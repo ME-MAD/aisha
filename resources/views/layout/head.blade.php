@@ -20,6 +20,15 @@
     <link href="{{asset('adminAssets/assets/css/dashboard/dash_2.css')}}" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 
+    <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
+    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/table/datatable/datatables.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/assets/css/forms/theme-checkbox-radio.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/table/datatable/dt-global_style.css')}}">
+    <link rel="stylesheet" type="text/css')}}" href="{{asset('adminAssets/plugins/table/datatable/custom_dt_custom.css')}}">
+    <!-- END PAGE LEVEL CUSTOM STYLES -->
+
+    <script src="https://unpkg.com/feather-icons"></script>
+
 </head>
 <body class="alt-menu sidebar-noneoverflow">
     <!-- BEGIN LOADER -->
