@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Experience;
-use App\Http\Requests\StoreExperienceRequest;
-use App\Http\Requests\UpdateExperienceRequest;
+use App\Http\Requests\Experience\StoreExperienceRequest;
+use App\Http\Requests\Experience\UpdateExperienceRequest;
 
 class ExperienceController extends Controller
 {

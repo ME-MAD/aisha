@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\GroupDay;
-use App\Http\Requests\StoreGroupDayRequest;
-use App\Http\Requests\UpdateGroupDayRequest;
+use App\Http\Requests\GroupDay\StoreGroupDayRequest;
+use App\Http\Requests\GroupDay\UpdateGroupDayRequest;
 
 class GroupDayController extends Controller
 {

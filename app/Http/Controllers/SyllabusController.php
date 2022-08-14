@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\syllabus;
-use App\Http\Requests\StoresyllabusRequest;
-use App\Http\Requests\UpdatesyllabusRequest;
+use App\Http\Requests\syllabus\StoresyllabusRequest;
+use App\Http\Requests\syllabus\UpdatesyllabusRequest;
 
 class SyllabusController extends Controller
 {

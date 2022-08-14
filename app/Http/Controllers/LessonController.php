@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lesson;
-use App\Http\Requests\StoreLessonRequest;
-use App\Http\Requests\UpdateLessonRequest;
+use App\Http\Requests\Lesson\StoreLessonRequest;
+use App\Http\Requests\Lesson\UpdateLessonRequest;
 
 class LessonController extends Controller
 {

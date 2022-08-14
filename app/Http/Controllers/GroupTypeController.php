@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\GroupType;
-use App\Http\Requests\StoreGroupTypeRequest;
-use App\Http\Requests\UpdateGroupTypeRequest;
+use App\Http\Requests\GroupType\StoreGroupTypeRequest;
+use App\Http\Requests\GroupType\UpdateGroupTypeRequest;
 
 class GroupTypeController extends Controller
 {

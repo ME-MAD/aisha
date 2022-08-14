@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\GroupStudent;
-use App\Http\Requests\StoreGroupStudentRequest;
-use App\Http\Requests\UpdateGroupStudentRequest;
+use App\Http\Requests\GroupStudent\StoreGroupStudentRequest;
+use App\Http\Requests\GroupStudent\UpdateGroupStudentRequest;
 
 class GroupStudentController extends Controller
 {
