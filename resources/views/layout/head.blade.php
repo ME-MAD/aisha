@@ -13,21 +13,11 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
     <link href="{{asset('adminAssets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('adminAssets/assets/css/plugins.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('adminAssets/plugins/font-icons/fontawesome/css/all.css')}}" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
+    @yield('css')
 
-    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
-    <link href="{{asset('adminAssets/plugins/apex/apexcharts.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('adminAssets/assets/css/dashboard/dash_2.css')}}" rel="stylesheet" type="text/css" />
-    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
-
-    <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/table/datatable/datatables.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/assets/css/forms/theme-checkbox-radio.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/table/datatable/dt-global_style.css')}}">
-    <link rel="stylesheet" type="text/css')}}" href="{{asset('adminAssets/plugins/table/datatable/custom_dt_custom.css')}}">
-    <!-- END PAGE LEVEL CUSTOM STYLES -->
-
-    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="{{asset('adminAssets/assets/css/myStyles.css')}}">
 
 </head>
 <body class="alt-menu sidebar-noneoverflow">

@@ -27,7 +27,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div id="flHorizontalForm" class="col-lg-12 layout-spacing">
                 <div class="statbox widget box box-shadow">

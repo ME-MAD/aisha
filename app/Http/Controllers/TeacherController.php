@@ -62,11 +62,9 @@ class TeacherController extends Controller
         return redirect(route('admin.teacher.index'));
     }
 
-    public function delete(TeacherDeleteRequest $request, Teacher $teacher)
+    public function delete(Teacher $teacher)
     {
-
         $teacher->delete();
-
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
     }

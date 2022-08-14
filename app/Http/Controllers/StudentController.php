@@ -22,7 +22,7 @@ class StudentController extends Controller
 
     public function index(StudentDataTable $studentDataTable)
     {
-        return $studentDataTable->render('admin.pages.student.index');
+        return $studentDataTable->render('pages.student.index');
         // $students  = $this->getStudentsDesc();
 
         // return view('admin.pages.student.index', [

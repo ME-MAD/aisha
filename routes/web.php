@@ -48,7 +48,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::post('/store', [TeacherController::class, 'store'])->name('store');
         Route::get('/edit/{teacher}', [TeacherController::class, 'edit'])->name('edit');
         Route::put('/update/{teacher}', [TeacherController::class, 'update'])->name('update');
-        Route::delete('/delete/{teacher}', [TeacherController::class, 'delete'])->name('delete');
+        Route::get('/delete/{teacher}', [TeacherController::class, 'delete'])->name('delete');
     });
 
     Route::group(['prefix' => 'Payment', 'as' => 'Payment.'], function () {
@@ -117,7 +117,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::post('store', [StudentController::class, 'store'])->name('store');
         Route::get('edit/{student}', [StudentController::class, 'edit'])->name('edit');
         Route::put('update/{student}', [StudentController::class, 'update'])->name('update');
-        Route::delete('delete/{student}', [StudentController::class, 'delete'])->name('delete');
+        Route::get('delete/{student}', [StudentController::class, 'delete'])->name('delete');
     });
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {

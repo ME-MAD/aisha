@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->enum('type', ['kids', 'mid', 'mom'])->nullable();
+            $table->enum('time', ['morning', 'evening'])->nullable();
             $table->unsignedBigInteger('teacher_id');
             $table->text('note')->nullable();
             $table->timestamps();

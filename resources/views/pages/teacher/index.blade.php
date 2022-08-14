@@ -1,131 +1,123 @@
 @extends('master')
 
-@section('breadcrumb')
-    <div class="page-header">
-        <div class="page-title">
-            <h3>Create Teacher</h3>
-        </div>
-        <div class="dropdown filter custom-dropdown-icon">
-            <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false"><span class="text"><span>Show</span> : Daily Analytics</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-chevron-down">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg></a>
+@section('css')
+    <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
+    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/table/datatable/datatables.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/assets/css/forms/theme-checkbox-radio.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/table/datatable/dt-global_style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/table/datatable/custom_dt_custom.css')}}">
+    <!-- END PAGE LEVEL CUSTOM STYLES -->
+@endsection
 
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown">
-                <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.home') }}">Home</a>
-                <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.teacher.index') }}">Teachers</a>
-                <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                    href="{{ route('admin.teacher.create') }}">Create Teacher</a>
+@section('breadcrumb')
+      <div class="page-header">
+            <div class="page-title">
+                  <h3>Teachers Table</h3>
             </div>
-        </div>
-    </div>
+            <div class="dropdown filter custom-dropdown-icon">
+                  <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"><span class="text"><span>Show</span> : Daily
+                              Analytics</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round" class="feather feather-chevron-down">
+                              <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg></a>
+
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown">
+                        <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
+                              href="{{ route('admin.home') }}">Home</a>
+                        <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
+                              href="{{ route('admin.teacher.index') }}">Teachers</a>
+                        <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
+                              href="{{ route('admin.teacher.create') }}">Create Teacher</a>
+                  </div>
+            </div>
+      </div>
 @endsection
 
 
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div id="flHorizontalForm" class="col-lg-12 layout-spacing">
-                <div class="statbox widget box box-shadow">
-                    <div class="widget-header">
-                        <div class="widget-content widget-content-area">
-                            <div class="table-responsive">
-                                <table id="style-3" class="table style-3 table-hover dataTable no-footer" role="grid"
-                                    aria-describedby="style-3_info">
-                                    <thead>
-                                        <tr role="row">
-                                            <th class="checkbox-column text-center sorting_asc" tabindex="0"
-                                                aria-controls="style-3" rowspan="1" colspan="1" aria-sort="ascending"
-                                                aria-label=" Record Id : activate to sort column descending"
-                                                style="width: 71.2031px;"> # </th>
-                                            <th class="text-center sorting" tabindex="0" aria-controls="style-3"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Image: activate to sort column ascending"
-                                                style="width: 46.2812px;">Name</th>
-                                            <th class="sorting" tabindex="0" aria-controls="style-3" rowspan="1"
-                                                colspan="1" aria-label="First Name: activate to sort column ascending"
-                                                style="width: 82.0156px;">Birthday</th>
-                                            <th class="sorting" tabindex="0" aria-controls="style-3" rowspan="1"
-                                                colspan="1" aria-label="Last Name: activate to sort column ascending"
-                                                style="width: 80.6719px;">Phone</th>
-                                            <th class="sorting" tabindex="0" aria-controls="style-3" rowspan="1"
-                                                colspan="1" aria-label="Email: activate to sort column ascending"
-                                                style="width: 118.953px;">Note</th>
-                                            <th class="text-center dt-no-sorting sorting" tabindex="0"
-                                                aria-controls="style-3" rowspan="1" colspan="1"
-                                                aria-label="Actions: activate to sort column ascending"
-                                                style="width: 56.5625px;">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+      <div class="container-fluid">
+            <div class="row layout-spacing">
+                  <div class="col-lg-12">
+                        <div class="statbox widget box box-shadow">
+                              <div class="widget-header">
+                                    <div class="row">
+                                          <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                <h4>Teachers</h4>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="widget-content widget-content-area">
+                                    <div class="table-responsive mb-4">
+                                          <div id="style-3_wrapper"
+                                                class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                                                <div class="row">
+                                                      <div class="col-sm-12">
 
-
-
-
-
-
-
-                                        <tr role="row">
-                                            <td class="checkbox-column text-center sorting_1"> 1 </td>
-                                            <td class="text-center">
-                                                <span><img src="assets/img/90x90.jpg" class="profile-img"
-                                                        alt="avatar"></span>
-                                            </td>
-                                            <td>Donna</td>
-                                            <td>Rogers</td>
-                                            <td>donna@yahoo.com</td>
-
-                                            <td class="text-center">
-                                                <ul class="table-controls">
-                                                    <li><a href="#">
-
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="52"
-                                                                height="52" viewBox="0 0 24 24" fill="none"
-                                                                stroke="currentColor" stroke-width="3"
-                                                                stroke-linecap="round" stroke-linejoin="round"
-                                                                class="feather feather-trash-2">
-                                                                <polyline points="3 6 5 6 21 6"></polyline>
-                                                                <path
-                                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
-                                                                </path>
-                                                                <line x1="10" y1="11" x2="10"
-                                                                    y2="17"></line>
-                                                                <line x1="14" y1="11" x2="14"
-                                                                    y2="17"></line>
-                                                            </svg>
-                                                        </a></li>
-                                                    <li>
-                                                        <form method="POST" action="">
-                                                            @csrf
-                                                            @method('DELETE')
-
-                                                            <input type="hidden" name="" value="">
-
-                                                            <button class="btn btn-outline-danger">
-                                                                <i class="fa-solid fa-trash-can"></i>
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
+                                                        <table id="style-3" class="table style-3  table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="checkbox-column text-center"> Id </th>
+                                                                    <th class="text-center">Name</th>
+                                                                    <th class="text-center">Birth Day</th>
+                                                                    <th class="text-center">Phone</th>
+                                                                    <th class="text-center">Note</th>
+                                                                    <th class="text-center">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($teachers as $teacher)
+                                                                    <tr role="row">
+                                                                        <td class="checkbox-column text-center sorting_1"> {{$teacher->id}} </td>
+                                        
+                                                                        <td>{{$teacher->name}}</td>
+                                                                        <td>{{$teacher->birthday}}</td>
+                                                                        <td>{{$teacher->phone}}</td>
+                                                                        <td>{{$teacher->note}}</td>
+                                                                        <td class="text-center">
+                                                                                <div class="links--ul">
+                                                                                        <x-edit-link :route="route('admin.teacher.edit',$teacher->id)" />
+                                                                                        <x-delete-link :route="route('admin.teacher.delete',$teacher->id)" />
+                                                                                </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
                         </div>
-
-                    </div>
-
-
-                </div>
+                  </div>
             </div>
-        </div>
-    </div>
+      </div>
+@endsection
+
+
+@section('javascript')
+     <!-- BEGIN PAGE LEVEL SCRIPTS -->
+ <script src="{{asset('adminAssets/plugins/table/datatable/datatables.js')}}"></script>
+ <script>
+     // var e;
+     c3 = $('#style-3').DataTable({
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+               "sLengthMenu": "Results :  _MENU_",
+            },
+            "stripeClasses": [],
+            "lengthMenu": [5, 10, 20, 50],
+            "pageLength": 5,
+        });
+
+        multiCheck(c3);
+ </script>
+ <!-- END PAGE LEVEL SCRIPTS -->  
 @endsection

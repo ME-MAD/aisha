@@ -13,13 +13,15 @@ class StudentDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'studentdatatable.action')
+            ->addColumn('edit', 'pages.student.datatable.edit')
+            ->addColumn('delete', 'pages.student.datatable.delete')
+            ->rawColumns(['edit','delete'])
             ->setRowId('id');
     }
 
-    public function query(Student $model): QueryBuilder
+    public function query(Student $student): QueryBuilder
     {
-        return $model->newQuery();
+        return Student::with('group');
     }
 
     public function html(): HtmlBuilder
@@ -32,8 +34,8 @@ class StudentDataTable extends DataTable
                 'dom'          => 'Blfrtip',
                 'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                 'buttons'      => [
-                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => '<i class="fa fa-print"></i>'],
-                    ['extend' => 'excel', 'className' => 'btn btn-success ', 'text' => '<i class="fa fa-file"></i> Export '],
+                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
+                    ['extend' => 'excel', 'className' => 'btn btn-success ', 'text' => 'Export'],
                 ],
                 'order' => [
                     0, 'desc'
@@ -61,14 +63,15 @@ class StudentDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            ['name' => 'id', 'data' => 'id', 'title' => 'رقم الهوية <input type="text" style="width:100px" id="exact" />'],
-            ['name' => 'name', 'data' => 'name', 'title' => 'الاسم <input type="text" style="width:100px"/>'],
-            ['name' => 'brithday', 'data' => 'brithday', 'title' => 'تاريخ الميلاد <input type="text" style="width:100px"/>'],
-            ['name' => 'phone', 'data' => 'phone', 'title' => 'الهاتف <input type="text" style="width:100px"/>'],
-            ['name' => 'type', 'data' => 'type', 'title' => 'النوع <input type="text" style="width:100px"/>'],
-            ['name' => 'note', 'data' => 'note', 'title' => 'ملحوظة <input type="text" style="width:100px"/>'],
-            ['name' => 'group_id', 'data' => 'group_id', 'title' => 'المجموعة <input type="text" style="width:100px"/>'],
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'تعديل'],
+            ['name' => 'id', 'data' => 'id', 'title' => '<input type="text" style="width:100px" id="exact" /> <br> رقم الهوية'],
+            ['name' => 'name', 'data' => 'name', 'title' => '<input type="text" style="width:100px"/> الاسم'],
+            ['name' => 'brithday', 'data' => 'brithday', 'title' => '<input type="text" style="width:100px"/> <br> تاريخ الميلاد'],
+            ['name' => 'phone', 'data' => 'phone', 'title' => '<input type="text" style="width:100px"/> الهاتف'],
+            ['name' => 'type', 'data' => 'type', 'title' => '<input type="text" style="width:100px"/> النوع'],
+            ['name' => 'note', 'data' => 'note', 'title' => '<input type="text" style="width:100px"/> ملحوظة'],
+            ['name' => 'group.name', 'data' => 'group.name', 'title' => '<input type="text" style="width:100px"/> المجموعة'],
+            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false],
+            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false],
         ];
     }
 
