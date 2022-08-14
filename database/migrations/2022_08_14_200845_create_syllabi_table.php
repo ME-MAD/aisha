@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('new_lesson');
             $table->unsignedBigInteger('old_lesson');
-            $table->boolean('is_reverse');
+            $table->boolean('is_reverse')->default(false);
             $table->timestamps();
 
             $table->foreign('student_id')

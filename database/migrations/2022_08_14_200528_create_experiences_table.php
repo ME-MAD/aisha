@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->unique(); 
+            $table->string('title'); 
             $table->unsignedBigInteger('teacher_id'); 
             $table->timestamps();
 

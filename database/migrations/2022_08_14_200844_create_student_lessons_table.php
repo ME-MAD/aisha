@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('lesson_id');
             $table->unsignedBigInteger('group_id');
-            $table->boolean('finished');
+            $table->boolean('finished')->default(false);
             $table->timestamps();
 
             $table->foreign('student_id')
