@@ -18,15 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->date('brithday');
             $table->string('phone')->nullable();
-            $table->enum('type', ['normal', 'dense']);
             $table->text('note')->nullable();
-            $table->unsignedBigInteger('group_id');
             $table->timestamps();
-
-            $table->foreign('group_id')
-                ->references('id')
-                ->on('groups')
-                ->onDelete('CASCADE');
         });
     }
 

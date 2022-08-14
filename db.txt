@@ -1,0 +1,93 @@
+Teacher:
+    id
+    name
+    birthday
+    phone
+    qualification
+    note
+
+Experience:
+    id
+    title
+    teacher_id
+
+Student:
+    id
+    name : string
+    birthday : date
+    phone : string
+    qualification : text
+    note : text
+
+syllabus:
+    id
+    student_id
+    new_lesson => foriegn key on lessons
+    old_lesson => foriegn key on lessons
+    is_reverse : bool
+
+StudentLesson:
+    id
+    student_id
+    lesson_id
+    group_id
+    finished : bool
+
+Group:
+    id
+    from : time
+    to : time
+    teacher_id
+    age_type ('kid','adult') : enum
+    note : text
+
+GroupDay:
+    id
+    group_id
+    day ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') : enum
+
+GroupType:
+    id
+    group_id
+    name : string
+    price : double
+
+GroupStudent:
+    id
+    student_id
+    group_id
+
+
+Payment:
+    student_id
+    group_id
+    paid : double
+    month ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December') : enum
+    note : text
+
+Exam:
+    id
+    group_id
+    subject_id
+    lesson_from => foriegn key on lessonss
+    lesson_to => foriegn key on lessons
+
+StudentExam:
+    subject_id
+    exam_id
+    degree : float
+
+Subject:
+    id
+    name : string
+
+Lesson:
+    id
+    subject_id
+    title : text
+
+
+
+we need to give away 10$ a month for each student
+private groups with double the price
+private group is the group with only one student

@@ -51,66 +51,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/delete/{teacher}', [TeacherController::class, 'delete'])->name('delete');
     });
 
-    Route::group(['prefix' => 'Payment', 'as' => 'Payment.'], function () {
-        Route::get('', [PaymentsController::class, 'index'])->name('index');
-        Route::get('/create', [PaymentsController::class, 'create'])->name('create');
-        Route::post('/store', [PaymentsController::class, 'store'])->name('store');
-        Route::get('/edit/{payment}', [PaymentsController::class, 'edit'])->name('edit');
-        Route::put('/update/{payment}', [PaymentsController::class, 'update'])->name('update');
-        Route::delete('/delete/{payment}', [PaymentsController::class, 'delete'])->name('delete');
-    });
-
-    Route::group(['prefix' => 'examstudent', 'as' => 'examstudent.'], function () {
-        Route::get('', [ExamStudentsController::class, 'index'])->name('index');
-        Route::get('/create', [ExamStudentsController::class, 'create'])->name('create');
-        Route::post('/store', [ExamStudentsController::class, 'store'])->name('store');
-        Route::get('/edit/{examStudent}', [ExamStudentsController::class, 'edit'])->name('edit');
-        Route::put('/update/{examStudent}', [ExamStudentsController::class, 'update'])->name('update');
-        Route::delete('/delete/{examStudent}', [ExamStudentsController::class, 'delete'])->name('delete');
-    });
-
-
-
-
-    Route::group(['prefix' => 'attend',  'as' => 'attend.'], function () {
-        Route::get('', [AttendController::class, 'index'])->name('index');
-        Route::get('create', [AttendController::class, 'create'])->name('create');
-        Route::post('store', [AttendController::class, 'store'])->name('store');
-        Route::get('edit/{attend}', [AttendController::class, 'edit'])->name('edit');
-        Route::put('update/{attend}', [AttendController::class, 'update'])->name('update');
-        Route::delete('delete/{attend}', [AttendController::class, 'delete'])->name('delete');
-    });
-
-
-    Route::group(['prefix' => 'exam', 'as' => 'exam.'], function () {
-        Route::get('', [ExamController::class, 'index'])->name('index');
-        Route::get('create', [ExamController::class, 'create'])->name('create');
-        Route::post('store', [ExamController::class, 'store'])->name('store');
-        Route::get('edit/{exam}', [ExamController::class, 'edit'])->name('edit');
-        Route::put('update/{exam}', [ExamController::class, 'update'])->name('update');
-        Route::delete('delete/{exam}', [ExamController::class, 'delete'])->name('delete');
-    });
-
-    Route::group(['prefix' => 'group', 'as' => 'group.'], function () {
-
-        Route::get('/', [GroupController::class, 'index'])->name('index');
-        Route::get('/create', [GroupController::class, 'create'])->name('create');
-        Route::post('/store', [GroupController::class, 'store'])->name('store');
-        Route::get('/edit/{group}', [GroupController::class, 'edit'])->name('edit');
-        Route::put('/update/{group}', [GroupController::class, 'update'])->name('update');
-        Route::delete('/delete/{group}', [GroupController::class, 'delete'])->name('delete');
-    });
-
-
-    Route::group(['prefix' => 'lesson', 'as' => 'lesson.'], function () {
-        Route::get('', [LessonController::class, 'index'])->name('index');
-        Route::get('create', [LessonController::class, 'create'])->name('create');
-        Route::post('store', [LessonController::class, 'store'])->name('store');
-        Route::get('edit/{lesson}', [LessonController::class, 'edit'])->name('edit');
-        Route::put('update/{lesson}', [LessonController::class, 'update'])->name('update');
-        Route::delete('delete/{lesson}', [LessonController::class, 'delete'])->name('delete');
-    });
-
     Route::group(['prefix' => 'student', 'as' => 'student.'], function () {
         Route::get('', [StudentController::class, 'index'])->name('index');
         Route::get('create', [StudentController::class, 'create'])->name('create');
