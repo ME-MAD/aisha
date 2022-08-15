@@ -46,7 +46,7 @@
                               <div class="widget-header">
                                     <div class="row">
                                           <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                <h4>Teachers</h4>
+                                                <h4>Teachers </h4>
                                                 <a href="{{ route('admin.teacher.create') }}" class="btn btn-primary float-right">Create</a>
                                           </div>
                                     </div>

@@ -64,10 +64,13 @@ class StudentDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => '<input type="text" style="width:100px" id="exact" /> <br> رقم الهوية'],
-            ['name' => 'name', 'data' => 'name', 'title' => '<input type="text" style="width:100px"/> الاسم'],
+            ['name' => 'name', 'data' => 'name', 'title' => '<input type="text" style="width:100px"/><br> الاسم'],
             ['name' => 'brithday', 'data' => 'brithday', 'title' => '<input type="text" style="width:100px"/> <br> تاريخ الميلاد'],
-            ['name' => 'phone', 'data' => 'phone', 'title' => '<input type="text" style="width:100px"/> الهاتف'],
-            ['name' => 'note', 'data' => 'note', 'title' => '<input type="text" style="width:100px"/> ملحوظة'],
+            ['name' => 'phone', 'data' => 'phone', 'title' => '<input type="text" style="width:100px"/> <br> الهاتف'],
+
+            ['name' => 'qualification', 'data' => 'qualification', 'title' => '<input type="text" style="width:100px"/> <br> الخبرات'],
+
+            ['name' => 'note', 'data' => 'note', 'title' => '<input type="text" style="width:100px"/>  <br>ملحوظة'],
             ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false],
             ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false],
         ];
