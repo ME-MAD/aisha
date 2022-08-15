@@ -22,16 +22,10 @@ return new class extends Migration
             $table->text('note')->nullable();
             $table->timestamps();
 
-
             $table->foreign('teacher_id')
                 ->references('id')
                 ->on('teachers')
                 ->onDelete('CASCADE');
-
-
-
-
-
         });
     }
 

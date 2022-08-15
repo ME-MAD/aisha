@@ -45,9 +45,11 @@
                   <div class="col-lg-12">
                         <div class="statbox widget box box-shadow">
                               <div class="widget-header">
-                                    <div class="row">
-                                          <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                    <div class="row align-items-center">
+                                          <div class="col-xl-10 col-md-10 col-sm-10 col-10">
                                                 <h4>Students</h4>
+                                          </div>
+                                          <div class="col-xl-2 col-md-2 col-sm-2 col-2">
                                                 <a href="{{ route('admin.student.create') }}" class="btn btn-primary float-right">Create</a>
                                           </div>
                                     </div>

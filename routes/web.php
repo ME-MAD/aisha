@@ -1,12 +1,6 @@
 <?php
 
-use App\Http\Controllers\AttendController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ExamController;
-use App\Http\Controllers\ExamStudentsController;
-use App\Http\Controllers\PaymentsController;
-use App\Http\Controllers\GroupController;
-use App\Http\Controllers\LessonController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
@@ -44,6 +38,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::group(['prefix' => 'teacher', 'as' => 'teacher.'], function () {
         Route::get('', [TeacherController::class, 'index'])->name('index');
+        Route::get('/show/{teacher}', [TeacherController::class, 'show'])->name('show');
         Route::get('/create', [TeacherController::class, 'create'])->name('create');
         Route::post('/store', [TeacherController::class, 'store'])->name('store');
         Route::get('/edit/{teacher}', [TeacherController::class, 'edit'])->name('edit');

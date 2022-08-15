@@ -44,9 +44,11 @@
                   <div class="col-lg-12">
                         <div class="statbox widget box box-shadow">
                               <div class="widget-header">
-                                    <div class="row">
-                                          <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                    <div class="row align-items-center">
+                                          <div class="col-xl-10 col-md-10 col-sm-10 col-10">
                                                 <h4>Teachers </h4>
+                                          </div>
+                                          <div class="col-xl-2 col-md-2 col-sm-2 col-2">
                                                 <a href="{{ route('admin.teacher.create') }}" class="btn btn-primary float-right">Create</a>
                                           </div>
                                     </div>
@@ -75,7 +77,11 @@
                                                                     <tr role="row">
                                                                         <td class="checkbox-column text-center sorting_1"> {{$teacher->id}} </td>
                                         
-                                                                        <td>{{$teacher->name}}</td>
+                                                                        <td>
+                                                                              <a href="{{route('admin.teacher.show',$teacher->id)}}">
+                                                                                    {{$teacher->name}}
+                                                                              </a>
+                                                                        </td>
                                                                         <td>{{$teacher->birthday}}</td>
                                                                         <td>{{$teacher->phone}}</td>
                                                                         <td>{{$teacher->qualification}}</td>

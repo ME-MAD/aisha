@@ -24,6 +24,13 @@ class TeacherController extends Controller
         ]);
     }
 
+    public function show(Teacher $teacher)
+    {
+        return view('pages.teacher.show',[
+            'teacher' => $teacher
+        ]);
+    }
+
     public function create()
     {
         return view('pages.teacher.create');
@@ -31,9 +38,6 @@ class TeacherController extends Controller
 
     public function store(Request $request)
     {
-        
-       // dd($request);
-       
         Teacher::create([
             'name' => $request->name,
             'phone' => $request->phone,
@@ -47,7 +51,6 @@ class TeacherController extends Controller
 
     public function edit(Teacher $teacher)
     {
-        //dd('dlfkldkf');
         return view('pages.teacher.edit', [
             'teacher'  => $teacher,
         ]);
@@ -56,7 +59,6 @@ class TeacherController extends Controller
     public function update(Request $request,Teacher $teacher)
     {
 
-        //dd($request);
         $teacher->update([
             'name' => $request->name,
             'phone' => $request->phone,

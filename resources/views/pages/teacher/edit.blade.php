@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        <form action="{{ route('admin.teacher.update',$teacher->id) }}" method="post">
+                        <form action="{{ route('admin.teacher.update', $teacher->id) }}" method="post">
                             @csrf
                         @method('PUT')
 

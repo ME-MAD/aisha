@@ -68,7 +68,7 @@ class StudentDataTable extends DataTable
             ['name' => 'brithday', 'data' => 'brithday', 'title' => '<input type="text" style="width:100px"/> <br> تاريخ الميلاد'],
             ['name' => 'phone', 'data' => 'phone', 'title' => '<input type="text" style="width:100px"/> <br> الهاتف'],
 
-            ['name' => 'qualification', 'data' => 'qualification', 'title' => '<input type="text" style="width:100px"/> <br> الخبرات'],
+            ['name' => 'qualification', 'data' => 'qualification', 'title' => '<input type="text" style="width:100px"/> <br> المؤهلات'],
 
             ['name' => 'note', 'data' => 'note', 'title' => '<input type="text" style="width:100px"/>  <br>ملحوظة'],
             ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false],
