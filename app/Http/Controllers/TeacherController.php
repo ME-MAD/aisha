@@ -29,12 +29,16 @@ class TeacherController extends Controller
         return view('pages.teacher.create');
     }
 
-    public function store(TeacherStoreRequest $request)
+    public function store(Request $request)
     {
+        
+       // dd($request);
+       
         Teacher::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'birthday' => $request->birthday,
+            'qualification' => $request->qualification,
             'note' => $request->note,
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
@@ -42,18 +46,22 @@ class TeacherController extends Controller
     }
 
     public function edit(Teacher $teacher)
-    {  
-        return view('admin.pages.teacher.edit', [
+    {
+        //dd('dlfkldkf');
+        return view('pages.teacher.edit', [
             'teacher'  => $teacher,
         ]);
     }
 
-    public function update(TeacherUpdateRequest $request, Teacher $teacher)
+    public function update(Request $request,Teacher $teacher)
     {
+
+        //dd($request);
         $teacher->update([
             'name' => $request->name,
             'phone' => $request->phone,
             'birthday' => $request->birthday,
+            'qualification' => $request->qualification,
             'note' => $request->note,
         ]);
 

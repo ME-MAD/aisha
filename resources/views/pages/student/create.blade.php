@@ -3,7 +3,7 @@
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
-            <h3>Create Teacher</h3>
+            <h3>Create Student</h3>
         </div>
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
@@ -18,9 +18,9 @@
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
                     href="{{ route('admin.home') }}">Home</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.teacher.index') }}">Teachers</a>
+                    href="{{ route('admin.student.index') }}">Students</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                    href="{{ route('admin.teacher.create') }}">Create Teacher</a>
+                    href="{{ route('admin.student.create') }}">Create Student</a>
             </div>
         </div>
     </div>
@@ -34,12 +34,12 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4 class="text-center text-primary">Create Teacher</h4>
+                                <h4 class="text-center text-primary">Create Student</h4>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        <form action="{{ route('admin.teacher.store') }}" method="post">
+                        <form action="{{ route('admin.student.store') }}" method="post">
                             @csrf
                             <div class="form-group row mb-4">
                                 <label for="name"
@@ -49,11 +49,11 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
-                                <label for="birthday" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">تاريخ
+                                <label for="brithday" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">تاريخ
                                     الميلاد</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="date" class="form-control" id="birthday" placeholder=""
-                                        name="birthday">
+                                    <input type="date" class="form-control" id="brithday" placeholder=""
+                                        name="brithday">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
@@ -63,10 +63,9 @@
                                     <input type="text" class="form-control" id="phone" placeholder="" name="phone">
                                 </div>
                             </div>
-
                             <div class="form-group row mb-4">
                                 <label for="qualification"
-                                    class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">المؤهل</label>
+                                    class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">الخبرات</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
                                     <input type="text" class="form-control" id="qualification" placeholder="" name="qualification">
                                 </div>

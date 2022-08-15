@@ -46,7 +46,8 @@
                               <div class="widget-header">
                                     <div class="row">
                                           <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                                <h4>Teachers</h4>
+                                                <h4>Teachers </h4>
+                                                <a href="{{ route('admin.teacher.create') }}" class="btn btn-primary float-right">Create</a>
                                           </div>
                                     </div>
                               </div>
@@ -64,6 +65,7 @@
                                                                     <th class="text-center">Name</th>
                                                                     <th class="text-center">Birth Day</th>
                                                                     <th class="text-center">Phone</th>
+                                                                    <th class="text-center">qualification</th>
                                                                     <th class="text-center">Note</th>
                                                                     <th class="text-center">Action</th>
                                                                 </tr>
@@ -76,6 +78,7 @@
                                                                         <td>{{$teacher->name}}</td>
                                                                         <td>{{$teacher->birthday}}</td>
                                                                         <td>{{$teacher->phone}}</td>
+                                                                        <td>{{$teacher->qualification}}</td>
                                                                         <td>{{$teacher->note}}</td>
                                                                         <td class="text-center">
                                                                                 <div class="links--ul">

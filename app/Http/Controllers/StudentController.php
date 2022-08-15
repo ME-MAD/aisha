@@ -32,46 +32,42 @@ class StudentController extends Controller
 
     public function create()
     {
-        $groups = $this->getGroups();
-
-        return view('admin.pages.student.create', [
-            'groups' => $groups
-        ]);
+       
+        return view('pages.student.create');
     }
 
-    public function store(StudentStoreRequest $request)
+    public function store(Request $request)
     {
-    
+       // dd($request);
         Student::create([
             'name' => $request->name,
             'brithday' => $request->brithday,
             'phone' => $request->phone,
-            'type' => $request->type,
-            'group_id' => $request->group_id,
+            'qualification' => $request->qualification,
             'note' => $request->note,
         ]);
+    // dd($request->qualification);
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.student.index'));
     }
 
     public function edit(Student $student)
     {
-        $groups = $this->getGroups();
+       
         
-        return view('admin.pages.student.edit', [
-            'groups' => $groups,
+        return view('pages.student.edit', [
+            
             'student' => $student
         ]);
     }
 
-    public function update(StudentUpdateRequest $request ,Student $student)
+    public function update(Request $request ,Student $student)
     {
         $student->update([
             'name' => $request->name,
             'brithday' => $request->brithday,
             'phone' => $request->phone,
-            'type' => $request->type,
-            'group_id' => $request->group_id,
+            'qualification' => $request->qualification,
             'note' => $request->note,
         ]);
 
@@ -79,7 +75,7 @@ class StudentController extends Controller
         return redirect(route('admin.student.index'));
     }
 
-    public function delete(StudentDeleteRequest $request ,Student $student)
+    public function delete(Request $request ,Student $student)
     {
         $student->delete();
 

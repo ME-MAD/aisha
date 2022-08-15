@@ -13,6 +13,7 @@
       <div class="page-header">
             <div class="page-title">
                   <h3>Students Table</h3>
+                 
             </div>
             <div class="dropdown filter custom-dropdown-icon">
                   <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
@@ -24,14 +25,14 @@
                               <polyline points="6 9 12 15 18 9"></polyline>
                         </svg></a>
 
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown">
-                        <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                              href="{{ route('admin.home') }}">Home</a>
-                        <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                              href="{{ route('admin.teacher.index') }}">Teachers</a>
-                        <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                              href="{{ route('admin.teacher.create') }}">Create Teacher</a>
-                  </div>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown">
+                              <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
+                                  href="{{ route('admin.home') }}">Home</a>
+                              <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
+                                  href="{{ route('admin.student.index') }}">Students</a>
+                              <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
+                                  href="{{ route('admin.student.create') }}">Create Student</a>
+                          </div>
             </div>
       </div>
 @endsection
@@ -47,6 +48,7 @@
                                     <div class="row">
                                           <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                                 <h4>Students</h4>
+                                                <a href="{{ route('admin.student.create') }}" class="btn btn-primary float-right">Create</a>
                                           </div>
                                     </div>
                               </div>

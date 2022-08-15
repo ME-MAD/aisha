@@ -34,18 +34,22 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4 class="text-center text-primary">Create Teacher</h4>
+                                <h4 class="text-center text-primary">Edit Teacher</h4>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        <form action="{{ route('admin.teacher.store') }}" method="post">
+                        <form action="{{ route('admin.teacher.update',$teacher->id) }}" method="post">
                             @csrf
+                        @method('PUT')
+
+                        <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+
                             <div class="form-group row mb-4">
                                 <label for="name"
                                     class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">الإسم</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="text" class="form-control" id="name" placeholder="" name="name">
+                                    <input type="text" class="form-control" id="name" placeholder="" name="name" value="{{$teacher->name}}">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
@@ -53,14 +57,14 @@
                                     الميلاد</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
                                     <input type="date" class="form-control" id="birthday" placeholder=""
-                                        name="birthday">
+                                        name="birthday" value="{{$teacher->birthday}}">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
                                 <label for="phone"
                                     class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">الهاتف</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="text" class="form-control" id="phone" placeholder="" name="phone">
+                                    <input type="text" class="form-control" id="phone" placeholder="" name="phone" value="{{$teacher->phone}}">
                                 </div>
                             </div>
 
@@ -68,7 +72,7 @@
                                 <label for="qualification"
                                     class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">المؤهل</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="text" class="form-control" id="qualification" placeholder="" name="qualification">
+                                    <input type="text" class="form-control" id="qualification" placeholder="" name="qualification" value="{{$teacher->qualification}}">
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
@@ -76,7 +80,7 @@
                                 class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">ملاحظة</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
                                     <textarea class="form-control" name="note" id="" cols="30" rows="10">
-                                       
+                                        {{$teacher->note}}
                                     </textarea>
                                 </div>
                             </div>
