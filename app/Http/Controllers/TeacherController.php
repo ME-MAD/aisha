@@ -33,6 +33,7 @@ class TeacherController extends Controller
     {
         
        // dd($request);
+       
         Teacher::create([
             'name' => $request->name,
             'phone' => $request->phone,
