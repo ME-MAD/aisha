@@ -65,6 +65,7 @@
                                                                     <th class="text-center">Name</th>
                                                                     <th class="text-center">Birth Day</th>
                                                                     <th class="text-center">Phone</th>
+                                                                    <th class="text-center">qualification</th>
                                                                     <th class="text-center">Note</th>
                                                                     <th class="text-center">Action</th>
                                                                 </tr>
@@ -77,6 +78,7 @@
                                                                         <td>{{$teacher->name}}</td>
                                                                         <td>{{$teacher->birthday}}</td>
                                                                         <td>{{$teacher->phone}}</td>
+                                                                        <td>{{$teacher->qualification}}</td>
                                                                         <td>{{$teacher->note}}</td>
                                                                         <td class="text-center">
                                                                                 <div class="links--ul">
