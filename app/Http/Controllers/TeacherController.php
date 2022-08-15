@@ -29,12 +29,15 @@ class TeacherController extends Controller
         return view('pages.teacher.create');
     }
 
-    public function store(TeacherStoreRequest $request)
+    public function store(Request $request)
     {
+        
+       // dd($request);
         Teacher::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'birthday' => $request->birthday,
+            'qualification' => $request->qualification,
             'note' => $request->note,
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
@@ -42,7 +45,7 @@ class TeacherController extends Controller
     }
 
     public function edit(Teacher $teacher)
-    {  
+    {
         return view('admin.pages.teacher.edit', [
             'teacher'  => $teacher,
         ]);

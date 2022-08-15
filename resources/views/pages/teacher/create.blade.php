@@ -63,6 +63,14 @@
                                     <input type="text" class="form-control" id="phone" placeholder="" name="phone">
                                 </div>
                             </div>
+
+                            <div class="form-group row mb-4">
+                                <label for="qualification"
+                                    class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">المؤهل</label>
+                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                    <input type="text" class="form-control" id="qualification" placeholder="" name="qualification">
+                                </div>
+                            </div>
                             <div class="form-group row mb-4">
                                 <label for="note"
                                 class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">ملاحظة</label>
