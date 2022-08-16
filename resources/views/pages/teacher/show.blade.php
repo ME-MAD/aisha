@@ -3,9 +3,6 @@
 @section('css')
     <!--  BEGIN CUSTOM STYLE FILE  -->
     <link href="{{ asset('adminAssets/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css" />
-    <!--  END CUSTOM STYLE FILE  -->
-    <!--  BEGIN CUSTOM STYLE FILE  -->
-    <link href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('adminAssets/assets/css/components/custom-modal.css') }}" rel="stylesheet" type="text/css" />
     <!--  END CUSTOM STYLE FILE  -->
 @endsection
@@ -13,7 +10,7 @@
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
-            <h3>{{ $teachers->name }}</h3>
+            <h3>{{ $teacher->name }}</h3>
         </div>
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
@@ -28,9 +25,9 @@
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
                     href="{{ route('admin.home') }}">Home</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.teacher.index') }}">Teachers</a>
+                    href="{{ route('admin.teacher.index') }}">teacher</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                    href="{{ route('admin.teacher.show', $teachers->id) }}">{{ $teachers->name }}</a>
+                    href="{{ route('admin.teacher.show', $teacher->id) }}">{{ $teacher->name }}</a>
             </div>
         </div>
     </div>
@@ -117,39 +114,15 @@
                     </div>
                 </div>
 
-                <div class="work-experience layout-spacing ">
+                
 
-                    <div class="widget-content widget-content-area">
-                        <h3 class="">Work Experiences</h3>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col text-center">
-                                    <button class="btn btn-outline-primary  " type="button" data-toggle="modal"
-                                        data-target="#exampleModal">Add experience</button>
-                                </div>
-                            </div>
-                        </div>
-                        @foreach ($experiences as $experience)
-                            @if ($teachers->id == $experience->teacher_id)
-                                <div class="timeline-alter">
-                                    <div class="item-timeline">
-                                        <div class="t-meta-date">
-                                            <p class="">{{ $experience->date }}</p>
-                                        </div>
-                                        <div class="t-dot" data-original-title="" title="">
-                                        </div>
-                                        <div class="t-text">
-                                            <a href="{{route('admin.teacher.show',$experience->teacher_id)}}"  data-target="#exampleModalA">
-                                                <p>{{ $experience->title }}</p>
-                                          </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
-                    </div>
 
-                </div>
+                @include('pages.teacher.partials.experience')
+
+
+
+
+
 
             </div>
 
@@ -270,118 +243,8 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">إضافة مؤهل</h5>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('admin.experience.store') }}" method="post">
-                        @csrf
-
-                        <input type="hidden" name="teacher_id" value="{{ $teachers->id }}">
-
-                        <div class="form-group row mb-4">
-                            <label for="title"
-                                class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">العنوان</label>
-                            <div class="col-xl-10 col-lg-9 col-sm-10">
-                                <input type="text" class="form-control" id="title" placeholder=""
-                                    name="title">
-                            </div>
-                        </div>
-                        <div class="form-group row mb-4">
-                            <label for="date"
-                                class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">التاريخ</label>
-                            <div class="col-xl-10 col-lg-9 col-sm-10">
-                                <input type="date" class="form-control" id="date" placeholder=""
-                                    name="date">
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>
-                                Discard</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-<!-- Modal2 -->
-<div class="modal fade" id="exampleModalA" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <svg> ... </svg>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p class="modal-text">Mauris mi tellus, pharetra vel mattis sed, tempus ultrices eros. Phasellus egestas sit amet velit sed luctus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti. Vivamus ultrices sed urna ac pulvinar. Ut sit amet ullamcorper mi. </p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-@section('javascript')
-    <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <script src="assets/js/libs/jquery-3.1.1.min.js"></script>
-    <script src="bootstrap/js/popper.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/app.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            App.init();
-        });
-    </script>
-    <script src="plugins/highlight/highlight.pack.js"></script>
-    <script src="assets/js/custom.js"></script>
-    <!-- END GLOBAL MANDATORY STYLES -->
-
-    <!--  BEGIN CUSTOM SCRIPT FILE  -->
-    <script src="assets/js/scrollspyNav.js"></script>
-    <script>
-        $('#yt-video-link').click(function() {
-            var src = 'https://www.youtube.com/embed/YE7VzlLtp-4';
-            $('#videoMedia1').modal('show');
-            $('<iframe>').attr({
-                'src': src,
-                'width': '560',
-                'height': '315',
-                'allow': 'encrypted-media'
-            }).css('border', '0').appendTo('#videoMedia1 .video-container');
-        });
-        $('#vimeo-video-link').click(function() {
-            var src = 'https://player.vimeo.com/video/1084537';
-            $('#videoMedia2').modal('show');
-            $('<iframe>').attr({
-                'src': src,
-                'width': '560',
-                'height': '315',
-                'allow': 'encrypted-media'
-            }).css('border', '0').appendTo('#videoMedia2 .video-container');
-        });
-        $('#videoMedia1 button, #videoMedia2 button').click(function() {
-            $('#videoMedia1 iframe, #videoMedia2 iframe').removeAttr('src');
-        });
-    </script>
-    <!--  END CUSTOM SCRIPT FILE  -->
-@endsection
-
-
 
 
 @endsection
+
+

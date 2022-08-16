@@ -27,10 +27,10 @@ class TeacherController extends Controller
 
     public function show(Teacher $teacher)
     {
-        $experiences = Experience::get();
+        $experiences = $teacher->experiences()->orderBy('date','DESC')->get();
         return view('pages.teacher.show',[
-            'teachers' => $teacher,
-            'experiences' =>$experiences
+            'teacher' => $teacher,
+            'experiences' => $experiences,  
         ]);
     }
 

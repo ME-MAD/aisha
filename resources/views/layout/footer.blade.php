@@ -26,6 +26,7 @@ App.init();
 });
 </script>
 <script src="{{asset('adminAssets/assets/js/custom.js')}}"></script>
+<script src="{{asset('adminAssets/assets/js/shared/modals.js')}}"></script>
 <!-- END GLOBAL MANDATORY SCRIPTS -->
 
 @yield('javascript')

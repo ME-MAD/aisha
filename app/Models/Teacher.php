@@ -10,4 +10,10 @@ class Teacher extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'phone', 'birthday','qualification', 'note'];
+
+
+    public function experiences()
+    {
+        return $this->hasMany(Experience::class,'teacher_id');
+    }
 }
