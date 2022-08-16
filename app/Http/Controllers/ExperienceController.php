@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Experience;
 use App\Http\Requests\Experience\StoreExperienceRequest;
 use App\Http\Requests\Experience\UpdateExperienceRequest;
+use App\Models\Teacher;
+use Illuminate\Console\View\Components\Alert;
+use RealRashid\SweetAlert\Facades\Alert as FacadesAlert;
 
 class ExperienceController extends Controller
 {
@@ -25,7 +28,7 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -36,7 +39,13 @@ class ExperienceController extends Controller
      */
     public function store(StoreExperienceRequest $request)
     {
-        //
+        Experience::create([
+            'title' => $request->title,
+            'date' => $request->date,
+            'teacher_id'=>$request->teacher_id
+        ]);
+        FacadesAlert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route('admin.teacher.show',$request->teacher_id));
     }
 
     /**
