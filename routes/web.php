@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
+use App\Models\Experience;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +46,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/edit/{teacher}', [TeacherController::class, 'edit'])->name('edit');
         Route::put('/update/{teacher}', [TeacherController::class, 'update'])->name('update');
         Route::get('/delete/{teacher}', [TeacherController::class, 'delete'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'experience', 'as' => 'experience.'], function () {
+        Route::get('', [ExperienceController::class, 'index'])->name('index');
+        Route::get('create', [ExperienceController::class, 'create'])->name('create');
+        Route::post('/store', [ExperienceController::class, 'store'])->name('store');
+        Route::get('edit/{experience}', [ExperienceController::class, 'edit'])->name('edit');
+        Route::put('update/{experience}', [ExperienceController::class, 'update'])->name('update');
+        Route::get('delete/{experience}', [ExperienceController::class, 'delete'])->name('delete');
     });
 
     Route::group(['prefix' => 'student', 'as' => 'student.'], function () {

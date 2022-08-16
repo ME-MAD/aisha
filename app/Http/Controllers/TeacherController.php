@@ -6,6 +6,7 @@ use App\Http\Requests\Teacher\TeacherDeleteRequest;
 use App\Http\Requests\Teacher\TeacherStoreRequest;
 use App\Http\Requests\Teacher\TeacherUpdateRequest;
 use App\Http\Traits\TeacherTrait;
+use App\Models\Experience;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -26,8 +27,10 @@ class TeacherController extends Controller
 
     public function show(Teacher $teacher)
     {
+        $experiences = Experience::get();
         return view('pages.teacher.show',[
-            'teacher' => $teacher
+            'teachers' => $teacher,
+            'experiences' =>$experiences
         ]);
     }
 
