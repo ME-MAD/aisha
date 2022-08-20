@@ -3,7 +3,7 @@
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
-            <h3>Create Teacher</h3>
+            <h3>edit Teacher</h3>
         </div>
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
@@ -41,49 +41,19 @@
                     <div class="widget-content widget-content-area">
                         <form action="{{ route('admin.teacher.update', $teacher->id) }}" method="post">
                             @csrf
-                        @method('PUT')
+                            @method('PUT')
 
-                        <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+                            <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
 
-                            <div class="form-group row mb-4">
-                                <label for="name"
-                                    class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">الإسم</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="text" class="form-control" id="name" placeholder="" name="name" value="{{$teacher->name}}">
-                                </div>
-                            </div>
-                            <div class="form-group row mb-4">
-                                <label for="birthday" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">تاريخ
-                                    الميلاد</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="date" class="form-control" id="birthday" placeholder=""
-                                        name="birthday" value="{{$teacher->birthday}}">
-                                </div>
-                            </div>
-                            <div class="form-group row mb-4">
-                                <label for="phone"
-                                    class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">الهاتف</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="text" class="form-control" id="phone" placeholder="" name="phone" value="{{$teacher->phone}}">
-                                </div>
-                            </div>
+                            <x-text name="name" label="الإسم" :value="$teacher->name" />
+                            
+                            <x-date name="birthday" label="تاريخ الميلاد" :value="$teacher->birthday" />
 
-                            <div class="form-group row mb-4">
-                                <label for="qualification"
-                                    class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">المؤهل</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="text" class="form-control" id="qualification" placeholder="" name="qualification" value="{{$teacher->qualification}}">
-                                </div>
-                            </div>
-                            <div class="form-group row mb-4">
-                                <label for="note"
-                                class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">ملاحظة</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <textarea class="form-control" name="note" id="" cols="30" rows="10">
-                                        {{$teacher->note}}
-                                    </textarea>
-                                </div>
-                            </div>
+                            <x-text name="phone" label="الهاتف" :value="$teacher->phone" />
+
+                            <x-text name="qualification" label="المؤهل" :value="$teacher->qualification" />
+
+                            <x-textarea name="note" label="ملاحظة" :value="$teacher->note" />
 
                             <div class="form-group row">
                                 <div class="col-sm-10">

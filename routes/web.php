@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
@@ -55,6 +56,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{experience}', [ExperienceController::class, 'edit'])->name('edit');
         Route::put('update/{experience}', [ExperienceController::class, 'update'])->name('update');
         Route::get('delete/{experience}', [ExperienceController::class, 'delete'])->name('delete');
+    });
+
+
+    Route::group(['prefix' => 'group', 'as' => 'group.'], function () {
+        Route::get('', [GroupController::class, 'index'])->name('index');
+        Route::get('create', [GroupController::class, 'create'])->name('create');
+        Route::post('/store', [GroupController::class, 'store'])->name('store');
+        Route::get('edit/{group}', [GroupController::class, 'edit'])->name('edit');
+        Route::put('update/{group}', [GroupController::class, 'update'])->name('update');
+        Route::get('delete/{group}', [GroupController::class, 'delete'])->name('delete');
     });
 
     Route::group(['prefix' => 'student', 'as' => 'student.'], function () {

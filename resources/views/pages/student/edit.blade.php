@@ -44,44 +44,16 @@
                             @method('PUT')
 
                             <input type="hidden" name="teacher_id" value="{{ $student->id }}">
-                            <div class="form-group row mb-4">
-                                <label for="name"
-                                    class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">الإسم</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="text" class="form-control" id="name" placeholder="" name="name" value="{{$student->name}}">
-                                </div>
-                            </div>
-                            <div class="form-group row mb-4">
-                                <label for="brithday" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">تاريخ
-                                    الميلاد</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="date" class="form-control" id="brithday" placeholder=""
-                                        name="brithday" value="{{$student->brithday}}">
-                                </div>
-                            </div>
-                            <div class="form-group row mb-4">
-                                <label for="phone"
-                                    class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">الهاتف</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="text" class="form-control" id="phone" placeholder="" name="phone" value="{{$student->phone}}">
-                                </div>
-                            </div>
-                            <div class="form-group row mb-4">
-                                <label for="qualification"
-                                    class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">الخبرات</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="text" class="form-control" id="qualification" placeholder="" name="qualification" value="{{$student->qualification}}">
-                                </div>
-                            </div>
-                            <div class="form-group row mb-4">
-                                <label for="note"
-                                class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">ملاحظة</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <textarea class="form-control" name="note" id="" cols="30" rows="10" >
-                                        {{$student->note}}
-                                    </textarea>
-                                </div>
-                            </div>
+                            
+                            <x-text name="name" label="الإسم" :value="$student->name" />
+
+                            <x-date name="brithday" label="تاريخ الميلاد" :value="$student->brithday" />
+
+                            <x-text name="phone" label="الهاتف" :value="$student->phone" />
+
+                            <x-text name="qualification" label="الخبرات" :value="$student->qualification" />
+                           
+                            <x-textarea name="note" label="ملاحظة" :value="$student->note" />
 
                             <div class="form-group row">
                                 <div class="col-sm-10">

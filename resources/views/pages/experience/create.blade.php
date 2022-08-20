@@ -3,7 +3,7 @@
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
-            <h3>Create Student</h3>
+            <h3>Create experience</h3>
         </div>
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
@@ -18,9 +18,11 @@
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
                     href="{{ route('admin.home') }}">Home</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.student.index') }}">Students</a>
+                    href="{{ route('admin.teacher.index') }}">Teachers</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                    href="{{ route('admin.student.create') }}">Create Student</a>
+                    href="{{ route('admin.teacher.create') }}">Create Teacher</a>
+                <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
+                    href="{{ route('admin.experience.create') }}">Create experience</a>
             </div>
         </div>
     </div>
@@ -34,24 +36,34 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4 class="text-center text-primary">Create Student</h4>
+                                <h4 class="text-center text-primary">Create experience</h4>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        <form action="{{ route('admin.student.store') }}" method="post">
+                        <form action="{{ route('admin.experience.store') }}" method="post">
                             @csrf
-                           
-                            <x-text name="name" label="الإسم" :value="old('name')" />
-
-                            <x-date name="brithday" label="تاريخ الميلاد" :value="old('brithday')" />
-
-                            <x-text name="phone" label="الهاتف" :value="old('phone')" />
-
-                            <x-text name="qualification" label="الخبرات" :value="old('qualification')" />
-                           
-                            <x-textarea name="note" label="ملاحظة" :value="old('note')" />
-
+                         
+                            <x-text name="title" label="العنوان" :value="old('title')" />
+                            
+                            <x-date name="date" label="التاريخ" :value="old('date')" />
+                            
+                            <div class="form-group row mb-4">
+                              <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
+                                  المعلم</label>
+                              <div class="col-xl-10 col-lg-9 col-sm-10">
+                                  <select class="form-control select2 select2-hidden-accessible teacher_id"
+                                      style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
+                                      name="teacher_id" id="teacher_id">
+                                      <option>اختر المعلم</option>
+                                      @foreach ($teacher as $item)
+                                          <option value="{{ $item->id }}"
+                                              {{ old('teacher_id') == $item->id ? 'selected' : '' }}>
+                                              {{ $item->name }}</option>
+                                      @endforeach
+                                  </select>
+                              </div>
+                          </div>
                             <div class="form-group row">
                                 <div class="col-sm-10">
                                     <button type="submit" class="btn btn-primary mt-3">Lets Go</button>
