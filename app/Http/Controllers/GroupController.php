@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
-use App\Http\Requests\Group\StoreGroupRequest;
-use App\Http\Requests\Group\UpdateGroupRequest;
 use App\Http\Traits\GroupTrait;
 use App\Models\Teacher;
-use App\helpers ;
 use App\Http\Traits\TeacherTrait;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -52,7 +49,6 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-
         Group::create([
             'from' => $request->from,
             'to' => $request->to,
