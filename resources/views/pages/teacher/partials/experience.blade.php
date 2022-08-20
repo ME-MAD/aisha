@@ -85,22 +85,11 @@
 
                               <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
 
-                              <div class="form-group row mb-4">
-                                    <label for="title"
-                                          class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">العنوان</label>
-                                    <div class="col-xl-10 col-lg-9 col-sm-10">
-                                          <input type="text" class="form-control" id="title" placeholder=""
-                                                name="title">
-                                    </div>
-                              </div>
-                              <div class="form-group row mb-4">
-                                    <label for="date"
-                                          class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">التاريخ</label>
-                                    <div class="col-xl-10 col-lg-9 col-sm-10">
-                                          <input type="date" class="form-control" id="date" placeholder=""
-                                                name="date">
-                                    </div>
-                              </div>
+                              <x-text name="title" label="العنوان" :value="old('title')" />
+
+                              <x-date name="date" label="التاريخ" :value="old('date')" />
+
+                            
 
                               <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Save</button>

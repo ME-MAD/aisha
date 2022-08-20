@@ -47,6 +47,9 @@
                     <li>
                         <a href="{{route('admin.teacher.create')}}">Create Teacher </a>
                     </li>
+                    <li>
+                        <a href="{{route('admin.experience.create')}}">Create experience</a>
+                    </li>
                 </ul>
             </li>
 
@@ -68,73 +71,28 @@
                     </li>
                 </ul>
             </li>
-            
+
 
             <li class="menu single-menu">
-                <a href="#uiKit" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-                        <span>UI Kit</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-cpu"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                        <span>groups</span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </a>
-                <ul class="collapse submenu list-unstyled" id="uiKit" data-parent="#topAccordion">
+                <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
                     <li>
-                        <a href="ui_alerts.html"> Alerts </a>
+                        <a href="{{route('admin.group.index')}}"> groups </a>
                     </li>
                     <li>
-                        <a href="ui_avatar.html"> Avatar </a>
-                    </li>
-                    <li>
-                        <a href="ui_badges.html"> Badges </a>
-                    </li>
-                    <li>
-                        <a href="ui_breadcrumbs.html"> Breadcrumbs </a>
-                    </li>                            
-                    <li>
-                        <a href="ui_buttons.html"> Buttons </a>
-                    </li>
-                    <li>
-                        <a href="ui_buttons_group.html"> Button Groups </a>
-                    </li>
-                    <li>
-                        <a href="ui_color_library.html"> Color Library </a>
-                    </li>
-                    <li>
-                        <a href="ui_dropdown.html"> Dropdown </a>
-                    </li>
-                    <li>
-                        <a href="ui_infobox.html"> Infobox </a>
-                    </li>
-                    <li>
-                        <a href="ui_jumbotron.html"> Jumbotron </a>
-                    </li>
-                    <li>
-                        <a href="ui_loader.html"> Loader </a>
-                    </li>
-                    <li>
-                        <a href="ui_pagination.html"> Pagination </a>
-                    </li>
-                    <li>
-                        <a href="ui_popovers.html"> Popovers </a>
-                    </li>
-                    <li>
-                        <a href="ui_progress_bar.html"> Progress Bar </a>
-                    </li>
-                    <li>
-                        <a href="ui_search.html"> Search </a>
-                    </li>
-                    <li>
-                        <a href="ui_tooltips.html"> Tooltips </a>
-                    </li>
-                    <li>
-                        <a href="ui_treeview.html"> Treeview </a>
-                    </li>
-                    <li>
-                        <a href="ui_typography.html"> Typography </a>
+                        <a href="{{route('admin.group.create')}}">Create groups</a>
                     </li>
                 </ul>
             </li>
+            
+
+           
 
             <li class="menu single-menu">
                 <a href="#tables" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">

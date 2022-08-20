@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Experience;
 use App\Http\Requests\Experience\StoreExperienceRequest;
 use App\Http\Requests\Experience\UpdateExperienceRequest;
+use App\Models\Teacher;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExperienceController extends Controller
@@ -26,7 +27,10 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        
+        $teacher = Teacher::get();
+        return view('pages.experience.create',[
+            'teacher' => $teacher,
+        ]);
     }
 
     /**
@@ -37,6 +41,7 @@ class ExperienceController extends Controller
      */
     public function store(StoreExperienceRequest $request)
     {
+
         Experience::create([
             'title' => $request->title,
             'date' => $request->date,
