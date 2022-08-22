@@ -90,7 +90,7 @@
                                                             </div>
                                                         </td>
                                                         <td class="text-center">
-                                                            <div class="links--ul">
+                                                            <div class="links--ul text-center">
                                                                 <x-delete-link :route="route('admin.experience.delete', $experience->id)" />
                                                             </div>
                                                         </td>

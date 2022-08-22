@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Experience;
 use App\Http\Requests\Experience\StoreExperienceRequest;
 use App\Http\Requests\Experience\UpdateExperienceRequest;
+use App\Http\Traits\ExperienceTrait;
 use App\Models\Teacher;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExperienceController extends Controller
 {
+    use ExperienceTrait;
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +19,7 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        $experiences =Experience::get();
+        $experiences =$this->getExperiences();
         return view('pages.experience.index', [
             'experiences' => $experiences,
         ]);

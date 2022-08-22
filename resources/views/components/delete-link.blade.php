@@ -1,3 +1,3 @@
-<a href="{{$route}}" class="bs-tooltip text-danger" style="font-size: 1.3rem" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
+<a href="{{$route}}" class="bs-tooltip text-danger m-auto" style="font-size: 1.3rem" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
       <i class="fa-solid fa-trash-can"></i>
 </a>

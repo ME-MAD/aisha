@@ -78,7 +78,7 @@
                                                                         <td class="checkbox-column text-center sorting_1"> {{$teacher->id}} </td>
                                         
                                                                         <td>
-                                                                              <a href="{{route('admin.teacher.show',$teacher->id)}}">
+                                                                              <a class="text-primary" href="{{route('admin.teacher.show',$teacher->id)}}">
                                                                                     {{$teacher->name}}
                                                                               </a>
                                                                         </td>
