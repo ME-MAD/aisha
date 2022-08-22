@@ -13,7 +13,7 @@ class UpdateExperienceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateExperienceRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required',
+            'date' => 'required',
+            'teacher_id' => 'required',
+           
         ];
     }
 }

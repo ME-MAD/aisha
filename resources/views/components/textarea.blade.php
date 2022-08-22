@@ -5,5 +5,8 @@
         <textarea class="form-control" cols="30" rows="10" name="{{ $name }}" id="{{ $name }}">
             {{ $value }} 
         </textarea>
+        @error($name)
+        <p class="text-danger">{{$message}}</p>
+    @enderror
     </div>
 </div>

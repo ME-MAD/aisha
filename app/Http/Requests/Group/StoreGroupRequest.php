@@ -13,7 +13,7 @@ class StoreGroupRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class StoreGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'from' => 'required',
+            'to' => 'required',
+            'teacher_id' => 'required',
+            'age_type' => 'required',
+            'note' => 'nullable'
         ];
     }
 }

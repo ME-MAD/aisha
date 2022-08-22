@@ -17,7 +17,11 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        //
+        $experiences =Experience::get();
+        return view('pages.experience.index', [
+            'experiences' => $experiences,
+        ]);
+       
     }
 
     /**

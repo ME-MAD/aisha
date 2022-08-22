@@ -55,13 +55,16 @@
                                   <select class="form-control select2 select2-hidden-accessible teacher_id"
                                       style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
                                       name="teacher_id" id="teacher_id">
-                                      <option>اختر المعلم</option>
+                                      <option value="">اختر المعلم</option>
                                       @foreach ($teacher as $item)
                                           <option value="{{ $item->id }}"
                                               {{ old('teacher_id') == $item->id ? 'selected' : '' }}>
                                               {{ $item->name }}</option>
                                       @endforeach
                                   </select>
+                                  @error("teacher_id")
+                                  <p class="text-danger">{{$message}}</p>
+                              @enderror
                               </div>
                           </div>
                             <div class="form-group row">

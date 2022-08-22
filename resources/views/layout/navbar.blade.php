@@ -50,6 +50,9 @@
                     <li>
                         <a href="{{route('admin.experience.create')}}">Create experience</a>
                     </li>
+                    <li>
+                        <a href="{{route('admin.experience.index')}}">Experiences</a>
+                    </li>
                 </ul>
             </li>
 
