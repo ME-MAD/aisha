@@ -35,7 +35,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4 class="text-center text-primary">Edit Group</h4>
+                                <h4 class="text-center text-success">Edit Group</h4>
                             </div>
                         </div>
                     </div>
@@ -52,24 +52,27 @@
 
                        <!-- شرح foreach ->item->id  -->
                             <div class="form-group row mb-4">
-                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
+                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-success"> اختر
                                     المعلم</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
                                     <select class="form-control select2 select2-hidden-accessible teacher_id"
                                         style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
                                         name="teacher_id" id="teacher_id">
                                         <option>اختر المعلم</option>
-                                        @foreach ($teacher as $item)
-                                            <option value="{{ $item->id }}"
-                                                {{ $group->teacher_id == $item->id ? 'selected' : '' }}>
-                                                {{ $item->name }}
+                                        @foreach ($teachers as $teacher)
+                                            <option value="{{ $teacher->id }}"
+                                                {{ $group->teacher_id == $teacher->id ? 'selected' : '' }}>
+                                                {{ $teacher->name }}
                                             </option>
                                         @endforeach
                                     </select>
+                                    @error("teacher_id")
+                                    <p class="text-danger">{{$message}}</p>
+                                @enderror
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
-                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">الفئه
+                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-success">الفئه
                                     العمرية</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
                                     <select class="form-control select2 select2-hidden-accessible teacher_id"
@@ -78,6 +81,9 @@
                                         <option value="{{$group->age_type}}"{{old('age_type') == "kid" ? 'kid' : ''}} >kid</option>
                                         <option value="{{$group->age_type}}" {{old('age_type') == "adult" ? 'adult' : ''}}>adult</option>
                                     </select>
+                                    @error("age_type")
+                                    <p class="text-danger">{{$message}}</p>
+                                @enderror
                                 </div>
                             </div>
 
@@ -85,7 +91,7 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary mt-3">Lets Go</button>
+                                    <button type="submit" class="btn btn-success mt-3">Lets Go</button>
                                 </div>
                             </div>
                         </form>

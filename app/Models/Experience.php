@@ -11,4 +11,9 @@ class Experience extends Model
     protected $fillable = ['title', 'date', 'teacher_id'];
 
     protected $dates = ['date'];
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class,'teacher_id');
+    }
 }

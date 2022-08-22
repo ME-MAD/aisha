@@ -34,7 +34,7 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4 class="text-center text-primary">Edit Student</h4>
+                                <h4 class="text-center text-success">Edit Student</h4>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary mt-3">Lets Go</button>
+                                    <button type="submit" class="btn btn-success mt-3">Lets Go</button>
                                 </div>
                             </div>
                         </form>

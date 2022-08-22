@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Group\StoreGroupRequest;
 use App\Models\Group;
 use App\Http\Traits\GroupTrait;
 use App\Models\Teacher;
@@ -32,12 +33,12 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create( )
     {
-        $teacher = Teacher::get();
+        $teaches = Teacher::get();
        
         return view('pages.group.create', [
-            'teacher' => $teacher,
+            'teachers' => $teaches,
        ]);
     }
 
@@ -47,7 +48,7 @@ class GroupController extends Controller
      * @param  \App\Http\Requests\StoreGroupRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreGroupRequest $request)
     {
         Group::create([
             'from' => $request->from,
@@ -79,10 +80,10 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        $teacher = $this->getTeachers();
+        $teachers = $this->getTeachers();
         return view('pages.group.edit', [
             'group'  => $group,
-            'teacher'  => $teacher,
+            'teachers'  => $teachers,
         ]);
     }
 

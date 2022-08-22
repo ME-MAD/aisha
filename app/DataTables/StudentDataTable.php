@@ -15,7 +15,8 @@ class StudentDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('edit', 'pages.student.datatable.edit')
             ->addColumn('delete', 'pages.student.datatable.delete')
-            ->rawColumns(['edit','delete'])
+            ->rawColumns(['edit'])
+            ->rawColumns(['delete'])
             ->setRowId('id');
     }
 

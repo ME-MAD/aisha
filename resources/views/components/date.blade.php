@@ -3,5 +3,8 @@
     <div class="col-xl-10 col-lg-9 col-sm-10">
         <input type="date" class="form-control" id="{{ $id ?? $name }}" placeholder=""
             name="{{ $name }}" value="{{ $value ?? '' }}">
+            @error($name)
+            <p class="text-danger">{{$message}}</p>
+        @enderror
     </div>
 </div>

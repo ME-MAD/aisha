@@ -12,7 +12,7 @@
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
-            <h3>Groups Table</h3>
+            <h3>experiences Table</h3>
         </div>
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
@@ -28,9 +28,9 @@
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
                     href="{{ route('admin.home') }}">Home</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.group.index') }}">Groups</a>
+                    href="{{ route('admin.experience.index') }}">experience</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                    href="{{ route('admin.group.create') }}">Create Group</a>
+                    href="{{ route('admin.experience.create') }}">Create experience</a>
             </div>
         </div>
     </div>
@@ -46,10 +46,10 @@
                     <div class="widget-header">
                         <div class="row align-items-center">
                             <div class="col-xl-10 col-md-10 col-sm-10 col-10">
-                                <h4>Groups</h4>
+                                <h4>experiences</h4>
                             </div>
                             <div class="col-xl-2 col-md-2 col-sm-2 col-2">
-                                <a href="{{ route('admin.group.create') }}" class="btn btn-primary float-right">Create</a>
+                                <a href="{{ route('admin.experience.create') }}" class="btn btn-primary float-right">Create</a>
                             </div>
                         </div>
                     </div>
@@ -63,38 +63,35 @@
                                             <thead>
                                                 <tr>
                                                     <th class="checkbox-column text-center"> Id </th>
-                                                    <th class="text-center">from</th>
-                                                    <th class="text-center">to</th>
-                                                    <th class="text-center">teacher</th>
-                                                    <th class="text-center">age_type</th>
-                                                    <th class="text-center">Note</th>
+                                                    <th class="text-center">title</th>
+                                                    <th class="text-center">date</th>
+                                                    <th class="text-center">Teacher
+                                                    </th>
                                                     <th class="text-center">Edit</th>
                                                     <th class="text-center">Delete</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($groups as $group)
+                                                @foreach ($experiences as $experience)
                                                     <tr role="row">
                                                         <td class="checkbox-column text-center sorting_1">
-                                                            {{ $group->id }} </td>
+                                                            {{ $experience->id }} </td>
 
-                                                        <td>{{ $group->from }}</td>
-                                                        <td>{{ $group->to }}</td>
+                                                        <td>{{ $experience->title }}</td>
+                                                        <td>{{ $experience->date }}</td>
                                                         <td>
-                                                            <a href="{{ route('admin.teacher.show', $group->id) }}"  class="text-primary">
-                                                                {{ $group->teacher->name }}
+                                                            <a href="{{ route('admin.teacher.show', $experience->id) }}"  class="text-primary">
+                                                                {{ $experience->teacher->name }}
                                                             </a>
                                                         </td>
-                                                        <td>{{ $group->age_type }}</td>
-                                                        <td>{{ $group->note }}</td>
                                                         <td class="text-center">
                                                             <div class="links--ul">
-                                                                <x-edit-link :route="route('admin.group.edit', $group->id)" />
+                                                                <x-edit-link :route="route('admin.experience.edit', $experience->id)" />
                                                             </div>
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="links--ul">
-                                                                <x-delete-link :route="route('admin.group.delete', $group->id)" />
+                                                                <x-delete-link :route="route('admin.experience.delete', $experience->id)" />
                                                             </div>
                                                         </td>
                                                     </tr>

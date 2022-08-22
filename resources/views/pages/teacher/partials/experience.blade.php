@@ -22,7 +22,7 @@
                         </div>
                         <div class="t-text">
                             <a class="editExperienceTitleButton" data-toggle="modal" data-target="#editExperienceTitleModal" data-title="{{ $experience->title }}">
-                                <p>{{ $experience->title }}</p>
+                                <p class="text-primary">{{ $experience->title }}</p>
                             </a>
                         </div>
                     </div>
