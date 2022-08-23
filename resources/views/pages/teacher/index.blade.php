@@ -69,7 +69,8 @@
                                                                     <th class="text-center">Phone</th>
                                                                     <th class="text-center">qualification</th>
                                                                     <th class="text-center">Note</th>
-                                                                    <th class="text-center">Action</th>
+                                                                    <th class="text-center">Edit</th>
+                                                                    <th class="text-center">Delete</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -87,8 +88,12 @@
                                                                         <td>{{$teacher->qualification}}</td>
                                                                         <td>{{$teacher->note}}</td>
                                                                         <td class="text-center">
-                                                                                <div class="links--ul">
+                                                                                <div class="links--ul text-center">
                                                                                         <x-edit-link :route="route('admin.teacher.edit',$teacher->id)" />
+                                                                                </div>
+                                                                        </td>
+                                                                        <td class="text-center">
+                                                                                <div class="links--ul text-center">
                                                                                         <x-delete-link :route="route('admin.teacher.delete',$teacher->id)" />
                                                                                 </div>
                                                                         </td>
