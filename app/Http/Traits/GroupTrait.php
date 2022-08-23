@@ -13,6 +13,8 @@ trait GroupTrait
     }
     private function getGroups()
     {
-        return Group::get();
+        return Group::select(['id','from','to','teacher_id','age_type','note'])
+                     ->with('teacher:id,name')
+                     ->get();
     }
 }

@@ -70,7 +70,7 @@
                         <a href="{{route('admin.student.index')}}"> Students </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.teacher.create')}}">Create Teacher</a>
+                        <a href="{{route('admin.teacher.create')}}">Create Student</a>
                     </li>
                 </ul>
             </li>
