@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/table/datatable/datatables.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/assets/css/forms/theme-checkbox-radio.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/table/datatable/dt-global_style.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/table/datatable/custom_dt_custom.css')}}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/table/datatable/custom_dt_custom.css')}}"> --}}
     <!-- END PAGE LEVEL CUSTOM STYLES -->
 @endsection
 
@@ -45,6 +45,9 @@
                   <div class="col-lg-12">
                         <div class="statbox widget box box-shadow">
                               <div class="widget-header">
+                                    
+                              </div>
+                              <div class="widget-content widget-content-area">
                                     <div class="row align-items-center">
                                           <div class="col-xl-10 col-md-10 col-sm-10 col-10">
                                                 <h4>Students</h4>
@@ -53,8 +56,6 @@
                                                 <a href="{{ route('admin.student.create') }}" class="btn btn-primary float-right">Create</a>
                                           </div>
                                     </div>
-                              </div>
-                              <div class="widget-content widget-content-area">
                                     <div class="table-responsive mb-4">
                                           <div id="style-3_wrapper"
                                                 class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
@@ -79,12 +80,16 @@
 
 
 @section('javascript')
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
- <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+    <!-- BEGIN PAGE LEVEL CUSTOM SCRIPTS -->
+    <script src="{{asset('adminAssets/plugins/table/datatable/datatables.js')}}"></script>
+    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
+    <script src="{{asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js')}}"></script>
+    <!-- END PAGE LEVEL CUSTOM SCRIPTS -->
     <script src="/vendor/datatables/buttons.server-side.js"></script>
-      {!! $dataTable->scripts() !!}
- <!-- END PAGE LEVEL SCRIPTS -->  
+
+
+
+{!! $dataTable->scripts() !!}
+
+
 @endsection

@@ -21,7 +21,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $groups = $this->getGroupsDesc();
+        $groups = $this->getGroups();
         
         return view('pages.group.index', [
             'groups' => $groups,

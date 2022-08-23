@@ -31,7 +31,7 @@ class StudentDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->parameters([
-                'dom'          => 'Blfrtip',
+                'dom'          => 'Blrtip',
                 'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                 'buttons'      => [
                     ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
@@ -42,37 +42,50 @@ class StudentDataTable extends DataTable
                 ],
                 'scrollX' => true,
                 'initComplete' => "function() {
-                    this.api().columns().every(function() {
-                        var that = this;
-                        $('input', this.header()).on('keyup change clear', function() {
-                            if (that.search() !== this.value) {
-                                if (this.id == 'exact') {
-                                    var val = this.value;
-                                    that.search(val ? '^' + val + '$' : '', true, false)
-                                        .draw();
-                                } else {
-                                    that.search(this.value).draw();
-                                }
+                    this.api().columns().every(function(){
+                        var column = this;
+                        var exact = $(column.header()).hasClass('exact')
+                        var input = document.createElement(\"input\")
+                        input.style.width = column.header().style.width
+                        $(input).appendTo($(column.footer()).empty())
+                        .on('keyup change clear',function(){
+                            if(exact)
+                            {
+                                var val = $(this).val()
+                                column.search(val ? '^' + val + '$' : '', true, false).draw();
                             }
-                        });
-                    });
+                            else
+                            {
+                                column.search($(this).val() , false, false, true).draw()
+                            }
+                        })
+
+                        if($(column.header()).hasClass('not--search--col'))
+                        {
+                            $(column.footer()).empty()
+                        }
+                    })
                 }",
+                "fnDrawCallback" => "function( oSettings ) {
+                    refreshAllTableLinks()
+                }",
+
             ]);
     }
 
     protected function getColumns(): array
     {
         return [
-            ['name' => 'id', 'data' => 'id', 'title' => '<input type="text" style="width:100px" id="exact" /> <br> رقم الهوية'],
-            ['name' => 'name', 'data' => 'name', 'title' => '<input type="text" style="width:100px"/><br> الاسم'],
-            ['name' => 'brithday', 'data' => 'brithday', 'title' => '<input type="text" style="width:100px"/> <br> تاريخ الميلاد'],
-            ['name' => 'phone', 'data' => 'phone', 'title' => '<input type="text" style="width:100px"/> <br> الهاتف'],
+            ['name' => 'id', 'data' => 'id', 'title' => 'رقم الهوية' ,"className" => 'search--col exact'],
+            ['name' => 'name', 'data' => 'name', 'title' => ' الاسم',"className" => 'search--col'],
+            ['name' => 'brithday', 'data' => 'brithday', 'title' => ' تاريخ الميلاد',"className" => 'search--col'],
+            ['name' => 'phone', 'data' => 'phone', 'title' => ' الهاتف',"className" => 'search--col'],
 
-            ['name' => 'qualification', 'data' => 'qualification', 'title' => '<input type="text" style="width:100px"/> <br> المؤهلات'],
+            ['name' => 'qualification', 'data' => 'qualification', 'title' => ' المؤهلات',"className" => 'search--col'],
 
-            ['name' => 'note', 'data' => 'note', 'title' => '<input type="text" style="width:100px"/>  <br>ملحوظة'],
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false],
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false],
+            ['name' => 'note', 'data' => 'note', 'title' => 'ملحوظة',"className" => 'search--col'],
+            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false,"className" => 'not--search--col'],
+            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false,"className" => 'not--search--col'],
         ];
     }
 

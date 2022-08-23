@@ -1,5 +1,7 @@
 @extends('master')
-
+@section('css')
+<link href="{{asset('adminAssets/plugins/flatpickr/flatpickr.css')}}" rel="stylesheet" type="text/css">
+@endsection
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
@@ -97,4 +99,23 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section("javascript")
+<script src="{{asset('adminAssets/plugins/flatpickr/flatpickr.js')}}"></script>
+<script>
+var f4 = flatpickr(document.getElementById('from'), {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    defaultDate: "13:45"
+});
+var f5 = flatpickr(document.getElementById('to'), {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    defaultDate: "13:45"
+});
+</script>
+
 @endsection
