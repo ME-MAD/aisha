@@ -68,7 +68,7 @@
                                                                     <th class="text-center">Birth Day</th>
                                                                     <th class="text-center">Phone</th>
                                                                     <th class="text-center">qualification</th>
-                                                                    <th class="text-center">Note</th>
+                                                                   
                                                                     <th class="text-center">Edit</th>
                                                                     <th class="text-center">Delete</th>
                                                                 </tr>
@@ -86,7 +86,7 @@
                                                                         <td>{{$teacher->birthday}}</td>
                                                                         <td>{{$teacher->phone}}</td>
                                                                         <td>{{$teacher->qualification}}</td>
-                                                                        <td>{{$teacher->note}}</td>
+                                                                      
                                                                         <td class="text-center">
                                                                                 <div class="links--ul text-center">
                                                                                         <x-edit-link :route="route('admin.teacher.edit',$teacher->id)" />

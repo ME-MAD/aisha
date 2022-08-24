@@ -55,7 +55,7 @@ class GroupController extends Controller
             'to' => $request->to,
             'teacher_id' => $request->teacher_id,
             'age_type' => $request->age_type,
-            'note' => $request->note,
+          
         ]);
       
         Alert::success('نجاح', 'تمت العملية بنجاح');
@@ -101,7 +101,7 @@ class GroupController extends Controller
             'to' => $request->to,
             'teacher_id' => $request->teacher_id,
             'age_type' => $request->age_type,
-            'note' => $request->note,
+            
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.group.index'));

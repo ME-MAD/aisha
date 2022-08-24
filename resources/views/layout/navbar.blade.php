@@ -48,10 +48,10 @@
                         <a href="{{route('admin.teacher.create')}}">Create Teacher </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.experience.create')}}">Create experience</a>
+                        <a href="{{route('admin.experience.index')}}">Experiences</a>
                     </li>
                     <li>
-                        <a href="{{route('admin.experience.index')}}">Experiences</a>
+                        <a href="{{route('admin.experience.create')}}">Create experience</a>
                     </li>
                 </ul>
             </li>

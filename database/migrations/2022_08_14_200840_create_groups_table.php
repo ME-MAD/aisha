@@ -19,7 +19,6 @@ return new class extends Migration
             $table->time('to');
             $table->unsignedBigInteger('teacher_id');
             $table->enum('age_type', ['kid', 'adult']);
-            $table->text('note')->nullable();
             $table->timestamps();
 
             $table->foreign('teacher_id')

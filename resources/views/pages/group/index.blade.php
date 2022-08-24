@@ -67,7 +67,6 @@
                                                     <th class="text-center">to</th>
                                                     <th class="text-center">teacher</th>
                                                     <th class="text-center">age_type</th>
-                                                    <th class="text-center">Note</th>
                                                     <th class="text-center">Edit</th>
                                                     <th class="text-center">Delete</th>
                                                 </tr>
@@ -86,7 +85,6 @@
                                                             </a>
                                                         </td>
                                                         <td>{{ $group->age_type }}</td>
-                                                        <td>{{ $group->note }}</td>
                                                         <td class="text-center">
                                                             <div class="links--ul">
                                                                 <x-edit-link :route="route('admin.group.edit', $group->id)" />

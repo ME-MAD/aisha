@@ -28,7 +28,7 @@ class UpdateGroupRequest extends FormRequest
             'to' => 'required',
             'teacher_id' => 'required',
             'age_type' => 'required',
-            'note' => 'nullable'
+           
         ];
     }
 }

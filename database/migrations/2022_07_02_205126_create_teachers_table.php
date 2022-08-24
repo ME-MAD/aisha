@@ -19,7 +19,6 @@ return new class extends Migration
             $table->date('birthday')->nullable();
             $table->string('phone')->nullable();
             $table->text('qualification')->nullable();
-            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

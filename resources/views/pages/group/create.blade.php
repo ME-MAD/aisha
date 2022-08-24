@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                             
-                          <x-textarea name="note" label="ملاحظة" :value="old('note')" />
+                        
 
                             <div class="form-group row">
                                 <div class="col-sm-10">

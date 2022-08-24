@@ -7,6 +7,8 @@ use App\Http\Traits\GroupTrait;
 use App\Http\Traits\StudentTrait;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\http\requests\Student\StoreStudentRequest;
+use App\http\requests\Student\UpdateStudentRequest;
 
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -32,7 +34,7 @@ class StudentController extends Controller
         return view('pages.student.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreStudentRequest $request)
     {
        // dd($request);
         Student::create([
@@ -40,7 +42,7 @@ class StudentController extends Controller
             'brithday' => $request->brithday,
             'phone' => $request->phone,
             'qualification' => $request->qualification,
-            'note' => $request->note,
+            
         ]);
     // dd($request->qualification);
         Alert::success('نجاح', 'تمت العملية بنجاح');
@@ -57,14 +59,14 @@ class StudentController extends Controller
         ]);
     }
 
-    public function update(Request $request ,Student $student)
+    public function update(UpdateStudentRequest $request ,Student $student)
     {
         $student->update([
             'name' => $request->name,
             'brithday' => $request->brithday,
             'phone' => $request->phone,
             'qualification' => $request->qualification,
-            'note' => $request->note,
+           
         ]);
 
         Alert::success('نجاح', 'تمت العملية بنجاح');

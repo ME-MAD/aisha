@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Teacher\TeacherDeleteRequest;
-use App\Http\Requests\Teacher\TeacherStoreRequest;
-use App\Http\Requests\Teacher\TeacherUpdateRequest;
+
+use App\Http\Requests\Teacher\StoreTeacherRequest;
+use App\Http\Requests\Teacher\UpdateTeacherRequest;
 use App\Http\Traits\TeacherTrait;
-use App\Models\Experience;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -39,14 +38,14 @@ class TeacherController extends Controller
         return view('pages.teacher.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreTeacherRequest $request)
     {
         Teacher::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'birthday' => $request->birthday,
             'qualification' => $request->qualification,
-            'note' => $request->note,
+           
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.teacher.index'));
@@ -59,7 +58,7 @@ class TeacherController extends Controller
         ]);
     }
 
-    public function update(Request $request,Teacher $teacher)
+    public function update(UpdateTeacherRequest $request,Teacher $teacher)
     {
 
         $teacher->update([
@@ -67,7 +66,7 @@ class TeacherController extends Controller
             'phone' => $request->phone,
             'birthday' => $request->birthday,
             'qualification' => $request->qualification,
-            'note' => $request->note,
+          
         ]);
 
 

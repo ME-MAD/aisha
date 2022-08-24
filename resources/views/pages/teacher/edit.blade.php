@@ -53,7 +53,7 @@
 
                             <x-text name="qualification" label="المؤهل" :value="$teacher->qualification" />
 
-                            <x-textarea name="note" label="ملاحظة" :value="$teacher->note" />
+                           
 
                             <div class="form-group row">
                                 <div class="col-sm-10">
