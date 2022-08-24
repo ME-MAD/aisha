@@ -24,8 +24,8 @@ class UpdateGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'from' => 'required',
-            'to' => 'required',
+            'from' => 'required|date_format:H:i',
+            'to' => 'required|date_format:H:i|after:from',
             'teacher_id' => 'required',
             'age_type' => 'required',
            
