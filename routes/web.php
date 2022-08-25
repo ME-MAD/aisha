@@ -3,7 +3,11 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\GroupDayController;
+use App\Http\Controllers\GroupTypeController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use App\Models\Experience;
@@ -83,6 +87,44 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::post('store', [UserController::class, 'store'])->name('store');
         Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit');
         Route::put('update/{user}', [UserController::class, 'update'])->name('update');
-        Route::delete('delete/{user}', [UserController::class, 'delete'])->name('delete');
+        Route::get('delete/{user}', [UserController::class, 'delete'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'group_day', 'as' => 'group_day.'], function () {
+        Route::get('', [GroupDayController::class, 'index'])->name('index');
+        Route::get('create', [GroupDayController::class, 'create'])->name('create');
+        Route::post('store', [GroupDayController::class, 'store'])->name('store');
+        Route::get('edit/{group_day}', [GroupDayController::class, 'edit'])->name('edit');
+        Route::put('update/{group_day}', [GroupDayController::class, 'update'])->name('update');
+        Route::get('delete/{group_day}', [GroupDayController::class, 'delete'])->name('delete');
+    });
+
+
+    Route::group(['prefix' => 'subject', 'as' => 'subject.'], function () {
+        Route::get('', [SubjectController::class, 'index'])->name('index');
+        Route::get('create', [SubjectController::class, 'create'])->name('create');
+        Route::post('store', [SubjectController::class, 'store'])->name('store');
+        Route::get('edit/{subject}', [SubjectController::class, 'edit'])->name('edit');
+        Route::put('update/{subject}', [SubjectController::class, 'update'])->name('update');
+        Route::get('delete/{subject}', [SubjectController::class, 'delete'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'lesson', 'as' => 'lesson.'], function () {
+        Route::get('', [LessonController::class, 'index'])->name('index');
+        Route::get('create', [LessonController::class, 'create'])->name('create');
+        Route::post('store', [LessonController::class, 'store'])->name('store');
+        Route::get('edit/{lesson}', [LessonController::class, 'edit'])->name('edit');
+        Route::put('update/{lesson}', [LessonController::class, 'update'])->name('update');
+        Route::get('delete/{lesson}', [LessonController::class, 'delete'])->name('delete');
+    });
+
+
+    Route::group(['prefix' => 'group_types', 'as' => 'group_types.'], function () {
+        Route::get('', [GroupTypeController::class, 'index'])->name('index');
+        Route::get('create', [GroupTypeController::class, 'create'])->name('create');
+        Route::post('store', [GroupTypeController::class, 'store'])->name('store');
+        Route::get('edit/{group_types}', [GroupTypeController::class, 'edit'])->name('edit');
+        Route::put('update/{group_types}', [GroupTypeController::class, 'update'])->name('update');
+        Route::get('delete/{group_types}', [GroupTypeController::class, 'delete'])->name('delete');
     });
 });

@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Lesson;
 use App\Http\Requests\Lesson\StoreLessonRequest;
 use App\Http\Requests\Lesson\UpdateLessonRequest;
+use App\Http\Traits\LessonTrait;
+use App\Http\Traits\SubjectTrait;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LessonController extends Controller
 {
+    use LessonTrait;
+    use SubjectTrait;
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +20,10 @@ class LessonController extends Controller
      */
     public function index()
     {
-        //
+        $lessons = $this->getLessons();
+        return view('pages.lesson.index',[
+            'lessons'=> $lessons
+        ]);
     }
 
     /**
@@ -25,7 +33,10 @@ class LessonController extends Controller
      */
     public function create()
     {
-        //
+        $subjects = $this->getSubject();
+        return view('pages.lesson.create',[
+            "subjects"=>$subjects
+        ]);
     }
 
     /**
@@ -36,7 +47,12 @@ class LessonController extends Controller
      */
     public function store(StoreLessonRequest $request)
     {
-        //
+        Lesson::create([
+            'subject_id' => $request->subject_id,
+            'title' => $request->title,
+        ]);
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route('admin.lesson.index'));
     }
 
     /**
@@ -58,7 +74,11 @@ class LessonController extends Controller
      */
     public function edit(Lesson $lesson)
     {
-        //
+        $subjects = $this->getSubject();
+        return view('pages.lesson.edit',[
+            "lesson"=>$lesson,
+            "subjects"=>$subjects
+        ]);
     }
 
     /**
@@ -70,7 +90,12 @@ class LessonController extends Controller
      */
     public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
-        //
+        $lesson->update([
+            'subject_id' => $request->subject_id,
+            'title' => $request->title,
+        ]);
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route('admin.lesson.index'));
     }
 
     /**
@@ -79,8 +104,10 @@ class LessonController extends Controller
      * @param  \App\Models\Lesson  $lesson
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Lesson $lesson)
+    public function delete(Lesson $lesson)
     {
-        //
+        $lesson->delete();
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect()->back();
     }
 }
