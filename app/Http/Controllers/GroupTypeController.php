@@ -10,6 +10,7 @@ use App\Models\Group;
 
 class GroupTypeController extends Controller
 {
+    
     use GroupTypeTrait;
     /**
      * Display a listing of the resource.
