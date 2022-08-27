@@ -5,7 +5,6 @@ Teacher:
     birthday
     phone
     qualification
-    note
     
 [CRUD]
 Experience:
@@ -20,7 +19,6 @@ Student:
     birthday : date
     phone : string
     qualification : text
-    note : text
 
 [CRUD]
 Group:
@@ -29,28 +27,26 @@ Group:
     to : time
     teacher_id
     age_type ('kid','adult') : enum
-    note : text
 
-.............
+
 GroupDay:
     id
     group_id
     day ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') : enum
 
-.............
+*********************
 GroupType:
     id
-    group_id
     name : string
     price : double
 
-.............
+
 Subject:
     id
     name : string
 
 
-..............
+
 Lesson:
     id
     subject_id
@@ -72,7 +68,7 @@ StudentLesson:
     finished : bool
 
 
-
+................
 GroupStudent:
     id
     student_id
@@ -84,13 +80,13 @@ Payment:
     group_id
     paid : double
     month ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December') : enum
-    note : text
 
+....................
 Exam:
     id
     group_id
     subject_id
-    lesson_from => foriegn key on lessonss
+    lesson_from => foriegn key on lessons
     lesson_to => foriegn key on lessons
 
 StudentExam:

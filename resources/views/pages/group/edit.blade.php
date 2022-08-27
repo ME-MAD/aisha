@@ -112,13 +112,13 @@ var f4 = flatpickr(document.getElementById('from'), {
     enableTime: true,
     noCalendar: true,
     dateFormat: "H:i",
-    defaultDate: "13:45"
+    // defaultDate: "13:45"
 });
 var f5 = flatpickr(document.getElementById('to'), {
     enableTime: true,
     noCalendar: true,
     dateFormat: "H:i",
-    defaultDate: "13:45"
+    // defaultDate: "13:45"
 });
 </script>
 

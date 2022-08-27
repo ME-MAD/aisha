@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\GroupType;
 use App\Http\Requests\GroupType\StoreGroupTypeRequest;
 use App\Http\Requests\GroupType\UpdateGroupTypeRequest;
+use App\Http\Traits\GroupTrait;
 use App\Http\Traits\GroupTypeTrait;
 use App\Models\Group;
 
 class GroupTypeController extends Controller
 {
     
-    use GroupTypeTrait;
+    use GroupTypeTrait,
+    GroupTrait;
     /**
      * Display a listing of the resource.
      *

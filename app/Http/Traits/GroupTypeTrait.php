@@ -7,7 +7,7 @@ use App\Models\GroupType;
 
 trait GroupTypeTrait
 {
-    private function getGroupsDesc()
+    private function getGroupTypesDesc()
     {
         return GroupType::orderBy('id', 'DESC')->get();
     }

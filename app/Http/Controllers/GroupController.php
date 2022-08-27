@@ -55,7 +55,6 @@ class GroupController extends Controller
             'to' => $request->to,
             'teacher_id' => $request->teacher_id,
             'age_type' => $request->age_type,
-          
         ]);
       
         Alert::success('نجاح', 'تمت العملية بنجاح');

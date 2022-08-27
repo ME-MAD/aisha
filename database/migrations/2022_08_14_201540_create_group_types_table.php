@@ -15,15 +15,9 @@ return new class extends Migration
     {
         Schema::create('group_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('group_id');
             $table->string('name')->unique();
             $table->double('price');
             $table->timestamps();
-
-            $table->foreign('group_id')
-            ->references('id')
-            ->on('groups')
-            ->onDelete('CASCADE');
         });
     }
 
