@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Subject;
 use App\Http\Requests\Subject\StoreSubjectRequest;
 use App\Http\Requests\Subject\UpdateSubjectRequest;
+use App\Http\Traits\SubjectTrait;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SubjectController extends Controller
 {
+    use SubjectTrait;
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +18,11 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        $subjects = $this->getSubject();
+
+        return view('pages.subject.index',[
+            'subjects' => $subjects
+        ]);
     }
 
     /**
@@ -25,9 +32,9 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.subject.create');
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -36,7 +43,11 @@ class SubjectController extends Controller
      */
     public function store(StoreSubjectRequest $request)
     {
-        //
+        Subject::create([
+            'name' => $request->name,
+        ]);
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route('admin.subject.index'));
     }
 
     /**
@@ -58,7 +69,9 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        //
+        return view('pages.subject.edit',[
+            'subject' => $subject
+        ]);
     }
 
     /**
@@ -70,7 +83,11 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
-        //
+        $subject->update([
+            'name' => $request->name
+        ]);
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route('admin.subject.index'));
     }
 
     /**
@@ -79,8 +96,10 @@ class SubjectController extends Controller
      * @param  \App\Models\Subject  $subject
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subject $subject)
+    public function delete(Subject $subject)
     {
-        //
+        $subject->delete();
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect()->back();
     }
 }

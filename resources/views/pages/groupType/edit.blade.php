@@ -21,9 +21,9 @@
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
                     href="{{ route('admin.home') }}">Home</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.group.index') }}">Groups</a>
+                    href="{{ route('admin.group_types.index') }}">Group Types</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                    href="{{ route('admin.group.create') }}">Create Group</a>
+                    href="{{ route('admin.group_types.create') }}">Create Group Types</a>
             </div>
         </div>
     </div>
@@ -37,59 +37,44 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4 class="text-center text-success">Edit Group</h4>
+                                <h4 class="text-center text-success">Edit Group Type</h4>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        <form action="{{ route('admin.group.update',$group->id) }}" method="post">
+                        <form action="{{ route('admin.group.update',$groupType->id) }}" method="post">
                             @csrf
                             @method('PUT')
 
-                            <input type="hidden" name="teacher_id" value="{{ $group->id }}">
+                            <input type="hidden" name="group_types_id" value="{{ $groupType->id }}">
                             
-                            <x-time name="from" label="من" :value="$group->from" />
 
-                            <x-time name="to" label="إلى" :value="$group->to" />
-
-                      
                             <div class="form-group row mb-4">
                                 <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-success"> اختر
-                                    المعلم</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible teacher_id"
+                                    المجموعة</label>
+                                    <div class="col-xl-10 col-lg-9 col-sm-10">
+                                        <select class="form-control select2 select2-hidden-accessible teacher_id"
                                         style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
-                                        name="teacher_id" id="teacher_id">
-                                        <option>اختر المعلم</option>
-                                        @foreach ($teachers as $teacher)
-                                            <option value="{{ $teacher->id }}"
-                                                {{ $group->teacher_id == $teacher->id ? 'selected' : '' }}>
-                                                {{ $teacher->name }}
-                                            </option>
+                                        name="group_id" id="group_id">
+                                        <option>اختر المجموعة</option>
+                                        @foreach ($groups as $group)
+                                        <option value="{{ $group->id }}"
+                                            {{ $groupType->group_id == $group->id ? 'selected' : '' }}>
+                                            {{ $groupType->group->from }} -
+                                            {{ $groupType->group->to }}
+                                        </option>
                                         @endforeach
                                     </select>
-                                    @error("teacher_id")
+                                    @error("group_id")
                                     <p class="text-danger">{{$message}}</p>
-                                @enderror
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="form-group row mb-4">
-                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-success">الفئه
-                                    العمرية</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible teacher_id"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
-                                        name="age_type" id="age_type">
-                                        <option value="{{$group->age_type}}"{{old('age_type') == "kid" ? 'kid' : ''}} >kid</option>
-                                        <option value="{{$group->age_type}}" {{old('age_type') == "adult" ? 'adult' : ''}}>adult</option>
-                                    </select>
-                                    @error("age_type")
-                                    <p class="text-danger">{{$message}}</p>
-                                @enderror
-                                </div>
-                            </div>
+                            
+                            <x-text name="name" label="الاسم" :value="$groupType->name" />
 
-                           
+                            <x-text name="price" label="السعر" :value="$groupType->price" />
+                      
 
                             <div class="form-group row">
                                 <div class="col-sm-10">

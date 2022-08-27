@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\GroupDay;
 use App\Http\Requests\GroupDay\StoreGroupDayRequest;
 use App\Http\Requests\GroupDay\UpdateGroupDayRequest;
+use App\Models\Group;
+use App\Http\Traits\GroupDayTrait;
+use App\Http\Traits\GroupTrait;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupDayController extends Controller
 {
+    use GroupDayTrait;
+    use GroupTrait;
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,12 @@ class GroupDayController extends Controller
      */
     public function index()
     {
-        //
+
+     
+        $groupdays = $this->getGroupDays();
+        return view('pages.groupDays.index', [
+            'groupdays' => $groupdays,
+        ]);
     }
 
     /**
@@ -25,7 +36,10 @@ class GroupDayController extends Controller
      */
     public function create()
     {
-        //
+        $groups = Group::get();
+        return view('pages.groupDays.create', [
+            'groups' => $groups,
+       ]);
     }
 
     /**
@@ -36,7 +50,14 @@ class GroupDayController extends Controller
      */
     public function store(StoreGroupDayRequest $request)
     {
-        //
+        GroupDay::create([
+            'group_id' => $request->group_id,
+            'day' => $request->day,
+        
+        ]);
+      
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route('admin.group_day.index'));
     }
 
     /**
@@ -58,7 +79,11 @@ class GroupDayController extends Controller
      */
     public function edit(GroupDay $groupDay)
     {
-        //
+        $groups = $this->getGroups();
+        return view('pages.groupDays.edit', [
+            'groupDay'  => $groupDay,
+            'groups'  => $groups,
+        ]); 
     }
 
     /**
@@ -70,7 +95,13 @@ class GroupDayController extends Controller
      */
     public function update(UpdateGroupDayRequest $request, GroupDay $groupDay)
     {
-        //
+        $groupDay->update([
+            'group_id' => $request->group_id,
+            'day' => $request->day,
+            
+        ]);
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route('admin.group_day.index'));
     }
 
     /**
@@ -79,8 +110,10 @@ class GroupDayController extends Controller
      * @param  \App\Models\GroupDay  $groupDay
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GroupDay $groupDay)
+    public function delete(GroupDay $groupDay)
     {
-        //
+        $groupDay->delete();
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect()->back();
     }
 }

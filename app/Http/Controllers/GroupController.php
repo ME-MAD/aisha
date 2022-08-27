@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Group\StoreGroupRequest;
+use App\Http\Requests\Group\UpdateGroupRequest;
 use App\Models\Group;
 use App\Http\Traits\GroupTrait;
 use App\Models\Teacher;
 use App\Http\Traits\TeacherTrait;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupController extends Controller
@@ -75,7 +75,7 @@ class GroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Group  $group
+     * @param  \App\Models\Group 
      * @return \Illuminate\Http\Response
      */
     public function edit(Group $group)
@@ -94,7 +94,7 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(UpdateGroupRequest $request, Group $group)
     {
         $group->update([
             'from' => $request->from,

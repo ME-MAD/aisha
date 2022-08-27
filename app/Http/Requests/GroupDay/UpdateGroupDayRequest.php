@@ -13,7 +13,7 @@ class UpdateGroupDayRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdateGroupDayRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-        ];
+            "group_id"=>"required",
+            "day"=>"required"
+         ];
     }
 }
