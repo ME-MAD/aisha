@@ -12,7 +12,7 @@
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
-            <h3>Groups Table</h3>
+            <h3>Exams Table</h3>
         </div>
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
@@ -28,9 +28,9 @@
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
                     href="{{ route('admin.home') }}">Home</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.group.index') }}">Groups</a>
+                    href="{{ route('admin.exam.index') }}">Exams</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                    href="{{ route('admin.group.create') }}">Create Group</a>
+                    href="{{ route('admin.exam.create') }}">Create Exam</a>
             </div>
         </div>
     </div>
@@ -46,10 +46,10 @@
                     <div class="widget-header">
                         <div class="row align-items-center">
                             <div class="col-xl-10 col-md-10 col-sm-10 col-10">
-                                <h4>Groups</h4>
+                                <h4>Exams</h4>
                             </div>
                             <div class="col-xl-2 col-md-2 col-sm-2 col-2">
-                                <a href="{{ route('admin.group.create') }}" class="btn btn-primary float-right">Create</a>
+                                <a href="{{ route('admin.exam.create') }}" class="btn btn-primary float-right">Create</a>
                             </div>
                         </div>
                     </div>
@@ -63,40 +63,38 @@
                                             <thead>
                                                 <tr>
                                                     <th class="checkbox-column text-center"> Id </th>
-                                                    <th class="text-center">from</th>
-                                                    <th class="text-center">to</th>
-                                                    <th class="text-center">teacher</th>
-                                                    <th class="text-center">group_type_id</th>
-                                                    <th class="text-center">age_type</th>
+                                                    <th class="text-center">student_id</th>
+                                                    <th class="text-center">group_id</th>
+                                                    <th class="text-center">lesson_from</th>
+                                                    <th class="text-center">lesson_to</th>
                                                     <th class="text-center">Edit</th>
                                                     <th class="text-center">Delete</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($groups as $group)
+                                                @foreach ($exams as $exam)
                                                     <tr role="row">
                                                         <td class="checkbox-column text-center sorting_1">
-                                                            {{ $group->id }} </td>
+                                                            {{ $exam->id }} </td>
 
-                                                        <td>{{ $group->from }}</td>
-                                                        <td>{{ $group->to }}</td>
                                                         <td>
-                                                            <a href="{{ route('admin.teacher.show', $group->id) }}"  class="text-primary">
-                                                                {{ $group->teacher->name }}
-                                                            </a>
+                                                            {{ $exam->student->name }}
                                                         </td>
                                                         <td>
-                                                          {{ $group->groupType->name}}
+                                                            {{ $exam->group->from }} :                         {{$exam->group->to }} 
                                                         </td>
-                                                        <td>{{ $group->age_type }}</td>
+                                                        <td>
+                                                          {{ $exam->lesson_from}}
+                                                        </td>
+                                                        <td>{{ $exam->lesson_to}}</td>
                                                         <td class="text-center">
                                                             <div class="links--ul">
-                                                                <x-edit-link :route="route('admin.group.edit', $group->id)" />
+                                                                <x-edit-link :route="route('admin.exam.edit', $exam->id)" />
                                                             </div>
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="links--ul">
-                                                                <x-delete-link :route="route('admin.group.delete', $group->id)" />
+                                                                <x-delete-link :route="route('admin.exam.delete', $exam->id)" />
                                                             </div>
                                                         </td>
                                                     </tr>

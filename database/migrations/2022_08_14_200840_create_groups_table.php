@@ -18,12 +18,17 @@ return new class extends Migration
             $table->time('from');
             $table->time('to');
             $table->unsignedBigInteger('teacher_id');
+            $table->unsignedBigInteger('group_type_id');
             $table->enum('age_type', ['kid', 'adult']);
             $table->timestamps();
 
             $table->foreign('teacher_id')
                 ->references('id')
                 ->on('teachers')
+                ->onDelete('CASCADE');
+            $table->foreign('group_type_id')
+                ->references('id')
+                ->on('group_types')
                 ->onDelete('CASCADE');
         });
     }

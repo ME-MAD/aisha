@@ -27,6 +27,7 @@ class StoreGroupRequest extends FormRequest
             'from' => 'required|date_format:H:i',
             'to' => 'required|date_format:H:i|after:from',
             'teacher_id' => 'required',
+            'group_type_id' => 'required',
             'age_type' => 'required',
             
         ];

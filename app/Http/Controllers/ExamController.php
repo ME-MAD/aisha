@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Exam;
 use App\Http\Requests\Exam\StoreExamRequest;
 use App\Http\Requests\Exam\UpdateExamRequest;
+use App\Http\Traits\ExamTrait;
 
 class ExamController extends Controller
 {
+    use ExamTrait;
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +17,11 @@ class ExamController extends Controller
      */
     public function index()
     {
-        //
+        $exams = $this->getExams();
+
+         return view(['pages.exam.index',
+           'exams'=> $exams
+         ]);
     }
 
     /**

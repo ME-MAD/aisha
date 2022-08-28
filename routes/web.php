@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GroupDayController;
@@ -126,5 +127,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{group_types}', [GroupTypeController::class, 'edit'])->name('edit');
         Route::put('update/{group_types}', [GroupTypeController::class, 'update'])->name('update');
         Route::get('delete/{group_types}', [GroupTypeController::class, 'delete'])->name('delete');
+    });
+
+
+    Route::group(['prefix' => 'exam', 'as' => 'exam.'], function () {
+        Route::get('', [ExamController::class, 'index'])->name('index');
+        Route::get('create', [ExamController::class, 'create'])->name('create');
+        Route::post('store', [ExamController::class, 'store'])->name('store');
+        Route::get('edit/{exam}', [ExamController::class, 'edit'])->name('edit');
+        Route::put('update/{exam}', [ExamController::class, 'update'])->name('update');
+        Route::get('delete/{exam}', [ExamController::class, 'delete'])->name('delete');
     });
 });
