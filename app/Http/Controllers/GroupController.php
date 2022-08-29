@@ -2,30 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\GroupDataTable;
 use App\Http\Requests\Group\StoreGroupRequest;
 use App\Http\Requests\Group\UpdateGroupRequest;
 use App\Models\Group;
 use App\Http\Traits\GroupTrait;
+use App\Http\Traits\GroupTypeTrait;
 use App\Models\Teacher;
 use App\Http\Traits\TeacherTrait;
+use App\Models\GroupType;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupController extends Controller
 {
     use GroupTrait;
     use TeacherTrait;
+    use GroupTypeTrait;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(GroupDataTable $GroupDataTable)
     {
-        $groups = $this->getGroups();
+        // $groups = $this->getGroups();
         
-        return view('pages.group.index', [
-            'groups' => $groups,
-        ]);
+        // return view('pages.group.index', [
+        //     'groups' => $groups,
+        // ]);
+        return $GroupDataTable->render('pages.group.index');
     }
 
     /**
@@ -36,9 +41,10 @@ class GroupController extends Controller
     public function create( )
     {
         $teaches = Teacher::get();
-       
+       $groupTypes = GroupType::get();
         return view('pages.group.create', [
             'teachers' => $teaches,
+            'groupTypes' => $groupTypes,
        ]);
     }
 
@@ -54,6 +60,7 @@ class GroupController extends Controller
             'from' => $request->from,
             'to' => $request->to,
             'teacher_id' => $request->teacher_id,
+            'group_type_id' => $request->group_type_id,
             'age_type' => $request->age_type,
         ]);
       
@@ -80,9 +87,11 @@ class GroupController extends Controller
     public function edit(Group $group)
     {
         $teachers = $this->getTeachers();
+        $groupTypes = GroupType::get();
         return view('pages.group.edit', [
             'group'  => $group,
             'teachers'  => $teachers,
+            'groupTypes'  => $groupTypes,
         ]);
     }
 
@@ -98,6 +107,7 @@ class GroupController extends Controller
         $group->update([
             'from' => $request->from,
             'to' => $request->to,
+            'group_type_id' => $request->group_type_id,
             'teacher_id' => $request->teacher_id,
             'age_type' => $request->age_type,
             

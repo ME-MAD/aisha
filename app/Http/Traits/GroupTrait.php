@@ -13,8 +13,9 @@ trait GroupTrait
     }
     private function getGroups()
     {
-        return Group::select(['id','from','to','teacher_id','age_type'])
-                     ->with('teacher:id,name')
+        return Group::select(['id','from','to','teacher_id','group_type_id','age_type'])
+                     ->with(['teacher:id,name',
+                               'groupType:id,name'     ])
                      ->get();
     }
 }

@@ -2,20 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ExamDataTable;
+use App\DataTables\GroupDataTable;
 use App\Models\Exam;
 use App\Http\Requests\Exam\StoreExamRequest;
 use App\Http\Requests\Exam\UpdateExamRequest;
+use App\Http\Traits\ExamTrait;
+use App\Models\Group;
+use App\Models\Lesson;
+use App\Models\Student;
 
 class ExamController extends Controller
 {
+    use ExamTrait;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ExamDataTable $examDataTable)
     {
-        //
+        return $examDataTable->render('pages.exam.index');
+        // $exams = $this->getExams();
+
+        //  return view('pages.exam.index',[
+        //    'exams'=> $exams
+        //  ]);
     }
 
     /**
@@ -25,7 +37,14 @@ class ExamController extends Controller
      */
     public function create()
     {
-        //
+        $students = Student::get();
+       $groups = Group::get();
+       $lessons = Lesson::get();
+        return view('pages.exam.create', [
+            'students' => $students,
+            'groups' => $groups,
+            'lessons' => $lessons,
+       ]);
     }
 
     /**

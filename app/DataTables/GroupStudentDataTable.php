@@ -2,28 +2,54 @@
 
 namespace App\DataTables;
 
-use App\Models\Student;
+use App\Models\GroupStudent;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
 
-class StudentDataTable extends DataTable
+class GroupStudentDataTable extends DataTable
 {
+    /**
+     * Build DataTable class.
+     *
+     * @param QueryBuilder $query Results from query() method.
+     * @return \Yajra\DataTables\EloquentDataTable
+     */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('edit', 'pages.student.datatable.edit')
-            ->addColumn('delete', 'pages.student.datatable.delete')
-            ->rawColumns(['edit','delete'])
-            ->setRowId('id');
+        ->addColumn('edit', 'pages.groupStudent.datatable.edit')
+        ->addColumn('delete', 'pages.groupStudent.datatable.delete')
+        ->editColumn('student.name',function($q){
+            return $q->student->name ?? "";
+        })
+        ->editColumn('group.from',function($q){
+            return $q->group->from ?? "";
+        })
+        ->rawColumns(['edit','delete'])
+        ->setRowId('id');
     }
 
-    public function query(Student $student): QueryBuilder
+    /**
+     * Get query source of dataTable.
+     *
+     * @param \App\Models\GroupStudent $model
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function query(GroupStudent $model): QueryBuilder
     {
-        return Student::query();
+        return $model->with([
+            'student:id,name',
+            'group:id,from,to'
+        ]);
     }
 
+    /**
+     * Optional method if you want to use html builder.
+     *
+     * @return \Yajra\DataTables\Html\Builder
+     */
     public function html(): HtmlBuilder
     {
         return $this->builder()
@@ -73,23 +99,63 @@ class StudentDataTable extends DataTable
             ]);
     }
 
+    /**
+     * Get columns.
+     *
+     * @return array
+     */
     protected function getColumns(): array
     {
         return [
-            ['name' => 'id', 'data' => 'id', 'title' => 'رقم الهوية' ,"className" => 'search--col exact'],
-            ['name' => 'name', 'data' => 'name', 'title' => ' الاسم',"className" => 'search--col'],
-            ['name' => 'brithday', 'data' => 'brithday', 'title' => ' تاريخ الميلاد',"className" => 'search--col'],
-            ['name' => 'phone', 'data' => 'phone', 'title' => ' الهاتف',"className" => 'search--col'],
+            [
+                'name' => 'id',
+                'data' => 'id',
+                'title' => '#',
+                "className" => 'search--col exact'
+            ],
 
-            ['name' => 'qualification', 'data' => 'qualification', 'title' => ' المؤهلات',"className" => 'search--col'],
+            [
+                'name' => 'student.name',
+                'data' => 'student.name',
+                'title' => 'student_id',
+                "className" => 'search--col'
+            ],
+
+            [
+                'name' => 'group.from',
+                'data' => 'group.from',
+                'title' => 'group_id',
+                "className" => 'search--col'
+            ],
+
+            ['name' => 'edit',
+             'data' => 'edit',
+             'title' => 'Edit',
+             'printable' => false,
+             'exportable' => false,
+             'orderable' => false,
+             'searchable' => false,
+             "className" => 'not--search--col'
+            ],
             
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false,"className" => 'not--search--col'],
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false,"className" => 'not--search--col'],
+            ['name' => 'delete',
+             'data' => 'delete',
+             'title' => 'Delete', 
+             'printable' => false, 
+             'exportable' => false, 
+             'orderable' => false, 
+             'searchable' => false, 
+             "className" => 'not--search--col'],
         ];
     }
 
+    /**
+     * Get filename for export.
+     *
+     * @return string
+     */
     protected function filename(): string
     {
-        return 'Student_' . date('YmdHis');
+        return 'GroupStudent_' . date('YmdHis');
     }
 }
