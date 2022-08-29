@@ -1,6 +1,7 @@
 @extends('master')
 @section('css')
 <link href="{{asset('adminAssets/plugins/flatpickr/flatpickr.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/select2/select2.min.css')}}">
 @endsection
 @section('breadcrumb')
     <div class="page-header">
@@ -53,8 +54,8 @@
                                 <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
                                     المعلم</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible teacher_id"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
+                                    <select class="form-control basic"
+                                        style="width: 100%;"
                                         name="teacher_id" id="teacher_id">
                                         <option value="">اختر المعلم</option>
                                         @foreach ($teachers as $teacher)
@@ -71,8 +72,8 @@
                             <div class="form-group row mb-4">
                                 <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">نوع المجموعة</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible group_type_id"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
+                                    <select class="form-control basic"
+                                        style="width: 100%;"
                                    name="group_type_id" id="group_type_id">
                                         <option value="">اختر نوع
                                             المجموعة</option>
@@ -92,8 +93,8 @@
                                 <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">الفئه
                                     العمرية</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible teacher_id"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
+                                    <select class="form-control basic"
+                                        style="width: 100%;"
                                         name="age_type" id="age_type">
                                         <option value="kid"{{old('age_type') == "kid" ? 'kid' : ''}} >kid</option>
                                         <option value="adult" {{old('age_type') == "adult" ? 'adult' : ''}}>adult</option>
@@ -122,6 +123,7 @@
 
 @section("javascript")
 <script src="{{asset('adminAssets/plugins/flatpickr/flatpickr.js')}}"></script>
+<script src="{{asset('adminAssets/plugins/select2/select2.min.js')}}"></script>
 <script>
 var f4 = flatpickr(document.getElementById('from'), {
     enableTime: true,
@@ -134,6 +136,11 @@ var f5 = flatpickr(document.getElementById('to'), {
     noCalendar: true,
     dateFormat: "H:i",
     defaultDate: "12:00"
+});
+
+
+$(".basic").select2({
+    tags: true,
 });
 </script>
 

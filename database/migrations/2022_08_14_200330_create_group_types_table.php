@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->double('price');
+            $table->unsignedInteger('days_num');
             $table->timestamps();
         });
     }

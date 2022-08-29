@@ -25,7 +25,7 @@ class GroupStudentController extends Controller
      */
     public function index(GroupStudentDataTable $GroupStudentDataTable)
     {
-        return $GroupStudentDataTable->render('pages.GroupStudent.index');
+        return $GroupStudentDataTable->render('pages.groupStudent.index');
     }
 
     /**
@@ -37,7 +37,7 @@ class GroupStudentController extends Controller
     {
         $students = Student::get();
         $groups = Group::get();
-         return view('pages.GroupStudent.create', [
+         return view('pages.groupStudent.create', [
              'students' => $students,
              'groups' => $groups,
         ]);

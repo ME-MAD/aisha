@@ -24,15 +24,5 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => Hash::make('123')
         ]);
-
-        GroupType::create([
-            'name' => 'عادي',
-            'price' => 80
-        ]);
-        
-        GroupType::create([
-            'name' => 'عادي',
-            'price' => 80
-        ]);
     }
 }

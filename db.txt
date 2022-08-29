@@ -34,11 +34,12 @@ GroupDay:
     group_id
     day ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') : enum
 
-*********************
+..................
 GroupType:
     id
     name : string
     price : double
+    days_num : int
 
 
 Subject:

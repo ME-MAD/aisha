@@ -47,7 +47,7 @@
                             
                             <x-text name="name" label="الإسم" :value="$student->name" />
 
-                            <x-date name="brithday" label="تاريخ الميلاد" :value="$student->brithday" />
+                            <x-date name="birthday" label="تاريخ الميلاد" :value="$student->birthday" />
 
                             <x-text name="phone" label="الهاتف" :value="$student->phone" />
 

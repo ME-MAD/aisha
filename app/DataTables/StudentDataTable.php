@@ -78,7 +78,7 @@ class StudentDataTable extends DataTable
         return [
             ['name' => 'id', 'data' => 'id', 'title' => 'رقم الهوية' ,"className" => 'search--col exact'],
             ['name' => 'name', 'data' => 'name', 'title' => ' الاسم',"className" => 'search--col'],
-            ['name' => 'brithday', 'data' => 'brithday', 'title' => ' تاريخ الميلاد',"className" => 'search--col'],
+            ['name' => 'birthday', 'data' => 'birthday', 'title' => ' تاريخ الميلاد',"className" => 'search--col'],
             ['name' => 'phone', 'data' => 'phone', 'title' => ' الهاتف',"className" => 'search--col'],
 
             ['name' => 'qualification', 'data' => 'qualification', 'title' => ' المؤهلات',"className" => 'search--col'],

@@ -39,7 +39,7 @@ class StudentController extends Controller
        // dd($request);
         Student::create([
             'name' => $request->name,
-            'brithday' => $request->brithday,
+            'birthday' => $request->birthday,
             'phone' => $request->phone,
             'qualification' => $request->qualification,
             
@@ -63,7 +63,7 @@ class StudentController extends Controller
     {
         $student->update([
             'name' => $request->name,
-            'brithday' => $request->brithday,
+            'birthday' => $request->birthday,
             'phone' => $request->phone,
             'qualification' => $request->qualification,
            

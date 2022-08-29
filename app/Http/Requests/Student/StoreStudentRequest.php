@@ -25,7 +25,7 @@ class StoreStudentRequest extends FormRequest
     {
         return [
            "name"=>"required",
-           "brithday"=>"required",
+           "birthday"=>"required",
            "phone"=>"required",
            "qualification"=>"required",
           

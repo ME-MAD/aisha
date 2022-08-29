@@ -25,7 +25,7 @@ class GroupStudentDataTable extends DataTable
             return $q->student->name ?? "";
         })
         ->editColumn('group.from',function($q){
-            return $q->group->from ?? "";
+            return $q->group->from ? $q->group->from . " - " . $q->group->to : '';
         })
         ->rawColumns(['edit','delete'])
         ->setRowId('id');
@@ -39,7 +39,11 @@ class GroupStudentDataTable extends DataTable
      */
     public function query(GroupStudent $model): QueryBuilder
     {
-        return $model->with([
+        return $model->select([
+            'group_students.id',
+            'student_id',
+            'group_id'
+        ])->with([
             'student:id,name',
             'group:id,from,to'
         ]);

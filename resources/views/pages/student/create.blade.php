@@ -44,7 +44,7 @@
                            
                             <x-text name="name" label="الإسم" :value="old('name')" />
 
-                            <x-date name="brithday" label="تاريخ الميلاد" :value="old('brithday')" />
+                            <x-date name="birthday" label="تاريخ الميلاد" :value="old('birthday')" />
 
                             <x-text name="phone" label="الهاتف" :value="old('phone')" />
 

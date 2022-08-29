@@ -144,8 +144,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('', [GroupStudentController::class, 'index'])->name('index');
         Route::get('create', [GroupStudentController::class, 'create'])->name('create');
         Route::post('store', [GroupStudentController::class, 'store'])->name('store');
-        Route::get('edit/{group_students}', [GroupStudentController::class, 'edit'])->name('edit');
-        Route::put('update/{group_students}', [GroupStudentController::class, 'update'])->name('update');
-        Route::get('delete/{group_students}', [GroupStudentController::class, 'delete'])->name('delete');
+        Route::get('edit/{groupStudent}', [GroupStudentController::class, 'edit'])->name('edit');
+        Route::put('update/{groupStudent}', [GroupStudentController::class, 'update'])->name('update');
+        Route::get('delete/{groupStudent}', [GroupStudentController::class, 'delete'])->name('delete');
     });
 });
