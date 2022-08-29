@@ -42,8 +42,8 @@ class ExamDataTable extends DataTable
             'exams.id',
             'student_id',
             'group_id',
-            'lesson_id'
-            
+            'lesson_from',
+            'lesson_to',
         ])->with([
             'student:id,name',
             'group:id,from,to',

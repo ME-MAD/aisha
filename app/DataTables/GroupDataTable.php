@@ -38,7 +38,10 @@ class GroupDataTable extends DataTable
         return $model->select([
             'groups.id',
             'teacher_id',
-            'groupType_id'
+            'from',
+            'to',
+            'age_type',
+            'group_type_id'
         ])->with([
             'teacher:id,name',
             'groupType:id,name'
