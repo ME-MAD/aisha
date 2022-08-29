@@ -5,6 +5,7 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GroupDayController;
+use App\Http\Controllers\GroupStudentController;
 use App\Http\Controllers\GroupTypeController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\StudentController;
@@ -137,5 +138,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{exam}', [ExamController::class, 'edit'])->name('edit');
         Route::put('update/{exam}', [ExamController::class, 'update'])->name('update');
         Route::get('delete/{exam}', [ExamController::class, 'delete'])->name('delete');
+    });
+    
+    Route::group(['prefix' => 'group_students', 'as' => 'group_students.'], function () {
+        Route::get('', [GroupStudentController::class, 'index'])->name('index');
+        Route::get('create', [GroupStudentController::class, 'create'])->name('create');
+        Route::post('store', [GroupStudentController::class, 'store'])->name('store');
+        Route::get('edit/{group_students}', [GroupStudentController::class, 'edit'])->name('edit');
+        Route::put('update/{group_students}', [GroupStudentController::class, 'update'])->name('update');
+        Route::get('delete/{group_students}', [GroupStudentController::class, 'delete'])->name('delete');
     });
 });

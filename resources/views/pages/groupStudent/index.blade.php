@@ -12,7 +12,7 @@
 @section('breadcrumb')
       <div class="page-header">
             <div class="page-title">
-                  <h3>Groups Table</h3>
+                  <h3>Group Students Table</h3>
                  
             </div>
             <div class="dropdown filter custom-dropdown-icon">
@@ -29,9 +29,9 @@
                               <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
                                   href="{{ route('admin.home') }}">Home</a>
                               <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                                  href="{{ route('admin.group.index') }}">Groups</a>
+                                  href="{{ route('admin.group_students.index') }}">Group Students</a>
                               <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                                  href="{{ route('admin.group.create') }}">Create Group</a>
+                                  href="{{ route('admin.group_students.create') }}">Create Group Student</a>
                           </div>
             </div>
       </div>
@@ -50,10 +50,10 @@
                               <div class="widget-content widget-content-area">
                                     <div class="row align-items-center">
                                           <div class="col-xl-10 col-md-10 col-sm-10 col-10">
-                                                <h4>Groups</h4>
+                                                <h4>Group Students</h4>
                                           </div>
                                           <div class="col-xl-2 col-md-2 col-sm-2 col-2">
-                                                <a href="{{ route('admin.group.create') }}" class="btn btn-primary float-right">Create</a>
+                                                <a href="{{ route('admin.group_students.create') }}" class="btn btn-primary float-right">Create</a>
                                           </div>
                                     </div>
                                     <div class="table-responsive mb-4">

@@ -13,7 +13,7 @@ class StoreGroupStudentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class StoreGroupStudentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'student_id' => "required",
+            'group_id' => "required",
         ];
     }
 }

@@ -166,6 +166,17 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="sub-sub-submenu-list">
+                        <a href="#starter-kit" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Group Students<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg> </a>
+                        <ul class="collapse list-unstyled sub-submenu eq-animated eq-fadeInUp" id="starter-kit" data-parent="#more">
+                            <li>
+                                <a href="{{route('admin.group_students.index')}}">Group Students</a>
+                            </li>
+                            <li>
+                                <a href="{{route('admin.group_students.create')}}">Create Group Student</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="../../documentation/index.html"> Documentation </a>
                     </li>

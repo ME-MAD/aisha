@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\GroupDataTable;
 use App\Http\Requests\Group\StoreGroupRequest;
 use App\Http\Requests\Group\UpdateGroupRequest;
 use App\Models\Group;
@@ -22,13 +23,14 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(GroupDataTable $GroupDataTable)
     {
-        $groups = $this->getGroups();
+        // $groups = $this->getGroups();
         
-        return view('pages.group.index', [
-            'groups' => $groups,
-        ]);
+        // return view('pages.group.index', [
+        //     'groups' => $groups,
+        // ]);
+        return $GroupDataTable->render('pages.group.index');
     }
 
     /**
@@ -85,7 +87,7 @@ class GroupController extends Controller
     public function edit(Group $group)
     {
         $teachers = $this->getTeachers();
-        $groupTypes = $this->getTeachers();
+        $groupTypes = GroupType::get();
         return view('pages.group.edit', [
             'group'  => $group,
             'teachers'  => $teachers,

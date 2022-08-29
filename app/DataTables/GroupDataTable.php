@@ -6,10 +6,6 @@ use App\Models\Group;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class GroupDataTable extends DataTable
@@ -22,17 +18,26 @@ class GroupDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        
         return (new EloquentDataTable($query))
-        ->addColumn('edit', 'pages.group.datatable.edit')
-        ->addColumn('delete', 'pages.group.datatable.delete')
-        ->rawColumns(['edit','delete'])
-        ->setRowId('id');
-
+            ->addColumn('edit', 'pages.group.datatable.edit')
+            ->addColumn('delete', 'pages.group.datatable.delete')
+            ->editColumn('groupType.name',function($q){
+                return $q->groupType->name ?? "";
+            })
+            ->editColumn('teacher.name',function($q){
+                return $q->teacher->name ?? "";
+            })
+            ->rawColumns(['edit', 'delete'])
+            ->setRowId('id');
     }
 
     public function query(Group $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->with([
+            'teacher:id,name',
+            'groupType:id,name'
+        ]);
     }
 
     public function html(): HtmlBuilder
@@ -92,38 +97,51 @@ class GroupDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            ['name' => 'id',
-             'data' => 'id',
-              'title' => '#' ,
-              "className" => 'search--col exact'],
+            [
+                'name' => 'id',
+                'data' => 'id',
+                'title' => '#',
+                "className" => 'search--col exact'
+            ],
 
-            ['name' => 'from',
-             'data' => 'from',
-              'title' => 'from',
-              "className" => 'search--col'],
+            [
+                'name' => 'from',
+                'data' => 'from',
+                'title' => 'from',
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'to',
-             'data' => 'to',
-              'title' => 'to',
-              "className" => 'search--col'],
+            [
+                'name' => 'to',
+                'data' => 'to',
+                'title' => 'to',
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'teacher_id',
-             'data' => 'teacher_id',
-              'title' => ' teacher_id',
-              "className" => 'search--col'],
+            [
+                'name' => 'teacher.name',
+                'data' => 'teacher.name',
+                'title' => ' teacher_id',
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'group_type_id',
-             'data' => 'group_type_id',
-              'title' => 'group_type_id',
-              "className" => 'search--col'],
-              
-            ['name' => 'age_type',
-             'data' => 'age_type',
-              'title' => 'age_type',
-              "className" => 'search--col'],
+            [
+                'name' => 'groupType.name',
+                'data' => 'groupType.name',
+                'title' => 'group_type_id',
+                "className" => 'search--col'
+            ],
+
+            [
+                'name' => 'age_type',
+                'data' => 'age_type',
+                'title' => 'age_type',
+                "className" => 'search--col'
+            ],
+
+            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
             
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false,"className" => 'not--search--col'],
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false,"className" => 'not--search--col'],
+            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
         ];
     }
 
