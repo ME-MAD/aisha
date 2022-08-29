@@ -1,6 +1,6 @@
 @extends('master')
 @section('css')
-<link href="{{asset('adminAssets/plugins/flatpickr/flatpickr.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/select2/select2.min.css')}}">
 @endsection
 @section('breadcrumb')
     <div class="page-header">
@@ -50,8 +50,8 @@
                                 <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
                                     الطالب</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible student_id"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
+                                    <select class="form-control basic"
+                                        style="width: 100%;"
                                         name="student_id" id="student_id">
                                         <option value=""> الطالب</option>
                                         @foreach ($students as $student)
@@ -71,15 +71,15 @@
                                 <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
                                     المجموعة</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible group_id"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
+                                    <select class="form-control basic"
+                                        style="width: 100%;" 
                                         name="group_id" id="group_id">
                                         <option value=""> المجموعة</option>
                                         @foreach ($groups as $group)
                                             <option value="{{ $group->id }}"
                                                 {{ old('group_id') == $group->id ? 'selected' : '' }}>
                                                 {{ $group->from }} :
-                                                {{ $group->from }} </option>
+                                                {{ $group->to }} </option>
                                         @endforeach
                                     </select>
                                     @error("group_id")
@@ -93,8 +93,8 @@
                                 <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> من درس
                                      </label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible lesson_from"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
+                                    <select class="form-control basic"
+                                        style="width: 100%;" 
                                         name="lesson_from" id="lesson_from">
                                         <option value="">  من الدرس</option>
                                         @foreach ($lessons as $lesson)
@@ -113,8 +113,8 @@
                                 <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> الى درس
                                      </label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible lesson_to"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
+                                    <select class="form-control basic"
+                                        style="width: 100%;" 
                                         name="lesson_to" id="lesson_to">
                                         <option value=""> الى الدرس</option>
                                         @foreach ($lessons as $lesson)
@@ -145,19 +145,10 @@
 @endsection
 
 @section("javascript")
-<script src="{{asset('adminAssets/plugins/flatpickr/flatpickr.js')}}"></script>
+<script src="{{asset('adminAssets/plugins/select2/select2.min.js')}}"></script>
 <script>
-var f4 = flatpickr(document.getElementById('from'), {
-    enableTime: true,
-    noCalendar: true,
-    dateFormat: "H:i",
-    defaultDate: "13:45"
-});
-var f5 = flatpickr(document.getElementById('to'), {
-    enableTime: true,
-    noCalendar: true,
-    dateFormat: "H:i",
-    defaultDate: "13:45"
+$(".basic").select2({
+    tags: true,
 });
 </script>
 

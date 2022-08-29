@@ -1,5 +1,7 @@
 @extends('master')
-
+@section('css')
+<link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/select2/select2.min.css')}}">
+@endsection
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
@@ -45,13 +47,12 @@
 
                             <input type="hidden" name="groupStudent_id" value="{{ $groupStudent->id }}">
                             
-                            {{dd("mohaemd")}}
                             <div class="form-group row mb-4">
                                 <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
                                     الطالب</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible student_id"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
+                                    <select class="form-control basic"
+                                        style="width: 100%;" 
                                         name="student_id" id="student_id">
                                         <option value="">اختر الطالب</option>
                                         @foreach ($students as $student)
@@ -69,8 +70,8 @@
                                 <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
                                     المجموعة</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible group_id"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
+                                    <select class="form-control basic"
+                                        style="width: 100%;" 
                                         name="group_id" id="group_id">
                                         <option value="">اختر المجموعة</option>
                                         @foreach ($groups as $group)
@@ -102,4 +103,14 @@
             </div>
         </div>
     </div>
+@endsection
+@section("javascript")
+
+<script src="{{asset('adminAssets/plugins/select2/select2.min.js')}}"></script>
+<script>
+$(".basic").select2({
+    tags: true,
+});
+</script>
+
 @endsection

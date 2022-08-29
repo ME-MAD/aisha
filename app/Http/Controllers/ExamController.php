@@ -8,13 +8,21 @@ use App\Models\Exam;
 use App\Http\Requests\Exam\StoreExamRequest;
 use App\Http\Requests\Exam\UpdateExamRequest;
 use App\Http\Traits\ExamTrait;
+use App\Http\Traits\GroupTrait;
+use App\Http\Traits\LessonTrait;
+use App\Http\Traits\StudentTrait;
 use App\Models\Group;
 use App\Models\Lesson;
 use App\Models\Student;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ExamController extends Controller
 {
     use ExamTrait;
+    use StudentTrait;
+    use GroupTrait;
+    use LessonTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -23,11 +31,7 @@ class ExamController extends Controller
     public function index(ExamDataTable $examDataTable)
     {
         return $examDataTable->render('pages.exam.index');
-        // $exams = $this->getExams();
-
-        //  return view('pages.exam.index',[
-        //    'exams'=> $exams
-        //  ]);
+        
     }
 
     /**
@@ -55,7 +59,16 @@ class ExamController extends Controller
      */
     public function store(StoreExamRequest $request)
     {
-        //
+        Exam::create([
+            'student_id' => $request->student_id,
+            'group_id' => $request->group_id,
+            'lesson_from' => $request->lesson_from,
+            'lesson_to' => $request->lesson_to,
+            
+        ]);
+      
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route('admin.exam.index'));
     }
 
     /**
@@ -77,7 +90,16 @@ class ExamController extends Controller
      */
     public function edit(Exam $exam)
     {
-        //
+        $students = Student::get();
+        $groups = Group::get();
+        $lessons = Lesson::get();
+       
+        return view('pages.exam.edit', [
+            'exam' => $exam,
+            'students'  => $students,
+            'groups'  => $groups,
+            'lessons'  => $lessons,
+        ]);
     }
 
     /**
@@ -89,7 +111,15 @@ class ExamController extends Controller
      */
     public function update(UpdateExamRequest $request, Exam $exam)
     {
-        //
+        $exam->update([
+            'student_id' => $request->student_id,
+            'group_id' => $request->group_id,
+            'lesson_from' => $request->lesson_from,
+            'lesson_to' => $request->lesson_to,
+            
+        ]);
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route('admin.exam.index'));
     }
 
     /**
@@ -98,8 +128,10 @@ class ExamController extends Controller
      * @param  \App\Models\Exam  $exam
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exam $exam)
+    public function delete(Exam $exam)
     {
-        //
+        $exam->delete();
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect()->back();
     }
 }

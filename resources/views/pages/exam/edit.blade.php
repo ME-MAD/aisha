@@ -1,11 +1,11 @@
 @extends('master')
 @section('css')
-<link href="{{asset('adminAssets/plugins/flatpickr/flatpickr.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/select2/select2.min.css')}}">
 @endsection
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
-            <h3>edit Table</h3>
+            <h3>Edit Exam</h3>
         </div>
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
@@ -21,9 +21,9 @@
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
                     href="{{ route('admin.home') }}">Home</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.group.index') }}">Groups</a>
+                    href="{{ route('admin.exam.index') }}">Exams</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                    href="{{ route('admin.group.create') }}">Create Group</a>
+                    href="{{ route('admin.exam.create') }}">Create Exam</a>
             </div>
         </div>
     </div>
@@ -37,83 +37,105 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4 class="text-center text-success">Edit Group</h4>
+                                <h4 class="text-center text-primary">Edit Exam</h4>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        <form action="{{ route('admin.group.update',$group->id) }}" method="post">
+                        <form action="{{ route('admin.exam.update',$exam->id) }}" method="post">
                             @csrf
                             @method('PUT')
 
-                            <input type="hidden" name="teacher_id" value="{{ $group->id }}">
-                            
-                            <x-time name="from" label="من" :value="$group->from" />
-
-                            <x-time name="to" label="إلى" :value="$group->to" />
-
-                      
+                            <input type="hidden" name="exam_id" value="{{ $exam->id }}">
+                        
+                        
                             <div class="form-group row mb-4">
-                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-success"> اختر
-                                    المعلم</label>
+                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
+                                    الطالب</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible teacher_id"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
-                                        name="teacher_id" id="teacher_id">
-                                        <option>اختر المعلم</option>
-                                        @foreach ($teachers as $teacher)
-                                            <option value="{{ $teacher->id }}"
-                                                {{ $group->teacher_id == $teacher->id ? 'selected' : '' }}>
-                                                {{ $teacher->name }}
-                                            </option>
+                                    <select class="form-control basic"
+                                        style="width: 100%;"
+                                        name="student_id" id="student_id">
+                                        <option value=""> الطالب</option>
+                                        @foreach ($students as $student)
+                                            <option value="{{ $student->id }}"
+                                                {{ $exam->student_id == $student->id ? 'selected' : '' }}>
+                                                {{ $student->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error("teacher_id")
+                                    @error("student_id")
                                     <p class="text-danger">{{$message}}</p>
                                 @enderror
                                 </div>
                             </div>
+
+
                             <div class="form-group row mb-4">
-                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">نوع المجموعة</label>
+                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
+                                    المجموعة</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible group_type_id"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
-                                   name="group_type_id" id="group_type_id">
-                                        <option value="">اختر نوع
-                                            المجموعة</option>
-                                        @foreach ($groupTypes as $groupType)
-                                            <option value="{{ $groupType->id }}"
-                                                {{ $group->group_type_id == $groupType->id ? 'selected' : '' }}>
-                                                {{ $groupType->name }}</option>
+                                    <select class="form-control basic"
+                                        style="width: 100%;" 
+                                        name="group_id" id="group_id">
+                                        <option value=""> المجموعة</option>
+                                        @foreach ($groups as $group)
+                                            <option value="{{ $group->id }}"
+                                                {{ $exam->group_id == $group->id ? 'selected' : '' }}>
+                                                {{ $group->from }} :
+                                                {{ $group->to }} </option>
                                         @endforeach
                                     </select>
-                                    @error("group_type_id")
+                                    @error("group_id")
                                     <p class="text-danger">{{$message}}</p>
                                 @enderror
                                 </div>
                             </div>
-
-                            <div class="form-group row mb-4">
-                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-success">الفئه
-                                    العمرية</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control select2 select2-hidden-accessible teacher_id"
-                                        style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true"
-                                        name="age_type" id="age_type">
-                                        <option value="{{$group->age_type}}"{{old('age_type') == "kid" ? 'kid' : ''}} >kid</option>
-                                        <option value="{{$group->age_type}}" {{old('age_type') == "adult" ? 'adult' : ''}}>adult</option>
-                                    </select>
-                                    @error("age_type")
-                                    <p class="text-danger">{{$message}}</p>
-                                @enderror
-                                </div>
-                            </div>
-
                            
+
+                            <div class="form-group row mb-4">
+                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> من درس
+                                     </label>
+                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                    <select class="form-control basic"
+                                        style="width: 100%;" 
+                                        name="lesson_from" id="lesson_from">
+                                        <option value="">  من الدرس</option>
+                                        @foreach ($lessons as $lesson)
+                                            <option value="{{ $lesson->id }}"
+                                                {{  $exam->lesson_from == $lesson->id ? 'selected' : '' }}>
+                                                {{ $lesson->title }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error("lesson_from")
+                                    <p class="text-danger">{{$message}}</p>
+                                @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-4">
+                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> الى درس
+                                     </label>
+                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                    <select class="form-control basic"
+                                        style="width: 100%;" 
+                                        name="lesson_to" id="lesson_to">
+                                        <option value=""> الى الدرس</option>
+                                        @foreach ($lessons as $lesson)
+                                            <option value="{{ $lesson->id }}"
+                                                {{  $exam->lesson_to == $lesson->id ? 'selected' : '' }}>
+                                                {{ $lesson->title }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error("lesson_to")
+                                    <p class="text-danger">{{$message}}</p>
+                                @enderror
+                                </div>
+                            </div>
+                          
 
                             <div class="form-group row">
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-success mt-3">Lets Go</button>
+                                    <button type="submit" class="btn btn-primary mt-3">Lets Go</button>
                                 </div>
                             </div>
                         </form>
@@ -126,19 +148,10 @@
 @endsection
 
 @section("javascript")
-<script src="{{asset('adminAssets/plugins/flatpickr/flatpickr.js')}}"></script>
+<script src="{{asset('adminAssets/plugins/select2/select2.min.js')}}"></script>
 <script>
-var f4 = flatpickr(document.getElementById('from'), {
-    enableTime: true,
-    noCalendar: true,
-    dateFormat: "H:i",
-    // defaultDate: "13:45"
-});
-var f5 = flatpickr(document.getElementById('to'), {
-    enableTime: true,
-    noCalendar: true,
-    dateFormat: "H:i",
-    // defaultDate: "13:45"
+$(".basic").select2({
+    tags: true,
 });
 </script>
 

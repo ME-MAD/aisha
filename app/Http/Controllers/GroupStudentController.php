@@ -79,13 +79,12 @@ class GroupStudentController extends Controller
      */
     public function edit(GroupStudent $groupStudent)
     {
-        $student = $this->getStudents();
-        $group = Group::get();
-        dd($groupStudent);
+        $students = Student::get();
+        $groups = Group::get();
         return view('pages.groupStudent.edit', [
             'groupStudent'  => $groupStudent,
-            'student'  => $student,
-            'group'  => $group,
+            'students'  => $students,
+            'groups'  => $groups,
         ]);
     }
 
