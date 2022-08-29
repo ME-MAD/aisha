@@ -34,7 +34,12 @@ class GroupDataTable extends DataTable
 
     public function query(Group $model): QueryBuilder
     {
-        return $model->with([
+    
+        return $model->select([
+            'groups.id',
+            'teacher_id',
+            'groupType_id'
+        ])->with([
             'teacher:id,name',
             'groupType:id,name'
         ]);

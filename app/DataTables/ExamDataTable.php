@@ -37,7 +37,14 @@ class ExamDataTable extends DataTable
      */
     public function query(Exam $model): QueryBuilder
     {
-        return $model->with([
+        
+        return $model->select([
+            'exams.id',
+            'student_id',
+            'group_id',
+            'lesson_id'
+            
+        ])->with([
             'student:id,name',
             'group:id,from,to',
             'lesson_from:id,title',
