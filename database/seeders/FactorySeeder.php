@@ -27,143 +27,65 @@ class FactorySeeder extends Seeder
      */
     public function run()
     {
+        //-------------------  GroupType   -----------------------//
+
+        GroupType::updateOrCreate([
+            'name' => 'normal',
+        ], [
+            'price' => 80,
+            'days_num' => 2
+        ]);
+        GroupType::updateOrCreate([
+            'name' => 'dense',
+        ], [
+            'price' => 120,
+            'days_num' => 2
+        ]);
+        GroupType::updateOrCreate([
+            'name' => 'all week',
+        ], [
+            'price' => 200,
+            'days_num' => 2
+        ]);
+
+        //-----------------------------------------------------------//
+
         Teacher::factory(2)->create()->each(function ($teacher) {
             Experience::factory(3)->create([
                 'teacher_id' => $teacher->id
             ]);
 
-            Group::factory(4)->create([
-                'teacher_id' =>$teacher->id
-            ]);
-            
+            Group::factory(1)->create([
+                'teacher_id' => $teacher->id,
+                'group_type_id' => rand(1, 3)
+            ])->each(function ($group) {
+
+                Subject::factory(1)->create()->each(function ($subject) use ($group) {
+
+                    Student::factory(1)->create()->each(function ($student) use ($subject, $group) {
+                        $lesson = Lesson::factory(1)->create([
+                            'subject_id' =>  $subject->id
+                        ])->each(function ($lesson) use ($student, $group) {
+                            StudentLesson::factory(1)->create([
+                                'lesson_id' => $lesson->id,
+                                'student_id' => $student->id,
+                                'group_id' => $group->id
+                            ]);
+                            Exam::factory(1)->create([
+                                'student_id' => $student->id,
+                                'group_id' => $group->id,
+                                'lesson_from' => $lesson->id,
+                                'lesson_to' => $lesson->id
+                            ]);
+                        });
+
+                        GroupStudent::factory(1)->create([
+                            'student_id' => $student->id,
+                            'group_id' => $group->id
+                        ]);
+                    });
+                });
+            });
         });
-
-        Student::factory(2)->create()->each(function($student){
-            Exam::factory(3)->create([
-                'student_id' => $student->id
-            ]);
-
-            GroupStudent::factory(3)->create([
-                'student_id' => $student->id
-            ]);
-
-            Payment::factory(3)->create([
-                'student_id' => $student->id
-            ]);
-
-            StudentExam::factory(3)->create([
-                'student_id' => $student->id
-            ]);
-
-            StudentLesson::factory(3)->create([
-                'student_id' => $student->id
-            ]);
-
-            syllabus::factory(3)->create([
-                'student_id' => $student->id
-            ]);
-        });
-
-        Group::factory(2)->create()->each(function($group){
-            Exam::factory(3)->create([
-                'group_id'=> $group->id
-            ]);
-
-            GroupDay::factory(4)->create([
-                'group_id' =>$group->id
-            ]);
-
-            GroupStudent::factory(4)->create([
-                'group_id' =>$group->id
-            ]);
-
-            Payment::factory(4)->create([
-                'group_id' =>$group->id
-            ]);
-
-            StudentLesson::factory(4)->create([
-                'group_id' =>$group->id
-            ]);
-        });
-
-        Lesson::factory(3)->create()->each(function($lesson){
-             Exam::factory(3)->create([
-                'lesson_from' => $lesson->id,
-                'lesson_to' => $lesson->id
-             ]);
-
-             StudentLesson::factory(3)->create([
-                'lesson_id' => $lesson->id,
-             ]);
-
-             syllabus::factory(3)->create([
-                'new_lesson' => $lesson->id,
-             ]);
-
-             syllabus::factory(3)->create([
-                'old_lesson' => $lesson->id,
-             ]);
-        });
-
-        GroupType::factory(4)->create()->each(function($groupType){
-              Group::factory(4)->create([
-                'group_type_id' => $groupType->id
-              ]);
-        });
-
-        Subject::factory(5)->create()->each(function($subject){
-            Lesson::factory(4)->create([
-                'subject_id' =>  $subject->id
-            ]);
-        });
-
-        Exam::factory()->create()->each(function($exam){
-            StudentExam::factory(4)->create([
-                'exam_id' =>  $exam->id
-            ]);
-        });
-
-//-------------------------------------------------------//
-        
-        Student::factory()->create();
-        Subject::factory()->create();
-
-//-------------------------------------------------------//
-
-
-
-
-
-
-
-
-
-       
-
-
-//-------------------  GroupType   -----------------------//
-
-         GroupType::updateOrCreate([
-             'name' => 'normal',
-         ],[
-             'price' => 80,
-             'days_num' => 2
-         ]);
-         GroupType::updateOrCreate([
-             'name' => 'dense',
-         ],[
-             'price' => 120,
-             'days_num' => 2
-         ]);
-         GroupType::updateOrCreate([
-             'name' => 'all week',
-         ],[
-             'price' => 200,
-             'days_num' => 2
-         ]);
-
-//-----------------------------------------------------------//
-
-
     }
 }

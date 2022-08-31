@@ -28,32 +28,32 @@ Group:
     teacher_id
     age_type ('kid','adult') : enum
 
-
+//ToDo CRUD in group show
 GroupDay:
     id
     group_id
     day ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') : enum
 
-..................
+[CRUD]
 GroupType:
     id
     name : string
     price : double
     days_num : int
 
-
+[CRUD]
 Subject:
     id
     name : string
 
 
-
+[CRUD]
 Lesson:
     id
     subject_id
     title : text
 
-
+//ToDo CRUD in student show
 syllabus:
     id
     student_id
@@ -69,7 +69,7 @@ StudentLesson:
     finished : bool
 
 
-................
+[CRUD]
 GroupStudent:
     id
     student_id
@@ -82,7 +82,7 @@ Payment:
     paid : double
     month ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December') : enum
 
-....................
+[CRUD]
 Exam:
     id
     group_id
@@ -90,6 +90,7 @@ Exam:
     lesson_from => foriegn key on lessons
     lesson_to => foriegn key on lessons
 
+//ToDo CRUD in Student
 StudentExam:
     subject_id
     exam_id

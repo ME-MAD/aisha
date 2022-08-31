@@ -21,8 +21,8 @@ class GroupFactory extends Factory
         return [
             'from' => fake()->time(),
             'to' => fake()->time(),
-            'age_type' => $array_age_type[rand(0,2)],
-            
+            'age_type' => $array_age_type[rand(0, 1)],
+
         ];
     }
 }

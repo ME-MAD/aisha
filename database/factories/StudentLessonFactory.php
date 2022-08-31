@@ -17,7 +17,7 @@ class StudentLessonFactory extends Factory
     public function definition()
     {
         return [
-            "finished" => fake()->tinyint()
+            "finished" => fake()->boolean()
         ];
     }
 }
