@@ -125,9 +125,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('', [GroupTypeController::class, 'index'])->name('index');
         Route::get('create', [GroupTypeController::class, 'create'])->name('create');
         Route::post('store', [GroupTypeController::class, 'store'])->name('store');
-        Route::get('edit/{group_types}', [GroupTypeController::class, 'edit'])->name('edit');
-        Route::put('update/{group_types}', [GroupTypeController::class, 'update'])->name('update');
-        Route::get('delete/{group_types}', [GroupTypeController::class, 'delete'])->name('delete');
+        Route::get('edit/{group_type}', [GroupTypeController::class, 'edit'])->name('edit');
+        Route::put('update/{group_type}', [GroupTypeController::class, 'update'])->name('update');
+        Route::get('delete/{group_type}', [GroupTypeController::class, 'delete'])->name('delete');
     });
 
 

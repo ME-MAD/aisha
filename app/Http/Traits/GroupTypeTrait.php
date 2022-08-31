@@ -13,8 +13,6 @@ trait GroupTypeTrait
     }
     private function getGroupType()
     {
-        return GroupType::select(['id','group_id','name','price'])
-                     ->with('group:id,from,to')
-                     ->get();
+        return GroupType::select(['id','days_num','name','price'])->get();
     }
 }
