@@ -13,7 +13,7 @@ class StoreGroupTypeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StoreGroupTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'demo_vertical' => 'required',
+            'price' => 'required',
         ];
     }
 }

@@ -8,12 +8,13 @@ use App\Http\Requests\GroupType\UpdateGroupTypeRequest;
 use App\Http\Traits\GroupTrait;
 use App\Http\Traits\GroupTypeTrait;
 use App\Models\Group;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupTypeController extends Controller
 {
     
-    use GroupTypeTrait,
-    GroupTrait;
+    use GroupTypeTrait;
+   
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +35,8 @@ class GroupTypeController extends Controller
      */
     public function create()
     {
-        //
+       return view('pages.groupType.create');
+       
     }
 
     /**
@@ -45,7 +47,15 @@ class GroupTypeController extends Controller
      */
     public function store(StoreGroupTypeRequest $request)
     {
-        //
+        
+        GroupType::create([
+            'name' => $request->name,
+            'days_num' => $request->demo_vertical,
+            'price' => $request->price,
+        ]);
+      
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route('admin.group_types.index'));
     }
 
     /**
@@ -65,14 +75,12 @@ class GroupTypeController extends Controller
      * @param  \App\Models\GroupType  $groupType
      * @return \Illuminate\Http\Response
      */
-    public function edit(GroupType $groupType)
+    public function edit(GroupType $group_type)
     {
-        $groups = Group::get();
-        
         return view('pages.groupType.edit',[
-            "groupType"=>$groupType,
-            "groups"=>$groups
+            "group_type"=>$group_type
         ]);
+      
     }
 
     /**
@@ -82,9 +90,18 @@ class GroupTypeController extends Controller
      * @param  \App\Models\GroupType  $groupType
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateGroupTypeRequest $request, GroupType $groupType)
+    public function update(UpdateGroupTypeRequest $request, GroupType $group_type)
     {
-        //
+
+        $group_type->update([
+           
+            'name' => $request->name,
+            'days_num' => $request->demo_vertical,
+            'price' => $request->price,
+           
+        ]);
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect(route('admin.group_types.index'));
     }
 
     /**
@@ -93,8 +110,10 @@ class GroupTypeController extends Controller
      * @param  \App\Models\GroupType  $groupType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GroupType $groupType)
+    public function delete(GroupType $group_type)
     {
-        //
+        $group_type->delete();
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect()->back();
     }
 }
