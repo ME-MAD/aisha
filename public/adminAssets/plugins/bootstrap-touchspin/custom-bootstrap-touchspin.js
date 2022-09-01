@@ -1,7 +1,7 @@
 // Example with postfix (large)
 $("input[name='demo1']").TouchSpin({
     min: 0,
-    max: 100,
+    max: 10000,
     step: 0.1,
     decimals: 2,
     boostat: 5,
@@ -14,7 +14,7 @@ $("input[name='demo1']").TouchSpin({
 // With prefix
 $("input[name='demo2']").TouchSpin({
     min: 0,
-    max: 100,
+    max: 10000,
     step: 0.1,
     decimals: 2,
     boostat: 5,

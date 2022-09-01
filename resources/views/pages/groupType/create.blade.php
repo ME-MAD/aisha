@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/select2/select2.min.css')}}">
     <link href="{{asset('adminAssets/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}">
+    <link href="{{asset('adminAssets/assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css" />
     <style>
         #demo_vertical::-ms-clear, #demo_vertical2::-ms-clear { display: none; }
         input#demo_vertical { border-top-right-radius: 5px; border-bottom-right-radius: 5px; }
@@ -61,7 +62,7 @@
                             <x-text name="demo_vertical" label="عدد الايام" :value="old('demo_vertical')" id="demo_vertical"  />
 
                         
-                            <x-number name="price" label="السعر" :value="old('price')" />
+                            <x-text name="price" label="السعر" id="currency" :value="old('price')" />
                            
 
                             <div class="form-group row">
@@ -83,11 +84,15 @@
 <script src="{{asset('adminAssets/assets/js/scrollspyNav.js')}}"></script>
 <script src="{{asset('adminAssets/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
 <script src="{{asset('adminAssets/plugins/bootstrap-touchspin/custom-bootstrap-touchspin.js')}}"></script>
-
+<script src="{{asset('adminAssets/plugins/input-mask/jquery.inputmask.bundle.min.js')}}"></script>
+<script src="{{asset('adminAssets/plugins/input-mask/input-mask.js')}}"></script>
 <script>
     $("input[name='demo_vertical']").TouchSpin({
     verticalbuttons: true,
 });
+</script>
+<script>
+    $("#currency").inputmask({mask:"$999,9999,999.99"});
 </script>
 
 @endsection
