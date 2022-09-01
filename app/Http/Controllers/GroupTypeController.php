@@ -12,9 +12,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupTypeController extends Controller
 {
-    
+
     use GroupTypeTrait;
-   
+
     /**
      * Display a listing of the resource.
      *
@@ -23,8 +23,8 @@ class GroupTypeController extends Controller
     public function index()
     {
         $grouptypes = $this->getGroupType();
-        return view('pages.groupType.index',[
-            "grouptypes"=>$grouptypes,
+        return view('pages.groupType.index', [
+            "grouptypes" => $grouptypes,
         ]);
     }
 
@@ -35,8 +35,7 @@ class GroupTypeController extends Controller
      */
     public function create()
     {
-       return view('pages.groupType.create');
-       
+        return view('pages.groupType.create');
     }
 
     /**
@@ -47,13 +46,13 @@ class GroupTypeController extends Controller
      */
     public function store(StoreGroupTypeRequest $request)
     {
-        
+        $price = str_replace(['$', '_', ','], ['', '0', ''], $request->price);
         GroupType::create([
             'name' => $request->name,
             'days_num' => $request->demo_vertical,
-            'price' => $request->price,
+            'price' => $price,
         ]);
-      
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.group_types.index'));
     }
@@ -77,10 +76,9 @@ class GroupTypeController extends Controller
      */
     public function edit(GroupType $group_type)
     {
-        return view('pages.groupType.edit',[
-            "group_type"=>$group_type
+        return view('pages.groupType.edit', [
+            "group_type" => $group_type
         ]);
-      
     }
 
     /**
@@ -94,11 +92,11 @@ class GroupTypeController extends Controller
     {
 
         $group_type->update([
-           
+
             'name' => $request->name,
             'days_num' => $request->demo_vertical,
             'price' => $request->price,
-           
+
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.group_types.index'));

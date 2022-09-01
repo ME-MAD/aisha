@@ -83,16 +83,22 @@
 <script src="{{asset('adminAssets/plugins/select2/select2.min.js')}}"></script>
 <script src="{{asset('adminAssets/assets/js/scrollspyNav.js')}}"></script>
 <script src="{{asset('adminAssets/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
-<script src="{{asset('adminAssets/plugins/bootstrap-touchspin/custom-bootstrap-touchspin.js')}}"></script>
 <script src="{{asset('adminAssets/plugins/input-mask/jquery.inputmask.bundle.min.js')}}"></script>
-<script src="{{asset('adminAssets/plugins/input-mask/input-mask.js')}}"></script>
 <script>
     $("input[name='demo_vertical']").TouchSpin({
-    verticalbuttons: true,
-});
+        verticalbuttons: true,
+        min: 1,
+        max: 7,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        buttondown_class: "btn btn-classic btn-primary",
+        buttonup_class: "btn btn-classic btn-danger"
+}   );
 </script>
 <script>
-    $("#currency").inputmask({mask:"$999,9999,999.99"});
+    $("#currency").inputmask({mask:"$999.99"});
 </script>
 
 @endsection
