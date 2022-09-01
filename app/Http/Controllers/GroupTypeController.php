@@ -49,7 +49,7 @@ class GroupTypeController extends Controller
         $price = str_replace(['$', '_', ','], ['', '0', ''], $request->price);
         GroupType::create([
             'name' => $request->name,
-            'days_num' => $request->demo_vertical,
+            'days_num' => $request->days_num,
             'price' => $price,
         ]);
 
@@ -90,12 +90,12 @@ class GroupTypeController extends Controller
      */
     public function update(UpdateGroupTypeRequest $request, GroupType $group_type)
     {
-
+        $price = str_replace(['$', '_', ','], ['', '0', ''], $request->price);
         $group_type->update([
 
             'name' => $request->name,
-            'days_num' => $request->demo_vertical,
-            'price' => $request->price,
+            'days_num' => $request->days_num,
+            'price' => $price,
 
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
