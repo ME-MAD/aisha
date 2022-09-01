@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('group_types', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->double('price');
+            $table->text('price');
             $table->unsignedInteger('days_num');
             $table->timestamps();
         });
