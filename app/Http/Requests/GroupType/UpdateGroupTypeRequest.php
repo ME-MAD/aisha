@@ -25,7 +25,7 @@ class UpdateGroupTypeRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'demo_vertical' => 'required',
+            'days_num' => 'required',
             'price' => 'required',
         ];
     }

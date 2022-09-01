@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/select2/select2.min.css')}}">
     <link href="{{asset('adminAssets/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}">
+    <link href="{{asset('adminAssets/assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css" />
     <style>
         #demo_vertical::-ms-clear, #demo_vertical2::-ms-clear { display: none; }
         input#demo_vertical { border-top-right-radius: 5px; border-bottom-right-radius: 5px; }
@@ -59,11 +60,12 @@
 
 
                             <x-text name="name" label="الاسم" :value="$group_type->name" />
+                               
+                          <x-text name="days_num" label="عدد الايام" :value="$group_type->days_num" id="days_num"  />    
 
-                            <x-text name="demo_vertical" label="عدد الايام" :value="$group_type->days_num" id="demo_vertical"  />
+                            <x-text name="price" label="السعر" id="currency" :value="$group_type->price" />
 
-                        
-                            <x-number name="price" label="السعر" :value="$group_type->price" />
+                            
                            
 
                             <div class="form-group row">
@@ -84,12 +86,22 @@
 <script src="{{asset('adminAssets/plugins/select2/select2.min.js')}}"></script>
 <script src="{{asset('adminAssets/assets/js/scrollspyNav.js')}}"></script>
 <script src="{{asset('adminAssets/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
-<script src="{{asset('adminAssets/plugins/bootstrap-touchspin/custom-bootstrap-touchspin.js')}}"></script>
-
+<script src="{{asset('adminAssets/plugins/input-mask/jquery.inputmask.bundle.min.js')}}"></script>
 <script>
-    $("input[name='demo_vertical']").TouchSpin({
-    verticalbuttons: true,
-});
+    $("input[name='days_num']").TouchSpin({
+        verticalbuttons: true,
+        min: 1,
+        max: 7,
+        step: 1,
+        decimals: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        buttondown_class: "btn btn-classic btn-primary",
+        buttonup_class: "btn btn-classic btn-danger"
+}   );
+</script>
+<script>
+    $("#currency").inputmask({mask:"$999.99"});
 </script>
 
 @endsection

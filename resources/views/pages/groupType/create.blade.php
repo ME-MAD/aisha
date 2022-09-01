@@ -59,10 +59,11 @@
 
                             <x-text name="name" label="الاسم" :value="old('name')" />
 
-                            <x-text name="demo_vertical" label="عدد الايام" :value="old('demo_vertical')" id="demo_vertical"  />
-
-                        
+                            <x-text name="days_num" label="عدد الايام" :value="old('days_num')" id="days_num"  />
+                            
                             <x-text name="price" label="السعر" id="currency" :value="old('price')" />
+                        
+                           
                            
 
                             <div class="form-group row">
@@ -85,7 +86,7 @@
 <script src="{{asset('adminAssets/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js')}}"></script>
 <script src="{{asset('adminAssets/plugins/input-mask/jquery.inputmask.bundle.min.js')}}"></script>
 <script>
-    $("input[name='demo_vertical']").TouchSpin({
+    $("input[name='days_num']").TouchSpin({
         verticalbuttons: true,
         min: 1,
         max: 7,
