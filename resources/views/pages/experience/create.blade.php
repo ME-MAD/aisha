@@ -1,6 +1,8 @@
 @extends('master')
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/select2/select2.min.css')}}">
+<link href="{{asset('adminAssets/plugins/flatpickr/flatpickr.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('adminAssets/plugins/flatpickr/custom-flatpickr.css')}}" rel="stylesheet" type="text/css">
 @endsection
 
 @section('breadcrumb')
@@ -48,8 +50,22 @@
                             @csrf
                          
                             <x-text name="title" label="العنوان" :value="old('title')" />
+
+                            <x-date name="date" label="التاريخ" :value="old('date')"  min="2017-04-01" max="2018-04-01"/>
+
+
                             
-                            <x-date name="date" label="التاريخ" :value="old('date')" />
+
+                         
+
+                            <div class="form-group row mb-4">
+                                <label for="brithday" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">التاريخ</label>
+                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                    <input id="basicFlatpickr" value="" class="form-control flatpickr flatpickr-input active" type="text"  name="date"
+                                   >
+                                </div>
+                            </div>
+
                             
                             <div class="form-group row mb-4">
                               <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
@@ -86,10 +102,16 @@
 @section("javascript")
 
 <script src="{{asset('adminAssets/plugins/select2/select2.min.js')}}"></script>
+{{-- <script src="{{asset('adminAssets/assets/js/scrollspyNav.js')}}"></script> --}}
+<script src="{{asset('adminAssets/plugins/flatpickr/flatpickr.js')}}"></script>
+<script src="{{asset('adminAssets/plugins/flatpickr/custom-flatpickr.js')}}"></script>
 <script>
 $(".basic").select2({
     tags: true,
 });
+</script>
+<script>
+    var f1 = flatpickr(document.getElementById('basicFlatpickr'));
 </script>
 
 @endsection
