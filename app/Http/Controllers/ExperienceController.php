@@ -48,6 +48,7 @@ class ExperienceController extends Controller
     public function store(StoreExperienceRequest $request)
     {
 
+        
         Experience::create([
             'title' => $request->title,
             'date' => $request->date,
