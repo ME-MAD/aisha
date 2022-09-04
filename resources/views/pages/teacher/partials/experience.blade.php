@@ -10,7 +10,7 @@
                               <line x1="12" y1="8" x2="12" y2="16"></line>
                               <line x1="8" y1="12" x2="16" y2="12"></line>
                         </svg>
-                  </a>
+                        </a>
             </h3>
             <div class="timeline-alter">
                 @foreach ($experiences as $experience)
@@ -21,7 +21,14 @@
                         <div class="t-dot" data-original-title="" title="">
                         </div>
                         <div class="t-text">
-                            <a class="editExperienceTitleButton" data-toggle="modal" data-target="#editExperienceTitleModal" data-title="{{ $experience->title }}">
+                              <a 
+                              class="editExperienceButton title" 
+                              data-experience="{{$experience}}"
+                              data-date="{{$experience->date->format('Y-m-d')}}"
+                              data-toggle="modal" 
+                              data-target="#editExperience" 
+                              data-href="{{route('admin.experience.update',$experience->id)}}">
+
                                 <p class="text-primary">{{ $experience->title }}</p>
                             </a>
                         </div>
@@ -29,48 +36,9 @@
                 @endforeach
             </div>
       </div>
-
 </div>
 
-
-    
-<div class="modal fade" id="editExperienceTitleModal" tabindex="-1" role="dialog" aria-labelledby="editExperienceTitleModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editExperienceTitleModal">تعديل العنوان</h5>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('admin.experience.store') }}" method="post">
-                    @csrf
-                    @method('PUT')
-
-                    <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
-
-                    <div class="form-group row mb-4">
-                          <label for="title"
-                                class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">العنوان</label>
-                          <div class="col-xl-10 col-lg-9 col-sm-10">
-                                <input type="text" class="form-control" id="title" placeholder=""
-                                      name="title">
-                          </div>
-                    </div>
-
-                    <div class="modal-footer">
-                          <button type="submit" class="btn btn-primary">Save</button>
-                          <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Discard</button>
-                    </div>
-
-              </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+<!--  modal tamplet Creat -->
 
 <div class="modal fade" id="createExperienceModal" tabindex="-1" role="dialog" aria-labelledby="createExperienceModal"
       aria-hidden="true">
@@ -88,6 +56,8 @@
                               <x-text name="title" label="العنوان" :value="old('title')" />
 
                               <x-date name="date" label="التاريخ" :value="old('date')" />
+                             
+
 
                             
 
@@ -102,3 +72,44 @@
             </div>
       </div>
 </div>
+
+<!--  modal tamplet Edit -->
+    
+<div class="modal fade" id="editExperience" tabindex="-1" role="dialog" aria-labelledby="editExperience" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editExperience">تعديل العنوان</h5>
+            </div>
+            <div class="modal-body">
+                <form
+                id="editExperienceForm" 
+                method="post">
+                    @csrf
+                    @method('PUT')
+
+                    <input type="hidden" name="teacher_id" value="{{ $teacher->id }}">
+
+                    <x-text name="title" label="العنوان" id="title"/>
+
+                    {{-- <x-date name="date" label="التاريخ" 
+                    id="date"/> --}}
+                    <div class="date-field">
+                        <label for="date">التاريخ</label>
+                    </div>
+                    
+                    <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary">Save</button>
+                          <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Discard</button>
+                    </div>
+
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

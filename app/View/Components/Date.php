@@ -16,6 +16,7 @@ class Date extends Component
         public $name,
         public $label,
         public $value = null,
+        public $class = null,
         public $id = null
     )
     {

@@ -6,12 +6,14 @@ use App\Models\Experience;
 use App\Http\Requests\Experience\StoreExperienceRequest;
 use App\Http\Requests\Experience\UpdateExperienceRequest;
 use App\Http\Traits\ExperienceTrait;
+use App\Http\Traits\TeacherTrait;
 use App\Models\Teacher;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExperienceController extends Controller
 {
     use ExperienceTrait;
+    use TeacherTrait;
     /**
      * Display a listing of the resource.
      *
@@ -66,7 +68,7 @@ class ExperienceController extends Controller
      */
     public function show(Experience $experience)
     {
-        //
+        
     }
 
     /**
@@ -77,7 +79,8 @@ class ExperienceController extends Controller
      */
     public function edit(Experience $experience)
     {
-        //
+        $teacher = $this->getTeachers();
+        return view('');
     }
 
     /**
