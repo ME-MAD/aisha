@@ -1,4 +1,4 @@
-.links--ul{
+.links--ul {
     list-style: none;
     display: flex;
     justify-content: space-between;
@@ -7,6 +7,12 @@
     text-align: center;
 }
 
-table tbody tr td{
+table tbody tr td {
     text-align: center;
+}
+
+.timeline-alter .editExperienceButton:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #0055FF;
 }

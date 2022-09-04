@@ -1,23 +1,10 @@
 $('.editExperienceButton').on('click', function () {
-    let experience = $(this).data('experience')
+    let title = $(this).data('title')
     let date = $(this).data('date')
-    console.log(date)
-    // let dateNew = new Date(experience.date)
-    // let vvv = dateNew.toDateString()
-    // let href = $(this).data('href')
-   
-    // $('#editExperienceForm #title').val(experience.title)
-    // $('#date').val(date)
+    let href = $(this).data('href')
 
-    let formInput = `<input type="date" class="form-control " id="date" placeholder="" name="date" value="${date}">`;
+    $('#editExperienceForm #title').val(title)
+    $('#editExperienceForm #date').val(date)
 
-    // let formInput = `<x-date name="date" label="التاريخ"  id="date" value="${date}"/>`;
- 
-    console.log(formInput)
-    $('#editExperienceForm .date-field').html('');
-    $('#editExperienceForm .date-field').append(formInput);
-
-    // $('#editExperienceForm').attr('action', href)
+    $('#editExperienceForm').attr('action', href)
 })
-
-console.log("sdoufods")

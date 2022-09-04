@@ -21,11 +21,10 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        $experiences =$this->getExperiences();
+        $experiences = $this->getExperiences();
         return view('pages.experience.index', [
             'experiences' => $experiences,
         ]);
-       
     }
 
     /**
@@ -36,7 +35,7 @@ class ExperienceController extends Controller
     public function create()
     {
         $teacher = Teacher::get();
-        return view('pages.experience.create',[
+        return view('pages.experience.create', [
             'teacher' => $teacher,
         ]);
     }
@@ -50,14 +49,14 @@ class ExperienceController extends Controller
     public function store(StoreExperienceRequest $request)
     {
 
-        
+
         Experience::create([
             'title' => $request->title,
             'date' => $request->date,
-            'teacher_id'=>$request->teacher_id
+            'teacher_id' => $request->teacher_id
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
-        return redirect(route('admin.teacher.show',$request->teacher_id));
+        return redirect(route('admin.teacher.show', $request->teacher_id));
     }
 
     /**
@@ -68,7 +67,6 @@ class ExperienceController extends Controller
      */
     public function show(Experience $experience)
     {
-        
     }
 
     /**
@@ -92,7 +90,7 @@ class ExperienceController extends Controller
      */
     public function update(UpdateExperienceRequest $request, Experience $experience)
     {
-        //
+        dd($request);
     }
 
     /**

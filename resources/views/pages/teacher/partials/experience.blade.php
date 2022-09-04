@@ -23,13 +23,12 @@
                         <div class="t-text">
                               <a 
                               class="editExperienceButton title" 
-                              data-experience="{{$experience}}"
+                              data-title="{{$experience->title}}"
                               data-date="{{$experience->date->format('Y-m-d')}}"
                               data-toggle="modal" 
                               data-target="#editExperience" 
                               data-href="{{route('admin.experience.update',$experience->id)}}">
-
-                                <p class="text-primary">{{ $experience->title }}</p>
+                                <p>{{ $experience->title }}</p>
                             </a>
                         </div>
                     </div>
@@ -92,11 +91,11 @@
 
                     <x-text name="title" label="العنوان" id="title"/>
 
-                    {{-- <x-date name="date" label="التاريخ" 
-                    id="date"/> --}}
-                    <div class="date-field">
+                    <x-date name="date" label="التاريخ" 
+                    id="date"/>
+                    {{-- <div class="date-field">
                         <label for="date">التاريخ</label>
-                    </div>
+                    </div> --}}
                     
                     <div class="modal-footer">
                           <button type="submit" class="btn btn-primary">Save</button>
