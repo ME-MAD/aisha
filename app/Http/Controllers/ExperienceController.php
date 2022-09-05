@@ -77,8 +77,7 @@ class ExperienceController extends Controller
      */
     public function edit(Experience $experience)
     {
-        $teacher = $this->getTeachers();
-        return view('');
+       //
     }
 
     /**
@@ -90,7 +89,16 @@ class ExperienceController extends Controller
      */
     public function update(UpdateExperienceRequest $request, Experience $experience)
     {
-        dd($request);
+        $experience->update([
+            'title' => $request->title,
+            'date' => $request->date,
+            
+          
+        ]);
+
+
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect()->back();
     }
 
     /**
@@ -99,8 +107,10 @@ class ExperienceController extends Controller
      * @param  \App\Models\Experience  $experience
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Experience $experience)
+    public function delete(Experience $experience)
     {
-        //
+        $experience->delete();
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect()->back();
     }
 }
