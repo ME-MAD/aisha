@@ -16,3 +16,20 @@ table tbody tr td {
     text-decoration: underline;
     color: #0055FF;
 }
+
+.timeline-alter .item-timeline {
+    position: relative;
+}
+
+.timeline-alter .deleteButton {
+    position: absolute;
+    right: -50px;
+    top: 50%;
+    bottom: 50%;
+    transform: translateX(-50%);
+}
+
+.timeline-alter .deleteButton i {
+    color: #dc3545;
+    font-size: 1.5rem;
+}

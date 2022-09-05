@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ExamDataTable;
-use App\DataTables\GroupDataTable;
 use App\Models\Exam;
 use App\Http\Requests\Exam\StoreExamRequest;
 use App\Http\Requests\Exam\UpdateExamRequest;
@@ -31,7 +30,6 @@ class ExamController extends Controller
     public function index(ExamDataTable $examDataTable)
     {
         return $examDataTable->render('pages.exam.index');
-        
     }
 
     /**
@@ -42,13 +40,13 @@ class ExamController extends Controller
     public function create()
     {
         $students = Student::get();
-       $groups = Group::get();
-       $lessons = Lesson::get();
+        $groups = Group::get();
+        $lessons = Lesson::get();
         return view('pages.exam.create', [
             'students' => $students,
             'groups' => $groups,
             'lessons' => $lessons,
-       ]);
+        ]);
     }
 
     /**
@@ -64,9 +62,9 @@ class ExamController extends Controller
             'group_id' => $request->group_id,
             'lesson_from' => $request->lesson_from,
             'lesson_to' => $request->lesson_to,
-            
+
         ]);
-      
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.exam.index'));
     }
@@ -93,7 +91,7 @@ class ExamController extends Controller
         $students = Student::get();
         $groups = Group::get();
         $lessons = Lesson::get();
-       
+
         return view('pages.exam.edit', [
             'exam' => $exam,
             'students'  => $students,
@@ -116,7 +114,7 @@ class ExamController extends Controller
             'group_id' => $request->group_id,
             'lesson_from' => $request->lesson_from,
             'lesson_to' => $request->lesson_to,
-            
+
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.exam.index'));

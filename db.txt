@@ -10,6 +10,7 @@ Teacher:
 Experience:
     id
     title
+    date: date
     teacher_id
 
 [CRUD]

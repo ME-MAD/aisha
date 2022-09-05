@@ -48,8 +48,6 @@ class ExperienceController extends Controller
      */
     public function store(StoreExperienceRequest $request)
     {
-
-
         Experience::create([
             'title' => $request->title,
             'date' => $request->date,
@@ -77,7 +75,7 @@ class ExperienceController extends Controller
      */
     public function edit(Experience $experience)
     {
-       //
+        //
     }
 
     /**
@@ -92,11 +90,7 @@ class ExperienceController extends Controller
         $experience->update([
             'title' => $request->title,
             'date' => $request->date,
-            
-          
         ]);
-
-
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
     }
