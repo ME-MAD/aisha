@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
+use App\Http\Traits\GroupTrait;
 use App\Http\Traits\TeacherTrait;
+use App\Models\Group;
+use App\Models\GroupType;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -14,6 +17,7 @@ class TeacherController extends Controller
 {
 
     use TeacherTrait;
+    // use GroupTrait;
 
     public function index()
     {
@@ -26,10 +30,12 @@ class TeacherController extends Controller
 
     public function show(Teacher $teacher)
     {
+        $groups =Group::get();
         $experiences = $teacher->experiences()->orderBy('date','DESC')->get();
         return view('pages.teacher.show',[
             'teacher' => $teacher,
             'experiences' => $experiences,  
+            'groups' => $groups,   
         ]);
     }
 

@@ -16,4 +16,9 @@ class Teacher extends Model
     {
         return $this->hasMany(Experience::class,'teacher_id');
     }
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class,'teacher_id');
+    }
 }
