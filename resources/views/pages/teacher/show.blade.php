@@ -155,6 +155,12 @@
 
                     </div>
                 </div>
+                
+                <div class="bio layout-spacing">  <!-- مشكله الخط الى تحت الاسم -->
+
+                    @include('pages.teacher.partials.display_table_group')
+    
+                </div>
 
                 <div class="bio layout-spacing ">
                     <div class="widget-content widget-content-area">
@@ -234,6 +240,10 @@
 
                     </div>
                 </div>
+
+               
+
+               
 
             </div>
 
