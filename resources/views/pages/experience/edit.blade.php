@@ -8,7 +8,7 @@
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
-            <h3>Create experience</h3>
+            <h3>Edit experience</h3>
         </div>
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
@@ -41,17 +41,23 @@
                     <div class="widget-header">
                         <div class="row">
                             <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4 class="text-center text-primary">Create experience</h4>
+                                <h4 class="text-center text-primary">Edit experience</h4>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        <form action="{{ route('admin.experience.store') }}" method="post">
+                        <form action="{{ route('admin.experience.update',$experience->id) }}" method="post">
                             @csrf
-                         
-                            <x-text name="title" label="العنوان" :value="old('title')" />
+                            @method('PUT')
 
-                            <x-date name="date" id="date" label="التاريخ" :value="old('date')" />
+                             <input type="hidden" name="experience_id" value="{{ $experience->id }}">
+
+                            
+
+
+                            <x-text name="title" label="العنوان" :value="$experience->title" />
+
+                            <x-date name="date" id="date" label="التاريخ" :value=" $experience->date->format('Y-m-d')" />
 
 
                             <div class="form-group row mb-4">
@@ -62,10 +68,10 @@
                                       style="width: 100%;"
                                       name="teacher_id" id="teacher_id">
                                       <option value="">اختر المعلم</option>
-                                      @foreach ($teacher as $item)
-                                          <option value="{{ $item->id }}"
-                                              {{ old('teacher_id') == $item->id ? 'selected' : '' }}>
-                                              {{ $item->name }}</option>
+                                      @foreach ($teachers as $teacher)
+                                          <option value="{{ $teacher->id }}"
+                                              {{$experience->teacher_id == $teacher->id ? 'selected' : '' }}>
+                                              {{ $teacher->name }}</option>
                                       @endforeach
                                   </select>
                                   @error("teacher_id")

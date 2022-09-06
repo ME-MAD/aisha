@@ -30,8 +30,9 @@ class TeacherController extends Controller
 
     public function show(Teacher $teacher)
     {
-        $groups =Group::get();
+
         $experiences = $teacher->experiences()->orderBy('date','DESC')->get();
+        $groups = $teacher->groups()->orderBy('id','DESC')->get();
         return view('pages.teacher.show',[
             'teacher' => $teacher,
             'experiences' => $experiences,  

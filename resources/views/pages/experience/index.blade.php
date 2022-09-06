@@ -63,10 +63,11 @@
                                             <thead>
                                                 <tr>
                                                     <th class="checkbox-column text-center"> Id </th>
-                                                    <th class="text-center">title</th>
-                                                    <th class="text-center">date</th>
                                                     <th class="text-center">Teacher
                                                     </th>
+                                                    <th class="text-center">title</th>
+                                                    <th class="text-center">date</th>
+                                                   
                                                     <th class="text-center">Edit</th>
                                                     <th class="text-center">Delete</th>
                                                 </tr>
@@ -76,14 +77,15 @@
                                                     <tr role="row">
                                                         <td class="checkbox-column text-center sorting_1">
                                                             {{ $experience->id }} </td>
+                                                            <td>
+                                                                <a href="{{ route('admin.teacher.show', $experience->id) }}"  class="text-primary">
+                                                                    {{ $experience->teacher->name }}
+                                                                </a>
+                                                            </td>
 
                                                         <td>{{ $experience->title }}</td>
                                                         <td>{{ $experience->date }}</td>
-                                                        <td>
-                                                            <a href="{{ route('admin.teacher.show', $experience->id) }}"  class="text-primary">
-                                                                {{ $experience->teacher->name }}
-                                                            </a>
-                                                        </td>
+                                                        
                                                         <td class="text-center">
                                                             <div class="links--ul">
                                                                 <x-edit-link :route="route('admin.experience.edit', $experience->id)" />

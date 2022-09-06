@@ -39,9 +39,10 @@ class ExamController extends Controller
      */
     public function create()
     {
-        $students = Student::get();
-        $groups = Group::get();
-        $lessons = Lesson::get();
+        $students = Student::select(['id','name'])->get();
+        $groups = Group::select(['id','from','to'])->get();
+        $lessons = Lesson::select(['id','title'])->get();
+
         return view('pages.exam.create', [
             'students' => $students,
             'groups' => $groups,
@@ -62,7 +63,6 @@ class ExamController extends Controller
             'group_id' => $request->group_id,
             'lesson_from' => $request->lesson_from,
             'lesson_to' => $request->lesson_to,
-
         ]);
 
         Alert::success('نجاح', 'تمت العملية بنجاح');
@@ -88,9 +88,10 @@ class ExamController extends Controller
      */
     public function edit(Exam $exam)
     {
-        $students = Student::get();
-        $groups = Group::get();
-        $lessons = Lesson::get();
+  
+        $students = Student::select(['id','name'])->get();
+        $groups = Group::select(['id','from','to'])->get();
+        $lessons = Lesson::select(['id','title'])->get();
 
         return view('pages.exam.edit', [
             'exam' => $exam,
