@@ -34,7 +34,8 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        $teacher = Teacher::get();
+       
+        $teacher = Teacher::select(['id','name'])->get();
         return view('pages.experience.create', [
             'teacher' => $teacher,
         ]);
@@ -75,7 +76,12 @@ class ExperienceController extends Controller
      */
     public function edit(Experience $experience)
     {
-        //
+
+        $teachers = Teacher::select(['id','name'])->get();
+        return view('pages.experience.edit', [
+            'teachers'  => $teachers,
+            'experience'  => $experience,
+        ]);
     }
 
     /**
@@ -92,7 +98,7 @@ class ExperienceController extends Controller
             'date' => $request->date,
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
-        return redirect()->back();
+         return redirect(route('admin.experience.index'));
     }
 
     /**
