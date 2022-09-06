@@ -4,7 +4,7 @@ $('.editExperienceButton').on('click', function () {
     let href = $(this).data('href')
 
     $('#editExperienceForm #title').val(title)
-    $('#editExperienceForm #date').val(date)
+    $('#editExperienceForm #editDateExperience').val(date)
 
     $('#editExperienceForm').attr('action', href)
 })

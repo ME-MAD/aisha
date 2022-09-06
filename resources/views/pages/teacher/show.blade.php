@@ -112,3 +112,13 @@
 @endsection
 
 
+
+
+@section('javascript')
+    <script>
+        let createDate = document.getElementById('createDateExperience')
+        createDate.max = new Date().toISOString().split("T")[0]
+        let editDate = document.getElementById('editDateExperience')
+        editDate.max = new Date().toISOString().split("T")[0]
+    </script>
+@endsection

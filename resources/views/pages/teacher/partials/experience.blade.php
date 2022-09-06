@@ -61,7 +61,7 @@
 
                               <x-text name="title" label="العنوان" :value="old('title')" />
 
-                              <x-date name="date" label="التاريخ" :value="old('date')" />
+                              <x-date name="date" id="createDateExperience" label="التاريخ" :value="old('date')" />
                              
 
 
@@ -98,8 +98,7 @@
 
                     <x-text name="title" label="العنوان" id="title"/>
 
-                    <x-date name="date" label="التاريخ" 
-                    id="date"/>
+                    <x-date name="date" id="editDateExperience" label="التاريخ" />
                     {{-- <div class="date-field">
                         <label for="date">التاريخ</label>
                     </div> --}}

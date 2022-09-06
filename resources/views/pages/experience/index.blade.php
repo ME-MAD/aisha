@@ -84,7 +84,7 @@
                                                             </td>
 
                                                         <td>{{ $experience->title }}</td>
-                                                        <td>{{ $experience->date }}</td>
+                                                        <td>{{ $experience->date->diffForHumans() }}</td>
                                                         
                                                         <td class="text-center">
                                                             <div class="links--ul">
