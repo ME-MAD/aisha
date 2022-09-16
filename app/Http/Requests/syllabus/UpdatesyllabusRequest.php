@@ -13,7 +13,7 @@ class UpdatesyllabusRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdatesyllabusRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'new_lesson' => 'required',
+            'old_lesson' => 'required',
+            'is_reverse' => 'required',
         ];
     }
 }

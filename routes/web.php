@@ -10,6 +10,7 @@ use App\Http\Controllers\GroupTypeController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\SyllabusController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use App\Models\Experience;
@@ -28,9 +29,9 @@ use Illuminate\Support\Facades\Route;
 
 // mohamed
 
-Route::group(['prefix' => 'admin','as' => 'admin.'],function(){
-    Route::get('loginPage',[AuthController::class,'loginPage'])->name('loginPage');
-    Route::post('login',[AuthController::class,'login'])->name('login');
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('loginPage', [AuthController::class, 'loginPage'])->name('loginPage');
+    Route::post('login', [AuthController::class, 'login'])->name('login');
 });
 
 Route::get('/', function () {
@@ -43,7 +44,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         return view('pages.home');
     })->name('home');
 
-    Route::get('logout',[AuthController::class,'logout'])->name('logout');
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::group(['prefix' => 'teacher', 'as' => 'teacher.'], function () {
         Route::get('', [TeacherController::class, 'index'])->name('index');
@@ -78,6 +79,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('', [StudentController::class, 'index'])->name('index');
         Route::get('create', [StudentController::class, 'create'])->name('create');
         Route::post('store', [StudentController::class, 'store'])->name('store');
+        Route::get('show/{student}', [StudentController::class, 'show'])->name('show');
         Route::get('edit/{student}', [StudentController::class, 'edit'])->name('edit');
         Route::put('update/{student}', [StudentController::class, 'update'])->name('update');
         Route::get('delete/{student}', [StudentController::class, 'delete'])->name('delete');
@@ -139,7 +141,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::put('update/{exam}', [ExamController::class, 'update'])->name('update');
         Route::get('delete/{exam}', [ExamController::class, 'delete'])->name('delete');
     });
-    
+
     Route::group(['prefix' => 'group_students', 'as' => 'group_students.'], function () {
         Route::get('', [GroupStudentController::class, 'index'])->name('index');
         Route::get('create', [GroupStudentController::class, 'create'])->name('create');
@@ -147,5 +149,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{groupStudent}', [GroupStudentController::class, 'edit'])->name('edit');
         Route::put('update/{groupStudent}', [GroupStudentController::class, 'update'])->name('update');
         Route::get('delete/{groupStudent}', [GroupStudentController::class, 'delete'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'syllabus', 'as' => 'syllabus.'], function () {
+        Route::get('', [SyllabusController::class, 'index'])->name('index');
+        Route::get('create', [SyllabusController::class, 'create'])->name('create');
+        Route::post('store', [SyllabusController::class, 'store'])->name('store');
+
+        Route::get('show/{syllabus}', [SyllabusController::class, 'show'])->name('show');
+        Route::get('edit/{syllabus}', [SyllabusController::class, 'edit'])->name('edit');
+        Route::put('update/{syllabus}', [SyllabusController::class, 'update'])->name('update');
+        Route::get('delete/{syllabus}', [SyllabusController::class, 'delete'])->name('delete');
     });
 });
