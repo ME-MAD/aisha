@@ -13,7 +13,7 @@ class StoresyllabusRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoresyllabusRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            //    'student_id' => 'required',
+            'new_lesson' => 'required',
+            'old_lesson' => 'required',
+            'is_reverse' => 'required',
         ];
     }
 }

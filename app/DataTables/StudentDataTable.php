@@ -15,7 +15,11 @@ class StudentDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('edit', 'pages.student.datatable.edit')
             ->addColumn('delete', 'pages.student.datatable.delete')
-            ->rawColumns(['edit','delete'])
+            ->editColumn('name', function ($q) {
+
+                return "<a href=".route('admin.student.show', $q->id)." >".$q->name."</a>";
+            })
+            ->rawColumns(['edit', 'delete', 'name'])
             ->setRowId('id');
     }
 
@@ -76,15 +80,15 @@ class StudentDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            ['name' => 'id', 'data' => 'id', 'title' => 'رقم الهوية' ,"className" => 'search--col exact'],
-            ['name' => 'name', 'data' => 'name', 'title' => ' الاسم',"className" => 'search--col'],
-            ['name' => 'birthday', 'data' => 'birthday', 'title' => ' تاريخ الميلاد',"className" => 'search--col'],
-            ['name' => 'phone', 'data' => 'phone', 'title' => ' الهاتف',"className" => 'search--col'],
+            ['name' => 'id', 'data' => 'id', 'title' => 'رقم الهوية', "className" => 'search--col exact'],
+            ['name' => 'name', 'data' => 'name', 'title' => ' الاسم', "className" => 'search--col'],
+            ['name' => 'birthday', 'data' => 'birthday', 'title' => ' تاريخ الميلاد', "className" => 'search--col'],
+            ['name' => 'phone', 'data' => 'phone', 'title' => ' الهاتف', "className" => 'search--col'],
 
-            ['name' => 'qualification', 'data' => 'qualification', 'title' => ' المؤهلات',"className" => 'search--col'],
-            
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false,"className" => 'not--search--col'],
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete','printable' => false,'exportable' => false, 'orderable' => false, 'searchable' => false,"className" => 'not--search--col'],
+            ['name' => 'qualification', 'data' => 'qualification', 'title' => ' المؤهلات', "className" => 'search--col'],
+
+            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
         ];
     }
 

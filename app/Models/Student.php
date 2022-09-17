@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'birthday', 'phone','qualification'];
+    protected $fillable = ['name', 'birthday', 'phone', 'qualification'];
 
     public function group()
     {
-        return $this->belongsTo(Group::class,'group_id');
+        return $this->belongsTo(Group::class, 'group_id');
+    }
+
+    public function syllabus()
+    {
+        return $this->hasMany(syllabus::class, 'student_id');
     }
 }
