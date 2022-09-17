@@ -161,8 +161,6 @@
                     @csrf
                     @method('PUT')
 
-                    <input type="hidden" name="syllabu->id" value="{{ $syllabu->id }}">
-
                     <input type="hidden" name="student_id" value="{{ $student->id }}">
 
 
@@ -208,8 +206,8 @@
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <select class="form-control basic" style="width: 100%;" name="is_reverse"
                                 id="is_reverse">
-                                <option value="0"{{ $syllabu->is_reverse == '0' ? '0' : '' }}>NO</option>
-                                <option value="1" {{ $syllabu->is_reverse == '1' ? '1' : '' }}>YES</option>
+                                <option value="0" >NO</option>
+                                <option value="1" >YES</option>
                             </select>
                             @error('is_reverse')
                                 <p class="text-danger">{{ $message }}</p>
