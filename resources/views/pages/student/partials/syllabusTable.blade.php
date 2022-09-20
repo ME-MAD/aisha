@@ -10,7 +10,7 @@
         </a>
     </h3>
     <div class="table-responsive">
-        <table class="table table-hover table-dark mb-4">
+        {{-- <table class="table table-hover table-dark mb-4">
             <thead>
                 <tr class="">
                     <th class="text-center">#</th>
@@ -53,7 +53,7 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
+        </table> --}}
     </div>
 </div>
 
