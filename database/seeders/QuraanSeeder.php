@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Lesson;
-use App\models\Subject;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Subject;
 use Illuminate\Database\Seeder;
-use Mockery\Matcher\Subset;
 
 class QuraanSeeder extends Seeder
 {
@@ -17,19 +15,16 @@ class QuraanSeeder extends Seeder
      */
     public function run()
     {
-
         $subject = Subject::updateOrCreate([
             'name' => 'القران الكريم'
         ], []);
 
         $chapters = chapterQuran();
+
         foreach ($chapters as $chapter) {
             Lesson::updateOrCreate([
-
                 'title'      => $chapter['surah_ar']
-
             ], [
-
                 'subject_id' => $subject->id,
             ]);
         };
