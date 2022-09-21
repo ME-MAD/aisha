@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Group;
-use App\Models\GroupType;
-use App\Models\Teacher;
+
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -24,5 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => Hash::make('123')
         ]);
+
+        $this->call([QuraanSeeder::class]);
     }
 }
