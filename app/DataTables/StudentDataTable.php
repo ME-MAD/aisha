@@ -17,7 +17,7 @@ class StudentDataTable extends DataTable
             ->addColumn('delete', 'pages.student.datatable.delete')
             ->editColumn('name', function ($q) {
 
-                return "<a href=".route('admin.student.show', $q->id)." >".$q->name."</a>";
+                return "<a class='text-primary' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' >" . $q->name . "</a>";
             })
             ->rawColumns(['edit', 'delete', 'name'])
             ->setRowId('id');

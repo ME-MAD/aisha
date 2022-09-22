@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\http\requests\Student\StoreStudentRequest;
 use App\http\requests\Student\UpdateStudentRequest;
 use App\Models\Lesson;
+use App\Models\Subject;
 use App\Models\syllabus;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -37,7 +38,6 @@ class StudentController extends Controller
 
     public function store(StoreStudentRequest $request)
     {
-        // dd($request);
         Student::create([
             'name' => $request->name,
             'birthday' => $request->birthday,
@@ -45,7 +45,6 @@ class StudentController extends Controller
             'qualification' => $request->qualification,
 
         ]);
-        // dd($request->qualification);
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.student.index'));
     }
@@ -54,15 +53,18 @@ class StudentController extends Controller
     {
 
         $syllabus = $student->syllabus()->orderBy('id', 'DESC')->get();
-        $syllabi   = syllabus::get();
+        // $syllabi   = syllabus::get();
         $lessons = Lesson::get();
+        $subjects = Subject::get();
+
 
         return view('pages.student.show', [
 
             'student' => $student,
             'syllabus' => $syllabus,
-            'syllabi' => $syllabi,
+            // 'syllabi' => $syllabi,
             'lessons' => $lessons,
+            'subjects' => $subjects
         ]);
     }
 
