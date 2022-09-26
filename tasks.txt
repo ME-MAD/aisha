@@ -1,0 +1,7 @@
+write a function that takes a number and prints this triangle
+input: 5
+*
+* *
+* * *
+* * * *
+* * * * *

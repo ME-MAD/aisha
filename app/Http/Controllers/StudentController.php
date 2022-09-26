@@ -23,11 +23,6 @@ class StudentController extends Controller
     public function index(StudentDataTable $studentDataTable)
     {
         return $studentDataTable->render('pages.student.index');
-        // $students  = $this->getStudentsDesc();
-
-        // return view('admin.pages.student.index', [
-        //     'students' => $students,
-        // ]);
     }
 
     public function create()
@@ -51,27 +46,16 @@ class StudentController extends Controller
 
     public function show(Student $student)
     {
-
-        $syllabus = $student->syllabus()->orderBy('id', 'DESC')->get();
-        // $syllabi   = syllabus::get();
-        $lessons = Lesson::get();
         $subjects = Subject::get();
 
-
         return view('pages.student.show', [
-
             'student' => $student,
-            'syllabus' => $syllabus,
-            // 'syllabi' => $syllabi,
-            'lessons' => $lessons,
             'subjects' => $subjects
         ]);
     }
 
     public function edit(Student $student)
     {
-
-
         return view('pages.student.edit', [
 
             'student' => $student

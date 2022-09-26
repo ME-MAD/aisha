@@ -4,10 +4,7 @@
     <!--  BEGIN CUSTOM STYLE FILE  -->
     <link href="{{ asset('adminAssets/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('adminAssets/assets/css/components/custom-modal.css') }}" rel="stylesheet" type="text/css" />
-    <!--  END CUSTOM STYLE FILE  -->
-    <!--  BEGIN CUSTOM STYLE FILE  -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/editors/quill/quill.snow.css') }}">
-    <link href="{{ asset('adminAssets/assets/css/apps/todolist.css') }}" rel="stylesheet" type="text/css" />
+
     <link href="{{asset('adminAssets/assets/css/components/custom-list-group.css')}}" rel="stylesheet" type="text/css">
     <!--  END CUSTOM STYLE FILE  -->
 @endsection
@@ -199,7 +196,5 @@
 
 
 @section('javascript')
-    <script src="{{ asset('adminassets/assets/js/ie11fix/fn.fix-padStart.js') }}"></script>
-    <script src="{{ asset('adminAssets/plugins/editors/quill/quill.js') }}"></script>
-    <script src="{{ asset('adminAssets/assets/js/apps/todoList.js') }}"></script>
+    
 @endsection

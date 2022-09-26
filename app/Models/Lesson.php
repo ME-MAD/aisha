@@ -10,7 +10,7 @@ class Lesson extends Model
     use HasFactory;
     protected $fillable = ['subject_id', 'title'];
 
-    public function Subject()
+    public function subject()
     {
         return $this->belongsTo(Subject::class,'subject_id');
     }
