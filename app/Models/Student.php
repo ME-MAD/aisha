@@ -10,10 +10,12 @@ class Student extends Model
     use HasFactory;
     protected $fillable = ['name', 'birthday', 'phone', 'qualification'];
 
-    public function group()
+    public function groupStudents()
     {
-        return $this->belongsTo(Group::class, 'group_id');
+        return $this->hasMany(GroupStudent::class, 'student_id');
     }
+
+
 
     public function syllabus()
     {

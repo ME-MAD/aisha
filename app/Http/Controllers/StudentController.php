@@ -9,7 +9,9 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use App\http\requests\Student\StoreStudentRequest;
 use App\http\requests\Student\UpdateStudentRequest;
+use App\Models\GroupStudent;
 use App\Models\Lesson;
+use App\Models\StudentLesson;
 use App\Models\Subject;
 use App\Models\syllabus;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -47,10 +49,15 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         $subjects = Subject::get();
+        $groupStudents = $student->groupStudents()->with('group')->get();
+
+        $studentLessons = StudentLesson::get();
 
         return view('pages.student.show', [
             'student' => $student,
-            'subjects' => $subjects
+            'subjects' => $subjects,
+            'groupStudents' => $groupStudents,
+            'studentLessons' => $studentLessons,
         ]);
     }
 

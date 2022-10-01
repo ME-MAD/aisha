@@ -5,7 +5,7 @@
     <link href="{{ asset('adminAssets/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('adminAssets/assets/css/components/custom-modal.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{asset('adminAssets/assets/css/components/custom-list-group.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('adminAssets/assets/css/components/custom-list-group.css') }}" rel="stylesheet" type="text/css">
     <!--  END CUSTOM STYLE FILE  -->
 @endsection
 
@@ -185,7 +185,7 @@
             <div class="row layout-top-spacing">
                 <div class="col-xl-12 col-lg-12 col-md-12">
 
-                    
+
                 </div>
             </div>
         </div>
@@ -196,5 +196,48 @@
 
 
 @section('javascript')
-    
+    <script>
+        let input = document.getElementsByClassName('new-control-input');
+
+        // console.log(href);
+        for (let element of input) {
+            element.addEventListener('change', function(event) {
+                let href = $(this).data('href');
+                let groupid = $(this).data('groupid');
+                let lessonid = $(this).data('lessonid');
+                let studentid = $(this).data('studentid');
+                console.log(href);
+                if (element.checked == true) {
+                    $.ajax({
+                        url: href,
+                        data: {
+
+                            group_id: groupid,
+                            lesson_id: lessonid,
+                            student_id: studentid,
+
+                        },
+                        success: function(response) {
+
+                        },
+                        error: function() {}
+                    })
+                } else {
+                    $.ajax({
+                        url: href,
+                        data: {
+                            finished: false
+                        },
+                        success: function(response) {},
+
+                    })
+                }
+            })
+        }
+    </script>
+    {{-- <script>
+        $('.new-control-input').on('change', function() {
+                    console.log('mohamed ');
+                }
+    </script> --}}
 @endsection
