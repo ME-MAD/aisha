@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\StudentLesson;
 use App\Http\Requests\StudentLesson\StoreStudentLessonRequest;
 use App\Http\Requests\StudentLesson\UpdateStudentLessonRequest;
+use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentLessonController extends Controller
 {
@@ -37,6 +39,20 @@ class StudentLessonController extends Controller
     public function store(StoreStudentLessonRequest $request)
     {
         //
+    }
+
+
+    public function ajax(Request $request)
+    {
+        dd($request);
+        StudentLesson::create([
+
+            'student_id' => $request->student_id,
+            'lesson_id' => $request->lesson_id,
+            'group_id' => $request->group_id,
+            'finished' => true,
+            'percentage' => 100,
+        ]);
     }
 
     /**

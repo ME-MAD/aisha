@@ -1,5 +1,5 @@
-$('.editExperienceTitleButton').on('click',function(){
-    let title = $(this).data('title')
-
-    
-})
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});

@@ -9,11 +9,13 @@ use App\Http\Controllers\GroupStudentController;
 use App\Http\Controllers\GroupTypeController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentLessonController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SyllabusController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use App\Models\Experience;
+use App\Models\StudentLesson;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -160,5 +162,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{syllabus}', [SyllabusController::class, 'edit'])->name('edit');
         Route::put('update/{syllabus}', [SyllabusController::class, 'update'])->name('update');
         Route::get('delete/{syllabus}', [SyllabusController::class, 'delete'])->name('delete');
+    });
+
+
+
+    Route::group(['prefix' => 'student_lesson', 'as' => 'student_lesson.'], function () {
+        Route::get('ajax', [StudentLessonController::class, 'ajax'])->name('ajax');
     });
 });
