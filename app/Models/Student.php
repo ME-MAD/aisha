@@ -15,10 +15,13 @@ class Student extends Model
         return $this->hasMany(GroupStudent::class, 'student_id');
     }
 
-
-
     public function syllabus()
     {
         return $this->hasMany(syllabus::class, 'student_id');
+    }
+
+    public function studentLessons()
+    {
+        return $this->hasMany(StudentLesson::class,'student_id');
     }
 }

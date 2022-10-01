@@ -9,7 +9,7 @@
             </svg>
         </a>
     </h3>
-    @foreach ($groupStudents as $groupStudent)
+    @foreach ($student->groupStudents as $groupStudent)
         <div>
             <p> <span class="badge bg-primary text-light">From</span>
                 {{ $groupStudent->group->from }} :<span class="badge bg-primary text-light">To</span>
@@ -23,8 +23,8 @@
                 <div class="col-4">
                     <div class="list-group" id="list-tab" role="tablist">
                         @foreach ($subjects as $subject)
-                            <a class="list-group-item list-group-item-action" id="list-home-list{{ $groupStudent->id }}"
-                                data-toggle="list" href="#list-home{{ $groupStudent->id }}" role="tab"
+                            <a class="list-group-item list-group-item-action" id="list-home-list{{ $groupStudent->id }}{{$subject->id}}"
+                                data-toggle="list" href="#list-home{{ $groupStudent->id }}{{$subject->id}}" role="tab"
                                 aria-controls="home">{{ $subject->name }}</a>
                         @endforeach
                     </div>
@@ -33,22 +33,30 @@
                 <div class="col-8">
                     <div class="tab-content" id="nav-tabContent">
                         @foreach ($subjects as $subject)
-                            <div class="tab-pane fade show" id="list-home{{ $groupStudent->id }}" role="tabpanel"
-                                aria-labelledby="list-home-list{{ $groupStudent->id }}">
+                            <div class="tab-pane fade show" id="list-home{{ $groupStudent->id }}{{$subject->id}}" role="tabpanel"
+                                aria-labelledby="list-home-list{{ $groupStudent->id }}{{$subject->id}}">
                                 <ul class="list-group task-list-group" style="height: 400px;overflow:auto">
                                     @foreach ($subject->lessons as $lesson)
                                         <li class="list-group-item list-group-item-action">
+                                            {{-- {{dd($lesson->load(['studentLessons' => function($q) use($groupStudent,$student){
+                                                $q->where('group_id',$groupStudent->group_id)->where('student_id', $student->id);
+                                            }]))}} --}}
                                             <div class="n-chk">
                                                 <label
                                                     class="new-control new-checkbox checkbox-primary w-100 justify-content-between">
-                                                    @foreach ($studentLessons as $studentLesson)
+                                                    @if (($groupStudent->group->studentLessons->where('lesson_id',$lesson->id)->first()->finished ?? false) == true)
+                                                        <input type="checkbox" class="new-control-input"
+                                                        data-href="{{ route('admin.student_lesson.ajax') }}"
+                                                        data-groupid="{{ $groupStudent->group->id }}"
+                                                        data-lessonid="{{ $lesson->id }}"
+                                                        data-studentid="{{ $student->id }}" checked>
+                                                    @else
                                                         <input type="checkbox" class="new-control-input"
                                                             data-href="{{ route('admin.student_lesson.ajax') }}"
                                                             data-groupid="{{ $groupStudent->group->id }}"
                                                             data-lessonid="{{ $lesson->id }}"
-                                                            data-studentid="{{ $student->id }}"
-                                                            {{ $studentLesson->finished == 1 ? 'checked' : '' }}>
-                                                    @endforeach
+                                                            data-studentid="{{ $student->id }}">
+                                                    @endif
 
                                                     <span class="new-control-indicator"></span>
                                                     <span class="ml-2">

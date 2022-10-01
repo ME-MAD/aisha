@@ -14,4 +14,9 @@ class Lesson extends Model
     {
         return $this->belongsTo(Subject::class,'subject_id');
     }
+
+    public function studentLessons()
+    {
+        return $this->hasMany(StudentLesson::class,'lesson_id');
+    }
 }

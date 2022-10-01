@@ -44,9 +44,7 @@ class StudentLessonController extends Controller
 
     public function ajax(Request $request)
     {
-        dd($request);
         StudentLesson::create([
-
             'student_id' => $request->student_id,
             'lesson_id' => $request->lesson_id,
             'group_id' => $request->group_id,
