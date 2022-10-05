@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\LessonsDataTable;
 use App\Models\Lesson;
 use App\Http\Requests\Lesson\StoreLessonRequest;
 use App\Http\Requests\Lesson\UpdateLessonRequest;
@@ -18,12 +19,14 @@ class LessonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(LessonsDataTable $lessonsDataTable)
     {
-        $lessons = $this->getLessons();
-        return view('pages.lesson.index',[
-            'lessons'=> $lessons
-        ]);
+        // $lessons = $this->getLessons();
+        // return view('pages.lesson.index', [
+        //     'lessons' => $lessons
+        // ]);
+
+        return $lessonsDataTable->render('pages.lesson.index');
     }
 
     /**
@@ -34,8 +37,8 @@ class LessonController extends Controller
     public function create()
     {
         $subjects = $this->getSubject();
-        return view('pages.lesson.create',[
-            "subjects"=>$subjects
+        return view('pages.lesson.create', [
+            "subjects" => $subjects
         ]);
     }
 
@@ -50,6 +53,7 @@ class LessonController extends Controller
         Lesson::create([
             'subject_id' => $request->subject_id,
             'title' => $request->title,
+            'chapters_count' => $request->chapters_count,
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.lesson.index'));
@@ -75,9 +79,9 @@ class LessonController extends Controller
     public function edit(Lesson $lesson)
     {
         $subjects = $this->getSubject();
-        return view('pages.lesson.edit',[
-            "lesson"=>$lesson,
-            "subjects"=>$subjects
+        return view('pages.lesson.edit', [
+            "lesson" => $lesson,
+            "subjects" => $subjects
         ]);
     }
 
@@ -93,6 +97,7 @@ class LessonController extends Controller
         $lesson->update([
             'subject_id' => $request->subject_id,
             'title' => $request->title,
+            'chapters_count' => $request->chapters_count,
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.lesson.index'));

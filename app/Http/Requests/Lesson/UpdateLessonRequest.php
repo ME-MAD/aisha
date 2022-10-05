@@ -24,8 +24,9 @@ class UpdateLessonRequest extends FormRequest
     public function rules()
     {
         return [
-            'subject_id' =>"required",
+            'subject_id' => "required",
             'title' => "required",
+            'chapters_count' => "required",
         ];
     }
 }

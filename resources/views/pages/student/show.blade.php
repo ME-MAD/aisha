@@ -199,23 +199,23 @@
     <script>
         let input = document.getElementsByClassName('new-control-input');
 
-        // console.log(href);
+
         for (let element of input) {
             element.addEventListener('change', function(event) {
                 let href = $(this).data('href');
+
                 let groupid = $(this).data('groupid');
                 let lessonid = $(this).data('lessonid');
                 let studentid = $(this).data('studentid');
-                console.log(href);
+                console.log(element.checked);
                 if (element.checked == true) {
                     $.ajax({
                         url: href,
                         data: {
-
                             group_id: groupid,
                             lesson_id: lessonid,
                             student_id: studentid,
-
+                            finished: true,
                         },
                         success: function(response) {
 
@@ -226,9 +226,17 @@
                     $.ajax({
                         url: href,
                         data: {
-                            finished: false
+                            group_id: groupid,
+                            lesson_id: lessonid,
+                            student_id: studentid,
+                            finished: false,
+
+
                         },
-                        success: function(response) {},
+                        success: function(response) {
+
+                        },
+                        error: function() {}
 
                     })
                 }

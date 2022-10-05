@@ -6,6 +6,7 @@ use App\Models\StudentLesson;
 use App\Http\Requests\StudentLesson\StoreStudentLessonRequest;
 use App\Http\Requests\StudentLesson\UpdateStudentLessonRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentLessonController extends Controller
@@ -42,16 +43,32 @@ class StudentLessonController extends Controller
     }
 
 
-    public function ajax(Request $request)
+    public function ajaxStudentLessonFinished(Request $request)
     {
-        StudentLesson::create([
-            'student_id' => $request->student_id,
-            'lesson_id' => $request->lesson_id,
-            'group_id' => $request->group_id,
-            'finished' => true,
-            'percentage' => 100,
-        ]);
+
+        if ($request->finished == "true") {
+            StudentLesson::updateOrCreate([
+                'student_id' => $request->student_id,
+                'lesson_id' => $request->lesson_id,
+                'group_id' => $request->group_id,
+            ], [
+                'finished' => true,
+                'percentage' => 100,
+            ]);
+        } else {
+            StudentLesson::updateOrCreate([
+                'student_id' => $request->student_id,
+                'lesson_id' => $request->lesson_id,
+                'group_id' => $request->group_id,
+            ], [
+                'finished' => false,
+
+            ]);
+        }
     }
+
+
+
 
     /**
      * Display the specified resource.

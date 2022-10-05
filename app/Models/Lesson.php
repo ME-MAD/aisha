@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Lesson extends Model
 {
     use HasFactory;
-    protected $fillable = ['subject_id', 'title'];
+    protected $fillable = ['subject_id', 'title', 'chapters_count'];
 
     public function subject()
     {
-        return $this->belongsTo(Subject::class,'subject_id');
+        return $this->belongsTo(Subject::class, 'subject_id');
     }
 
     public function studentLessons()
     {
-        return $this->hasMany(StudentLesson::class,'lesson_id');
+        return $this->hasMany(StudentLesson::class, 'lesson_id');
     }
 }
