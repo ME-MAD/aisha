@@ -6,7 +6,7 @@ use App\Models\Lesson;
 use App\Models\Subject;
 use Illuminate\Database\Seeder;
 
-class QuraanSeeder extends Seeder
+class TgweedSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,15 +16,15 @@ class QuraanSeeder extends Seeder
     public function run()
     {
         $subject = Subject::updateOrCreate([
-            'name' => 'القران الكريم'
+            'name' => 'المنهج المفيد لمراكز تعليم الجويد'
         ], []);
 
-        $chapters = chapterQuran();
+        $chapters = chapterTgweed();
 
         foreach ($chapters as $chapter) {
             Lesson::updateOrCreate([
-                'title'      => $chapter['surah_ar'],
-                'chapters_count' => $chapter['surah_count']
+                'title'      => $chapter['lesson_ar'],
+                'chapters_count' => $chapter['num_pages']
             ], [
                 'subject_id' => $subject->id,
             ]);

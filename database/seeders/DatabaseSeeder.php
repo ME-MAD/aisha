@@ -17,15 +17,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'admin',
+        User::updateOrCreate([
             'email' => 'admin@admin.com',
+        ], [
+
+            'name' => 'admin',
             'password' => Hash::make('123')
         ]);
 
         $this->call([
+            FactorySeeder::class,
             QuraanSeeder::class,
-            FactorySeeder::class
+            TgweedSeeder::class,
+            QaidaNooraniahSeeder::class,
         ]);
     }
 }

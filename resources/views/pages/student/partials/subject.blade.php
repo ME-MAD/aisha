@@ -23,8 +23,9 @@
                 <div class="col-4">
                     <div class="list-group" id="list-tab" role="tablist">
                         @foreach ($subjects as $subject)
-                            <a class="list-group-item list-group-item-action" id="list-home-list{{ $groupStudent->id }}{{$subject->id}}"
-                                data-toggle="list" href="#list-home{{ $groupStudent->id }}{{$subject->id}}" role="tab"
+                            <a class="list-group-item list-group-item-action"
+                                id="list-home-list{{ $groupStudent->id }}{{ $subject->id }}" data-toggle="list"
+                                href="#list-home{{ $groupStudent->id }}{{ $subject->id }}" role="tab"
                                 aria-controls="home">{{ $subject->name }}</a>
                         @endforeach
                     </div>
@@ -33,26 +34,30 @@
                 <div class="col-8">
                     <div class="tab-content" id="nav-tabContent">
                         @foreach ($subjects as $subject)
-                            <div class="tab-pane fade show" id="list-home{{ $groupStudent->id }}{{$subject->id}}" role="tabpanel"
-                                aria-labelledby="list-home-list{{ $groupStudent->id }}{{$subject->id}}">
+                            <div class="tab-pane fade show" id="list-home{{ $groupStudent->id }}{{ $subject->id }}"
+                                role="tabpanel"
+                                aria-labelledby="list-home-list{{ $groupStudent->id }}{{ $subject->id }}">
                                 <ul class="list-group task-list-group" style="height: 400px;overflow:auto">
                                     @foreach ($subject->lessons as $lesson)
                                         <li class="list-group-item list-group-item-action">
                                             {{-- {{dd($lesson->load(['studentLessons' => function($q) use($groupStudent,$student){
                                                 $q->where('group_id',$groupStudent->group_id)->where('student_id', $student->id);
                                             }]))}} --}}
+
+
+
                                             <div class="n-chk">
                                                 <label
                                                     class="new-control new-checkbox checkbox-primary w-100 justify-content-between">
-                                                    @if (($groupStudent->group->studentLessons->where('lesson_id',$lesson->id)->first()->finished ?? false) == true)
+                                                    @if (($groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->finished ?? false) == true)
                                                         <input type="checkbox" class="new-control-input"
-                                                        data-href="{{ route('admin.student_lesson.ajax') }}"
-                                                        data-groupid="{{ $groupStudent->group->id }}"
-                                                        data-lessonid="{{ $lesson->id }}"
-                                                        data-studentid="{{ $student->id }}" checked>
+                                                            data-href="{{ route('admin.student_lesson.ajaxStudentLessonFinished') }}"
+                                                            data-groupid="{{ $groupStudent->group->id }}"
+                                                            data-lessonid="{{ $lesson->id }}"
+                                                            data-studentid="{{ $student->id }}" checked>
                                                     @else
                                                         <input type="checkbox" class="new-control-input"
-                                                            data-href="{{ route('admin.student_lesson.ajax') }}"
+                                                            data-href="{{ route('admin.student_lesson.ajaxStudentLessonFinished') }}"
                                                             data-groupid="{{ $groupStudent->group->id }}"
                                                             data-lessonid="{{ $lesson->id }}"
                                                             data-studentid="{{ $student->id }}">
@@ -67,6 +72,21 @@
                                                     </span>
                                                 </label>
                                             </div>
+                                            <br>
+
+                                            <div class="progress br-30">
+                                                <div class="progress-bar bg-primary" role="progressbar"
+                                                    style="width:{{ $groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->percentage ?? 0 }}%"
+                                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                    <div class="progress-title"><span>
+                                                            {{ $lesson->title }}</span>
+                                                        <span>
+                                                            {{ $groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->percentage ?? 0 }}%
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </li>
                                     @endforeach
                                 </ul>

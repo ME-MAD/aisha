@@ -1,7 +1,7 @@
 @extends('master')
 @section('css')
     <link href="{{ asset('adminAssets/plugins/flatpickr/flatpickr.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/select2/select2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endsection
 @section('breadcrumb')
     <div class="page-header">
@@ -55,9 +55,8 @@
                                 <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
                                     المادة</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control basic"
-                                        style="width: 100%;"
-                                        name="subject_id" id="subject_id">
+                                    <select class="form-control basic" style="width: 100%;" name="subject_id"
+                                        id="subject_id">
                                         <option value="">اختر المادة</option>
                                         @foreach ($subjects as $subject)
                                             <option value="{{ $subject->id }}"
@@ -72,6 +71,18 @@
                             </div>
 
                             <x-text name="title" label="عنوان الدرس" :value="$lesson->title" />
+
+                            <div class="form-group row mb-4">
+                                <label for="name" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">عدد
+                                    الايات</label>
+                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                    <input type="number" class="form-control" placeholder="" name="chapters_count"
+                                        value="{{ $lesson->chapters_count }}">
+                                    @error('chapters_count')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
 
 
 
@@ -90,13 +101,11 @@
     </div>
 @endsection
 
-@section("javascript")
-
-<script src="{{asset('adminAssets/plugins/select2/select2.min.js')}}"></script>
-<script>
-$(".basic").select2({
-    tags: true,
-});
-</script>
-
+@section('javascript')
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+    <script>
+        $(".basic").select2({
+            tags: true,
+        });
+    </script>
 @endsection

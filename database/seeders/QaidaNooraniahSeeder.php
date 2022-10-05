@@ -4,9 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Lesson;
 use App\Models\Subject;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class QuraanSeeder extends Seeder
+class QaidaNooraniahSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,15 +17,15 @@ class QuraanSeeder extends Seeder
     public function run()
     {
         $subject = Subject::updateOrCreate([
-            'name' => 'القران الكريم'
+            'name' => 'القاعدة النورنية'
         ], []);
 
-        $chapters = chapterQuran();
+        $chapters = chapterQaidaNooraniah();
 
         foreach ($chapters as $chapter) {
             Lesson::updateOrCreate([
-                'title'      => $chapter['surah_ar'],
-                'chapters_count' => $chapter['surah_count']
+                'title'      => $chapter['lesson_ar'],
+                'chapters_count' => $chapter['page_row']
             ], [
                 'subject_id' => $subject->id,
             ]);

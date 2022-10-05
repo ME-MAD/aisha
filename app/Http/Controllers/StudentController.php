@@ -50,14 +50,16 @@ class StudentController extends Controller
     {
         $subjects = Subject::get();
         $student->load([
-            'groupStudents' => function($q){
+            'groupStudents' => function ($q) {
                 $q->with('group.studentLessons');
             },
         ]);
+        $student_lessons = StudentLesson::get();
 
         return view('pages.student.show', [
             'student' => $student,
             'subjects' => $subjects,
+            'student_lessons' => $student_lessons,
         ]);
     }
 
@@ -71,6 +73,7 @@ class StudentController extends Controller
 
     public function update(UpdateStudentRequest $request, Student $student)
     {
+
         $student->update([
             'name' => $request->name,
             'birthday' => $request->birthday,

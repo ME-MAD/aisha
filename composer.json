@@ -36,7 +36,9 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/helpers/dataQuraan.php"
+            "app/helpers/dataQuraan.php",
+            "app/helpers/dataTgweed.php",
+            "app/helpers/dataQaidaNooraniah.php"
         ]
     },
     "autoload-dev": {
