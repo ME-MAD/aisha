@@ -221,7 +221,12 @@
 
                         },
                         success: function(response) {
-
+                            console.log(element);
+                            $(element).parent().parent().parent().find('.createSubjectButton .progress-bar').css({
+                                'width':'100%',
+                                'transision' : '1.5s'
+                            }).find(".progress-bar-percentage").html("100%")
+                            swal("Success", "Success", "success");
                         },
                         error: function() {}
                     })
@@ -237,7 +242,7 @@
 
                         },
                         success: function(response) {
-
+                            swal("Success", "Success", "success");
                         },
                         error: function() {}
 

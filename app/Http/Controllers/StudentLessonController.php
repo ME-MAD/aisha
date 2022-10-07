@@ -67,7 +67,6 @@ class StudentLessonController extends Controller
 
     public function ajaxStudentLessonFinished(Request $request)
     {
-
         if ($request->finished == "true") {
             StudentLesson::updateOrCreate([
                 'student_id' => $request->student_id,
@@ -76,7 +75,7 @@ class StudentLessonController extends Controller
             ], [
                 'finished' => true,
                 'percentage' => 100,
-                'chapters_count' => $request->chapters_count,
+                'chapters_count' => intval($request->chapters_count),
             ]);
         } else {
             StudentLesson::updateOrCreate([
@@ -85,7 +84,6 @@ class StudentLessonController extends Controller
                 'group_id' => $request->group_id,
             ], [
                 'finished' => false,
-
             ]);
         }
     }

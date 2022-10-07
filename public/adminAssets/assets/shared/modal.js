@@ -40,12 +40,15 @@ $('.createSubjectButton').on('click', function () {
     let chapters_count = $(this).data('chapterscount')
     let group_id = $(this).data('groupid')
     let lesson_id = $(this).data('lessonid')
+    let finishedChaptersCount = $(this).data('finishedchapterscount')
+
 
 
     $('#showSubjectForm #max_chapters').val(chapters_count)
     $("#showSubjectForm #chapters_count").attr({
         "max": chapters_count,
         "min": 0,
+        "value": finishedChaptersCount
     })
     $('#showSubjectForm #group_id').val(group_id)
     $('#showSubjectForm #lesson_id').val(lesson_id)

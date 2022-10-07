@@ -30,11 +30,13 @@ App.init();
 <script src="{{asset('adminAssets/assets/js/shared/modals.js')}}"></script>
 <script src="{{asset('adminAssets/assets/shared/main.js')}}"></script>
 <script src="{{asset('adminAssets/assets/shared/modal.js')}}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.js"></script>
 
 
 @yield('javascript')
 
 
 @include('sweetalert::alert')
+
 </body>
 </html>

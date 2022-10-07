@@ -44,8 +44,6 @@
                                                 $q->where('group_id',$groupStudent->group_id)->where('student_id', $student->id);
                                             }]))}} --}}
 
-
-
                                             <div class="n-chk">
                                                 <label
                                                     class="new-control new-checkbox checkbox-primary w-100 justify-content-between">
@@ -79,6 +77,7 @@
                                             <a class="createSubjectButton subject" data-toggle="modal"
                                                 data-target="#createSubjectModal"
                                                 data-chapterscount="{{ $lesson->chapters_count }}"
+                                                data-finishedchapterscount="{{ $groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->chapters_count ?? 0 }}"
                                                 data-groupid="{{ $groupStudent->group->id }}"
                                                 data-lessonid="{{ $lesson->id }}"
                                                 data-studentid="{{ $student->id }}">
@@ -88,7 +87,7 @@
                                                         aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                                                         <div class="progress-title"><span>
                                                                 {{ $lesson->title }}</span>
-                                                            <span>
+                                                            <span class="progress-bar-percentage">
                                                                 {{ $groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->percentage ?? 0 }}%
                                                             </span>
                                                         </div>
@@ -127,20 +126,13 @@
                     <div class="row">
                         <div class="col">
 
-                            <input class="text-dark" id="max_chapters" readonly name="max_chapters">
+                            <input class="text-dark form-control" id="max_chapters" readonly name="max_chapters">
                         </div>
                         <div class="col">
-
-                            <input id="chapters_count" type="number" name="chapters_count" min=""
-                                max="" style="width: 170px">
+                            <input id="chapters_count" class="form-control" type="number" name="chapters_count" min=""
+                                max="">
                         </div>
                     </div>
-
-
-
-
-
-
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save</button>

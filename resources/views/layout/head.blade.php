@@ -17,6 +17,7 @@
     <!-- END GLOBAL MANDATORY STYLES -->
     @yield('css')
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
     <link rel="stylesheet" href="{{asset('adminAssets/assets/css/myStyles.css')}}">
 
 </head>
