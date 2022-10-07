@@ -168,5 +168,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::group(['prefix' => 'student_lesson', 'as' => 'student_lesson.'], function () {
         Route::get('ajaxStudentLessonFinished', [StudentLessonController::class, 'ajaxStudentLessonFinished'])->name('ajaxStudentLessonFinished');
+
+        Route::post('store', [StudentLessonController::class, 'store'])->name('store');
     });
 });

@@ -28,7 +28,6 @@ class StudentLessonController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -39,7 +38,30 @@ class StudentLessonController extends Controller
      */
     public function store(StoreStudentLessonRequest $request)
     {
-        //
+
+        if ($request->max_chapters == $request->chapters_count) {
+            StudentLesson::updateOrCreate([
+                'student_id' => $request->student_id,
+                'lesson_id' => $request->lesson_id,
+                'group_id' => $request->group_id,
+            ], [
+                'finished' => true,
+                'percentage' => 100,
+                'chapters_count' => $request->chapters_count,
+            ]);
+        } else {
+            $parcentage = ($request->chapters_count / $request->max_chapters) * 100;
+            StudentLesson::updateOrCreate([
+                'student_id' => $request->student_id,
+                'lesson_id' => $request->lesson_id,
+                'group_id' => $request->group_id,
+            ], [
+                'finished' => false,
+                'percentage' => round($parcentage, 2),
+                'chapters_count' => $request->chapters_count,
+            ]);
+        }
+        return redirect()->back();
     }
 
 
@@ -54,6 +76,7 @@ class StudentLessonController extends Controller
             ], [
                 'finished' => true,
                 'percentage' => 100,
+                'chapters_count' => $request->chapters_count,
             ]);
         } else {
             StudentLesson::updateOrCreate([
