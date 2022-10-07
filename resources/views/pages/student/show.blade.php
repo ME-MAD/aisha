@@ -207,7 +207,8 @@
                 let groupid = $(this).data('groupid');
                 let lessonid = $(this).data('lessonid');
                 let studentid = $(this).data('studentid');
-                console.log(element.checked);
+                let chaptercount = $(this).data('chaptercount');
+                console.log(chaptercount);
                 if (element.checked == true) {
                     $.ajax({
                         url: href,
@@ -216,6 +217,8 @@
                             lesson_id: lessonid,
                             student_id: studentid,
                             finished: true,
+                            chapters_count: chaptercount
+
                         },
                         success: function(response) {
 

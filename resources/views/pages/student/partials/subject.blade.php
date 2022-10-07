@@ -60,7 +60,8 @@
                                                             data-href="{{ route('admin.student_lesson.ajaxStudentLessonFinished') }}"
                                                             data-groupid="{{ $groupStudent->group->id }}"
                                                             data-lessonid="{{ $lesson->id }}"
-                                                            data-studentid="{{ $student->id }}">
+                                                            data-studentid="{{ $student->id }}"
+                                                            data-chaptercount="{{ $lesson->chapters_count }}">
                                                     @endif
 
                                                     <span class="new-control-indicator"></span>
@@ -74,18 +75,27 @@
                                             </div>
                                             <br>
 
-                                            <div class="progress br-30">
-                                                <div class="progress-bar bg-primary" role="progressbar"
-                                                    style="width:{{ $groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->percentage ?? 0 }}%"
-                                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                    <div class="progress-title"><span>
-                                                            {{ $lesson->title }}</span>
-                                                        <span>
-                                                            {{ $groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->percentage ?? 0 }}%
-                                                        </span>
+
+                                            <a class="createSubjectButton subject" data-toggle="modal"
+                                                data-target="#createSubjectModal"
+                                                data-chapterscount="{{ $lesson->chapters_count }}"
+                                                data-groupid="{{ $groupStudent->group->id }}"
+                                                data-lessonid="{{ $lesson->id }}"
+                                                data-studentid="{{ $student->id }}">
+                                                <div class="progress br-30">
+                                                    <div class="progress-bar bg-primary" role="progressbar"
+                                                        style="width:{{ $groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->percentage ?? 0 }}%"
+                                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                        <div class="progress-title"><span>
+                                                                {{ $lesson->title }}</span>
+                                                            <span>
+                                                                {{ $groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->percentage ?? 0 }}%
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+
+                                            </a>
 
                                         </li>
                                     @endforeach
@@ -98,4 +108,49 @@
             </div>
         </div>
     @endforeach
+</div>
+
+<div class="modal fade" id="createSubjectModal" tabindex="-1" role="dialog" aria-labelledby="createSubjectModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createSubjectModal">إضافة مؤهل</h5>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin.student_lesson.store') }}" method="post" id="showSubjectForm">
+                    @csrf
+                    <input type="hidden" name="group_id" id="group_id">
+                    <input type="hidden" name="lesson_id" id="lesson_id">
+                    <input type="hidden" name="student_id" value="{{ $student->id }}">
+
+                    <div class="row">
+                        <div class="col">
+
+                            <input class="text-dark" id="max_chapters" readonly name="max_chapters">
+                        </div>
+                        <div class="col">
+
+                            <input id="chapters_count" type="number" name="chapters_count" min=""
+                                max="" style="width: 170px">
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button class="btn" data-dismiss="modal"><i
+                                class="flaticon-cancel-12"></i>Discard</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
 </div>
