@@ -69,7 +69,7 @@ StudentLesson:
     group_id
     finished : bool
     percentage: float default(0) nullable
-___ chapters_count:int default(0)  
+    chapters_count:int default(0)  
 
 [CRUD]
 GroupStudent:

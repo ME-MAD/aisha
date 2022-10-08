@@ -39,13 +39,13 @@ class FactorySeeder extends Seeder
             'name' => 'dense',
         ], [
             'price' => 120,
-            'days_num' => 2
+            'days_num' => 4
         ]);
         GroupType::updateOrCreate([
             'name' => 'all week',
         ], [
             'price' => 200,
-            'days_num' => 2
+            'days_num' => 6
         ]);
 
         //-----------------------------------------------------------//
@@ -55,7 +55,7 @@ class FactorySeeder extends Seeder
                 'teacher_id' => $teacher->id
             ]);
 
-            Group::factory(1)->create([
+            Group::factory(10)->create([
                 'teacher_id' => $teacher->id,
                 'group_type_id' => rand(1, 3)
             ])->each(function ($group) {

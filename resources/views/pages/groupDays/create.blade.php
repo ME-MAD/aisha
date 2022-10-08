@@ -56,12 +56,13 @@
                                         name="group_id" id="group_id">
                                         <option value="">اختر اسم المجموعه</option>
                                         @foreach ($groups as $group)
-                                            <option value="{{ $group->id }}"
-                                                {{ old('group_id') == $group->id ? 'selected' : '' }}>
-                                                {{ $group->from }} -
-                                                {{ $group->to }}
-                                            
-                                            </option>
+                                            @if (! $group->checkIfGroupExceededGroupDaysLimit())
+                                                <option value="{{ $group->id }}"
+                                                    {{ old('group_id') == $group->id ? 'selected' : '' }}>
+                                                    {{ $group->from }} -
+                                                    {{ $group->to }}
+                                                </option>
+                                            @endif
                                         @endforeach
                                     </select>
                                     @error("group_id")
@@ -74,7 +75,7 @@
                                 <label for="day" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">
                                     اليوم</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control basic"
+                                    <select class="form-control"
                                         style="width: 100%;"
                                         name="day" id="day">
                                         <option value="Monday"{{old('day') == "Monday" ? 'Monday' : ''}} >Monday</option>

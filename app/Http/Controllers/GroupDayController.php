@@ -21,8 +21,6 @@ class GroupDayController extends Controller
      */
     public function index()
     {
-
-     
         $groupdays = $this->getGroupDays();
         return view('pages.groupDays.index', [
             'groupdays' => $groupdays,
@@ -36,7 +34,7 @@ class GroupDayController extends Controller
      */
     public function create()
     {
-        $groups = Group::get();
+        $groups = Group::with(['groupType','groupDays'])->get();
         return view('pages.groupDays.create', [
             'groups' => $groups,
        ]);
@@ -53,9 +51,8 @@ class GroupDayController extends Controller
         GroupDay::create([
             'group_id' => $request->group_id,
             'day' => $request->day,
-        
         ]);
-      
+    
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.group_day.index'));
     }
@@ -98,7 +95,6 @@ class GroupDayController extends Controller
         $groupDay->update([
             'group_id' => $request->group_id,
             'day' => $request->day,
-            
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.group_day.index'));
