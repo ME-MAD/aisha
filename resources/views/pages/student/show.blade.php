@@ -172,7 +172,7 @@
 
         <div class="bio layout-spacing ">
 
-            @include('pages.student.partials.subject')
+
 
         </div>
 
@@ -185,7 +185,7 @@
             <div class="row layout-top-spacing">
                 <div class="col-xl-12 col-lg-12 col-md-12">
 
-
+                    @include('pages.student.partials.subject')
                 </div>
             </div>
         </div>
@@ -222,11 +222,12 @@
                         },
                         success: function(response) {
                             console.log(element);
-                            $(element).parent().parent().parent().find('.createSubjectButton .progress-bar').css({
-                                'width':'100%',
-                                'transision' : '1.5s'
+                            $(element).parent().parent().parent().find(
+                                '.createSubjectButton .progress-bar').css({
+                                'width': '100%',
+                                'transision': '1.5s'
                             }).find(".progress-bar-percentage").html("100%")
-                            swal("Success", "Success", "success");
+                            // swal("Success", "Success", "success");
                         },
                         error: function() {}
                     })
