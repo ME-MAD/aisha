@@ -185,7 +185,7 @@
             <div class="row layout-top-spacing">
                 <div class="col-xl-12 col-lg-12 col-md-12">
 
-                    @include('pages.student.partials.subject')
+                    @include('pages.student.partials.subjects')
                 </div>
             </div>
         </div>
@@ -197,7 +197,7 @@
 
 @section('javascript')
     <script>
-        let input = document.getElementsByClassName('new-control-input');
+        let input = document.getElementsByClassName('lesson_finished_checkbox');
 
 
         for (let element of input) {
@@ -218,12 +218,11 @@
                             student_id: studentid,
                             finished: true,
                             chapters_count: chaptercount
-
                         },
                         success: function(response) {
                             console.log(element);
                             $(element).parent().parent().parent().find(
-                                '.createSubjectButton .progress-bar').css({
+                                '.progressOfSubjectLink .progress-bar').css({
                                 'width': '100%',
                                 'transision': '1.5s'
                             }).find(".progress-bar-percentage").html("100%")
@@ -239,8 +238,6 @@
                             lesson_id: lessonid,
                             student_id: studentid,
                             finished: false,
-
-
                         },
                         success: function(response) {
                             swal("Success", "Success", "success");
@@ -252,9 +249,4 @@
             })
         }
     </script>
-    {{-- <script>
-        $('.new-control-input').on('change', function() {
-                    console.log('mohamed ');
-                }
-    </script> --}}
 @endsection
