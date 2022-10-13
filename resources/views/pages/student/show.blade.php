@@ -180,7 +180,7 @@
                 let lessonid = $(this).data('lessonid');
                 let studentid = $(this).data('studentid');
                 let chaptercount = $(this).data('chaptercount');
-                console.log(chaptercount);
+
                 if (element.checked == true) {
                     $.ajax({
                         url: href,

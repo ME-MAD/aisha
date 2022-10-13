@@ -12,7 +12,7 @@ class Student extends Model
 
     public function groupStudents()
     {
-        return $this->hasMany(GroupStudent::class, 'student_id');
+        return $this->hasMany(GrsoupStudent::class, 'student_id');
     }
 
     public function syllabus()
@@ -22,6 +22,6 @@ class Student extends Model
 
     public function studentLessons()
     {
-        return $this->hasMany(StudentLesson::class,'student_id');
+        return $this->hasMany(StudentLesson::class, 'student_id');
     }
 }

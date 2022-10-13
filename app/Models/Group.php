@@ -14,6 +14,10 @@ class Group extends Model
     {
         return $this->belongsTo(Teacher::class, 'teacher_id');
     }
+    public function groupStudents()
+    {
+        return $this->hasMany(GroupStudent::class, 'group_id');
+    }
     public function groupType()
     {
         return $this->belongsTo(GroupType::class, 'group_type_id');
@@ -25,11 +29,16 @@ class Group extends Model
 
     public function studentLessons()
     {
-        return $this->hasMany(StudentLesson::class,'group_id');
+        return $this->hasMany(StudentLesson::class, 'group_id');
     }
 
     public function checkIfGroupExceededGroupDaysLimit()
     {
         return ($this->groupType->days_num ?? 0) <= ($this->groupDays->count() ?? 0);
+    }
+
+    public function getRemainingGroupDaysCount()
+    {
+        return $this->groupType->days_num - $this->groupDays->count();
     }
 }
