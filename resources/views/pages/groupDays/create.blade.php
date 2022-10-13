@@ -1,7 +1,7 @@
 @extends('master')
 @section('css')
-<link href="{{asset('adminAssets/plugins/flatpickr/flatpickr.css')}}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/select2/select2.min.css')}}">
+    <link href="{{ asset('adminAssets/plugins/flatpickr/flatpickr.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endsection
 @section('breadcrumb')
     <div class="page-header">
@@ -45,29 +45,31 @@
                     <div class="widget-content widget-content-area">
                         <form action="{{ route('admin.group_day.store') }}" method="post">
                             @csrf
-                        
-                         
+
+
                             <div class="form-group row mb-4">
                                 <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
                                     المجموعه</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control basic"
-                                        style="width: 100%;" 
-                                        name="group_id" id="group_id">
+                                    <select class="form-control basic chickgroup" style="width: 100%;" name="group_id"
+                                        id="group_id" data-href="{{ route('admin.group_day.getDaysOfGroup') }}">
                                         <option value="">اختر اسم المجموعه</option>
                                         @foreach ($groups as $group)
-                                            @if (! $group->checkIfGroupExceededGroupDaysLimit())
+                                            @if (!$group->checkIfGroupExceededGroupDaysLimit())
                                                 <option value="{{ $group->id }}"
                                                     {{ old('group_id') == $group->id ? 'selected' : '' }}>
-                                                    {{ $group->from }} -
-                                                    {{ $group->to }}
+                                                    {{ $group->from }} :
+                                                    {{ $group->to }} -
+                                                    {{ $group->groupType->days_num }} Namber Days :
+                                                    Remainging
+                                                    {{ $group->getRemainingGroupDaysCount() }}
                                                 </option>
                                             @endif
                                         @endforeach
                                     </select>
-                                    @error("group_id")
-                                    <p class="text-danger">{{$message}}</p>
-                                @enderror
+                                    @error('group_id')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -75,32 +77,39 @@
                                 <label for="day" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">
                                     اليوم</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <select class="form-control"
-                                        style="width: 100%;"
-                                        name="day" id="day">
-                                        <option value="Monday"{{old('day') == "Monday" ? 'Monday' : ''}} >Monday</option>
+                                    <select class="form-control" style="width: 100%;" name="day" id="day">
+                                        <option value="Monday"{{ old('day') == 'Monday' ? 'selected' : '' }}>Monday
+                                        </option>
 
-                                        <option value="Tuesday" {{old('day') == "Tuesday" ? 'Tuesday' : ''}}>Tuesday</option>
+                                        <option value="Tuesday" {{ old('day') == 'Tuesday' ? 'selected' : '' }}>Tuesday
+                                        </option>
 
-                                        <option value="Wednesday" {{old('day') == "Wednesday" ? 'Wednesday' : ''}}>Wednesday</option>
+                                        <option value="Wednesday" {{ old('day') == 'Wednesday' ? 'selected' : '' }}>
+                                            Wednesday</option>
 
-                                        <option value="Thursday" {{old('day') == "Thursday" ? 'Thursday' : ''}}>Thursday</option>
+                                        <option value="Thursday" {{ old('day') == 'Thursday' ? 'selected' : '' }}>Thursday
+                                        </option>
 
-                                        <option value="FridaySaturday" {{old('day') == "FridaySaturday" ? 'FridaySaturday' : ''}}>FridaySaturday</option>
+                                        <option value="Friday" {{ old('day') == 'Friday' ? 'selected' : '' }}>
+                                            Friday
+                                        </option>
 
-                                        <option value="Saturday" {{old('day') == "Saturday" ? 'Saturday' : ''}}>Saturday</option>
+                                        <option value="Saturday" {{ old('day') == 'Saturday' ? 'selected' : '' }}>
+                                            Saturday
+                                        </option>
 
-                                        <option value="Sunday" {{old('day') == "adult" ? 'Sunday' : ''}}>Sunday</option>
+                                        <option value="Sunday" {{ old('day') == 'Sunday' ? 'selected' : '' }}>Sunday
+                                        </option>
 
 
                                     </select>
-                                    @error("day")
-                                    <p class="text-danger">{{$message}}</p>
-                                @enderror
+                                    @error('day')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
-                            
-                        
+
+
 
                             <div class="form-group row">
                                 <div class="col-sm-10">
@@ -116,28 +125,54 @@
     </div>
 @endsection
 
-@section("javascript")
-<script src="{{asset('adminAssets/plugins/flatpickr/flatpickr.js')}}"></script>
-<script src="{{asset('adminAssets/plugins/select2/select2.min.js')}}"></script>
-<script>
-var f4 = flatpickr(document.getElementById('from'), {
-    enableTime: true,
-    noCalendar: true,
-    dateFormat: "H:i",
-    defaultDate: "13:45"
-});
-var f5 = flatpickr(document.getElementById('to'), {
-    enableTime: true,
-    noCalendar: true,
-    dateFormat: "H:i",
-    defaultDate: "13:45"
-});
-
-</script>
-<script>
-    $(".basic").select2({
-        tags: true,
-    });
+@section('javascript')
+    <script src="{{ asset('adminAssets/plugins/flatpickr/flatpickr.js') }}"></script>
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+    <script>
+        var f4 = flatpickr(document.getElementById('from'), {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            defaultDate: "13:45"
+        });
+        var f5 = flatpickr(document.getElementById('to'), {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "H:i",
+            defaultDate: "13:45"
+        });
     </script>
+    <script>
+        $(".basic").select2({
+            tags: true,
+        });
+    </script>
+    <script>
+        $('#group_id').on('change', function() {
+            let href = $(this).data('href');
+            let group_id = $(this).val();
+            $(`option`).removeAttr('disabled').css({
+                'color': 'black'
+            });
+            $.ajax({
+                url: href,
+                data: {
+                    group_id
+                },
+                success: function(response) {
+                    let groupDays = response.groupDays
+                    groupDays.forEach(element => {
+                        let groupDay = element.day
+                        console.log(groupDay);
+                        $(`option[value=${groupDay}]`).attr('disabled', true).css({
+                            'color': 'red'
+                        })
+                    });
 
+
+                },
+                error: function() {}
+            })
+        })
+    </script>
 @endsection

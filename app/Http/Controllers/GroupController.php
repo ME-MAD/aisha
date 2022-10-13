@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\DataTables\GroupDataTable;
 use App\Http\Requests\Group\StoreGroupRequest;
 use App\Http\Requests\Group\UpdateGroupRequest;
+use App\Http\Traits\GroupStudentTrait;
 use App\Models\Group;
 use App\Http\Traits\GroupTrait;
 use App\Http\Traits\GroupTypeTrait;
 use App\Models\Teacher;
 use App\Http\Traits\TeacherTrait;
+use App\Models\GroupStudent;
 use App\Models\GroupType;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -18,6 +20,7 @@ class GroupController extends Controller
     use GroupTrait;
     use TeacherTrait;
     use GroupTypeTrait;
+    use GroupStudentTrait;
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +29,7 @@ class GroupController extends Controller
     public function index(GroupDataTable $GroupDataTable)
     {
         // $groups = $this->getGroups();
-        
+
         // return view('pages.group.index', [
         //     'groups' => $groups,
         // ]);
@@ -38,14 +41,14 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create( )
+    public function create()
     {
         $teaches = Teacher::get();
-       $groupTypes = GroupType::get();
+        $groupTypes = GroupType::get();
         return view('pages.group.create', [
             'teachers' => $teaches,
             'groupTypes' => $groupTypes,
-       ]);
+        ]);
     }
 
     /**
@@ -63,7 +66,7 @@ class GroupController extends Controller
             'group_type_id' => $request->group_type_id,
             'age_type' => $request->age_type,
         ]);
-      
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.group.index'));
     }
@@ -76,6 +79,18 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
+        $groupStudents = $group->load('groupStudents.student');
+
+
+
+
+
+
+
+        return view('pages.group.show', [
+            'group' => $group,
+            'groupStudents' => $groupStudents
+        ]);
     }
 
     /**
@@ -110,7 +125,7 @@ class GroupController extends Controller
             'group_type_id' => $request->group_type_id,
             'teacher_id' => $request->teacher_id,
             'age_type' => $request->age_type,
-            
+
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.group.index'));

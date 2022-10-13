@@ -13,12 +13,12 @@ class GroupStudent extends Model
 
     public function student()
     {
-        return $this->belongsTo(Student::class,'student_id');
+        return $this->belongsTo(Student::class, 'student_id');
     }
 
     public function group()
     {
-        return $this->belongsTo(Group::class,'group_id');
+        return $this->belongsTo(Group::class, 'group_id');
     }
 
     public function checkIfLessonIsFinished($lesson_id)
@@ -41,3 +41,4 @@ class GroupStudent extends Model
         return $this->getStudentLessonFromLesson($lesson_id)->percentage ?? 0;
     }
 }
+
