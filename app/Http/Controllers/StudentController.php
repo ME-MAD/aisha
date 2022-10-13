@@ -48,18 +48,15 @@ class StudentController extends Controller
 
     public function show(Student $student)
     {
-        $subjects = Subject::get();
+        $subjects = Subject::with('lessons')->get();
         $student->load([
             'groupStudents' => function ($q) {
                 $q->with('group.studentLessons');
-            },
+            }
         ]);
-        $student_lessons = StudentLesson::get();
-
         return view('pages.student.show', [
             'student' => $student,
             'subjects' => $subjects,
-            'student_lessons' => $student_lessons,
         ]);
     }
 

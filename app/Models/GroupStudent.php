@@ -20,4 +20,25 @@ class GroupStudent extends Model
     {
         return $this->belongsTo(Group::class, 'group_id');
     }
+
+    public function checkIfLessonIsFinished($lesson_id)
+    {
+        return ($this->getStudentLessonFromLesson($lesson_id)->finished ?? false) == true;
+    }
+
+    public function getStudentLessonChaptersCount($lesson_id)
+    {
+        return $this->getStudentLessonFromLesson($lesson_id)->chapters_count ?? 0;
+    }
+
+    public function getStudentLessonFromLesson($lesson_id)
+    {
+        return $this->group->studentLessons->where('lesson_id', $lesson_id)->first();
+    }
+
+    public function getStudentLessonPercentage($lesson_id)
+    {
+        return $this->getStudentLessonFromLesson($lesson_id)->percentage ?? 0;
+    }
 }
+
