@@ -13,9 +13,17 @@ trait GroupStudentTrait
     }
     private function getGroupStudent()
     {
-        return GroupStudent::select(['id','student_id','group_id'])
-                     ->with(['student:id,name',
-                               'group:id,from,to'     ])
-                     ->get();
+        return GroupStudent::select(['id', 'student_id', 'group_id'])
+            ->with([
+                'student:id,name',
+                'group:id,from,to'
+            ])
+            ->get();
+    }
+    private function Students()
+    {
+        return GroupStudent::select(['id', 'student_id'])
+            ->with(['student:id,name,birthday,phone,qualification'])
+            ->get();
     }
 }

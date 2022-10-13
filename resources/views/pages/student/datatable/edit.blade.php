@@ -1,3 +1,3 @@
 <div class="text-center">
-<x-edit-link :route="route('admin.student.edit',$id)" />
+    <x-edit-link :route="route('admin.group.edit', $id)" />
 </div>

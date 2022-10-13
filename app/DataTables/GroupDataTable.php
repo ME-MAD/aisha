@@ -18,23 +18,27 @@ class GroupDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        
+
         return (new EloquentDataTable($query))
             ->addColumn('edit', 'pages.group.datatable.edit')
             ->addColumn('delete', 'pages.group.datatable.delete')
-            ->editColumn('groupType.name',function($q){
+            ->editColumn('groupType.name', function ($q) {
                 return $q->groupType->name ?? "";
             })
-            ->editColumn('teacher.name',function($q){
+            ->editColumn('teacher.name', function ($q) {
                 return $q->teacher->name ?? "";
             })
-            ->rawColumns(['edit', 'delete'])
+            ->editColumn('id', function ($q) {
+
+                return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' >" . $q->id . "</a>";
+            })
+            ->rawColumns(['edit', 'delete', 'id'])
             ->setRowId('id');
     }
 
     public function query(Group $model): QueryBuilder
     {
-    
+
         return $model->select([
             'groups.id',
             'teacher_id',
@@ -148,7 +152,7 @@ class GroupDataTable extends DataTable
             ],
 
             ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
-            
+
             ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
         ];
     }

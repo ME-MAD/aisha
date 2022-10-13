@@ -73,6 +73,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('create', [GroupController::class, 'create'])->name('create');
         Route::post('/store', [GroupController::class, 'store'])->name('store');
         Route::get('edit/{group}', [GroupController::class, 'edit'])->name('edit');
+        Route::get('show/{group}', [GroupController::class, 'show'])->name('show');
         Route::put('update/{group}', [GroupController::class, 'update'])->name('update');
         Route::get('delete/{group}', [GroupController::class, 'delete'])->name('delete');
     });
@@ -103,6 +104,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{group_day}', [GroupDayController::class, 'edit'])->name('edit');
         Route::put('update/{group_day}', [GroupDayController::class, 'update'])->name('update');
         Route::get('delete/{group_day}', [GroupDayController::class, 'delete'])->name('delete');
+
+        Route::get('getDaysOfGroup', [GroupDayController::class, 'getDaysOfGroup'])->name('getDaysOfGroup');
     });
 
 
