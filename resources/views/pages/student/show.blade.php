@@ -139,36 +139,8 @@
 
     <div class="col-xl-8 col-lg-6 col-md-7 col-sm-12 layout-top-spacing">
 
-        <div class="skills layout-spacing ">
-            <div class="widget-content widget-content-area">
-                <h3 class="">Skills</h3>
-                <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-title"><span>PHP</span> <span>25%</span> </div>
-                    </div>
-                </div>
-                <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-title"><span>Wordpress</span> <span>50%</span> </div>
-                    </div>
-                </div>
-                <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-title"><span>Javascript</span> <span>70%</span> </div>
-                    </div>
-                </div>
-                <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-title"><span>jQuery</span> <span>60%</span> </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        @include('pages.student.partials.showLesson')
+        
 
         <div class="bio layout-spacing ">
 

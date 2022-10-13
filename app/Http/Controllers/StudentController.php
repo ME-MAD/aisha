@@ -9,16 +9,11 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use App\http\requests\Student\StoreStudentRequest;
 use App\http\requests\Student\UpdateStudentRequest;
-use App\Models\GroupStudent;
-use App\Models\Lesson;
-use App\Models\StudentLesson;
 use App\Models\Subject;
-use App\Models\syllabus;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentController extends Controller
 {
-
     use GroupTrait;
     use StudentTrait;
 

@@ -122,6 +122,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{lesson}', [LessonController::class, 'edit'])->name('edit');
         Route::put('update/{lesson}', [LessonController::class, 'update'])->name('update');
         Route::get('delete/{lesson}', [LessonController::class, 'delete'])->name('delete');
+        Route::get('getQuranSurahAjax', [LessonController::class, 'getQuranSurahAjax'])->name('getQuranSurahAjax');
     });
 
 

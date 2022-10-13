@@ -12,7 +12,7 @@ if (!function_exists("chapterQuran")) {
             ],
             [
                 'surah_ar' => 'سورة البقرة',
-                'surah_count' => '665'
+                'surah_count' => '286'
             ],
             [
                 'surah_ar' => 'سورة ال عمران',
