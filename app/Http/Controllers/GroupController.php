@@ -79,17 +79,10 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        $groupStudents = $group->load('groupStudents.student');
-
-
-
-
-
-
+        $group->load('groupStudents.student');
 
         return view('pages.group.show', [
             'group' => $group,
-            'groupStudents' => $groupStudents
         ]);
     }
 

@@ -12,7 +12,7 @@ class Student extends Model
 
     public function groupStudents()
     {
-        return $this->hasMany(GrsoupStudent::class, 'student_id');
+        return $this->hasMany(GroupStudent::class, 'student_id');
     }
 
     public function syllabus()
