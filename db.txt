@@ -42,17 +42,32 @@ GroupType:
     price : double
     days_num : int
 
-[CRUD]
 Subject:
     id
-    name : string
+    name: string
+    book: string
 
+***
+    prevent from uploading too large files
+***
 
-[CRUD]
 Lesson:
     id
     subject_id
     title : text
+    chapters_count: unsignedInteger default(0)
+    from_page: unsignedInteger default(0)
+    to_page: unsignedInteger default(0)
+
+StudentLesson:
+    id
+    student_id
+    lesson_id
+    group_id
+    finished: bool
+    percentage: float default(0) nullable
+    chapters_count:unsignedInteger default(0)
+    last_page_finished: unsignedInteger default(0)
 
 //ToDo CRUD in student show
 syllabus:
@@ -61,15 +76,6 @@ syllabus:
     new_lesson => foriegn key on lessons
     old_lesson => foriegn key on lessons
     is_reverse : bool
-
-StudentLesson:
-    id
-    student_id
-    lesson_id
-    group_id
-    finished : bool
-    percentage: float default(0) nullable
-    chapters_count:int default(0)  
 
 [CRUD]
 GroupStudent:

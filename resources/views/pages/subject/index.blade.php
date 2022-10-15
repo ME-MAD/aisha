@@ -66,7 +66,7 @@
                                                                       <tr>
                                                                           <th class="checkbox-column text-center"> Id </th>
                                                                           <th class="text-center">Name</th>
-                                                                          
+                                                                          <th class="text-center">Book</th>
                                                                           <th class="text-center">Edit</th>
                                                                           <th class="text-center">Delete</th>
                                                                       </tr>
@@ -77,7 +77,11 @@
                                                                               <td class="checkbox-column text-center sorting_1"> {{$subject->id}} </td>
 
                                                                               <td>{{$subject->name}}</td>
-                                                                             
+                                                                              <td>
+                                                                                    <a href="{{$subject->book}}" target="__blank">
+                                                                                          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                                                                    </a>
+                                                                              </td>
                                                                             
                                                                               <td class="text-center">
                                                                                       <div class="links--ul text-center">

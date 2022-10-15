@@ -8,6 +8,8 @@ use App\Http\Requests\Subject\UpdateSubjectRequest;
 use App\Http\Traits\SubjectTrait;
 use RealRashid\SweetAlert\Facades\Alert;
 
+use function PHPUnit\Framework\fileExists;
+
 class SubjectController extends Controller
 {
     use SubjectTrait;
@@ -43,8 +45,15 @@ class SubjectController extends Controller
      */
     public function store(StoreSubjectRequest $request)
     {
+        $book = $request->file('book');
+        $ext = $book->getClientOriginalExtension();
+        $book_name = $request->name . "_book" . "." . $ext;
+
+        $book->move(public_path('files/subjects/'),$book_name);
+
         Subject::create([
             'name' => $request->name,
+            'book' => $book_name
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.subject.index'));
@@ -83,8 +92,22 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
+        $book_name = $subject->getRawOriginal('book');
+        if($book = $request->file('book'))
+        {
+            if(fileExists(public_path($subject->book)))
+            {
+                unlink(public_path($subject->book));
+            }
+            $ext = $book->getClientOriginalExtension();
+            $book_name = $request->name . "_book" . "." . $ext;
+
+            $book->move(public_path('files/subjects/'),$book_name);
+        }
+
         $subject->update([
-            'name' => $request->name
+            'name' => $request->name,
+            'book' => $book_name
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.subject.index'));
@@ -98,8 +121,18 @@ class SubjectController extends Controller
      */
     public function delete(Subject $subject)
     {
+        if(fileExists(public_path($subject->book)))
+        {
+            unlink(public_path($subject->book));
+        }
         $subject->delete();
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
+    }
+
+    public function getSubjectBook(Subject $subject)
+    {
+        dd($subject);
+        return $subject->book;
     }
 }

@@ -3,23 +3,12 @@ $(document).ready(function () {
 
     refreshAllTableLinks()
 
-    $('.showSurahOfLesson').on('click',function(){
-        let lesson = $(this).data('lesson')
-        let href = $(this).data('href')
-
-        $('#show-lesson').html('')
+    $('.subjectShowButton').on('click',function(){
+        let opensubjecthref = $(this).data('opensubjecthref')
         $.ajax({
-            url: href,
-            data: {
-                lesson_title: lesson.title,
-                lesson_chapters_count: lesson.chapters_count
-            },
+            url: opensubjecthref,
             success: function(response) {
-                for (const verse in response.surah) {
-                    $('#show-lesson').append(`
-                        <span class="quraanVerse num${verse}">${response.surah[verse]}</span>
-                    `)
-                }
+                console.log(response);
             },
             error: function() {}
         })

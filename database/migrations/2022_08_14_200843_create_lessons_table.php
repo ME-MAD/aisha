@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('subject_id');
             $table->text('title');
-            $table->integer('chapters_count')->default(0);
+            $table->unsignedInteger('chapters_count')->default(0);
+            $table->unsignedInteger('from_page')->default(0);
+            $table->unsignedInteger('to_page')->default(0);
             $table->timestamps();
 
             $table->foreign('subject_id')

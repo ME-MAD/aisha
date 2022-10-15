@@ -81,28 +81,4 @@ class LessonController extends Controller
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
     }
-
-    public function getQuranSurahAjax(Request $request)
-    {
-        $surahNumber = null;
-
-        array_filter(chapterQuran(), function($surahArray, $key) use($request, &$surahNumber) {
-            if($surahArray['surah_ar'] == $request->lesson_title)
-            {
-                $surahNumber = $key;
-                return true;
-            }
-            return false;
-        },ARRAY_FILTER_USE_BOTH);
-        
-        $surahNumber++;
-
-        if($surahNumber > 0)
-        {
-            return response()->json([
-                'surah' => $this->quran->get("{$surahNumber}:1-{$request->lesson_chapters_count}")
-            ]);
-        }
-        return new Exception("The Chapters Count Is Invalid");
-    }
 }

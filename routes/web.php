@@ -116,6 +116,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{subject}', [SubjectController::class, 'edit'])->name('edit');
         Route::put('update/{subject}', [SubjectController::class, 'update'])->name('update');
         Route::get('delete/{subject}', [SubjectController::class, 'delete'])->name('delete');
+        Route::get('getSubjectBook/{subject}', [SubjectController::class, 'getSubjectBook'])->name('getSubjectBook');
     });
 
     Route::group(['prefix' => 'lesson', 'as' => 'lesson.'], function () {
@@ -125,7 +126,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{lesson}', [LessonController::class, 'edit'])->name('edit');
         Route::put('update/{lesson}', [LessonController::class, 'update'])->name('update');
         Route::get('delete/{lesson}', [LessonController::class, 'delete'])->name('delete');
-        Route::get('getQuranSurahAjax', [LessonController::class, 'getQuranSurahAjax'])->name('getQuranSurahAjax');
     });
 
 
