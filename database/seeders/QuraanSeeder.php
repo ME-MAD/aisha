@@ -24,9 +24,9 @@ class QuraanSeeder extends Seeder
         foreach ($chapters as $chapter) {
             Lesson::updateOrCreate([
                 'title'      => $chapter['surah_ar'],
-                'chapters_count' => $chapter['surah_count']
-            ], [
                 'subject_id' => $subject->id,
+            ], [
+                'chapters_count' => $chapter['surah_count']
             ]);
         };
     }

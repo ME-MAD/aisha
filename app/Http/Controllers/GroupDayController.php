@@ -8,6 +8,8 @@ use App\Http\Requests\GroupDay\UpdateGroupDayRequest;
 use App\Models\Group;
 use App\Http\Traits\GroupDayTrait;
 use App\Http\Traits\GroupTrait;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupDayController extends Controller
@@ -34,10 +36,13 @@ class GroupDayController extends Controller
      */
     public function create()
     {
-        $groups = Group::with(['groupType','groupDays'])->get();
+        $groups = Group::with(['groupType', 'groupDays'])->get();
+
+
+
         return view('pages.groupDays.create', [
             'groups' => $groups,
-       ]);
+        ]);
     }
 
     /**
@@ -52,7 +57,7 @@ class GroupDayController extends Controller
             'group_id' => $request->group_id,
             'day' => $request->day,
         ]);
-    
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.group_day.index'));
     }
@@ -80,7 +85,7 @@ class GroupDayController extends Controller
         return view('pages.groupDays.edit', [
             'groupDay'  => $groupDay,
             'groups'  => $groups,
-        ]); 
+        ]);
     }
 
     /**
@@ -111,5 +116,14 @@ class GroupDayController extends Controller
         $groupDay->delete();
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
+    }
+
+
+    public function getDaysOfGroup(Request $request)
+    {
+        $groupDays = GroupDay::where('group_id', $request->group_id)->select(['group_id', 'day'])->get();
+        return response()->json([
+            'groupDays' => $groupDays
+        ]);
     }
 }

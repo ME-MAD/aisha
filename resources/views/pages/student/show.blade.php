@@ -139,36 +139,8 @@
 
     <div class="col-xl-8 col-lg-6 col-md-7 col-sm-12 layout-top-spacing">
 
-        <div class="skills layout-spacing ">
-            <div class="widget-content widget-content-area">
-                <h3 class="">Skills</h3>
-                <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 25%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-title"><span>PHP</span> <span>25%</span> </div>
-                    </div>
-                </div>
-                <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-title"><span>Wordpress</span> <span>50%</span> </div>
-                    </div>
-                </div>
-                <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-title"><span>Javascript</span> <span>70%</span> </div>
-                    </div>
-                </div>
-                <div class="progress br-30">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 60%" aria-valuenow="25"
-                        aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-title"><span>jQuery</span> <span>60%</span> </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        @include('pages.student.partials.showLesson')
+        
 
         <div class="bio layout-spacing ">
 
@@ -185,7 +157,7 @@
             <div class="row layout-top-spacing">
                 <div class="col-xl-12 col-lg-12 col-md-12">
 
-                    @include('pages.student.partials.subject')
+                    @include('pages.student.partials.subjects')
                 </div>
             </div>
         </div>
@@ -197,7 +169,7 @@
 
 @section('javascript')
     <script>
-        let input = document.getElementsByClassName('new-control-input');
+        let input = document.getElementsByClassName('lesson_finished_checkbox');
 
 
         for (let element of input) {
@@ -208,7 +180,7 @@
                 let lessonid = $(this).data('lessonid');
                 let studentid = $(this).data('studentid');
                 let chaptercount = $(this).data('chaptercount');
-                console.log(chaptercount);
+
                 if (element.checked == true) {
                     $.ajax({
                         url: href,
@@ -218,12 +190,11 @@
                             student_id: studentid,
                             finished: true,
                             chapters_count: chaptercount
-
                         },
                         success: function(response) {
                             console.log(element);
                             $(element).parent().parent().parent().find(
-                                '.createSubjectButton .progress-bar').css({
+                                '.progressOfSubjectLink .progress-bar').css({
                                 'width': '100%',
                                 'transision': '1.5s'
                             }).find(".progress-bar-percentage").html("100%")
@@ -239,8 +210,6 @@
                             lesson_id: lessonid,
                             student_id: studentid,
                             finished: false,
-
-
                         },
                         success: function(response) {
                             swal("Success", "Success", "success");
@@ -252,9 +221,4 @@
             })
         }
     </script>
-    {{-- <script>
-        $('.new-control-input').on('change', function() {
-                    console.log('mohamed ');
-                }
-    </script> --}}
 @endsection

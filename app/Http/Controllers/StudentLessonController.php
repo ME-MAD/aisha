@@ -61,6 +61,7 @@ class StudentLessonController extends Controller
                 'chapters_count' => $request->chapters_count,
             ]);
         }
+        Alert::toast("Updated Successfully",'success');
         return redirect()->back();
     }
 

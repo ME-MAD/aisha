@@ -36,7 +36,7 @@ $('.editSyllabusButton').on('click', function () {
 
 
 // Edit Lessons
-$('.createSubjectButton').on('click', function () {
+$('.progressOfSubjectLink').on('click', function () {
     let chapters_count = $(this).data('chapterscount')
     let group_id = $(this).data('groupid')
     let lesson_id = $(this).data('lessonid')

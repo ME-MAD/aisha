@@ -8,32 +8,29 @@ use App\Http\Requests\Lesson\StoreLessonRequest;
 use App\Http\Requests\Lesson\UpdateLessonRequest;
 use App\Http\Traits\LessonTrait;
 use App\Http\Traits\SubjectTrait;
+use Exception;
+use Illuminate\Http\Request;
+use FaizShukri\Quran\Quran;
 use RealRashid\SweetAlert\Facades\Alert;
+use XMLWriter;
 
 class LessonController extends Controller
 {
     use LessonTrait;
     use SubjectTrait;
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private $quran;
+
+    public function __construct(Quran $quran)
+    {
+        $this->quran = $quran;
+    }
+
     public function index(LessonsDataTable $lessonsDataTable)
     {
-        // $lessons = $this->getLessons();
-        // return view('pages.lesson.index', [
-        //     'lessons' => $lessons
-        // ]);
-
         return $lessonsDataTable->render('pages.lesson.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $subjects = $this->getSubject();
@@ -42,12 +39,6 @@ class LessonController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreLessonRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreLessonRequest $request)
     {
         Lesson::create([
@@ -59,23 +50,11 @@ class LessonController extends Controller
         return redirect(route('admin.lesson.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Lesson  $lesson
-     * @return \Illuminate\Http\Response
-     */
     public function show(Lesson $lesson)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Lesson  $lesson
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Lesson $lesson)
     {
         $subjects = $this->getSubject();
@@ -85,13 +64,6 @@ class LessonController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateLessonRequest  $request
-     * @param  \App\Models\Lesson  $lesson
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateLessonRequest $request, Lesson $lesson)
     {
         $lesson->update([
@@ -103,16 +75,34 @@ class LessonController extends Controller
         return redirect(route('admin.lesson.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Lesson  $lesson
-     * @return \Illuminate\Http\Response
-     */
     public function delete(Lesson $lesson)
     {
         $lesson->delete();
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
+    }
+
+    public function getQuranSurahAjax(Request $request)
+    {
+        $surahNumber = null;
+
+        array_filter(chapterQuran(), function($surahArray, $key) use($request, &$surahNumber) {
+            if($surahArray['surah_ar'] == $request->lesson_title)
+            {
+                $surahNumber = $key;
+                return true;
+            }
+            return false;
+        },ARRAY_FILTER_USE_BOTH);
+        
+        $surahNumber++;
+
+        if($surahNumber > 0)
+        {
+            return response()->json([
+                'surah' => $this->quran->get("{$surahNumber}:1-{$request->lesson_chapters_count}")
+            ]);
+        }
+        return new Exception("The Chapters Count Is Invalid");
     }
 }

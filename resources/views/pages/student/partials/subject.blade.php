@@ -1,113 +1,82 @@
-<div class="work-experience widget-content-area">
-    <h3 class="">Student syllabus
+@foreach ($subjects as $subject)
+<div class="tab-pane fade show" id="list-home{{ $groupStudent->id }}{{ $subject->id }}"
+    role="tabpanel"
+    aria-labelledby="list-home-list{{ $groupStudent->id }}{{ $subject->id }}">
+    <ul class="list-group task-list-group" style="height: 400px;overflow:auto">
+        @foreach ($subject->lessons as $lesson)
+            <li class="list-group-item list-group-item-action">
 
-    </h3>
-    @foreach ($student->groupStudents as $groupStudent)
-        <div>
-            <p class="text-center"> <span class="badge bg-primary text-light">From</span>
-                {{ $groupStudent->group->from }} :<span class="badge bg-primary text-light">To</span>
-                {{ $groupStudent->group->to }}
-                @foreach ($groupStudent->group->groupDays as $groupDay)
-                    <span class="badge bg-info text-light">{{ $groupDay->day }}</span>
-                @endforeach
-            </p>
+                <div class="text-center mb-3">
+                    <label class="float-left">
+                        @if ($groupStudent->checkIfLessonIsFinished($lesson->id))
+                            <input type="checkbox" class="lesson_finished_checkbox big-checkbox"
+                                data-href="{{ route('admin.student_lesson.ajaxStudentLessonFinished') }}"
+                                data-groupid="{{ $groupStudent->group->id }}"
+                                data-lessonid="{{ $lesson->id }}"
+                                data-studentid="{{ $student->id }}" checked>
+                        @else
+                            <input type="checkbox" class="lesson_finished_checkbox big-checkbox"
+                                data-href="{{ route('admin.student_lesson.ajaxStudentLessonFinished') }}"
+                                data-groupid="{{ $groupStudent->group->id }}"
+                                data-lessonid="{{ $lesson->id }}"
+                                data-studentid="{{ $student->id }}"
+                                data-chaptercount="{{ $lesson->chapters_count }}">
+                        @endif
+                    </label>
 
-            <div class="row p-4">
-                <div class="col-4">
-                    <div class="list-group" id="list-tab" role="tablist">
-                        @foreach ($subjects as $subject)
-                            <a class="list-group-item list-group-item-action"
-                                id="list-home-list{{ $groupStudent->id }}{{ $subject->id }}" data-toggle="list"
-                                href="#list-home{{ $groupStudent->id }}{{ $subject->id }}" role="tab"
-                                aria-controls="home">{{ $subject->name }}</a>
-                        @endforeach
-                    </div>
+                    <span>
+                        <a 
+                            class="text-primary showSurahOfLesson" 
+                            data-href="{{route('admin.lesson.getQuranSurahAjax')}}"
+                            data-lesson="{{$lesson}}"
+                        >
+                            {{ $lesson->title }}
+                        </a>
+                    </span>
+
                 </div>
 
-                <div class="col-8">
-                    <div class="tab-content" id="nav-tabContent">
-                        @foreach ($subjects as $subject)
-                            <div class="tab-pane fade show" id="list-home{{ $groupStudent->id }}{{ $subject->id }}"
-                                role="tabpanel"
-                                aria-labelledby="list-home-list{{ $groupStudent->id }}{{ $subject->id }}">
-                                <ul class="list-group task-list-group" style="height: 400px;overflow:auto">
-                                    @foreach ($subject->lessons as $lesson)
-                                        <li class="list-group-item list-group-item-action">
-                                            {{-- {{dd($lesson->load(['studentLessons' => function($q) use($groupStudent,$student){
-                                                $q->where('group_id',$groupStudent->group_id)->where('student_id', $student->id);
-                                            }]))}} --}}
+                <div class="d-flex justify-content-between mb-3">
+                    <span
+                        class="badge badge-success">{{ $groupStudent->getStudentLessonChaptersCount($lesson->id) }}
+                    </span>
+                    <span class="badge badge-secondary">
+                        {{ $lesson->chapters_count }} 
+                    </span>
+                </div>
 
-                                            <div class="n-chk">
-                                                <label
-                                                    class="new-control new-checkbox checkbox-primary w-100 justify-content-between">
-                                                    @if (($groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->finished ?? false) == true)
-                                                        <input type="checkbox" class="new-control-input"
-                                                            data-href="{{ route('admin.student_lesson.ajaxStudentLessonFinished') }}"
-                                                            data-groupid="{{ $groupStudent->group->id }}"
-                                                            data-lessonid="{{ $lesson->id }}"
-                                                            data-studentid="{{ $student->id }}" checked>
-                                                    @else
-                                                        <input type="checkbox" class="new-control-input"
-                                                            data-href="{{ route('admin.student_lesson.ajaxStudentLessonFinished') }}"
-                                                            data-groupid="{{ $groupStudent->group->id }}"
-                                                            data-lessonid="{{ $lesson->id }}"
-                                                            data-studentid="{{ $student->id }}"
-                                                            data-chaptercount="{{ $lesson->chapters_count }}">
-                                                    @endif
-                                                    <span class="ml-3 d-block">
-                                                        <span
-                                                            class="badge badge-success">{{ $groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->chapters_count ?? 0 }}</span>
-                                                    </span>
-                                                    <span class="new-control-indicator"></span>
-                                                    <span class="ml-2">
-                                                        {{ $lesson->title }}
-                                                    </span>
-                                                    <span class="ml-3 d-block">
-                                                        <span class="badge badge-secondary">
-                                                            {{ $lesson->chapters_count }} </span>
-                                                    </span>
-
-                                                </label>
-
-
-                                            </div>
-                                            <br>
-
-
-                                            <a class="createSubjectButton subject" data-toggle="modal"
-                                                data-target="#createSubjectModal"
-                                                data-chapterscount="{{ $lesson->chapters_count }}"
-                                                data-finishedchapterscount="{{ $groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->chapters_count ?? 0 }}"
-                                                data-groupid="{{ $groupStudent->group->id }}"
-                                                data-lessonid="{{ $lesson->id }}"
-                                                data-studentid="{{ $student->id }}">
-                                                <div class="progress br-30">
-                                                    <div class="progress-bar bg-primary" role="progressbar"
-                                                        style="width:{{ $groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->percentage ?? 0 }}%"
-                                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                                                        <div class="progress-title"><span>
-                                                                {{ $lesson->title }}</span>
-                                                            <span class="progress-bar-percentage">
-                                                                {{ $groupStudent->group->studentLessons->where('lesson_id', $lesson->id)->first()->percentage ?? 0 }}%
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </a>
-
-                                        </li>
-                                    @endforeach
-                                </ul>
+                <a class="progressOfSubjectLink subject" data-toggle="modal"
+                    data-target="#createSubjectModal"
+                    data-chapterscount="{{ $lesson->chapters_count }}"
+                    data-finishedchapterscount="{{ $groupStudent->getStudentLessonChaptersCount($lesson->id) }}"
+                    data-groupid="{{ $groupStudent->group->id }}"
+                    data-lessonid="{{ $lesson->id }}"
+                    data-studentid="{{ $student->id }}">
+                    <div class="progress br-30">
+                        <div class="progress-bar bg-primary" role="progressbar"
+                            style="width:{{ $groupStudent->getStudentLessonPercentage($lesson->id) }}%"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-title"><span>
+                                    {{ $lesson->title }}</span>
+                                <span class="progress-bar-percentage">
+                                    {{ $groupStudent->getStudentLessonPercentage($lesson->id) }}%
+                                </span>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
 
-                </div>
-            </div>
-        </div>
-    @endforeach
+                </a>
+
+            </li>
+        @endforeach
+    </ul>
 </div>
+@endforeach
+
+
+
+
+
 
 <div class="modal fade" id="createSubjectModal" tabindex="-1" role="dialog" aria-labelledby="createSubjectModal"
     aria-hidden="true">

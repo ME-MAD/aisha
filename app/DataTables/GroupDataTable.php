@@ -28,6 +28,7 @@ class GroupDataTable extends DataTable
             ->editColumn('teacher.name', function ($q) {
                 return $q->teacher->name ?? "";
             })
+
             ->editColumn('from', function ($q) {
                 return  date('g:i:s A', strtotime($q->from));
             })
@@ -35,6 +36,13 @@ class GroupDataTable extends DataTable
                 return  date('g:i:s A', strtotime($q->to));
             })
             ->rawColumns(['edit', 'delete'])
+
+            ->editColumn('id', function ($q) {
+
+                return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' >" . $q->id . "</a>";
+            })
+            ->rawColumns(['edit', 'delete', 'id'])
+
             ->setRowId('id');
     }
 
