@@ -9,8 +9,6 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- <input type="hidden" name="teacher_id" id="teacher_id" /> --}}
-
                     <x-text name="name" label="الإسم" id="name" />
 
                     <x-date name="birthday" label="تاريخ الميلاد" id="birthday" />

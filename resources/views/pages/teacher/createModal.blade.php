@@ -8,6 +8,7 @@
             <div class="modal-body">
                 <form action="{{ route('admin.teacher.store') }}" method="post">
                     @csrf
+                    
                     <x-text name="name" label="الإسم" :value="old('name')" />
 
                     <x-date name="birthday" label="تاريخ الميلاد" :value="old('birthday')" />
@@ -15,8 +16,6 @@
                     <x-text name="phone" label="الهاتف" :value="old('phone')" />
 
                     <x-text name="qualification" label="المؤهل" :value="old('qualification')" />
-
-
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save</button>
