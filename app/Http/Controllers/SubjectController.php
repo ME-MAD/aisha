@@ -7,6 +7,8 @@ use App\Http\Requests\Subject\StoreSubjectRequest;
 use App\Http\Requests\Subject\UpdateSubjectRequest;
 use App\Http\Traits\SubjectTrait;
 use RealRashid\SweetAlert\Facades\Alert;
+use setasign\Fpdi\Fpdi;
+use Spatie\PdfToImage\Pdf;
 
 use function PHPUnit\Framework\fileExists;
 
@@ -132,6 +134,8 @@ class SubjectController extends Controller
 
     public function getSubjectBook(Subject $subject)
     {
+        $pdf = new Pdf(public_path($subject->book));
+        $pdf->saveImage(public_path('files') . "/image.jpg");
         dd($subject);
         return $subject->book;
     }
