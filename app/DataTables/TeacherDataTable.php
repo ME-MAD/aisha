@@ -2,13 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\Group;
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
 
-class GroupDataTable extends DataTable
+
+class TeacherDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -18,50 +19,36 @@ class GroupDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-
         return (new EloquentDataTable($query))
-            ->addColumn('edit', 'pages.group.datatable.edit')
-            ->addColumn('delete', 'pages.group.datatable.delete')
-            ->editColumn('groupType.name', function ($q) {
-                return $q->groupType->name ?? "";
+            // ->addColumn('edit', 'pages.teacher.datatable.edit')
+            ->addColumn('edit', function ($query) {
+                return view('pages.teacher.datatable.edit', compact('query'));
             })
-            ->editColumn('teacher.name', function ($q) {
-                return $q->teacher->name ?? "";
-            })
+            ->addColumn('delete', 'pages.teacher.datatable.delete')
+            ->editColumn('name', function ($q) {
 
-            ->editColumn('from', function ($q) {
-                return  date('g:i:s A', strtotime($q->from));
+                return "<a class='text-primary' href=" . route('admin.teacher.show', $q->id) . " title='Enter Page show Teacher' >" . $q->name . "</a>";
             })
-            ->editColumn('to', function ($q) {
-                return  date('g:i:s A', strtotime($q->to));
-            })
-            ->rawColumns(['edit', 'delete'])
-
-            ->editColumn('id', function ($q) {
-
-                return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' >" . $q->id . "</a>";
-            })
-            ->rawColumns(['edit', 'delete', 'id'])
-
+            ->rawColumns(['edit', 'delete', 'name'])
             ->setRowId('id');
     }
 
-    public function query(Group $model): QueryBuilder
+    /**
+     * Get query source of dataTable.
+     *
+     * @param \App\Models\Teacher $model
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function query(Teacher $model): QueryBuilder
     {
-
-        return $model->select([
-            'groups.id',
-            'teacher_id',
-            'from',
-            'to',
-            'age_type',
-            'group_type_id'
-        ])->with([
-            'teacher:id,name',
-            'groupType:id,name'
-        ]);
+        return $model->newQuery();
     }
 
+    /**
+     * Optional method if you want to use html builder.
+     *
+     * @return \Yajra\DataTables\Html\Builder
+     */
     public function html(): HtmlBuilder
     {
         return $this->builder()
@@ -106,6 +93,7 @@ class GroupDataTable extends DataTable
                 }",
                 "fnDrawCallback" => "function( oSettings ) {
                     refreshAllTableLinks()
+                    initEditeTeacherModal()
                 }",
 
             ]);
@@ -119,50 +107,14 @@ class GroupDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            [
-                'name' => 'id',
-                'data' => 'id',
-                'title' => '#',
-                "className" => 'search--col exact'
-            ],
+            ['name' => 'id', 'data' => 'id', 'title' => 'رقم الهوية', "className" => 'search--col exact'],
+            ['name' => 'name', 'data' => 'name', 'title' => ' الاسم', "className" => 'search--col'],
+            ['name' => 'birthday', 'data' => 'birthday', 'title' => ' تاريخ الميلاد', "className" => 'search--col'],
+            ['name' => 'phone', 'data' => 'phone', 'title' => ' الهاتف', "className" => 'search--col'],
 
-            [
-                'name' => 'from',
-                'data' => 'from',
-                'title' => 'from',
-                "className" => 'search--col'
-            ],
-
-            [
-                'name' => 'to',
-                'data' => 'to',
-                'title' => 'to',
-                "className" => 'search--col'
-            ],
-
-            [
-                'name' => 'teacher.name',
-                'data' => 'teacher.name',
-                'title' => ' teacher_id',
-                "className" => 'search--col'
-            ],
-
-            [
-                'name' => 'groupType.name',
-                'data' => 'groupType.name',
-                'title' => 'group_type_id',
-                "className" => 'search--col'
-            ],
-
-            [
-                'name' => 'age_type',
-                'data' => 'age_type',
-                'title' => 'age_type',
-                "className" => 'search--col'
-            ],
+            ['name' => 'qualification', 'data' => 'qualification', 'title' => ' المؤهلات', "className" => 'search--col'],
 
             ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
-
             ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
         ];
     }
@@ -174,6 +126,6 @@ class GroupDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Group_' . date('YmdHis');
+        return 'Teacher_' . date('YmdHis');
     }
 }

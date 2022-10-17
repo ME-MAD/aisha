@@ -56,3 +56,23 @@ $('.progressOfSubjectLink').on('click', function () {
 
 
 })
+
+
+//----------------------------Modal Teacher-----------------------------------//
+
+//Edite Modal Teacher
+function initEditeTeacherModal() {
+    $('.editTeacherButton').on('click', function () {
+        let teacher = $(this).data('teacher')
+        let href = $(this).data('href')
+
+
+        $('#editTeacherForm #name').val(teacher.name)
+        $('#editTeacherForm #birthday').val(teacher.birthday)
+        $('#editTeacherForm #phone').val(teacher.phone)
+        $('#editTeacherForm #qualification').val(teacher.qualification)
+
+        $('#editTeacherForm').attr('action', href)
+
+    })
+}

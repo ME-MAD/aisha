@@ -25,6 +25,7 @@
                             data-date="{{ $experience->date->format('Y-m-d') }}" data-toggle="modal"
                             data-target="#editExperience"
                             data-href="{{ route('admin.experience.update', $experience->id) }}">
+
                             <p>{{ $experience->title }}</p>
                         </a>
                     </div>
