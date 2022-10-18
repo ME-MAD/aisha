@@ -76,3 +76,23 @@ function initEditeTeacherModal() {
 
     })
 }
+
+
+
+
+//----------------------------Modal Experience-----------------------------------//
+
+//Edite Modal Experience
+function initEditeExperienceModal() {
+    $('.editExperienceButton').on('click', function () {
+        let experience = $(this).data('experience')
+        let date = $(this).data('date')
+        let href = $(this).data('href')
+
+        $('#editExperienceForm #title').val(experience.title)
+        $('#editExperienceForm #date').val(date)
+        $('#editExperienceForm #teacherId').val(experience.teacher_id)
+
+        $('#editExperienceForm').attr('action', href)
+    })
+}
