@@ -59,7 +59,7 @@ class ExperienceController extends Controller
             'date' => $request->date,
             'teacher_id' => $request->teacher_id
         ]);
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
