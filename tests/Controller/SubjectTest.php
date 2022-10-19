@@ -112,8 +112,8 @@ class SubjectTest extends TestCase
         copy(__DIR__ . "/../stub/4.jpg", public_path('files/subjects/math2/4.jpg'));
 
         $subject = Subject::factory()->create([
-            'name' => 'math',
-            'book' => 'math_book.pdf'
+            'name' => 'math2',
+            'book' => 'math2_book.pdf'
         ]);
         
         $response = $this->call('PUT',route('admin.subject.update',$subject->id),[
@@ -124,7 +124,7 @@ class SubjectTest extends TestCase
         $response->assertSessionHasNoErrors();
 
         $this->assertTrue(File::exists(public_path('files/subjects/calculus2_book.pdf')));
-        $this->assertTrue(File::missing(public_path('files/subjects/math4_book.pdf')));
+        $this->assertTrue(File::missing(public_path('files/subjects/math2_book.pdf')));
 
         $this->assertTrue(File::exists(public_path('files/subjects/calculus2/')));
         $this->assertTrue(File::exists(public_path('files/subjects/calculus2/1.jpg')));
@@ -141,5 +141,45 @@ class SubjectTest extends TestCase
         $this->assertTrue(File::missing(public_path('files/subjects/calculus2/2.jpg')));
         $this->assertTrue(File::missing(public_path('files/subjects/calculus2/3.jpg')));
         $this->assertTrue(File::missing(public_path('files/subjects/calculus2/4.jpg')));
+
+
+        $this->assertTrue(File::missing(public_path('files/subjects/math2/')));
+        $this->assertTrue(File::missing(public_path('files/subjects/math2/1.jpg')));
+        $this->assertTrue(File::missing(public_path('files/subjects/math2/2.jpg')));
+        $this->assertTrue(File::missing(public_path('files/subjects/math2/3.jpg')));
+        $this->assertTrue(File::missing(public_path('files/subjects/math2/4.jpg')));
+    }
+
+
+    public function test_subject_delete_method()
+    {
+        $originalFilePath = __DIR__ . "/../stub/math5.pdf";
+        $testingFilePath = public_path('files/subjects/' . 'math6_book.pdf');
+
+        File::makeDirectory(public_path('files/subjects/math6/'), 0777, true, true);
+
+        copy($originalFilePath,$testingFilePath);
+
+        copy(__DIR__ . "/../stub/1.jpg", public_path('files/subjects/math6/1.jpg'));
+        copy(__DIR__ . "/../stub/2.jpg", public_path('files/subjects/math6/2.jpg'));
+        copy(__DIR__ . "/../stub/3.jpg", public_path('files/subjects/math6/3.jpg'));
+        copy(__DIR__ . "/../stub/4.jpg", public_path('files/subjects/math6/4.jpg'));
+
+        $subject = Subject::factory()->create([
+            'name' => 'math6',
+            'book' => 'math6_book.pdf'
+        ]);
+        
+        $response = $this->call('GET',route('admin.subject.delete',$subject->id));
+
+        $response->assertSessionHasNoErrors();
+
+        $this->assertTrue(File::missing(public_path('files/subjects/math6_book.pdf')));
+
+        $this->assertTrue(File::missing(public_path('files/subjects/math6/')));
+        $this->assertTrue(File::missing(public_path('files/subjects/math6/1.jpg')));
+        $this->assertTrue(File::missing(public_path('files/subjects/math6/2.jpg')));
+        $this->assertTrue(File::missing(public_path('files/subjects/math6/3.jpg')));
+        $this->assertTrue(File::missing(public_path('files/subjects/math6/4.jpg')));
     }
 }

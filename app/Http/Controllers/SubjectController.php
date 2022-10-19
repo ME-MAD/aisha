@@ -7,10 +7,7 @@ use App\Http\Requests\Subject\StoreSubjectRequest;
 use App\Http\Requests\Subject\UpdateSubjectRequest;
 use App\Http\Traits\SubjectTrait;
 use App\Services\PDFService;
-use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
-use setasign\Fpdi\Fpdi;
-use Spatie\PdfToImage\Pdf;
 
 class SubjectController extends Controller
 {
@@ -107,6 +104,9 @@ class SubjectController extends Controller
        
         if($book = $request->file('book'))
         {
+            $this->PDFService->deleteFile($subject->book);
+    
+            $this->PDFService->deleteDirectory($subject->directoryName());
 
             $book_name = $this->PDFService->uploadPdfFile(
                 $book,
@@ -115,32 +115,20 @@ class SubjectController extends Controller
                 null,
                 'book'
             );
-            $ext = $book->getClientOriginalExtension();
-            $book_name = $request->name . "_book" . "." . $ext;
-            $pathArray = explode('_',$book_name);
-            $directory_name = array_shift($pathArray);
-    
-            if(file_exists(public_path($subject->book)))
-            {
-                unlink(public_path($subject->book));
-            }
-
-            if(File::exists(public_path('files/subjects/' . $directory_name . "/")))
-            {
-                File::deleteDirectory(public_path('files/subjects/' . $directory_name . "/"));
-            }
-            
-            $book->move(public_path('files/subjects/'),$book_name);
         }
         else
         {
             $book_name = $request->name . "_book" . "." . "pdf";
+
             rename(
                 public_path($subject->book), 
                 public_path('files/subjects/' . $book_name)
             );
 
-            rename(public_path('files/subjects/' . $subject->name . "/") , public_path('files/subjects/' . $request->name . "/"));
+            rename(
+                public_path('files/subjects/' . $subject->name . "/"),
+                public_path('files/subjects/' . $request->name . "/")
+            );
         }
 
         $subject->update([
@@ -148,19 +136,7 @@ class SubjectController extends Controller
             'book' => $book_name
         ]);
 
-        $pdf = new Pdf(public_path($subject->book));
-        $numberOfPages = $pdf->getNumberOfPages();
-        $path = public_path('files/subjects/' . $subject->name . "/");
-
-        if(!File::exists($path)) 
-        {
-            File::makeDirectory($path, 0777, true, true);
-        }
-
-        for($i = 1; $i <= $numberOfPages; $i++)
-        {
-            $pdf->setPage($i)->setOutputFormat('jpg')->saveImage(public_path('files/subjects/' . $subject->name . "/") . $i . ".jpg");
-        }
+        $this->PDFService->explodePdfToImages($subject->book,$subject->name);
 
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.subject.index'));
@@ -174,19 +150,11 @@ class SubjectController extends Controller
      */
     public function delete(Subject $subject)
     {
-        $pathArray = explode('_',$subject->getRawOriginal('book'));
-        $directory_name = array_shift($pathArray);
+        $this->PDFService->deleteFile($subject->book);
+        $this->PDFService->deleteDirectory($subject->directoryName());
 
-        if(file_exists(public_path($subject->book)))
-        {
-            unlink(public_path($subject->book));
-        }
-
-        if(File::exists(public_path('files/subjects/' . $directory_name . "/")))
-        {
-            File::deleteDirectory(public_path('files/subjects/' . $directory_name . "/"));
-        }
         $subject->delete();
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
     }

@@ -8,23 +8,13 @@ use App\Http\Requests\Lesson\StoreLessonRequest;
 use App\Http\Requests\Lesson\UpdateLessonRequest;
 use App\Http\Traits\LessonTrait;
 use App\Http\Traits\SubjectTrait;
-use Exception;
-use Illuminate\Http\Request;
-use FaizShukri\Quran\Quran;
 use RealRashid\SweetAlert\Facades\Alert;
-use XMLWriter;
 
 class LessonController extends Controller
 {
     use LessonTrait;
     use SubjectTrait;
 
-    private $quran;
-
-    public function __construct(Quran $quran)
-    {
-        $this->quran = $quran;
-    }
 
     public function index(LessonsDataTable $lessonsDataTable)
     {

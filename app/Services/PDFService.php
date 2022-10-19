@@ -43,24 +43,21 @@ class PDFService
         }
     }
 
-    public function upload($fileObject)
+    public function deleteFile($path)
     {
-        $ext = $fileObject->getClientOriginalExtension();
-        $book_name = $request->name . "_book" . "." . $ext;
-        $pathArray = explode('_',$book_name);
-        $directory_name = array_shift($pathArray);
-
-        if(file_exists(public_path($subject->book)))
+        if(file_exists(public_path($path)))
         {
-            unlink(public_path($subject->book));
+            return unlink(public_path($path));
         }
+        return true;
+    }
 
+    public function deleteDirectory($directory_name)
+    {
         if(File::exists(public_path('files/subjects/' . $directory_name . "/")))
         {
             File::deleteDirectory(public_path('files/subjects/' . $directory_name . "/"));
         }
-        
-        $book->move(public_path('files/subjects/'),$book_name);
     }
 
 

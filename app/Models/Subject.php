@@ -23,4 +23,10 @@ class Subject extends Model
             get: fn ($value) => "/files/subjects/" . $value,
         );
     }
+
+    public function directoryName()
+    {
+        $pathArray = explode('_',$this->getRawOriginal('book'));
+        return array_shift($pathArray);
+    }
 }
