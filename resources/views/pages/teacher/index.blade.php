@@ -29,8 +29,7 @@
                     href="{{ route('admin.home') }}">Home</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
                     href="{{ route('admin.teacher.index') }}">Teachers</a>
-                <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                    href="{{ route('admin.teacher.create') }}">Create Teacher</a>
+
             </div>
         </div>
     </div>
@@ -80,7 +79,6 @@
     @include('pages.teacher.createModal')
 
     @include('pages.teacher.editModal')
-    
 @endsection
 
 

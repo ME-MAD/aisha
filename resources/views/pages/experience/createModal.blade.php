@@ -2,8 +2,8 @@
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="creatExperienceModal">إضافة خبرة مدرس</h5>
+            <div class="modal-header p-3 mb-2 bg-primary">
+                <h5 class="modal-title text-white" id="creatExperienceModal">إضافة خبرة مدرس</h5>
             </div>
             <div class="modal-body">
                 <form action="{{ route('admin.experience.store') }}" method="post">

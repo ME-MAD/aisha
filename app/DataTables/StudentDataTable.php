@@ -13,7 +13,10 @@ class StudentDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('edit', 'pages.student.datatable.edit')
+            // ->addColumn('edit', 'pages.student.datatable.edit')
+            ->addColumn('edit', function ($query) {
+                return view('pages.student.datatable.edit', compact('query'));
+            })
             ->addColumn('delete', 'pages.student.datatable.delete')
             ->editColumn('name', function ($q) {
 
@@ -72,6 +75,7 @@ class StudentDataTable extends DataTable
                 }",
                 "fnDrawCallback" => "function( oSettings ) {
                     refreshAllTableLinks()
+                    initEditeStudentModal()
                 }",
 
             ]);
