@@ -102,7 +102,7 @@ class ExperienceController extends Controller
             'title' => $request->title,
             'date' => $request->date,
         ]);
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.experience.index'));
     }
 
@@ -115,7 +115,7 @@ class ExperienceController extends Controller
     public function delete(Experience $experience)
     {
         $experience->delete();
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 }

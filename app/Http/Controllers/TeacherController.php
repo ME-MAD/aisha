@@ -46,7 +46,7 @@ class TeacherController extends Controller
             'qualification' => $request->qualification,
         ]);
 
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
@@ -66,14 +66,14 @@ class TeacherController extends Controller
             'qualification' => $request->qualification,
         ]);
 
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
     public function delete(Teacher $teacher)
     {
         $teacher->delete();
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 }

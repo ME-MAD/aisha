@@ -37,9 +37,9 @@ class GroupStudentController extends Controller
     {
         $students = Student::get();
         $groups = Group::get();
-         return view('pages.groupStudent.create', [
-             'students' => $students,
-             'groups' => $groups,
+        return view('pages.groupStudent.create', [
+            'students' => $students,
+            'groups' => $groups,
         ]);
     }
 
@@ -55,8 +55,8 @@ class GroupStudentController extends Controller
             'student_id' => $request->student_id,
             'group_id' => $request->group_id,
         ]);
-      
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group_students.index'));
     }
 
@@ -98,13 +98,13 @@ class GroupStudentController extends Controller
     public function update(UpdateGroupStudentRequest $request, GroupStudent $groupStudent)
     {
         $groupStudent->update([
-           
+
             'student_id' => $request->student_id,
             'group_id' => $request->group_id,
-           
-            
+
+
         ]);
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group_students.index'));
     }
 
@@ -116,8 +116,8 @@ class GroupStudentController extends Controller
      */
     public function delete(GroupStudent $groupStudent)
     {
-         $groupStudent->delete();
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        $groupStudent->delete();
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 }

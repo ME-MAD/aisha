@@ -26,14 +26,14 @@ class UserController extends Controller
         return view('admin.pages.user.create');
     }
 
-    public function store(UserStoreRequest $request)
+    public function store(UserStorRequest $request)
     {
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route("admin.user.index"));
     }
 
@@ -55,7 +55,7 @@ class UserController extends Controller
             ]
 
         );
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route("admin.user.index"));
     }
 
@@ -64,7 +64,7 @@ class UserController extends Controller
 
 
         $user->delete();
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route("admin.user.index"));
     }
 }

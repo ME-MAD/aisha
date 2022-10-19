@@ -67,7 +67,7 @@ class GroupController extends Controller
             'age_type' => $request->age_type,
         ]);
 
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group.index'));
     }
 
@@ -120,7 +120,7 @@ class GroupController extends Controller
             'age_type' => $request->age_type,
 
         ]);
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group.index'));
     }
 
@@ -133,7 +133,7 @@ class GroupController extends Controller
     public function delete(Group $group)
     {
         $group->delete();
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 }
