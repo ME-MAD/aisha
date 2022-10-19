@@ -28,8 +28,6 @@ class StoreStudentRequest extends FormRequest
            "birthday"=>"required",
            "phone"=>"required",
            "qualification"=>"required",
-          
-          
         ];
     }
 }

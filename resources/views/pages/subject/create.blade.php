@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('css')
+    <link href="{{asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css')}}" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
@@ -39,11 +43,28 @@
                         </div>
                     </div>
                     <div class="widget-content widget-content-area">
-                        <form action="{{ route('admin.subject.store') }}" method="post">
+                        <form action="{{ route('admin.subject.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                            
                             <x-text name="name" label="إسم المادة" :value="old('name')" />
 
+                            <div class="form-group row mb-4">
+                                <label for="book" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">Book</label>
+                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                    <div class="custom-file-container" data-upload-id="myFirstImage">
+                                        <label>Upload <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                                        <label class="custom-file-container__custom-file" >
+                                            <input type="file" class="custom-file-container__custom-file__custom-file-input" accept="application/pdf" name="book">
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                                            <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                        </label>
+                                        <div class="custom-file-container__image-preview"></div>
+                                    </div>
+                                    @error('book')
+                                    <p class="text-danger">{{$message}}</p>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-10">
@@ -57,4 +78,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('javascript')
+    <script src="{{asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js')}}"></script>
+    <script>
+        var firstUpload = new FileUploadWithPreview('myFirstImage')
+    </script>
 @endsection

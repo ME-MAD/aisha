@@ -6,11 +6,17 @@ use App\Models\Subject;
 use App\Http\Requests\Subject\StoreSubjectRequest;
 use App\Http\Requests\Subject\UpdateSubjectRequest;
 use App\Http\Traits\SubjectTrait;
+use App\Services\PDFService;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SubjectController extends Controller
 {
     use SubjectTrait;
+
+    public function __construct(public PDFService $PDFService)
+    {
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -43,9 +49,21 @@ class SubjectController extends Controller
      */
     public function store(StoreSubjectRequest $request)
     {
-        Subject::create([
+        $book_name = $this->PDFService->uploadPdfFile(
+            $request->file('book'),
+            $request->name,
+            'subjects',
+            null,
+            'book'
+        );
+
+        $subject = Subject::create([
             'name' => $request->name,
+            'book' => $book_name
         ]);
+
+        $this->PDFService->explodePdfToImages($subject->book,$subject->name);
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.subject.index'));
     }
@@ -83,9 +101,43 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
+       
+        if($book = $request->file('book'))
+        {
+            $this->PDFService->deleteFile($subject->book);
+    
+            $this->PDFService->deleteDirectory($subject->directoryName());
+
+            $book_name = $this->PDFService->uploadPdfFile(
+                $book,
+                $request->name,
+                'subjects',
+                null,
+                'book'
+            );
+        }
+        else
+        {
+            $book_name = $request->name . "_book" . "." . "pdf";
+
+            rename(
+                public_path($subject->book), 
+                public_path('files/subjects/' . $book_name)
+            );
+
+            rename(
+                public_path('files/subjects/' . $subject->name . "/"),
+                public_path('files/subjects/' . $request->name . "/")
+            );
+        }
+
         $subject->update([
-            'name' => $request->name
+            'name' => $request->name,
+            'book' => $book_name
         ]);
+
+        $this->PDFService->explodePdfToImages($subject->book,$subject->name);
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect(route('admin.subject.index'));
     }
@@ -98,8 +150,17 @@ class SubjectController extends Controller
      */
     public function delete(Subject $subject)
     {
+        $this->PDFService->deleteFile($subject->book);
+        $this->PDFService->deleteDirectory($subject->directoryName());
+
         $subject->delete();
+
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
+    }
+
+    public function getSubjectBook(Subject $subject)
+    {
+        
     }
 }

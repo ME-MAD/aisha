@@ -24,7 +24,8 @@ class UpdateSubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
+            'book' => 'nullable|mimes:pdf|max:10000'
         ];
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
+    
     protected $fillable = ['name', 'birthday', 'phone', 'qualification'];
 
     public function groupStudents()
@@ -24,4 +25,5 @@ class Student extends Model
     {
         return $this->hasMany(StudentLesson::class, 'student_id');
     }
+
 }

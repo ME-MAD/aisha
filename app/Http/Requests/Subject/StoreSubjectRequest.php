@@ -24,7 +24,8 @@ class StoreSubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'name' => 'required',
+            'book' => 'required|mimes:pdf|max:10000'
         ];
     }
 }

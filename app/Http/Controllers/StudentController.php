@@ -7,8 +7,8 @@ use App\Http\Traits\GroupTrait;
 use App\Http\Traits\StudentTrait;
 use App\Models\Student;
 use Illuminate\Http\Request;
-use App\http\requests\Student\StoreStudentRequest;
-use App\http\requests\Student\UpdateStudentRequest;
+use App\Http\Requests\Student\StoreStudentRequest;
+use App\Http\Requests\Student\UpdateStudentRequest;
 use App\Models\Subject;
 use RealRashid\SweetAlert\Facades\Alert;
 

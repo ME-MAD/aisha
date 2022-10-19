@@ -26,7 +26,7 @@
 
                     <span>
                         <a 
-                            class="text-primary showSurahOfLesson" 
+                            class="text-primary" 
                             data-href="{{route('admin.lesson.getQuranSurahAjax')}}"
                             data-lesson="{{$lesson}}"
                         >
