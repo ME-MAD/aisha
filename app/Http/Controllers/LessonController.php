@@ -40,9 +40,8 @@ class LessonController extends Controller
             'title' => $request->title,
             'chapters_count' => $request->chapters_count,
         ]);
-        dd($request);
         Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route('admin.lesson.index'));
+        return redirect()->back();
     }
 
     public function show(Lesson $lesson)
@@ -67,7 +66,7 @@ class LessonController extends Controller
             'chapters_count' => $request->chapters_count,
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route('admin.lesson.index'));
+        return redirect()->back();
     }
 
     public function delete(Lesson $lesson)

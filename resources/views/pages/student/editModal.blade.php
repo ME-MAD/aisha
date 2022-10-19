@@ -1,11 +1,11 @@
-<div class="modal fade" id="editTeacher" tabindex="-1" role="dialog" aria-labelledby="editTeacher" aria-hidden="true">
+<div class="modal fade" id="editStudent" tabindex="-1" role="dialog" aria-labelledby="editStudent" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header p-3 mb-2 bg-warning ">
-                <h5 class="modal-title text-white" id="editTeacher">تعديل بيانات المعلم</h5>
+                <h5 class="modal-title text-white" id="editStudent">تعديل بيانات الطالب</h5>
             </div>
             <div class="modal-body">
-                <form id="editTeacherForm" method="post">
+                <form id="editStudentForm" method="post">
                     @csrf
                     @method('PUT')
 

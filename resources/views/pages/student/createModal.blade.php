@@ -1,12 +1,12 @@
-<div class="modal fade" id="creatTeacherModal" tabindex="-1" role="dialog" aria-labelledby="creatTeacherModal"
+<div class="modal fade" id="creatStudentModal" tabindex="-1" role="dialog" aria-labelledby="creatStudentModal"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header p-3 mb-2 bg-primary">
-                <h5 class="modal-title text-white" id="creatTeacherModal">إضافة مدرس</h5>
+                <h5 class="modal-title text-white" id="creatStudentModal">إضافة طالب</h5>
             </div>
-            <div class="modal-body">
-                <form action="{{ route('admin.teacher.store') }}" method="post">
+            <div class="modal-body px-6">
+                <form action="{{ route('admin.student.store') }}" method="post">
                     @csrf
 
                     <x-text name="name" label="الإسم" :value="old('name')" />

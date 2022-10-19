@@ -108,9 +108,6 @@
                      <li>
                          <a href="{{ route('admin.student.index') }}"> Students </a>
                      </li>
-                     <li>
-                         <a href="{{ route('admin.teacher.create') }}">Create Student</a>
-                     </li>
                  </ul>
              </li>
 
@@ -146,26 +143,15 @@
                          <a href="{{ route('admin.group.index') }}"> Groups </a>
                      </li>
                      <li>
-                         <a href="{{ route('admin.group.create') }}">Create Groups</a>
-                     </li>
-                     <li>
                          <a href="{{ route('admin.group_day.index') }}">Group Days</a>
-                     </li>
-                     <li>
-                         <a href="{{ route('admin.group_day.create') }}">Create Group Days</a>
                      </li>
                      <li>
                          <a href="{{ route('admin.group_students.index') }}">Group Students</a>
                      </li>
                      <li>
-                         <a href="{{ route('admin.group_students.create') }}">Create Group Student</a>
-                     </li>
-                     <li>
                          <a href="{{ route('admin.group_types.index') }}">Group Types</a>
                      </li>
-                     <li>
-                         <a href="{{ route('admin.group_types.create') }}">Edit Group Type</a>
-                     </li>
+
                  </ul>
              </li>
 

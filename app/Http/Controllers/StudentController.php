@@ -24,8 +24,7 @@ class StudentController extends Controller
 
     public function create()
     {
-
-        return view('pages.student.create');
+        //
     }
 
     public function store(StoreStudentRequest $request)
@@ -38,7 +37,7 @@ class StudentController extends Controller
 
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route('admin.student.index'));
+        return redirect()->back();
     }
 
     public function show(Student $student)
@@ -57,15 +56,11 @@ class StudentController extends Controller
 
     public function edit(Student $student)
     {
-        return view('pages.student.edit', [
-
-            'student' => $student
-        ]);
+        //
     }
 
     public function update(UpdateStudentRequest $request, Student $student)
     {
-
         $student->update([
             'name' => $request->name,
             'birthday' => $request->birthday,
@@ -73,9 +68,8 @@ class StudentController extends Controller
             'qualification' => $request->qualification,
 
         ]);
-
         Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route('admin.student.index'));
+        return redirect()->back();
     }
 
     public function delete(Request $request, Student $student)

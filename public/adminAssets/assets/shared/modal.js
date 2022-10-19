@@ -116,3 +116,22 @@ function initEditeLessonModal() {
         $('#editExperienceForm').attr('action', href)
     })
 }
+
+
+//----------------------------Modal Student-----------------------------------//
+
+//Edite Modal Student
+function initEditeStudentModal() {
+    $('.editStudentButton').on('click', function () {
+        let student = $(this).data('student')
+        console.log(student);
+        let href = $(this).data('href')
+
+        $('#editStudentForm #name').val(student.name)
+        $('#editStudentForm #birthday').val(student.birthday)
+        $('#editStudentForm #phone').val(student.phone)
+        $('#editStudentForm #qualification').val(student.qualification)
+
+        $('#editStudentForm').attr('action', href)
+    })
+}

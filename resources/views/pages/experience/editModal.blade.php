@@ -1,8 +1,8 @@
 <div class="modal fade" id="editexperience" tabindex="-1" role="dialog" aria-labelledby="editexperience" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editexperience">تعديل بيانات المعلم</h5>
+            <div class="modal-header p-3 mb-2 bg-warning text-dark">
+                <h5 class="modal-title text-white" id="editexperience">تعديل بيانات المعلم</h5>
             </div>
             <div class="modal-body">
                 <form id="editExperienceForm" method="post">
@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-warning">Save</button>
                         <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Discard</button>
                     </div>
                 </form>
