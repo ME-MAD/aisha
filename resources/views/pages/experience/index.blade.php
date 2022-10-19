@@ -49,7 +49,8 @@
                                 <h4>experiences</h4>
                             </div>
                             <div class="col-xl-2 col-md-2 col-sm-2 col-2">
-                                <a href="{{ route('admin.experience.create') }}" class="btn btn-primary float-right">Create</a>
+                                <a data-toggle='modal' data-target='#creatExperienceModal'
+                                    class="btn btn-primary float-right">Create</a>
                             </div>
                         </div>
                     </div>
@@ -59,47 +60,12 @@
                                 <div class="row">
                                     <div class="col-sm-12">
 
-                                        <table id="style-3" class="table style-3  table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th class="checkbox-column text-center"> Id </th>
-                                                    <th class="text-center">Teacher
-                                                    </th>
-                                                    <th class="text-center">title</th>
-                                                    <th class="text-center">date</th>
-                                                   
-                                                    <th class="text-center">Edit</th>
-                                                    <th class="text-center">Delete</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($experiences as $experience)
-                                                    <tr role="row">
-                                                        <td class="checkbox-column text-center sorting_1">
-                                                            {{ $experience->id }} </td>
-                                                            <td>
-                                                                <a href="{{ route('admin.teacher.show', $experience->id) }}"  class="text-primary">
-                                                                    {{ $experience->teacher->name }}
-                                                                </a>
-                                                            </td>
-
-                                                        <td>{{ $experience->title }}</td>
-                                                        <td>{{ $experience->date->diffForHumans() }}</td>
-                                                        
-                                                        <td class="text-center">
-                                                            <div class="links--ul">
-                                                                <x-edit-link :route="route('admin.experience.edit', $experience->id)" />
-                                                            </div>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <div class="links--ul text-center">
-                                                                <x-delete-link :route="route('admin.experience.delete', $experience->id)" />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                        {!! $dataTable->table(
+                                            [
+                                                'class' => 'table',
+                                            ],
+                                            true,
+                                        ) !!}
                                     </div>
                                 </div>
                             </div>
@@ -109,31 +75,25 @@
             </div>
         </div>
     </div>
+
+    {{-- {{ dd($query) }} --}}
+
+
+    @include('pages.experience.createModal')
+
+    @include('pages.experience.editModal')
 @endsection
 
 
 @section('javascript')
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL CUSTOM SCRIPTS -->
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
-    <script>
-        // var e;
-        c3 = $('#style-3').DataTable({
-            "oLanguage": {
-                "oPaginate": {
-                    "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
-                    "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
-                },
-                "sInfo": "Showing page _PAGE_ of _PAGES_",
-                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
-                "sLengthMenu": "Results :  _MENU_",
-            },
-            "stripeClasses": [],
-            "lengthMenu": [5, 10, 20, 50],
-            "pageLength": 5,
-        });
+    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
+    <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
+    <!-- END PAGE LEVEL CUSTOM SCRIPTS -->
+    <script src="/vendor/datatables/buttons.server-side.js"></script>
 
-        multiCheck(c3);
-    </script>
-    <!-- END PAGE LEVEL SCRIPTS -->
+
+
+    {!! $dataTable->scripts() !!}
 @endsection

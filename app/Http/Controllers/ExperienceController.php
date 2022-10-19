@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ExperienceDataTable;
 use App\Models\Experience;
 use App\Http\Requests\Experience\StoreExperienceRequest;
 use App\Http\Requests\Experience\UpdateExperienceRequest;
@@ -19,11 +20,14 @@ class ExperienceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ExperienceDataTable $experienceDataTable)
+
     {
         $experiences = $this->getExperiences();
-        return view('pages.experience.index', [
-            'experiences' => $experiences,
+        $teachers  = Teacher::select(['id', 'name'])->get();
+        return $experienceDataTable->render('pages.experience.index', [
+            'teachers' => $teachers,
+            'experiences' => $experiences
         ]);
     }
 
@@ -34,8 +38,8 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-       
-        $teacher = Teacher::select(['id','name'])->get();
+
+        $teacher = Teacher::select(['id', 'name'])->get();
         return view('pages.experience.create', [
             'teacher' => $teacher,
         ]);
@@ -49,13 +53,14 @@ class ExperienceController extends Controller
      */
     public function store(StoreExperienceRequest $request)
     {
+
         Experience::create([
             'title' => $request->title,
             'date' => $request->date,
             'teacher_id' => $request->teacher_id
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
-        return redirect(route('admin.teacher.show', $request->teacher_id));
+        return redirect()->back();
     }
 
     /**
@@ -77,7 +82,7 @@ class ExperienceController extends Controller
     public function edit(Experience $experience)
     {
 
-        $teachers = Teacher::select(['id','name'])->get();
+        $teachers = Teacher::select(['id', 'name'])->get();
         return view('pages.experience.edit', [
             'teachers'  => $teachers,
             'experience'  => $experience,
@@ -98,7 +103,7 @@ class ExperienceController extends Controller
             'date' => $request->date,
         ]);
         Alert::success('نجاح', 'تمت العملية بنجاح');
-         return redirect(route('admin.experience.index'));
+        return redirect(route('admin.experience.index'));
     }
 
     /**
