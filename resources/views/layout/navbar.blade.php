@@ -155,6 +155,12 @@
                          <a href="{{ route('admin.group_day.create') }}">Create Group Days</a>
                      </li>
                      <li>
+                         <a href="{{ route('admin.group_students.index') }}">Group Students</a>
+                     </li>
+                     <li>
+                         <a href="{{ route('admin.group_students.create') }}">Create Group Student</a>
+                     </li>
+                     <li>
                          <a href="{{ route('admin.group_types.index') }}">Group Types</a>
                      </li>
                      <li>
@@ -195,7 +201,7 @@
                          <a href="{{ route('admin.subject.index') }}"> Subjects </a>
                      </li>
                      <li>
-                         <a href="{{ route('admin.subject.create') }}">Create Subject</a>
+                         <a href="{{ route('admin.lesson.index') }}"> Lessons </a>
                      </li>
                  </ul>
              </li>
@@ -218,7 +224,7 @@
                              <line x1="1" y1="9" x2="4" y2="9"></line>
                              <line x1="1" y1="14" x2="4" y2="14"></line>
                          </svg>
-                         <span>Lessons</span>
+                         <span>Exams</span>
                      </div>
                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -228,17 +234,17 @@
                  </a>
                  <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
                      <li>
-                         <a href="{{ route('admin.lesson.index') }}"> Lessons </a>
+                         <a href="{{ route('admin.exam.index') }}">Exams</a>
                      </li>
                      <li>
-                         <a href="{{ route('admin.lesson.create') }}">Create Lesson</a>
+                         <a href="{{ route('admin.exam.create') }}">Create Exam</a>
                      </li>
                  </ul>
              </li>
 
 
 
-             <li class="menu single-menu">
+             {{-- <li class="menu single-menu">
                  <a href="#more" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                      <div class="">
                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -298,7 +304,7 @@
                          <a href="../../documentation/index.html"> Documentation </a>
                      </li>
                  </ul>
-             </li>
+             </li> --}}
          </ul>
      </nav>
  </div>

@@ -8,6 +8,7 @@ use App\Http\Requests\Lesson\StoreLessonRequest;
 use App\Http\Requests\Lesson\UpdateLessonRequest;
 use App\Http\Traits\LessonTrait;
 use App\Http\Traits\SubjectTrait;
+use App\Models\Subject;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class LessonController extends Controller
@@ -18,7 +19,10 @@ class LessonController extends Controller
 
     public function index(LessonsDataTable $lessonsDataTable)
     {
-        return $lessonsDataTable->render('pages.lesson.index');
+        $subjects  = Subject::select(['id', 'name'])->get();
+        return $lessonsDataTable->render('pages.lesson.index', [
+            'subjects' => $subjects
+        ]);
     }
 
     public function create()
@@ -36,7 +40,8 @@ class LessonController extends Controller
             'title' => $request->title,
             'chapters_count' => $request->chapters_count,
         ]);
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        dd($request);
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.lesson.index'));
     }
 
@@ -61,7 +66,7 @@ class LessonController extends Controller
             'title' => $request->title,
             'chapters_count' => $request->chapters_count,
         ]);
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.lesson.index'));
     }
 

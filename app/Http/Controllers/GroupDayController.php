@@ -58,7 +58,7 @@ class GroupDayController extends Controller
             'day' => $request->day,
         ]);
 
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group_day.index'));
     }
 
@@ -101,7 +101,7 @@ class GroupDayController extends Controller
             'group_id' => $request->group_id,
             'day' => $request->day,
         ]);
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group_day.index'));
     }
 
@@ -114,7 +114,7 @@ class GroupDayController extends Controller
     public function delete(GroupDay $groupDay)
     {
         $groupDay->delete();
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 

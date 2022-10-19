@@ -37,7 +37,7 @@ class StudentController extends Controller
             'qualification' => $request->qualification,
 
         ]);
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.student.index'));
     }
 
@@ -74,7 +74,7 @@ class StudentController extends Controller
 
         ]);
 
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.student.index'));
     }
 
@@ -82,7 +82,7 @@ class StudentController extends Controller
     {
         $student->delete();
 
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 }

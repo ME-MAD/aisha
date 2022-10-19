@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lesson extends Model
 {
     use HasFactory;
-    protected $fillable = ['subject_id', 'title', 'chapters_count'];
+    protected $fillable = ['subject_id', 'title', 'chapters_count', 'from_page', 'to_page'];
 
     public function subject()
     {

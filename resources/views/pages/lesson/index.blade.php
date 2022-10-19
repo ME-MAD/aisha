@@ -5,8 +5,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/custom_dt_custom.css') }}"> --}}
-    <!-- END PAGE LEVEL CUSTOM STYLES -->
 @endsection
 
 @section('breadcrumb')
@@ -29,8 +27,6 @@
                     href="{{ route('admin.home') }}">Home</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
                     href="{{ route('admin.lesson.index') }}">Lessons</a>
-                <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                    href="{{ route('admin.lesson.create') }}">Create Lesson</a>
             </div>
         </div>
     </div>
@@ -43,21 +39,23 @@
         <div class="row layout-spacing">
             <div class="col-lg-12">
                 <div class="statbox widget box box-shadow">
-                    <div class="widget-header">
-                        <div class="row align-items-center">
-                            <div class="col-xl-10 col-md-10 col-sm-10 col-10">
-                                <h4>Lessons</h4>
-                            </div>
-                            <div class="col-xl-2 col-md-2 col-sm-2 col-2">
-                                <a href="{{ route('admin.lesson.create') }}" class="btn btn-primary float-right">Create</a>
+                    <div class="widget-content widget-content-area">
+                        <div class="widget-header">
+                            <div class="row align-items-center">
+                                <div class="col-xl-10 col-md-10 col-sm-10 col-10">
+                                    <h4>Lessons</h4>
+                                </div>
+                                <div class="col-xl-2 col-md-2 col-sm-2 col-2">
+                                    <a data-toggle='modal' data-target='#creatLessonModal'
+                                        class="btn btn-primary float-right">Create</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="widget-content widget-content-area">
                         <div class="table-responsive mb-4">
                             <div id="style-3_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                                 <div class="row">
                                     <div class="col-sm-12">
+
                                         {!! $dataTable->table(
                                             [
                                                 'class' => 'table',
@@ -73,18 +71,19 @@
             </div>
         </div>
     </div>
+
+    @include('pages.lesson.createModal')
+
+    @include('pages.lesson.editModal')
 @endsection
 
 
 @section('javascript')
-    <!-- BEGIN PAGE LEVEL CUSTOM SCRIPTS -->
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
-    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
+
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
-    <!-- END PAGE LEVEL CUSTOM SCRIPTS -->
+
     <script src="/vendor/datatables/buttons.server-side.js"></script>
-
-
 
     {!! $dataTable->scripts() !!}
 @endsection

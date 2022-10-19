@@ -53,7 +53,7 @@ class GroupTypeController extends Controller
             'price' => $price,
         ]);
 
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group_types.index'));
     }
 
@@ -98,7 +98,7 @@ class GroupTypeController extends Controller
             'price' => $price,
 
         ]);
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group_types.index'));
     }
 
@@ -111,7 +111,7 @@ class GroupTypeController extends Controller
     public function delete(GroupType $group_type)
     {
         $group_type->delete();
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 }

@@ -23,7 +23,10 @@ class LessonsDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('edit', 'pages.lesson.datatable.edit')
+            // ->addColumn('edit', 'pages.lesson.datatable.edit')
+            ->addColumn('edit', function ($query) {
+                return view('pages.lesson.datatable.edit', compact('query'));
+            })
             ->addColumn('delete', 'pages.lesson.datatable.delete')
             ->editColumn('Subject.name', function ($q) {
                 return $q->Subject->name ?? "";
@@ -46,6 +49,8 @@ class LessonsDataTable extends DataTable
             'lessons.id',
             'subject_id',
             'title',
+            'from_page',
+            'to_page',
             'chapters_count',
         ])->with([
             'subject:id,name',
@@ -101,6 +106,7 @@ class LessonsDataTable extends DataTable
             }",
                 "fnDrawCallback" => "function( oSettings ) {
                 refreshAllTableLinks()
+                initEditeLessonModal()
             }",
 
             ]);
@@ -132,6 +138,18 @@ class LessonsDataTable extends DataTable
                 'name' => 'title',
                 'data' => 'title',
                 'title' => 'title',
+                "className" => 'search--col'
+            ],
+            [
+                'name' => 'from_page',
+                'data' => 'from_page',
+                'title' => 'from_page',
+                "className" => 'search--col'
+            ],
+            [
+                'name' => 'to_page',
+                'data' => 'to_page',
+                'title' => 'to_page',
                 "className" => 'search--col'
             ],
 

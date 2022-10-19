@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/custom_dt_custom.css') }}">
     <!-- END PAGE LEVEL CUSTOM STYLES -->
+    <link href="{{ asset('adminAssets/plugins/flatpickr/flatpickr.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endsection
 
 @section('breadcrumb')
@@ -76,7 +78,7 @@
         </div>
     </div>
 
-    {{-- {{ dd($query) }} --}}
+
 
 
     @include('pages.experience.createModal')
@@ -92,7 +94,12 @@
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
     <!-- END PAGE LEVEL CUSTOM SCRIPTS -->
     <script src="/vendor/datatables/buttons.server-side.js"></script>
-
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+    <script>
+        $(".basic").select2({
+            tags: true,
+        });
+    </script>
 
 
     {!! $dataTable->scripts() !!}

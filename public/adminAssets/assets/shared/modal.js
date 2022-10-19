@@ -96,3 +96,23 @@ function initEditeExperienceModal() {
         $('#editExperienceForm').attr('action', href)
     })
 }
+
+
+//----------------------------Modal Lesson-----------------------------------//
+
+//Edite Modal Lesson
+function initEditeLessonModal() {
+    $('.editLessonButton').on('click', function () {
+        let lesson = $(this).data('lesson')
+        console.log(lesson);
+        let href = $(this).data('href')
+
+        $('#editLessonForm #subject_id').val(lesson.subject_id)
+        $('#editLessonForm #title').val(lesson.title)
+        $('#editLessonForm #chapters_count').val(lesson.chapters_count)
+        $('#editLessonForm #from_page').val(lesson.from_page)
+        $('#editLessonForm #to_page').val(lesson.to_page)
+
+        $('#editExperienceForm').attr('action', href)
+    })
+}

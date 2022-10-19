@@ -43,7 +43,7 @@ class SyllabusController extends Controller
             'is_reverse' => $request->is_reverse,
 
         ]);
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
@@ -85,7 +85,7 @@ class SyllabusController extends Controller
             'is_reverse' => $request->is_reverse,
         ]);
 
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
@@ -98,7 +98,7 @@ class SyllabusController extends Controller
     public function delete(syllabus $syllabus)
     {
         $syllabus->delete();
-        Alert::success('نجاح', 'تمت العملية بنجاح');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 }
