@@ -17,7 +17,7 @@
         "santigarcor/laratrust": "^7.1",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi": "^2.3",
-        "spatie/pdf-to-image": "^1.2",
+        "spatie/pdf-to-image": "^2.2",
         "yajra/laravel-datatables": "^9.0",
         "yajra/laravel-datatables-buttons": "^9.0",
         "yajra/laravel-datatables-oracle": "^10.0"
