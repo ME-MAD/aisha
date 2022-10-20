@@ -20,7 +20,10 @@ class GroupDataTable extends DataTable
     {
 
         return (new EloquentDataTable($query))
-            ->addColumn('edit', 'pages.group.datatable.edit')
+            // ->addColumn('edit', 'pages.group.datatable.edit')
+            ->addColumn('edit', function ($query) {
+                return view('pages.group.datatable.edit', compact('query'));
+            })
             ->addColumn('delete', 'pages.group.datatable.delete')
             ->editColumn('groupType.name', function ($q) {
                 return $q->groupType->name ?? "";
@@ -106,6 +109,7 @@ class GroupDataTable extends DataTable
                 }",
                 "fnDrawCallback" => "function( oSettings ) {
                     refreshAllTableLinks()
+                    initEditeGroupModal()
                 }",
 
             ]);
@@ -120,7 +124,7 @@ class GroupDataTable extends DataTable
     {
         return [
             [
-                'name' => 'id',
+                'name' => 'groups.id',
                 'data' => 'id',
                 'title' => '#',
                 "className" => 'search--col exact'
