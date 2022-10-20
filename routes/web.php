@@ -136,6 +136,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{group_type}', [GroupTypeController::class, 'edit'])->name('edit');
         Route::put('update/{group_type}', [GroupTypeController::class, 'update'])->name('update');
         Route::get('delete/{group_type}', [GroupTypeController::class, 'delete'])->name('delete');
+
+        Route::get('show/{group_type}', [GroupTypeController::class, 'show'])->name('show');
     });
 
 

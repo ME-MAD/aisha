@@ -49,7 +49,8 @@
                                 <h4>Group Types</h4>
                             </div>
                             <div class="col-xl-2 col-md-2 col-sm-2 col-2">
-                                <a href="{{ route('admin.group_types.create') }}" class="btn btn-primary float-right">Create</a>
+                                <a class="btn btn-primary float-right" data-toggle="modal"
+                                    data-target="#creatGroupTypeModal">Create</a>
                             </div>
                         </div>
                     </div>
@@ -59,42 +60,12 @@
                                 <div class="row">
                                     <div class="col-sm-12">
 
-                                        <table id="style-3" class="table style-3  table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th class="checkbox-column text-center"> Id </th>
-                                                    <th class="text-center">Name</th>
-                                                    <th class="text-center">Price</th>
-                                                    <th class="text-center">Days Num
-                                                    </th>
-                                                    <th class="text-center">Edit</th>
-                                                    <th class="text-center">Delete</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($grouptypes as $grouptype)
-                                                    <tr role="row">
-                                                        <td class="checkbox-column text-center sorting_1">
-                                                            {{ $grouptype->id }} </td>
-
-                                                        <td>{{ $grouptype->name }}</td>
-                                                        <td>{{ $grouptype->price }}</td>
-                                                        <td>{{ $grouptype->days_num }}</td>
-                                                       
-                                                        <td class="text-center">
-                                                            <div class="links--ul">
-                                                                <x-edit-link :route="route('admin.group_types.edit', $grouptype->id)" />
-                                                            </div>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <div class="links--ul text-center">
-                                                                <x-delete-link :route="route('admin.group_types.delete', $grouptype->id)" />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                        {!! $dataTable->table(
+                                            [
+                                                'class' => 'table',
+                                            ],
+                                            true,
+                                        ) !!}
                                     </div>
                                 </div>
                             </div>
@@ -104,31 +75,22 @@
             </div>
         </div>
     </div>
+
+    @include('pages.groupType.createModal')
+
+    @include('pages.groupType.editModal')
 @endsection
 
 
 @section('javascript')
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL CUSTOM SCRIPTS -->
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
-    <script>
-        // var e;
-        c3 = $('#style-3').DataTable({
-            "oLanguage": {
-                "oPaginate": {
-                    "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
-                    "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
-                },
-                "sInfo": "Showing page _PAGE_ of _PAGES_",
-                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
-                "sLengthMenu": "Results :  _MENU_",
-            },
-            "stripeClasses": [],
-            "lengthMenu": [5, 10, 20, 50],
-            "pageLength": 5,
-        });
+    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
+    <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
+    <!-- END PAGE LEVEL CUSTOM SCRIPTS -->
+    <script src="/vendor/datatables/buttons.server-side.js"></script>
 
-        multiCheck(c3);
-    </script>
-    <!-- END PAGE LEVEL SCRIPTS -->
+
+
+    {!! $dataTable->scripts() !!}
 @endsection

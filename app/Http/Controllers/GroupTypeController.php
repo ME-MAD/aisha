@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\GroupTypeDataTable;
 use App\Models\GroupType;
 use App\Http\Requests\GroupType\StoreGroupTypeRequest;
 use App\Http\Requests\GroupType\UpdateGroupTypeRequest;
@@ -20,12 +21,13 @@ class GroupTypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(GroupTypeDataTable $groupTypeDataTable)
     {
-        $grouptypes = $this->getGroupType();
-        return view('pages.groupType.index', [
-            "grouptypes" => $grouptypes,
-        ]);
+        return  $groupTypeDataTable->render('pages.groupType.index');
+        // $grouptypes = $this->getGroupType();
+        // return view('pages.groupType.index', [
+        //     "grouptypes" => $grouptypes,
+        // ]);
     }
 
     /**
