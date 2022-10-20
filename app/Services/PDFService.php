@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Spatie\PdfToImage\Pdf;
 
 class PDFService
@@ -17,11 +18,15 @@ class PDFService
 
         if($directoryName)
         {
-            $fileObject->move(public_path('files/'. $directoryName .'/'), $fileName);
+            Storage::disk('public')->putFileAs(
+                'files/'. $directoryName . '/',
+                $fileObject,
+                $fileName
+            );
         }
         else
         {
-            $fileObject->move(public_path('files/'), $fileName);
+            Storage::disk('public')->putFile('files/' . $fileName, $fileObject);
         }
         return $fileName;
     }

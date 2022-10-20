@@ -6,6 +6,7 @@ use App\Models\Subject;
 use App\Http\Requests\Subject\StoreSubjectRequest;
 use App\Http\Requests\Subject\UpdateSubjectRequest;
 use App\Http\Traits\SubjectTrait;
+use App\Jobs\BreakPDFIntoImagesJob;
 use App\Services\PDFService;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -61,7 +62,7 @@ class SubjectController extends Controller
             'book' => $book_name
         ]);
 
-        $this->PDFService->explodePdfToImages($subject->book, $subject->name);
+        BreakPDFIntoImagesJob::dispatch($this->PDFService,$subject);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.subject.index'));
