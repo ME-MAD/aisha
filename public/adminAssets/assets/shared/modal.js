@@ -135,3 +135,22 @@ function initEditeStudentModal() {
         $('#editStudentForm').attr('action', href)
     })
 }
+
+
+//----------------------------Modal Group Type-----------------------------------//
+
+//Edite Modal Group Type
+function initEditeGroupTypeModal() {
+    $('.editGroupTypeButton').on('click', function () {
+        let GroupType = $(this).data('grouptype')
+
+        let href = $(this).data('href')
+
+        $('#editGroupTypeForm #name').val(GroupType.name)
+        $('#editGroupTypeForm #price').val(GroupType.price)
+        $('#editGroupTypeForm #days_num').val(GroupType.days_num)
+
+
+        $('#editGroupTypeForm').attr('action', href)
+    })
+}
