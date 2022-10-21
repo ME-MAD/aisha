@@ -76,8 +76,6 @@
         </div>
     </div>
     @include('pages.groupDays.createModal')
-
-    @include('pages.groupDays.editModal')
 @endsection
 
 

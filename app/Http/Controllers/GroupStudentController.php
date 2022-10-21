@@ -12,6 +12,7 @@ use App\Http\Traits\StudentTrait;
 use App\Models\Group;
 use App\Models\Student;
 use RealRashid\SweetAlert\Facades\Alert;
+use Symfony\Component\VarDumper\Cloner\Stub;
 
 class GroupStudentController extends Controller
 {
@@ -25,7 +26,12 @@ class GroupStudentController extends Controller
      */
     public function index(GroupStudentDataTable $GroupStudentDataTable)
     {
-        return $GroupStudentDataTable->render('pages.groupStudent.index');
+        $groups = Group::get();
+        $students = Student::get();
+        return $GroupStudentDataTable->render('pages.groupStudent.index', [
+            'groups' => $groups,
+            'students' => $students,
+        ]);
     }
 
     /**
@@ -35,12 +41,12 @@ class GroupStudentController extends Controller
      */
     public function create()
     {
-        $students = Student::get();
-        $groups = Group::get();
-        return view('pages.groupStudent.create', [
-            'students' => $students,
-            'groups' => $groups,
-        ]);
+        // $students = Student::get();
+        // $groups = Group::get();
+        // return view('pages.groupStudent.create', [
+        //     'students' => $students,
+        //     'groups' => $groups,
+        // ]);
     }
 
     /**
@@ -79,13 +85,13 @@ class GroupStudentController extends Controller
      */
     public function edit(GroupStudent $groupStudent)
     {
-        $students = Student::get();
-        $groups = Group::get();
-        return view('pages.groupStudent.edit', [
-            'groupStudent'  => $groupStudent,
-            'students'  => $students,
-            'groups'  => $groups,
-        ]);
+        // $students = Student::get();
+        // $groups = Group::get();
+        // return view('pages.groupStudent.edit', [
+        //     'groupStudent'  => $groupStudent,
+        //     'students'  => $students,
+        //     'groups'  => $groups,
+        // ]);
     }
 
     /**
@@ -97,15 +103,15 @@ class GroupStudentController extends Controller
      */
     public function update(UpdateGroupStudentRequest $request, GroupStudent $groupStudent)
     {
-        $groupStudent->update([
+        // $groupStudent->update([
 
-            'student_id' => $request->student_id,
-            'group_id' => $request->group_id,
+        //     'student_id' => $request->student_id,
+        //     'group_id' => $request->group_id,
 
 
-        ]);
-        Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route('admin.group_students.index'));
+        // ]);
+        // Alert::toast('تمت العملية بنجاح', 'success');
+        // return redirect(route('admin.group_students.index'));
     }
 
     /**
