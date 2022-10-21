@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\GroupDayDataTable;
 use App\Models\GroupDay;
 use App\Http\Requests\GroupDay\StoreGroupDayRequest;
 use App\Http\Requests\GroupDay\UpdateGroupDayRequest;
@@ -21,11 +22,15 @@ class GroupDayController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(GroupDayDataTable $groupDayDataTable)
     {
         $groupdays = $this->getGroupDays();
-        return view('pages.groupDays.index', [
+        $groups = Group::get();
+
+        return $groupDayDataTable->render('pages.groupDays.index', [
             'groupdays' => $groupdays,
+            'groups' => $groups,
+
         ]);
     }
 
@@ -36,13 +41,13 @@ class GroupDayController extends Controller
      */
     public function create()
     {
-        $groups = Group::with(['groupType', 'groupDays'])->get();
+        // $groups = Group::with(['groupType', 'groupDays'])->get();
 
 
 
-        return view('pages.groupDays.create', [
-            'groups' => $groups,
-        ]);
+        // return view('pages.groupDays.create', [
+        //     'groups' => $groups,
+        // ]);
     }
 
     /**
@@ -81,11 +86,11 @@ class GroupDayController extends Controller
      */
     public function edit(GroupDay $groupDay)
     {
-        $groups = $this->getGroups();
-        return view('pages.groupDays.edit', [
-            'groupDay'  => $groupDay,
-            'groups'  => $groups,
-        ]);
+        // $groups = $this->getGroups();
+        // return view('pages.groupDays.edit', [
+        //     'groupDay'  => $groupDay,
+        //     'groups'  => $groups,
+        // ]);
     }
 
     /**
