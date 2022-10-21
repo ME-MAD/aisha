@@ -8,9 +8,9 @@
             <div class="modal-body">
                 <form action="{{ route('admin.group.store') }}" method="post">
                     @csrf
-                    <x-time name="from" label="من" :value="old('from')" />
+                    <x-time name="from" id="from_create" label="من" :value="old('from')" />
 
-                    <x-time name="to" label="إلى" :value="old('to')" />
+                    <x-time name="to" id="to_create" label="إلى" :value="old('to')" />
 
 
 

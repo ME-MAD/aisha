@@ -8,9 +8,9 @@
                 <form id="editGroupForm" method="post">
                     @csrf
                     @method('PUT')
-                    <x-time name="from" label="من" id="from" class="text-warning" />
+                    <x-time name="from" id="from_edit" label="من" id="from" class="text-warning" />
 
-                    <x-time name="to" label="إلى" id="to" class="text-warning" />
+                    <x-time name="to" id="from_edit" label="إلى" id="to" class="text-warning" />
 
 
 

@@ -5,9 +5,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
-
-    <link href="{{ asset('adminAssets/plugins/flatpickr/flatpickr.css') }}" rel="stylesheet" type="text/css">
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}"> --}}
 @endsection
 
 @section('breadcrumb')
@@ -94,24 +91,4 @@
     <script src="/vendor/datatables/buttons.server-side.js"></script>
 
     {!! $dataTable->scripts() !!}
-    <script src="{{ asset('adminAssets/plugins/flatpickr/flatpickr.js') }}"></script>
-    {{-- <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script> --}}
-    <script>
-        var f4 = flatpickr(document.getElementById('from'), {
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: "H:i",
-            // defaultDate: "13:45"
-        });
-        var f5 = flatpickr(document.getElementById('to'), {
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: "H:i",
-            // defaultDate: "13:45"
-        });
-
-        // $(".basic").select2({
-        //     tags: true,
-        // });
-    </script>
 @endsection

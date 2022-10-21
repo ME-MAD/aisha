@@ -31,12 +31,11 @@ class GroupDataTable extends DataTable
             ->editColumn('teacher.name', function ($q) {
                 return $q->teacher->name ?? "";
             })
-
             ->editColumn('from', function ($q) {
-                return  date('g:i:s A', strtotime($q->from));
+                return  date('h:i a', strtotime($q->from));
             })
             ->editColumn('to', function ($q) {
-                return  date('g:i:s A', strtotime($q->to));
+                return  date('h:i a', strtotime($q->to));
             })
             ->rawColumns(['edit', 'delete'])
 
