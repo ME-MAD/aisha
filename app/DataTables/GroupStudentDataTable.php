@@ -19,7 +19,7 @@ class GroupStudentDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('edit', 'pages.groupStudent.datatable.edit')
+
             ->addColumn('delete', 'pages.groupStudent.datatable.delete')
             ->editColumn('student.name', function ($q) {
                 return $q->student->name ?? "";
@@ -27,7 +27,7 @@ class GroupStudentDataTable extends DataTable
             ->editColumn('group.from', function ($q) {
                 return $q->group->from ? $q->group->from . " - " . $q->group->to : '';
             })
-            ->rawColumns(['edit', 'delete'])
+            ->rawColumns(['delete'])
             ->setRowId('id');
     }
 
@@ -132,16 +132,16 @@ class GroupStudentDataTable extends DataTable
                 "className" => 'search--col'
             ],
 
-            [
-                'name' => 'edit',
-                'data' => 'edit',
-                'title' => 'Edit',
-                'printable' => false,
-                'exportable' => false,
-                'orderable' => false,
-                'searchable' => false,
-                "className" => 'not--search--col'
-            ],
+            // [
+            //     'name' => 'edit',
+            //     'data' => 'edit',
+            //     'title' => 'Edit',
+            //     'printable' => false,
+            //     'exportable' => false,
+            //     'orderable' => false,
+            //     'searchable' => false,
+            //     "className" => 'not--search--col'
+            // ],
 
             [
                 'name' => 'delete',

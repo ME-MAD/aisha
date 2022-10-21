@@ -23,9 +23,7 @@ class GroupDayDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('edit', function ($query) {
-                return view('pages.groupDays.datatable.edit', compact('query'));
-            })
+
             ->addColumn('delete', 'pages.groupDays.datatable.delete')
 
             ->editColumn('group.from', function ($q) {
@@ -34,7 +32,7 @@ class GroupDayDataTable extends DataTable
             ->editColumn('group.to', function ($q) {
                 return $q->group->to ?? "";
             })
-            ->rawColumns(['edit', 'delete', 'name'])
+            ->rawColumns(['delete'])
             ->setRowId('id');
     }
 
@@ -112,7 +110,7 @@ class GroupDayDataTable extends DataTable
                 }",
                 "fnDrawCallback" => "function( oSettings ) {
                     refreshAllTableLinks()
-                    initEditeGroupDayModal()
+                  
                 }",
 
             ]);
@@ -134,7 +132,7 @@ class GroupDayDataTable extends DataTable
 
             ['name' => 'day', 'data' => 'day', 'title' => 'اليوم', "className" => 'search--col'],
 
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+
             ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
         ];
     }
