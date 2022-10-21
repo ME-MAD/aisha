@@ -7,18 +7,19 @@ use Illuminate\View\Component;
 class Time extends Component
 {
 
- 
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct( public $name,
-    public $label,
-    public $value = null,
-    public $id = null)
-    {
-       
+    public function __construct(
+        public $name,
+        public $label,
+        public $value = null,
+        public $class = null,
+        public $id = null
+    ) {
     }
 
     /**

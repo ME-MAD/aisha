@@ -156,6 +156,7 @@ function initEditeGroupTypeModal() {
 }
 
 
+
 //----------------------------Modal Group Days-----------------------------------//
 
 //Edite Modal Group Days
@@ -172,5 +173,25 @@ function initEditeGroupDayModal() {
 
 
         $('#editGroupDayForm').attr('action', href)
+
+
+//----------------------------Modal Group -----------------------------------//
+
+//Edite Modal Group 
+function initEditeGroupModal() {
+    $('.editGroupButton').on('click', function () {
+        let Group = $(this).data('group')
+        let href = $(this).data('href')
+
+        $('#editGroupForm #from').val(Group.from)
+        $('#editGroupForm #to').val(Group.to)
+        $('#editGroupForm #teacherId').val(Group.teacher_id)
+        $('#editGroupForm #groupTypeId').val(Group.group_type_id)
+        $('#editGroupForm #ageType').val(Group.age_type)
+        console.log(Group.age_type);
+
+
+        $('#editGroupForm').attr('action', href)
+
     })
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +10,20 @@ class Group extends Model
 {
     use HasFactory;
     protected $fillable = ['from', 'to', 'teacher_id', 'group_type_id', 'age_type'];
+
+    protected function from(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => date('H:i',strtotime($value)),
+        );
+    }
+
+    protected function to(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => date('H:i',strtotime($value)),
+        );
+    }
 
     public function teacher()
     {
@@ -41,4 +56,6 @@ class Group extends Model
     {
         return $this->groupType->days_num - $this->groupDays->count();
     }
+
+    
 }

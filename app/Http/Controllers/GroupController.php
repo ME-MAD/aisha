@@ -28,12 +28,12 @@ class GroupController extends Controller
      */
     public function index(GroupDataTable $GroupDataTable)
     {
-        // $groups = $this->getGroups();
-
-        // return view('pages.group.index', [
-        //     'groups' => $groups,
-        // ]);
-        return $GroupDataTable->render('pages.group.index');
+        $teaches = Teacher::get();
+        $groupTypes = GroupType::get();
+        return $GroupDataTable->render('pages.group.index', [
+            'teachers' => $teaches,
+            'groupTypes' => $groupTypes,
+        ]);
     }
 
     /**

@@ -20,7 +20,10 @@ class GroupDataTable extends DataTable
     {
 
         return (new EloquentDataTable($query))
-            ->addColumn('edit', 'pages.group.datatable.edit')
+            // ->addColumn('edit', 'pages.group.datatable.edit')
+            ->addColumn('edit', function ($query) {
+                return view('pages.group.datatable.edit', compact('query'));
+            })
             ->addColumn('delete', 'pages.group.datatable.delete')
             ->editColumn('groupType.name', function ($q) {
                 return $q->groupType->name ?? "";
@@ -28,12 +31,11 @@ class GroupDataTable extends DataTable
             ->editColumn('teacher.name', function ($q) {
                 return $q->teacher->name ?? "";
             })
-
             ->editColumn('from', function ($q) {
-                return  date('g:i:s A', strtotime($q->from));
+                return  date('h:i a', strtotime($q->from));
             })
             ->editColumn('to', function ($q) {
-                return  date('g:i:s A', strtotime($q->to));
+                return  date('h:i a', strtotime($q->to));
             })
             ->rawColumns(['edit', 'delete'])
 
@@ -106,6 +108,7 @@ class GroupDataTable extends DataTable
                 }",
                 "fnDrawCallback" => "function( oSettings ) {
                     refreshAllTableLinks()
+                    initEditeGroupModal()
                 }",
 
             ]);
@@ -120,7 +123,7 @@ class GroupDataTable extends DataTable
     {
         return [
             [
-                'name' => 'id',
+                'name' => 'groups.id',
                 'data' => 'id',
                 'title' => '#',
                 "className" => 'search--col exact'
