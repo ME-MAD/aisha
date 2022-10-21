@@ -94,12 +94,7 @@
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
     <!-- END PAGE LEVEL CUSTOM SCRIPTS -->
     <script src="/vendor/datatables/buttons.server-side.js"></script>
-    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
-    <script>
-        $(".basic").select2({
-            tags: true,
-        });
-    </script>
+
 
 
     {!! $dataTable->scripts() !!}

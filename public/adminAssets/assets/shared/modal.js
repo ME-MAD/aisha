@@ -154,3 +154,23 @@ function initEditeGroupTypeModal() {
         $('#editGroupTypeForm').attr('action', href)
     })
 }
+
+
+//----------------------------Modal Group Days-----------------------------------//
+
+//Edite Modal Group Days
+function initEditeGroupDayModal() {
+    $('.editGroupDayButton').on('click', function () {
+        let GroupDay = $(this).data('groupday')
+        console.log(GroupDay);
+        let href = $(this).data('href')
+
+        $('#editGroupDayForm #groupform').val(GroupDay.group.from)
+        $('#editGroupDayForm #groupto').val(GroupDay.group.to)
+
+        $('#editGroupDayForm #day').val(GroupDay.day)
+
+
+        $('#editGroupDayForm').attr('action', href)
+    })
+}
