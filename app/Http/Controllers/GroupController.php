@@ -28,12 +28,17 @@ class GroupController extends Controller
      */
     public function index(GroupDataTable $GroupDataTable)
     {
+        $teaches = Teacher::get();
+        $groupTypes = GroupType::get();
         // $groups = $this->getGroups();
 
         // return view('pages.group.index', [
         //     'groups' => $groups,
         // ]);
-        return $GroupDataTable->render('pages.group.index');
+        return $GroupDataTable->render('pages.group.index', [
+            'teachers' => $teaches,
+            'groupTypes' => $groupTypes,
+        ]);
     }
 
     /**
@@ -59,6 +64,8 @@ class GroupController extends Controller
      */
     public function store(StoreGroupRequest $request)
     {
+
+
         Group::create([
             'from' => $request->from,
             'to' => $request->to,
@@ -112,6 +119,8 @@ class GroupController extends Controller
      */
     public function update(UpdateGroupRequest $request, Group $group)
     {
+
+        dd($request);
         $group->update([
             'from' => $request->from,
             'to' => $request->to,
