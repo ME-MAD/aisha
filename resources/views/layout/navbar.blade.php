@@ -44,20 +44,10 @@
              <li class="menu single-menu">
                  <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                      <div class="">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round" class="feather feather-cpu">
-                             <rect x="4" y="4" width="16" height="16" rx="2"
-                                 ry="2"></rect>
-                             <rect x="9" y="9" width="6" height="6"></rect>
-                             <line x1="9" y1="1" x2="9" y2="4"></line>
-                             <line x1="15" y1="1" x2="15" y2="4"></line>
-                             <line x1="9" y1="20" x2="9" y2="23"></line>
-                             <line x1="15" y1="20" x2="15" y2="23"></line>
-                             <line x1="20" y1="9" x2="23" y2="9"></line>
-                             <line x1="20" y1="14" x2="23" y2="14"></line>
-                             <line x1="1" y1="9" x2="4" y2="9"></line>
-                             <line x1="1" y1="14" x2="4" y2="14"></line>
+                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                             fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                             <circle cx="12" cy="7" r="4"></circle>
                          </svg>
                          <span>Teachers</span>
                      </div>
@@ -81,20 +71,12 @@
              <li class="menu single-menu">
                  <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                      <div class="">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round" class="feather feather-cpu">
-                             <rect x="4" y="4" width="16" height="16" rx="2"
-                                 ry="2"></rect>
-                             <rect x="9" y="9" width="6" height="6"></rect>
-                             <line x1="9" y1="1" x2="9" y2="4"></line>
-                             <line x1="15" y1="1" x2="15" y2="4"></line>
-                             <line x1="9" y1="20" x2="9" y2="23"></line>
-                             <line x1="15" y1="20" x2="15" y2="23"></line>
-                             <line x1="20" y1="9" x2="23" y2="9"></line>
-                             <line x1="20" y1="14" x2="23" y2="14"></line>
-                             <line x1="1" y1="9" x2="4" y2="9"></line>
-                             <line x1="1" y1="14" x2="4" y2="14"></line>
+                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                             fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                             <circle cx="9" cy="7" r="4"></circle>
+                             <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                             <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                          </svg>
                          <span>Students</span>
                      </div>
@@ -115,20 +97,13 @@
              <li class="menu single-menu">
                  <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                      <div class="">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round" class="feather feather-cpu">
-                             <rect x="4" y="4" width="16" height="16" rx="2"
-                                 ry="2"></rect>
-                             <rect x="9" y="9" width="6" height="6"></rect>
-                             <line x1="9" y1="1" x2="9" y2="4"></line>
-                             <line x1="15" y1="1" x2="15" y2="4"></line>
-                             <line x1="9" y1="20" x2="9" y2="23"></line>
-                             <line x1="15" y1="20" x2="15" y2="23"></line>
-                             <line x1="20" y1="9" x2="23" y2="9"></line>
-                             <line x1="20" y1="14" x2="23" y2="14"></line>
-                             <line x1="1" y1="9" x2="4" y2="9"></line>
-                             <line x1="1" y1="14" x2="4" y2="14"></line>
+                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                             stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                             class="css-i6dzq1">
+                             <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z">
+                             </path>
+                             <line x1="12" y1="11" x2="12" y2="17"></line>
+                             <line x1="9" y1="14" x2="15" y2="14"></line>
                          </svg>
                          <span>groups</span>
                      </div>
@@ -159,20 +134,11 @@
              <li class="menu single-menu">
                  <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                      <div class="">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round" class="feather feather-cpu">
-                             <rect x="4" y="4" width="16" height="16" rx="2"
-                                 ry="2"></rect>
-                             <rect x="9" y="9" width="6" height="6"></rect>
-                             <line x1="9" y1="1" x2="9" y2="4"></line>
-                             <line x1="15" y1="1" x2="15" y2="4"></line>
-                             <line x1="9" y1="20" x2="9" y2="23"></line>
-                             <line x1="15" y1="20" x2="15" y2="23"></line>
-                             <line x1="20" y1="9" x2="23" y2="9"></line>
-                             <line x1="20" y1="14" x2="23" y2="14"></line>
-                             <line x1="1" y1="9" x2="4" y2="9"></line>
-                             <line x1="1" y1="14" x2="4" y2="14"></line>
+                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                             stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                             class="css-i6dzq1">
+                             <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                             <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                          </svg>
                          <span>Subjects</span>
                      </div>
@@ -195,20 +161,13 @@
              <li class="menu single-menu">
                  <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                      <div class="">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round" class="feather feather-cpu">
-                             <rect x="4" y="4" width="16" height="16" rx="2"
-                                 ry="2"></rect>
-                             <rect x="9" y="9" width="6" height="6"></rect>
-                             <line x1="9" y1="1" x2="9" y2="4"></line>
-                             <line x1="15" y1="1" x2="15" y2="4"></line>
-                             <line x1="9" y1="20" x2="9" y2="23"></line>
-                             <line x1="15" y1="20" x2="15" y2="23"></line>
-                             <line x1="20" y1="9" x2="23" y2="9"></line>
-                             <line x1="20" y1="14" x2="23" y2="14"></line>
-                             <line x1="1" y1="9" x2="4" y2="9"></line>
-                             <line x1="1" y1="14" x2="4" y2="14"></line>
+                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                             stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                             class="css-i6dzq1">
+                             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                             <polyline points="14 2 14 8 20 8"></polyline>
+                             <line x1="12" y1="18" x2="12" y2="12"></line>
+                             <line x1="9" y1="15" x2="15" y2="15"></line>
                          </svg>
                          <span>Exams</span>
                      </div>
@@ -227,20 +186,17 @@
                      </li>
                  </ul>
              </li>
-
-
-
-             {{-- <li class="menu single-menu">
-                 <a href="#more" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+             <li class="menu single-menu">
+                 <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                      <div class="">
-                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                             stroke-linejoin="round" class="feather feather-plus-circle">
-                             <circle cx="12" cy="12" r="10"></circle>
-                             <line x1="12" y1="8" x2="12" y2="16"></line>
-                             <line x1="8" y1="12" x2="16" y2="12"></line>
+                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                             stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                             class="css-i6dzq1">
+                             <rect x="1" y="4" width="22" height="16" rx="2"
+                                 ry="2"></rect>
+                             <line x1="1" y1="10" x2="23" y2="10"></line>
                          </svg>
-                         <span>More</span>
+                         <span>Payment</span>
                      </div>
                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -248,49 +204,19 @@
                          <polyline points="6 9 12 15 18 9"></polyline>
                      </svg>
                  </a>
-                 <ul class="collapse submenu list-unstyled" id="more" data-parent="#topAccordion">
-
-                     <li class="sub-sub-submenu-list">
-                         <a href="#starter-kit" data-toggle="collapse" aria-expanded="false"
-                             class="dropdown-toggle">Exams<svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                 class="feather feather-chevron-right">
-                                 <polyline points="9 18 15 12 9 6"></polyline>
-                             </svg> </a>
-                         <ul class="collapse list-unstyled sub-submenu eq-animated eq-fadeInUp" id="starter-kit"
-                             data-parent="#more">
-                             <li>
-                                 <a href="{{ route('admin.exam.index') }}">Exams</a>
-                             </li>
-                             <li>
-                                 <a href="{{ route('admin.exam.create') }}">Create Exam</a>
-                             </li>
-                         </ul>
-                     </li>
-                     <li class="sub-sub-submenu-list">
-                         <a href="#starter-kit" data-toggle="collapse" aria-expanded="false"
-                             class="dropdown-toggle">Group Students<svg xmlns="http://www.w3.org/2000/svg"
-                                 width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                 stroke-linejoin="round" class="feather feather-chevron-right">
-                                 <polyline points="9 18 15 12 9 6"></polyline>
-                             </svg> </a>
-                         <ul class="collapse list-unstyled sub-submenu eq-animated eq-fadeInUp" id="starter-kit"
-                             data-parent="#more">
-                             <li>
-                                 <a href="{{ route('admin.group_students.index') }}">Group Students</a>
-                             </li>
-                             <li>
-                                 <a href="{{ route('admin.group_students.create') }}">Create Group Student</a>
-                             </li>
-                         </ul>
+                 <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+                     <li>
+                         <a href="{{ route('admin.exam.index') }}">payments</a>
                      </li>
                      <li>
-                         <a href="../../documentation/index.html"> Documentation </a>
+                         <a href="{{ route('admin.exam.create') }}">Create payments</a>
                      </li>
                  </ul>
-             </li> --}}
+             </li>
+
+
+
+
          </ul>
      </nav>
  </div>
