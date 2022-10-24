@@ -27,9 +27,10 @@ class ExperienceDataTable extends DataTable
             ->addColumn('edit', function ($query) {
                 return view('pages.experience.datatable.edit', compact('query'));
             })
-            // ->addColumn('edit', function ($query) {
-            //     return view('pages.experience.index', compact('query'));
+            // ->editColumn('from', function ($query) {
+            //     return  $query->from->format('Y-m-d');
             // })
+
             ->addColumn('delete', 'pages.experience.datatable.delete')
             ->editColumn('teacher.name', function ($q) {
                 return $q->teacher->name ?? "";
@@ -49,7 +50,8 @@ class ExperienceDataTable extends DataTable
         return $model->select([
             'experiences.id',
             'title',
-            'date',
+            'from',
+            'to',
             'teacher_id',
         ])->with([
             'teacher' => function ($q) {
@@ -128,7 +130,9 @@ class ExperienceDataTable extends DataTable
 
             ['name' => 'title', 'data' => 'title', 'title' => 'الخبرة', "className" => 'search--col'],
 
-            ['name' => 'date', 'data' => 'date', 'title' => ' تاريخ الخبرة', "className" => 'search--col'],
+            ['name' => 'from', 'data' => 'from', 'title' => 'من ', "className" => 'search--col'],
+
+            ['name' => 'to', 'data' => 'to', 'title' => 'الى', "className" => 'search--col'],
 
             ['name' => 'teacher.name', 'data' => 'teacher.name', 'title' => ' المعلم', "className" => 'search--col'],
 

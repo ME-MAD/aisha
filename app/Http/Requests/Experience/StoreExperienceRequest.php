@@ -13,7 +13,7 @@ class StoreExperienceRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -26,7 +26,8 @@ class StoreExperienceRequest extends FormRequest
 
         return [
             'title' => 'required',
-            'date' => 'required|date|date_format:Y-m-d|before:today',
+            'from' => 'required|date|date_format:Y-m-d|before:today',
+            'to' => 'required|date|date_format:Y-m-d|before:today',
             'teacher_id' => 'required',
 
         ];

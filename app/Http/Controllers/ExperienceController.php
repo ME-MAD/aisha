@@ -9,6 +9,8 @@ use App\Http\Requests\Experience\UpdateExperienceRequest;
 use App\Http\Traits\ExperienceTrait;
 use App\Http\Traits\TeacherTrait;
 use App\Models\Teacher;
+use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request as HttpRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExperienceController extends Controller
@@ -51,12 +53,13 @@ class ExperienceController extends Controller
      * @param  \App\Http\Requests\StoreExperienceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreExperienceRequest $request)
+    public function store(HttpRequest $request)
     {
 
         Experience::create([
             'title' => $request->title,
-            'date' => $request->date,
+            'from' => $request->from,
+            'to' => $request->to,
             'teacher_id' => $request->teacher_id
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -96,14 +99,17 @@ class ExperienceController extends Controller
      * @param  \App\Models\Experience  $experience
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateExperienceRequest $request, Experience $experience)
+    public function update(HttpRequest $request, Experience $experience)
     {
+
         $experience->update([
             'title' => $request->title,
-            'date' => $request->date,
+            'from' => $request->from,
+            'to' => $request->to,
+            'teacher_id' => $request->teacher_id,
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route('admin.experience.index'));
+        return redirect()->back();
     }
 
     /**

@@ -44,95 +44,6 @@
 
         </div>
 
-        {{-- <div class="education layout-spacing ">
-            <div class="widget-content widget-content-area">
-                <h3 class="">Education</h3>
-                <div class="timeline-alter">
-                    <div class="item-timeline">
-                        <div class="t-meta-date">
-                            <p class="">04 Mar 2009</p>
-                        </div>
-                        <div class="t-dot" data-original-title="" title="">
-                        </div>
-                        <div class="t-text">
-                            <p>Royal Collage of Art</p>
-                            <p>Designer Illustrator</p>
-                        </div>
-                    </div>
-                    <div class="item-timeline">
-                        <div class="t-meta-date">
-                            <p class="">25 Apr 2014</p>
-                        </div>
-                        <div class="t-dot" data-original-title="" title="">
-                        </div>
-                        <div class="t-text">
-                            <p>Massachusetts Institute of Technology (MIT)</p>
-                            <p>Designer Illustrator</p>
-                        </div>
-                    </div>
-                    <div class="item-timeline">
-                        <div class="t-meta-date">
-                            <p class="">04 Apr 2018</p>
-                        </div>
-                        <div class="t-dot" data-original-title="" title="">
-                        </div>
-                        <div class="t-text">
-                            <p>School of Art Institute of Chicago (SAIC)</p>
-                            <p>Designer Illustrator</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-
-        {{-- <div class="work-experience layout-spacing ">
-
-            <div class="widget-content widget-content-area">
-
-                <h3 class="">Work Experience</h3>
-
-                <div class="timeline-alter">
-
-                    <div class="item-timeline">
-                        <div class="t-meta-date">
-                            <p class="">04 Mar 2009</p>
-                        </div>
-                        <div class="t-dot" data-original-title="" title="">
-                        </div>
-                        <div class="t-text">
-                            <p>Netfilx Inc.</p>
-                            <p>Designer Illustrator</p>
-                        </div>
-                    </div>
-
-                    <div class="item-timeline">
-                        <div class="t-meta-date">
-                            <p class="">25 Apr 2014</p>
-                        </div>
-                        <div class="t-dot" data-original-title="" title="">
-                        </div>
-                        <div class="t-text">
-                            <p>Google Inc.</p>
-                            <p>Designer Illustrator</p>
-                        </div>
-                    </div>
-
-                    <div class="item-timeline">
-                        <div class="t-meta-date">
-                            <p class="">04 Apr 2018</p>
-                        </div>
-                        <div class="t-dot" data-original-title="" title="">
-                        </div>
-                        <div class="t-text">
-                            <p>Design Reset Inc.</p>
-                            <p>Designer Illustrator</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div> --}}
 
     </div>
 
@@ -140,7 +51,7 @@
     <div class="col-xl-8 col-lg-6 col-md-7 col-sm-12 layout-top-spacing">
 
         @include('pages.student.partials.showLesson')
-        
+
 
         <div class="bio layout-spacing ">
 
