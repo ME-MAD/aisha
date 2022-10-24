@@ -17,18 +17,16 @@ class TeacherController extends Controller
 
     public function index(TeacherDataTable $teacherDataTable)
     {
-
         return $teacherDataTable->render('pages.teacher.index');
     }
 
     public function show(Teacher $teacher)
     {
-
-
-        // $experiences = $teacher->experiences()->orderBy('date', 'DESC')->get();
-        $experiences = $teacher->experiences()->get();
-        $groups = $teacher->groups()->orderBy('id', 'DESC')->get();
-        $countGroups = $teacher->groups()->count();
+        $teacher->load(['groups','experiences']);
+        
+        $experiences = $teacher->experiences;
+        $groups = $teacher->groups->sortByDesc('id');
+        $countGroups = $teacher->groups->count();
 
         return view('pages.teacher.show', [
             'teacher' => $teacher,
@@ -37,11 +35,6 @@ class TeacherController extends Controller
             'countGroups' => $countGroups,
         ]);
     }
-
-    // public function create()
-    // {
-    //     return view('pages.teacher.create');
-    // }
 
     public function store(StoreTeacherRequest $request)
     {
@@ -55,13 +48,6 @@ class TeacherController extends Controller
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
-
-    // public function edit(Teacher $teacher)
-    // {
-    //     return view('pages.teacher.edit', [
-    //         'teacher'  => $teacher,
-    //     ]);
-    // }
 
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {

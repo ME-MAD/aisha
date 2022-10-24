@@ -14,20 +14,16 @@
 @section('breadcrumb')
     <div class="page-header">
 
-        <div class="row">
-            <div class="col-6">
-                <div class="card border-primary">
-                    <div class="card-body text-primary">
-                        <h5 class="card-title text-primary">count group</h5>
-                        <p class="card-text text-primary">{{ $countGroups }}</p>
-                    </div>
-                </div>
-            </div>
+        <div class="page-title">
+            <h3>Teacher Page</h3>
+        </div>
+        <div class="page-title">
+            <h3 class="alert alert-primary">{{ $teacher->name }}</h3>
         </div>
 
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false"><span class="text"><span>Show</span> : Teacher</span>
+                aria-haspopup="true" aria-expanded="false"><span class="text"><span>Teacher</span> : Page</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="feather feather-chevron-down">
@@ -123,20 +119,11 @@
 
     <div class="col-xl-8 col-lg-6 col-md-7 col-sm-12 layout-top-spacing">
 
+        @include('pages.teacher.partials.statistics')
 
-
-        <div class="work-experience layout-spacing">
-
-            @include('pages.teacher.partials.display_table_group')
-
-        </div>
-
+        @include('pages.teacher.partials.display_table_group')
 
         @include('pages.teacher.partials.experience')
-
-
-
-
 
 
     </div>
