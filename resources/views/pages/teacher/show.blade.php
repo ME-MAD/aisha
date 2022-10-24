@@ -10,7 +10,7 @@
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
-            <h3>{{ $teacher->name }}</h3>
+
         </div>
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
