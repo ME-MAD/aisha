@@ -23,12 +23,18 @@ class TeacherController extends Controller
 
     public function show(Teacher $teacher)
     {
-        $experiences = $teacher->experiences()->orderBy('date', 'DESC')->get();
+
+
+        // $experiences = $teacher->experiences()->orderBy('date', 'DESC')->get();
+        $experiences = $teacher->experiences()->get();
         $groups = $teacher->groups()->orderBy('id', 'DESC')->get();
+        $countGroups = $teacher->groups()->count();
+
         return view('pages.teacher.show', [
             'teacher' => $teacher,
             'experiences' => $experiences,
             'groups' => $groups,
+            'countGroups' => $countGroups,
         ]);
     }
 

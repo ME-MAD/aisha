@@ -25,9 +25,10 @@ class UpdateExperienceRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'date' => 'required',
+            'from' => 'required',
+            'to' => 'required',
             'teacher_id' => 'required',
-           
+
         ];
     }
 }
