@@ -2,29 +2,31 @@
 
 namespace App\Jobs;
 
-use App\Services\PDFService;
+use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Spatie\PdfToImage\Pdf;
 
-class BreakPDFIntoImagesJob implements ShouldQueue
+class ConvertPdfPageIntoImageJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    private $pdfService;
-    private $subject;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($pdfService, $subject)
+    public function __construct(
+        private Pdf $pdf,
+        private int $pageNumber,
+        private string $directoryName
+    )
     {
-        $this->pdfService = $pdfService;
-        $this->subject = $subject;
+        //
     }
 
     /**
@@ -34,6 +36,6 @@ class BreakPDFIntoImagesJob implements ShouldQueue
      */
     public function handle()
     {
-        $this->pdfService->explodePdfToImages($this->subject->book, $this->subject->name);
+        $this->pdf->setPage($this->pageNumber)->setOutputFormat('jpg')->saveImage(public_path('files/subjects/' . $this->directoryName . "/") . $this->pageNumber . ".jpg");
     }
 }

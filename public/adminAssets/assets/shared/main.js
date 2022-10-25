@@ -1,18 +1,12 @@
 $(document).ready(function () {
-    $.ajaxSetup({ headers: { "X-CSRF-TOKEN": $('meta[name="csrf_token"]').attr("content") } });
+    $.ajaxSetup({ 
+        headers: { "X-CSRF-TOKEN": $('meta[name="csrf_token"]').attr("content") },
+        async: true
+    });
 
     refreshAllTableLinks()
 
-    $('.subjectShowButton').on('click',function(){
-        let opensubjecthref = $(this).data('opensubjecthref')
-        $.ajax({
-            url: opensubjecthref,
-            success: function(response) {
-                console.log(response);
-            },
-            error: function() {}
-        })
-    })
+    
 })
 
 function areYouSureForLinks()

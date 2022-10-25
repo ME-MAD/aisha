@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Jobs\ConvertPdfPageIntoImageJob;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Spatie\PdfToImage\Pdf;
@@ -42,10 +44,13 @@ class PDFService
             File::makeDirectory($path, 0777, true, true);
         }
 
+        $jobs = [];
         for($i = 1; $i <= $numberOfPages; $i++)
         {
-            $pdf->setPage($i)->setOutputFormat('jpg')->saveImage(public_path('files/subjects/' . $createdDirectoryName . "/") . $i . ".jpg");
+            $jobs []= new ConvertPdfPageIntoImageJob($pdf, $i, $createdDirectoryName);
         }
+        // ConvertPdfPageIntoImageJob::withChain($jobs)->dispatch($pdf, 1, $createdDirectoryName);
+        Bus::chain($jobs)->dispatch();
     }
 
     public function deleteFile($path)

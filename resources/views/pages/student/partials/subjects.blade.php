@@ -17,7 +17,8 @@
                     <div class="list-group" id="list-tab" role="tablist">
                         @foreach ($subjects as $subject)
                             <a class="list-group-item list-group-item-action subjectShowButton"
-                                data-opensubjecthref="{{route('admin.subject.getSubjectBook',$subject->id)}}"
+                                data-opensubjecthref="{{route('admin.subject.getSubjectBook',$subject)}}"
+                                data-subject="{{$subject}}"
                                 id="list-home-list{{ $groupStudent->id }}{{ $subject->id }}" data-toggle="list"
                                 href="#list-home{{ $groupStudent->id }}{{ $subject->id }}" role="tab"
                                 aria-controls="home">{{ $subject->name }}</a>

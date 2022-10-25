@@ -62,9 +62,9 @@ class SubjectController extends Controller
             'book' => $book_name
         ]);
 
-        BreakPDFIntoImagesJob::dispatch($this->PDFService,$subject);
+        BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
 
-        Alert::toast('تمت العملية بنجاح', 'success');
+        Alert::toast('قد تاخذ عملية تجهيز الكتاب بعض الوقت', 'warning');
         return redirect(route('admin.subject.index'));
     }
 
@@ -133,9 +133,9 @@ class SubjectController extends Controller
             'book' => $book_name
         ]);
 
-        $this->PDFService->explodePdfToImages($subject->book, $subject->name);
+        BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
 
-        Alert::toast('تمت العملية بنجاح', 'success');
+        Alert::toast('قد تاخذ عملية تجهيز الكتاب بعض الوقت', 'warning');
         return redirect(route('admin.subject.index'));
     }
 
@@ -158,5 +158,7 @@ class SubjectController extends Controller
 
     public function getSubjectBook(Subject $subject)
     {
+        dd($subject);
     }
 }
+

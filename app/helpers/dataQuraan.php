@@ -8,7 +8,7 @@ if (!function_exists("chapterQuran")) {
         $chapters = [
             [
                 'surah_ar' => 'سورة الفاتحة',
-                'surah_count' => '7'
+                'surah_count' => '7',
             ],
             [
                 'surah_ar' => 'سورة البقرة',

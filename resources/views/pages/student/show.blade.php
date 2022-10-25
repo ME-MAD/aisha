@@ -6,6 +6,8 @@
     <link href="{{ asset('adminAssets/assets/css/components/custom-modal.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('adminAssets/assets/css/components/custom-list-group.css') }}" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="{{asset('css/book.css')}}">
     <!--  END CUSTOM STYLE FILE  -->
 @endsection
 
@@ -79,6 +81,9 @@
 
 
 @section('javascript')
+
+    <script src="{{asset('js/subject.js')}}"></script>
+
     <script>
         let input = document.getElementsByClassName('lesson_finished_checkbox');
 
@@ -103,7 +108,6 @@
                             chapters_count: chaptercount
                         },
                         success: function(response) {
-                            console.log(element);
                             $(element).parent().parent().parent().find(
                                 '.progressOfSubjectLink .progress-bar').css({
                                 'width': '100%',
