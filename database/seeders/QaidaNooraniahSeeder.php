@@ -25,7 +25,7 @@ class QaidaNooraniahSeeder extends Seeder
         foreach ($chapters as $chapter) {
             Lesson::updateOrCreate([
                 'title'      => $chapter['lesson_ar'],
-                'chapters_count' => $chapter['page_row']
+                'chapters_count' => $chapter['number_of_squares']
             ], [
                 'subject_id' => $subject->id,
             ]);
