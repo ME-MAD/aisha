@@ -11,7 +11,6 @@ use App\Http\Traits\GroupTrait;
 use App\Http\Traits\GroupTypeTrait;
 use App\Models\Teacher;
 use App\Http\Traits\TeacherTrait;
-use App\Models\GroupStudent;
 use App\Models\GroupType;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -30,6 +29,7 @@ class GroupController extends Controller
     {
         $teaches = Teacher::get();
         $groupTypes = GroupType::get();
+
         return $GroupDataTable->render('pages.group.index', [
             'teachers' => $teaches,
             'groupTypes' => $groupTypes,
@@ -45,6 +45,7 @@ class GroupController extends Controller
     {
         $teaches = Teacher::get();
         $groupTypes = GroupType::get();
+
         return view('pages.group.create', [
             'teachers' => $teaches,
             'groupTypes' => $groupTypes,
@@ -80,9 +81,11 @@ class GroupController extends Controller
     public function show(Group $group)
     {
         $group->load('groupStudents.student');
+        $countStudents = $group->groupStudents->count();
 
         return view('pages.group.show', [
             'group' => $group,
+            'countStudents' => $countStudents,
         ]);
     }
 
@@ -96,6 +99,7 @@ class GroupController extends Controller
     {
         $teachers = $this->getTeachers();
         $groupTypes = GroupType::get();
+
         return view('pages.group.edit', [
             'group'  => $group,
             'teachers'  => $teachers,
@@ -118,8 +122,8 @@ class GroupController extends Controller
             'group_type_id' => $request->group_type_id,
             'teacher_id' => $request->teacher_id,
             'age_type' => $request->age_type,
-
         ]);
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group.index'));
     }
@@ -133,6 +137,7 @@ class GroupController extends Controller
     public function delete(Group $group)
     {
         $group->delete();
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }

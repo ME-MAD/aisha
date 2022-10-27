@@ -31,6 +31,9 @@ class GroupDataTable extends DataTable
             ->editColumn('teacher.name', function ($q) {
                 return $q->teacher->name ?? "";
             })
+            ->editColumn('countStudent', function ($q) {
+                return ($q->group_students_count);
+            })
             ->editColumn('from', function ($q) {
                 return  date('h:i a', strtotime($q->from));
             })
@@ -58,6 +61,8 @@ class GroupDataTable extends DataTable
             'to',
             'age_type',
             'group_type_id'
+        ])->withCount([
+            'groupStudents'
         ])->with([
             'teacher:id,name',
             'groupType:id,name'
@@ -162,6 +167,12 @@ class GroupDataTable extends DataTable
                 'data' => 'age_type',
                 'title' => 'age_type',
                 "className" => 'search--col'
+            ],
+            [
+                'name' => 'countStudent',
+                'data' => 'countStudent',
+                'title' => 'count Student',
+                "className" => 'not--search--col'
             ],
 
             ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
