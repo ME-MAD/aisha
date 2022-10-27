@@ -12,24 +12,33 @@
                                     <thead>
                                         <tr class="">
                                             <th class="text-center">#</th>
-                                            <th>From </th>
-                                            <th>To </th>
+                                            <th>Time Group </th>
                                             <th>Ege Type </th>
+                                            <th>Count Student </th>
                                             <th>Name Group Type</th>
                                             <th>Day Number </th>
+                                            <th class="text-center">Days </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($groups as $group)
                                             <tr class="">
+
                                                 <td class="text-center">{{ $group->id }}</td>
-                                                <td class="text-center">{{ $group->from }}</td>
-                                                <td class="text-center">{{ $group->to }}</td>
+                                                <td class="text-center">{{ $group->getFrom() }} : {{ $group->getTo() }}
+                                                </td>
                                                 <td class="text-center">{{ $group->age_type }}</td>
-                                                <td class="text-center">{{ $group->groupType->name }}</td>
-                                                <td class="text-center">{{ $group->groupType->days_num }}</td>
+                                                <td class="text-center">{{ $group->groupStudents->count() }}</td>
+                                                <td class="text-center">{{ $group->groupType->name ?? '' }}</td>
+                                                <td class="text-center">{{ $group->groupType->days_num ?? '' }}</td>
+                                                @foreach ($group->groupDays as $groupDay)
+                                                    <td class="text-center">{{ $groupDay->day }}</td>
+                                                @endforeach
                                             </tr>
                                         @endforeach
+
+
+
                                     </tbody>
                                 </table>
                             </div>

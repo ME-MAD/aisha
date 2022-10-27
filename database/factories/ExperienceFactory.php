@@ -18,7 +18,8 @@ class ExperienceFactory extends Factory
     {
         return [
             'title' => fake()->realText(100),
-            'date' => fake()->date(),
+            'from' => fake()->date(),
+            'to' => fake()->date(),
         ];
     }
 }

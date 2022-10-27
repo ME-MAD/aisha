@@ -25,31 +25,24 @@ class TeacherController extends Controller
 
     public function show(Teacher $teacher)
     {
-        $teacher->load(['groups.groupStudents', 'experiences']);
-
+        $teacher->load([
+            'groupStudents',
+            'groups.groupDays',
+            'groups.groupType',
+            'experiences'
+        ]);
 
         $experiences = $teacher->experiences;
         $groups = $teacher->groups->sortByDesc('id');
         $countGroups = $teacher->groups->count();
-        // $students = GroupStudent::with(['group'])->firstWhere('group_id', '3');
-        // $students = $teacher->groups->groupStudents;
-        $groups = $teacher->groups;
-
-        $countStudent = 0;
-        foreach ($groups as $group) {
-            $groupStudents = $group->groupStudents->count();
-            $countStudent += $groupStudents;
-        }
-
-
-
+        $countStudent = $teacher->groupStudents->count();
 
         return view('pages.teacher.show', [
             'teacher' => $teacher,
             'experiences' => $experiences,
             'groups' => $groups,
             'countGroups' => $countGroups,
-            'countStudent' => $countStudent,
+            'countStudent' => $countStudent
         ]);
     }
 

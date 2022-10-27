@@ -14,14 +14,14 @@ class Group extends Model
     protected function from(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => date('H:i',strtotime($value)),
+            get: fn ($value) => date('H:i', strtotime($value)),
         );
     }
 
     protected function to(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => date('H:i',strtotime($value)),
+            get: fn ($value) => date('H:i', strtotime($value)),
         );
     }
 
@@ -57,5 +57,13 @@ class Group extends Model
         return $this->groupType->days_num - $this->groupDays->count();
     }
 
-    
+    public function getFrom()
+    {
+        return date('h:i a', strtotime($this->from));
+    }
+
+    public function getTo()
+    {
+        return date('h:i a', strtotime($this->to));
+    }
 }
