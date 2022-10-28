@@ -25,15 +25,19 @@
                                             <tr class="">
 
                                                 <td class="text-center">{{ $group->id }}</td>
-                                                <td class="text-center">{{ $group->getFrom() }} : {{ $group->getTo() }}
+                                                <td class="text-center">
+                                                    <span class="badge bg-success mb-2">{{ $group->getFrom() }}</span>
+                                                    <span class="badge bg-danger">{{ $group->getTo() }}</span>
                                                 </td>
                                                 <td class="text-center">{{ $group->age_type }}</td>
                                                 <td class="text-center">{{ $group->groupStudents->count() }}</td>
                                                 <td class="text-center">{{ $group->groupType->name ?? '' }}</td>
                                                 <td class="text-center">{{ $group->groupType->days_num ?? '' }}</td>
-                                                @foreach ($group->groupDays as $groupDay)
-                                                    <td class="text-center">{{ $groupDay->day }}</td>
-                                                @endforeach
+                                                <td class="text-center">
+                                                    @foreach ($group->groupDays as $groupDay)
+                                                        <span class="badge bg-info mb-2">{{ $groupDay->day }}</span>
+                                                    @endforeach
+                                                </td>
                                             </tr>
                                         @endforeach
 
