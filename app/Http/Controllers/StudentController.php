@@ -48,6 +48,7 @@ class StudentController extends Controller
                 $q->with('group.studentLessons');
             }
         ]);
+
         return view('pages.student.show', [
             'student' => $student,
             'subjects' => $subjects,

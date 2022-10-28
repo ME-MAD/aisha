@@ -11,6 +11,7 @@ class Subject extends Model
     use HasFactory;
 
     protected $fillable = ['name','book'];
+    protected $appends = ['pagesCount'];
 
     public function lessons()
     {
@@ -28,5 +29,15 @@ class Subject extends Model
     {
         $pathArray = explode('_',$this->getRawOriginal('book'));
         return array_shift($pathArray);
+    }
+
+    public function directoryPath()
+    {
+        return "files/subjects/" . $this->name . "/";
+    }
+
+    public function getPagesCountAttribute()
+    {
+        return count(glob($this->directoryPath() . "*"));
     }
 }
