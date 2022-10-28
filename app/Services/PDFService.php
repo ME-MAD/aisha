@@ -55,7 +55,7 @@ class PDFService
 
     public function deleteFile($path)
     {
-        if(file_exists(public_path($path)))
+        if($this->isAPdf($path) && file_exists(public_path($path)))
         {
             return unlink(public_path($path));
         }
@@ -70,5 +70,10 @@ class PDFService
         }
     }
 
+    public function isAPdf($path)
+    {
+        $array = explode('.',$path);
+        return array_pop($array) == 'pdf';
+    }
 
 }

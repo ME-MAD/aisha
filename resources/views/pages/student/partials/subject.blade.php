@@ -1,31 +1,38 @@
 @foreach ($subjects as $subject)
-    <div class="tab-pane fade show" id="list-home{{ $groupStudent->id }}{{ $subject->id }}" role="tabpanel"
-        aria-labelledby="list-home-list{{ $groupStudent->id }}{{ $subject->id }}">
-        <ul class="list-group task-list-group" style="height: 400px;overflow:auto">
-            @foreach ($subject->lessons as $lesson)
-                <li class="list-group-item list-group-item-action">
+<div class="tab-pane fade show" id="list-home{{ $groupStudent->id }}{{ $subject->id }}"
+    role="tabpanel"
+    aria-labelledby="list-home-list{{ $groupStudent->id }}{{ $subject->id }}">
+    <ul class="list-group task-list-group" style="height: 400px;overflow:auto">
+        @foreach ($subject->lessons as $lesson)
+            <li class="list-group-item list-group-item-action">
 
-                    <div class="text-center mb-3">
-                        <label class="float-left">
-                            @if ($groupStudent->checkIfLessonIsFinished($lesson->id))
-                                <input type="checkbox" class="lesson_finished_checkbox big-checkbox"
-                                    data-href="{{ route('admin.student_lesson.ajaxStudentLessonFinished') }}"
-                                    data-groupid="{{ $groupStudent->group->id }}" data-lessonid="{{ $lesson->id }}"
-                                    data-studentid="{{ $student->id }}" checked>
-                            @else
-                                <input type="checkbox" class="lesson_finished_checkbox big-checkbox"
-                                    data-href="{{ route('admin.student_lesson.ajaxStudentLessonFinished') }}"
-                                    data-groupid="{{ $groupStudent->group->id }}" data-lessonid="{{ $lesson->id }}"
-                                    data-studentid="{{ $student->id }}"
-                                    data-chaptercount="{{ $lesson->chapters_count }}">
-                            @endif
-                        </label>
+                <div class="text-center mb-3">
+                    <label class="float-left">
+                        @if ($groupStudent->checkIfLessonIsFinished($lesson->id))
+                            <input type="checkbox" class="lesson_finished_checkbox big-checkbox"
+                                data-href="{{ route('admin.student_lesson.ajaxStudentLessonFinished') }}"
+                                data-groupid="{{ $groupStudent->group->id }}"
+                                data-lessonid="{{ $lesson->id }}"
+                                data-studentid="{{ $student->id }}" checked>
+                        @else
+                            <input type="checkbox" class="lesson_finished_checkbox big-checkbox"
+                                data-href="{{ route('admin.student_lesson.ajaxStudentLessonFinished') }}"
+                                data-groupid="{{ $groupStudent->group->id }}"
+                                data-lessonid="{{ $lesson->id }}"
+                                data-studentid="{{ $student->id }}"
+                                data-chaptercount="{{ $lesson->chapters_count }}">
+                        @endif
+                    </label>
 
-                        <span>
-                            <a class="text-primary" data-lesson="{{ $lesson }}">
-                                {{ $lesson->title }}
-                            </a>
-                        </span>
+                    <span>
+                        <a 
+                            class="text-primary" 
+                           
+                            data-lesson="{{$lesson}}"
+                        >
+                            {{ $lesson->title }}
+                        </a>
+                    </span>
 
                     </div>
 

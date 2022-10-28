@@ -3,29 +3,100 @@ subjectShowHandle()
 function subjectShowHandle() 
 {
     $('.subjectShowButton').on('click',function(){
-        let opensubjecthref = $(this).data('opensubjecthref')
-        let subject = $(this).data('subject')
-
-        
-        $('#show-lesson-con').append(`
-            <img 
-                src="/files/subjects/${subject.name}/1.jpg"
-                alt=""
-                class="w-100"
-            >
+        let book = null;
+        $('#show-lesson-con').remove('')  
+        $('#next').remove()
+        $('#prev').remove()
+        $('#navButtonsForBook').html(`
+            <button class="btn btn-info" id="prev">
+                <i class="fa-solid fa-left-long"></i>
+            </button>
+            <button class="btn btn-info" id="next">
+                <i class="fa-solid fa-right-long"></i>
+            </button>
+        `)
+        $('#zoom-view-port').html(`
+            <div id="show-lesson-con">
+            
+            </div>
         `)
 
-        $("#show-lesson-con").turn({
-            width: 400,
-            height: 300,
-            autoCenter: true
+        let pageCount = 1
+        let subject = $(this).data('subject')
+        const fullPage = document.querySelector('#fullpage');
+        
+        $('#show-lesson-con').append(`
+            <div>
+                <img 
+                    src="/files/subjects/${subject.name}/${pageCount}.jpg"
+                    alt=""
+                    class="w-100 full--screen"
+                >
+            </div>
+        `)
+
+        book = $('#show-lesson-con').turn({
+            duration:1000,
+            direction: "rtl",
+            height: 850
         });
-        // $.ajax({
-        //     url: opensubjecthref,
-        //     success: function(response) {
-        //         console.log(response);
-        //     },
-        //     error: function() {}
-        // })
+
+        $('.full--screen').on('click',function(){
+            fullPage.style.backgroundImage = 'url(' + this.src + ')';
+            fullPage.style.display = 'block';
+        })
+
+        book.bind('start', 
+            function (event, pageObject, corner)
+            {
+                if (corner == 'tl' || corner == 'tr' || corner == 'bl' || corner == 'br')
+                {
+                    event.preventDefault();
+                }
+            }
+        );
+
+        $('#prev').on('click',function(){
+            book.turn("previous");
+        })
+
+        $('#next').on('click',function(){
+            pageCount += 1
+            if(subject.pagesCount >= pageCount)
+            {
+                book.turn('addPage',`
+                    <div>
+                        <img 
+                            src="/files/subjects/${subject.name}/${pageCount}.jpg"
+                            alt=""
+                            class="w-100 full--screen"
+                        >
+                    </div>
+                `)
+                book.turn('pages', pageCount)
+            }
+           
+            pageCount += 1
+            if(subject.pagesCount >= pageCount)
+            {
+                book.turn('addPage',`
+                    <div>
+                        <img 
+                            src="/files/subjects/${subject.name}/${pageCount}.jpg"
+                            alt=""
+                            class="w-100 full--screen"
+                        >
+                    </div>
+                `)
+                book.turn('pages', pageCount)
+            }
+
+            $('.full--screen').on('click',function(){
+                fullPage.style.backgroundImage = 'url(' + this.src + ')';
+                fullPage.style.display = 'block';
+            })
+
+            book.turn("next");
+        })
     })
 }
