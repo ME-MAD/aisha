@@ -29,14 +29,20 @@ class TeacherController extends Controller
             'groupStudents',
             'groups.groupDays',
             'groups.groupType',
+            'groups.students',
             'experiences'
         ]);
 
         $experiences = $teacher->experiences;
-        $groups = $teacher->groups->sortByDesc('id');
         $countGroups = $teacher->groups->count();
         $countStudent = $teacher->groupStudents->count();
+        $groups = $teacher->groups->sortByDesc('id');
+        // foreach ($groups as $group) {
+        //     foreach ($group->students as $student) {
 
+        //         dd($student->name);
+        //     }
+        // }
         return view('pages.teacher.show', [
             'teacher' => $teacher,
             'experiences' => $experiences,

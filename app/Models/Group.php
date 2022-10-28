@@ -66,4 +66,16 @@ class Group extends Model
     {
         return date('h:i a', strtotime($this->to));
     }
+
+    public function students()
+    {
+        return $this->hasManyThrough(
+            Student::class,
+            GroupStudent::class,
+            'group_id',
+            'id',
+            'id',
+            'student_id'
+        );
+    }
 }
