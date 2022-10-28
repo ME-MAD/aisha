@@ -7,7 +7,7 @@
 
     <link href="{{ asset('adminAssets/assets/css/components/custom-list-group.css') }}" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="{{asset('css/book.css')}}">
+    <link rel="stylesheet" href="{{asset('css/student.css')}}">
     <!--  END CUSTOM STYLE FILE  -->
 @endsection
 
@@ -49,10 +49,7 @@
 
     </div>
 
-
     <div class="col-xl-8 col-lg-6 col-md-7 col-sm-12 layout-top-spacing">
-
-        @include('pages.student.partials.showLesson')
 
 
         <div class="bio layout-spacing ">
@@ -63,17 +60,16 @@
 
     </div>
 
+    <div class="col-xl-12 col-lg-12 col-md-12">
 
-    <div id="content" class="main-content">
-        <div class="layout-px-spacing">
+        @include('pages.student.partials.subjects')
+        
+    </div>
 
-            <div class="row layout-top-spacing">
-                <div class="col-xl-12 col-lg-12 col-md-12">
+    <div class="col-xl-12 col-lg-12 col-md-12 mt-4 showLessonContainer">
 
-                    @include('pages.student.partials.subjects')
-                </div>
-            </div>
-        </div>
+        @include('pages.student.partials.showLesson')
+
     </div>
 @endsection
 
@@ -82,6 +78,7 @@
 
 @section('javascript')
 
+    <script src="{{asset('adminAssets/plugins/turn/turn.min.js')}}"></script>
     <script src="{{asset('js/subject.js')}}"></script>
 
     <script>

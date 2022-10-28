@@ -41,29 +41,3 @@ table tbody tr td {
 .progressOfSubjectLink .progress{
     height: 30px;
 }
-
-.quran-surah-dir{
-    direction: rtl;
-    text-align: right;
-    counter-reset: quranVerse;
-    font-family: 'Reem Kufi Ink', sans-serif !important;
-    height: 775px;
-    overflow: auto;
-}
-
-.quraanVerse{
-    color: black;
-    font-size: 1.5em;
-    font-weight: bold;
-    line-height: 3;
-}
-
-.quraanVerse::after{
-    counter-increment: quranVerse;
-    content: counter(quranVerse);
-    margin: 0em 1em;
-    padding: .5em;
-    border-radius: 50%;
-    background-color: rebeccapurple;
-    color: white;
-}
