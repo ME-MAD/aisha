@@ -24,18 +24,14 @@
                                     @foreach ($groups as $group)
                                         <li class="nav-item">
                                             <div class="nav-link list-actions" id="group-{{ $group->id }}"
-                                                data-invoice-id="group-{{ $group->id }}">
+                                                data-invoice-id="group : {{ $group->id }}">
                                                 <div class="f-m-body">
                                                     <div class="f-head">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2"
+                                                        <svg viewBox="0 0 24 24" width="36" height="36"
+                                                            stroke="currentColor" stroke-width="3" fill="none"
                                                             stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-dollar-sign">
-                                                            <line x1="12" y1="1" x2="12"
-                                                                y2="23"></line>
-                                                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6">
-                                                            </path>
+                                                            class="css-i6dzq1">
+                                                            <polyline points="9 18 15 12 9 6"></polyline>
                                                         </svg>
                                                     </div>
                                                     <div class="f-body">
@@ -91,16 +87,85 @@
                                 </div>
                             </div>
 
-                            <div id="ct" class="" style="display: block;">
+
+                            <div id="ct" class="">
                                 @foreach ($groups as $group)
                                     <div class="group-{{ $group->id }}">
                                         <div class="content-section  animated animatedFadeInUp fadeInUp">
 
                                             <div class="row inv--head-section">
+
                                                 <div class="col-sm-6 col-12">
-                                                    <h3 class="in-heading">My Students</h3>
+                                                    <h3 class="in-heading">{{ $group->getFrom() }}</h3>
+                                                </div>
+                                                <div class="col-sm-6 col-12 align-self-center text-sm-right">
+                                                    <div class="company-info">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                            height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="feather feather-hexagon">
+                                                            <path
+                                                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                                            </path>
+                                                        </svg>
+                                                        <h5 class="inv-brand-name">
+                                                            COUNT : {{ $group->groupStudents->count() }}</h5>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row inv--detail-section">
+
+                                                <div class="col-sm-7 align-self-center">
+                                                    <p class="inv-to">Days Num :
+                                                        <span class="badge bg-danger mb-2">
+                                                            {{ $group->groupType->days_num ?? '' }}
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                                <div
+                                                    class="col-sm-5 align-self-center  text-sm-right order-sm-0 order-1">
+                                                    <p class="inv-detail-title">Name Group Type :
+                                                        <span class="badge bg-danger mb-2">
+                                                            {{ $group->groupType->name ?? '' }}
+                                                        </span>
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-sm-7 align-self-center">
+                                                    <p class="inv-customer-name">Days Group :</p>
+                                                    @foreach ($group->groupDays as $groupDay)
+                                                        <span class="badge bg-success mb-2">{{ $groupDay->day }}
+                                                        </span>
+                                                    @endforeach
+
+                                                </div>
+                                                <div class="col-sm-5 align-self-center  text-sm-right order-2">
+                                                    <p class="inv-customer-name">
+                                                        <span class="text-primary">
+                                                            Time Group
+                                                        </span>
+                                                    </p>
+                                                    <p class="inv-created-date">
+                                                        <span class="inv-title">From :
+                                                        </span>
+                                                        <span class="inv-date badge bg-info mb-2">
+                                                            {{ $group->getFrom() }}
+                                                        </span>
+                                                    </p>
+                                                    <p class="inv-due-date">
+                                                        <span class="inv-title">
+                                                            To :
+                                                        </span>
+                                                        <span class="inv-date badge bg-info mb-2">
+                                                            {{ $group->getTo() }}
+                                                        </span>
+                                                    </p>
                                                 </div>
                                             </div>
+
 
                                             <div class="row inv--product-table-section">
                                                 <div class="col-12">
@@ -119,7 +184,12 @@
                                                                 @foreach ($group->students as $student)
                                                                     <tr>
                                                                         <td>{{ $student->id }}</td>
-                                                                        <td>{{ $student->name }}</td>
+                                                                        <td>
+                                                                            <a class='text-primary'
+                                                                                href="{{ route('admin.student.show', $student->id) }}"
+                                                                                title='Enter Page show Student'>{{ $student->name }}
+                                                                            </a>
+                                                                        </td>
                                                                         <td class="text-right">
                                                                             {{ $student->birthday }}</td>
                                                                         <td class="text-right">
