@@ -30,7 +30,7 @@
                                                     <span class="badge bg-danger">{{ $group->getTo() }}</span>
                                                 </td>
                                                 <td class="text-center">{{ $group->age_type }}</td>
-                                                <td class="text-center">{{ $group->groupStudents->count() }}</td>
+                                                <td class="text-center">{{ $group->students->count() }}</td>
                                                 <td class="text-center">{{ $group->groupType->name ?? '' }}</td>
                                                 <td class="text-center">{{ $group->groupType->days_num ?? '' }}</td>
                                                 <td class="text-center">

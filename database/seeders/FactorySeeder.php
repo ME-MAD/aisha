@@ -62,7 +62,7 @@ class FactorySeeder extends Seeder
 
                 Subject::factory(1)->create()->each(function ($subject) use ($group) {
 
-                    Student::factory(1)->create()->each(function ($student) use ($subject, $group) {
+                    Student::factory(10)->create()->each(function ($student) use ($subject, $group) {
                         $lesson = Lesson::factory(1)->create([
                             'subject_id' =>  $subject->id
                         ])->each(function ($lesson) use ($student, $group) {

@@ -22,10 +22,9 @@
                                 <ul class="nav nav-pills inv-list-container d-block ps ps--active-y" id="pills-tab"
                                     role="tablist">
                                     @foreach ($groups as $group)
-                                        <h2>{{ $group->id }}</h2>
                                         <li class="nav-item">
-                                            <div class="nav-link list-actions" id="invoice-{{ $group->id }}"
-                                                data-invoice-id="{{ $group->id }}">
+                                            <div class="nav-link list-actions" id="group-{{ $group->id }}"
+                                                data-invoice-id="group-{{ $group->id }}">
                                                 <div class="f-m-body">
                                                     <div class="f-head">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -93,55 +92,48 @@
                             </div>
 
                             <div id="ct" class="" style="display: block;">
+                                @foreach ($groups as $group)
+                                    <div class="group-{{ $group->id }}">
+                                        <div class="content-section  animated animatedFadeInUp fadeInUp">
 
-                                {{-- @foreach ($groups as $group)
-                                    <h2>{{ $group->id }}</h2>
-                                    <div class="invoice-{{ $group->id }}">
-                                @endforeach --}}
+                                            <div class="row inv--head-section">
+                                                <div class="col-sm-6 col-12">
+                                                    <h3 class="in-heading">My Students</h3>
+                                                </div>
+                                            </div>
 
-
-                                <div class="content-section  animated animatedFadeInUp fadeInUp">
-
-                                    <div class="row inv--head-section">
-                                        <div class="col-sm-6 col-12">
-                                            <h3 class="in-heading">My Students</h3>
-                                        </div>
-                                    </div>
-
-
-
-
-
-                                    <div class="row inv--product-table-section">
-                                        <div class="col-12">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead class="">
-                                                        <tr>
-                                                            <th scope="col">Id</th>
-                                                            <th scope="col">Name</th>
-                                                            <th class="text-right" scope="col">Birthday
-                                                            </th>
-                                                            <th class="text-right" scope="col">Phone</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($group->students as $student)
-                                                            <tr>
-                                                                <td>{{ $student->id }}</td>
-                                                                <td>{{ $student->name }}</td>
-                                                                <td class="text-right">
-                                                                    {{ $student->birthday }}</td>
-                                                                <td class="text-right">
-                                                                    {{ $student->phone }}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
+                                            <div class="row inv--product-table-section">
+                                                <div class="col-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table">
+                                                            <thead class="">
+                                                                <tr>
+                                                                    <th scope="col">Id</th>
+                                                                    <th scope="col">Name</th>
+                                                                    <th class="text-right" scope="col">Birthday
+                                                                    </th>
+                                                                    <th class="text-right" scope="col">Phone</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($group->students as $student)
+                                                                    <tr>
+                                                                        <td>{{ $student->id }}</td>
+                                                                        <td>{{ $student->name }}</td>
+                                                                        <td class="text-right">
+                                                                            {{ $student->birthday }}</td>
+                                                                        <td class="text-right">
+                                                                            {{ $student->phone }}</td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
 
                         </div>
