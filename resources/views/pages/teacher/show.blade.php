@@ -48,8 +48,8 @@
 @section('content')
     <!-- Start Content -->
     <div class="col-xl-4 col-lg-6 col-md-5 col-sm-12 layout-top-spacing">
-        @include('pages.teacher.partials.experience')
         @include('pages.teacher.partials.profile')
+        @include('pages.teacher.partials.experience')
     </div>
 
     <div class="col-xl-8 col-lg-6 col-md-7 col-sm-12 layout-top-spacing">
