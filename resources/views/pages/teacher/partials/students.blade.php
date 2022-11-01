@@ -110,7 +110,7 @@
                                                             </path>
                                                         </svg>
                                                         <h5 class="inv-brand-name">
-                                                            COUNT : {{ $group->groupStudents->count() }}</h5>
+                                                            COUNT Student : {{ $group->groupStudents->count() }}</h5>
                                                     </div>
                                                 </div>
 
@@ -127,7 +127,7 @@
                                                 </div>
                                                 <div
                                                     class="col-sm-5 align-self-center  text-sm-right order-sm-0 order-1">
-                                                    <p class="inv-detail-title">Name Group Type :
+                                                    <p class="inv-detail-title">Group Type :
                                                         <span class="badge bg-danger mb-2">
                                                             {{ $group->groupType->name ?? '' }}
                                                         </span>
@@ -180,7 +180,7 @@
                                                                     <th class="text-right" scope="col">Phone</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
+                                                            <tbody id="student">
                                                                 @foreach ($group->students as $student)
                                                                     <tr>
                                                                         <td>{{ $student->id }}</td>

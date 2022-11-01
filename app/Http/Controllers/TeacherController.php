@@ -37,18 +37,49 @@ class TeacherController extends Controller
         $countGroups = $teacher->groups->count();
         $countStudent = $teacher->groupStudents->count();
         $groups = $teacher->groups->sortByDesc('id');
-        // foreach ($groups as $group) {
-        //     foreach ($group->students as $student) {
 
-        //         dd($student->name);
-        //     }
-        // }
         return view('pages.teacher.show', [
             'teacher' => $teacher,
             'experiences' => $experiences,
             'groups' => $groups,
             'countGroups' => $countGroups,
             'countStudent' => $countStudent
+        ]);
+    }
+
+    public function getTeacherShowDataAjax(Teacher $teacher)
+    {
+        $teacher->load([
+            'groupStudents',
+            'groups.groupDays',
+            'groups.groupType',
+            'groups.students',
+            'experiences'
+        ]);
+
+        $experiences = $teacher->experiences;
+        $countGroups = $teacher->groups->count();
+        $countStudent = $teacher->groupStudents->count();
+        $groups = $teacher->groups;
+
+        return response()->json([
+            'statistics' => [
+                [
+                    'name' => 'Groups Count',
+                    'value' => $countGroups
+                ],
+                [
+                    'name' => 'Student Count',
+                    'value' => $countStudent
+                ],
+                [
+                    'name' => 'Students Count',
+                    'value' => $countStudent
+                ],
+            ],
+            'teacher' => $teacher,
+            'experiences' => $experiences,
+            'groups' => $groups,
         ]);
     }
 

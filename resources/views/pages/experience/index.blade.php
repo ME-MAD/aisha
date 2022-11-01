@@ -90,6 +90,7 @@
 @section('javascript')
     <!-- BEGIN PAGE LEVEL CUSTOM SCRIPTS -->
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
+    <script src="{{ asset('js/experience.js') }}"></script>
     <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
     <!-- END PAGE LEVEL CUSTOM SCRIPTS -->
