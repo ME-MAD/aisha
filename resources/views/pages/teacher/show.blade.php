@@ -64,13 +64,14 @@
 
 
 @section('javascript')
+    <script src="{{asset('js/invoice-list.js')}}"></script>
     <script src="{{ asset('js/teacher.js') }}"></script>
     <script src="{{ asset('js/experience.js') }}"></script>
     <script>
-        let createDate = document.getElementById('createDateExperience')
-        createDate.max = new Date().toISOString().split("T")[0]
-        let editDate = document.getElementById('editDateExperience')
-        editDate.max = new Date().toISOString().split("T")[0]
+        // let createDate = document.getElementById('createDateExperience')
+        // createDate.max = new Date().toISOString().split("T")[0]
+        // let editDate = document.getElementById('editDateExperience')
+        // editDate.max = new Date().toISOString().split("T")[0]
     </script>
 
     <script>
@@ -78,5 +79,5 @@
         initEditeExperienceModal()
     </script>
 
-    <script src="{{ asset('adminAssets/assets/js/apps/invoice.js') }}"></script>
+    {{-- <script src="{{ asset('adminAssets/assets/js/apps/invoice.js') }}"></script> --}}
 @endsection

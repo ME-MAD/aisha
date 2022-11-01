@@ -11,7 +11,7 @@
                             <line x1="3" y1="6" x2="21" y2="6"></line>
                             <line x1="3" y1="18" x2="21" y2="18"></line>
                         </svg></div>
-                </div>
+                    </div>
                 <div class="doc-container">
                     <div class="tab-title open-inv-sidebar">
                         <div class="row">
@@ -21,7 +21,7 @@
                                 </div>
                                 <ul class="nav nav-pills inv-list-container d-block ps ps--active-y" id="pills-tab"
                                     role="tablist">
-                                    @foreach ($groups as $group)
+                                    {{-- @foreach ($groups as $group)
                                         <li class="nav-item">
                                             <div class="nav-link list-actions" id="group-{{ $group->id }}"
                                                 data-invoice-id="group : {{ $group->id }}">
@@ -40,16 +40,16 @@
                                                                 class="badge bg-info mb-2">{{ $group->age_type }}</span>
                                                         </p>
                                                         <p class="invoice-generated-date">Time: <span
-                                                                class="badge bg-success mb-2">{{ $group->getFrom() }}</span>
+                                                                class="badge bg-success mb-2">{{ $group->ffrom }}</span>
                                                         </p>
                                                         <p class="invoice-generated-date">Time: <span
-                                                                class="badge bg-danger mb-2">{{ $group->getTo() }}</span>
+                                                                class="badge bg-danger mb-2">{{ $group->fto }}</span>
                                                         </p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </li>
-                                    @endforeach
+                                    @endforeach --}}
 
 
 
@@ -89,14 +89,14 @@
 
 
                             <div id="ct" class="">
-                                @foreach ($groups as $group)
+                                {{-- @foreach ($groups as $group)
                                     <div class="group-{{ $group->id }}">
                                         <div class="content-section  animated animatedFadeInUp fadeInUp">
 
                                             <div class="row inv--head-section">
 
                                                 <div class="col-sm-6 col-12">
-                                                    <h3 class="in-heading">{{ $group->getFrom() }}</h3>
+                                                    <h3 class="in-heading">{{ $group->ffrom }}</h3>
                                                 </div>
                                                 <div class="col-sm-6 col-12 align-self-center text-sm-right">
                                                     <div class="company-info">
@@ -152,7 +152,7 @@
                                                         <span class="inv-title">From :
                                                         </span>
                                                         <span class="inv-date badge bg-info mb-2">
-                                                            {{ $group->getFrom() }}
+                                                            {{ $group->ffrom }}
                                                         </span>
                                                     </p>
                                                     <p class="inv-due-date">
@@ -160,7 +160,7 @@
                                                             To :
                                                         </span>
                                                         <span class="inv-date badge bg-info mb-2">
-                                                            {{ $group->getTo() }}
+                                                            {{ $group->fto }}
                                                         </span>
                                                     </p>
                                                 </div>
@@ -203,7 +203,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
+                                @endforeach --}}
                             </div>
 
                         </div>

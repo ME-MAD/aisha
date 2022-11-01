@@ -10,6 +10,7 @@ use App\Models\Group;
 use App\Models\GroupStudent;
 use App\Models\Student;
 use App\Models\Teacher;
+use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TeacherController extends Controller
@@ -36,7 +37,13 @@ class TeacherController extends Controller
         $experiences = $teacher->experiences;
         $countGroups = $teacher->groups->count();
         $countStudent = $teacher->groupStudents->count();
-        $groups = $teacher->groups->sortByDesc('id');
+        $groups = $teacher->groups;
+
+        $groups->map(function($group){
+            $group->ahmed = "123";
+        });
+
+        // dd($groups);
 
         return view('pages.teacher.show', [
             'teacher' => $teacher,
@@ -62,6 +69,30 @@ class TeacherController extends Controller
         $countStudent = $teacher->groupStudents->count();
         $groups = $teacher->groups;
 
+        $years = 0;
+        $months = 0;
+        $days = 0;
+        foreach($experiences as $experience)
+        {
+            $from = new DateTime($experience->from);
+            $to = new DateTime($experience->to);
+            $years += $from->diff($to)->y;
+            $months += $from->diff($to)->m;
+            $days += $from->diff($to)->d;
+        }
+
+        while($days > 30)
+        {
+            $months += 1;
+            $days -= 30;
+        }
+        while($months > 11)
+        {
+            $months -= 12;
+            $years += 1;
+        }
+
+
         return response()->json([
             'statistics' => [
                 [
@@ -73,8 +104,8 @@ class TeacherController extends Controller
                     'value' => $countStudent
                 ],
                 [
-                    'name' => 'Students Count',
-                    'value' => $countStudent
+                    'name' => 'Total Experience',
+                    'value' => $years . " Years"
                 ],
             ],
             'teacher' => $teacher,
