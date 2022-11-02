@@ -25,6 +25,7 @@ class GroupDataTable extends DataTable
                 return view('pages.group.datatable.edit', compact('query'));
             })
             ->addColumn('delete', 'pages.group.datatable.delete')
+
             ->editColumn('groupType.name', function ($q) {
                 return $q->groupType->name ?? "";
             })
@@ -40,13 +41,15 @@ class GroupDataTable extends DataTable
             ->editColumn('to', function ($q) {
                 return  date('h:i a', strtotime($q->to));
             })
-            ->rawColumns(['edit', 'delete'])
+            // ->rawColumns(['edit', 'delete'])
 
+            ->editColumn('show', function ($q) {
+                return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' ><i class='fa-solid fa-eye'></i></a>";
+            })
             ->editColumn('id', function ($q) {
-
                 return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' >" . $q->id . "</a>";
             })
-            ->rawColumns(['edit', 'delete', 'id'])
+            ->rawColumns(['edit', 'delete', 'id', 'show'])
 
             ->setRowId('id');
     }
@@ -174,6 +177,8 @@ class GroupDataTable extends DataTable
                 'title' => 'count Student',
                 "className" => 'not--search--col'
             ],
+
+            ['name' => 'show', 'data' => 'show', 'title' => 'show', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
             ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 

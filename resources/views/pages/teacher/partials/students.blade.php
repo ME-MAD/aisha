@@ -11,7 +11,7 @@
                             <line x1="3" y1="6" x2="21" y2="6"></line>
                             <line x1="3" y1="18" x2="21" y2="18"></line>
                         </svg></div>
-                    </div>
+                </div>
                 <div class="doc-container">
                     <div class="tab-title open-inv-sidebar">
                         <div class="row">
@@ -55,7 +55,8 @@
 
 
                                     <div class="ps__rail-x" style="left: 0px; bottom: -1083px;">
-                                        <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                                        <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;">
+                                        </div>
                                     </div>
                                     <div class="ps__rail-y" style="top: 1083px; height: 409px; right: 0px;">
                                         <div class="ps__thumb-y" tabindex="0" style="top: 296px; height: 112px;">
@@ -224,4 +225,3 @@
             </div>
         </div>
     </div>
-</div>

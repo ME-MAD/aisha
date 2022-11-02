@@ -41,7 +41,7 @@
                                     المجموعة</option>
                                 @foreach ($groupTypes as $item)
                                     <option value="{{ $item->id }}"
-                                        {{ old('groupTypeId') == $item->id ? 'selected' : '' }}>
+                                        {{ old('group_type_id') == $item->id ? 'selected' : '' }}>
                                         {{ $item->name }}</option>
                                 @endforeach
                             </select>
@@ -57,9 +57,9 @@
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <select class="form-control basic" style="width: 100%;" name="age_type" id="ageType">
                                 <option value="">الفئة العمرية</option>
-                                <option value="kid" {{ old('ageType') == $item->id ? 'selected' : '' }}>
+                                <option value="Kid" {{ old('age_type') == 'Kid' ? 'selected' : '' }}>
                                     Kid </option>
-                                <option value="adult" {{ old('ageType') == $item->id ? 'selected' : '' }}>
+                                <option value="Adult" {{ old('age_type') == 'Adult' ? 'selected' : '' }}>
                                     Adult </option>
                             </select>
                             @error('age_type')
