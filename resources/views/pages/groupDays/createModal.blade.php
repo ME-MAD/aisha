@@ -1,5 +1,5 @@
 <div class="modal fade" id="creatGroupDayModal" tabindex="-1" role="dialog" aria-labelledby="creatGroupDayModal"
-    aria-hidden="true">
+    aria-hidden="true" data-toggle="modal" data-href="{{ route('admin.group_day.getDaysOfGroup') }}">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header p-3 mb-2 bg-primary">
@@ -8,31 +8,37 @@
             <div class="modal-body">
                 <form action="{{ route('admin.group_day.store') }}" method="post">
                     @csrf
-                    <div class="form-group row mb-4">
-                        <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
-                            المجموعه</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <select class="form-control basic chickgroup" style="width: 100%;" name="group_id"
-                                id="group_id" data-href="{{ route('admin.group_day.getDaysOfGroup') }}">
-                                <option value="">اختر اسم المجموعه</option>
-                                @foreach ($groups as $group)
-                                    @if (!$group->checkIfGroupExceededGroupDaysLimit())
-                                        <option value="{{ $group->id }}"
-                                            {{ old('group_id') == $group->id ? 'selected' : '' }}>
-                                            {{ $group->ffrom }} :
-                                            {{ $group->fto }} -
-                                            {{ $group->groupType->days_num }} Namber Days :
-                                            Remainging
-                                            {{ $group->getRemainingGroupDaysCount() }}
-                                        </option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            @error('group_id')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
+                    @if (!isset($group))
+                        <div class="form-group row mb-4">
+                            <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
+                                المجموعه</label>
+                            <div class="col-xl-10 col-lg-9 col-sm-10">
+                                <select class="form-control basic chickgroup" style="width: 100%;" name="group_id"
+                                    id="group_id" data-href="{{ route('admin.group_day.getDaysOfGroup') }}">
+                                    <option value="">اختر اسم المجموعه</option>
+                                    @foreach ($groups as $group)
+                                        @if (!$group->checkIfGroupExceededGroupDaysLimit())
+                                            <option value="{{ $group->id }}"
+                                                {{ old('group_id') == $group->id ? 'selected' : '' }}>
+                                                {{ $group->ffrom }} :
+                                                {{ $group->fto }} -
+                                                {{ $group->groupType->days_num }} Namber Days :
+                                                Remainging
+                                                {{ $group->getRemainingGroupDaysCount() }}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('group_id')
+                                    <p class="text-danger" data-href="{{ route('admin.group_day.getDaysOfGroup') }}">
+                                        {{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <input type="hidden" name="group_id" id="group_id" value="{{ $group->id }}"
+                            data-groupid="{{ $group->id }}">
+                    @endif
 
                     <div class="form-group row mb-4">
                         <label for="day" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">
@@ -62,16 +68,12 @@
                                 <option value="Sunday" {{ old('day') == 'Sunday' ? 'selected' : '' }}>Sunday
                                 </option>
 
-
                             </select>
                             @error('day')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
-
-
-
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save</button>
                         <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Discard</button>

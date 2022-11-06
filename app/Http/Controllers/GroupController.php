@@ -80,12 +80,16 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        $group->load('groupStudents.student');
+        $group->load('groupStudents.student', 'groupType');
         $countStudents = $group->groupStudents->count();
+        $groupDaysCount = $group->groupDays->count();
+        $groupTypeNumDays = $group->groupType->days_num;
 
         return view('pages.group.show', [
             'group' => $group,
             'countStudents' => $countStudents,
+            'groupDaysCount' => $groupDaysCount,
+            'groupTypeNumDays' => $groupTypeNumDays,
         ]);
     }
 

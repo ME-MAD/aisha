@@ -158,6 +158,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{groupStudent}', [GroupStudentController::class, 'edit'])->name('edit');
         Route::put('update/{groupStudent}', [GroupStudentController::class, 'update'])->name('update');
         Route::get('delete/{groupStudent}', [GroupStudentController::class, 'delete'])->name('delete');
+
+        Route::get('getStudentsOfGroup', [GroupStudentController::class, 'getStudentsOfGroup'])->name('getStudentsOfGroup');
     });
 
     Route::group(['prefix' => 'syllabus', 'as' => 'syllabus.'], function () {

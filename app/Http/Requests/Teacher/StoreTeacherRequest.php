@@ -25,10 +25,12 @@ class StoreTeacherRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            // 'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'avatar' => 'required',
             'birthday' => 'required',
             'phone' => 'required',
             'qualification' => 'required',
-            
+
         ];
     }
 }

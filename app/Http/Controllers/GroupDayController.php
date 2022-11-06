@@ -64,7 +64,7 @@ class GroupDayController extends Controller
         ]);
 
         Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route('admin.group_day.index'));
+        return redirect()->back();
     }
 
     /**

@@ -56,12 +56,16 @@ function initEditeTeacherModal() {
     $('.editTeacherButton').on('click', function () {
         let teacher = $(this).data('teacher')
         let href = $(this).data('href')
+        // let srcAvatar = '/image/teacher/' + teacher.avatar
 
 
         $('#editTeacherForm #name').val(teacher.name)
         $('#editTeacherForm #birthday').val(teacher.birthday)
         $('#editTeacherForm #phone').val(teacher.phone)
         $('#editTeacherForm #qualification').val(teacher.qualification)
+
+        // $('#editTeacherForm #avatarName').html(teacher.avatar)
+        // $('#editTeacherForm #avatar').attr("src", srcAvatar)
 
         $('#editTeacherForm').attr('action', href)
 

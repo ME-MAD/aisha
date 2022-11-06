@@ -28,10 +28,14 @@ class TeacherDataTable extends DataTable
             ->editColumn('name', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.teacher.show', $q->id) . " title='Enter Page show Teacher' >" . $q->name . "</a>";
             })
+            ->editColumn('avatar', function ($q) {
+                // return "<img src='public/image/teacher/$q->avatar'>";
+                return "<img src=" . asset('image/teacher/' . $q->avatar . '') . " width='100px' >";
+            })
             ->editColumn('show', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.teacher.show', $q->id) . " title='Enter Page show Teacher' ><i class='fa-solid fa-eye'></i></a>";
             })
-            ->rawColumns(['edit', 'delete', 'name', 'show'])
+            ->rawColumns(['edit', 'delete', 'name', 'show', 'avatar'])
             ->setRowId('id');
     }
 
@@ -111,6 +115,7 @@ class TeacherDataTable extends DataTable
         return [
             ['name' => 'id', 'data' => 'id', 'title' => 'رقم الهوية', "className" => 'search--col exact'],
             ['name' => 'name', 'data' => 'name', 'title' => ' الاسم', "className" => 'search--col'],
+            ['name' => 'avatar', 'data' => 'avatar', 'title' => ' الصور', "className" => 'search--col'],
             ['name' => 'birthday', 'data' => 'birthday', 'title' => ' تاريخ الميلاد', "className" => 'search--col'],
             ['name' => 'phone', 'data' => 'phone', 'title' => ' الهاتف', "className" => 'search--col'],
 
