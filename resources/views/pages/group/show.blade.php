@@ -56,7 +56,15 @@
                         <li class="nav-item">
                             <a class="nav-link" id="justify-pills-profile-tab" data-toggle="pill"
                                 href="#justify-pills-profile" role="tab" aria-controls="justify-pills-profile"
-                                aria-selected="false">Group Days</a>
+                                aria-selected="false">Group Days
+                                @if ($groupDaysCount < $groupTypeNumDays)
+                                    <span class="badge badge-danger float-right">{{ $groupDaysCount }}</span>
+                                @else
+                                    <span class="badge badge-success float-right">{{ $groupDaysCount }}</span>
+                                @endif
+
+                            </a>
+
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="justify-pills-contact-tab" data-toggle="pill"
@@ -74,6 +82,7 @@
                         <div class="tab-pane fade" id="justify-pills-profile" role="tabpanel"
                             aria-labelledby="justify-pills-profile-tab">
                             @include('pages.group.partials.groupDays')
+                            @include('pages.groupDays.createModal')
                         </div>
 
                         <div class="tab-pane fade" id="justify-pills-contact" role="tabpanel"
@@ -92,19 +101,50 @@
 
 
 @section('javascript')
-<script src="{{asset('adminAssets/plugins/table/datatable/datatables.js')}}"></script>
-<script>
-    $('#zero-config').DataTable({
-        "oLanguage": {
-            "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
-            "sInfo": "Showing page _PAGE_ of _PAGES_",
-            "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-            "sSearchPlaceholder": "Search...",
-           "sLengthMenu": "Results :  _MENU_",
-        },
-        "stripeClasses": [],
-        "lengthMenu": [7, 10, 20, 50],
-        "pageLength": 7 
-    });
-</script>
+    <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
+    {{-- <script>
+        $('#zero-config').DataTable({
+            "oLanguage": {
+                "oPaginate": {
+                    "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
+                    "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
+                },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+                "sLengthMenu": "Results :  _MENU_",
+            },
+            "stripeClasses": [],
+            "lengthMenu": [7, 10, 20, 50],
+            "pageLength": 7
+        });
+    </script> --}}
+
+    <script>
+        $('#creatGroupDayModal').on('shown.bs.modal', function(e) {
+            let href = $(this).data('href');
+            let group_id = $('#group_id').data('groupid');
+            $(`option`).removeAttr('disabled').css({
+                'color': 'black'
+            });
+            $.ajax({
+                url: href,
+                data: {
+                    group_id
+                },
+                success: function(response) {
+                    let groupDays = response.groupDays
+                    groupDays.forEach(element => {
+                        let groupDay = element.day
+                        $(`option[value=${groupDay}]`).attr('disabled', true).css({
+                            'color': 'red'
+                        })
+                    });
+
+
+                },
+                error: function() {}
+            })
+        })
+    </script>
 @endsection

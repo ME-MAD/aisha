@@ -95,6 +95,7 @@
         $('#group_id').on('change', function() {
             let href = $(this).data('href');
             let group_id = $(this).val();
+            console.log(group_id);
             $(`option`).removeAttr('disabled').css({
                 'color': 'black'
             });
@@ -107,7 +108,6 @@
                     let groupDays = response.groupDays
                     groupDays.forEach(element => {
                         let groupDay = element.day
-                        console.log(groupDay);
                         $(`option[value=${groupDay}]`).attr('disabled', true).css({
                             'color': 'red'
                         })

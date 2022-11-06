@@ -39,11 +39,9 @@ class TeacherController extends Controller
         $countStudent = $teacher->groupStudents->count();
         $groups = $teacher->groups;
 
-        $groups->map(function($group){
+        $groups->map(function ($group) {
             $group->ahmed = "123";
         });
-
-        // dd($groups);
 
         return view('pages.teacher.show', [
             'teacher' => $teacher,
@@ -72,8 +70,7 @@ class TeacherController extends Controller
         $years = 0;
         $months = 0;
         $days = 0;
-        foreach($experiences as $experience)
-        {
+        foreach ($experiences as $experience) {
             $from = new DateTime($experience->from);
             $to = new DateTime($experience->to);
             $years += $from->diff($to)->y;
@@ -81,13 +78,11 @@ class TeacherController extends Controller
             $days += $from->diff($to)->d;
         }
 
-        while($days > 30)
-        {
+        while ($days > 30) {
             $months += 1;
             $days -= 30;
         }
-        while($months > 11)
-        {
+        while ($months > 11) {
             $months -= 12;
             $years += 1;
         }
@@ -116,11 +111,26 @@ class TeacherController extends Controller
 
     public function store(StoreTeacherRequest $request)
     {
+        // dd($request);
+        // $imageName = time() . '.' . $request->avatar->extension();
+        // $image_path = $request->avatar->storeAs('teacher/images', $imageName);
+        // $image_path = $request->file('avatar')->storeAs('teacher/images', $imageName);
+        // $image_path = $request->file('avatar')->store('teacher/images', 'public');
+        // $image_path = $request->file->storeAs('teacher', $imageName);
+
+        if ($image = $request->file('avatar')) {
+            $destinationPath = 'image/teacher';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['avatar'] = "$profileImage";
+        }
+
         Teacher::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'birthday' => $request->birthday,
             'qualification' => $request->qualification,
+            'avatar' => $input['avatar'],
         ]);
 
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -129,11 +139,24 @@ class TeacherController extends Controller
 
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
+
+        $input = $request->all();
+
+        if ($image = $request->file('avatar')) {
+            $destinationPath = 'image/teacher';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['avatar'] = "$profileImage";
+        } else {
+            unset($input['avatar']);
+        }
+
         $teacher->update([
             'name' => $request->name,
             'phone' => $request->phone,
             'birthday' => $request->birthday,
             'qualification' => $request->qualification,
+            'avatar' => $input['avatar'],
         ]);
 
         Alert::toast('تمت العملية بنجاح', 'success');

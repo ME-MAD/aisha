@@ -6,7 +6,7 @@
                 <h5 class="modal-title text-white" id="creatTeacherModal">إضافة مدرس</h5>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.teacher.store') }}" method="post">
+                <form action="{{ route('admin.teacher.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <x-text name="name" label="الإسم" :value="old('name')" />
@@ -16,6 +16,18 @@
                     <x-text name="phone" label="الهاتف" :value="old('phone')" />
 
                     <x-text name="qualification" label="المؤهل" :value="old('qualification')" />
+
+                    <div class="custom-file-container" data-upload-id="myFirstImage">
+                        <label>اختر صوره <a href="javascript:void(0)" class="custom-file-container__image-clear"
+                                title="Clear Image"></a></label>
+                        <label class="custom-file-container__custom-file">
+                            <input type="file" class="custom-file-container__custom-file__custom-file-input"
+                                accept="image/*" name="avatar">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                            <span class="custom-file-container__custom-file__custom-file-control"></span>
+                        </label>
+                        <div class="custom-file-container__image-preview"></div>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save</button>

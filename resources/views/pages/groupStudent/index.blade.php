@@ -91,4 +91,32 @@
 
 
     {!! $dataTable->scripts() !!}
+
+    <script>
+        $('#group_id').on('change', function() {
+            let href = $(this).data('href');
+            let group_id = $(this).val();
+            $(`option`).removeAttr('disabled').css({
+                'color': 'black'
+            });
+            $.ajax({
+                url: href,
+                data: {
+                    group_id
+                },
+                success: function(response) {
+                    let groupStudents = response.groupStudents
+
+                    groupStudents.forEach(element => {
+                        let student = element.student_id
+
+                        $(`#student_id option[value=${student}]`).attr('disabled', true).css({
+                            'color': 'red'
+                        })
+                    });
+                },
+                error: function() {}
+            })
+        })
+    </script>
 @endsection
