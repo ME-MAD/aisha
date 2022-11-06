@@ -19,8 +19,8 @@
                                     @if (!$group->checkIfGroupExceededGroupDaysLimit())
                                         <option value="{{ $group->id }}"
                                             {{ old('group_id') == $group->id ? 'selected' : '' }}>
-                                            {{ $group->getFrom() }} :
-                                            {{ $group->getTo() }} -
+                                            {{ $group->ffrom }} :
+                                            {{ $group->fto }} -
                                             {{ $group->groupType->days_num }} Namber Days :
                                             Remainging
                                             {{ $group->getRemainingGroupDaysCount() }}

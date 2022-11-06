@@ -11,6 +11,8 @@ class Group extends Model
     use HasFactory;
     protected $fillable = ['from', 'to', 'teacher_id', 'group_type_id', 'age_type'];
 
+    protected $appends = ['fto','ffrom'];
+
     protected function from(): Attribute
     {
         return Attribute::make(
@@ -57,12 +59,12 @@ class Group extends Model
         return $this->groupType->days_num - $this->groupDays->count();
     }
 
-    public function getFrom()
+    public function getFfromAttribute()
     {
         return date('h:i a', strtotime($this->from));
     }
 
-    public function getTo()
+    public function getFtoAttribute()
     {
         return date('h:i a', strtotime($this->to));
     }

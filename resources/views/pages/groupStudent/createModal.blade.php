@@ -35,8 +35,8 @@
                                 @foreach ($groups as $group)
                                     <option value="{{ $group->id }}"
                                         {{ old('group_id') == $group->id ? 'selected' : '' }}>
-                                        {{ $group->getFrom() }} :
-                                        {{ $group->getTo() }}
+                                        {{ $group->ffrom }} :
+                                        {{ $group->fto }}
                                     </option>
                                 @endforeach
                             </select>

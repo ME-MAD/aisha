@@ -112,7 +112,7 @@ class GroupStudentDataTable extends DataTable
     {
         return [
             [
-                'name' => 'id',
+                'name' => 'group_students.id',
                 'data' => 'id',
                 'title' => '#',
                 "className" => 'search--col exact'

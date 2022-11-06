@@ -1,14 +1,5 @@
-// // Edit Experince
-// $('.editExperienceButton').on('click', function () {
-//     let title = $(this).data('title')
-//     let date = $(this).data('date')
-//     let href = $(this).data('href')
 
-//     $('#editExperienceForm #title').val(title)
-//     $('#editExperienceForm #editDateExperience').val(date)
 
-//     $('#editExperienceForm').attr('action', href)
-// })
 
 
 
@@ -81,29 +72,6 @@ function initEditeTeacherModal() {
 
 
 
-//----------------------------Modal Experience-----------------------------------//
-
-//Edite Modal Experience
-function initEditeExperienceModal() {
-    $('.editExperienceButton').on('click', function () {
-        let experience = $(this).data('experience')
-
-        let href = $(this).data('href')
-
-
-        $('#editExperienceForm #title').val(experience.title)
-        $('#editExperienceForm #from').val(experience.from)
-        $('#editExperienceForm #to').val(experience.to)
-        $('#editExperienceForm #teacherId').val(experience.teacher_id)
-
-        $('#editExperienceForm').attr('action', href)
-    })
-}
-
-$('.creatTeacherExperienceButton').on('click', function () {
-    let teacher_id = $(this).data('teacherid')
-    console.log(teacher_id);
-})
 
 
 //----------------------------Modal Lesson-----------------------------------//

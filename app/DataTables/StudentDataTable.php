@@ -19,10 +19,12 @@ class StudentDataTable extends DataTable
             })
             ->addColumn('delete', 'pages.student.datatable.delete')
             ->editColumn('name', function ($q) {
-
                 return "<a class='text-primary' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' >" . $q->name . "</a>";
             })
-            ->rawColumns(['edit', 'delete', 'name'])
+            ->editColumn('show', function ($q) {
+                return "<a class='text-primary' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' ><i class='fa-solid fa-eye'></i></a>";
+            })
+            ->rawColumns(['edit', 'delete', 'name', 'show'])
             ->setRowId('id');
     }
 
@@ -91,7 +93,12 @@ class StudentDataTable extends DataTable
 
             ['name' => 'qualification', 'data' => 'qualification', 'title' => ' المؤهلات', "className" => 'search--col'],
 
+            ['name' => 'show', 'data' => 'show', 'title' => 'Show', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+
+
             ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+
+
             ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
         ];
     }
