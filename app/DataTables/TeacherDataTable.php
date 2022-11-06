@@ -28,10 +28,7 @@ class TeacherDataTable extends DataTable
             ->editColumn('name', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.teacher.show', $q->id) . " title='Enter Page show Teacher' >" . $q->name . "</a>";
             })
-            ->editColumn('avatar', function ($q) {
-                // return "<img src='public/image/teacher/$q->avatar'>";
-                return "<img src=" . asset('image/teacher/' . $q->avatar . '') . " width='100px' >";
-            })
+            ->editColumn('avatar', 'pages.teacher.datatable.avatar')
             ->editColumn('show', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.teacher.show', $q->id) . " title='Enter Page show Teacher' ><i class='fa-solid fa-eye'></i></a>";
             })

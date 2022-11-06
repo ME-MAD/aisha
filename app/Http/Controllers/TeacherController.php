@@ -39,10 +39,6 @@ class TeacherController extends Controller
         $countStudent = $teacher->groupStudents->count();
         $groups = $teacher->groups;
 
-        $groups->map(function ($group) {
-            $group->ahmed = "123";
-        });
-
         return view('pages.teacher.show', [
             'teacher' => $teacher,
             'experiences' => $experiences,
@@ -111,18 +107,9 @@ class TeacherController extends Controller
 
     public function store(StoreTeacherRequest $request)
     {
-        // dd($request);
-        // $imageName = time() . '.' . $request->avatar->extension();
-        // $image_path = $request->avatar->storeAs('teacher/images', $imageName);
-        // $image_path = $request->file('avatar')->storeAs('teacher/images', $imageName);
-        // $image_path = $request->file('avatar')->store('teacher/images', 'public');
-        // $image_path = $request->file->storeAs('teacher', $imageName);
-
         if ($image = $request->file('avatar')) {
-            $destinationPath = 'image/teacher';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['avatar'] = "$profileImage";
+            $fileName = now()->timestamp . "_" . $image->getClientOriginalName();
+            $image->move(Teacher::AVATARS_PATH, $fileName);
         }
 
         Teacher::create([
@@ -130,7 +117,7 @@ class TeacherController extends Controller
             'phone' => $request->phone,
             'birthday' => $request->birthday,
             'qualification' => $request->qualification,
-            'avatar' => $input['avatar'],
+            'avatar' => $fileName ?? null,
         ]);
 
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -139,16 +126,15 @@ class TeacherController extends Controller
 
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
-
-        $input = $request->all();
+        $fileName = $teacher->getRawOriginal('avatar');
 
         if ($image = $request->file('avatar')) {
-            $destinationPath = 'image/teacher';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['avatar'] = "$profileImage";
-        } else {
-            unset($input['avatar']);
+            if($fileName && file_exists($teacher->getAvatarPath()))
+            {
+                unlink($teacher->getAvatarPath());
+            }
+            $fileName = now()->timestamp . "_" . $image->getClientOriginalName();
+            $image->move(Teacher::AVATARS_PATH, $fileName);
         }
 
         $teacher->update([
@@ -156,7 +142,7 @@ class TeacherController extends Controller
             'phone' => $request->phone,
             'birthday' => $request->birthday,
             'qualification' => $request->qualification,
-            'avatar' => $input['avatar'],
+            'avatar' => $fileName,
         ]);
 
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -165,6 +151,11 @@ class TeacherController extends Controller
 
     public function delete(Teacher $teacher)
     {
+        if($teacher->getRawOriginal('avatar') && file_exists($teacher->getAvatarPath()))
+        {
+            unlink($teacher->getAvatarPath());
+        }
+
         $teacher->delete();
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();

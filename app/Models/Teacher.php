@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +12,18 @@ class Teacher extends Model
 
     protected $fillable = ['name', 'phone', 'birthday', 'avatar', 'qualification'];
 
+    const AVATARS_PATH = 'images/teacher/avatars/';
+
+    protected function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => asset(Teacher::AVATARS_PATH . $value),
+        );
+    }
+
+    function getAvatarPath(){
+        return public_path(Teacher::AVATARS_PATH . $this->getRawOriginal('avatar'));
+    }
 
     public function experiences()
     {
