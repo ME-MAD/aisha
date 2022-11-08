@@ -17,12 +17,22 @@ class Teacher extends Model
     protected function avatar(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => asset(Teacher::AVATARS_PATH . $value),
+            get: function($avatar){
+                if($avatar)
+                {
+                    return asset(Teacher::AVATARS_PATH . $avatar);
+                }
+                return '';
+            },
         );
     }
 
     function getAvatarPath(){
-        return public_path(Teacher::AVATARS_PATH . $this->getRawOriginal('avatar'));
+        if($this->getRawOriginal('avatar'))
+        {
+            return public_path(Teacher::AVATARS_PATH . $this->getRawOriginal('avatar'));
+        }
+        return '';
     }
 
     public function experiences()

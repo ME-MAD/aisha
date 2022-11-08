@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\TeacherDataTable;
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
+use App\Http\Traits\ImageTrait;
 use App\Http\Traits\TeacherTrait;
 use App\Models\Teacher;
 use DateTime;
@@ -15,6 +16,7 @@ class TeacherController extends Controller
 
     use TeacherTrait;
     // use GroupTrait;
+    use ImageTrait;
 
     public function index(TeacherDataTable $teacherDataTable)
     {
@@ -104,17 +106,17 @@ class TeacherController extends Controller
 
     public function store(StoreTeacherRequest $request)
     {
-        if ($image = $request->file('avatar')) {
-            $fileName = now()->timestamp . "_" . $image->getClientOriginalName();
-            $image->move(Teacher::AVATARS_PATH, $fileName);
-        }
+        $fileName = $this->uploadImage(
+            imageObject: $request->file('avatar'),
+            path: Teacher::AVATARS_PATH
+        );
 
         Teacher::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'birthday' => $request->birthday,
             'qualification' => $request->qualification,
-            'avatar' =>  $fileName ?? null,
+            'avatar' =>  $fileName,
         ]);
 
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -125,12 +127,16 @@ class TeacherController extends Controller
     {
         $fileName = $teacher->getRawOriginal('avatar');
 
-        if ($image = $request->file('avatar')) {
-            if ($fileName && file_exists($teacher->getAvatarPath())) {
-                unlink($teacher->getAvatarPath());
-            }
-            $fileName = now()->timestamp . "_" . $image->getClientOriginalName();
-            $image->move(Teacher::AVATARS_PATH, $fileName);
+        if ($request->file('avatar')) {
+
+            $this->deleteImage(
+                path: $teacher->getAvatarPath()
+            );
+
+            $fileName = $this->uploadImage(
+                imageObject: $request->file('avatar'),
+                path: Teacher::AVATARS_PATH
+            );
         }
 
         $teacher->update([
@@ -147,10 +153,9 @@ class TeacherController extends Controller
 
     public function delete(Teacher $teacher)
     {
-
-        if ($teacher->getRawOriginal('avatar') && file_exists($teacher->getAvatarPath())) {
-            unlink($teacher->getAvatarPath());
-        }
+        $this->deleteImage(
+            path: $teacher->getAvatarPath()
+        );
 
         $teacher->delete();
         Alert::toast('تمت العملية بنجاح', 'success');
