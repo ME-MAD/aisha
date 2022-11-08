@@ -29,11 +29,17 @@ class StudentController extends Controller
 
     public function store(StoreStudentRequest $request)
     {
+        if ($image = $request->file('avatar')) {
+            $fileName = now()->timestamp . "_" . $image->getClientOriginalName();
+            $image->move(Student::AVATARS_PATH, $fileName);
+        }
+
         Student::create([
             'name' => $request->name,
             'birthday' => $request->birthday,
             'phone' => $request->phone,
             'qualification' => $request->qualification,
+            'avatar' =>  $fileName ?? null,
 
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -62,21 +68,37 @@ class StudentController extends Controller
 
     public function update(UpdateStudentRequest $request, Student $student)
     {
+        $fileName = $student->getRawOriginal('avatar');
+
+        if ($image = $request->file('avatar')) {
+            if ($fileName && file_exists($student->getAvatarPath())) {
+                unlink($student->getAvatarPath());
+            }
+            $fileName = now()->timestamp . "_" . $image->getClientOriginalName();
+            $image->move(Student::AVATARS_PATH, $fileName);
+        }
+
         $student->update([
             'name' => $request->name,
             'birthday' => $request->birthday,
             'phone' => $request->phone,
             'qualification' => $request->qualification,
+            'avatar' =>  $fileName ?? null,
 
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
-    public function delete(Request $request, Student $student)
+    public function delete(Student $student)
     {
-        $student->delete();
 
+
+        if ($student->getRawOriginal('avatar') && file_exists($student->getAvatarPath())) {
+            unlink($student->getAvatarPath());
+        }
+
+        $student->delete();
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }

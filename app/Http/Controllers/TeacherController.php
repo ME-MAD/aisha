@@ -6,9 +6,6 @@ use App\DataTables\TeacherDataTable;
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
 use App\Http\Traits\TeacherTrait;
-use App\Models\Group;
-use App\Models\GroupStudent;
-use App\Models\Student;
 use App\Models\Teacher;
 use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -117,7 +114,7 @@ class TeacherController extends Controller
             'phone' => $request->phone,
             'birthday' => $request->birthday,
             'qualification' => $request->qualification,
-            'avatar' => $fileName ?? null,
+            'avatar' =>  $fileName ?? null,
         ]);
 
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -129,8 +126,7 @@ class TeacherController extends Controller
         $fileName = $teacher->getRawOriginal('avatar');
 
         if ($image = $request->file('avatar')) {
-            if($fileName && file_exists($teacher->getAvatarPath()))
-            {
+            if ($fileName && file_exists($teacher->getAvatarPath())) {
                 unlink($teacher->getAvatarPath());
             }
             $fileName = now()->timestamp . "_" . $image->getClientOriginalName();
@@ -151,8 +147,8 @@ class TeacherController extends Controller
 
     public function delete(Teacher $teacher)
     {
-        if($teacher->getRawOriginal('avatar') && file_exists($teacher->getAvatarPath()))
-        {
+
+        if ($teacher->getRawOriginal('avatar') && file_exists($teacher->getAvatarPath())) {
             unlink($teacher->getAvatarPath());
         }
 

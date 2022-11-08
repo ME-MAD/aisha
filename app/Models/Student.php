@@ -2,14 +2,29 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
     use HasFactory;
-    
-    protected $fillable = ['name', 'birthday', 'phone', 'qualification'];
+
+    protected $fillable = ['name', 'birthday', 'phone', 'qualification', 'avatar'];
+
+    const AVATARS_PATH = 'images/student/avatars/';
+
+    protected function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => asset(Student::AVATARS_PATH . $value),
+        );
+    }
+
+    function getAvatarPath()
+    {
+        return public_path(Student::AVATARS_PATH . $this->getRawOriginal('avatar'));
+    }
 
     public function groupStudents()
     {
@@ -25,5 +40,4 @@ class Student extends Model
     {
         return $this->hasMany(StudentLesson::class, 'student_id');
     }
-
 }

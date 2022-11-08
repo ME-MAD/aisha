@@ -89,18 +89,12 @@
 
 @section('javascript')
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
-
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
-
     <script src="/vendor/datatables/buttons.server-side.js"></script>
-
     {!! $dataTable->scripts() !!}
-
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <script src="{{ asset('adminAssets/assets/js/scrollspyNav.js') }}"></script>
     <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
-
-
     <script>
         var firstUpload = new FileUploadWithPreview('myFirstImage')
         var secondUpload = new FileUploadWithPreview('mySecondImage')

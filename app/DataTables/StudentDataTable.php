@@ -18,13 +18,14 @@ class StudentDataTable extends DataTable
                 return view('pages.student.datatable.edit', compact('query'));
             })
             ->addColumn('delete', 'pages.student.datatable.delete')
+            ->editColumn('avatar', 'pages.student.datatable.avatar')
             ->editColumn('name', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' >" . $q->name . "</a>";
             })
             ->editColumn('show', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' ><i class='fa-solid fa-eye'></i></a>";
             })
-            ->rawColumns(['edit', 'delete', 'name', 'show'])
+            ->rawColumns(['edit', 'delete', 'name', 'show', 'avatar'])
             ->setRowId('id');
     }
 
@@ -88,6 +89,7 @@ class StudentDataTable extends DataTable
         return [
             ['name' => 'id', 'data' => 'id', 'title' => 'رقم الهوية', "className" => 'search--col exact'],
             ['name' => 'name', 'data' => 'name', 'title' => ' الاسم', "className" => 'search--col'],
+            ['name' => 'avatar', 'data' => 'avatar', 'title' => ' الصور', "className" => 'search--col'],
             ['name' => 'birthday', 'data' => 'birthday', 'title' => ' تاريخ الميلاد', "className" => 'search--col'],
             ['name' => 'phone', 'data' => 'phone', 'title' => ' الهاتف', "className" => 'search--col'],
 
