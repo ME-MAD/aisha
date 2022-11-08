@@ -5,7 +5,7 @@
                 <h5 class="modal-title text-white" id="editStudent">تعديل بيانات الطالب</h5>
             </div>
             <div class="modal-body">
-                <form id="editStudentForm" method="post">
+                <form id="editStudentForm" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -17,6 +17,21 @@
 
                     <x-text name="qualification" label="المؤهل" id="qualification" />
 
+                    <div class="custom-file-container" data-upload-id="mySecondImage">
+                        <label>Upload (Image) <a href="javascript:void(0)" class="custom-file-container__image-clear"
+                                title="Clear Image"></a></label>
+                        <label class="custom-file-container__custom-file">
+                            <input type="file" class="custom-file-container__custom-file__custom-file-input"
+                                accept="image/*" name="avatar">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                            <span class="custom-file-container__custom-file__custom-file-control">
+                                {{-- here is center  html js but not work --}}
+                            </span>
+                        </label>
+                        <div class="custom-file-container__image-preview">
+                            {{-- here is center tag img but not work --}}
+                        </div>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-warning">Save</button>

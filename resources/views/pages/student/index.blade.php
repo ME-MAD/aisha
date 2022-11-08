@@ -5,8 +5,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
-    {{-- <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/table/datatable/custom_dt_custom.css')}}"> --}}
-    <!-- END PAGE LEVEL CUSTOM STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}" rel="stylesheet"
+        type="text/css" />
+    <!-- END PAGE LEVEL STYLES -->
 @endsection
 
 @section('breadcrumb')
@@ -88,8 +91,12 @@
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
     <!-- END PAGE LEVEL CUSTOM SCRIPTS -->
     <script src="/vendor/datatables/buttons.server-side.js"></script>
-
-
-
     {!! $dataTable->scripts() !!}
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="{{ asset('adminAssets/assets/js/scrollspyNav.js') }}"></script>
+    <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
+    <script>
+        var firstUpload = new FileUploadWithPreview('myFirstImage')
+        var secondUpload = new FileUploadWithPreview('mySecondImage')
+    </script>
 @endsection
