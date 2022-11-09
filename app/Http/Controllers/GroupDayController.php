@@ -7,16 +7,11 @@ use App\Models\GroupDay;
 use App\Http\Requests\GroupDay\StoreGroupDayRequest;
 use App\Http\Requests\GroupDay\UpdateGroupDayRequest;
 use App\Models\Group;
-use App\Http\Traits\GroupDayTrait;
-use App\Http\Traits\GroupTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupDayController extends Controller
 {
-    use GroupDayTrait;
-    use GroupTrait;
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +19,9 @@ class GroupDayController extends Controller
      */
     public function index(GroupDayDataTable $groupDayDataTable)
     {
-        $groupdays = $this->getGroupDays();
+        $groupdays = GroupDay::select(['id', 'group_id', 'day'])
+            ->with('group:id,from,to')
+            ->get();
         $groups = Group::get();
 
         return $groupDayDataTable->render('pages.groupDays.index', [

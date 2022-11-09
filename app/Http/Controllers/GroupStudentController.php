@@ -6,9 +6,6 @@ use App\DataTables\GroupStudentDataTable;
 use App\Models\GroupStudent;
 use App\Http\Requests\GroupStudent\StoreGroupStudentRequest;
 use App\Http\Requests\GroupStudent\UpdateGroupStudentRequest;
-use App\Http\Traits\GroupStudentTrait;
-use App\Http\Traits\GroupTrait;
-use App\Http\Traits\StudentTrait;
 use App\Models\Group;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -17,9 +14,9 @@ use Symfony\Component\VarDumper\Cloner\Stub;
 
 class GroupStudentController extends Controller
 {
-    use GroupStudentTrait;
-    use StudentTrait;
-    use GroupTrait;
+    // use GroupStudentTrait;
+    // use StudentTrait;
+    // use GroupTrait;
     /**
      * Display a listing of the resource.
      *

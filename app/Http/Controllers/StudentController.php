@@ -3,19 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\StudentDataTable;
-use App\Http\Traits\GroupTrait;
-use App\Http\Traits\StudentTrait;
 use App\Models\Student;
-use Illuminate\Http\Request;
 use App\Http\Requests\Student\StoreStudentRequest;
 use App\Http\Requests\Student\UpdateStudentRequest;
+use App\Http\Traits\ImageTrait;
 use App\Models\Subject;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentController extends Controller
 {
-    use GroupTrait;
-    use StudentTrait;
+    use ImageTrait;
 
     public function index(StudentDataTable $studentDataTable)
     {
@@ -29,17 +26,17 @@ class StudentController extends Controller
 
     public function store(StoreStudentRequest $request)
     {
-        if ($image = $request->file('avatar')) {
-            $fileName = now()->timestamp . "_" . $image->getClientOriginalName();
-            $image->move(Student::AVATARS_PATH, $fileName);
-        }
+        $fileName = $this->uploadImage(
+            imageObject: $request->file('avatar'),
+            path: Student::AVATARS_PATH
+        );
 
         Student::create([
             'name' => $request->name,
             'birthday' => $request->birthday,
             'phone' => $request->phone,
             'qualification' => $request->qualification,
-            'avatar' =>  $fileName ?? null,
+            'avatar' =>  $fileName,
 
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -70,12 +67,16 @@ class StudentController extends Controller
     {
         $fileName = $student->getRawOriginal('avatar');
 
-        if ($image = $request->file('avatar')) {
-            if ($fileName && file_exists($student->getAvatarPath())) {
-                unlink($student->getAvatarPath());
-            }
-            $fileName = now()->timestamp . "_" . $image->getClientOriginalName();
-            $image->move(Student::AVATARS_PATH, $fileName);
+        if ($request->file('avatar')) {
+
+            $this->deleteImage(
+                path: $student->getAvatarPath()
+            );
+
+            $fileName = $this->uploadImage(
+                imageObject: $request->file('avatar'),
+                path: Student::AVATARS_PATH
+            );
         }
 
         $student->update([
@@ -83,7 +84,7 @@ class StudentController extends Controller
             'birthday' => $request->birthday,
             'phone' => $request->phone,
             'qualification' => $request->qualification,
-            'avatar' =>  $fileName ?? null,
+            'avatar' =>  $fileName,
 
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -92,11 +93,9 @@ class StudentController extends Controller
 
     public function delete(Student $student)
     {
-
-
-        if ($student->getRawOriginal('avatar') && file_exists($student->getAvatarPath())) {
-            unlink($student->getAvatarPath());
-        }
+        $this->deleteImage(
+            path: $student->getAvatarPath()
+        );
 
         $student->delete();
         Alert::toast('تمت العملية بنجاح', 'success');

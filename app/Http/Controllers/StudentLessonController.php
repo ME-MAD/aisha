@@ -6,7 +6,6 @@ use App\Models\StudentLesson;
 use App\Http\Requests\StudentLesson\StoreStudentLessonRequest;
 use App\Http\Requests\StudentLesson\UpdateStudentLessonRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentLessonController extends Controller

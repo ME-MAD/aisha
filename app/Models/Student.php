@@ -17,7 +17,12 @@ class Student extends Model
     protected function avatar(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => asset(Student::AVATARS_PATH . $value),
+            get: function ($avatar) {
+                if ($avatar) {
+                    return asset(Student::AVATARS_PATH . $avatar);
+                }
+                return '';
+            },
         );
     }
 

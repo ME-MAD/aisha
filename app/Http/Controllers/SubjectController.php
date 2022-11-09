@@ -12,7 +12,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class SubjectController extends Controller
 {
-    use SubjectTrait;
 
     public function __construct(public PDFService $PDFService)
     {
@@ -161,4 +160,3 @@ class SubjectController extends Controller
         dd($subject);
     }
 }
-

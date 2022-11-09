@@ -4,19 +4,14 @@ namespace App\Http\Controllers;
 
 use App\DataTables\ExperienceDataTable;
 use App\Models\Experience;
-use App\Http\Requests\Experience\StoreExperienceRequest;
-use App\Http\Requests\Experience\UpdateExperienceRequest;
-use App\Http\Traits\ExperienceTrait;
-use App\Http\Traits\TeacherTrait;
 use App\Models\Teacher;
-use Illuminate\Http\Client\Request;
 use Illuminate\Http\Request as HttpRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExperienceController extends Controller
 {
-    use ExperienceTrait;
-    use TeacherTrait;
+
+
     /**
      * Display a listing of the resource.
      *
