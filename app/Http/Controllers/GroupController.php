@@ -7,19 +7,12 @@ use App\Http\Requests\Group\StoreGroupRequest;
 use App\Http\Requests\Group\UpdateGroupRequest;
 use App\Http\Traits\GroupStudentTrait;
 use App\Models\Group;
-use App\Http\Traits\GroupTrait;
-use App\Http\Traits\GroupTypeTrait;
 use App\Models\Teacher;
-use App\Http\Traits\TeacherTrait;
 use App\Models\GroupType;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupController extends Controller
 {
-    use GroupTrait;
-    use TeacherTrait;
-    use GroupTypeTrait;
-    use GroupStudentTrait;
     /**
      * Display a listing of the resource.
      *
@@ -101,7 +94,7 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        $teachers = $this->getTeachers();
+        $teachers = Teacher::get();
         $groupTypes = GroupType::get();
 
         return view('pages.group.edit', [

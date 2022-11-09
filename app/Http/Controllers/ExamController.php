@@ -6,10 +6,6 @@ use App\DataTables\ExamDataTable;
 use App\Models\Exam;
 use App\Http\Requests\Exam\StoreExamRequest;
 use App\Http\Requests\Exam\UpdateExamRequest;
-use App\Http\Traits\ExamTrait;
-use App\Http\Traits\GroupTrait;
-use App\Http\Traits\LessonTrait;
-use App\Http\Traits\StudentTrait;
 use App\Models\Group;
 use App\Models\Lesson;
 use App\Models\Student;
@@ -17,10 +13,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ExamController extends Controller
 {
-    use ExamTrait;
-    use StudentTrait;
-    use GroupTrait;
-    use LessonTrait;
+
+
 
     /**
      * Display a listing of the resource.
@@ -39,9 +33,9 @@ class ExamController extends Controller
      */
     public function create()
     {
-        $students = Student::select(['id','name'])->get();
-        $groups = Group::select(['id','from','to'])->get();
-        $lessons = Lesson::select(['id','title'])->get();
+        $students = Student::select(['id', 'name'])->get();
+        $groups = Group::select(['id', 'from', 'to'])->get();
+        $lessons = Lesson::select(['id', 'title'])->get();
 
         return view('pages.exam.create', [
             'students' => $students,
@@ -88,10 +82,10 @@ class ExamController extends Controller
      */
     public function edit(Exam $exam)
     {
-  
-        $students = Student::select(['id','name'])->get();
-        $groups = Group::select(['id','from','to'])->get();
-        $lessons = Lesson::select(['id','title'])->get();
+
+        $students = Student::select(['id', 'name'])->get();
+        $groups = Group::select(['id', 'from', 'to'])->get();
+        $lessons = Lesson::select(['id', 'title'])->get();
 
         return view('pages.exam.edit', [
             'exam' => $exam,

@@ -6,7 +6,6 @@ use App\DataTables\TeacherDataTable;
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
 use App\Http\Traits\ImageTrait;
-use App\Http\Traits\TeacherTrait;
 use App\Models\Teacher;
 use DateTime;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -14,7 +13,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class TeacherController extends Controller
 {
 
-    use TeacherTrait;
+
     // use GroupTrait;
     use ImageTrait;
 
