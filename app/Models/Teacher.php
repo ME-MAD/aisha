@@ -18,7 +18,7 @@ class Teacher extends Model
     {
         return Attribute::make(
             get: function($avatar){
-                if($avatar)
+                if($avatar && file_exists($this->getAvatarPath()))
                 {
                     return asset(Teacher::AVATARS_PATH . $avatar);
                 }

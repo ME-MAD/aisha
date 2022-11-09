@@ -18,7 +18,7 @@ class Student extends Model
     {
         return Attribute::make(
             get: function ($avatar) {
-                if ($avatar) {
+                if ($avatar && file_exists($this->getAvatarPath())) {
                     return asset(Student::AVATARS_PATH . $avatar);
                 }
                 return '';
@@ -28,7 +28,11 @@ class Student extends Model
 
     function getAvatarPath()
     {
-        return public_path(Student::AVATARS_PATH . $this->getRawOriginal('avatar'));
+        if($this->getRawOriginal('avatar'))
+        {
+            return public_path(Student::AVATARS_PATH . $this->getRawOriginal('avatar'));
+        }
+        return '';
     }
 
     public function groupStudents()
