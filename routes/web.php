@@ -8,6 +8,7 @@ use App\Http\Controllers\GroupDayController;
 use App\Http\Controllers\GroupStudentController;
 use App\Http\Controllers\GroupTypeController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentLessonController;
 use App\Http\Controllers\SubjectController;
@@ -149,6 +150,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{exam}', [ExamController::class, 'edit'])->name('edit');
         Route::put('update/{exam}', [ExamController::class, 'update'])->name('update');
         Route::get('delete/{exam}', [ExamController::class, 'delete'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'payment', 'as' => 'payment.'], function () {
+        Route::get('', [PaymentController::class, 'index'])->name('index');
+        Route::get('create', [PaymentController::class, 'create'])->name('create');
+        Route::post('store', [PaymentController::class, 'store'])->name('store');
+        Route::get('edit/{payment}', [PaymentController::class, 'edit'])->name('edit');
+        Route::put('update/{payment}', [PaymentController::class, 'update'])->name('update');
+        Route::get('delete/{payment}', [PaymentController::class, 'delete'])->name('delete');
     });
 
     Route::group(['prefix' => 'group_students', 'as' => 'group_students.'], function () {

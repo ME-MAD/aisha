@@ -61,7 +61,7 @@ class GroupStudentController extends Controller
         ]);
 
         Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route('admin.group_students.index'));
+        return redirect()->back();
     }
 
     /**
