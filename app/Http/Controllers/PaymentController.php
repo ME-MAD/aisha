@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PaymentDataTable;
 use App\Models\Payment;
 use App\Http\Requests\Payment\StorePaymentRequest;
 use App\Http\Requests\Payment\UpdatePaymentRequest;
+use App\Models\Group;
 
 class PaymentController extends Controller
 {
@@ -13,9 +15,9 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PaymentDataTable $paymentDataTable)
     {
-        //
+        return $paymentDataTable->render('pages.payment.index');
     }
 
     /**
@@ -25,7 +27,10 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        $gorups = Group::get();
+        return view('pages.payment.create', [
+            'gorups' => $gorups
+        ]);
     }
 
     /**

@@ -88,6 +88,7 @@
                         <div class="tab-pane fade" id="justify-pills-contact" role="tabpanel"
                             aria-labelledby="justify-pills-contact-tab">
                             @include('pages.group.partials.students')
+                            @include('pages.groupStudent.createModal')
                         </div>
                     </div>
 
@@ -102,7 +103,7 @@
 
 @section('javascript')
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
-    {{-- <script>
+    <script>
         $('#zero-config').DataTable({
             "oLanguage": {
                 "oPaginate": {
@@ -118,7 +119,7 @@
             "lengthMenu": [7, 10, 20, 50],
             "pageLength": 7
         });
-    </script> --}}
+    </script>
 
     <script>
         $('#creatGroupDayModal').on('shown.bs.modal', function(e) {

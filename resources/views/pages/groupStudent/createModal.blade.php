@@ -8,26 +8,31 @@
             <div class="modal-body">
                 <form action="{{ route('admin.group_students.store') }}" method="post">
                     @csrf
-                    <div class="form-group row mb-4">
-                        <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
-                            المجموعة</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <select class="form-control basic" style="width: 100%;" name="group_id" id="group_id"
-                                data-href="{{ route('admin.group_students.getStudentsOfGroup') }}">
-                                <option value="">اختر المجموعة</option>
-                                @foreach ($groups as $group)
-                                    <option value="{{ $group->id }}"
-                                        {{ old('group_id') == $group->id ? 'selected' : '' }}>
-                                        {{ $group->ffrom }} :
-                                        {{ $group->fto }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('group_id')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
+                    @if (!isset($group))
+                        <div class="form-group row mb-4">
+                            <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
+                                المجموعة</label>
+                            <div class="col-xl-10 col-lg-9 col-sm-10">
+                                <select class="form-control basic" style="width: 100%;" name="group_id" id="group_id"
+                                    data-href="{{ route('admin.group_students.getStudentsOfGroup') }}">
+                                    <option value="">اختر المجموعة</option>
+                                    @foreach ($groups as $group)
+                                        <option value="{{ $group->id }}"
+                                            {{ old('group_id') == $group->id ? 'selected' : '' }}>
+                                            {{ $group->ffrom }} :
+                                            {{ $group->fto }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('group_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <input type="hidden" name="group_id" id="group_id" value="{{ $group->id }}"
+                            data-groupid="{{ $group->id }}">
+                    @endif
                     <div class="form-group row mb-4">
                         <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> اختر
                             الطالب</label>

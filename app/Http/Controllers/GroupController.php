@@ -9,6 +9,7 @@ use App\Http\Traits\GroupStudentTrait;
 use App\Models\Group;
 use App\Models\Teacher;
 use App\Models\GroupType;
+use App\Models\Student;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupController extends Controller
@@ -77,12 +78,14 @@ class GroupController extends Controller
         $countStudents = $group->groupStudents->count();
         $groupDaysCount = $group->groupDays->count();
         $groupTypeNumDays = $group->groupType->days_num;
+        $students = Student::get();
 
         return view('pages.group.show', [
             'group' => $group,
             'countStudents' => $countStudents,
             'groupDaysCount' => $groupDaysCount,
             'groupTypeNumDays' => $groupTypeNumDays,
+            'students' => $students,
         ]);
     }
 
