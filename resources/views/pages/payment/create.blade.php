@@ -7,6 +7,10 @@
     <!--  BEGIN CUSTOM STYLE FILE  -->
     <link href="{{ asset('adminAssets/assets/css/apps/invoice.css') }}" rel="stylesheet" type="text/css" />
     <!--  END CUSTOM STYLE FILE  -->
+    <!--  BEGIN CUSTOM STYLE FILE  -->
+    <link href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="{{ asset('adminAssets/stylesheet" type="text/css') }}" href="plugins/select2/select2.min.css">
+    <!--  END CUSTOM STYLE FILE  -->
 @endsection
 @section('content')
     <div id="content" class="main-content">
@@ -32,9 +36,9 @@
                                     </div>
                                     <ul class="nav nav-pills inv-list-container d-block ps ps--active-y" id="pills-tab"
                                         role="tablist">
-                                        @foreach ($gorups as $gorup)
+                                        @foreach ($gorups as $group)
                                             <li class="nav-item">
-                                                <div class="nav-link list-actions" id="invoice-00001"
+                                                <div class="nav-link list-actions" id="invoice-{{ $group->id }}"
                                                     data-invoice-id="00001">
                                                     <div class="f-m-body">
                                                         <div class="f-head">
@@ -50,13 +54,13 @@
                                                             </svg>
                                                         </div>
                                                         <div class="f-body">
-                                                            <p class="invoice-number">Invoice #00001</p>
+                                                            <p class="invoice-number">Invoice {{ $group->id }}</p>
                                                             <p class="invoice-customer-name badge bg-primary text-light">
-                                                                <span class="text-light">From:</span>{{ $gorup->from }}
+                                                                <span class="text-light">From:</span>{{ $group->from }}
                                                             </p>
                                                             <p class="invoice-customer-name badge bg-primary text-light">
                                                                 <span class="text-light">To:</span>
-                                                                {{ $gorup->to }}
+                                                                {{ $group->to }}
                                                             </p>
 
                                                         </div>
@@ -105,156 +109,73 @@
                                 </div>
 
                                 <div id="ct" class="" style="display: block;">
+                                    @foreach ($gorups as $group)
+                                        <div class="invoice-{{ $group->id }}" style="display: none;">
+                                            <div class="content-section  animated animatedFadeInUp fadeInUp">
 
-                                    <div class="invoice-00001" style="display: none;">
-                                        <div class="content-section  animated animatedFadeInUp fadeInUp">
+                                                <div class="row inv--head-section">
 
-                                            <div class="row inv--head-section">
-
-                                                <div class="col-sm-6 col-12">
-                                                    <h3 class="in-heading">INVOICE</h3>
-                                                </div>
-                                                <div class="col-sm-6 col-12 align-self-center text-sm-right">
-                                                    <div class="company-info">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                            height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" class="feather feather-hexagon">
-                                                            <path
-                                                                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                                                            </path>
-                                                        </svg>
-                                                        <h5 class="inv-brand-name">CORK</h5>
+                                                    <div class="col-sm-6 col-12">
+                                                        <h3 class="in-heading">STUDNTS</h3>
                                                     </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row inv--detail-section">
-
-                                                <div class="col-sm-7 align-self-center">
-                                                    <p class="inv-to">Invoice To</p>
-                                                </div>
-                                                <div class="col-sm-5 align-self-center  text-sm-right order-sm-0 order-1">
-                                                    <p class="inv-detail-title">From : XYZ Company</p>
-                                                </div>
-
-                                                <div class="col-sm-7 align-self-center">
-                                                    <p class="inv-customer-name">Jesse Cory</p>
-                                                    <p class="inv-street-addr">405 Mulberry Rd. Mc Grady, NC, 28649</p>
-                                                    <p class="inv-email-address">redq@company.com</p>
-                                                </div>
-                                                <div class="col-sm-5 align-self-center  text-sm-right order-2">
-                                                    <p class="inv-list-number"><span class="inv-title">Invoice Number :
-                                                        </span> <span class="inv-number">#00003</span></p>
-                                                    <p class="inv-created-date"><span class="inv-title">Invoice Date :
-                                                        </span> <span class="inv-date">20 Aug 2020</span></p>
-                                                    <p class="inv-due-date"><span class="inv-title">Due Date : </span>
-                                                        <span class="inv-date">26 Aug 2020</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                            <div class="row inv--product-table-section">
-                                                <div class="col-12">
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead class="">
-                                                                <tr>
-                                                                    <th scope="col">S.No</th>
-                                                                    <th scope="col">Items</th>
-                                                                    <th class="text-right" scope="col">Qty</th>
-                                                                    <th class="text-right" scope="col">Unit Price</th>
-                                                                    <th class="text-right" scope="col">Amount</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>Electric Shaver</td>
-                                                                    <td class="text-right">20</td>
-                                                                    <td class="text-right">$300</td>
-                                                                    <td class="text-right">$2800</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td>Earphones</td>
-                                                                    <td class="text-right">49</td>
-                                                                    <td class="text-right">$500</td>
-                                                                    <td class="text-right">$7000</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>3</td>
-                                                                    <td>Wireless Router</td>
-                                                                    <td class="text-right">30</td>
-                                                                    <td class="text-right">$500</td>
-                                                                    <td class="text-right">$3500</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row mt-4">
-                                                <div class="col-sm-5 col-12 order-sm-0 order-1">
-                                                    <div class="inv--payment-info">
-                                                        <div class="row">
-                                                            <div class="col-sm-12 col-12">
-                                                                <h6 class=" inv-title">Payment Info:</h6>
-                                                            </div>
-                                                            <div class="col-sm-4 col-12">
-                                                                <p class=" inv-subtitle">Bank Name: </p>
-                                                            </div>
-                                                            <div class="col-sm-8 col-12">
-                                                                <p class="">Bank of America</p>
-                                                            </div>
-                                                            <div class="col-sm-4 col-12">
-                                                                <p class=" inv-subtitle">Account Number : </p>
-                                                            </div>
-                                                            <div class="col-sm-8 col-12">
-                                                                <p class="">1234567890</p>
-                                                            </div>
+                                                    <div class="col-sm-6 col-12 align-self-center text-sm-right">
+                                                        <div class="company-info">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="feather feather-hexagon">
+                                                                <path
+                                                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                                                </path>
+                                                            </svg>
+                                                            <h5 class="inv-brand-name">Payment</h5>
                                                         </div>
                                                     </div>
+
                                                 </div>
-                                                <div class="col-sm-7 col-12 order-sm-1 order-0">
-                                                    <div class="inv--total-amounts text-sm-right">
-                                                        <div class="row">
-                                                            <div class="col-sm-8 col-7">
-                                                                <p class="">Sub Total: </p>
-                                                            </div>
-                                                            <div class="col-sm-4 col-5">
-                                                                <p class="">$13300</p>
-                                                            </div>
-                                                            <div class="col-sm-8 col-7">
-                                                                <p class="">Tax Amount: </p>
-                                                            </div>
-                                                            <div class="col-sm-4 col-5">
-                                                                <p class="">$700</p>
-                                                            </div>
-                                                            <div class="col-sm-8 col-7">
-                                                                <p class=" discount-rate">Discount : <span
-                                                                        class="discount-percentage">5%</span> </p>
-                                                            </div>
-                                                            <div class="col-sm-4 col-5">
-                                                                <p class="">$700</p>
-                                                            </div>
-                                                            <div class="col-sm-8 col-7 grand-total-title">
-                                                                <h4 class="">Grand Total : </h4>
-                                                            </div>
-                                                            <div class="col-sm-4 col-5 grand-total-amount">
-                                                                <h4 class="">$14000</h4>
-                                                            </div>
+                                                <div class="row inv--product-table-section">
+                                                    <div class="col-4">
+                                                        <div class="table-responsive">
+                                                            <table class="table">
+                                                                <thead class="">
+                                                                    <tr>
+                                                                        <th scope="col">S.No</th>
+                                                                        <th scope="col">Name</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($group->students as $student)
+                                                                        <tr>
+                                                                            <td>{{ $student->id }}</td>
+                                                                            <td>{{ $student->name }}</td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
                                                         </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <select class="form-control  basic">
+                                                            <option selected="selected">Choose The Month</option>
+                                                            <option>January</option>
+                                                            <option>February</option>
+                                                            <option>March</option>
+                                                            <option>April</option>
+                                                            <option>May</option>
+                                                            <option>June</option>
+                                                            <option>July</option>
+                                                            <option>August</option>
+                                                            <option>September</option>
+                                                            <option>October</option>
+                                                            <option>November</option>
+                                                            <option>December</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-                                    </div>
-
-
+                                    @endforeach
                                 </div>
 
 
@@ -307,4 +228,15 @@
 
 @section('javascript')
     <script src="{{ asset('adminAssets/assets/js/apps/invoice.js') }}"></script>
+
+    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
+    <script src="{{ asset('adminAssets/assets/js/scrollspyNav.js') }}"></script>
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('adminAssets/plugins/select2/custom-select2.js') }}"></script>
+    <script>
+        var ss = $(".basic").select2({
+            tags: true,
+        });
+    </script>
+    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
 @endsection
