@@ -27,7 +27,8 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        $gorups = Group::get();
+        $gorups = Group::with('students')->get();
+
         return view('pages.payment.create', [
             'gorups' => $gorups
         ]);
