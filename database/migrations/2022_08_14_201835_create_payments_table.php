@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('group_id');
-            $table->double('paid');
+            $table->double('amount');
             $table->enum('month', ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
-            $table->text('note')->nullable();
+            $table->boolean('paid')->default(false);
             $table->timestamps();
 
 

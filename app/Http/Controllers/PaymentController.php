@@ -7,6 +7,8 @@ use App\Models\Payment;
 use App\Http\Requests\Payment\StorePaymentRequest;
 use App\Http\Requests\Payment\UpdatePaymentRequest;
 use App\Models\Group;
+use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PaymentController extends Controller
 {
@@ -27,10 +29,10 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        $gorups = Group::with('students')->get();
 
+        $gorups = Group::with('students', 'groupType')->get();
         return view('pages.payment.create', [
-            'gorups' => $gorups
+            'gorups' => $gorups,
         ]);
     }
 
@@ -42,7 +44,40 @@ class PaymentController extends Controller
      */
     public function store(StorePaymentRequest $request)
     {
-        //
+        if ($request->paid == "true") {
+            Payment::updateOrCreate([
+                'student_id' => $request->student_id,
+                'group_id' => $request->group_id,
+                'amount' => $request->amount,
+                'month' => $request->month,
+            ], [
+                'paid' => true,
+            ]);
+        } else {
+            Payment::updateOrCreate([
+                'student_id' => $request->student_id,
+                'group_id' => $request->group_id,
+                'amount' => $request->amount,
+                'month' => $request->month,
+            ], [
+                'paid' => false,
+            ]);
+        }
+        Alert::toast('تمت العملية بنجاح', 'success');
+        return redirect()->back();
+    }
+
+
+    public function getMonthOfPayment(Request $request)
+    {
+        $payment = Payment::select(['id', 'paid', 'student_id', 'group_id', 'month'])
+            ->where('month', $request->month)
+            ->where('group_id', $request->group_id)
+            ->get();
+
+        return response()->json([
+            'payment' => $payment
+        ]);
     }
 
     /**

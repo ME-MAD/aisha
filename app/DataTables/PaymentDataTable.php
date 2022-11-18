@@ -6,10 +6,6 @@ use App\Models\Payment;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class PaymentDataTable extends DataTable
@@ -52,8 +48,9 @@ class PaymentDataTable extends DataTable
             'payments.id',
             'student_id',
             'group_id',
-            'paid',
+            'amount',
             'month',
+            'paid',
         ])->with([
             'student:id,name',
             'group:id,from,to'
@@ -144,9 +141,9 @@ class PaymentDataTable extends DataTable
             ],
 
             [
-                'name' => 'paid',
-                'data' => 'paid',
-                'title' => 'paid',
+                'name' => 'amount',
+                'data' => 'amount',
+                'title' => 'amount',
                 "className" => 'search--col'
             ],
 
@@ -154,6 +151,12 @@ class PaymentDataTable extends DataTable
                 'name' => 'month',
                 'data' => 'month',
                 'title' => 'month',
+                "className" => 'search--col'
+            ],
+            [
+                'name' => 'paid',
+                'data' => 'paid',
+                'title' => 'paid',
                 "className" => 'search--col'
             ],
 

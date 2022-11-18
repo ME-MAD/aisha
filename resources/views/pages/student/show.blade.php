@@ -7,7 +7,7 @@
 
     <link href="{{ asset('adminAssets/assets/css/components/custom-list-group.css') }}" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="{{asset('css/student.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/student.css') }}">
     <!--  END CUSTOM STYLE FILE  -->
 @endsection
 
@@ -63,7 +63,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12">
 
         @include('pages.student.partials.subjects')
-        
+
     </div>
 
     <div class="col-xl-12 col-lg-12 col-md-12 mt-4 showLessonContainer">
@@ -77,9 +77,8 @@
 
 
 @section('javascript')
-
-    <script src="{{asset('adminAssets/plugins/turn/turn.min.js')}}"></script>
-    <script src="{{asset('js/subject.js')}}"></script>
+    <script src="{{ asset('adminAssets/plugins/turn/turn.min.js') }}"></script>
+    <script src="{{ asset('js/subject.js') }}"></script>
 
     <script>
         let input = document.getElementsByClassName('lesson_finished_checkbox');
@@ -88,7 +87,7 @@
         for (let element of input) {
             element.addEventListener('change', function(event) {
                 let href = $(this).data('href');
-
+                // console.log(href);
                 let groupid = $(this).data('groupid');
                 let lessonid = $(this).data('lessonid');
                 let studentid = $(this).data('studentid');
