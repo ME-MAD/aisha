@@ -12,16 +12,30 @@
                 @endforeach
             </p>
 
-            <div class="row p-4">
+            <div class="row">
+                @foreach ($subjects as $subject)
+                    <div class="col-4 mb-4">
+                        <div class="card component-card_1">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a class="subjectShowButton text-dark"
+                                        data-opensubjecthref="{{route('admin.subject.getSubjectBook',$subject)}}"
+                                        data-subject="{{$subject}}"
+                                        id="list-home-list{{ $groupStudent->id }}{{ $subject->id }}"
+                                        href="#list-home{{ $groupStudent->id }}{{ $subject->id }}">
+                                        {{ $subject->name }}
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            {{-- <div class="row p-4">
                 <div class="col-3">
                     <div class="list-group" id="list-tab" role="tablist">
                         @foreach ($subjects as $subject)
-                            <a class="list-group-item list-group-item-action subjectShowButton"
-                                data-opensubjecthref="{{route('admin.subject.getSubjectBook',$subject)}}"
-                                data-subject="{{$subject}}"
-                                id="list-home-list{{ $groupStudent->id }}{{ $subject->id }}" data-toggle="list"
-                                href="#list-home{{ $groupStudent->id }}{{ $subject->id }}" role="tab"
-                                aria-controls="home">{{ $subject->name }}</a>
+                            
                         @endforeach
                     </div>
                 </div>
@@ -32,7 +46,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> --}}
         </div>
     @endforeach
 </div>
