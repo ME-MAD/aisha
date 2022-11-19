@@ -23,7 +23,7 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        $subjects = $this->getSubject();
+        $subjects = Subject::get();
 
         return view('pages.subject.index', [
             'subjects' => $subjects

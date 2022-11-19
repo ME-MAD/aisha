@@ -20,7 +20,7 @@ class ExperienceController extends Controller
     public function index(ExperienceDataTable $experienceDataTable)
 
     {
-        $experiences = $this->getExperiences();
+        $experiences = Experience::get();
         $teachers  = Teacher::select(['id', 'name'])->get();
         return $experienceDataTable->render('pages.experience.index', [
             'teachers' => $teachers,

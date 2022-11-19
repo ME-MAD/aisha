@@ -7,7 +7,10 @@
 
     <link href="{{ asset('adminAssets/assets/css/components/custom-list-group.css') }}" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="{{ asset('css/student.css') }}">
+
+    <link href="{{asset('adminAssets/assets/css/components/cards/card.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{asset('css/student.css')}}">
+
     <!--  END CUSTOM STYLE FILE  -->
 @endsection
 
