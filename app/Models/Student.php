@@ -28,8 +28,7 @@ class Student extends Model
 
     function getAvatarPath()
     {
-        if($this->getRawOriginal('avatar'))
-        {
+        if ($this->getRawOriginal('avatar')) {
             return public_path(Student::AVATARS_PATH . $this->getRawOriginal('avatar'));
         }
         return '';
@@ -48,5 +47,10 @@ class Student extends Model
     public function studentLessons()
     {
         return $this->hasMany(StudentLesson::class, 'student_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'student_id');
     }
 }

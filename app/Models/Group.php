@@ -52,6 +52,11 @@ class Group extends Model
         return $this->hasMany(StudentLesson::class, 'group_id');
     }
 
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'group_id');
+    }
+
     public function checkIfGroupExceededGroupDaysLimit()
     {
         return ($this->groupType->days_num ?? 0) <= ($this->groupDays->count() ?? 0);

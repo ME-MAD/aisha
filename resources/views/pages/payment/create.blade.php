@@ -135,13 +135,14 @@
 
                                                 </div>
                                                 <div class="row inv--product-table-section">
-                                                    <div class="col-4">
+                                                    <div class="col-6">
                                                         <div class="table-responsive">
                                                             <table class="table">
                                                                 <thead class="">
                                                                     <tr>
                                                                         <th scope="col">S.No</th>
                                                                         <th scope="col">Name</th>
+                                                                        <th scope="col">paid</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -149,6 +150,19 @@
                                                                         <tr>
                                                                             <td>{{ $student->id }}</td>
                                                                             <td>{{ $student->name }}</td>
+                                                                            <td id="checkbok">
+                                                                                <input type="checkbox"
+                                                                                    class="paid_finished_checkbox big-checkbox"
+                                                                                    id="paid_finished_checkbox_{{ $student->id }}_{{ $group->id }}"
+                                                                                    data-href="{{ route('admin.payment.store') }}"
+                                                                                    data-student="{{ $student->id }}"
+                                                                                    data-group="{{ $group->id }}"
+                                                                                    data-amount="{{ $group->groupType->price }}">
+
+
+
+
+                                                                            </td>
                                                                         </tr>
                                                                     @endforeach
                                                                 </tbody>
@@ -156,20 +170,23 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
-                                                        <select class="form-control  basic">
-                                                            <option selected="selected">Choose The Month</option>
-                                                            <option>January</option>
-                                                            <option>February</option>
-                                                            <option>March</option>
-                                                            <option>April</option>
-                                                            <option>May</option>
-                                                            <option>June</option>
-                                                            <option>July</option>
-                                                            <option>August</option>
-                                                            <option>September</option>
-                                                            <option>October</option>
-                                                            <option>November</option>
-                                                            <option>December</option>
+                                                        <select class="form-control basic month" name="month"
+                                                            id="month" data-group="{{ $group->id }}"
+                                                            data-href="{{ route('admin.payment.getMonthOfPayment') }}">
+                                                            <option value="" selected="selected">Choose The Month
+                                                            </option>
+                                                            <option value="January">January</option>
+                                                            <option value="February">February</option>
+                                                            <option value="March">March</option>
+                                                            <option value="April">April</option>
+                                                            <option value="May">May</option>
+                                                            <option value="June">June</option>
+                                                            <option value="July">July</option>
+                                                            <option value="August">August</option>
+                                                            <option value="September">September</option>
+                                                            <option value="October">October</option>
+                                                            <option value="November">November</option>
+                                                            <option value="December">December</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -177,7 +194,6 @@
                                         </div>
                                     @endforeach
                                 </div>
-
 
                                 <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
                                     <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
@@ -200,11 +216,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -228,7 +241,6 @@
 
 @section('javascript')
     <script src="{{ asset('adminAssets/assets/js/apps/invoice.js') }}"></script>
-
     <!--  BEGIN CUSTOM SCRIPTS FILE  -->
     <script src="{{ asset('adminAssets/assets/js/scrollspyNav.js') }}"></script>
     <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
@@ -239,4 +251,5 @@
         });
     </script>
     <!--  BEGIN CUSTOM SCRIPTS FILE  -->
+    <script src="{{ asset('js/payment.js') }}"></script>
 @endsection

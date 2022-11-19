@@ -6,6 +6,7 @@ function getDataShow() {
     $.ajax({
         url: href,
         success: function (response) {
+            // console.log(response);
             response.statistics.forEach(statistic => {
                 $('#statustucsContaner').append(`
                     <div class="col-4">
@@ -52,7 +53,7 @@ function getDataShow() {
                 `)
             });
 
-            console.log(response.groups);
+            // console.log(response.groups);
 
             response.groups.forEach(group => {
                 $('#pills-tab').append(`
@@ -182,11 +183,11 @@ function getDataShow() {
                                     <p class="inv-customer-name">Days Group :</p>
                                 `
 
-                                +
-                                groupDaysHtml
-                                +
+                    +
+                    groupDaysHtml
+                    +
 
-                                `
+                    `
                                 </div>
                                 <div class="col-sm-5 align-self-center  text-sm-right order-2">
                                     <p class="inv-customer-name">
@@ -228,10 +229,10 @@ function getDataShow() {
                                             </thead>
                                             <tbody id="student">
                                                 `
-                                                +
-                                                studentsGroupStudentsHtml
-                                                +
-                                                `
+                    +
+                    studentsGroupStudentsHtml
+                    +
+                    `
                                             </tbody>
                                         </table>
                                     </div>
