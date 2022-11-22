@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('book')->nullable();
             $table->unsignedInteger('pages_count')->default(0);
+            $table->string('avatar')->nullable();
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@ use Illuminate\Http\UploadedFile;
 
 trait ImageTrait
 {
-    private function uploadImage(?UploadedFile $imageObject,string $path)
+    private function uploadImage(?UploadedFile $imageObject, string $path)
     {
         if ($imageObject) {
             $fileName = now()->timestamp . "_" . $imageObject->getClientOriginalName();
@@ -21,5 +21,4 @@ trait ImageTrait
             unlink($path);
         }
     }
-
 }

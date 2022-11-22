@@ -25,7 +25,8 @@ class UpdateSubjectRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'book' => 'nullable|mimes:pdf|max:10000'
+            // 'book' => 'nullable|mimes:pdf|max:10000',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ];
     }
 }

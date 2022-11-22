@@ -10,12 +10,33 @@ class Subject extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','book'];
+    protected $fillable = ['name', 'avatar', 'book'];
     protected $appends = ['pagesCount'];
+    const AVATARS_PATH = 'images/subject/avatars/';
+
+    protected function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: function ($avatar) {
+                if ($avatar && file_exists($this->getAvatarPath())) {
+                    return asset(Subject::AVATARS_PATH . $avatar);
+                }
+                return asset('images/bookCover.webp');
+            },
+        );
+    }
+
+    function getAvatarPath()
+    {
+        if ($this->getRawOriginal('avatar')) {
+            return public_path(Subject::AVATARS_PATH . $this->getRawOriginal('avatar'));
+        }
+        return '';
+    }
 
     public function lessons()
     {
-        return $this->hasMany(Lesson::class,'subject_id');
+        return $this->hasMany(Lesson::class, 'subject_id');
     }
 
     protected function book(): Attribute
@@ -27,7 +48,7 @@ class Subject extends Model
 
     public function directoryName()
     {
-        $pathArray = explode('_',$this->getRawOriginal('book'));
+        $pathArray = explode('_', $this->getRawOriginal('book'));
         return array_shift($pathArray);
     }
 
