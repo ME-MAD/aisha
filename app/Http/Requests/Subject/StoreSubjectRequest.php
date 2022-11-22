@@ -25,7 +25,8 @@ class StoreSubjectRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'book' => 'required|mimes:pdf|max:10000'
+            // 'book' => 'required|mimes:pdf|max:10000',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ];
     }
 }
