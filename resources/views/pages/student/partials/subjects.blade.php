@@ -1,8 +1,6 @@
-<div class="work-experience widget-content-area">
-    <h3 class="">Student syllabus
-
-    </h3>
-    @foreach ($student->groupStudents as $groupStudent)
+<div class="widget-content-area" id="groupStudentsContainer" data-href="{{route('admin.student.getGroupStudents', $student)}}">
+    <h3 class="">Student syllabus</h3>
+    {{-- @foreach ($student->groupStudents as $groupStudent)
         <div>
             <p class="text-center"> <span class="badge bg-primary text-light">From</span>
                 {{ $groupStudent->group->from }} :<span class="badge bg-primary text-light">To</span>
@@ -25,7 +23,6 @@
                                         href="#list-home{{ $groupStudent->id }}{{ $subject->id }}">
                                         {{ $subject->name }}
                                     </a>
-
                                 </h5>
                                 <img src="{{ $subject->avatar }}" alt=""
                                     class="avatar-image rounded mx-auto d-block">
@@ -38,21 +35,6 @@
                     </div>
                 @endforeach
             </div>
-            <div class="row p-4">
-                {{-- <div class="col-3">
-                    <div class="list-group" id="list-tab" role="tablist">
-                        @foreach ($subjects as $subject)
-                        @endforeach
-                    </div>
-                </div> --}}
-
-                <div class="col-9">
-                    <div class="tab-content" id="nav-tabContent">
-                        @include('pages.student.partials.subject')
-                    </div>
-
-                </div>
-            </div>
         </div>
-    @endforeach
+    @endforeach --}}
 </div>

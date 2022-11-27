@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('group_id');
             $table->boolean('finished')->default(false);
             $table->float('percentage')->default(0)->nullable();
-            $table->unsignedInteger('chapters_count')->default(0);
+            $table->unsignedInteger('last_chapter_finished')->default(0);
             $table->unsignedInteger('last_page_finished')->default(0);
             $table->timestamps();
 

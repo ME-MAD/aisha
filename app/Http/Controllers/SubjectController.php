@@ -54,21 +54,21 @@ class SubjectController extends Controller
             path: Subject::AVATARS_PATH
         );
 
-        // $book_name = $this->PDFService->uploadPdfFile(
-        //     $request->file('book'),
-        //     $request->name,
-        //     'subjects',
-        //     null,
-        //     'book'
-        // );
+        $book_name = $this->PDFService->uploadPdfFile(
+            $request->file('book'),
+            $request->name,
+            'subjects',
+            null,
+            'book'
+        );
 
         $subject = Subject::create([
             'name' => $request->name,
-            'book' => "mohamed",
+            'book' => $book_name,
             'avatar' =>  $fileName,
         ]);
 
-        // BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
+        BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
 
         Alert::toast('قد تاخذ عملية تجهيز الكتاب بعض الوقت', 'warning');
         return redirect(route('admin.subject.index'));
@@ -122,39 +122,39 @@ class SubjectController extends Controller
             );
         }
 
-        // if ($book = $request->file('book')) {
-        //     $this->PDFService->deleteFile($subject->book);
+        if ($book = $request->file('book')) {
+            $this->PDFService->deleteFile($subject->book);
 
-        //     $this->PDFService->deleteDirectory($subject->directoryName());
+            $this->PDFService->deleteDirectory($subject->directoryName());
 
-        //     $book_name = $this->PDFService->uploadPdfFile(
-        //         $book,
-        //         $request->name,
-        //         'subjects',
-        //         null,
-        //         'book'
-        //     );
-        // } else {
-        //     $book_name = $request->name . "_book" . "." . "pdf";
+            $book_name = $this->PDFService->uploadPdfFile(
+                $book,
+                $request->name,
+                'subjects',
+                null,
+                'book'
+            );
+        } else {
+            $book_name = $request->name . "_book" . "." . "pdf";
 
-        //     rename(
-        //         public_path($subject->book),
-        //         public_path('files/subjects/' . $book_name)
-        //     );
+            rename(
+                public_path($subject->book),
+                public_path('files/subjects/' . $book_name)
+            );
 
-        //     rename(
-        //         public_path('files/subjects/' . $subject->name . "/"),
-        //         public_path('files/subjects/' . $request->name . "/")
-        //     );
-        // }
+            rename(
+                public_path('files/subjects/' . $subject->name . "/"),
+                public_path('files/subjects/' . $request->name . "/")
+            );
+        }
 
         $subject->update([
             'name' => $request->name,
-            // 'book' => $book_name,
+            'book' => $book_name,
             'avatar' =>  $fileName,
         ]);
 
-        // BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
+        BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
 
         Alert::toast('قد تاخذ عملية تجهيز الكتاب بعض الوقت', 'warning');
         return redirect(route('admin.subject.index'));

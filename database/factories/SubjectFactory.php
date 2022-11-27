@@ -18,7 +18,7 @@ class SubjectFactory extends Factory
     {
         return [
             'name' => fake()->name,
-            'avatar' => fake()->text()
+            'avatar' => fake()->name()
         ];
     }
 }

@@ -15,31 +15,17 @@ return new class extends Migration
     {
         Schema::create('syllabi', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('new_lesson');
-            $table->unsignedBigInteger('old_lesson');
-            $table->boolean('is_reverse')->default(false);
+            $table->unsignedBigInteger('student_lesson_id');
+            $table->unsignedInteger('from_chapter')->default(0);
+            $table->unsignedInteger('to_chapter')->default(0);
+            $table->unsignedInteger('from_page')->default(0);
+            $table->unsignedInteger('to_page')->default(0);
             $table->timestamps();
 
-            $table->foreign('student_id')
+            $table->foreign('student_lesson_id')
             ->references('id')
-            ->on('students')
+            ->on('student_lessons')
             ->onDelete('CASCADE');
-
-            $table->foreign('new_lesson')
-            ->references('id')
-            ->on('lessons')
-            ->onDelete('CASCADE');
-
-            $table->foreign('old_lesson')
-            ->references('id')
-            ->on('lessons')
-            ->onDelete('CASCADE');
-
-
-
-
-
         });
     }
 

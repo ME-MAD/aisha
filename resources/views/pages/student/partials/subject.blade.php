@@ -27,14 +27,14 @@
                     <span>
                         <a 
                             class="text-primary" 
-                           
+                        
                             data-lesson="{{$lesson}}"
                         >
                             {{ $lesson->title }}
                         </a>
                     </span>
 
-                    </div>
+                </div>
 
                     <div class="d-flex justify-content-between mb-3">
                         <span

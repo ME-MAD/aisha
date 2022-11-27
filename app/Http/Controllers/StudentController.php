@@ -101,4 +101,18 @@ class StudentController extends Controller
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
+
+    public function getGroupStudents(Student $student)
+    {
+        $subjects = Subject::with('lessons.studentLessons')->get();
+        // $subjects->map(function($subject){
+        //     $subject->lessons->map(function($lesson){
+                
+        //     });
+        // });
+        return response()->json([
+            'groupStudents' => $student->groupStudents->load(['group.groupDays']),
+            'subjects' => $subjects,
+        ]);
+    }
 }

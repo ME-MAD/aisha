@@ -72,10 +72,11 @@ StudentLesson:
 //ToDo CRUD in student show
 syllabus:
     id
-    student_id
-    new_lesson => foriegn key on lessons
-    old_lesson => foriegn key on lessons
-    is_reverse : bool
+    student_lesson_id: unsignedInteger ==> StudentLesson.id
+    from_chapter: unsignedInteger default(0)
+    to_chapter: unsignedInteger default(0)
+    from_page: unsignedInteger default(0)
+    to_page: unsignedInteger default(0)
 
 [CRUD]
 GroupStudent:
