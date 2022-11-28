@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\syllabus;
 use App\Http\Requests\syllabus\StoresyllabusRequest;
 use App\Http\Requests\syllabus\UpdatesyllabusRequest;
+use App\Models\StudentLesson;
+use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SyllabusController extends Controller
@@ -100,5 +102,31 @@ class SyllabusController extends Controller
         $syllabus->delete();
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
+    }
+
+    public function createNewLesson(Request $request)
+    {
+        if( !$request->student_lesson_id )
+        {
+            StudentLesson::create([
+                'group_id' => $request->group_id,
+                'lesson_id' => $request->lesson_id,
+                'student_id' => $request->student_id,
+                'finished' => false,
+            ]);
+        }
+        else
+        {
+            syllabus::create([
+                'student_lesson_id' => $request->student_lesson_id,
+                'from_chapter' => $request->from_chapter,
+                'to_chapter' => $request->to_chapter,
+                'from_page' => $request->from_page,
+                'to_page' => $request->to_page,
+            ]);
+        }
+        return response()->json([
+            'status' => 200
+        ]);
     }
 }

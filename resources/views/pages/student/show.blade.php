@@ -74,6 +74,9 @@
         @include('pages.student.partials.showLesson')
 
     </div>
+
+
+    @include('pages.student.partials.newLessonModal')
 @endsection
 
 

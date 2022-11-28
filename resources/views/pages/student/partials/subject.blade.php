@@ -1,4 +1,4 @@
-@foreach ($subjects as $subject)
+{{-- @foreach ($subjects as $subject)
 <div class="tab-pane fade show" id="list-home{{ $groupStudent->id }}{{ $subject->id }}"
     role="tabpanel"
     aria-labelledby="list-home-list{{ $groupStudent->id }}{{ $subject->id }}">
@@ -69,35 +69,39 @@
             @endforeach
         </ul>
     </div>
-@endforeach
+@endforeach --}}
 
 
 
 
 
 
-<div class="modal fade" id="createSubjectModal" tabindex="-1" role="dialog" aria-labelledby="createSubjectModal"
+<div class="modal fade" id="newLessonModal" tabindex="-1" role="dialog" aria-labelledby="newLessonModal"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createSubjectModal">إضافة مؤهل</h5>
+                <h5 class="modal-title" id="newLessonModal">إضافة درس جديد</h5>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.student_lesson.store') }}" method="post" id="showSubjectForm">
+                <form method="post" id="newLessonForm">
                     @csrf
-                    <input type="hidden" name="group_id" id="group_id">
-                    <input type="hidden" name="lesson_id" id="lesson_id">
-                    <input type="hidden" name="student_id" value="{{ $student->id }}">
+                    <input type="hidden" name="student_lesson_id" id="student_lesson_id">
 
                     <div class="row">
                         <div class="col">
-
-                            <input class="text-dark form-control" id="max_chapters" readonly name="max_chapters">
+                            <input class="text-dark form-control" id="from_chapter" name="from_chapter">
                         </div>
                         <div class="col">
-                            <input id="chapters_count" class="form-control" type="number" name="chapters_count"
-                                min="" max="">
+                            <input class="text-dark form-control" id="to_chapter" name="to_chapter">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input class="text-dark form-control" id="from_page" name="from_page">
+                        </div>
+                        <div class="col">
+                            <input class="text-dark form-control" id="to_page" name="to_page">
                         </div>
                     </div>
 

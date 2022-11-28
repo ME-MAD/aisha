@@ -1,6 +1,7 @@
 let groupStudentsContainer = $('#groupStudentsContainer')
 let studentId = $('#studentProfileContainer').data('student-id')
-
+let groupStudents = null
+let subjects = null
 
 function renderSubjectsInStudentsShow(){
 
@@ -8,14 +9,14 @@ function renderSubjectsInStudentsShow(){
         url: groupStudentsContainer.data('href'),
         success: function (response) {
 
-            let groupStudents = response.groupStudents
-            let subjects = response.subjects
+            groupStudents = response.groupStudents
+            subjects = response.subjects
 
             groupStudents.forEach(groupStudent => {
                 groupStudentsContainer.append(`
                     <div id="groupStudentContainer${groupStudent.id}"></div>
                 `)
-                renderSubjectsForEachGroup(subjects, groupStudent)
+                renderSubjectsForEachGroup(groupStudent)
                 
             });
         },
@@ -24,7 +25,7 @@ function renderSubjectsInStudentsShow(){
 }
 
 
-function renderSubjectsForEachGroup(subjects, groupStudent)
+function renderSubjectsForEachGroup(groupStudent)
 {
     let subjectsElements = ''
     let groupDaysElements = ''
@@ -79,7 +80,7 @@ function renderSubjectsForEachGroup(subjects, groupStudent)
 
     $(`.subjectContainer${groupStudent.id}`).on('click',function(){
 
-        let subject = subjects.filter( subject => subject.id == $(this).data('subject-id'))[0]
+        let subject = getSubjectById($(this).data('subject-id'))
         let groupId = subjectsContainer.data('group-id')
         let lessonsElements = ''
 
@@ -89,10 +90,11 @@ function renderSubjectsForEachGroup(subjects, groupStudent)
                     studentLesson.group_id == groupId
                 )
             })[0]
-            let studentFinishedChaptersCount = studentLesson ? studentLesson.chapters_count : 0
+            let studentFinishedChaptersCount = studentLesson ? studentLesson.last_chapter_finished : 0
             let studentFinishedChaptersPercentage = studentLesson ? studentLesson.percentage : 0
             let studentLessonIsFinished = studentLesson ? studentLesson.finished : false
-            
+            let studentLessonLastPageFinished = studentLesson ? studentLesson.last_page_finished : 0
+
             lessonsElements += `
                 <div class="studentLessonContainer">
                     <div class="text-center mb-3">
@@ -104,6 +106,7 @@ function renderSubjectsForEachGroup(subjects, groupStudent)
                                 data-lesson-id="${lesson.id}"
                                 data-student-id="${studentId}"
                                 data-chapters-count="${lesson.chapters_count}"
+                                data-last-page-finished="${lesson.to_page}"
                                 ${studentLessonIsFinished ? 'checked' : ''}>
                         </label>
 
@@ -143,10 +146,15 @@ function renderSubjectsForEachGroup(subjects, groupStudent)
                         </div>
                     </a>
                     <div>
-                        
+                        Last Page Finished : <span class="badge bg-primary studentLessonLastPageFinishedElement">${studentLessonLastPageFinished}</span>
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-primary newLessonButton" data-student-lesson-id="${studentLesson ? studentLesson.id : null}" data-group-id="${groupId}" data-lesson-id="${lesson.id}">New Lesson</button>
                     </div>
                 </div>
             `
+
+            
         });
 
         subjectsContainer.html('')
@@ -161,82 +169,12 @@ function renderSubjectsForEachGroup(subjects, groupStudent)
             </div>
         `)
 
-
-        $('.lesson_finished_checkbox').on('change',function(){
-            let lesson_finished_checkbox = this;
-            let group_id = $(this).data('group-id');
-            let lesson_id = $(this).data('lesson-id');
-            let student_id = $(this).data('student-id');
-            let chapters_count = $(this).data('chapters-count');
-
-            if (lesson_finished_checkbox.checked == true) {
-                $.ajax({
-                    url: '/admin/student_lesson/ajaxStudentLessonFinished',
-                    data: {
-                        group_id: group_id,
-                        lesson_id: lesson_id,
-                        student_id: student_id,
-                        finished: true,
-                        chapters_count: chapters_count
-                    },
-                    success: function(response) {
-                        let mainParent = $(lesson_finished_checkbox).parent().parent().parent()
-
-                        mainParent.find(
-                            '.progressOfSubjectLink .progress-bar').css({
-                                'width': '100%',
-                                'transision': '1.5s'
-                            }).find(".progress-bar-percentage").html("100%")
-
-                        mainParent.find('.studentFinishedChaptersCountElement').html(chapters_count)
-
-                        Swal.fire(
-                            'Success!',
-                            `Finished Successfully !`,
-                            'success',
-                        )
-                    },
-                    error: function(res) {
-                        Swal.fire(
-                            'Error!',
-                            `There Was an Error !`,
-                            'error',
-                        )
-                        console.log(res);
-                    }
-                })
-            } else {
-                $.ajax({
-                    url: '/admin/student_lesson/ajaxStudentLessonFinished',
-                    data: {
-                        group_id: group_id,
-                        lesson_id: lesson_id,
-                        student_id: student_id,
-                        finished: false,
-                    },
-                    success: function(response) {
-                        Swal.fire(
-                            'Success!',
-                            `Finished Successfully !`,
-                            'success',
-                        )
-                    },
-                    error: function(res) {
-                        Swal.fire(
-                            'Error!',
-                            `There Was an Error !`,
-                            'error',
-                        )
-                        console.log(res);
-                    }
-
-                })
-            }
-        })
+        studentLessonFinishedAjax()
+       
 
         $(`#backToSubjects${groupStudent.id}`).on('click',function(){
 
-            renderSubjectsForEachGroup(subjects, groupStudent)
+            renderSubjectsInStudentsShow()
 
         })
 
@@ -244,6 +182,144 @@ function renderSubjectsForEachGroup(subjects, groupStudent)
     })
 }
 
+
+function studentLessonFinishedAjax()
+{
+    $('.lesson_finished_checkbox').on('change',function(){
+        let lesson_finished_checkbox = this;
+        let group_id = $(this).data('group-id');
+        let lesson_id = $(this).data('lesson-id');
+        let student_id = $(this).data('student-id');
+        let chapters_count = $(this).data('chapters-count');
+        let last_page_finished = $(this).data('last-page-finished');
+
+        if (lesson_finished_checkbox.checked == true) {
+            $.ajax({
+                url: '/admin/student_lesson/ajaxStudentLessonFinished',
+                data: {
+                    group_id: group_id,
+                    lesson_id: lesson_id,
+                    student_id: student_id,
+                    finished: true,
+                    chapters_count: chapters_count,
+                    last_page_finished: last_page_finished,
+                },
+                success: function(response) {
+                    let mainParent = $(lesson_finished_checkbox).parent().parent().parent()
+
+                    mainParent.find(
+                        '.progressOfSubjectLink .progress-bar').css({
+                            'width': '100%',
+                            'transision': '1.5s'
+                        }).find(".progress-bar-percentage").html("100%")
+                    
+                    mainParent.find('.studentFinishedChaptersCountElement').html(chapters_count)
+                    mainParent.find('.studentLessonLastPageFinishedElement').html(last_page_finished)
+
+                    Swal.fire(
+                        'Success!',
+                        `Finished Successfully !`,
+                        'success',
+                    )
+                },
+                error: function(res) {
+                    Swal.fire(
+                        'Error!',
+                        `There Was an Error !`,
+                        'error',
+                    )
+                    console.log(res);
+                }
+            })
+        } else {
+            $.ajax({
+                url: '/admin/student_lesson/ajaxStudentLessonFinished',
+                data: {
+                    group_id: group_id,
+                    lesson_id: lesson_id,
+                    student_id: student_id,
+                    finished: false,
+                },
+                success: function(response) {
+                    Swal.fire(
+                        'Success!',
+                        `Finished Successfully !`,
+                        'success',
+                    )
+                },
+                error: function(res) {
+                    Swal.fire(
+                        'Error!',
+                        `There Was an Error !`,
+                        'error',
+                    )
+                    console.log(res);
+                }
+
+            })
+        }
+    })
+
+    $('.newLessonButton').on('click',function(){
+        $('#newLessonModal').modal('show')
+        let student_lesson_id = $(this).data('student-lesson-id')
+
+        
+
+        $('#newLessonForm').submit(function(e){
+            e.preventDefault()
+            let from_chapter = $('#newLessonForm #from_chapter').val()
+            let to_chapter = $('#newLessonForm #to_chapter').val()
+            let from_page = $('#newLessonForm #from_page').val()
+            let to_page = $('#newLessonForm #to_page').val()
+            let group_id = $(this).data('group-id')
+            let lesson_id = $(this).data('lesson-id')
+            
+            let url = $(this).data('url')
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {
+                   from_chapter,
+                   to_chapter,
+                   from_page,
+                   to_page,
+                   student_lesson_id,
+                   student_id: studentId,
+                   group_id,
+                   lesson_id
+                },
+                success: function(response) {
+                    $('#newLessonModal').modal('hide')
+                    Swal.fire(
+                        'Success!',
+                        `Finished Successfully !`,
+                        'success',
+                    )
+                },
+                error: function(res) {
+                    Swal.fire(
+                        'Error!',
+                        `There Was an Error !`,
+                        'error',
+                    )
+                    console.log(res);
+                }
+            })
+        })
+    })
+}
+
+function getSubjectById(subject_id)
+{
+    return subjects.filter( subject => subject.id == subject_id)[0]
+}
+
+function getLessonById(subject,lesson_id)
+{
+    return subject.lessons.filter( lesson => lesson.id == lesson_id)[0]
+}
 
 
 function subjectShowHandle() 

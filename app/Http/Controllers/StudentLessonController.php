@@ -47,6 +47,7 @@ class StudentLessonController extends Controller
                 'finished' => true,
                 'percentage' => 100,
                 'last_chapter_finished' => $request->chapters_count,
+                'last_page_finished' => $request->last_page_finished,
             ]);
         } else {
             $parcentage = ($request->chapters_count / $request->max_chapters) * 100;
@@ -58,6 +59,7 @@ class StudentLessonController extends Controller
                 'finished' => false,
                 'percentage' => round($parcentage, 2),
                 'last_chapter_finished' => $request->chapters_count,
+                'last_page_finished' => $request->last_page_finished,
             ]);
         }
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -76,6 +78,7 @@ class StudentLessonController extends Controller
                 'finished' => true,
                 'percentage' => 100,
                 'last_chapter_finished' => intval($request->chapters_count),
+                'last_page_finished' => intval($request->last_page_finished),
             ]);
         } else {
             StudentLesson::updateOrCreate([
