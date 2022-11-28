@@ -22,4 +22,9 @@ class StudentLesson extends Model
     {
         return $this->hasMany(Lesson::class, 'group_id');
     }
+
+    public function syllabus()
+    {
+        return $this->hasMany(syllabus::class,'student_lesson_id');
+    }
 }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('to_chapter')->default(0);
             $table->unsignedInteger('from_page')->default(0);
             $table->unsignedInteger('to_page')->default(0);
+            $table->boolean('finished')->default(false);
             $table->timestamps();
 
             $table->foreign('student_lesson_id')

@@ -184,6 +184,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::put('update/{syllabus}', [SyllabusController::class, 'update'])->name('update');
         Route::get('delete/{syllabus}', [SyllabusController::class, 'delete'])->name('delete');
         Route::post('createNewLesson/', [SyllabusController::class, 'createNewLesson'])->name('createNewLesson');
+        Route::post('finishNewLessonAjax/{syllabus}', [SyllabusController::class, 'finishNewLessonAjax'])->name('finishNewLessonAjax');
     });
 
 

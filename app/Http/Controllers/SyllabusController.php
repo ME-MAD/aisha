@@ -106,25 +106,50 @@ class SyllabusController extends Controller
 
     public function createNewLesson(Request $request)
     {
+        $student_lesson_id = $request->student_lesson_id;
         if( !$request->student_lesson_id )
         {
-            StudentLesson::create([
+            $studentLesson = StudentLesson::create([
                 'group_id' => $request->group_id,
                 'lesson_id' => $request->lesson_id,
                 'student_id' => $request->student_id,
                 'finished' => false,
             ]);
+            $student_lesson_id = $studentLesson->id;
+        }
+
+        if(syllabus::where([
+            ['student_lesson_id' , $student_lesson_id],
+            ['finished' , false]
+        ])->exists())
+        {
+            return response()->json([
+                'status' => 400,
+            ]);
         }
         else
         {
-            syllabus::create([
-                'student_lesson_id' => $request->student_lesson_id,
+            $syllabi = syllabus::create([
+                'student_lesson_id' => $student_lesson_id,
                 'from_chapter' => $request->from_chapter,
                 'to_chapter' => $request->to_chapter,
                 'from_page' => $request->from_page,
                 'to_page' => $request->to_page,
+                'finished' => false
             ]);
         }
+        return response()->json([
+            'status' => 200,
+            'syllabi' => $syllabi
+        ]);
+    }
+
+    public function finishNewLessonAjax(syllabus $syllabus)
+    {
+        $syllabus->update([
+            'finished' => true
+        ]);
+
         return response()->json([
             'status' => 200
         ]);

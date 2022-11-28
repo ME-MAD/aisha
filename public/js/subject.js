@@ -90,10 +90,15 @@ function renderSubjectsForEachGroup(groupStudent)
                     studentLesson.group_id == groupId
                 )
             })[0]
+            let nextLesson = studentLesson?.syllabus.filter(syllabi => syllabi.finished == 0)[0]
+
+            let isNewLessonFinished = (nextLesson?.finished || false) == true
+
             let studentFinishedChaptersCount = studentLesson ? studentLesson.last_chapter_finished : 0
             let studentFinishedChaptersPercentage = studentLesson ? studentLesson.percentage : 0
             let studentLessonIsFinished = studentLesson ? studentLesson.finished : false
             let studentLessonLastPageFinished = studentLesson ? studentLesson.last_page_finished : 0
+
 
             lessonsElements += `
                 <div class="studentLessonContainer">
@@ -145,11 +150,42 @@ function renderSubjectsForEachGroup(groupStudent)
                             </div>
                         </div>
                     </a>
-                    <div>
+                    <div class="mb-3">
                         Last Page Finished : <span class="badge bg-primary studentLessonLastPageFinishedElement">${studentLessonLastPageFinished}</span>
                     </div>
-                    <div class="mt-3">
-                        <button class="btn btn-primary newLessonButton" data-student-lesson-id="${studentLesson ? studentLesson.id : null}" data-group-id="${groupId}" data-lesson-id="${lesson.id}">New Lesson</button>
+                    <div class="bg-dark p-3 text-center" style="font-size:1.5rem;">
+                        <div class="${nextLesson ? '' : 'd-none'} newLessonContainerElement">
+                            <div class="mb-3">
+                                <span>
+                                    <span>Next Lesson Is From Chapter</span>
+                                    <span class="badge bg-info nextLessonFromChapter">${nextLesson?.from_chapter || 0}</span>
+                                    <span>To Chapter</span>
+                                    <span class="badge bg-info nextLessonToChapter">${nextLesson?.to_chapter || 0}</span>
+                                </span>
+                            </div>
+                            <div class="mb-3">
+                                <span>
+                                    <span>Next Lesson Is From Page</span>
+                                    <span class="badge bg-info nextLessonFromPage">${nextLesson?.from_page || 0}</span>
+                                    <span>To Page</span>
+                                    <span class="badge bg-info nextLessonToPage">${nextLesson?.to_page || 0}</span>
+                                </span>
+                            </div>
+                            
+                        </div>
+                        <div class="mb-3">
+                            <span class="badge ${nextLesson ? "bg-danger" : "bg-success"} studentFinishedNewLessonElement">
+                                ${nextLesson ? "Student Finished The New Lesson" : "Student Didn't Finish The New Lesson"}
+                            </span>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary newLessonButton ${nextLesson ? 'd-none' : ''}" data-student-lesson-id="${studentLesson ? studentLesson.id : null}" data-group-id="${groupId}" data-lesson-id="${lesson.id}">New Lesson</button>
+
+                            <button class="btn btn-info finishNewLessonButton ${nextLesson ? '' : 'd-none'}" data-syllabi-id=${nextLesson?.id || null}>
+                                Finish New Lesson
+                                <i class="fa-solid fa-square-check"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             `
@@ -263,7 +299,10 @@ function studentLessonFinishedAjax()
     $('.newLessonButton').on('click',function(){
         $('#newLessonModal').modal('show')
         let student_lesson_id = $(this).data('student-lesson-id')
+        let group_id = $(this).data('group-id')
+        let lesson_id = $(this).data('lesson-id')
 
+        let mainParent = $(this).parent().parent().parent()
         
 
         $('#newLessonForm').submit(function(e){
@@ -272,8 +311,7 @@ function studentLessonFinishedAjax()
             let to_chapter = $('#newLessonForm #to_chapter').val()
             let from_page = $('#newLessonForm #from_page').val()
             let to_page = $('#newLessonForm #to_page').val()
-            let group_id = $(this).data('group-id')
-            let lesson_id = $(this).data('lesson-id')
+           
             
             let url = $(this).data('url')
 
@@ -292,11 +330,38 @@ function studentLessonFinishedAjax()
                 },
                 success: function(response) {
                     $('#newLessonModal').modal('hide')
-                    Swal.fire(
-                        'Success!',
-                        `Finished Successfully !`,
-                        'success',
-                    )
+                    if(response.status == 200)
+                    {
+                        Swal.fire(
+                            'Success!',
+                            `Finished Successfully !`,
+                            'success',
+                        )
+                        mainParent.find('.newLessonContainerElement').removeClass('d-none')
+                        mainParent.find('.nextLessonFromChapter').html(from_chapter)
+                        mainParent.find('.nextLessonToChapter').html(to_chapter)
+                        mainParent.find('.nextLessonFromPage').html(from_page)
+                        mainParent.find('.nextLessonToPage').html(to_page)
+
+                        mainParent.find('.studentFinishedNewLessonElement').removeClass('bg-success').addClass('bg-danger')
+                        mainParent.find('.studentFinishedNewLessonElement').html("Student Didn't Finish The New Lesson")
+
+                        mainParent.find('.newLessonButton').addClass('d-none')
+                        mainParent.find('.finishNewLessonButton').removeClass('d-none')
+                        mainParent.find('.finishNewLessonButton').attr('data-syllabi-id', response.syllabi.id)
+
+                        emptyNewLessonModal()
+                    }
+                    else if(response.status == 400)
+                    {
+                        Swal.fire(
+                            'Warning!',
+                            `Student Didn't Finish The Last Lesson!`,
+                            'warning',
+                        )
+
+                        emptyNewLessonModal()
+                    }
                 },
                 error: function(res) {
                     Swal.fire(
@@ -307,6 +372,45 @@ function studentLessonFinishedAjax()
                     console.log(res);
                 }
             })
+        })
+    })
+
+    $('.finishNewLessonButton').on('click',function(){
+        let syllabi_id = $(this).data('syllabi-id')
+        console.log(syllabi_id);
+        let mainParent = $(this).parent().parent().parent()
+
+        $.ajax({
+            url: "/admin/syllabus/finishNewLessonAjax/" + syllabi_id,
+            type: "POST",
+            data: {
+               
+            },
+            success: function(response) {
+                
+                mainParent.find('.newLessonContainerElement').addClass('d-none')
+                mainParent.find('.studentFinishedNewLessonElement').removeClass('bg-danger').addClass('bg-success')
+                mainParent.find('.studentFinishedNewLessonElement').html('Student Finished The New Lesson')
+
+                mainParent.find('.newLessonButton').removeClass('d-none')
+                mainParent.find('.finishNewLessonButton').addClass('d-none')
+                if(response.status == 200)
+                {
+                    Swal.fire(
+                        'Success!',
+                        `Finished Successfully !`,
+                        'success',
+                    )
+                }
+            },
+            error: function(res) {
+                Swal.fire(
+                    'Error!',
+                    `There Was an Error !`,
+                    'error',
+                )
+                console.log(res);
+            }
         })
     })
 }
@@ -321,6 +425,13 @@ function getLessonById(subject,lesson_id)
     return subject.lessons.filter( lesson => lesson.id == lesson_id)[0]
 }
 
+function emptyNewLessonModal()
+{
+    $('#newLessonForm #from_chapter').val('')
+    $('#newLessonForm #to_chapter').val('')
+    $('#newLessonForm #from_page').val('')
+    $('#newLessonForm #to_page').val('')
+}
 
 function subjectShowHandle() 
 {
