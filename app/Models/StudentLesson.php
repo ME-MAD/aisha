@@ -10,17 +10,17 @@ class StudentLesson extends Model
     use HasFactory;
     protected $fillable = ['student_id', 'lesson_id', 'group_id', 'finished', 'percentage', 'last_chapter_finished','last_page_finished'];
 
-    public function students()
+    public function student()
     {
-        return $this->hasMany(Lesson::class, 'student_id');
+        return $this->belongsTo(Student::class, 'student_id');
     }
-    public function lessons()
+    public function lesson()
     {
-        return $this->hasMany(Lesson::class, 'lesson_id');
+        return $this->belongsTo(Lesson::class, 'lesson_id');
     }
-    public function groups()
+    public function group()
     {
-        return $this->hasMany(Lesson::class, 'group_id');
+        return $this->belongsTo(Group::class, 'group_id');
     }
 
     public function syllabus()

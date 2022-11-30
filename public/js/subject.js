@@ -150,8 +150,14 @@ function renderSubjectsForEachGroup(groupStudent)
                             </div>
                         </div>
                     </a>
-                    <div class="mb-3">
-                        Last Page Finished : <span class="badge bg-primary studentLessonLastPageFinishedElement">${studentLessonLastPageFinished}</span>
+                    <div class="mb-4">
+                        Lesson Is From Page : <span class="badge bg-primary">${lesson.from_page}</span>
+                    </div>
+                    <div class="mb-4">
+                        Lesson Is To Page : <span class="badge bg-primary">${lesson.to_page}</span>
+                    </div>
+                    <div class="mb-4">
+                        Last Page Finished : <span class="badge bg-success studentLessonLastPageFinishedElement">${studentLessonLastPageFinished}</span>
                     </div>
                     <div class="bg-dark p-3 text-center" style="font-size:1.5rem;">
                         <div class="${nextLesson ? '' : 'd-none'} newLessonContainerElement">
@@ -179,7 +185,7 @@ function renderSubjectsForEachGroup(groupStudent)
                             </span>
                         </div>
                         <div>
-                            <button class="btn btn-primary newLessonButton ${nextLesson ? 'd-none' : ''}" data-student-lesson-id="${studentLesson ? studentLesson.id : null}" data-group-id="${groupId}" data-lesson-id="${lesson.id}">New Lesson</button>
+                            <button class="btn btn-primary newLessonButton ${nextLesson ? 'd-none' : ''}" data-student-lesson-id="${studentLesson ? studentLesson.id : null}" data-group-id="${groupId}" data-lesson-id="${lesson.id}" data-last-page-finished="${studentLesson?.last_page_finished}" data-last-chapter-finished="${studentLesson?.last_chapter_finished}">New Lesson</button>
 
                             <button class="btn btn-info finishNewLessonButton ${nextLesson ? '' : 'd-none'}" data-syllabi-id=${nextLesson?.id || null}>
                                 Finish New Lesson
@@ -243,11 +249,7 @@ function studentLessonFinishedAjax()
                 success: function(response) {
                     let mainParent = $(lesson_finished_checkbox).parent().parent().parent()
 
-                    mainParent.find(
-                        '.progressOfSubjectLink .progress-bar').css({
-                            'width': '100%',
-                            'transision': '1.5s'
-                        }).find(".progress-bar-percentage").html("100%")
+                    changePercentageBar(mainParent, 100)
                     
                     mainParent.find('.studentFinishedChaptersCountElement').html(chapters_count)
                     mainParent.find('.studentLessonLastPageFinishedElement').html(last_page_finished)
@@ -299,8 +301,13 @@ function studentLessonFinishedAjax()
     $('.newLessonButton').on('click',function(){
         $('#newLessonModal').modal('show')
         let student_lesson_id = $(this).data('student-lesson-id')
+        let last_page_finished = $(this).data('last-page-finished')
+        let last_chapter_finished = $(this).data('last-chapter-finished')
         let group_id = $(this).data('group-id')
         let lesson_id = $(this).data('lesson-id')
+
+        $('#newLessonForm #from_page').val(last_page_finished || '')
+        $('#newLessonForm #from_chapter').val(last_chapter_finished || '')
 
         let mainParent = $(this).parent().parent().parent()
         
@@ -311,7 +318,7 @@ function studentLessonFinishedAjax()
             let to_chapter = $('#newLessonForm #to_chapter').val()
             let from_page = $('#newLessonForm #from_page').val()
             let to_page = $('#newLessonForm #to_page').val()
-           
+            
             
             let url = $(this).data('url')
 
@@ -348,7 +355,10 @@ function studentLessonFinishedAjax()
 
                         mainParent.find('.newLessonButton').addClass('d-none')
                         mainParent.find('.finishNewLessonButton').removeClass('d-none')
-                        mainParent.find('.finishNewLessonButton').attr('data-syllabi-id', response.syllabi.id)
+                        mainParent.find('.finishNewLessonButton').data('syllabi-id', response.syllabi.id)
+
+                        mainParent.find('.newLessonButton').data('last-page-finished', response.syllabi.to_page)
+                        mainParent.find('.newLessonButton').data('last-chapter-finished', response.syllabi.to_chapter)
 
                         emptyNewLessonModal()
                     }
@@ -364,12 +374,19 @@ function studentLessonFinishedAjax()
                     }
                 },
                 error: function(res) {
+                    let errors = '';
+
+                    res.responseJSON.errors.forEach(errorArray => {
+                        errors += `
+                            <p class="text-danger py-1"> ${errorArray[0]} </p>
+                            <hr>
+                        `
+                    });
                     Swal.fire(
                         'Error!',
-                        `There Was an Error !`,
+                        `${errors}`,
                         'error',
                     )
-                    console.log(res);
                 }
             })
         })
@@ -377,7 +394,6 @@ function studentLessonFinishedAjax()
 
     $('.finishNewLessonButton').on('click',function(){
         let syllabi_id = $(this).data('syllabi-id')
-        console.log(syllabi_id);
         let mainParent = $(this).parent().parent().parent()
 
         $.ajax({
@@ -387,19 +403,35 @@ function studentLessonFinishedAjax()
                
             },
             success: function(response) {
-                
-                mainParent.find('.newLessonContainerElement').addClass('d-none')
-                mainParent.find('.studentFinishedNewLessonElement').removeClass('bg-danger').addClass('bg-success')
-                mainParent.find('.studentFinishedNewLessonElement').html('Student Finished The New Lesson')
-
-                mainParent.find('.newLessonButton').removeClass('d-none')
-                mainParent.find('.finishNewLessonButton').addClass('d-none')
                 if(response.status == 200)
                 {
+                    mainParent.find('.newLessonContainerElement').addClass('d-none')
+                    mainParent.find('.studentFinishedNewLessonElement').removeClass('bg-danger').addClass('bg-success')
+                    mainParent.find('.studentFinishedNewLessonElement').html('Student Finished The New Lesson')
+
+                    mainParent.find('.newLessonButton').removeClass('d-none')
+                    mainParent.find('.finishNewLessonButton').addClass('d-none')
+
+                    mainParent.find('.studentLessonLastPageFinishedElement').html(response.studentLesson.last_page_finished)
+
+                    mainParent.find('.studentFinishedChaptersCountElement').html(response.studentLesson.last_chapter_finished)
+
+                    mainParent.find('.lesson_finished_checkbox').prop('checked', response.studentLesson.finished)
+
+                    changePercentageBar(mainParent, response.studentLesson.percentage)
+
                     Swal.fire(
                         'Success!',
                         `Finished Successfully !`,
                         'success',
+                    )
+                }
+                else if(response.status == 400)
+                {
+                    Swal.fire(
+                        'Warning!',
+                        `Student Didn't Finish The Last Lesson!`,
+                        'warning',
                     )
                 }
             },
@@ -413,6 +445,15 @@ function studentLessonFinishedAjax()
             }
         })
     })
+}
+
+function changePercentageBar(mainParent, percentage)
+{
+    mainParent.find(
+    '.progressOfSubjectLink .progress-bar').css({
+        'width': `${percentage}%`,
+        'transision': '1.5s'
+    }).find(".progress-bar-percentage").html(`${percentage}%`)
 }
 
 function getSubjectById(subject_id)
