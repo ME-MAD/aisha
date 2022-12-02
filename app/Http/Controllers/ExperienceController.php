@@ -5,26 +5,32 @@ namespace App\Http\Controllers;
 use App\DataTables\ExperienceDataTable;
 use App\Models\Experience;
 use App\Models\Teacher;
+use App\Services\Teacher\TeacherService;
 use Illuminate\Http\Request as HttpRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExperienceController extends Controller
 {
 
+    private $experienceDataTable;
+    private $teacherService;
+
+    public function __construct(ExperienceDataTable $experienceDataTable, TeacherService $teacherService)
+    {
+        $this->experienceDataTable = $experienceDataTable;
+        $this->teacherService = $teacherService;
+    }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ExperienceDataTable $experienceDataTable)
-
+    public function index()
     {
-        $experiences = Experience::get();
-        $teachers  = Teacher::select(['id', 'name'])->get();
-        return $experienceDataTable->render('pages.experience.index', [
+        $teachers  = $this->teacherService->getAllTeachers();
+        return $this->experienceDataTable->render('pages.experience.index', [
             'teachers' => $teachers,
-            'experiences' => $experiences
         ]);
     }
 
@@ -35,11 +41,7 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-
-        $teacher = Teacher::select(['id', 'name'])->get();
-        return view('pages.experience.create', [
-            'teacher' => $teacher,
-        ]);
+        
     }
 
     /**
@@ -50,7 +52,6 @@ class ExperienceController extends Controller
      */
     public function store(HttpRequest $request)
     {
-
         Experience::create([
             'title' => $request->title,
             'from' => $request->from,

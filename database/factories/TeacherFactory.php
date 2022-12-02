@@ -20,7 +20,7 @@ class TeacherFactory extends Factory
             'name' => fake()->name,
             'birthday' => fake()->date(),
             'phone' => fake()->phoneNumber(),
-            'avatar' => fake()->text(),
+            'avatar' => fake()->name(),
             'qualification' => fake()->text()
         ];
     }
