@@ -24,9 +24,11 @@ class TgweedSeeder extends Seeder
         foreach ($chapters as $chapter) {
             Lesson::updateOrCreate([
                 'title'      => $chapter['lesson_ar'],
-                'chapters_count' => $chapter['num_pages']
-            ], [
                 'subject_id' => $subject->id,
+            ], [
+                'chapters_count' => $chapter['num_pages'],
+                'from_page' => $chapter['from_page'],
+                'to_page' => $chapter['to_page'],
             ]);
         };
     }

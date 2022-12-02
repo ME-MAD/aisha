@@ -43,7 +43,7 @@
 @section('content')
     <div class="col-xl-4 col-lg-6 col-md-5 col-sm-12 layout-top-spacing">
 
-        <div class="user-profile layout-spacing">
+        <div class="user-profile layout-spacing" id="studentProfileContainer" data-student-id="{{$student->id}}">
 
             @include('pages.student.partials.profileStudent')
 
@@ -63,17 +63,22 @@
 
     </div>
 
+    <div class="col-xl-12 col-lg-12 col-md-12 mt-4 showLessonContainer">
+
+        @include('pages.student.partials.showLesson')
+
+    </div>
+
     <div class="col-xl-12 col-lg-12 col-md-12">
 
         @include('pages.student.partials.subjects')
 
     </div>
 
-    <div class="col-xl-12 col-lg-12 col-md-12 mt-4 showLessonContainer">
+  
 
-        @include('pages.student.partials.showLesson')
 
-    </div>
+    @include('pages.student.partials.newLessonModal')
 @endsection
 
 
@@ -84,55 +89,61 @@
     <script src="{{ asset('js/subject.js') }}"></script>
 
     <script>
-        let input = document.getElementsByClassName('lesson_finished_checkbox');
+
+        // subjectShowHandle()
+        renderSubjectsInStudentsShow()
 
 
-        for (let element of input) {
-            element.addEventListener('change', function(event) {
-                let href = $(this).data('href');
-                // console.log(href);
-                let groupid = $(this).data('groupid');
-                let lessonid = $(this).data('lessonid');
-                let studentid = $(this).data('studentid');
-                let chaptercount = $(this).data('chaptercount');
 
-                if (element.checked == true) {
-                    $.ajax({
-                        url: href,
-                        data: {
-                            group_id: groupid,
-                            lesson_id: lessonid,
-                            student_id: studentid,
-                            finished: true,
-                            chapters_count: chaptercount
-                        },
-                        success: function(response) {
-                            $(element).parent().parent().parent().find(
-                                '.progressOfSubjectLink .progress-bar').css({
-                                'width': '100%',
-                                'transision': '1.5s'
-                            }).find(".progress-bar-percentage").html("100%")
-                            // swal("Success", "Success", "success");
-                        },
-                        error: function() {}
-                    })
-                } else {
-                    $.ajax({
-                        url: href,
-                        data: {
-                            group_id: groupid,
-                            lesson_id: lessonid,
-                            student_id: studentid,
-                            finished: false,
-                        },
-                        success: function(response) {
-                            swal("Success", "Success", "success");
-                        },
-                        error: function() {}
+        // let input = document.getElementsByClassName('lesson_finished_checkbox');
 
-                    })
-                }
-            })
-        }
+
+        // for (let element of input) {
+        //     element.addEventListener('change', function(event) {
+        //         let href = $(this).data('href');
+        //         // console.log(href);
+        //         let groupid = $(this).data('groupid');
+        //         let lessonid = $(this).data('lessonid');
+        //         let studentid = $(this).data('studentid');
+        //         let chaptercount = $(this).data('chaptercount');
+
+        //         if (element.checked == true) {
+        //             $.ajax({
+        //                 url: href,
+        //                 data: {
+        //                     group_id: groupid,
+        //                     lesson_id: lessonid,
+        //                     student_id: studentid,
+        //                     finished: true,
+        //                     chapters_count: chaptercount
+        //                 },
+        //                 success: function(response) {
+        //                     $(element).parent().parent().parent().find(
+        //                         '.progressOfSubjectLink .progress-bar').css({
+        //                         'width': '100%',
+        //                         'transision': '1.5s'
+        //                     }).find(".progress-bar-percentage").html("100%")
+        //                     // swal("Success", "Success", "success");
+        //                 },
+        //                 error: function() {}
+        //             })
+        //         } else {
+        //             $.ajax({
+        //                 url: href,
+        //                 data: {
+        //                     group_id: groupid,
+        //                     lesson_id: lessonid,
+        //                     student_id: studentid,
+        //                     finished: false,
+        //                 },
+        //                 success: function(response) {
+        //                     swal("Success", "Success", "success");
+        //                 },
+        //                 error: function() {}
+
+        //             })
+        //         }
+        //     })
+        // }
     </script>
 @endsection

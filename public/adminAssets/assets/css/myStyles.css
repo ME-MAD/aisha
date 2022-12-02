@@ -11,6 +11,10 @@ table tbody tr td {
     text-align: center;
 }
 
+.layout-spacing .widget-content .bio-skill-box .row p{
+    color: black;
+}
+
 .timeline-alter .editExperienceButton:hover {
     cursor: pointer;
     text-decoration: underline;

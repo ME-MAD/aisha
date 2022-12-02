@@ -5,11 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\StudentLesson;
 use App\Http\Requests\StudentLesson\StoreStudentLessonRequest;
 use App\Http\Requests\StudentLesson\UpdateStudentLessonRequest;
+use App\Services\StudentLesson\StudentLessonService;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentLessonController extends Controller
 {
+
+    private $studentLessonService;
+
+    public function __construct(StudentLessonService $studentLessonService)
+    {
+        $this->studentLessonService = $studentLessonService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -37,58 +45,16 @@ class StudentLessonController extends Controller
      */
     public function store(StoreStudentLessonRequest $request)
     {
+        $this->studentLessonService->store($request);
 
-        if ($request->max_chapters == $request->chapters_count) {
-            StudentLesson::updateOrCreate([
-                'student_id' => $request->student_id,
-                'lesson_id' => $request->lesson_id,
-                'group_id' => $request->group_id,
-            ], [
-                'finished' => true,
-                'percentage' => 100,
-                'chapters_count' => $request->chapters_count,
-            ]);
-        } else {
-            $parcentage = ($request->chapters_count / $request->max_chapters) * 100;
-            StudentLesson::updateOrCreate([
-                'student_id' => $request->student_id,
-                'lesson_id' => $request->lesson_id,
-                'group_id' => $request->group_id,
-            ], [
-                'finished' => false,
-                'percentage' => round($parcentage, 2),
-                'chapters_count' => $request->chapters_count,
-            ]);
-        }
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
-
     public function ajaxStudentLessonFinished(Request $request)
     {
-        if ($request->finished == "true") {
-            StudentLesson::updateOrCreate([
-                'student_id' => $request->student_id,
-                'lesson_id' => $request->lesson_id,
-                'group_id' => $request->group_id,
-            ], [
-                'finished' => true,
-                'percentage' => 100,
-                'chapters_count' => intval($request->chapters_count),
-            ]);
-        } else {
-            StudentLesson::updateOrCreate([
-                'student_id' => $request->student_id,
-                'lesson_id' => $request->lesson_id,
-                'group_id' => $request->group_id,
-            ], [
-                'finished' => false,
-            ]);
-        }
+        $this->studentLessonService->ajaxStudentLessonFinished($request);
     }
-
-
 
 
     /**
@@ -99,7 +65,9 @@ class StudentLessonController extends Controller
      */
     public function show(StudentLesson $studentLesson)
     {
-        //
+        return view('pages.studentLesson.show',[
+            'studentLesson' => $studentLesson->load(['syllabus','lesson.subject','student'])
+        ]);
     }
 
     /**

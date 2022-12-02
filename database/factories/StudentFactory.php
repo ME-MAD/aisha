@@ -19,8 +19,7 @@ class StudentFactory extends Factory
         return [
             'name' => fake()->name,
             'birthday' => fake()->date(),
-            'phone' => fake()->phoneNumber(),
-            'avatar' => fake()->text(),
+            'phone' => fake()->name(),
             'qualification' => fake()->text()
         ];
     }

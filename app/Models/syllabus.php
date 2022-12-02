@@ -9,15 +9,10 @@ class syllabus extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['student_id', 'new_lesson', 'old_lesson', 'is_reverse'];
+    protected $fillable = ['student_lesson_id', 'from_chapter', 'to_chapter', 'from_page','to_page','finished'];
 
-    public function lesson_new()
+    public function studentLesson()
     {
-        return $this->belongsTo(Lesson::class, 'new_lesson');
-    }
-
-    public function lesson_old()
-    {
-        return $this->belongsTo(Lesson::class, 'old_lesson');
+        return $this->belongsTo(StudentLesson::class, 'student_lesson_id');
     }
 }

@@ -88,6 +88,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{student}', [StudentController::class, 'edit'])->name('edit');
         Route::put('update/{student}', [StudentController::class, 'update'])->name('update');
         Route::get('delete/{student}', [StudentController::class, 'delete'])->name('delete');
+        Route::get('getGroupStudents/{student}', [StudentController::class, 'getGroupStudents'])->name('getGroupStudents');
     });
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
@@ -182,12 +183,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{syllabus}', [SyllabusController::class, 'edit'])->name('edit');
         Route::put('update/{syllabus}', [SyllabusController::class, 'update'])->name('update');
         Route::get('delete/{syllabus}', [SyllabusController::class, 'delete'])->name('delete');
+        Route::post('createNewLesson/', [SyllabusController::class, 'createNewLesson'])->name('createNewLesson');
+        Route::post('finishNewLessonAjax/{syllabus}', [SyllabusController::class, 'finishNewLessonAjax'])->name('finishNewLessonAjax');
     });
 
 
 
     Route::group(['prefix' => 'student_lesson', 'as' => 'student_lesson.'], function () {
         Route::get('ajaxStudentLessonFinished', [StudentLessonController::class, 'ajaxStudentLessonFinished'])->name('ajaxStudentLessonFinished');
+        Route::get('show/{studentLesson}', [StudentLessonController::class, 'show'])->name('show');
 
         Route::post('store', [StudentLessonController::class, 'store'])->name('store');
     });
