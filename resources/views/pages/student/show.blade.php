@@ -63,17 +63,19 @@
 
     </div>
 
+    <div class="col-xl-12 col-lg-12 col-md-12 mt-4 showLessonContainer">
+
+        @include('pages.student.partials.showLesson')
+
+    </div>
+
     <div class="col-xl-12 col-lg-12 col-md-12">
 
         @include('pages.student.partials.subjects')
 
     </div>
 
-    <div class="col-xl-12 col-lg-12 col-md-12 mt-4 showLessonContainer">
-
-        @include('pages.student.partials.showLesson')
-
-    </div>
+  
 
 
     @include('pages.student.partials.newLessonModal')
@@ -88,7 +90,7 @@
 
     <script>
 
-        subjectShowHandle()
+        // subjectShowHandle()
         renderSubjectsInStudentsShow()
 
 

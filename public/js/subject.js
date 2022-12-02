@@ -37,7 +37,7 @@ function renderSubjectsForEachGroup(groupStudent)
             <div class="col-4 mb-4 subjectContainer${groupStudent.id}" data-subject-id="${subject.id}">
                 <div class="card component-card_1" style="height:280px">
                     <div class="d-flex flex-column card-body justify-content-between">
-                        <h5 class="card-title text-center subjectShowButton">
+                        <h5 class="card-title text-center">
                                 ${subject.name}
                         </h5>
                         <img src="${subject.avatar}" alt=""
@@ -80,9 +80,14 @@ function renderSubjectsForEachGroup(groupStudent)
 
     $(`.subjectContainer${groupStudent.id}`).on('click',function(){
 
+
         let subject = getSubjectById($(this).data('subject-id'))
         let groupId = subjectsContainer.data('group-id')
         let lessonsElements = ''
+
+        
+        handleShowingOfTheBook(1 , subject)
+
 
         subject.lessons.forEach(lesson => {
             let studentLesson = lesson.student_lessons.filter(studentLesson => {
@@ -90,6 +95,9 @@ function renderSubjectsForEachGroup(groupStudent)
                     studentLesson.group_id == groupId
                 )
             })[0]
+
+            let studentLessonShowURL = (studentLesson?.id || false) ? `/admin/student_lesson/show/${studentLesson.id}`:'#'
+
             let nextLesson = studentLesson?.syllabus.filter(syllabi => syllabi.finished == 0)[0]
 
             let isNewLessonFinished = (nextLesson?.finished || false) == true
@@ -150,14 +158,25 @@ function renderSubjectsForEachGroup(groupStudent)
                             </div>
                         </div>
                     </a>
-                    <div class="mb-4">
-                        Lesson Is From Page : <span class="badge bg-primary">${lesson.from_page}</span>
+                    <div class="mb-4 d-flex justify-content-between align-items-center">
+                        <span>
+                            Lesson Is From Page : <span class="badge bg-primary">${lesson.from_page}</span>
+                        </span>
+                        <span>
+                            <a href="${studentLessonShowURL}" class="btn btn-outline-warning text-dark" target="_blank">
+                                Show Progress
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                        </span>
                     </div>
                     <div class="mb-4">
                         Lesson Is To Page : <span class="badge bg-primary">${lesson.to_page}</span>
                     </div>
                     <div class="mb-4">
                         Last Page Finished : <span class="badge bg-success studentLessonLastPageFinishedElement">${studentLessonLastPageFinished}</span>
+                        <span class="btn btn-outline-info openStudentLastPageFinishedElement" data-last-page-finished="${studentLessonLastPageFinished}">
+                            <i class="fa-solid fa-book-open"></i>
+                        </span>
                     </div>
                     <div class="bg-dark p-3 text-center" style="font-size:1.5rem;">
                         <div class="${nextLesson ? '' : 'd-none'} newLessonContainerElement">
@@ -180,7 +199,7 @@ function renderSubjectsForEachGroup(groupStudent)
                             
                         </div>
                         <div class="mb-3">
-                            <span class="badge ${nextLesson ? "bg-danger" : "bg-success"} studentFinishedNewLessonElement">
+                            <span class="badge ${nextLesson ? "bg-danger" : "bg-success text-dark"} studentFinishedNewLessonElement">
                                 ${nextLesson ? "Student Finished The New Lesson" : "Student Didn't Finish The New Lesson"}
                             </span>
                         </div>
@@ -210,6 +229,15 @@ function renderSubjectsForEachGroup(groupStudent)
                 ${lessonsElements}
             </div>
         `)
+
+        $('.openStudentLastPageFinishedElement').on('click',function(){
+            let lastPageFinished = $(this).data('last-page-finished') || 1
+            let bookElement = document.getElementById('show-lesson-con')
+            bookElement.scrollIntoView({
+                behavior: 'smooth'
+            })
+            handleShowingOfTheBook(lastPageFinished , subject)
+        })
 
         studentLessonFinishedAjax()
        
@@ -253,6 +281,8 @@ function studentLessonFinishedAjax()
                     
                     mainParent.find('.studentFinishedChaptersCountElement').html(chapters_count)
                     mainParent.find('.studentLessonLastPageFinishedElement').html(last_page_finished)
+                   
+                    mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',last_page_finished)
 
                     Swal.fire(
                         'Success!',
@@ -298,99 +328,12 @@ function studentLessonFinishedAjax()
         }
     })
 
-    $('.newLessonButton').on('click',function(){
-        $('#newLessonModal').modal('show')
-        let student_lesson_id = $(this).data('student-lesson-id')
-        let last_page_finished = $(this).data('last-page-finished')
-        let last_chapter_finished = $(this).data('last-chapter-finished')
-        let group_id = $(this).data('group-id')
-        let lesson_id = $(this).data('lesson-id')
 
-        $('#newLessonForm #from_page').val(last_page_finished || '')
-        $('#newLessonForm #from_chapter').val(last_chapter_finished || '')
+    
+    addNewLessonHandler()
 
-        let mainParent = $(this).parent().parent().parent()
-        
 
-        $('#newLessonForm').submit(function(e){
-            e.preventDefault()
-            let from_chapter = $('#newLessonForm #from_chapter').val()
-            let to_chapter = $('#newLessonForm #to_chapter').val()
-            let from_page = $('#newLessonForm #from_page').val()
-            let to_page = $('#newLessonForm #to_page').val()
-            
-            
-            let url = $(this).data('url')
-
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: {
-                   from_chapter,
-                   to_chapter,
-                   from_page,
-                   to_page,
-                   student_lesson_id,
-                   student_id: studentId,
-                   group_id,
-                   lesson_id
-                },
-                success: function(response) {
-                    $('#newLessonModal').modal('hide')
-                    if(response.status == 200)
-                    {
-                        Swal.fire(
-                            'Success!',
-                            `Finished Successfully !`,
-                            'success',
-                        )
-                        mainParent.find('.newLessonContainerElement').removeClass('d-none')
-                        mainParent.find('.nextLessonFromChapter').html(from_chapter)
-                        mainParent.find('.nextLessonToChapter').html(to_chapter)
-                        mainParent.find('.nextLessonFromPage').html(from_page)
-                        mainParent.find('.nextLessonToPage').html(to_page)
-
-                        mainParent.find('.studentFinishedNewLessonElement').removeClass('bg-success').addClass('bg-danger')
-                        mainParent.find('.studentFinishedNewLessonElement').html("Student Didn't Finish The New Lesson")
-
-                        mainParent.find('.newLessonButton').addClass('d-none')
-                        mainParent.find('.finishNewLessonButton').removeClass('d-none')
-                        mainParent.find('.finishNewLessonButton').data('syllabi-id', response.syllabi.id)
-
-                        mainParent.find('.newLessonButton').data('last-page-finished', response.syllabi.to_page)
-                        mainParent.find('.newLessonButton').data('last-chapter-finished', response.syllabi.to_chapter)
-
-                        emptyNewLessonModal()
-                    }
-                    else if(response.status == 400)
-                    {
-                        Swal.fire(
-                            'Warning!',
-                            `Student Didn't Finish The Last Lesson!`,
-                            'warning',
-                        )
-
-                        emptyNewLessonModal()
-                    }
-                },
-                error: function(res) {
-                    let errors = '';
-
-                    res.responseJSON.errors.forEach(errorArray => {
-                        errors += `
-                            <p class="text-danger py-1"> ${errorArray[0]} </p>
-                            <hr>
-                        `
-                    });
-                    Swal.fire(
-                        'Error!',
-                        `${errors}`,
-                        'error',
-                    )
-                }
-            })
-        })
-    })
+    
 
     $('.finishNewLessonButton').on('click',function(){
         let syllabi_id = $(this).data('syllabi-id')
@@ -418,6 +361,8 @@ function studentLessonFinishedAjax()
 
                     mainParent.find('.lesson_finished_checkbox').prop('checked', response.studentLesson.finished)
 
+                    mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',response.studentLesson.last_page_finished)
+
                     changePercentageBar(mainParent, response.studentLesson.percentage)
 
                     Swal.fire(
@@ -430,7 +375,7 @@ function studentLessonFinishedAjax()
                 {
                     Swal.fire(
                         'Warning!',
-                        `Student Didn't Finish The Last Lesson!`,
+                        `sfdgdsfgfdsg`,
                         'warning',
                     )
                 }
@@ -442,6 +387,107 @@ function studentLessonFinishedAjax()
                     'error',
                 )
                 console.log(res);
+            }
+        })
+    })
+}
+
+function addNewLessonHandler()
+{
+    let student_lesson_id = null;
+    let group_id = null;
+    let lesson_id = null;
+    let mainParent = null;
+
+    $('.newLessonButton').on('click',function(){
+        $('#newLessonModal').modal('show')
+        student_lesson_id = $(this).data('student-lesson-id')
+        let last_page_finished = $(this).data('last-page-finished')
+        let last_chapter_finished = $(this).data('last-chapter-finished')
+        group_id = $(this).data('group-id')
+        lesson_id = $(this).data('lesson-id')
+
+        $('#newLessonForm #from_page').val(last_page_finished || '')
+        $('#newLessonForm #from_chapter').val(last_chapter_finished || '')
+
+        mainParent = $(this).parent().parent().parent()
+    })
+
+    $('#newLessonForm').submit(function(e){
+        e.preventDefault()
+        let from_chapter = $('#newLessonForm #from_chapter').val()
+        let to_chapter = $('#newLessonForm #to_chapter').val()
+        let from_page = $('#newLessonForm #from_page').val()
+        let to_page = $('#newLessonForm #to_page').val()
+        
+        
+        let url = $(this).data('url')
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+               from_chapter,
+               to_chapter,
+               from_page,
+               to_page,
+               student_lesson_id,
+               student_id: studentId,
+               group_id,
+               lesson_id
+            },
+            success: function(response) {
+                $('#newLessonModal').modal('hide')
+                if(response.status == 200)
+                {
+                    Swal.fire(
+                        'Success!',
+                        `Finished Successfully !`,
+                        'success',
+                    )
+                    mainParent.find('.newLessonContainerElement').removeClass('d-none')
+                    mainParent.find('.nextLessonFromChapter').html(from_chapter)
+                    mainParent.find('.nextLessonToChapter').html(to_chapter)
+                    mainParent.find('.nextLessonFromPage').html(from_page)
+                    mainParent.find('.nextLessonToPage').html(to_page)
+
+                    mainParent.find('.studentFinishedNewLessonElement').removeClass('bg-success').addClass('bg-danger')
+                    mainParent.find('.studentFinishedNewLessonElement').html("Student Didn't Finish The New Lesson")
+
+                    mainParent.find('.newLessonButton').addClass('d-none')
+                    mainParent.find('.finishNewLessonButton').removeClass('d-none')
+                    mainParent.find('.finishNewLessonButton').data('syllabi-id', response.syllabi.id)
+
+                    mainParent.find('.newLessonButton').data('last-page-finished', response.syllabi.to_page)
+                    mainParent.find('.newLessonButton').data('last-chapter-finished', response.syllabi.to_chapter)
+
+                    emptyNewLessonModal()
+                }
+                else if(response.status == 400)
+                {
+                    Swal.fire(
+                        'Warning!',
+                        `Student Didn't Finish The Last Lesson!`,
+                        'warning',
+                    )
+
+                    emptyNewLessonModal()
+                }
+            },
+            error: function(res) {
+                let errors = '';
+
+                res.responseJSON.errors.forEach(errorArray => {
+                    errors += `
+                        <p class="text-danger py-1"> ${errorArray[0]} </p>
+                        <hr>
+                    `
+                });
+                Swal.fire(
+                    'Error!',
+                    `${errors}`,
+                    'error',
+                )
             }
         })
     })
@@ -474,16 +520,9 @@ function emptyNewLessonModal()
     $('#newLessonForm #to_page').val('')
 }
 
-function subjectShowHandle() 
-{
-    $('.subjectShowButton').on('click',function(){
-        handleShowingOfTheBook(1 , $(this).data('subject'))
-    })
-}
-
 function handleShowingOfTheBook(pageCount = 1, subject){
     let book = null;
-    $('#show-lesson-con').remove('') 
+    $('#show-lesson-con').remove('')
     $('#next').remove()
     $('#prev').remove()
     $('#navButtonsForBook').html(`

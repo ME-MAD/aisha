@@ -131,17 +131,16 @@ class SyllabusController extends Controller
                 'status' => 400,
             ]);
         }
-        else
-        {
-            $syllabi = syllabus::create([
-                'student_lesson_id' => $student_lesson_id,
-                'from_chapter' => $request->from_chapter,
-                'to_chapter' => $request->to_chapter,
-                'from_page' => $request->from_page,
-                'to_page' => $request->to_page,
-                'finished' => false
-            ]);
-        }
+
+        $syllabi = syllabus::create([
+            'student_lesson_id' => $student_lesson_id,
+            'from_chapter' => $request->from_chapter,
+            'to_chapter' => $request->to_chapter,
+            'from_page' => $request->from_page,
+            'to_page' => $request->to_page,
+            'finished' => false
+        ]);
+        
         return response()->json([
             'status' => 200,
             'syllabi' => $syllabi

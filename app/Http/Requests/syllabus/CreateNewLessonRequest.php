@@ -27,7 +27,14 @@ class CreateNewLessonRequest extends ApiRequest
      */
     public function rules()
     {
-        $studentLesson = StudentLesson::find(request('student_lesson_id'))->load('lesson');
+        $studentLesson = StudentLesson::firstOrCreate([
+            'group_id' => request('group_id'),
+            'lesson_id' => request('lesson_id'),
+            'student_id' => request('student_id')
+        ],[
+            
+        ]);
+        // $studentLesson = StudentLesson::findOrFail(request('student_lesson_id'))->load('lesson');
         return [
             'from_chapter' => [
                 'required',

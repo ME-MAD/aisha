@@ -107,7 +107,6 @@ class SubjectController extends Controller
      */
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
-
         $fileName = $subject->getRawOriginal('avatar');
 
         if ($request->file('avatar')) {
@@ -137,15 +136,18 @@ class SubjectController extends Controller
         } else {
             $book_name = $request->name . "_book" . "." . "pdf";
 
-            rename(
-                public_path($subject->book),
-                public_path('files/subjects/' . $book_name)
-            );
-
-            rename(
-                public_path('files/subjects/' . $subject->name . "/"),
-                public_path('files/subjects/' . $request->name . "/")
-            );
+            if(file_exists($subject->book))
+            {
+                rename(
+                    public_path($subject->book),
+                    public_path('files/subjects/' . $book_name)
+                );
+    
+                rename(
+                    public_path('files/subjects/' . $subject->name . "/"),
+                    public_path('files/subjects/' . $request->name . "/")
+                );
+            }
         }
 
         $subject->update([

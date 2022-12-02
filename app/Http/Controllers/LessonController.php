@@ -43,7 +43,9 @@ class LessonController extends Controller
 
     public function show(Lesson $lesson)
     {
-        //
+        return view('pages.lesson.show', [
+            "lesson" => $lesson->load(['subject','studentLessons.syllabus'])
+        ]);
     }
 
     public function edit(Lesson $lesson)
