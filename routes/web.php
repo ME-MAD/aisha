@@ -7,6 +7,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GroupDayController;
 use App\Http\Controllers\GroupStudentController;
 use App\Http\Controllers\GroupTypeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentController;
@@ -43,9 +44,10 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
-    Route::get('/', function () {
-        return view('pages.home');
-    })->name('home');
+    // Route::get('/', function () {
+    //     return view('pages.home');
+    // })->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 

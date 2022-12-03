@@ -27,9 +27,19 @@ for (let element of createcheckbox) {
                     paid: true
                 },
                 success: function (response) {
-
+                    Swal.fire(
+                        'Success!',
+                        `The month has been paid successfully !`,
+                        'success'
+                    )
                 },
-                error: function () { }
+                error: function (response) {
+                    Swal.fire(
+                        'Warning!',
+                        `${response.responseJSON.message}`,
+                        'error'
+                    )
+                }
             })
         } else {
             $.ajax({
@@ -42,9 +52,19 @@ for (let element of createcheckbox) {
                     paid: false
                 },
                 success: function (response) {
-
+                    Swal.fire(
+                        'Success!',
+                        `The month's payment has been cancelled !`,
+                        'success'
+                    )
                 },
-                error: function () { }
+                error: function (response) {
+                    Swal.fire(
+                        'Warning!',
+                        `${response.responseJSON.message}`,
+                        'error'
+                    )
+                }
 
             })
         }

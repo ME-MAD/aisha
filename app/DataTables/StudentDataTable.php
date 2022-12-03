@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\GroupStudent;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -24,6 +25,9 @@ class StudentDataTable extends DataTable
             })
             ->editColumn('show', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' ><i class='fa-solid fa-eye'></i></a>";
+            })
+            ->editColumn('countGroups', function ($q) {
+                return  GroupStudent::where('student_id', $q->id)->count();
             })
             ->rawColumns(['edit', 'delete', 'name', 'show', 'avatar'])
             ->setRowId('id');
@@ -88,12 +92,18 @@ class StudentDataTable extends DataTable
     {
         return [
             ['name' => 'id', 'data' => 'id', 'title' => 'رقم الهوية', "className" => 'search--col exact'],
+
             ['name' => 'name', 'data' => 'name', 'title' => ' الاسم', "className" => 'search--col'],
+
             ['name' => 'avatar', 'data' => 'avatar', 'title' => ' الصور', "className" => 'search--col'],
+
             ['name' => 'birthday', 'data' => 'birthday', 'title' => ' تاريخ الميلاد', "className" => 'search--col'],
+
             ['name' => 'phone', 'data' => 'phone', 'title' => ' الهاتف', "className" => 'search--col'],
 
             ['name' => 'qualification', 'data' => 'qualification', 'title' => ' المؤهلات', "className" => 'search--col'],
+
+            ['name' => 'countGroups', 'data' => 'countGroups', 'title' => ' عدد الجروبات', "className" => 'search--col'],
 
             ['name' => 'show', 'data' => 'show', 'title' => 'Show', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
