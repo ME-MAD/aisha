@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ExperienceDataTable;
+use App\Http\Requests\Experience\StoreExperienceRequest;
+use App\Http\Requests\Experience\UpdateExperienceRequest;
 use App\Models\Experience;
 use App\Models\Teacher;
 use App\Services\Teacher\TeacherService;
@@ -41,7 +43,6 @@ class ExperienceController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -50,7 +51,7 @@ class ExperienceController extends Controller
      * @param  \App\Http\Requests\StoreExperienceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(HttpRequest $request)
+    public function store(StoreExperienceRequest $request)
     {
         Experience::create([
             'title' => $request->title,
@@ -95,7 +96,7 @@ class ExperienceController extends Controller
      * @param  \App\Models\Experience  $experience
      * @return \Illuminate\Http\Response
      */
-    public function update(HttpRequest $request, Experience $experience)
+    public function update(UpdateExperienceRequest $request, Experience $experience)
     {
 
         $experience->update([

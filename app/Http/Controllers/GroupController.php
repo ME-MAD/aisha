@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\DataTables\GroupDataTable;
 use App\Http\Requests\Group\StoreGroupRequest;
 use App\Http\Requests\Group\UpdateGroupRequest;
-use App\Http\Traits\GroupStudentTrait;
 use App\Models\Group;
 use App\Models\Teacher;
 use App\Models\GroupType;
