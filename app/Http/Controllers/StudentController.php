@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Http\Requests\Student\StoreStudentRequest;
 use App\Http\Requests\Student\UpdateStudentRequest;
 use App\Http\Traits\ImageTrait;
+use App\Models\GroupStudent;
 use App\Models\Subject;
 use RealRashid\SweetAlert\Facades\Alert;
 

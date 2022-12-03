@@ -26,15 +26,14 @@ class HomeController extends Controller
         $countGroupsPrice80 = $homeService->countGroupsPrice80();
         $countGroupsPrice120 = $homeService->countGroupsPrice120();
         $countGroupsPrice200 = $homeService->countGroupsPrice200();
-        // $divisionGroupsPrice80 = $homeService->divisionGroupsPrice80();
+        $divisionGroupsPrice80 = $homeService->divisionGroupsPrice80();
         $divisionGroupsPrice120 = $homeService->divisionGroupsPrice120();
-        // $divisionGroupsPrice200 = $homeService->divisionGroupsPrice200();
-        dump($countGroupsPrice80);
-        dump($countGroupsPrice120);
-        dump($countGroupsPrice200);
-        // dump($divisionGroupsPrice80);
-        dump($divisionGroupsPrice120);
-        // dd($divisionGroupsPrice200);
+        $divisionGroupsPrice200 = $homeService->divisionGroupsPrice200();
+
+        // dump($countGroupsPrice80);
+        // dump($countGroupsPrice120);
+        // dd($divisionGroupsPrice80);
+
         return view('pages.home', [
             'CountGroupskid' => $CountGroupskid,
             'CountGroupsAdult' => $CountGroupsAdult,
@@ -44,6 +43,9 @@ class HomeController extends Controller
             'countGroupsPrice80' => $countGroupsPrice80,
             'countGroupsPrice120' => $countGroupsPrice120,
             'countGroupsPrice200' => $countGroupsPrice200,
+            'divisionGroupsPrice80' => $divisionGroupsPrice80,
+            'divisionGroupsPrice120' => $divisionGroupsPrice120,
+            'divisionGroupsPrice200' => $divisionGroupsPrice200,
         ]);
     }
 }

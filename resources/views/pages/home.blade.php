@@ -126,12 +126,12 @@
                                     <div class="w-browser-info">
                                         <h6>Price 80<span class="badge badge-primary ml-2">{{ $countGroupsPrice80 }}</span>
                                         </h6>
-                                        <p class="browser-count">{{ $divisionGroupskid }}%</p>
+                                        <p class="browser-count">{{ $divisionGroupsPrice80 }}%</p>
                                     </div>
                                     <div class="w-browser-stats">
                                         <div class="progress">
                                             <div class="progress-bar bg-gradient-primary" role="progressbar"
-                                                style="width: {{ $divisionGroupskid }}%" aria-valuenow="90"
+                                                style="width: {{ $divisionGroupsPrice80 }}%" aria-valuenow="90"
                                                 aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
@@ -153,14 +153,16 @@
                                 <div class="w-browser-details">
 
                                     <div class="w-browser-info">
-                                        <h6>Adult<span class="badge badge-danger ml-2">{{ $CountGroupsAdult }}</span></h6>
-                                        <p class="browser-count">{{ $divisionGroupsAdult }}%</p>
+                                        <h6>Price 120<span
+                                                class="badge badge-danger ml-2">{{ $countGroupsPrice120 }}</span>
+                                        </h6>
+                                        <p class="browser-count">{{ $divisionGroupsPrice120 }}%</p>
                                     </div>
 
                                     <div class="w-browser-stats">
                                         <div class="progress">
                                             <div class="progress-bar bg-gradient-danger" role="progressbar"
-                                                style="width: {{ $divisionGroupsAdult }}%" aria-valuenow=""
+                                                style="width: {{ $divisionGroupsPrice120 }}%" aria-valuenow=""
                                                 aria-valuemin="0" aria-valuemax="100">
                                             </div>
                                         </div>
@@ -183,14 +185,16 @@
                                 <div class="w-browser-details">
 
                                     <div class="w-browser-info">
-                                        <h6>Adult<span class="badge badge-danger ml-2">{{ $CountGroupsAdult }}</span></h6>
-                                        <p class="browser-count">{{ $divisionGroupsAdult }}%</p>
+                                        <h6>Price 200 <span
+                                                class="badge badge-danger ml-2">{{ $countGroupsPrice200 }}</span>
+                                        </h6>
+                                        <p class="browser-count">{{ $divisionGroupsPrice200 }}%</p>
                                     </div>
 
                                     <div class="w-browser-stats">
                                         <div class="progress">
                                             <div class="progress-bar bg-gradient-danger" role="progressbar"
-                                                style="width: {{ $divisionGroupsAdult }}%" aria-valuenow=""
+                                                style="width: {{ $divisionGroupsPrice200 }}%" aria-valuenow=""
                                                 aria-valuemin="0" aria-valuemax="100">
                                             </div>
                                         </div>
