@@ -78,6 +78,7 @@ syllabus:
     from_page: unsignedInteger default(0)
     to_page: unsignedInteger default(0)
     finished: bool default(false)
+    rate: enum('excelent','very good', 'good', 'fail')
 
 [CRUD]
 GroupStudent:
