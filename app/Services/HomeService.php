@@ -3,77 +3,67 @@
 namespace App\Services;
 
 use App\Models\Group;
+use App\Models\GroupType;
 
 class HomeService
 {
 
-    public function countGroupskid()
+    private $groups;
+    private $allGroupsCount;
+
+    function getGroupsCountsData()
     {
-        return Group::get()->where('age_type', 'kid')->count();
+        $this->setGroups();
+        $this->setAllGroupsCount();
+
+        $groupKidsCount = $this->getGroupKidsCount();
+        $groupAdultCount = $this->getGroupAdultsCount();
+
+        $groupKidsPercentage = $this->getGroupPercentageOf($groupKidsCount);
+        $groupAdultPercentage = $this->getGroupPercentageOf($groupAdultCount);
+
+        $groupTypes = GroupType::withCount('groups')->get();
+
+        $groupTypes->map(function($groupType){
+            $groupType->percentage = $this->getGroupPercentageOf($groupType->groups_count);
+        });
+
+        return [
+            'allGroupsCount' => $this->allGroupsCount,
+            'groupKidsCount' => $groupKidsCount,
+            'groupAdultCount' => $groupAdultCount,
+            'groupKidsPercentage' => $groupKidsPercentage,
+            'groupAdultPercentage' => $groupAdultPercentage,
+            'groupTypes' => $groupTypes
+        ];
     }
 
-    public function divisionGroupskid()
+    private function getGroups()
     {
-        return  round(($this->countGroupskid() / $this->allCountGroups()) * 100);
+        return Group::select(['id','age_type'])->get();
     }
 
-    public function countGroupsAdult()
+    private function setGroups()
     {
-        return Group::get()->where('age_type', 'adult')->count();
+        $this->groups = $this->getGroups();
     }
 
-    public function divisionGroupsAdult()
+    private function setAllGroupsCount()
     {
-        return  round(($this->countGroupsAdult() / $this->allCountGroups()) * 100);
+        $this->allGroupsCount = $this->groups->count();
+    }
+    
+    private function getGroupKidsCount()
+    {
+        return $this->groups->where('age_type', 'kid')->count();
+    }
+    private function getGroupAdultsCount()
+    {
+        return $this->groups->where('age_type', 'adult')->count();
     }
 
-    public function allCountGroups()
+    private function getGroupPercentageOf($groupKindCount)
     {
-        return Group::get()->count();
-    }
-
-    ////////////////////////////////////////////////////////////////
-
-
-    public function countGroupsPrice80()
-    {
-        return Group::get()->where('group_type_id', '1')->count();
-    }
-
-    public function divisionGroupsPrice80()
-    {
-        if ($this->countGroupsPrice80() == 0) {
-            return 0;
-        } else {
-            return  round(($this->countGroupsPrice80() / $this->allCountGroups()) * 100);
-        }
-    }
-
-    public function countGroupsPrice120()
-    {
-        return Group::get()->where('group_type_id', '3')->count();
-    }
-
-    public function divisionGroupsPrice120()
-    {
-        if ($this->countGroupsPrice120() == 0) {
-            return 0;
-        } else {
-            return  round(($this->countGroupsPrice120() / $this->allCountGroups()) * 100);
-        }
-    }
-
-    public function countGroupsPrice200()
-    {
-        return Group::get()->where('group_type_id', '3')->count();
-    }
-
-    public function divisionGroupsPrice200()
-    {
-        if ($this->countGroupsPrice200() == 0) {
-            return 0;
-        } else {
-            return  round(($this->countGroupsPrice200() / $this->allCountGroups()) * 100);
-        }
+        return $this->allGroupsCount > 0 ? round(($groupKindCount / $this->allGroupsCount) * 100) : 0;
     }
 }
