@@ -25,8 +25,7 @@ class UpdateTeacherRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'avatar' => 'required',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'birthday' => 'required',
             'phone' => 'required',
             'qualification' => 'required',
