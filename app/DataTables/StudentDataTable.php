@@ -14,7 +14,6 @@ class StudentDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            // ->addColumn('edit', 'pages.student.datatable.edit')
             ->addColumn('edit', function ($query) {
                 return view('pages.student.datatable.edit', compact('query'));
             })
@@ -27,14 +26,13 @@ class StudentDataTable extends DataTable
                 return "<a class='text-primary' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' ><i class='fa-solid fa-eye'></i></a>";
             })
             ->editColumn('countGroups', function ($q) {
-                // return  GroupStudent::where('student_id', $q->id)->count();
                 return $q->group_students_count;
             })
             ->rawColumns(['edit', 'delete', 'name', 'show', 'avatar'])
             ->setRowId('id');
     }
 
-    public function query(Student $student): QueryBuilder
+    public function query(): QueryBuilder
     {
         return Student::withCount('groupStudents');
     }
