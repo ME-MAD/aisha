@@ -96,123 +96,172 @@ function renderSubjectsForEachGroup(groupStudent)
                 )
             })[0]
 
+            let studentLessonReview = lesson.student_lesson_reviews.filter(studentLesson => {
+                return(studentLesson.student_id == studentId &&
+                    studentLesson.group_id == groupId
+                )
+            })[0]
+
             let studentLessonShowURL = (studentLesson?.id || false) ? `/admin/student_lesson/show/${studentLesson.id}`:'#'
 
             let nextLesson = studentLesson?.syllabus.filter(syllabi => syllabi.finished == 0)[0]
 
-            let isNewLessonFinished = (nextLesson?.finished || false) == true
+            let nextReviewLesson = studentLessonReview?.syllabus_reviews.filter(syllabusReview => syllabusReview.finished == 0)[0]
 
             let studentFinishedChaptersCount = studentLesson ? studentLesson.last_chapter_finished : 0
             let studentFinishedChaptersPercentage = studentLesson ? studentLesson.percentage : 0
             let studentLessonIsFinished = studentLesson ? studentLesson.finished : false
             let studentLessonLastPageFinished = studentLesson ? studentLesson.last_page_finished : 0
 
+            let studentLessonReviewIsFinished = studentLessonReview ? studentLessonReview.finished : false
+            let studentLessonReviewLastPageFinished = studentLessonReview ? studentLessonReview.last_page_finished : 0
+
+
+            // <input 
+            // type="checkbox" 
+            // class="lesson_review_finished_checkbox big-checkbox" 
+            // data-group-id="${groupId}"
+            // data-lesson-id="${lesson.id}"
+            // data-student-id="${studentId}"
+            // data-chapters-count="${lesson.chapters_count}"
+            // data-last-page-finished="${lesson.to_page}"
+            // ${studentLessonReviewIsFinished ? 'checked' : ''}>
 
             lessonsElements += `
-                <div class="studentLessonContainer">
-                    <div class="text-center mb-3">
-                        <label class="float-left">
-                            <input 
-                                type="checkbox" 
-                                class="lesson_finished_checkbox big-checkbox" 
-                                data-group-id="${groupId}"
-                                data-lesson-id="${lesson.id}"
-                                data-student-id="${studentId}"
-                                data-chapters-count="${lesson.chapters_count}"
-                                data-last-page-finished="${lesson.to_page}"
-                                ${studentLessonIsFinished ? 'checked' : ''}>
-                        </label>
+                <div class="studentLessonMainContainer">
 
-                        <span>
-                            <a class="text-primary">
-                                ${lesson.title}
-                            </a>
-                        </span>
+                    <div class="studentLessonContainer">
 
-                    </div>
 
-                    <div class="d-flex justify-content-between mb-3">
-                        <span class="badge badge-success studentFinishedChaptersCountElement">
-                            ${studentFinishedChaptersCount}
-                        </span>
-                        <span class="badge badge-secondary">
-                            ${lesson.chapters_count}
-                        </span>
-                    </div>
+                        <h2 class="text-center">${lesson.title}</h2>
 
-                    <a class="progressOfSubjectLink subject" data-toggle="modal" data-target="#createSubjectModal"
-                        data-chapterscount="${lesson.chapters_count}"
-                        data-finishedchapterscount="${studentFinishedChaptersCount}"
-                        data-groupid="${groupId}" data-lessonid="${lesson.id}"
-                        data-studentid="${studentId}">
-                        <div class="progress br-30">
-                            <div class="progress-bar bg-primary" role="progressbar"
-                                aria-valuenow="${studentFinishedChaptersPercentage}" 
-                                style="width:${studentFinishedChaptersPercentage}%"
-                                aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-title">
-                                    <span class="progress-bar-percentage">
-                                        ${studentFinishedChaptersPercentage}%
-                                    </span>
+                        <div class="mb-4 d-flex justify-content-between align-items-center">
+                            <span>
+                                Lesson Is From Page : <span class="badge bg-primary">${lesson.from_page}</span>
+                                To Page : <span class="badge bg-primary">${lesson.to_page}</span>
+                            </span>
+                            <span>
+                                <a href="${studentLessonShowURL}" class="btn btn-outline-warning text-dark ${studentLessonShowURL == "#" ? 'd-none' : ''}" target="_blank">
+                                    Show Progress
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3 align-items-center">
+                            <span class="badge badge-success studentFinishedChaptersCountElement">
+                                ${studentFinishedChaptersCount}
+                            </span>
+
+                            <label class="switch s-icons s-outline  s-outline-success">
+                                <input 
+                                    type="checkbox" 
+                                    class="lesson_finished_checkbox"
+                                    data-group-id="${groupId}"
+                                    data-lesson-id="${lesson.id}"
+                                    data-student-id="${studentId}"
+                                    data-chapters-count="${lesson.chapters_count}"
+                                    data-last-page-finished="${lesson.to_page}"
+                                    ${studentLessonIsFinished ? 'checked' : ''}
+                                >
+                                <span class="slider"></span>
+                            </label>
+
+                            <span class="badge badge-secondary">
+                                ${lesson.chapters_count}
+                            </span>
+                        </div>
+
+                        <a class="progressOfSubjectLink subject" data-toggle="modal" data-target="#createSubjectModal"
+                            data-chapterscount="${lesson.chapters_count}"
+                            data-finishedchapterscount="${studentFinishedChaptersCount}"
+                            data-groupid="${groupId}" data-lessonid="${lesson.id}"
+                            data-studentid="${studentId}">
+                            <div class="progress br-30">
+                                <div class="progress-bar bg-primary" role="progressbar"
+                                    aria-valuenow="${studentFinishedChaptersPercentage}" 
+                                    style="width:${studentFinishedChaptersPercentage}%"
+                                    aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-title">
+                                        <span class="progress-bar-percentage">
+                                            ${studentFinishedChaptersPercentage}%
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                    <div class="mb-4 d-flex justify-content-between align-items-center">
-                        <span>
-                            Lesson Is From Page : <span class="badge bg-primary">${lesson.from_page}</span>
-                        </span>
-                        <span>
-                            <a href="${studentLessonShowURL}" class="btn btn-outline-warning text-dark" target="_blank">
-                                Show Progress
-                                <i class="fa-solid fa-eye"></i>
-                            </a>
-                        </span>
-                    </div>
-                    <div class="mb-4">
-                        Lesson Is To Page : <span class="badge bg-primary">${lesson.to_page}</span>
-                    </div>
-                    <div class="mb-4">
-                        Last Page Finished : <span class="badge bg-success studentLessonLastPageFinishedElement">${studentLessonLastPageFinished}</span>
-                        <span class="btn btn-outline-info openStudentLastPageFinishedElement" data-last-page-finished="${studentLessonLastPageFinished}">
-                            <i class="fa-solid fa-book-open"></i>
-                        </span>
-                    </div>
-                    <div class="bg-dark p-3 text-center" style="font-size:1.5rem;">
-                        <div class="${nextLesson ? '' : 'd-none'} newLessonContainerElement">
-                            <div class="mb-3">
-                                <span>
-                                    <span>Next Lesson Is From Chapter</span>
-                                    <span class="badge bg-info nextLessonFromChapter">${nextLesson?.from_chapter || 0}</span>
-                                    <span>To Chapter</span>
-                                    <span class="badge bg-info nextLessonToChapter">${nextLesson?.to_chapter || 0}</span>
-                                </span>
-                            </div>
-                            <div class="mb-3">
-                                <span>
-                                    <span>Next Lesson Is From Page</span>
-                                    <span class="badge bg-info nextLessonFromPage">${nextLesson?.from_page || 0}</span>
-                                    <span>To Page</span>
-                                    <span class="badge bg-info nextLessonToPage">${nextLesson?.to_page || 0}</span>
-                                </span>
+                        </a>
+                        
+                       
+
+                        <div class="row">
+                            <div class="p-3 text-center col" style="font-size:1.5rem;">
+                                <div class="mb-4">
+                                    Last Page Finished : <span class="badge bg-success studentLessonLastPageFinishedElement">${studentLessonLastPageFinished}</span>
+                                    <span class="btn btn-outline-info openStudentLastPageFinishedElement" data-last-page-finished="${studentLessonLastPageFinished}">
+                                        <i class="fa-solid fa-book-open"></i>
+                                    </span>
+                                </div>
+
+                                <div class="${nextLesson ? '' : 'd-none'} newLessonContainerElement">
+                                    <div class="mb-3">
+                                        <span>
+                                            <span>Next Lesson Is From Chapter</span>
+                                            <span class="badge bg-info nextLessonFromChapter">
+                                                ${nextLesson?.from_chapter || 0}
+                                            </span>
+                                            <span>To Chapter</span>
+                                            <span class="badge bg-info nextLessonToChapter">${nextLesson?.to_chapter || 0}</span>
+                                        </span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <span>
+                                            <span>Next Lesson Is From Page</span>
+                                            <span class="badge bg-info nextLessonFromPage" data-last-page-finished="${nextLesson?.from_page || null}">
+                                                ${nextLesson?.from_page || 0}
+                                                <i class="fa-solid fa-book-open"></i>
+                                            </span>
+                                            <span>To Page</span>
+                                            <span class="badge bg-info nextLessonToPage" data-last-page-finished="${nextLesson?.to_page || null}">
+                                                ${nextLesson?.to_page || 0}
+                                                <i class="fa-solid fa-book-open"></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <select class="form-control newLessonRate ${nextLesson ? '' : 'd-none'}">
+                                        <option value="excellent"> excellent </option>
+                                        <option value="very good"> very good </option>
+                                        <option value="good"> good </option>
+                                        <option value="fail"> fail </option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary newLessonButton ${nextLesson ? 'd-none' : ''}" data-student-lesson-id="${studentLesson ? studentLesson.id : null}" data-group-id="${groupId}" data-lesson-id="${lesson.id}" data-last-page-finished="${studentLesson?.last_page_finished}" data-last-chapter-finished="${studentLesson?.last_chapter_finished}">New Lesson</button>
+
+                                    <button class="btn btn-info finishNewLessonButton ${nextLesson ? '' : 'd-none'}" data-syllabi-id=${nextLesson?.id || null}>
+                                        Finish New Lesson
+                                        <i class="fa-solid fa-square-check"></i>
+                                    </button>
+                                </div>
                             </div>
                             
                         </div>
-                        <div class="mb-3">
-                            <span class="badge ${nextLesson ? "bg-danger" : "bg-success text-dark"} studentFinishedNewLessonElement">
-                                ${nextLesson ? "Student Finished The New Lesson" : "Student Didn't Finish The New Lesson"}
-                            </span>
-                        </div>
-                        <div>
-                            <button class="btn btn-primary newLessonButton ${nextLesson ? 'd-none' : ''}" data-student-lesson-id="${studentLesson ? studentLesson.id : null}" data-group-id="${groupId}" data-lesson-id="${lesson.id}" data-last-page-finished="${studentLesson?.last_page_finished}" data-last-chapter-finished="${studentLesson?.last_chapter_finished}">New Lesson</button>
-
-                            <button class="btn btn-info finishNewLessonButton ${nextLesson ? '' : 'd-none'}" data-syllabi-id=${nextLesson?.id || null}>
-                                Finish New Lesson
-                                <i class="fa-solid fa-square-check"></i>
-                            </button>
-                        </div>
                     </div>
+
+
+
+
+
+
+
+                   
+
+
+
                 </div>
+                
             `
 
             
@@ -231,12 +280,23 @@ function renderSubjectsForEachGroup(groupStudent)
         `)
 
         $('.openStudentLastPageFinishedElement').on('click',function(){
-            let lastPageFinished = $(this).data('last-page-finished') || 1
-            let bookElement = document.getElementById('show-lesson-con')
-            bookElement.scrollIntoView({
-                behavior: 'smooth'
-            })
-            handleShowingOfTheBook(lastPageFinished , subject)
+            openPageFromTheBook(this, subject)
+        })
+
+        $('.nextLessonFromPage').on('click',function(){
+            openPageFromTheBook(this, subject)
+        })
+
+        $('.nextLessonToPage').on('click',function(){
+            openPageFromTheBook(this, subject)
+        })
+        
+        $('.nextReviewLessonFromPage').on('click',function(){
+            openPageFromTheBook(this, subject)
+        })
+
+        $('.nextReviewLessonToPage').on('click',function(){
+            openPageFromTheBook(this, subject)
         })
 
         studentLessonFinishedAjax()
@@ -335,22 +395,78 @@ function studentLessonFinishedAjax()
 
     
 
+    $('.finishNewReviewLessonButton').on('click',function(){
+        let syllabi_review_id = $(this).data('data-syllabi-review-id')
+        let mainParent = $(this).parent().parent().parent().parent()
+        let rate = mainParent.find('.newLessonRate').val()
+
+        $.ajax({
+            url: "/admin/syllabus/finishNewReviewLessonAjax/" + syllabi_review_id,
+            type: "POST",
+            data: {
+               rate: rate
+            },
+            success: function(response) {
+                if(response.status == 200)
+                {
+                    mainParent.find('.newLessonReviewContainerElement').addClass('d-none')
+
+                    mainParent.find('.newReviewLessonButton').removeClass('d-none')
+                    mainParent.find('.finishNewReviewLessonButton').addClass('d-none')
+
+                    mainParent.find('.studentLessonReviewLastPageFinishedElement').html(response.studentLessonReview.last_page_finished)
+
+                    mainParent.find('.studentFinishedChaptersCountElement').html(response.studentLessonReview.last_chapter_finished)
+
+                    mainParent.find('.lesson_finished_checkbox').prop('checked', response.studentLessonReview.finished)
+
+                    mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',response.studentLessonReview.last_page_finished)
+
+                    mainParent.find('.newLessonRate').addClass('d-none')
+                    changePercentageBar(mainParent, response.studentLessonReview.percentage)
+
+                    Swal.fire(
+                        'Success!',
+                        `Finished Successfully !`,
+                        'success',
+                    )
+                }
+                else if(response.status == 400)
+                {
+                    Swal.fire(
+                        'Warning!',
+                        `sfdgdsfgfdsg`,
+                        'warning',
+                    )
+                }
+            },
+            error: function(res) {
+                Swal.fire(
+                    'Error!',
+                    `There Was an Error !`,
+                    'error',
+                )
+                console.log(res);
+            }
+        })
+    })
+
+
     $('.finishNewLessonButton').on('click',function(){
         let syllabi_id = $(this).data('syllabi-id')
-        let mainParent = $(this).parent().parent().parent()
+        let mainParent = $(this).parent().parent().parent().parent()
+        let rate = mainParent.find('.newLessonRate').val()
 
         $.ajax({
             url: "/admin/syllabus/finishNewLessonAjax/" + syllabi_id,
             type: "POST",
             data: {
-               
+               rate: rate
             },
             success: function(response) {
                 if(response.status == 200)
                 {
                     mainParent.find('.newLessonContainerElement').addClass('d-none')
-                    mainParent.find('.studentFinishedNewLessonElement').removeClass('bg-danger').addClass('bg-success')
-                    mainParent.find('.studentFinishedNewLessonElement').html('Student Finished The New Lesson')
 
                     mainParent.find('.newLessonButton').removeClass('d-none')
                     mainParent.find('.finishNewLessonButton').addClass('d-none')
@@ -363,6 +479,7 @@ function studentLessonFinishedAjax()
 
                     mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',response.studentLesson.last_page_finished)
 
+                    mainParent.find('.newLessonRate').addClass('d-none')
                     changePercentageBar(mainParent, response.studentLesson.percentage)
 
                     Swal.fire(
@@ -410,7 +527,7 @@ function addNewLessonHandler()
         $('#newLessonForm #from_page').val(last_page_finished || '')
         $('#newLessonForm #from_chapter').val(last_chapter_finished || '')
 
-        mainParent = $(this).parent().parent().parent()
+        mainParent = $(this).parent().parent().parent().parent()
     })
 
     $('#newLessonForm').submit(function(e){
@@ -448,11 +565,9 @@ function addNewLessonHandler()
                     mainParent.find('.newLessonContainerElement').removeClass('d-none')
                     mainParent.find('.nextLessonFromChapter').html(from_chapter)
                     mainParent.find('.nextLessonToChapter').html(to_chapter)
-                    mainParent.find('.nextLessonFromPage').html(from_page)
-                    mainParent.find('.nextLessonToPage').html(to_page)
+                    mainParent.find('.nextLessonFromPage').html(from_page + `<i class="fa-solid fa-book-open"></i>`)
+                    mainParent.find('.nextLessonToPage').html(to_page + `<i class="fa-solid fa-book-open"></i>`)
 
-                    mainParent.find('.studentFinishedNewLessonElement').removeClass('bg-success').addClass('bg-danger')
-                    mainParent.find('.studentFinishedNewLessonElement').html("Student Didn't Finish The New Lesson")
 
                     mainParent.find('.newLessonButton').addClass('d-none')
                     mainParent.find('.finishNewLessonButton').removeClass('d-none')
@@ -460,6 +575,8 @@ function addNewLessonHandler()
 
                     mainParent.find('.newLessonButton').data('last-page-finished', response.syllabi.to_page)
                     mainParent.find('.newLessonButton').data('last-chapter-finished', response.syllabi.to_chapter)
+
+                    mainParent.find('.newLessonRate').removeClass('d-none')
 
                     emptyNewLessonModal()
                 }
@@ -491,6 +608,16 @@ function addNewLessonHandler()
             }
         })
     })
+}
+
+function openPageFromTheBook(element, subject)
+{
+    let lastPageFinished = $(element).data('last-page-finished') || 1
+    let bookElement = document.getElementById('show-lesson-con')
+    bookElement.scrollIntoView({
+        behavior: 'smooth'
+    })
+    handleShowingOfTheBook(lastPageFinished , subject)
 }
 
 function changePercentageBar(mainParent, percentage)

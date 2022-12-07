@@ -9,6 +9,9 @@
 
 
     <link href="{{ asset('adminAssets/assets/css/components/cards/card.css') }}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/assets/css/forms/switches.css')}}">
+
     <link rel="stylesheet" href="{{ asset('css/student.css') }}">
 
     <!--  END CUSTOM STYLE FILE  -->

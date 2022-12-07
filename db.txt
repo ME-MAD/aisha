@@ -69,6 +69,17 @@ StudentLesson:
     chapters_count:unsignedInteger default(0)
     last_page_finished: unsignedInteger default(0)
 
+StudentLessonReview:
+    id
+    student_id
+    lesson_id
+    group_id
+    finished: bool
+    percentage: float default(0) nullable
+    chapters_count:unsignedInteger default(0)
+    last_page_finished: unsignedInteger default(0)
+
+
 //ToDo CRUD in student show
 syllabus:
     id
@@ -78,7 +89,19 @@ syllabus:
     from_page: unsignedInteger default(0)
     to_page: unsignedInteger default(0)
     finished: bool default(false)
-    rate: enum('excelent','very good', 'good', 'fail')
+    rate: enum('excellent','very good', 'good', 'fail')
+
+
+syllabus_review:
+    id
+    student_lesson_id: unsignedInteger ==> StudentLesson.id
+    from_chapter: unsignedInteger default(0)
+    to_chapter: unsignedInteger default(0)
+    from_page: unsignedInteger default(0)
+    to_page: unsignedInteger default(0)
+    finished: bool default(false)
+    rate: enum('excellent','very good', 'good', 'fail')
+
 
 [CRUD]
 GroupStudent:

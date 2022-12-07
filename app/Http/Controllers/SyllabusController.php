@@ -147,7 +147,7 @@ class SyllabusController extends Controller
         ]);
     }
 
-    public function finishNewLessonAjax(syllabus $syllabus)
+    public function finishNewLessonAjax(Request $request, syllabus $syllabus)
     {
         if($syllabus->finished == true)
         {
@@ -157,7 +157,8 @@ class SyllabusController extends Controller
         }
 
         $syllabus->update([
-            'finished' => true
+            'finished' => true,
+            'rate' => $request->rate
         ]);
 
         $studentLesson = $syllabus->studentLesson;

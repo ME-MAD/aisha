@@ -105,7 +105,10 @@ class StudentController extends Controller
 
     public function getGroupStudents(Student $student)
     {
-        $subjects = Subject::with('lessons.studentLessons.syllabus')->get();
+        $subjects = Subject::with([
+            'lessons.studentLessons.syllabus',
+            'lessons.studentLessonReviews.syllabusReviews'
+        ])->get();
         return response()->json([
             'groupStudents' => $student->groupStudents->load(['group.groupDays']),
             'subjects' => $subjects,

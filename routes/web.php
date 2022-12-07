@@ -14,6 +14,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentLessonController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SyllabusController;
+use App\Http\Controllers\SyllabusReviewController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use App\Models\Experience;
@@ -187,6 +188,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('delete/{syllabus}', [SyllabusController::class, 'delete'])->name('delete');
         Route::post('createNewLesson/', [SyllabusController::class, 'createNewLesson'])->name('createNewLesson');
         Route::post('finishNewLessonAjax/{syllabus}', [SyllabusController::class, 'finishNewLessonAjax'])->name('finishNewLessonAjax');
+    });
+
+
+    Route::group(['prefix' => 'syllabus-review', 'as' => 'syllabusReview.'], function () {
+        Route::post('finishNewReviewLessonAjax/{syllabusReview}', [SyllabusReviewController::class, 'finishNewReviewLessonAjax'])->name('finishNewReviewLessonAjax');
     });
 
 
