@@ -7,7 +7,6 @@ use App\Models\Payment;
 use App\Http\Requests\Payment\StorePaymentRequest;
 use App\Http\Requests\Payment\UpdatePaymentRequest;
 use App\Models\Group;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -31,28 +30,7 @@ class PaymentController extends Controller
     public function create()
     {
 
-
-        $monthNow = Carbon::now()->format('F');
-        $payments = Payment::get();
-        foreach ($payments as $payment) {
-            if ($payment->month == $monthNow) {
-                $gorups = Group::with('students', 'groupType')->where('id', '21')->get();
-                foreach ($gorups as $gorup) {
-                    if ($gorup->id == $payment->student_id) {
-                        dump($gorup->id);
-                    } else {
-                        dump($gorups);
-                        dump($payment->student_id);
-                    }
-                }
-                // dump($gorups);
-                // 
-                dump("...........................................");
-            }
-            dd("finished");
-        }
-
-
+        $gorups = Group::with('students', 'groupType')->get();
         return view('pages.payment.create', [
             'gorups' => $gorups,
         ]);
