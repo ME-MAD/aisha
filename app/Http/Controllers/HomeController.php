@@ -11,13 +11,19 @@ class HomeController extends Controller
 
     public function __construct(HomeService $homeService)
     {
-        $this->homeService = $homeService;    
+        $this->homeService = $homeService;
     }
-    
+
     public function index()
     {
         $groupsCountsData = $this->homeService->getGroupsCountsData();
 
         return view('pages.home', $groupsCountsData);
+    }
+
+    public function getDataAjax()
+    {
+        $groupsCountsData = $this->homeService->getGroupsCountsData();
+        return response()->json($groupsCountsData);
     }
 }

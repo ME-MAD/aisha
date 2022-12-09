@@ -44,12 +44,14 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
-    // Route::get('/', function () {
-    //     return view('pages.home');
-    // })->name('home');
-    Route::get('/', [HomeController::class, 'index'])->name('home');
-
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+
+    Route::group(['prefix' => 'home'], function () {
+        Route::get('', [HomeController::class, 'index'])->name('home');
+        Route::get('getDataAjax', [HomeController::class, 'getDataAjax'])->name('getDataAjax');
+    });
+
 
     Route::group(['prefix' => 'teacher', 'as' => 'teacher.'], function () {
         Route::get('', [TeacherController::class, 'index'])->name('index');
