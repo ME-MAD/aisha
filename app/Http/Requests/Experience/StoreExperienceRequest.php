@@ -29,7 +29,6 @@ class StoreExperienceRequest extends FormRequest
             'from' => 'required|date|date_format:Y-m-d|before:today',
             'to' => 'required|date|date_format:Y-m-d|before:today',
             'teacher_id' => 'required',
-
         ];
     }
 }

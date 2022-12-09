@@ -28,7 +28,6 @@ class UpdateExperienceRequest extends FormRequest
             'from' => 'required',
             'to' => 'required',
             'teacher_id' => 'required',
-
         ];
     }
 }

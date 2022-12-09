@@ -75,7 +75,8 @@ for (let element of createcheckbox) {
 
 
 $(".month").change(function () {
-    $(`.paid_finished_checkbox`).attr('checked', false);
+    $(`.paid_finished_checkbox`).prop('checked', false);
+
     let month = $(this).val();
     let group = $(this).data('group');
     let href = $(this).data('href');
@@ -86,16 +87,15 @@ $(".month").change(function () {
             group_id: group,
         },
         success: function (response) {
-            console.log(response.payment);
-            response.payment.forEach(element => {
-                if (element.paid == 1) {
-                    student_id = $(`#paid_finished_checkbox_${element.student_id}_${element.group_id}`).data('student');
-                    if (student_id == element.student_id) {
-                        $(`#paid_finished_checkbox_${element.student_id}_${element.group_id}`).attr('checked', true);
+            response.payments.forEach(payment => {
+                if (payment.paid == 1) {
+                    student_id = $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).data('student');
+                    if (student_id == payment.student_id) {
+                        console.log(student_id);
+                        $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).prop('checked', true);
                     }
                 }
             });
-            // $(`.paid_finished_checkbox`).attr('checked', false);
         },
         error: function () { }
     })

@@ -42,23 +42,18 @@
                                                     data-invoice-id="00001">
                                                     <div class="f-m-body">
                                                         <div class="f-head">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewBox="0 0 24 24" fill="none"
-                                                                stroke="currentColor" stroke-width="2"
-                                                                stroke-linecap="round" stroke-linejoin="round"
-                                                                class="feather feather-dollar-sign">
-                                                                <line x1="12" y1="1" x2="12"
-                                                                    y2="23"></line>
-                                                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6">
-                                                                </path>
-                                                            </svg>
+                                                            
                                                         </div>
                                                         <div class="f-body">
-                                                            <p class="invoice-number">Invoice {{ $group->id }}</p>
+                                                            <p class="invoice-number"></p>
+                                                            <p class="alert {{$group->allStudentsPaid ? 'alert-success' : 'alert-danger'}}">
+                                                                Group {{ $group->id }}
+                                                                {{$group->allStudentsPaid ? 'All paid this month' : 'Not All Paid this month'}}
+                                                            </p>
                                                             <p class="invoice-customer-name badge bg-primary text-light">
                                                                 <span class="text-light">From:</span>{{ $group->from }}
                                                             </p>
-                                                            <p class="invoice-customer-name badge bg-primary text-light">
+                                                            <p class="invoice-customer-name badge bg-warning text-light">
                                                                 <span class="text-light">To:</span>
                                                                 {{ $group->to }}
                                                             </p>
@@ -86,27 +81,6 @@
 
                         <div class="invoice-container">
                             <div class="invoice-inbox ps ps--active-y" style="height: calc(100vh - 215px);">
-
-                                <div class="inv-not-selected" style="display: none;">
-                                    <p>Open an invoice from the list.</p>
-                                </div>
-
-                                <div class="invoice-header-section" style="display: flex;">
-                                    <h4 class="inv-number">#00003</h4>
-                                    <div class="invoice-action">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-printer action-print" data-toggle="tooltip"
-                                            data-placement="top" data-original-title="Reply">
-                                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
-                                            <path
-                                                d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2">
-                                            </path>
-                                            <rect x="6" y="14" width="12" height="8"></rect>
-                                        </svg>
-                                    </div>
-                                </div>
 
                                 <div id="ct" class="" style="display: block;">
                                     @foreach ($gorups as $group)
@@ -241,15 +215,6 @@
 
 @section('javascript')
     <script src="{{ asset('adminAssets/assets/js/apps/invoice.js') }}"></script>
-    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
-    <script src="{{ asset('adminAssets/assets/js/scrollspyNav.js') }}"></script>
-    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('adminAssets/plugins/select2/custom-select2.js') }}"></script>
-    <script>
-        var ss = $(".basic").select2({
-            tags: true,
-        });
-    </script>
     <!--  BEGIN CUSTOM SCRIPTS FILE  -->
     <script src="{{ asset('js/payment.js') }}"></script>
 @endsection

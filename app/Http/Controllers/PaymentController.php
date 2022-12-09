@@ -29,8 +29,20 @@ class PaymentController extends Controller
      */
     public function create()
     {
+        $currentMonth = date('F');
 
-        $gorups = Group::with('students', 'groupType')->get();
+        $gorups = Group::with([
+            'students',
+            'groupType',
+            'payments' => function($query) use($currentMonth){
+                return $query->where('month', $currentMonth);
+            }
+        ])->get();
+
+        $gorups->map(function($group){
+            $group->allStudentsPaid = $group->students->count() == $group->payments->count();
+        });
+        
         return view('pages.payment.create', [
             'gorups' => $gorups,
         ]);
@@ -70,13 +82,13 @@ class PaymentController extends Controller
 
     public function getMonthOfPayment(Request $request)
     {
-        $payment = Payment::select(['id', 'paid', 'student_id', 'group_id', 'month'])
+        $payments = Payment::select(['id', 'paid', 'student_id', 'group_id', 'month'])
             ->where('month', $request->month)
             ->where('group_id', $request->group_id)
             ->get();
 
         return response()->json([
-            'payment' => $payment
+            'payments' => $payments
         ]);
     }
 
