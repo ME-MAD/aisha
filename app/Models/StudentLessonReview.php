@@ -9,20 +9,7 @@ class StudentLessonReview extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['student_id', 'lesson_id', 'group_id', 'finished', 'percentage', 'last_chapter_finished','last_page_finished'];
-
-    public function student()
-    {
-        return $this->belongsTo(Student::class, 'student_id');
-    }
-    public function lesson()
-    {
-        return $this->belongsTo(Lesson::class, 'lesson_id');
-    }
-    public function group()
-    {
-        return $this->belongsTo(Group::class, 'group_id');
-    }
+    protected $fillable = ['student_lesson_id', 'finished', 'percentage', 'last_chapter_finished','last_page_finished'];
 
     public function syllabusReviews()
     {

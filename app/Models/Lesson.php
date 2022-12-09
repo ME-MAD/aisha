@@ -19,9 +19,4 @@ class Lesson extends Model
     {
         return $this->hasMany(StudentLesson::class, 'lesson_id');
     }
-
-    public function studentLessonReviews()
-    {
-        return $this->hasMany(StudentLessonReview::class, 'lesson_id');
-    }
 }

@@ -15,28 +15,16 @@ return new class extends Migration
     {
         Schema::create('student_lesson_reviews', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('lesson_id');
-            $table->unsignedBigInteger('group_id');
+            $table->unsignedBigInteger('student_lesson_id');
             $table->boolean('finished')->default(false);
             $table->float('percentage')->default(0)->nullable();
             $table->unsignedInteger('last_chapter_finished')->default(0);
             $table->unsignedInteger('last_page_finished')->default(0);
             $table->timestamps();
 
-            $table->foreign('student_id')
+            $table->foreign('student_lesson_id')
                 ->references('id')
-                ->on('students')
-                ->onDelete('CASCADE');
-
-            $table->foreign('lesson_id')
-                ->references('id')
-                ->on('lessons')
-                ->onDelete('CASCADE');
-
-            $table->foreign('group_id')
-                ->references('id')
-                ->on('groups')
+                ->on('student_lessons')
                 ->onDelete('CASCADE');
         });
     }
