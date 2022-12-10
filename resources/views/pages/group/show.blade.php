@@ -12,6 +12,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
     <!--  END CUSTOM  Data Table  -->
+    <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
+    <link href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
+    <link href="{{ asset('adminAssets/assets/css/tables/table-basic.css') }}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL CUSTOM STYLES -->
 @endsection
 
 @section('breadcrumb')
@@ -44,56 +49,75 @@
 @section('content')
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
+            {{-- <div class="row layout-top-spacing"> --}}
 
-            <div class="row layout-top-spacing">
-                <div class="col-xl-12 col-lg-12 col-md-12">
-                    <ul class="nav nav-pills mb-3 mt-3 nav-fill" id="justify-pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="justify-pills-home-tab" data-toggle="pill"
-                                href="#justify-pills-home" role="tab" aria-controls="justify-pills-home"
-                                aria-selected="true">Teacher</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="justify-pills-profile-tab" data-toggle="pill"
-                                href="#justify-pills-profile" role="tab" aria-controls="justify-pills-profile"
-                                aria-selected="false">Group Days
-                                @if ($groupDaysCount < $groupTypeNumDays)
-                                    <span class="badge badge-danger float-right">{{ $groupDaysCount }}</span>
-                                @else
-                                    <span class="badge badge-success float-right">{{ $groupDaysCount }}</span>
-                                @endif
+            <div class="col-xl-12 col-lg-12 col-md-12">
+                <ul class="nav nav-pills mb-3 mt-3 nav-fill" id="justify-pills-tab1" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="justify-pills-teacher-tab" data-toggle="pill"
+                            href="#justify-pills-teacher" role="tab" aria-controls="justify-pills-teacher"
+                            aria-selected="true">Teacher</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="justify-pills-groupDays-tab" data-toggle="pill"
+                            href="#justify-pills-groupDays" role="tab" aria-controls="justify-pills-groupDays"
+                            aria-selected="false">Group Days
+                            @if ($groupDaysCount < $groupTypeNumDays)
+                                <span class="badge badge-danger float-right">{{ $groupDaysCount }}</span>
+                            @else
+                                <span class="badge badge-success float-right">{{ $groupDaysCount }}</span>
+                            @endif
 
-                            </a>
+                        </a>
 
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="justify-pills-contact-tab" data-toggle="pill"
-                                href="#justify-pills-contact" role="tab" aria-controls="justify-pills-contact"
-                                aria-selected="false">Group Students</a>
-                        </li>
-                    </ul>
-
-                    <div class="tab-content" id="justify-pills-tabContent">
-                        <div class="tab-pane fade show active" id="justify-pills-home" role="tabpanel"
-                            aria-labelledby="justify-pills-home-tab">
-                            @include('pages.group.partials.teacher')
-                        </div>
-
-                        <div class="tab-pane fade" id="justify-pills-profile" role="tabpanel"
-                            aria-labelledby="justify-pills-profile-tab">
-                            @include('pages.group.partials.groupDays')
-                            @include('pages.groupDays.createModal')
-                        </div>
-
-                        <div class="tab-pane fade" id="justify-pills-contact" role="tabpanel"
-                            aria-labelledby="justify-pills-contact-tab">
-                            @include('pages.group.partials.students')
-                            @include('pages.groupStudent.createModal')
-                        </div>
+                    </li>
+                </ul>
+                <div class="tab-content" id="justify-pills-tabContent">
+                    <div class="tab-pane fade show active" id="justify-pills-teacher" role="tabpanel"
+                        aria-labelledby="justify-pills-teacher-tab">
+                        @include('pages.group.partials.teacher')
                     </div>
 
+                    <div class="tab-pane fade" id="justify-pills-groupDays" role="tabpanel"
+                        aria-labelledby="justify-pills-groupDays-tab">
+                        @include('pages.group.partials.groupDays')
+                        @include('pages.groupDays.createModal')
+                    </div>
                 </div>
             </div>
+
+            <div class="col-xl-12 col-lg-12 col-md-12">
+                <ul class="nav nav-pills mb-3 mt-3 nav-fill" id="justify-pills-tab2" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="justify-pills-students-tab" data-toggle="pill"
+                            href="#justify-pills-students" role="tab" aria-controls="justify-pills-students"
+                            aria-selected="true">
+                            Students</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" id="justify-pills-payment-tab" data-toggle="pill"
+                            href="#justify-pills-payment" role="tab" aria-controls="justify-pills-payment"
+                            aria-selected="false">Payment</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="justify-pills-tabContent">
+                    <div class="tab-pane fade show active" id="justify-pills-students" role="tabpanel"
+                        aria-labelledby="justify-pills-students-tab">
+                        @include('pages.group.partials.students')
+                        @include('pages.groupStudent.createModal')
+                    </div>
+
+                    <div class="tab-pane fade" id="justify-pills-payment" role="tabpanel"
+                        aria-labelledby="justify-pills-payment-tab">
+                        @include('pages.group.partials.payment')
+
+                    </div>
+                </div>
+
+            </div>
+            {{-- </div> --}}
         </div>
     </div>
 @endsection
@@ -120,6 +144,50 @@
             "pageLength": 7
         });
     </script>
+    <script>
+        $('#zero-config2').DataTable({
+            "oLanguage": {
+                "oPaginate": {
+                    "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
+                    "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
+                },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+                "sLengthMenu": "Results :  _MENU_",
+            },
+            "stripeClasses": [],
+            "lengthMenu": [7, 10, 20, 50],
+            "pageLength": 7
+        });
+    </script>
+    <script>
+        $('#zero-config3').DataTable({
+            "oLanguage": {
+                "oPaginate": {
+                    "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
+                    "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
+                },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+                "sLengthMenu": "Results :  _MENU_",
+            },
+            "stripeClasses": [],
+            "lengthMenu": [7, 10, 20, 50],
+            "pageLength": 7
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
 
     <script>
         $('#creatGroupDayModal').on('shown.bs.modal', function(e) {

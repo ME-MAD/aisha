@@ -34,17 +34,18 @@ class PaymentController extends Controller
         $gorups = Group::with([
             'students',
             'groupType',
-            'payments' => function($query) use($currentMonth){
+            'payments' => function ($query) use ($currentMonth) {
                 return $query->where('month', $currentMonth);
             }
         ])->get();
-
-        $gorups->map(function($group){
+        $gorups->map(function ($group) {
             $group->allStudentsPaid = $group->students->count() == $group->payments->count();
+            // dd($group->allStudentsPaid);
         });
-        
+
         return view('pages.payment.create', [
             'gorups' => $gorups,
+            'currentMonth' => $currentMonth,
         ]);
     }
 

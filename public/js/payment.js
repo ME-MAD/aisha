@@ -34,6 +34,7 @@ for (let element of createcheckbox) {
                     )
                 },
                 error: function (response) {
+                    $(`.paid_finished_checkbox`).prop('checked', false);
                     Swal.fire(
                         'Warning!',
                         `${response.responseJSON.message}`,
@@ -65,7 +66,6 @@ for (let element of createcheckbox) {
                         'error'
                     )
                 }
-
             })
         }
     })
