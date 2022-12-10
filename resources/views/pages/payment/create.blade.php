@@ -42,13 +42,14 @@
                                                     data-invoice-id="00001">
                                                     <div class="f-m-body">
                                                         <div class="f-head">
-                                                            
+
                                                         </div>
                                                         <div class="f-body">
                                                             <p class="invoice-number"></p>
-                                                            <p class="alert {{$group->allStudentsPaid ? 'alert-success' : 'alert-danger'}}">
+                                                            <p
+                                                                class="alert {{ $group->allStudentsPaid ? 'alert-success' : 'alert-danger' }}">
                                                                 Group {{ $group->id }}
-                                                                {{$group->allStudentsPaid ? 'All paid this month' : 'Not All Paid this month'}}
+                                                                {{ $group->allStudentsPaid ? 'All paid this month' : 'Not All Paid this month' }}
                                                             </p>
                                                             <p class="invoice-customer-name badge bg-primary text-light">
                                                                 <span class="text-light">From:</span>{{ $group->from }}
@@ -147,7 +148,8 @@
                                                         <select class="form-control basic month" name="month"
                                                             id="month" data-group="{{ $group->id }}"
                                                             data-href="{{ route('admin.payment.getMonthOfPayment') }}">
-                                                            <option value="" selected="selected">Choose The Month
+                                                            <option value="{{ $currentMonth }}" selected="selected">
+                                                                {{ $currentMonth }}
                                                             </option>
                                                             <option value="January">January</option>
                                                             <option value="February">February</option>

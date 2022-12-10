@@ -27,7 +27,7 @@ class StoreExperienceRequest extends FormRequest
         return [
             'title' => 'required',
             'from' => 'required|date|date_format:Y-m-d|before:today',
-            'to' => 'required|date|date_format:Y-m-d|before:today',
+            'to' => 'required|date|date_format:Y-m-d|after:from',
             'teacher_id' => 'required',
         ];
     }

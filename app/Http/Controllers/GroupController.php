@@ -73,11 +73,12 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        $group->load('groupStudents.student', 'groupType');
+        $group->load('groupStudents.student', 'groupType', 'payments.student');
         $countStudents = $group->groupStudents->count();
         $groupDaysCount = $group->groupDays->count();
         $groupTypeNumDays = $group->groupType->days_num;
         $students = Student::get();
+        $currentMonth = date('F');
 
         return view('pages.group.show', [
             'group' => $group,
@@ -85,6 +86,7 @@ class GroupController extends Controller
             'groupDaysCount' => $groupDaysCount,
             'groupTypeNumDays' => $groupTypeNumDays,
             'students' => $students,
+            'currentMonth' => $currentMonth,
         ]);
     }
 
