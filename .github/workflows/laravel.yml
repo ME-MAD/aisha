@@ -32,7 +32,6 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-    - name: Migrations
       run: php artisan migrate
     - name: testing
       run: php artisan test
