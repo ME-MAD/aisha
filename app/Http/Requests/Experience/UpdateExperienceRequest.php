@@ -25,8 +25,8 @@ class UpdateExperienceRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'from' => 'required|date|date_format:Y-m-d|before:today',
-            'to' => 'required|date|date_format:Y-m-d|after:from',
+            'from' => 'required|date|date_format:Y-m-d|before:today|before:to',
+            'to' => 'required|date|date_format:Y-m-d|before:today|after:from',
             'teacher_id' => 'required',
         ];
     }

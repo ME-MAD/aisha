@@ -2,8 +2,6 @@
 
 namespace Tests\Controller;
 
-use App\Models\Experience;
-use App\Models\Teacher;
 use App\Services\Experience\ExperienceService;
 use App\Services\Teacher\TeacherService;
 use Carbon\Carbon;
@@ -37,106 +35,17 @@ class ExperienceControllerTest extends TestCase
         $res->assertViewHas('teachers',$teachers);
     }
 
-    public function test_store_fails_without_title()
+    /**
+     * @test
+     * @dataProvider storeValidationProvider
+     */
+    public function test_store_validations($data)
     {
-        $teacher = $this->generateRandomTeacher();
-
-        $res = $this->call('POST',route('admin.experience.store'),[
-            'from' => Carbon::now()->subDays(20)->toDateString(),
-            'to' => Carbon::now()->subDays(10)->toDateString(),
-            'teacher_id' => $teacher->id
-        ]);
+        $res = $this->call('POST',route('admin.experience.store'), $data);
 
         $res->assertSessionHasErrors();
     }
 
-    public function test_store_fails_without_from()
-    {
-        $teacher = $this->generateRandomTeacher();
-
-        $res = $this->call('POST',route('admin.experience.store'),[
-            'title' => 'this is title for exps',
-            'to' => Carbon::now()->subDays(10)->toDateString(),
-            'teacher_id' => $teacher->id
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
-    public function test_store_fails_without_to()
-    {
-        $teacher = $this->generateRandomTeacher();
-
-        $res = $this->call('POST',route('admin.experience.store'),[
-            'title' => 'this is title for exps',
-            'from' => Carbon::now()->subDays(20)->toDateString(),
-            'teacher_id' => $teacher->id
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
-    public function test_store_fails_without_teacher_id()
-    {
-        $res = $this->call('POST',route('admin.experience.store'),[
-            'title' => 'this is title for exps',
-            'from' => Carbon::now()->subDays(20)->toDateString(),
-            'to' => Carbon::now()->subDays(10)->toDateString(),
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
-    public function test_store_fails_if_from_is_less_than_to()
-    {
-        $teacher = $this->generateRandomTeacher();
-
-        $this->mock(ExperienceService::class, function(MockInterface $mock){
-            $mock->shouldReceive('createExperience')->once();
-        });
-
-
-        $res = $this->call('POST',route('admin.experience.store'),[
-            'title' => 'this is title for exps',
-            'from' => Carbon::now()->subDays(11)->toDateString(),
-            'to' => Carbon::now()->subDays(10)->toDateString(),
-            'teacher_id' => $teacher->id
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
-    public function test_store_fails_when_from_grater_than_today()
-    {
-
-        $teacher = $this->generateRandomTeacher();
-
-        $res = $this->call('POST',route('admin.experience.store'),[
-            'title' => 'this is title for exps',
-            'from' => Carbon::now()->addDays(1)->toDateString(),
-            'to' => Carbon::now()->addDays(2)->toDateString(),
-            'teacher_id' => $teacher->id
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
-    public function test_store_fails_when_to_grater_than_today()
-    {
-
-        $teacher = $this->generateRandomTeacher();
-
-        $res = $this->call('POST',route('admin.experience.store'),[
-            'title' => 'this is title for exps',
-            'from' => Carbon::now()->subDays(10)->toDateString(),
-            'to' => Carbon::now()->addDays(2)->toDateString(),
-            'teacher_id' => $teacher->id
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
-    
     public function test_store_pass_with_all_data()
     {
         $teacher = $this->generateRandomTeacher();
@@ -155,65 +64,14 @@ class ExperienceControllerTest extends TestCase
         $res->assertSessionHasNoErrors();
     }
 
-    public function test_update_fails_without_data()
+    /**
+     * @dataProvider storeValidationProvider
+     */
+    public function test_update_validations($data)
     {
         $experience = $this->generateRandomExperience();
         
-        $res = $this->call('PUT',route('admin.experience.update',$experience->id),[
-            
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
-    public function test_update_fails_without_title()
-    {
-        $experience = $this->generateRandomExperience();
-
-        $res = $this->call('PUT',route('admin.experience.update',$experience->id),[
-            'from' => Carbon::now()->subDays(20)->toDateString(),
-            'to' => Carbon::now()->subDays(10)->toDateString(),
-            'teacher_id' => $experience->teacher_id
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
-    public function test_update_fails_without_from()
-    {
-        $experience = $this->generateRandomExperience();
-
-        $res = $this->call('PUT',route('admin.experience.update',$experience->id),[
-            'title' => 'this is title for exps',
-            'to' => Carbon::now()->subDays(10)->toDateString(),
-            'teacher_id' => $experience->teacher_id
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
-    public function test_update_fails_without_to()
-    {
-        $experience = $this->generateRandomExperience();
-
-        $res = $this->call('PUT',route('admin.experience.update',$experience->id),[
-            'title' => 'this is title for exps',
-            'from' => Carbon::now()->subDays(20)->toDateString(),
-            'teacher_id' => $experience->teacher_id
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
-    public function test_update_fails_without_teacher_id()
-    {
-        $experience = $this->generateRandomExperience();
-
-        $res = $this->call('PUT',route('admin.experience.update',$experience->id),[
-            'title' => 'this is title for exps',
-            'from' => Carbon::now()->subDays(20)->toDateString(),
-            'to' => Carbon::now()->subDays(10)->toDateString(),
-        ]);
+        $res = $this->call('PUT',route('admin.experience.update',$experience->id),$data);
 
         $res->assertSessionHasErrors();
     }
@@ -235,48 +93,6 @@ class ExperienceControllerTest extends TestCase
         $res->assertSessionHasNoErrors();
     }
 
-    public function test_update_fails_if_from_is_less_than_to()
-    {
-        $experience = $this->generateRandomExperience();
-
-        $res = $this->call('PUT',route('admin.experience.update',$experience->id),[
-            'title' => 'this is title for exps',
-            'from' => Carbon::now()->subDays(11)->toDateString(),
-            'to' => Carbon::now()->subDays(10)->toDateString(),
-            'teacher_id' => $experience->teacher_id
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
-    public function test_update_fails_when_from_grater_than_today()
-    {
-        $experience = $this->generateRandomExperience();
-
-        $res = $this->call('PUT',route('admin.experience.update',$experience->id),[
-            'title' => 'this is title for exps',
-            'from' => Carbon::now()->addDays(1)->toDateString(),
-            'to' => Carbon::now()->addDays(2)->toDateString(),
-            'teacher_id' => $experience->teacher_id
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
-    public function test_update_fails_when_to_grater_than_today()
-    {
-        $experience = $this->generateRandomExperience();
-
-        $res = $this->call('PUT',route('admin.experience.update',$experience->id),[
-            'title' => 'this is title for exps',
-            'from' => Carbon::now()->subDays(10)->toDateString(),
-            'to' => Carbon::now()->addDays(2)->toDateString(),
-            'teacher_id' => $experience->teacher_id
-        ]);
-
-        $res->assertSessionHasErrors();
-    }
-
     public function test_experience_get_deleted_without_errors()
     {
         $experience = $this->generateRandomExperience();
@@ -288,5 +104,77 @@ class ExperienceControllerTest extends TestCase
         $res = $this->call('get',route('admin.experience.delete',$experience->id));
 
         $res->assertSessionHasNoErrors();
+    }
+
+
+    public function storeValidationProvider() : array
+    {
+        $this->refreshApplication();
+        $teacher = $this->generateRandomTeacher();
+        
+        return [
+            "without data" => [
+                [
+                    
+                ],
+            ],
+            "without a title" => [
+                [
+                    'title' => null,
+                    'from' => Carbon::now()->subDays(20)->toDateString(),
+                    'to' => Carbon::now()->subDays(10)->toDateString(),
+                    'teacher_id' => $teacher->id,
+                ],
+            ],
+            "without a from" =>[
+                [
+                    'title' => 'this is title for exps',
+                    'from' => null,
+                    'to' => Carbon::now()->subDays(10)->toDateString(),
+                    'teacher_id' =>  $teacher->id
+                ],
+            ],
+            "without a to" => [
+                [
+                    'title' => 'this is title for exps',
+                    'from' => Carbon::now()->subDays(20)->toDateString(),
+                    'to' => null,
+                    'teacher_id' =>  $teacher->id
+                ],
+            ],
+            "without teacher_id" => [ 
+                [
+                    'title' => 'this is title for exps',
+                    'from' => Carbon::now()->subDays(20)->toDateString(),
+                    'to' => Carbon::now()->subDays(10)->toDateString(),
+                    'teacher_id' => null
+                ],
+            ],
+            "if (from) is greater than (to)" => [
+                [
+                    'title' => 'this is title for exps',
+                    'from' => Carbon::now()->subDays(10)->toDateString(),
+                    'to' => Carbon::now()->subDays(12)->toDateString(),
+                    'teacher_id' =>  $teacher->id
+                ],
+            ],
+            "if (from) is grater than today" => [
+                [
+                    'title' => 'this is title for exps',
+                    'from' => Carbon::now()->addDays(1)->toDateString(),
+                    'to' => Carbon::now()->addDays(2)->toDateString(),
+                    'teacher_id' =>  $teacher->id
+                ],
+            ],
+            "if (to) is greater than today" => [
+                [
+                    'title' => 'this is title for exps',
+                    'from' => Carbon::now()->subDays(10)->toDateString(),
+                    'to' => Carbon::now()->addDays(2)->toDateString(),
+                    'teacher_id' =>  $teacher->id
+                ]
+            ]
+            
+        ];
     }
 }
