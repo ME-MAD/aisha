@@ -63,19 +63,16 @@ class ExperienceController extends Controller
 
     public function update(UpdateExperienceRequest $request, Experience $experience)
     {
-        $experience->update([
-            'title' => $request->title,
-            'from' => $request->from,
-            'to' => $request->to,
-            'teacher_id' => $request->teacher_id,
-        ]);
+        $this->experienceService->updateExperience($experience, $request);
+        
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
     public function delete(Experience $experience)
     {
-        $experience->delete();
+        $this->experienceService->deleteExperience($experience);
+        
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }

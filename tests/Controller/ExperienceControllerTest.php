@@ -222,14 +222,70 @@ class ExperienceControllerTest extends TestCase
     {
         $experience = $this->generateRandomExperience();
 
+        $this->mock(ExperienceService::class, function(MockInterface $mock){
+            $mock->shouldReceive('updateExperience')->once();
+        });
+
         $res = $this->call('PUT',route('admin.experience.update',$experience->id),[
             'title' => 'this is title for exps',
             'from' => Carbon::now()->subDays(20)->toDateString(),
             'to' => Carbon::now()->subDays(10)->toDateString(),
             'teacher_id' => $experience->teacher_id
         ]);
+        $res->assertSessionHasNoErrors();
+    }
 
-        // dd($res);
+    public function test_update_fails_if_from_is_less_than_to()
+    {
+        $experience = $this->generateRandomExperience();
+
+        $res = $this->call('PUT',route('admin.experience.update',$experience->id),[
+            'title' => 'this is title for exps',
+            'from' => Carbon::now()->subDays(11)->toDateString(),
+            'to' => Carbon::now()->subDays(10)->toDateString(),
+            'teacher_id' => $experience->teacher_id
+        ]);
+
+        $res->assertSessionHasErrors();
+    }
+
+    public function test_update_fails_when_from_grater_than_today()
+    {
+        $experience = $this->generateRandomExperience();
+
+        $res = $this->call('PUT',route('admin.experience.update',$experience->id),[
+            'title' => 'this is title for exps',
+            'from' => Carbon::now()->addDays(1)->toDateString(),
+            'to' => Carbon::now()->addDays(2)->toDateString(),
+            'teacher_id' => $experience->teacher_id
+        ]);
+
+        $res->assertSessionHasErrors();
+    }
+
+    public function test_update_fails_when_to_grater_than_today()
+    {
+        $experience = $this->generateRandomExperience();
+
+        $res = $this->call('PUT',route('admin.experience.update',$experience->id),[
+            'title' => 'this is title for exps',
+            'from' => Carbon::now()->subDays(10)->toDateString(),
+            'to' => Carbon::now()->addDays(2)->toDateString(),
+            'teacher_id' => $experience->teacher_id
+        ]);
+
+        $res->assertSessionHasErrors();
+    }
+
+    public function test_experience_get_deleted_without_errors()
+    {
+        $experience = $this->generateRandomExperience();
+
+        $this->mock(ExperienceService::class, function(MockInterface $mock){
+            $mock->shouldReceive('deleteExperience')->once();
+        });
+
+        $res = $this->call('get',route('admin.experience.delete',$experience->id));
 
         $res->assertSessionHasNoErrors();
     }
