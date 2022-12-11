@@ -127,6 +127,7 @@
 
 @section('javascript')
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
+    <script src="{{ asset('js/payment.js') }}"></script>
     <script>
         $('#zero-config').DataTable({
             "oLanguage": {
