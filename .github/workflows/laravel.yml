@@ -49,6 +49,7 @@ jobs:
         mysql database: 'test'
         mysql user: 'developer'
         mysql password: ${{ secrets.DatabasePassword }}
+    - name: migration
       run: php artisan migrate --database="mysql_testing"
     - name: testing
       run: php artisan test
