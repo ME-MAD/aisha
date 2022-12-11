@@ -18,7 +18,7 @@ jobs:
         image: mysql:8.0
         env:
           ## Accessing to Github secrets, where you can store your configuration
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: ${{ secrets.DatabasePassword }}
           MYSQL_DATABASE_TEST: test
         ## map the "external" 3306 port with the "internal" 3306
         ports:
