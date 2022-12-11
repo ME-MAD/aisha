@@ -48,6 +48,6 @@ jobs:
           DB_USERNAME_TEST: root
           MYSQL_ROOT_PASSWORD: 123
           DB_PASSWORD_TEST: 123
-      run: php artisan migrate
+      run: php artisan migrate --database="mysql_test"
     - name: testing
       run: php artisan test
