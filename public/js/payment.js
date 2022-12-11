@@ -12,9 +12,9 @@ for (let element of createcheckbox) {
             .parent().parent()
             .parent().parent()
             .parent().parent()
-            .find(".month")
-            .val()
+            .find("#month")
 
+        console.log(month);
 
         if (element.checked == true) {
             $.ajax({
@@ -34,7 +34,7 @@ for (let element of createcheckbox) {
                     )
                 },
                 error: function (response) {
-                    $(`.paid_finished_checkbox`).prop('checked', false);
+                    month == null ? $(`.paid_finished_checkbox`).prop('checked', false) : '';
                     Swal.fire(
                         'Warning!',
                         `${response.responseJSON.message}`,

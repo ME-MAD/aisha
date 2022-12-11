@@ -40,7 +40,6 @@ class PaymentController extends Controller
         ])->get();
         $gorups->map(function ($group) {
             $group->allStudentsPaid = $group->students->count() == $group->payments->count();
-            // dd($group->allStudentsPaid);
         });
 
         return view('pages.payment.create', [

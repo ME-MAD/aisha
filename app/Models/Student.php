@@ -53,4 +53,9 @@ class Student extends Model
     {
         return $this->hasMany(Payment::class, 'student_id');
     }
+
+    public function checkPaid(int $group_id, string $month)
+    {
+        return $this->payments()->select(['paid'])->where('group_id', $group_id)->where('month', $month)->first()->paid ?? false;
+    }
 }
