@@ -20,6 +20,10 @@ jobs:
           ## Accessing to Github secrets, where you can store your configuration
           MYSQL_ROOT_PASSWORD: ${{ secrets.DatabasePassword }}
           MYSQL_DATABASE_TEST: test
+          DB_CONNECTION_TEST: 'mysql'
+          DB_HOST_TEST: 127.0.0.1
+          DB_USERNAME_TEST: 'developer'
+          DB_PASSWORD_TEST: ${{ secrets.DatabasePassword }}
         ## map the "external" 3306 port with the "internal" 3306
         ports:
           - 3306:3306
