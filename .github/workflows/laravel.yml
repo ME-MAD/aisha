@@ -48,14 +48,14 @@ jobs:
         mysql database: 'test'
         mysql user: 'developer'
         mysql password: ${{ secrets.DatabasePassword }}
-    - name: migration
-      env:
-          DB_CONNECTION_TEST: 'mysql'
-          DB_HOST_TEST: 127.0.0.1
-          DB_PORT_TEST: 3306
-          DB_DATABASE_TEST: 'test'
-          DB_USERNAME_TEST: 'developer'
-          DB_PASSWORD_TEST: ${{ secrets.DatabasePassword }}
-      run: php artisan migrate --database="mysql_testing"
+    # - name: migration
+    #   env:
+    #       DB_CONNECTION_TEST: 'mysql'
+    #       DB_HOST_TEST: 127.0.0.1
+    #       DB_PORT_TEST: 3306
+    #       DB_DATABASE_TEST: 'test'
+    #       DB_USERNAME_TEST: 'developer'
+    #       DB_PASSWORD_TEST: ${{ secrets.DatabasePassword }}
+    #   run: php artisan migrate --database="mysql_testing"
     - name: testing
       run: php artisan test
