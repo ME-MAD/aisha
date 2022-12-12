@@ -96,32 +96,25 @@ function renderSubjectsForEachGroup(groupStudent)
                 )
             })[0]
 
-            let studentLessonReview = null
+            
 
             let studentLessonShowURL = (studentLesson?.id || false) ? `/admin/student_lesson/show/${studentLesson.id}`:'#'
 
             let nextLesson = studentLesson?.syllabus.filter(syllabi => syllabi.finished == 0)[0]
-
-            let nextReviewLesson = studentLessonReview?.syllabus_reviews.filter(syllabusReview => syllabusReview.finished == 0)[0]
-
             let studentFinishedChaptersCount = studentLesson ? studentLesson.last_chapter_finished : 0
             let studentFinishedChaptersPercentage = studentLesson ? studentLesson.percentage : 0
             let studentLessonIsFinished = studentLesson ? studentLesson.finished : false
             let studentLessonLastPageFinished = studentLesson ? studentLesson.last_page_finished : 0
 
-            let studentLessonReviewIsFinished = studentLessonReview ? studentLessonReview.finished : false
-            let studentLessonReviewLastPageFinished = studentLessonReview ? studentLessonReview.last_page_finished : 0
+            
+            let studentLessonReview = studentLesson?.studentLessonReview
 
-            let reviewStudentFinishedChaptersCount = studentLessonReview ? studentLessonReview.last_chapter_finished : 0;
-            // <input 
-            // type="checkbox" 
-            // class="lesson_review_finished_checkbox big-checkbox" 
-            // data-group-id="${groupId}"
-            // data-lesson-id="${lesson.id}"
-            // data-student-id="${studentId}"
-            // data-chapters-count="${lesson.chapters_count}"
-            // data-last-page-finished="${lesson.to_page}"
-            // ${studentLessonReviewIsFinished ? 'checked' : ''}>
+            let nextLessonReview = studentLessonReview?.syllabusReviews.filter(syllabusReview => syllabusReview.finished == 0)[0]
+
+            let studentFinishedChaptersCountReview = studentLessonReview ? studentLessonReview.last_chapter_finished : 0
+            let studentFinishedChaptersPercentageReview = studentLessonReview ? studentLessonReview.percentage : 0
+            let studentLessonIsFinishedReview = studentLessonReview ? studentLessonReview.finished : false
+            let studentLessonLastPageFinishedReview = studentLessonReview ? studentLessonReview.last_page_finished : 0
 
             lessonsElements += `
                 <div class="studentLessonMainContainer borderPrimary">
@@ -253,7 +246,7 @@ function renderSubjectsForEachGroup(groupStudent)
 
 
 
-                        <div class="studentLessonReviewContainer">
+                        <div class="studentLessonContainerReview">
 
                             <button class="btn btn-dark goToLessonButton">
                                 Go To Lesson 
@@ -276,20 +269,20 @@ function renderSubjectsForEachGroup(groupStudent)
                             </div>
 
                             <div class="d-flex justify-content-between mb-3 align-items-center">
-                                <span class="badge badge-success reviewStudentFinishedChaptersCountElement">
-                                    ${reviewStudentFinishedChaptersCount}
+                                <span class="badge badge-success StudentFinishedChaptersCountElementReview">
+                                    ${studentFinishedChaptersCountReview}
                                 </span>
 
                                 <label class="switch s-icons s-outline  s-outline-success">
                                     <input 
                                         type="checkbox" 
-                                        class="review_lesson_finished_checkbox"
+                                        class="lesson_finished_checkbox_review"
                                         data-group-id="${groupId}"
                                         data-lesson-id="${lesson.id}"
                                         data-student-id="${studentId}"
                                         data-chapters-count="${lesson.chapters_count}"
                                         data-last-page-finished="${lesson.to_page}"
-                                        ${reviewStudentLessonIsFinished ? 'checked' : ''}
+                                        ${studentLessonIsFinishedReview ? 'checked' : ''}
                                     >
                                     <span class="slider"></span>
                                 </label>
@@ -301,17 +294,17 @@ function renderSubjectsForEachGroup(groupStudent)
 
                             <a class="progressOfSubjectLink subject" data-toggle="modal" data-target="#createSubjectModal"
                                 data-chapterscount="${lesson.chapters_count}"
-                                data-finishedchapterscount="${studentFinishedChaptersCount}"
+                                data-finishedchapterscount="${studentFinishedChaptersCountReview}"
                                 data-groupid="${groupId}" data-lessonid="${lesson.id}"
                                 data-studentid="${studentId}">
                                 <div class="progress br-30">
                                     <div class="progress-bar bg-primary" role="progressbar"
-                                        aria-valuenow="${studentFinishedChaptersPercentage}" 
-                                        style="width:${studentFinishedChaptersPercentage}%"
+                                        aria-valuenow="${studentFinishedChaptersPercentageReview}" 
+                                        style="width:${studentFinishedChaptersPercentageReview}%"
                                         aria-valuemin="0" aria-valuemax="100">
                                         <div class="progress-title">
                                             <span class="progress-bar-percentage">
-                                                ${studentFinishedChaptersPercentage}%
+                                                ${studentFinishedChaptersPercentageReview}%
                                             </span>
                                         </div>
                                     </div>
@@ -323,33 +316,33 @@ function renderSubjectsForEachGroup(groupStudent)
                             <div class="row">
                                 <div class="p-3 text-center col" style="font-size:1.5rem;">
                                     <div class="mb-4">
-                                        Last Page Finished : <span class="badge bg-success studentLessonLastPageFinishedElement">${studentLessonLastPageFinished}</span>
-                                        <span class="btn btn-outline-info openStudentLastPageFinishedElement" data-last-page-finished="${studentLessonLastPageFinished}">
+                                        Last Page Finished : <span class="badge bg-success studentLessonLastPageFinishedElement">${studentLessonLastPageFinishedReview}</span>
+                                        <span class="btn btn-outline-info openStudentLastPageFinishedElement" data-last-page-finished="${studentLessonLastPageFinishedReview}">
                                             <i class="fa-solid fa-book-open"></i>
                                         </span>
                                     </div>
 
-                                    <div class="${nextLesson ? '' : 'd-none'} newLessonContainerElement">
+                                    <div class="${nextLessonReview ? '' : 'd-none'} newLessonContainerElement">
                                         <div class="mb-3">
                                             <span>
                                                 <span>Next Lesson Is From Chapter</span>
                                                 <span class="badge bg-info nextLessonFromChapter">
-                                                    ${nextLesson?.from_chapter || 0}
+                                                    ${nextLessonReview?.from_chapter || 0}
                                                 </span>
                                                 <span>To Chapter</span>
-                                                <span class="badge bg-info nextLessonToChapter">${nextLesson?.to_chapter || 0}</span>
+                                                <span class="badge bg-info nextLessonToChapter">${nextLessonReview?.to_chapter || 0}</span>
                                             </span>
                                         </div>
                                         <div class="mb-3">
                                             <span>
                                                 <span>Next Lesson Is From Page</span>
-                                                <span class="badge bg-info nextLessonFromPage" data-last-page-finished="${nextLesson?.from_page || null}">
-                                                    <span>${nextLesson?.from_page || 0}</span>
+                                                <span class="badge bg-info nextLessonFromPage" data-last-page-finished="${nextLessonReview?.from_page || null}">
+                                                    <span>${nextLessonReview?.from_page || 0}</span>
                                                     <i class="fa-solid fa-book-open"></i>
                                                 </span>
                                                 <span>To Page</span>
-                                                <span class="badge bg-info nextLessonToPage" data-last-page-finished="${nextLesson?.to_page || null}">
-                                                    <span>${nextLesson?.to_page || 0}</span>
+                                                <span class="badge bg-info nextLessonToPage" data-last-page-finished="${nextLessonReview?.to_page || null}">
+                                                    <span>${nextLessonReview?.to_page || 0}</span>
                                                     <i class="fa-solid fa-book-open"></i>
                                                 </span>
                                             </span>
@@ -357,7 +350,7 @@ function renderSubjectsForEachGroup(groupStudent)
                                         
                                     </div>
                                     <div class="mb-3">
-                                        <select class="form-control newLessonRate ${nextLesson ? '' : 'd-none'}">
+                                        <select class="form-control newLessonRate ${nextLessonReview ? '' : 'd-none'}">
                                             <option value="excellent"> excellent </option>
                                             <option value="very good"> very good </option>
                                             <option value="good"> good </option>
@@ -365,9 +358,9 @@ function renderSubjectsForEachGroup(groupStudent)
                                         </select>
                                     </div>
                                     <div>
-                                        <button class="btn btn-primary newLessonButton ${nextLesson ? 'd-none' : ''}" data-student-lesson-id="${studentLesson ? studentLesson.id : null}" data-group-id="${groupId}" data-lesson-id="${lesson.id}" data-last-page-finished="${studentLesson?.last_page_finished}" data-last-chapter-finished="${studentLesson?.last_chapter_finished}">New Lesson</button>
+                                        <button class="btn btn-primary newLessonButtonReview ${nextLessonReview ? 'd-none' : ''}" data-student-lesson-id="${studentLessonReview ? studentLessonReview.id : null}" data-group-id="${groupId}" data-lesson-id="${lesson.id}" data-last-page-finished="${studentLessonReview?.last_page_finished}" data-last-chapter-finished="${studentLessonReview?.last_chapter_finished}">New Lesson</button>
 
-                                        <button class="btn btn-info finishNewLessonButton ${nextLesson ? '' : 'd-none'}" data-syllabi-id=${nextLesson?.id || null}>
+                                        <button class="btn btn-info finishNewLessonButton ${nextLessonReview ? '' : 'd-none'}" data-syllabi-id=${nextLessonReview?.id || null}>
                                             Finish New Lesson
                                             <i class="fa-solid fa-square-check"></i>
                                         </button>
@@ -416,13 +409,13 @@ function renderSubjectsForEachGroup(groupStudent)
             openPageFromTheBook(this, subject)
         })
         
-        $('.nextReviewLessonFromPage').on('click',function(){
-            openPageFromTheBook(this, subject)
-        })
+        // $('.nextReviewLessonFromPage').on('click',function(){
+        //     openPageFromTheBook(this, subject)
+        // })
 
-        $('.nextReviewLessonToPage').on('click',function(){
-            openPageFromTheBook(this, subject)
-        })
+        // $('.nextReviewLessonToPage').on('click',function(){
+        //     openPageFromTheBook(this, subject)
+        // })
 
 
 
@@ -655,6 +648,11 @@ function addNewLessonHandler()
     let lesson_id = null;
     let mainParent = null;
 
+    let student_lesson_review_id = null;
+    let group_review_id = null;
+    let lesson_review_id = null;
+    let mainParent_review = null;
+
     $('.newLessonButton').on('click',function(){
         $('#newLessonModal').modal('show')
         student_lesson_id = $(this).data('student-lesson-id')
@@ -667,6 +665,20 @@ function addNewLessonHandler()
         $('#newLessonForm #from_chapter').val(last_chapter_finished || '')
 
         mainParent = $(this).parent().parent().parent().parent()
+    })
+
+    $('.newLessonButtonReview').on('click',function(){
+        $('#newLessonModalReview').modal('show')
+        student_lesson_review_id = $(this).data('student-lesson-review-id')
+        let last_page_finished_review = $(this).data('last-page-finished-review')
+        let last_chapter_finished_review = $(this).data('last-chapter-finished-review')
+        group_review_id = $(this).data('group-id')
+        lesson_review_id = $(this).data('lesson-id')
+
+        $('#newLessonFromReview #from_page').val(last_page_finished_review || '')
+        $('#newLessonFromReview #from_chapter').val(last_chapter_finished_review || '')
+
+        mainParent_review = $(this).parent().parent().parent().parent()
     })
 
     $('#newLessonForm').submit(function(e){
@@ -691,6 +703,87 @@ function addNewLessonHandler()
                student_id: studentId,
                group_id,
                lesson_id
+            },
+            success: function(response) {
+                $('#newLessonModal').modal('hide')
+                if(response.status == 200)
+                {
+                    Swal.fire(
+                        'Success!',
+                        `Finished Successfully !`,
+                        'success',
+                    )
+                    mainParent.find('.newLessonContainerElement').removeClass('d-none')
+                    mainParent.find('.nextLessonFromChapter').html(from_chapter)
+                    mainParent.find('.nextLessonToChapter').html(to_chapter)
+                    mainParent.find('.nextLessonFromPage').find('span').html(from_page)
+                    mainParent.find('.nextLessonFromPage').data("last-page-finished", from_page)
+                    mainParent.find('.nextLessonToPage').find('span').html(to_page)
+                    mainParent.find('.nextLessonToPage').data("last-page-finished", to_page)
+
+
+                    mainParent.find('.newLessonButton').addClass('d-none')
+                    mainParent.find('.finishNewLessonButton').removeClass('d-none')
+                    mainParent.find('.finishNewLessonButton').data('syllabi-id', response.syllabi.id)
+
+                    mainParent.find('.newLessonButton').data('last-page-finished', response.syllabi.to_page)
+                    mainParent.find('.newLessonButton').data('last-chapter-finished', response.syllabi.to_chapter)
+
+                    mainParent.find('.newLessonRate').removeClass('d-none')
+
+                    emptyNewLessonModal()
+                }
+                else if(response.status == 400)
+                {
+                    Swal.fire(
+                        'Warning!',
+                        `Student Didn't Finish The Last Lesson!`,
+                        'warning',
+                    )
+
+                    emptyNewLessonModal()
+                }
+            },
+            error: function(res) {
+                let errors = '';
+
+                res.responseJSON.errors.forEach(errorArray => {
+                    errors += `
+                        <p class="text-danger py-1"> ${errorArray[0]} </p>
+                        <hr>
+                    `
+                });
+                Swal.fire(
+                    'Error!',
+                    `${errors}`,
+                    'error',
+                )
+            }
+        })
+    })
+
+    $('#newLessonFromReview').submit(function(e){
+        e.preventDefault()
+        let from_chapter = $('#newLessonFromReview #from_chapter').val()
+        let to_chapter = $('#newLessonFromReview #to_chapter').val()
+        let from_page = $('#newLessonFromReview #from_page').val()
+        let to_page = $('#newLessonFromReview #to_page').val()
+        
+        
+        let url = $(this).data('url')
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+               from_chapter,
+               to_chapter,
+               from_page,
+               to_page,
+               student_lesson_review_id,
+               student_id: studentId,
+               group_review_id,
+               lesson_review_id
             },
             success: function(response) {
                 $('#newLessonModal').modal('hide')

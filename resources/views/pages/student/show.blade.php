@@ -82,6 +82,7 @@
 
 
     @include('pages.student.partials.newLessonModal')
+    @include('pages.student.partials.newLessonModalReview')
 @endsection
 
 

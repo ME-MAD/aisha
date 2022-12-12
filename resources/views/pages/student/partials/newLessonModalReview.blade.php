@@ -1,15 +1,15 @@
 
-<div class="modal fade" id="newLessonModal" tabindex="-1" role="dialog" aria-labelledby="newLessonModal"
+<div class="modal fade" id="newLessonModalReview" tabindex="-1" role="dialog" aria-labelledby="newLessonModalReview"
 aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newLessonModal">إضافة درس جديد</h5>
+                <h5 class="modal-title" id="newLessonModalReviewTitle">إضافة درس جديد</h5>
             </div>
             <div class="modal-body">
-                <form data-url="{{route('admin.syllabus.createNewLesson')}}" method="post" id="newLessonForm">
+                <form data-url="{{route('admin.syllabusReview.createNewLesson')}}" method="post" id="newLessonFromReview">
                     
-                    {{-- <input type="hidden" name="student_lesson_id" id="student_lesson_id"> --}}
+                    {{-- <input type="hidden" name="student_lesson_review_id" id="student_lesson_review_id"> --}}
 
                     <div class="row mb-3">
                         <div class="col">

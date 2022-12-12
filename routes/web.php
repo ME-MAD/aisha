@@ -193,6 +193,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::group(['prefix' => 'syllabus-review', 'as' => 'syllabusReview.'], function () {
         Route::post('finishNewReviewLessonAjax/{syllabusReview}', [SyllabusReviewController::class, 'finishNewReviewLessonAjax'])->name('finishNewReviewLessonAjax');
+
+        Route::post('createNewLesson/', [SyllabusReviewController::class, 'createNewLesson'])->name('createNewLesson');
     });
 
 

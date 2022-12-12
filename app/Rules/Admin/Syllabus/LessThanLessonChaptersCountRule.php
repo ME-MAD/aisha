@@ -18,7 +18,7 @@ class LessThanLessonChaptersCountRule implements Rule
 
     public function passes($attribute, $value)
     {
-        if($value > $this->studentLesson->lesson->chapters_count)
+        if($value > ($this->studentLesson->lesson->chapters_count ?? 0))
         {
             $this->message = "The $attribute Should Be Less Than " . $this->studentLesson->lesson->chapters_count;
             return false;
