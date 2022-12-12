@@ -12,17 +12,9 @@ for (let element of createcheckbox) {
             .parent().parent()
             .parent().parent()
             .parent().parent()
-            .find("#month")
-            .val()
-
-        let monthShowGroup = $(element).parent()
-            .parent().parent()
-            .parent().parent()
-            .parent().parent()
             .parent()
             .find("#month")
             .val()
-
 
         // Create Payment
         if (element.checked == true) {
@@ -78,62 +70,6 @@ for (let element of createcheckbox) {
             })
         }
 
-
-
-
-        // Show Group Paymetn
-        if (element.checked == true) {
-            $.ajax({
-                url: href,
-                data: {
-                    student_id: student,
-                    group_id: group,
-                    amount: amount,
-                    month: monthShowGroup,
-                    paid: true
-                },
-                success: function (response) {
-                    Swal.fire(
-                        'Success!',
-                        `The month has been paid successfully !`,
-                        'success'
-                    )
-                },
-                error: function (response) {
-                    month == null ? $(`.paid_finished_checkbox`).prop('checked', false) : '';
-                    Swal.fire(
-                        'Warning!',
-                        `${response.responseJSON.message}mohamed sharaf`,
-                        'error'
-                    )
-                }
-            })
-        } else {
-            $.ajax({
-                url: href,
-                data: {
-                    student_id: student,
-                    group_id: group,
-                    amount: amount,
-                    month: monthShowGroup,
-                    paid: false
-                },
-                success: function (response) {
-                    Swal.fire(
-                        'Success!',
-                        `The month's payment has been cancelled !`,
-                        'success'
-                    )
-                },
-                error: function (response) {
-                    Swal.fire(
-                        'Warning!',
-                        `${response.responseJSON.message}`,
-                        'error'
-                    )
-                }
-            })
-        }
     })
 }
 
@@ -157,7 +93,6 @@ $(".month").change(function () {
                 if (payment.paid == 1) {
                     student_id = $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).data('student');
                     if (student_id == payment.student_id) {
-                        console.log(student_id);
                         $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).prop('checked', true);
                     }
                 }
