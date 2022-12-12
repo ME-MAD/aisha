@@ -2,15 +2,10 @@
 
 namespace Tests\Controller;
 
-use Mockery;
-use Carbon\Carbon;
 use Tests\TestCase;
 use Mockery\MockInterface;
-use Illuminate\Http\UploadedFile;
 use Tests\Traits\TestTeacherTrait;
 use App\Services\Teacher\TeacherService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Storage;
 
 class TeacherControllerTest extends TestCase
 {

@@ -10,6 +10,7 @@ use App\Services\Teacher\TeacherService;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
+use App\Services\Experience\ExperienceService;
 
 class TeacherController extends Controller
 {
@@ -19,13 +20,16 @@ class TeacherController extends Controller
 
     private $teacherDataTable;
     private $teacherService;
+    private $experienceService;
 
     public function __construct(
         TeacherDataTable $teacherDataTable,
         TeacherService $teacherService,
+        ExperienceService $experienceService
     ) {
         $this->teacherDataTable = $teacherDataTable;
         $this->teacherService = $teacherService;
+        $this->experienceService = $experienceService;
     }
 
     public function index()
@@ -35,7 +39,8 @@ class TeacherController extends Controller
 
     public function show(Teacher $teacher)
     {
-
+        $this->teacherService->setTeacherWithAllData($teacher);
+        
         return view('pages.teacher.show', [
             'teacher'      => $teacher,
             'experiences'  => $this->teacherService->teacherExperiences($teacher),
@@ -47,30 +52,10 @@ class TeacherController extends Controller
 
     public function getTeacherShowDataAjax(Teacher $teacher)
     {
+        $this->teacherService->setTeacherWithAllData($teacher);
+
         $experiences  = $this->teacherService->teacherExperiences($teacher);
-
-
-        $years = 0;
-        $months = 0;
-        $days = 0;
-
-        foreach ($experiences as $experience) {
-            $from = new DateTime($experience->from);
-            $to = new DateTime($experience->to);
-            $years += $from->diff($to)->y;
-            $months += $from->diff($to)->m;
-            $days += $from->diff($to)->d;
-        }
-
-        while ($days > 30) {
-            $months += 1;
-            $days -= 30;
-        }
-        while ($months > 11) {
-            $months -= 12;
-            $years += 1;
-        }
-
+        $yearsOfExperience = $this->experienceService->getCountOfExperienceYears($experiences);
 
         return response()->json([
             'statistics' => [
@@ -84,7 +69,7 @@ class TeacherController extends Controller
                 ],
                 [
                     'name'  => 'Total Experience',
-                    'value' => $years . " Years"
+                    'value' => $yearsOfExperience . " Years"
                 ],
             ],
             'teacher'     => $teacher,
