@@ -55,7 +55,7 @@ class TeacherService
         );
 
 
-        Teacher::create([
+        return Teacher::create([
             'name'          => $request->name,
             'phone'         => $request->phone,
             'birthday'      => $request->birthday,
@@ -80,7 +80,7 @@ class TeacherService
             );
         }
 
-        $teacher->update([
+        return $teacher->update([
             'name'          => $request->name,
             'phone'         => $request->phone,
             'birthday'      => $request->birthday,

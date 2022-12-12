@@ -10,6 +10,7 @@ use Illuminate\Http\UploadedFile;
 use Tests\Traits\TestTeacherTrait;
 use App\Services\Teacher\TeacherService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 
 class TeacherControllerTest extends TestCase
 {
@@ -20,19 +21,6 @@ class TeacherControllerTest extends TestCase
         $res = $this->call('get', route('admin.teacher.index'));
 
         $res->assertOk();
-    }
-
-    public function test_content_teacher_data_table()
-    {
-        $tableContent = ['id', 'name', 'avatar', 'birthday', 'phone', 'qualification'];
-
-        $response = $this->get(route('admin.teacher.index'));
-
-        $response->assertOk();
-
-        foreach ($tableContent as $content) {
-            $response->assertSee($content);
-        }
     }
 
     /**
@@ -48,7 +36,6 @@ class TeacherControllerTest extends TestCase
 
     public function test_store_pass_with_all_data()
     {
-
         $this->mock(TeacherService::class, function (MockInterface $mock) {
             $mock->shouldReceive('createTeacher')->once();
         });
