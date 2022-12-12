@@ -56,6 +56,7 @@ class PaymentController extends Controller
      */
     public function store(StorePaymentRequest $request)
     {
+        // dd($request);
         if ($request->paid == "true") {
             Payment::updateOrCreate([
                 'student_id' => $request->student_id,
