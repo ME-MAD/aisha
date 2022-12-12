@@ -87,7 +87,6 @@
                                     @foreach ($gorups as $group)
                                         <div class="invoice-{{ $group->id }}" style="display: none;">
                                             <div class="content-section  animated animatedFadeInUp fadeInUp">
-
                                                 <div class="row inv--head-section">
 
                                                     <div class="col-sm-6 col-12">
@@ -125,6 +124,7 @@
                                                                         <tr>
                                                                             <td>{{ $student->id }}</td>
                                                                             <td>{{ $student->name }}</td>
+
                                                                             <td id="checkbok">
                                                                                 <input type="checkbox"
                                                                                     class="paid_finished_checkbox big-checkbox"
@@ -132,11 +132,8 @@
                                                                                     data-href="{{ route('admin.payment.store') }}"
                                                                                     data-student="{{ $student->id }}"
                                                                                     data-group="{{ $group->id }}"
-                                                                                    data-amount="{{ $group->groupType->price }}">
-
-
-
-
+                                                                                    data-amount="{{ $group->groupType->price }}"
+                                                                                    {{ $student->checkPaid($group->id, $currentMonth) ? 'checked' : '' }}>
                                                                             </td>
                                                                         </tr>
                                                                     @endforeach
@@ -148,21 +145,33 @@
                                                         <select class="form-control basic month" name="month"
                                                             id="month" data-group="{{ $group->id }}"
                                                             data-href="{{ route('admin.payment.getMonthOfPayment') }}">
-                                                            <option value="{{ $currentMonth }}" selected="selected">
-                                                                {{ $currentMonth }}
+                                                            <option value="" selected="selected">
+                                                                choose the month
                                                             </option>
-                                                            <option value="January">January</option>
-                                                            <option value="February">February</option>
-                                                            <option value="March">March</option>
-                                                            <option value="April">April</option>
-                                                            <option value="May">May</option>
-                                                            <option value="June">June</option>
-                                                            <option value="July">July</option>
-                                                            <option value="August">August</option>
-                                                            <option value="September">September</option>
-                                                            <option value="October">October</option>
-                                                            <option value="November">November</option>
-                                                            <option value="December">December</option>
+                                                            <option value="January" selected="selected"
+                                                                {{ $currentMonth ? 'selected' : '' }}>January</option>
+                                                            <option value="February" selected="selected"
+                                                                {{ $currentMonth ? 'selected' : '' }}>February</option>
+                                                            <option value="March" selected="selected"
+                                                                {{ $currentMonth ? 'selected' : '' }}>March</option>
+                                                            <option value="April" selected="selected"
+                                                                {{ $currentMonth ? 'selected' : '' }}>April</option>
+                                                            <option value="May" selected="selected"
+                                                                {{ $currentMonth ? 'selected' : '' }}>May</option>
+                                                            <option value="June" selected="selected"
+                                                                {{ $currentMonth ? 'selected' : '' }}>June</option>
+                                                            <option value="July" selected="selected"
+                                                                {{ $currentMonth ? 'selected' : '' }}>July</option>
+                                                            <option value="August" selected="selected"
+                                                                {{ $currentMonth ? 'selected' : '' }}>August</option>
+                                                            <option value="September" selected="selected"
+                                                                {{ $currentMonth ? 'selected' : '' }}>September</option>
+                                                            <option value="October" selected="selected"
+                                                                {{ $currentMonth ? 'selected' : '' }}>October</option>
+                                                            <option value="November" selected="selected"
+                                                                {{ $currentMonth ? 'selected' : '' }}>November</option>
+                                                            <option value="December" selected="selected"
+                                                                {{ $currentMonth ? 'selected' : '' }}>December</option>
                                                         </select>
                                                     </div>
                                                 </div>

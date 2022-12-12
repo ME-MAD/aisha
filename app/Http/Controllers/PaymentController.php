@@ -39,8 +39,7 @@ class PaymentController extends Controller
             }
         ])->get();
         $gorups->map(function ($group) {
-            $group->allStudentsPaid = $group->students->count() == $group->payments->count();
-            // dd($group->allStudentsPaid);
+            $group->allStudentsPaid = $group->students->count() == $group->payments->where('paid',true)->count();
         });
 
         return view('pages.payment.create', [
@@ -57,6 +56,7 @@ class PaymentController extends Controller
      */
     public function store(StorePaymentRequest $request)
     {
+        // dd($request);
         if ($request->paid == "true") {
             Payment::updateOrCreate([
                 'student_id' => $request->student_id,

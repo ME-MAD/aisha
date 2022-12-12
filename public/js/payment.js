@@ -8,14 +8,15 @@ for (let element of createcheckbox) {
         let group = $(this).data('group');
         let amount = $(this).data('amount');
 
-        let month = $(element).parent()
+        let monthCreatePayment = $(element).parent()
             .parent().parent()
             .parent().parent()
             .parent().parent()
-            .find(".month")
+            .parent()
+            .find("#month")
             .val()
 
-
+        // Create Payment
         if (element.checked == true) {
             $.ajax({
                 url: href,
@@ -23,7 +24,7 @@ for (let element of createcheckbox) {
                     student_id: student,
                     group_id: group,
                     amount: amount,
-                    month: month,
+                    month: monthCreatePayment,
                     paid: true
                 },
                 success: function (response) {
@@ -34,10 +35,10 @@ for (let element of createcheckbox) {
                     )
                 },
                 error: function (response) {
-                    $(`.paid_finished_checkbox`).prop('checked', false);
+                    month == null ? $(`.paid_finished_checkbox`).prop('checked', false) : '';
                     Swal.fire(
                         'Warning!',
-                        `${response.responseJSON.message}`,
+                        `${response.responseJSON.message}mohamed sharaf`,
                         'error'
                     )
                 }
@@ -49,7 +50,7 @@ for (let element of createcheckbox) {
                     student_id: student,
                     group_id: group,
                     amount: amount,
-                    month: month,
+                    month: monthCreatePayment,
                     paid: false
                 },
                 success: function (response) {
@@ -68,6 +69,7 @@ for (let element of createcheckbox) {
                 }
             })
         }
+
     })
 }
 
@@ -77,13 +79,13 @@ for (let element of createcheckbox) {
 $(".month").change(function () {
     $(`.paid_finished_checkbox`).prop('checked', false);
 
-    let month = $(this).val();
+    let monthCreatePayment = $(this).val();
     let group = $(this).data('group');
     let href = $(this).data('href');
     $.ajax({
         url: href,
         data: {
-            month: month,
+            month: monthCreatePayment,
             group_id: group,
         },
         success: function (response) {
@@ -91,7 +93,6 @@ $(".month").change(function () {
                 if (payment.paid == 1) {
                     student_id = $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).data('student');
                     if (student_id == payment.student_id) {
-                        console.log(student_id);
                         $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).prop('checked', true);
                     }
                 }
