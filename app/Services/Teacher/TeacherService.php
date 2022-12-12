@@ -9,15 +9,17 @@ class TeacherService
 {
     use ImageTrait;
 
+    private $teacherWithAllData;
+
     public function getAllTeachers(array $columns = ['id', 'name'])
     {
         return Teacher::select($columns)->get();
     }
 
 
-    public function relationsOfTeacher(Teacher $teacher)
+    public function setTeacherWithAllData(Teacher $teacher)
     {
-        return  $teacher->load([
+        $this->teacherWithAllData =  $teacher->load([
             'groupStudents',
             'groups.groupDays',
             'groups.groupType',
@@ -26,25 +28,24 @@ class TeacherService
         ]);
     }
 
-
-    public function teacherExperiences(Teacher $teacher)
+    public function teacherExperiences()
     {
-        return $this->relationsOfTeacher($teacher)->experiences;
+        return $this->teacherWithAllData->experiences;
     }
 
-    public function countGroups(Teacher $teacher)
+    public function countGroups()
     {
-        return $this->relationsOfTeacher($teacher)->groups->count();
+        return $this->teacherWithAllData->groups->count();
     }
 
-    public function countStudent(Teacher $teacher)
+    public function countStudent()
     {
-        return $this->relationsOfTeacher($teacher)->groupStudents->count();
+        return $this->teacherWithAllData->groupStudents->count();
     }
 
-    public function groups(Teacher $teacher)
+    public function groups()
     {
-        return $this->relationsOfTeacher($teacher)->groups;
+        return $this->teacherWithAllData->groups;
     }
 
     public function createTeacher(object $request)
@@ -97,4 +98,6 @@ class TeacherService
 
         return $teacher->delete();
     }
+
+    
 }
