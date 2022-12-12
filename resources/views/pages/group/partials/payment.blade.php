@@ -44,7 +44,7 @@
                                 <tr role="row">
                                     <th class="sorting_asc" tabindex="0" aria-controls="multi-column-ordering"
                                         rowspan="1" colspan="1" aria-sort="ascending"
-                                        aria-label="Name: activate to sort column descending" style="width: 82px;">ID
+                                        aria-label="Name: activate to sort column descending" style="width: 82px;">S.No
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="multi-column-ordering"
                                         rowspan="1" colspan="1"
@@ -53,43 +53,37 @@
                                     <th class="sorting" tabindex="0" aria-controls="multi-column-ordering"
                                         rowspan="1" colspan="1"
                                         aria-label="paid: activate to sort column ascending" style="width: 70px;">
-                                        Amount</th>
-                                    <th class="sorting" tabindex="0" aria-controls="multi-column-ordering"
-                                        rowspan="1" colspan="1"
-                                        aria-label="paid: activate to sort column ascending" style="width: 70px;">
                                         Paid</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($group->payments as $payment)
+                                @foreach ($group->students as $student)
                                     <tr role="row">
-                                        <td>{{ $payment->id }}</td>
+                                        <td>{{ $student->id }}</td>
                                         <td class="sorting_1 sorting_2">
                                             <div class="d-flex">
                                                 <p class="align-self-center mb-0 admin-name">
-                                                    {{ $payment->student->name }} </p>
+                                                    {{ $student->name }} </p>
                                             </div>
                                         </td>
-                                        <td>{{ $payment->amount }}</td>
                                         <td id="checkbok">
                                             <input type="checkbox" class="paid_finished_checkbox big-checkbox"
-                                                id="paid_finished_checkbox_{{ $payment->student->id }}_{{ $payment->group->id }}"
+                                                id="paid_finished_checkbox_{{ $student->id }}_{{ $group->id }}"
                                                 data-href="{{ route('admin.payment.store') }}"
-                                                data-student="{{ $payment->student->id }}"
-                                                data-group="{{ $payment->group->id }}"
-                                                data-amount="{{ $payment->group->groupType->price }}"
-                                                {{ $payment->paid ? 'checked' : '' }}>
+                                                data-student="{{ $student->id }}" data-group="{{ $group->id }}"
+                                                data-amount="{{ $group->groupType->price }}"
+                                                {{ $student->checkPaid($group->id, $currentMonth) ? 'checked' : '' }}>
                                         </td>
 
                                     </tr>
                                 @endforeach
+
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th rowspan="1" colspan="1">ID</th>
+                                    <th rowspan="1" colspan="1">S.No</th>
                                     <th rowspan="1" colspan="1">Name</th>
-                                    <th rowspan="1" colspan="1">Amount</th>
                                     <th rowspan="1" colspan="1">Paid</th>
 
 

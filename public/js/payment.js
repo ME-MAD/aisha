@@ -8,14 +8,23 @@ for (let element of createcheckbox) {
         let group = $(this).data('group');
         let amount = $(this).data('amount');
 
-        let month = $(element).parent()
+        let monthCreatePayment = $(element).parent()
             .parent().parent()
             .parent().parent()
             .parent().parent()
             .find("#month")
+            .val()
 
-        console.log(month);
+        let monthShowGroup = $(element).parent()
+            .parent().parent()
+            .parent().parent()
+            .parent().parent()
+            .parent()
+            .find("#month")
+            .val()
 
+
+        // Create Payment
         if (element.checked == true) {
             $.ajax({
                 url: href,
@@ -23,7 +32,7 @@ for (let element of createcheckbox) {
                     student_id: student,
                     group_id: group,
                     amount: amount,
-                    month: month,
+                    month: monthCreatePayment,
                     paid: true
                 },
                 success: function (response) {
@@ -37,7 +46,7 @@ for (let element of createcheckbox) {
                     month == null ? $(`.paid_finished_checkbox`).prop('checked', false) : '';
                     Swal.fire(
                         'Warning!',
-                        `${response.responseJSON.message}`,
+                        `${response.responseJSON.message}mohamed sharaf`,
                         'error'
                     )
                 }
@@ -49,7 +58,64 @@ for (let element of createcheckbox) {
                     student_id: student,
                     group_id: group,
                     amount: amount,
-                    month: month,
+                    month: monthCreatePayment,
+                    paid: false
+                },
+                success: function (response) {
+                    Swal.fire(
+                        'Success!',
+                        `The month's payment has been cancelled !`,
+                        'success'
+                    )
+                },
+                error: function (response) {
+                    Swal.fire(
+                        'Warning!',
+                        `${response.responseJSON.message}`,
+                        'error'
+                    )
+                }
+            })
+        }
+
+
+
+
+        // Show Group Paymetn
+        if (element.checked == true) {
+            $.ajax({
+                url: href,
+                data: {
+                    student_id: student,
+                    group_id: group,
+                    amount: amount,
+                    month: monthShowGroup,
+                    paid: true
+                },
+                success: function (response) {
+                    Swal.fire(
+                        'Success!',
+                        `The month has been paid successfully !`,
+                        'success'
+                    )
+                },
+                error: function (response) {
+                    month == null ? $(`.paid_finished_checkbox`).prop('checked', false) : '';
+                    Swal.fire(
+                        'Warning!',
+                        `${response.responseJSON.message}mohamed sharaf`,
+                        'error'
+                    )
+                }
+            })
+        } else {
+            $.ajax({
+                url: href,
+                data: {
+                    student_id: student,
+                    group_id: group,
+                    amount: amount,
+                    month: monthShowGroup,
                     paid: false
                 },
                 success: function (response) {
@@ -77,13 +143,13 @@ for (let element of createcheckbox) {
 $(".month").change(function () {
     $(`.paid_finished_checkbox`).prop('checked', false);
 
-    let month = $(this).val();
+    let monthCreatePayment = $(this).val();
     let group = $(this).data('group');
     let href = $(this).data('href');
     $.ajax({
         url: href,
         data: {
-            month: month,
+            month: monthCreatePayment,
             group_id: group,
         },
         success: function (response) {
