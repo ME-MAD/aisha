@@ -24,10 +24,10 @@ class StoreTeacherRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'birthday' => 'required',
-            'phone' => 'required',
+            'name'          => 'required',
+            'avatar'        => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'birthday'      => 'required',
+            'phone'         => 'required',
             'qualification' => 'required',
         ];
     }
