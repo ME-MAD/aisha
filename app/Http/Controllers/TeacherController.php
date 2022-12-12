@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+use App\Models\Teacher;
+use App\Http\Traits\ImageTrait;
 use App\DataTables\TeacherDataTable;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
-use App\Http\Traits\ImageTrait;
-use App\Models\Teacher;
-use DateTime;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class TeacherController extends Controller
 {
@@ -17,9 +17,19 @@ class TeacherController extends Controller
     // use GroupTrait;
     use ImageTrait;
 
-    public function index(TeacherDataTable $teacherDataTable)
+
+    private $teacherDataTable;
+
+    public function __construct(
+        TeacherDataTable $teacherDataTable,
+    ) {
+        $this->teacherDataTable = $teacherDataTable;
+    }
+
+
+    public function index()
     {
-        return $teacherDataTable->render('pages.teacher.index');
+        return $this->teacherDataTable->render('pages.teacher.index');
     }
 
     public function show(Teacher $teacher)
@@ -38,10 +48,10 @@ class TeacherController extends Controller
         $groups = $teacher->groups;
 
         return view('pages.teacher.show', [
-            'teacher' => $teacher,
-            'experiences' => $experiences,
-            'groups' => $groups,
-            'countGroups' => $countGroups,
+            'teacher'      => $teacher,
+            'experiences'  => $experiences,
+            'groups'       => $groups,
+            'countGroups'  => $countGroups,
             'countStudent' => $countStudent
         ]);
     }
@@ -85,21 +95,21 @@ class TeacherController extends Controller
         return response()->json([
             'statistics' => [
                 [
-                    'name' => 'Groups Count',
+                    'name'  => 'Groups Count',
                     'value' => $countGroups
                 ],
                 [
-                    'name' => 'Student Count',
+                    'name'  => 'Student Count',
                     'value' => $countStudent
                 ],
                 [
-                    'name' => 'Total Experience',
+                    'name'  => 'Total Experience',
                     'value' => $years . " Years"
                 ],
             ],
-            'teacher' => $teacher,
+            'teacher'     => $teacher,
             'experiences' => $experiences,
-            'groups' => $groups,
+            'groups'      => $groups,
         ]);
     }
 
@@ -110,12 +120,13 @@ class TeacherController extends Controller
             path: Teacher::AVATARS_PATH
         );
 
+
         Teacher::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'birthday' => $request->birthday,
+            'name'          => $request->name,
+            'phone'         => $request->phone,
+            'birthday'      => $request->birthday,
             'qualification' => $request->qualification,
-            'avatar' =>  $fileName,
+            'avatar'        =>  $fileName,
         ]);
 
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -139,11 +150,11 @@ class TeacherController extends Controller
         }
 
         $teacher->update([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'birthday' => $request->birthday,
+            'name'          => $request->name,
+            'phone'         => $request->phone,
+            'birthday'      => $request->birthday,
             'qualification' => $request->qualification,
-            'avatar' => $fileName,
+            'avatar'        => $fileName,
         ]);
 
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -157,6 +168,7 @@ class TeacherController extends Controller
         );
 
         $teacher->delete();
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
