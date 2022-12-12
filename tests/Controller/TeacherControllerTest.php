@@ -49,6 +49,10 @@ class TeacherControllerTest extends TestCase
     public function test_store_pass_with_all_data()
     {
 
+        $this->mock(TeacherService::class, function (MockInterface $mock) {
+            $mock->shouldReceive('createTeacher')->once();
+        });
+
         $res = $this->call('POST', route('admin.teacher.store'), [
             'name'          => fake()->name,
             'birthday'      => fake()->date(),
@@ -76,6 +80,10 @@ class TeacherControllerTest extends TestCase
     {
         $teacher = $this->generateRandomTeacher();
 
+        $this->mock(TeacherService::class, function (MockInterface $mock) {
+            $mock->shouldReceive('updateTeacher')->once();
+        });
+
         $res = $this->call('PUT', route('admin.teacher.update', $teacher->id), [
             'name'          => fake()->name,
             'birthday'      => fake()->date(),
@@ -89,6 +97,10 @@ class TeacherControllerTest extends TestCase
     public function test_teacher_get_deleted_without_errors()
     {
         $teacher = $this->generateRandomTeacher();
+
+        $this->mock(TeacherService::class, function(MockInterface $mock){
+            $mock->shouldReceive('deleteTeacher')->once();
+        });
 
         $res = $this->call('get', route('admin.teacher.delete', $teacher->id));
 

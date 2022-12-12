@@ -6,6 +6,7 @@ use DateTime;
 use App\Models\Teacher;
 use App\Http\Traits\ImageTrait;
 use App\DataTables\TeacherDataTable;
+use App\Services\Teacher\TeacherService;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
@@ -15,17 +16,17 @@ class TeacherController extends Controller
 
 
     // use GroupTrait;
-    use ImageTrait;
-
 
     private $teacherDataTable;
+    private $teacherService;
 
     public function __construct(
         TeacherDataTable $teacherDataTable,
+        TeacherService $teacherService,
     ) {
         $this->teacherDataTable = $teacherDataTable;
+        $this->teacherService = $teacherService;
     }
-
 
     public function index()
     {
@@ -34,46 +35,25 @@ class TeacherController extends Controller
 
     public function show(Teacher $teacher)
     {
-        $teacher->load([
-            'groupStudents',
-            'groups.groupDays',
-            'groups.groupType',
-            'groups.students',
-            'experiences'
-        ]);
-
-        $experiences = $teacher->experiences;
-        $countGroups = $teacher->groups->count();
-        $countStudent = $teacher->groupStudents->count();
-        $groups = $teacher->groups;
 
         return view('pages.teacher.show', [
             'teacher'      => $teacher,
-            'experiences'  => $experiences,
-            'groups'       => $groups,
-            'countGroups'  => $countGroups,
-            'countStudent' => $countStudent
+            'experiences'  => $this->teacherService->teacherExperiences($teacher),
+            'groups'       => $this->teacherService->groups($teacher),
+            'countGroups'  => $this->teacherService->countGroups($teacher),
+            'countStudent' => $this->teacherService->countStudent($teacher)
         ]);
     }
 
     public function getTeacherShowDataAjax(Teacher $teacher)
     {
-        $teacher->load([
-            'groupStudents',
-            'groups.groupDays',
-            'groups.groupType',
-            'groups.students',
-            'experiences'
-        ]);
+        $experiences  = $this->teacherService->teacherExperiences($teacher);
 
-        $experiences = $teacher->experiences;
-        $countGroups = $teacher->groups->count();
-        $countStudent = $teacher->groupStudents->count();
-        $groups = $teacher->groups;
 
         $years = 0;
         $months = 0;
         $days = 0;
+
         foreach ($experiences as $experience) {
             $from = new DateTime($experience->from);
             $to = new DateTime($experience->to);
@@ -96,11 +76,11 @@ class TeacherController extends Controller
             'statistics' => [
                 [
                     'name'  => 'Groups Count',
-                    'value' => $countGroups
+                    'value' => $this->teacherService->countGroups($teacher)
                 ],
                 [
                     'name'  => 'Student Count',
-                    'value' => $countStudent
+                    'value' =>  $this->teacherService->countStudent($teacher)
                 ],
                 [
                     'name'  => 'Total Experience',
@@ -108,26 +88,14 @@ class TeacherController extends Controller
                 ],
             ],
             'teacher'     => $teacher,
-            'experiences' => $experiences,
-            'groups'      => $groups,
+            'experiences' => $this->teacherService->teacherExperiences($teacher),
+            'groups'      => $this->teacherService->groups($teacher),
         ]);
     }
 
     public function store(StoreTeacherRequest $request)
     {
-        $fileName = $this->uploadImage(
-            imageObject: $request->file('avatar'),
-            path: Teacher::AVATARS_PATH
-        );
-
-
-        Teacher::create([
-            'name'          => $request->name,
-            'phone'         => $request->phone,
-            'birthday'      => $request->birthday,
-            'qualification' => $request->qualification,
-            'avatar'        =>  $fileName,
-        ]);
+        $this->teacherService->createTeacher($request);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
@@ -135,27 +103,7 @@ class TeacherController extends Controller
 
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
-        $fileName = $teacher->getRawOriginal('avatar');
-
-        if ($request->file('avatar')) {
-
-            $this->deleteImage(
-                path: $teacher->getAvatarPath()
-            );
-
-            $fileName = $this->uploadImage(
-                imageObject: $request->file('avatar'),
-                path: Teacher::AVATARS_PATH
-            );
-        }
-
-        $teacher->update([
-            'name'          => $request->name,
-            'phone'         => $request->phone,
-            'birthday'      => $request->birthday,
-            'qualification' => $request->qualification,
-            'avatar'        => $fileName,
-        ]);
+        $this->teacherService->updateTeacher($teacher, $request);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
@@ -163,11 +111,7 @@ class TeacherController extends Controller
 
     public function delete(Teacher $teacher)
     {
-        $this->deleteImage(
-            path: $teacher->getAvatarPath()
-        );
-
-        $teacher->delete();
+        $this->teacherService->deleteTeacher($teacher);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
