@@ -98,7 +98,7 @@ $.ajax({
                         <div class="w-browser-details">
                             <div class="w-browser-info">
                                 <h6> ${groupType.name} <span
-                                        class="badge badge-primary ml-2"> ${groupType.groups_count}</span>
+                                        class="badge badge-primary ml-2"> ${groupType.price}</span>
                                 </h6>
                                 <p class="browser-count">${groupType.percentage}%</p>
                             </div>
@@ -118,8 +118,11 @@ $.ajax({
         $('#statustucsContanerTwo').append(`
             <div class="widget-four">
             <div class="widget-heading">
-                <h5 class="text-secondary">Groups <span
-                        class="badge badge-secondary ml-2">${response.allGroupsCount}</span>
+                <h5 class="text-secondary">
+                    Groups
+                    <span class="badge badge-secondary ml-2">
+                        ${response.allGroupsCount}
+                    </span>
                 </h5>
             </div>
             <div class="widget-content">
