@@ -67,11 +67,11 @@ class StudentLessonController extends Controller
     {
         $studentLesson->load(['syllabus', 'lesson.subject', 'student',  'studentLessonReview.syllabusReviews']);
 
-        $studentLessonReviews = $studentLesson->studentLessonReview->get();
+        $studentLessonReview = $studentLesson->studentLessonReview;
 
         return view('pages.studentLesson.show', [
             'studentLesson' => $studentLesson,
-            'studentLessonReviews' => $studentLessonReviews
+            'studentLessonReview' => $studentLessonReview
         ]);
     }
 
