@@ -92,13 +92,17 @@
                         <a class="nav-link active" id="justify-pills-students-tab" data-toggle="pill"
                             href="#justify-pills-students" role="tab" aria-controls="justify-pills-students"
                             aria-selected="true">
-                            Students</a>
+                            Students
+                            <span class="badge badge-secondary float-right">{{ $countStudents }}</span>
+                        </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" id="justify-pills-payment-tab" data-toggle="pill"
                             href="#justify-pills-payment" role="tab" aria-controls="justify-pills-payment"
-                            aria-selected="false">Payment</a>
+                            aria-selected="false">Payment
+                            <span id="paymentsCount" class="badge badge-secondary float-right">0</span>
+                        </a>
                     </li>
                 </ul>
 

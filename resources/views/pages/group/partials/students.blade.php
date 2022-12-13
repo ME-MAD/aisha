@@ -46,8 +46,10 @@
                                                             class="img-fluid rounded-circle" class="avatar-image">
                                                     @endif
                                                 </div>
-                                                <p class="align-self-center mb-0 admin-name">
-                                                    {{ $groupStudent->student->name }} </p>
+                                                <a href="{{ route('admin.student.show', $groupStudent->student->id) }}">
+                                                    <p class="align-self-center mb-0 admin-name text-primary">
+                                                        {{ $groupStudent->student->name }}</p>
+                                                </a>
                                             </div>
                                         </td>
                                         <td>{{ $groupStudent->student->birthday }}</td>

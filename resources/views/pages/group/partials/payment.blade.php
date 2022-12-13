@@ -7,7 +7,8 @@
                         <div class="col-sm-12 mb-4">
                             <select class="form-control basic month" name="month" id="month"
                                 data-group="{{ $group->id }}"
-                                data-href="{{ route('admin.payment.getMonthOfPayment') }}">
+                                data-href="{{ route('admin.payment.getMonthOfPayment') }}"
+                                data-href-payment-count="{{ route('admin.payment.getMonthCount') }}">
                                 <option value="" selected="selected">
                                     choose the month
                                 </option>
@@ -63,8 +64,19 @@
                                         <td>{{ $student->id }}</td>
                                         <td class="sorting_1 sorting_2">
                                             <div class="d-flex">
-                                                <p class="align-self-center mb-0 admin-name">
-                                                    {{ $student->name }} </p>
+                                                <div class="usr-img-frame mr-2 rounded-circle">
+                                                    @if ($student->avatar)
+                                                        <img alt="avatar" class="img-fluid rounded-circle"
+                                                            src="{{ $student->avatar }}">
+                                                    @else
+                                                        <img src="{{ asset('images/Spare.jpg') }}"
+                                                            class="img-fluid rounded-circle" class="avatar-image">
+                                                    @endif
+                                                </div>
+                                                <a href="{{ route('admin.student.show', $student->id) }}">
+                                                    <p class="align-self-center mb-0 admin-name text-primary">
+                                                        {{ $student->name }} </p>
+                                                </a>
                                             </div>
                                         </td>
                                         <td id="checkbok">

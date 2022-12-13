@@ -74,8 +74,6 @@ for (let element of createcheckbox) {
 }
 
 
-
-
 $(".month").change(function () {
     $(`.paid_finished_checkbox`).prop('checked', false);
 
@@ -101,4 +99,36 @@ $(".month").change(function () {
         error: function () { }
     })
 });
+
+
+function getPymentsCount(month, group, href) {
+    $.ajax({
+        url: href,
+        data: {
+            month: month,
+            group_id: group,
+        },
+        success: function (response) {
+            $('#paymentsCount').html(response.paymentsCount)
+            getPymentsCount(month, group, href)
+        },
+        error: function () { }
+    })
+}
+
+let month = $(".month").val();
+let group = $(".month").data('group');
+let href = $(".month").data('href-payment-count');
+
+getPymentsCount(month, group, href)
+
+$(".month").change(function () {
+
+    let month = $(this).val();
+    let group = $(this).data('group');
+    let href = $(this).data('href-payment-count');
+
+    getPymentsCount(month, group, href)
+});
+
 
