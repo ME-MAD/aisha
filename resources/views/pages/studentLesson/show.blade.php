@@ -190,8 +190,16 @@
                                                         style="width: 95px;">To Page</th>
                                                     <th class="sorting" tabindex="0" aria-controls="html5-extension"
                                                         rowspan="1" colspan="1"
+                                                        aria-label="Start date: activate to sort column ascending"
+                                                        style="width: 95px;">Rate</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="html5-extension"
+                                                        rowspan="1" colspan="1"
                                                         aria-label="Salary: activate to sort column ascending"
                                                         style="width: 61px;">Finished</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="html5-extension"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Salary: activate to sort column ascending"
+                                                        style="width: 61px;">Date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -201,12 +209,14 @@
                                                         <td>{{ $syllab->to_chapter }}</td>
                                                         <td>{{ $syllab->from_page }}</td>
                                                         <td>{{ $syllab->to_page }}</td>
+                                                        <td>{{ $syllab->rate }}</td>
                                                         @if ($syllab->finished == 1)
                                                             <td><span class="badge badge-success"> Completed
                                                                 </span></td>
                                                         @else
                                                             <td><span class="badge badge-danger">Not Completed </span></td>
                                                         @endif
+                                                        <td>{{ $syllab->created_at }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
