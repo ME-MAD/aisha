@@ -18,7 +18,7 @@ class ExperienceServiceTest extends TestCase
 
     public function test_create_experience()
     {
-        $experienceObject = new ExperienceService();
+        $experienceObject = $this->app->make(ExperienceService::class);
         $teacher = $this->generateRandomTeacher();
         $data = (object)[
             'title' => fake()->name,
@@ -34,7 +34,7 @@ class ExperienceServiceTest extends TestCase
 
     public function test_update_experience()
     {
-        $experienceObject = new ExperienceService();
+        $experienceObject = $this->app->make(ExperienceService::class);
         $experience = $this->generateRandomExperience();
         $data = (object)[
             'title' => fake()->name,
@@ -51,7 +51,7 @@ class ExperienceServiceTest extends TestCase
 
     public function test_delete_experience()
     {
-        $experienceObject = new ExperienceService();
+        $experienceObject = $this->app->make(ExperienceService::class);
         $experience = $this->generateRandomExperience();
 
         $experienceObject->deleteExperience($experience);
