@@ -13,6 +13,8 @@ class Group extends Model
 
     protected $appends = ['fto', 'ffrom'];
 
+    const GROUP_TYPES = ['kid', 'adult'];
+
     protected function from(): Attribute
     {
         return Attribute::make(

@@ -10,6 +10,8 @@ class GroupType extends Model
     use HasFactory;
     protected $fillable = ['name','price','days_num'];
 
+    
+
     public function groups()
     {
         return $this->hasMany(Group::class, 'group_type_id');
