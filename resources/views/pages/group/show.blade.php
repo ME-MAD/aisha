@@ -180,7 +180,10 @@
             },
             "stripeClasses": [],
             "lengthMenu": [7, 10, 20, 50],
-            "pageLength": 7
+            "pageLength": 7,
+            "fnDrawCallback": function(){
+                whenMonthChangeHandlePaymentCheckBox()
+            }
         });
     </script>
 

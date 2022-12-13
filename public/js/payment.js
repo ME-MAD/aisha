@@ -1,6 +1,8 @@
 
 let createcheckbox = document.getElementsByClassName('paid_finished_checkbox');
 
+whenMonthChangeHandlePaymentCheckBox()
+
 for (let element of createcheckbox) {
     element.addEventListener('change', function (event) {
         let href = $(this).data('href');
@@ -28,6 +30,12 @@ for (let element of createcheckbox) {
                     paid: true
                 },
                 success: function (response) {
+                    let paymentsCount = $('#paymentsCount').html()
+
+                    paymentsCount = parseInt(paymentsCount)
+
+                    $('#paymentsCount').html(paymentsCount + 1)
+
                     Swal.fire(
                         'Success!',
                         `The month has been paid successfully !`,
@@ -54,6 +62,12 @@ for (let element of createcheckbox) {
                     paid: false
                 },
                 success: function (response) {
+                    let paymentsCount = $('#paymentsCount').html()
+
+                    paymentsCount = parseInt(paymentsCount)
+                    
+                    $('#paymentsCount').html(paymentsCount - 1)
+                    
                     Swal.fire(
                         'Success!',
                         `The month's payment has been cancelled !`,
@@ -75,11 +89,17 @@ for (let element of createcheckbox) {
 
 
 $(".month").change(function () {
+    whenMonthChangeHandlePaymentCheckBox()
+});
+
+
+function whenMonthChangeHandlePaymentCheckBox()
+{
     $(`.paid_finished_checkbox`).prop('checked', false);
 
-    let monthCreatePayment = $(this).val();
-    let group = $(this).data('group');
-    let href = $(this).data('href');
+    let monthCreatePayment = $('.month').val();
+    let group = $('.month').data('group');
+    let href = $('.month').data('href');
     $.ajax({
         url: href,
         data: {
@@ -89,38 +109,28 @@ $(".month").change(function () {
         success: function (response) {
             response.payments.forEach(payment => {
                 if (payment.paid == 1) {
-                    student_id = $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).data('student');
-                    if (student_id == payment.student_id) {
-                        $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).prop('checked', true);
-                    }
+                    student_id = $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).prop('checked', true);
+                    // if (student_id == payment.student_id) {
+                        // $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).prop('checked', true);
+                    // }
+                }
+                else
+                {
+                    student_id = $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).prop('checked', false);
                 }
             });
         },
         error: function () { }
     })
-});
-
-
-function getPymentsCount(month, group, href) {
-    $.ajax({
-        url: href,
-        data: {
-            month: month,
-            group_id: group,
-        },
-        success: function (response) {
-            $('#paymentsCount').html(response.paymentsCount)
-            getPymentsCount(month, group, href)
-        },
-        error: function () { }
-    })
 }
+
 
 let month = $(".month").val();
 let group = $(".month").data('group');
 let href = $(".month").data('href-payment-count');
 
 getPymentsCount(month, group, href)
+
 
 $(".month").change(function () {
 
@@ -132,3 +142,18 @@ $(".month").change(function () {
 });
 
 
+
+
+function getPymentsCount(month, group, href) {
+    $.ajax({
+        url: href,
+        data: {
+            month: month,
+            group_id: group,
+        },
+        success: function (response) {
+            $('#paymentsCount').html(response.paymentsCount)
+        },
+        error: function () { }
+    })
+}
