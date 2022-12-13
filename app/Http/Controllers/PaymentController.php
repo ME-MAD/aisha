@@ -39,7 +39,7 @@ class PaymentController extends Controller
             }
         ])->get();
         $gorups->map(function ($group) {
-            $group->allStudentsPaid = $group->students->count() == $group->payments->where('paid',true)->count();
+            $group->allStudentsPaid = $group->students->count() == $group->payments->where('paid', true)->count();
         });
 
         return view('pages.payment.create', [
@@ -56,7 +56,6 @@ class PaymentController extends Controller
      */
     public function store(StorePaymentRequest $request)
     {
-        // dd($request);
         if ($request->paid == "true") {
             Payment::updateOrCreate([
                 'student_id' => $request->student_id,
@@ -90,6 +89,19 @@ class PaymentController extends Controller
 
         return response()->json([
             'payments' => $payments
+        ]);
+    }
+
+
+    public function getMonthCount(Request $request)
+    {
+        $paymentsCount = Payment::where('group_id', $request->group_id)
+            ->where('month',  $request->month)
+            ->where('paid', true)
+            ->count();
+
+        return response()->json([
+            'paymentsCount' => $paymentsCount
         ]);
     }
 

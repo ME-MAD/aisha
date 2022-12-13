@@ -79,7 +79,10 @@ class GroupController extends Controller
         $groupTypeNumDays = $group->groupType->days_num;
         $students = Student::get();
         $currentMonth = date('F');
-
+        // $paymetsCount = $group->payments->where('group_id', $group->id);
+        // dd($paymetsCount);
+        // dump($countStudents);
+        // dd($students);
         return view('pages.group.show', [
             'group' => $group,
             'countStudents' => $countStudents,
