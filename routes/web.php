@@ -12,8 +12,10 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentLessonController;
+use App\Http\Controllers\StudentLessonReviewController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SyllabusController;
+use App\Http\Controllers\SyllabusReviewController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use App\Models\Experience;
@@ -193,11 +195,22 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     });
 
 
+    Route::group(['prefix' => 'syllabus-review', 'as' => 'syllabusReview.'], function () {
+        Route::post('finishNewLessonReviewAjax/{syllabusReview}', [SyllabusReviewController::class, 'finishNewLessonReviewAjax'])->name('finishNewLessonReviewAjax');
+
+        Route::post('createNewLessonAjax/', [SyllabusReviewController::class, 'createNewLessonAjax'])->name('createNewLessonAjax');
+    });
+
+
 
     Route::group(['prefix' => 'student_lesson', 'as' => 'student_lesson.'], function () {
         Route::get('ajaxStudentLessonFinished', [StudentLessonController::class, 'ajaxStudentLessonFinished'])->name('ajaxStudentLessonFinished');
         Route::get('show/{studentLesson}', [StudentLessonController::class, 'show'])->name('show');
 
         Route::post('store', [StudentLessonController::class, 'store'])->name('store');
+    });
+    
+    Route::group(['prefix' => 'student_lesson_review', 'as' => 'student_lesson_review.'], function () {
+        Route::get('ajaxStudentLessonFinishedReview', [StudentLessonReviewController::class, 'ajaxStudentLessonFinishedReview'])->name('ajaxStudentLessonFinishedReview');
     });
 });

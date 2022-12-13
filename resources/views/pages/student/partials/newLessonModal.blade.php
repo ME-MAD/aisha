@@ -9,7 +9,7 @@ aria-hidden="true">
             <div class="modal-body">
                 <form data-url="{{route('admin.syllabus.createNewLesson')}}" method="post" id="newLessonForm">
                     
-                    <input type="hidden" name="student_lesson_id" id="student_lesson_id">
+                    {{-- <input type="hidden" name="student_lesson_id" id="student_lesson_id"> --}}
 
                     <div class="row mb-3">
                         <div class="col">
