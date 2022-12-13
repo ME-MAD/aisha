@@ -5,13 +5,17 @@ Teacher:
     birthday
     phone
     qualification
-    
+
+
+
 [CRUD]
 Experience:
     id
     title
     date: date
     teacher_id
+
+
 
 [CRUD]
 Student:
@@ -21,6 +25,8 @@ Student:
     phone : string
     qualification : text
 
+
+
 [CRUD]
 Group:
     id
@@ -29,11 +35,14 @@ Group:
     teacher_id
     age_type ('kid','adult') : enum
 
-//ToDo CRUD in group show
+
+[ToDo CRUD in group show]
 GroupDay:
-    id
-    group_id
-    day ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') : enum
+        id
+        group_id
+        day ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') : enum
+
+
 
 [CRUD]
 GroupType:
@@ -42,6 +51,8 @@ GroupType:
     price : double
     days_num : int
 
+
+[CRUD]
 Subject:
     id
     name: string
@@ -50,7 +61,7 @@ Subject:
 ***
     prevent from uploading too large files
 ***
-
+///////////////////////////////////////////////////////////////////////
 Lesson:
     id
     subject_id
@@ -98,7 +109,7 @@ syllabus_review:
     finished: bool default(false)
     rate: enum('excellent','very good', 'good', 'fail')
 
-
+///////////////////////////////////////////////////////////////////////
 [CRUD]
 GroupStudent:
     id

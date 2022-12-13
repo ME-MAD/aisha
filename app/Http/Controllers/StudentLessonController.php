@@ -65,8 +65,13 @@ class StudentLessonController extends Controller
      */
     public function show(StudentLesson $studentLesson)
     {
-        return view('pages.studentLesson.show',[
-            'studentLesson' => $studentLesson->load(['syllabus','lesson.subject','student'])
+        $studentLesson->load(['syllabus', 'lesson.subject', 'student',  'studentLessonReview.syllabusReviews']);
+
+        $studentLessonReviews = $studentLesson->studentLessonReview->get();
+
+        return view('pages.studentLesson.show', [
+            'studentLesson' => $studentLesson,
+            'studentLessonReviews' => $studentLessonReviews
         ]);
     }
 
