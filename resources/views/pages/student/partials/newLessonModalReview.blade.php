@@ -3,11 +3,11 @@
 aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="newLessonModalReviewTitle">إضافة درس جديد</h5>
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-light" id="newLessonModalReviewTitle">إضافة درس مراجعة جديد</h5>
             </div>
             <div class="modal-body">
-                <form data-url="{{route('admin.syllabusReview.createNewLesson')}}" method="post" id="newLessonFromReview">
+                <form data-url="{{route('admin.syllabusReview.createNewLessonAjax')}}" method="post" id="newLessonFromReview">
                     
                     {{-- <input type="hidden" name="student_lesson_review_id" id="student_lesson_review_id"> --}}
 

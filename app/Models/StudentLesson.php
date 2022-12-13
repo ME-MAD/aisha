@@ -12,7 +12,7 @@ class StudentLesson extends Model
 
     public function studentLessonReview()
     {
-        return $this->belongsTo(StudentLessonReview::class, 'student_lesson_review_id');
+        return $this->hasOne(StudentLessonReview::class, 'student_lesson_id');
     }
 
     public function syllabus()

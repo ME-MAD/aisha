@@ -15,4 +15,9 @@ class StudentLessonReview extends Model
     {
         return $this->hasMany(SyllabusReview::class,'student_lesson_review_id');
     }
+
+    public function studentLesson()
+    {
+        return $this->belongsTo(StudentLesson::class, 'student_lesson_id');
+    }
 }
