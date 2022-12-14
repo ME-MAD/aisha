@@ -71,18 +71,14 @@ class ExperienceServiceTest extends TestCase
             (object)
             [
                 "id"         => 1,
-                "title"      => "",
                 "from"       => "2000-01-28",
                 "to"         => "2005-11-22",
-                "teacher_id" => 6,
             ],
             (object)
             [
                 "id"         => 2,
-                "title"      => "",
                 "from"       => "2010-03-19",
                 "to"         => "2015-08-09",
-                "teacher_id" => 6,
             ]
         ];
 
