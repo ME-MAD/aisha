@@ -17,7 +17,6 @@ class GroupDayFactory extends Factory
      */
     public function definition()
     {
-        $array_day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'friday', 'saturday', 'sunday'];
 
 
         return [
