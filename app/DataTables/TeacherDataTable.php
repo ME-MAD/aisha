@@ -20,13 +20,11 @@ class TeacherDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            // ->addColumn('edit', 'pages.teacher.datatable.edit')
-
             ->editColumn('groups.count', function ($query) {
-                return $query->groups->count() ?? '';
+                return $query->groups_count ?? '';
             })
             ->editColumn('groupStudents.count', function ($query) {
-                return $query->groupStudents->count() ?? '';
+                return $query->group_students_count ?? '';
             })
             ->addColumn('edit', function ($query) {
                 return view('pages.teacher.datatable.edit', compact('query'));
@@ -51,11 +49,7 @@ class TeacherDataTable extends DataTable
      */
     public function query(Teacher $model): QueryBuilder
     {
-        // return $model->newQuery();
-        return $model->with(['groups','groupStudents']);
-        // $qeary = $model->with(['groups','groupStudents']);
-
-        // dd($qeary->take(10)->get());
+        return $model->withCount(['groups','groupStudents']);
     }
 
     /**
@@ -129,9 +123,9 @@ class TeacherDataTable extends DataTable
 
             ['name' => 'qualification', 'data' => 'qualification', 'title' => ' المؤهلات', "className" => 'search--col'],
 
-            ['name' => 'groups.count', 'data' => 'groups.count', 'title' => 'عدد الجروبات', "className" => 'search--col'],
+            ['name' => 'groups.count', 'data' => 'groups.count', 'title' => 'عدد الجروبات', "className" => 'search--col', 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
-            ['name' => 'groupStudents.count', 'data' => 'groupStudents.count', 'title' => 'عدد الطلاب', "className" => 'search--col'],
+            ['name' => 'groupStudents.count', 'data' => 'groupStudents.count', 'title' => 'عدد الطلاب', "className" => 'search--col','orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
 
             ['name' => 'show', 'data' => 'show', 'title' => 'Show', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],

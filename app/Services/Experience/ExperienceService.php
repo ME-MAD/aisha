@@ -3,6 +3,7 @@
 namespace App\Services\Experience;
 
 use App\Models\Experience;
+use App\Services\Teacher\TeacherService;
 use DateTime;
 
 class ExperienceService
@@ -41,9 +42,12 @@ class ExperienceService
         foreach ($experiences as $experience) {
             $from = new DateTime($experience->from);
             $to = new DateTime($experience->to);
-            $years += $from->diff($to)->y;
-            $months += $from->diff($to)->m;
-            $days += $from->diff($to)->d;
+
+            $diff = $from->diff($to);
+            
+            $years += $diff->y;
+            $months += $diff->m;
+            $days += $diff->d;
         }
 
         while ($days > 30) {

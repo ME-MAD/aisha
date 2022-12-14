@@ -55,13 +55,13 @@
                     <div class="bio layout-spacing ">
                         @include('pages.studentLesson.partials.sectionThird')
                     </div>
+                    <div class="widget-content widget-content-area br-6">
+                        @include('pages.studentLesson.partials.newLessons')
+                    </div>
                     <div class="bio layout-spacing ">
                         @if ($studentLessonReview)
                             @include('pages.studentLesson.partials.studentLessonReview')
                         @endif
-                    </div>
-                    <div class="widget-content widget-content-area br-6">
-                        @include('pages.studentLesson.partials.newLessons')
                     </div>
                 </div>
             </div>

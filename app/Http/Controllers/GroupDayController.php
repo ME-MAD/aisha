@@ -12,11 +12,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupDayController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(GroupDayDataTable $groupDayDataTable)
     {
         $groupdays = GroupDay::select(['id', 'group_id', 'day'])
@@ -31,28 +26,11 @@ class GroupDayController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        // $groups = Group::with(['groupType', 'groupDays'])->get();
-
-
-
-        // return view('pages.groupDays.create', [
-        //     'groups' => $groups,
-        // ]);
+        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreGroupDayRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreGroupDayRequest $request)
     {
         GroupDay::create([
@@ -64,39 +42,16 @@ class GroupDayController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\GroupDay  $groupDay
-     * @return \Illuminate\Http\Response
-     */
     public function show(GroupDay $groupDay)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\GroupDay  $groupDay
-     * @return \Illuminate\Http\Response
-     */
     public function edit(GroupDay $groupDay)
     {
-        // $groups = $this->getGroups();
-        // return view('pages.groupDays.edit', [
-        //     'groupDay'  => $groupDay,
-        //     'groups'  => $groups,
-        // ]);
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateGroupDayRequest  $request
-     * @param  \App\Models\GroupDay  $groupDay
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateGroupDayRequest $request, GroupDay $groupDay)
     {
         $groupDay->update([
@@ -107,19 +62,12 @@ class GroupDayController extends Controller
         return redirect(route('admin.group_day.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\GroupDay  $groupDay
-     * @return \Illuminate\Http\Response
-     */
     public function delete(GroupDay $groupDay)
     {
         $groupDay->delete();
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
-
 
     public function getDaysOfGroup(Request $request)
     {
