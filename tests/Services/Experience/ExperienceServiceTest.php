@@ -2,9 +2,9 @@
 
 namespace Tests\Services\Experience;
 
+use App\Models\Experience;
 use App\Services\Experience\ExperienceService;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Tests\Traits\TestExperienceTrait;
 use Tests\Traits\TestTeacherTrait;
@@ -29,7 +29,7 @@ class ExperienceServiceTest extends TestCase
 
         $experienceObject->createExperience($data);
 
-        $this->assertDatabaseHas('experiences',(array) $data);
+        $this->assertDatabaseHas('experiences', (array) $data);
     }
 
     public function test_update_experience()
@@ -43,9 +43,9 @@ class ExperienceServiceTest extends TestCase
             'teacher_id' => $experience->teacher_id
         ];
 
-        $experienceObject->updateExperience($experience ,$data);
+        $experienceObject->updateExperience($experience, $data);
 
-        $this->assertDatabaseHas('experiences',(array) $data);
+        $this->assertDatabaseHas('experiences', (array) $data);
     }
 
 
@@ -56,10 +56,34 @@ class ExperienceServiceTest extends TestCase
 
         $experienceObject->deleteExperience($experience);
 
-        $this->assertDatabaseMissing('experiences',[
+        $this->assertDatabaseMissing('experiences', [
             'id' => $experience->id
         ]);
     }
 
 
+    public function test_get_Ccount_of_experience_years()
+    {
+        $experienceObject = new ExperienceService();
+
+        $data = [
+
+            (object)
+            [
+                "id"         => 1,
+                "from"       => "2000-01-28",
+                "to"         => "2005-11-22",
+            ],
+            (object)
+            [
+                "id"         => 2,
+                "from"       => "2010-03-19",
+                "to"         => "2015-08-09",
+            ]
+        ];
+
+        $countYearsExperience = ($experienceObject->getCountOfExperienceYears($data));
+
+        $this->assertEquals(11, $countYearsExperience);
+    }
 }
