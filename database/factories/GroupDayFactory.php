@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\GroupDay;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\GroupDay>
+ * @extends Factory<GroupDay>
  */
 class GroupDayFactory extends Factory
 {
@@ -16,11 +17,12 @@ class GroupDayFactory extends Factory
      */
     public function definition()
     {
-        $array_day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','friday','saturday','sunday'];
+        $array_day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'friday', 'saturday', 'sunday'];
 
 
         return [
-            'age_type' => $array_day[rand(0,6)],
+            'day' => $this->faker->dayOfWeek,
+            'group_id' => $this->faker->numberBetween(1, 5),
         ];
     }
 }
