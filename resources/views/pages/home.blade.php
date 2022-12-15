@@ -1,5 +1,8 @@
 @extends('master')
 
+@section('css')
+@endsection
+
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
@@ -33,14 +36,23 @@
         <div class="row">
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing" id="statustucsContanerOne">
 
-                {{-- on file ajax js/home.js --}}
+                <!-- on file ajax js/home.js -->
 
             </div>
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing" id="statustucsContanerTwo">
 
-                {{-- on file ajax js/home.js --}}
+                <!-- on file ajax js/home.js -->
 
             </div>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12 layout-spacing" id="canvas">
+                <canvas id="myChart"></canvas>
+            </div>
+
         </div>
     </div>
 @endsection
@@ -48,5 +60,8 @@
 
 
 @section('javascript')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script src="{{ asset('js/home.js') }}"></script>
+    <script src="{{ asset('js/payment_chart.js') }}"></script>
 @endsection
