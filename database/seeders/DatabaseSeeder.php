@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             TgweedSeeder::class,
             QaidaNooraniahSeeder::class,
             FactorySeeder::class,
+            PaymentSeeder::class
         ]);
     }
 }

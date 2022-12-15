@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Group;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,13 +18,15 @@ class PaymentFactory extends Factory
      */
     public function definition()
     {
-        $array_month = ['January', 'February', 'March', 'April','May','June','July','August','September','October','November','December'];
+        $array_month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 
         return [
-            'month' => $array_month[rand(0,29)],
+            'student_id' => Student::select('id')->InRandomOrder()->first()->id,
+            'group_id'   => Group::select('id')->InRandomOrder()->first()->id,
+            'amount'     => fake()->numberBetween(50, 1500),
+            'month'      => fake()->randomElement($array_month),
+            'paid'       => rand(0, 1),
         ];
-
-        
     }
 }
