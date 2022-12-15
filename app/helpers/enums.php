@@ -11,3 +11,24 @@ if (!function_exists('getStudentTypes')) {
 }
 
 
+if (!function_exists('getMonthNames')) {
+    function getMonthNames()
+    {
+        return [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
+    }
+}
+
+

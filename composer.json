@@ -39,7 +39,8 @@
         "files": [
             "app/helpers/dataQuraan.php",
             "app/helpers/dataTgweed.php",
-            "app/helpers/dataQaidaNooraniah.php"
+            "app/helpers/dataQaidaNooraniah.php",
+            "app/helpers/enums.php"
         ]
     },
     "autoload-dev": {

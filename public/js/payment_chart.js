@@ -1,42 +1,18 @@
-$.get('/api/chart/payments', function (data) {
+$.get($('#paymentsThisMonthContainer').data('href'), function (response) {
 
-    const month = data.paymentsChart;
+    console.log(response);
+    const months = response.months;
+    const values = response.values;
 
-    const ctx = document.getElementById('myChart');
+    const ctx = document.getElementById('paymentsThisMonthChart');
 
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December'
-            ],
+            labels: months,
             datasets: [{
                 label: '# of Votes',
-                data: [
-                    month['January'],
-                    month['February'],
-                    month['March'],
-                    month['April'],
-                    month['May'],
-                    month['June'],
-                    month['July'],
-                    month['August'],
-                    month['September'],
-                    month['October'],
-                    month['November'],
-                    month['December']
-                ],
+                data: values,
                 borderWidth: 2
             }]
         },

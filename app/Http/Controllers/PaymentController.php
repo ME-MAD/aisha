@@ -8,6 +8,7 @@ use App\Http\Requests\Payment\StorePaymentRequest;
 use App\Http\Requests\Payment\UpdatePaymentRequest;
 use App\Models\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PaymentController extends Controller
@@ -148,5 +149,23 @@ class PaymentController extends Controller
     public function destroy(Payment $payment)
     {
         //
+    }
+    public function getPaymentPerMonthThisYear()
+    {
+        $paymentsChart = Payment::select(DB::raw("(SUM(amount)) as month_amount"), 'month')
+            ->whereYear('created_at', date('Y'))
+            ->groupBy('month')
+            ->get();
+
+        $data = [];
+        foreach(getMonthNames() as $monthName)
+        {
+            $data[$monthName] = $paymentsChart->where('month', $monthName)->first()->month_amount ?? 0;
+        }
+
+        return response()->json([
+            'months' => array_keys($data),
+            'values' => array_values($data),
+        ]);
     }
 }

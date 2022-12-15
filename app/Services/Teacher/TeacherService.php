@@ -11,6 +11,8 @@ class TeacherService
 
     private $teacherWithAllData;
 
+    
+
     public function getAllTeachers(array $columns = ['id', 'name'])
     {
         return Teacher::select($columns)->get();
