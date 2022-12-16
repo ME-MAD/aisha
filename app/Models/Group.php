@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     use HasFactory;
+
     protected $fillable = ['from', 'to', 'teacher_id', 'group_type_id', 'age_type'];
 
     protected $appends = ['fto', 'ffrom'];
@@ -18,14 +19,14 @@ class Group extends Model
     protected function from(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => date('H:i', strtotime($value)),
+            get: fn($value) => date('h:i A', strtotime($value)),
         );
     }
 
     protected function to(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => date('H:i', strtotime($value)),
+            get: fn($value) => date('h:i A', strtotime($value)),
         );
     }
 
