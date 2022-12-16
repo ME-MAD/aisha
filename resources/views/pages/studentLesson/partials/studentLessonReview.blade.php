@@ -88,7 +88,14 @@
                                                     <td>{{ $syllabusReview->to_chapter }}</td>
                                                     <td>{{ $syllabusReview->from_page }}</td>
                                                     <td>{{ $syllabusReview->to_page }}</td>
-                                                    <td>{{ $syllabusReview->finished ? 'True' : 'false' }}</td>
+
+                                                    @if ($syllabusReview->finished == 1)
+                                                        <td><span class="badge badge-success"> Completed
+                                                            </span></td>
+                                                    @else
+                                                        <td><span class="badge badge-danger">Not Completed </span></td>
+                                                    @endif
+                                                    </td>
                                                     <td>
                                                         @if ($syllabusReview->rate == 'excellent')
                                                             <span class="badge badge-primary">

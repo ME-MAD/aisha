@@ -1,18 +1,13 @@
-
-
-
-
 let href = $("#getfromdata").data('href');
 $.ajax({
     url: href,
 
     success: function (response) {
-        console.log(response.groupTypes);
 
         $('#statustucsContanerOne').append(`
             <div class="widget-four">
             <div class="widget-heading">
-                <h5 class="text-secondary">Groups <span
+                <h5 class="text-secondary">${response.words.groups}<span
                         class="badge badge-secondary ml-2">${response.allGroupsCount}</span>
                 </h5>
             </div>
@@ -119,7 +114,7 @@ $.ajax({
             <div class="widget-four">
             <div class="widget-heading">
                 <h5 class="text-secondary">
-                    Groups
+                ${response.words.groups}
                     <span class="badge badge-secondary ml-2">
                         ${response.allGroupsCount}
                     </span>

@@ -2,24 +2,24 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header p-3 mb-2 bg-warning ">
-                <h5 class="modal-title text-white" id="editTeacher">تعديل بيانات المعلم</h5>
+                <h5 class="modal-title text-white" id="editTeacher">{{ __('teacher.edite teacher') }}</h5>
             </div>
             <div class="modal-body">
                 <form id="editTeacherForm" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
-                    <x-text name="name" label="الإسم" id="name" />
+                    <x-text name="name" label="{{ __('teacher.name') }}" id="name" />
 
-                    <x-date name="birthday" label="تاريخ الميلاد" id="birthday" />
+                    <x-date name="birthday" label="{{ __('teacher.birthday') }}" id="birthday" />
 
-                    <x-text name="phone" label="الهاتف" id="phone" />
+                    <x-text name="phone" label="{{ __('teacher.phone') }}" id="phone" />
 
-                    <x-text name="qualification" label="المؤهل" id="qualification" />
+                    <x-text name="qualification" label="{{ __('teacher.qualification') }}" id="qualification" />
 
                     <div class="custom-file-container" data-upload-id="mySecondImage">
-                        <label>Upload (Image) <a href="javascript:void(0)" class="custom-file-container__image-clear"
-                                title="Clear Image"></a></label>
+                        <label>{{ __('teacher.avatar') }}<a href="javascript:void(0)"
+                                class="custom-file-container__image-clear" title="Clear Image"></a></label>
                         <label class="custom-file-container__custom-file">
                             <input type="file" class="custom-file-container__custom-file__custom-file-input"
                                 accept="image/*" name="avatar">
@@ -34,8 +34,9 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-warning">Save</button>
-                        <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Discard</button>
+                        <button type="submit" class="btn btn-warning">{{ __('teacher.Save') }}</button>
+                        <button class="btn" data-dismiss="modal"><i
+                                class="flaticon-cancel-12"></i>{{ __('teacher.Discard') }}</button>
                     </div>
                 </form>
             </div>

@@ -13,7 +13,8 @@
 
         <div class="nav-logo align-self-center">
             <a class="navbar-brand" href="{{ route('admin.home') }}"><img alt="logo"
-                    src="{{ asset('images/home.jpg') }}"> <span class="navbar-brand-name">HOME</span></a>
+                    src="{{ asset('images/home.jpg') }}"> <span
+                    class="navbar-brand-name">{{ __('globalWorld.HOME') }}</span></a>
         </div>
 
         <ul class="navbar-item flex-row mr-auto">
@@ -32,7 +33,6 @@
                 </svg>
             </li>
         </ul>
-
         <ul class="navbar-item flex-row nav-dropdowns">
             <li class="nav-item dropdown language-dropdown more-dropdown">
                 <div class="dropdown custom-dropdown-icon">
@@ -46,21 +46,17 @@
                         </svg></a>
 
                     <div class="dropdown-menu dropdown-menu-right animated fadeInUp" aria-labelledby="customDropdown">
-                        <a class="dropdown-item" data-img-value="de" data-value="de" href="javascript:void(0);"><img
-                                src="{{ asset('adminAssets/assets/img/de.png') }}" class="flag-width" alt="flag">
-                            German</a>
-                        <a class="dropdown-item" data-img-value="jp" data-value="jp" href="javascript:void(0);"><img
-                                src="{{ asset('adminAssets/assets/img/jp.png') }}" class="flag-width" alt="flag">
-                            Japanese</a>
-                        <a class="dropdown-item" data-img-value="fr" data-value="fr" href="javascript:void(0);"><img
-                                src="{{ asset('adminAssets/assets/img/fr.png') }}" class="flag-width" alt="flag">
-                            French</a>
-                        <a class="dropdown-item" data-img-value="ca" data-value="en" href="javascript:void(0);"><img
-                                src="{{ asset('adminAssets/assets/img/ca.png') }}" class="flag-width" alt="flag">
-                            English</a>
+                        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <a class="dropdown-item" data-img-value="ca" data-value="en"
+                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"><img
+                                    src="{{ asset('adminAssets/assets/img/ca.png') }}" class="flag-width"
+                                    alt="flag alternate" hreflang="{{ $localeCode }}">
+                                {{ $properties['native'] }}</a>
+                        @endforeach
                     </div>
                 </div>
             </li>
+
 
             <li class="nav-item dropdown message-dropdown">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="messageDropdown"

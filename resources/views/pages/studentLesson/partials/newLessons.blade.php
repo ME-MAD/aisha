@@ -40,7 +40,25 @@
                                 <td>{{ $syllab->to_chapter }}</td>
                                 <td>{{ $syllab->from_page }}</td>
                                 <td>{{ $syllab->to_page }}</td>
-                                <td>{{ $syllab->rate }}</td>
+                                <td>
+                                    @if ($syllab->rate == 'excellent')
+                                        <span class="badge badge-primary">
+                                            {{ $syllab->rate }}
+                                        </span>
+                                    @elseif ($syllab->rate == 'very good')
+                                        <span class="badge badge-secondary">
+                                            {{ $syllab->rate }}
+                                        </span>
+                                    @elseif ($syllab->rate == 'good')
+                                        <span class="badge badge-success">
+                                            {{ $syllab->rate }}
+                                        </span>
+                                    @elseif ($syllab->rate == 'fail')
+                                        <span class="badge badge-danger">
+                                            {{ $syllab->rate }}
+                                        </span>
+                                    @endif
+                                </td>
                                 @if ($syllab->finished == 1)
                                     <td><span class="badge badge-success"> Completed
                                         </span></td>

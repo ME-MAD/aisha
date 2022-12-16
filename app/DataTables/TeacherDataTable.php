@@ -19,6 +19,7 @@ class TeacherDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+        // dd($words);
         return (new EloquentDataTable($query))
             ->editColumn('groups.count', function ($query) {
                 return $query->groups_count ?? '';
@@ -49,7 +50,7 @@ class TeacherDataTable extends DataTable
      */
     public function query(Teacher $model): QueryBuilder
     {
-        return $model->withCount(['groups','groupStudents']);
+        return $model->withCount(['groups', 'groupStudents']);
     }
 
     /**
@@ -59,6 +60,7 @@ class TeacherDataTable extends DataTable
      */
     public function html(): HtmlBuilder
     {
+
         return $this->builder()
             ->setTableId('product-table')
             ->columns($this->getColumns())
@@ -115,24 +117,60 @@ class TeacherDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            ['name' => 'id', 'data' => 'id', 'title' => 'رقم الهوية', "className" => 'search--col exact'],
-            ['name' => 'name', 'data' => 'name', 'title' => ' الاسم', "className" => 'search--col'],
-            ['name' => 'avatar', 'data' => 'avatar', 'title' => ' الصور', "className" => 'search--col'],
-            ['name' => 'birthday', 'data' => 'birthday', 'title' => ' تاريخ الميلاد', "className" => 'search--col'],
-            ['name' => 'phone', 'data' => 'phone', 'title' => ' الهاتف', "className" => 'search--col'],
+            [
+                'name' => 'id',
+                'data' => 'id',
+                'title' => __('teacher.id'),
+                "className" => 'search--col exact'
+            ],
 
-            ['name' => 'qualification', 'data' => 'qualification', 'title' => ' المؤهلات', "className" => 'search--col'],
+            [
+                'name' => 'name',
+                'data' => 'name',
+                'title' =>  __('teacher.name'),
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'groups.count', 'data' => 'groups.count', 'title' => 'عدد الجروبات', "className" => 'search--col', 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'avatar',
+                'data' => 'avatar',
+                'title' =>  __('teacher.avatar'),
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'groupStudents.count', 'data' => 'groupStudents.count', 'title' => 'عدد الطلاب', "className" => 'search--col','orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+
+            [
+                'name' => 'birthday',
+                'data' => 'birthday',
+                'title' => __('teacher.birthday'),
+                "className" => 'search--col'
+            ],
+
+            [
+                'name' => 'phone',
+                'data' => 'phone',
+                'title' => __('teacher.phone'),
+                "className" => 'search--col'
+            ],
+            [
+                'name' => 'qualification',
+                'data' => 'qualification',
+                'title' => __('teacher.qualification'),
+                "className" => 'search--col'
+            ],
 
 
-            ['name' => 'show', 'data' => 'show', 'title' => 'Show', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'groups.count', 'data' => 'groups.count', 'title' => __('teacher.group count'), "className" => 'search--col', 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'groupStudents.count', 'data' => 'groupStudents.count', 'title' => __('teacher.student count'), "className" => 'search--col', 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+
+
+            ['name' => 'show', 'data' => 'show', 'title' => __('teacher.Show'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+
+            ['name' => 'edit', 'data' => 'edit', 'title' => __('teacher.Edit'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+
+            ['name' => 'delete', 'data' => 'delete', 'title' => __('teacher.Delete'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
         ];
     }
 

@@ -23,7 +23,7 @@
                              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                              <polyline points="9 22 9 12 15 12 15 22"></polyline>
                          </svg>
-                         <span>Dashboard</span>
+                         <span>{{ __('globalWorld.Dashboard') }}</span>
                      </div>
                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -33,10 +33,10 @@
                  </a>
                  <ul class="collapse submenu list-unstyled" id="dashboard" data-parent="#topAccordion">
                      <li class="active">
-                         <a href="index.html"> Analytics </a>
+                         <a href="index.html"> {{ __('globalWorld.Analytics') }} </a>
                      </li>
                      <li>
-                         <a href="index2.html"> Sales </a>
+                         <a href="index2.html"> {{ __('globalWorld.Sales') }} </a>
                      </li>
                  </ul>
              </li>
@@ -49,7 +49,7 @@
                              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                              <circle cx="12" cy="7" r="4"></circle>
                          </svg>
-                         <span>Teachers</span>
+                         <span>{{ __('globalWorld.Teachers') }}</span>
                      </div>
                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -59,10 +59,10 @@
                  </a>
                  <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
                      <li>
-                         <a href="{{ route('admin.teacher.index') }}"> Teachers </a>
+                         <a href="{{ route('admin.teacher.index') }}"> {{ __('globalWorld.Teachers') }} </a>
                      </li>
                      <li>
-                         <a href="{{ route('admin.experience.index') }}">Experiences</a>
+                         <a href="{{ route('admin.experience.index') }}">{{ __('globalWorld.Experiences') }}</a>
                      </li>
                  </ul>
              </li>
@@ -78,7 +78,7 @@
                              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                          </svg>
-                         <span>Students</span>
+                         <span>{{ __('globalWorld.Students') }}</span>
                      </div>
                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -88,7 +88,7 @@
                  </a>
                  <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
                      <li>
-                         <a href="{{ route('admin.student.index') }}"> Students </a>
+                         <a href="{{ route('admin.student.index') }}"> {{ __('globalWorld.Students') }} </a>
                      </li>
                  </ul>
              </li>
@@ -105,7 +105,7 @@
                              <line x1="12" y1="11" x2="12" y2="17"></line>
                              <line x1="9" y1="14" x2="15" y2="14"></line>
                          </svg>
-                         <span>groups</span>
+                         <span>{{ __('globalWorld.groups') }}</span>
                      </div>
                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -115,16 +115,17 @@
                  </a>
                  <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
                      <li>
-                         <a href="{{ route('admin.group.index') }}"> Groups </a>
+                         <a href="{{ route('admin.group.index') }}"> {{ __('globalWorld.groups') }} </a>
                      </li>
                      <li>
-                         <a href="{{ route('admin.group_day.index') }}">Group Days</a>
+                         <a href="{{ route('admin.group_day.index') }}">{{ __('globalWorld.Group Days') }}</a>
                      </li>
                      <li>
-                         <a href="{{ route('admin.group_students.index') }}">Group Students</a>
+                         <a
+                             href="{{ route('admin.group_students.index') }}">{{ __('globalWorld.Group Students') }}</a>
                      </li>
                      <li>
-                         <a href="{{ route('admin.group_types.index') }}">Group Types</a>
+                         <a href="{{ route('admin.group_types.index') }}">{{ __('globalWorld.Group Types') }}</a>
                      </li>
 
                  </ul>
@@ -140,7 +141,7 @@
                              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                          </svg>
-                         <span>Subjects</span>
+                         <span>{{ __('globalWorld.Subjects') }}</span>
                      </div>
                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -150,10 +151,10 @@
                  </a>
                  <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
                      <li>
-                         <a href="{{ route('admin.subject.index') }}"> Subjects </a>
+                         <a href="{{ route('admin.subject.index') }}"> {{ __('globalWorld.Subjects') }} </a>
                      </li>
                      <li>
-                         <a href="{{ route('admin.lesson.index') }}"> Lessons </a>
+                         <a href="{{ route('admin.lesson.index') }}"> {{ __('globalWorld.Lessons') }} </a>
                      </li>
                  </ul>
              </li>
@@ -169,7 +170,7 @@
                                  ry="2"></rect>
                              <line x1="1" y1="10" x2="23" y2="10"></line>
                          </svg>
-                         <span>Payment</span>
+                         <span>{{ __('globalWorld.Payment') }}</span>
                      </div>
                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -179,10 +180,10 @@
                  </a>
                  <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
                      <li>
-                         <a href="{{ route('admin.payment.index') }}">payments</a>
+                         <a href="{{ route('admin.payment.index') }}">{{ __('globalWorld.Payment') }}</a>
                      </li>
                      <li>
-                         <a href="{{ route('admin.payment.create') }}">Create payments</a>
+                         <a href="{{ route('admin.payment.create') }}">{{ __('globalWorld.Create payments') }}</a>
                      </li>
                  </ul>
              </li>
@@ -198,7 +199,7 @@
                              <line x1="12" y1="18" x2="12" y2="12"></line>
                              <line x1="9" y1="15" x2="15" y2="15"></line>
                          </svg>
-                         <span>Exams</span>
+                         <span>{{ __('globalWorld.Exams') }}</span>
                      </div>
                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -208,10 +209,10 @@
                  </a>
                  <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
                      <li>
-                         <a href="{{ route('admin.exam.index') }}">Exams</a>
+                         <a href="{{ route('admin.exam.index') }}">{{ __('globalWorld.Exams') }}</a>
                      </li>
                      <li>
-                         <a href="{{ route('admin.exam.create') }}">Create Exam</a>
+                         <a href="{{ route('admin.exam.create') }}">{{ __('globalWorld.Create Exam') }}</a>
                      </li>
                  </ul>
              </li>
