@@ -24,6 +24,11 @@ class HomeController extends Controller
     public function getDataAjax()
     {
         $groupsCountsData = $this->homeService->getGroupsCountsData();
-        return response()->json($groupsCountsData);
+        return response()->json([
+            ...$groupsCountsData,
+            'words' => [
+                'groups' => __('home.Groups'),
+            ]
+        ]);
     }
 }

@@ -6,8 +6,9 @@ function getDataShow() {
     $.ajax({
         url: href,
         success: function (response) {
-            // console.log(response);
+
             response.statistics.forEach(statistic => {
+                console.log(statistic.words);
                 $('#statustucsContaner').append(`
                     <div class="col-4">
                         <div class="card border-secondary">
@@ -53,7 +54,6 @@ function getDataShow() {
                 `)
             });
 
-            // console.log(response.groups);
 
             response.groups.forEach(group => {
                 $('#pills-tab').append(`
@@ -86,10 +86,6 @@ function getDataShow() {
                     </li>
                 `)
 
-                // @foreach ($group->groupDays as $groupDay)
-                //     <span class="badge bg-success mb-2">{{ $groupDay->day }}
-                //     </span>
-                // @endforeach
 
                 let groupDaysHtml = '';
                 group.group_days.forEach(groupDay => {
@@ -99,21 +95,6 @@ function getDataShow() {
                     `
                 });
 
-                // // @foreach ($group->students as $student)
-                //     <tr>
-                //         <td>{{ $student->id }}</td>
-                //         <td>
-                //             <a class='text-primary'
-                //                 href="{{ route('admin.student.show', $student->id) }}"
-                //                 title='Enter Page show Student'>{{ $student->name }}
-                //             </a>
-                //         </td>
-                //         <td class="text-right">
-                //             {{ $student->birthday }}</td>
-                //         <td class="text-right">
-                //             {{ $student->phone }}</td>
-                //     </tr>
-                // // @endforeach
 
                 let studentsGroupStudentsHtml = '';
                 group.students.forEach(student => {

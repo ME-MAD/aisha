@@ -40,7 +40,7 @@ class TeacherController extends Controller
     public function show(Teacher $teacher)
     {
         $this->teacherService->setTeacherWithAllData($teacher);
-        
+
         return view('pages.teacher.show', [
             'teacher'      => $teacher,
             'experiences'  => $this->teacherService->teacherExperiences($teacher),
@@ -60,15 +60,15 @@ class TeacherController extends Controller
         return response()->json([
             'statistics' => [
                 [
-                    'name'  => 'Groups Count',
+                    'name'  => __('teacher.group count'),
                     'value' => $this->teacherService->countGroups($teacher)
                 ],
                 [
-                    'name'  => 'Student Count',
+                    'name'  =>  __('teacher.student count'),
                     'value' =>  $this->teacherService->countStudent($teacher)
                 ],
                 [
-                    'name'  => 'Total Experience',
+                    'name'  => __('teacher.total experience years'),
                     'value' => $yearsOfExperience . " Years"
                 ],
             ],

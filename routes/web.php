@@ -33,7 +33,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// mohamed
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('loginPage', [AuthController::class, 'loginPage'])->name('loginPage');
@@ -45,6 +44,10 @@ Route::get('/', function () {
 })->name('home');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+
+    Route::get('/', function () {
+        return app()->getLocale();
+    });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -210,7 +213,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
         Route::post('store', [StudentLessonController::class, 'store'])->name('store');
     });
-    
+
     Route::group(['prefix' => 'student_lesson_review', 'as' => 'student_lesson_review.'], function () {
         Route::get('ajaxStudentLessonFinishedReview', [StudentLessonReviewController::class, 'ajaxStudentLessonFinishedReview'])->name('ajaxStudentLessonFinishedReview');
     });

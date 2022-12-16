@@ -12,17 +12,13 @@
 
 @section('breadcrumb')
     <div class="page-header">
-
         <div class="page-title">
-            <h3>Teacher Page</h3>
+            <h3>{{ __('teacher.Teachers Table') }}</h3>
         </div>
-        <div class="page-title">
-            <h3 class="alert alert-primary">{{ $teacher->name }}</h3>
-        </div>
-
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false"><span class="text"><span>Teacher</span> : Page</span>
+                aria-haspopup="true" aria-expanded="false"><span class="text"><span>{{ __('teacher.Show') }}</span> :
+                    {{ __('teacher.Dail Analytics') }} </span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="feather feather-chevron-down">
@@ -31,11 +27,12 @@
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown">
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.home') }}">Home</a>
+                    href="{{ route('admin.home') }}">{{ __('teacher.Home') }}</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.teacher.index') }}">teacher</a>
+                    href="{{ route('admin.teacher.index') }}">{{ __('teacher.Teachers') }}</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
                     href="{{ route('admin.teacher.show', $teacher->id) }}">{{ $teacher->name }}</a>
+
             </div>
         </div>
     </div>

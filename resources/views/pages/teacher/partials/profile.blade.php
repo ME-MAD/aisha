@@ -1,7 +1,7 @@
 <div class="user-profile layout-spacing">
     <div class="widget-content widget-content-area">
         <div class="d-flex justify-content-between">
-            <h3 class="">Info</h3>
+            <h3 class="">{{ __('teacher.Info') }}</h3>
             <a class="mt-2 edit-profile editTeacherButton" data-toggle='modal' data-target='#editTeacher'
                 data-teacher="{{ $teacher }}" data-href="{{ route('admin.teacher.update', $teacher->id) }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"

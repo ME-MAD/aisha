@@ -2,7 +2,7 @@
     <div class="work-experience layout-spacing ">
         <div class="widget-content widget-content-area">
             <h3 class="">
-                Work Experiences
+                {{ __('teacher.Work Experiences') }}
                 <a class="text-success float-right creatTeacherExperienceButton" type="button" data-toggle="modal"
                     data-target='#creatExperienceModal'>
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
