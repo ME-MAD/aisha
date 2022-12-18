@@ -47,10 +47,17 @@
         </div>
 
 
-        <div class="row" id="paymentsThisMonthContainer" data-href="{{route('admin.payment.getPaymentPerMonthThisYear')}}">
+        <div class="row" id="paymentsThisMonthContainer"
+            data-href="{{ route('admin.payment.getPaymentPerMonthThisYear') }}">
 
             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12 layout-spacing" id="canvas">
-                <canvas id="paymentsThisMonthChart"></canvas>
+                <div id="btns-years-container">
+                    <!--btns-years-container -->
+                </div>
+
+                <canvas id="paymentsThisMonthChart">
+                    <!-- paymentsThisMonthChart -->
+                </canvas>
             </div>
 
         </div>

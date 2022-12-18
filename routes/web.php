@@ -171,7 +171,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('edit/{payment}', [PaymentController::class, 'edit'])->name('edit');
         Route::put('update/{payment}', [PaymentController::class, 'update'])->name('update');
         Route::get('delete/{payment}', [PaymentController::class, 'delete'])->name('delete');
-        Route::get('getPaymentPerMonthThisYear', [PaymentController::class, 'getPaymentPerMonthThisYear'])->name('getPaymentPerMonthThisYear');
+        Route::post('getPaymentPerMonthThisYear', [PaymentController::class, 'getPaymentPerMonthThisYear'])->name('getPaymentPerMonthThisYear');
     });
 
     Route::group(['prefix' => 'group_students', 'as' => 'group_students.'], function () {

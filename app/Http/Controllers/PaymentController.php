@@ -150,22 +150,41 @@ class PaymentController extends Controller
     {
         //
     }
-    public function getPaymentPerMonthThisYear()
+
+    public function getPaymentPerMonthThisYear(Request $request)
     {
-        $paymentsChart = Payment::select(DB::raw("(SUM(amount)) as month_amount"), 'month')
-            ->whereYear('created_at', date('Y'))
+
+
+        $thisYear = (isset($request->year)) ? $request->year : date('Y');
+
+        $paymentsChart = Payment::select(
+            DB::raw("(SUM(amount)) as month_amount"),
+            'month'
+        )
+            ->where('paid', 1)
+            ->whereYear('created_at', $thisYear)
             ->groupBy('month')
             ->get();
 
         $data = [];
-        foreach(getMonthNames() as $monthName)
-        {
+        foreach (getMonthNames() as $monthName) {
             $data[$monthName] = $paymentsChart->where('month', $monthName)->first()->month_amount ?? 0;
         }
 
+
+        $years = Payment::select(
+            DB::raw("YEAR(created_at) as year")
+        )
+            ->where('paid', 1)
+            ->groupBy('year')
+            ->get();
+
+
         return response()->json([
-            'months' => array_keys($data),
-            'values' => array_values($data),
+            'months'    => array_keys($data),
+            'values'    => array_values($data),
+            'years'     => $years,
+            'thisYear'  => $thisYear,
         ]);
     }
 }
