@@ -7,6 +7,8 @@ return [
     'Dashboard' => 'لوحة التحكم',
     'Analytics' => 'تحليلات',
     'Sales' => 'مبيعات',
+    'Show' => 'إظهار',
+    'Dail Analytics' => 'التفصيل',
     'Teachers' => 'المعلمون',
     'Experiences' => 'الخبرات',
     'Students' => 'الطلاب',
@@ -20,6 +22,11 @@ return [
     'Create payments' => 'تسجيل الدفع',
     'Exams' => 'الامتحانات',
     'Create Exam' => 'إضافة إمتحان',
+    'Save' => 'حفظ',
+    'Discard' => 'تجاهل',
+    'Show' => 'إظهار',
+    'Edit' => 'تعديل',
+    'Delete' => 'حذف',
     '' => '',
     '' => '',
     '' => '',
@@ -30,5 +37,6 @@ return [
     '' => '',
     '' => '',
     '',
+
 
 ];

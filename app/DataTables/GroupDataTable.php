@@ -133,56 +133,56 @@ class GroupDataTable extends DataTable
             [
                 'name' => 'groups.id',
                 'data' => 'id',
-                'title' => '#',
+                'title' => __('group.id'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'from',
                 'data' => 'from',
-                'title' => 'from',
+                'title' => __('group.from'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'to',
                 'data' => 'to',
-                'title' => 'to',
+                'title' => __('group.to'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'teacher.name',
                 'data' => 'teacher.name',
-                'title' => ' teacher_id',
+                'title' => __('group.teacher_id'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'groupType.name',
                 'data' => 'groupType.name',
-                'title' => 'group_type_id',
+                'title' => __('group.group_type_id'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'age_type',
                 'data' => 'age_type',
-                'title' => 'age_type',
+                'title' => __('group.age type'),
                 "className" => 'search--col'
             ],
             [
                 'name' => 'countStudent',
                 'data' => 'countStudent',
-                'title' => 'count Student',
+                'title' => __('group.count Student'),
                 "className" => 'not--search--col'
             ],
 
-            ['name' => 'show', 'data' => 'show', 'title' => 'show', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'show', 'data' => 'show', 'title' => __('globalWorld.Show'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'edit', 'data' => 'edit', 'title' => __('globalWorld.Edit'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'delete', 'data' => 'delete', 'title' => __('globalWorld.Delete'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
         ];
     }
 

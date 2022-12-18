@@ -20,6 +20,11 @@ return [
     'Create payments' => 'Create payments',
     'Exams' => 'Exams',
     'Create Exam' => 'Create Exam',
+    'Save' => 'Save',
+    'Discard' => 'Discard',
+    'Show' => 'Show ',
+    'Edit' => 'Edit',
+    'Delete' => 'Delete',
     '' => '',
     '' => '',
     '' => '',
@@ -29,6 +34,6 @@ return [
     '' => '',
     '' => '',
     '' => '',
-    '',
+
 
 ];

@@ -7,7 +7,7 @@
 
             <div class="col-xl-2 col-md-2 col-sm-2 col-2">
                 <a href="{{ route('admin.teacher.edit', $group->teacher->id) }}"
-                    class="btn btn-success  float-left">Edite</a>
+                    class="btn btn-success  float-left">Edit</a>
             </div>
         </div>
 

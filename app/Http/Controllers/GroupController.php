@@ -6,12 +6,12 @@ use App\DataTables\GroupDataTable;
 use App\Http\Requests\Group\StoreGroupRequest;
 use App\Http\Requests\Group\UpdateGroupRequest;
 use App\Models\Group;
-use App\Models\Teacher;
-use App\Models\GroupType;
+use App\Models\Payment;
 use App\Models\Student;
 use App\Services\Group\GroupService;
 use App\Services\GroupType\GroupTypeService;
 use App\Services\Teacher\TeacherService;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupController extends Controller
@@ -25,8 +25,7 @@ class GroupController extends Controller
         TeacherService $teacherService,
         GroupTypeService $groupTypeService,
         GroupService $groupService
-     )
-    {
+    ) {
         $this->teacherService = $teacherService;
         $this->groupTypeService = $groupTypeService;
         $this->groupService = $groupService;
@@ -45,7 +44,6 @@ class GroupController extends Controller
 
     public function create()
     {
-        
     }
 
     public function store(StoreGroupRequest $request)
@@ -78,7 +76,6 @@ class GroupController extends Controller
 
     public function edit(Group $group)
     {
-        
     }
 
     public function update(UpdateGroupRequest $request, Group $group)
@@ -95,5 +92,25 @@ class GroupController extends Controller
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
+    }
+
+    public function getPaymentPerMonth(Group $group)
+    {
+
+        $paymentsChart = Payment::select(DB::raw("(SUM(amount)) as month_amount"), 'month')
+            ->where('group_id', '=', $group->id)
+            ->whereYear('created_at', date('Y'))
+            ->groupBy('month')
+            ->get();
+
+        $data = [];
+        foreach (getMonthNames() as $monthName) {
+            $data[$monthName] = $paymentsChart->where('month', $monthName)->first()->month_amount ?? 0;
+        }
+
+        return response()->json([
+            'months' => array_keys($data),
+            'values' => array_values($data),
+        ]);
     }
 }
