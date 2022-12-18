@@ -87,6 +87,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('show/{group}', [GroupController::class, 'show'])->name('show');
         Route::put('update/{group}', [GroupController::class, 'update'])->name('update');
         Route::get('delete/{group}', [GroupController::class, 'delete'])->name('delete');
+        Route::get('getPaymentPerMonth/{group}', [GroupController::class, 'getPaymentPerMonth'])->name('getPaymentPerMonth');
     });
 
     Route::group(['prefix' => 'student', 'as' => 'student.'], function () {

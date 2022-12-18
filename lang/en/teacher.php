@@ -9,7 +9,7 @@ return [
     'Home' => 'Home',
     'Teachers' => 'Teachers',
     'Create' => 'Create',
-    'Print' => 'طباعة',
+    'Print' => 'Print',
     'id' => 'Id',
     'name' => 'Name',
     'avatar' => 'Avatar',
