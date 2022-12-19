@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use DateTime;
-use App\Models\Teacher;
-use App\Http\Traits\ImageTrait;
 use App\DataTables\TeacherDataTable;
-use App\Services\Teacher\TeacherService;
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
+use App\Models\Student;
+use App\Models\Teacher;
 use App\Services\Experience\ExperienceService;
+use App\Services\Teacher\TeacherService;
+use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TeacherController extends Controller
 {
@@ -23,10 +23,11 @@ class TeacherController extends Controller
     private $experienceService;
 
     public function __construct(
-        TeacherDataTable $teacherDataTable,
-        TeacherService $teacherService,
+        TeacherDataTable  $teacherDataTable,
+        TeacherService    $teacherService,
         ExperienceService $experienceService
-    ) {
+    )
+    {
         $this->teacherDataTable = $teacherDataTable;
         $this->teacherService = $teacherService;
         $this->experienceService = $experienceService;
@@ -39,42 +40,14 @@ class TeacherController extends Controller
 
     public function show(Teacher $teacher)
     {
-        $this->teacherService->setTeacherWithAllData($teacher);
+        $this->teacherService->setAllDataAboutTeacher($teacher);
 
         return view('pages.teacher.show', [
-            'teacher'      => $teacher,
-            'experiences'  => $this->teacherService->teacherExperiences($teacher),
-            'groups'       => $this->teacherService->groups($teacher),
-            'countGroups'  => $this->teacherService->countGroups($teacher),
-            'countStudent' => $this->teacherService->countStudent($teacher)
-        ]);
-    }
-
-    public function getTeacherShowDataAjax(Teacher $teacher)
-    {
-        $this->teacherService->setTeacherWithAllData($teacher);
-
-        $experiences  = $this->teacherService->teacherExperiences($teacher);
-        $yearsOfExperience = $this->experienceService->getCountOfExperienceYears($experiences);
-
-        return response()->json([
-            'statistics' => [
-                [
-                    'name'  => __('teacher.group count'),
-                    'value' => $this->teacherService->countGroups($teacher)
-                ],
-                [
-                    'name'  =>  __('teacher.student count'),
-                    'value' =>  $this->teacherService->countStudent($teacher)
-                ],
-                [
-                    'name'  => __('teacher.total experience years'),
-                    'value' => $yearsOfExperience . " Years"
-                ],
-            ],
-            'teacher'     => $teacher,
-            'experiences' => $this->teacherService->teacherExperiences($teacher),
-            'groups'      => $this->teacherService->groups($teacher),
+            'teacher' => $teacher,
+            'experiences' => $this->teacherService->getTeacherExperiences($teacher),
+            'groups' => $this->teacherService->getAllTeacherGroups($teacher),
+            'countGroups' => $this->teacherService->getCountOfGroups($teacher),
+            'countStudent' => $this->teacherService->getCountOfStudents($teacher)
         ]);
     }
 
@@ -100,5 +73,44 @@ class TeacherController extends Controller
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
+    }
+
+    public function getTeacherShowDataAjax(Teacher $teacher)
+    {
+        $this->teacherService->setAllDataAboutTeacher($teacher);
+
+        $experiences = $this->teacherService->getTeacherExperiences($teacher);
+        $yearsOfExperience = $this->experienceService->getCountOfExperienceYears($experiences);
+
+        return response()->json([
+            'statistics' => [
+                [
+                    'name' => 'Groups Count',
+                    'value' => $this->teacherService->getCountOfGroups($teacher)
+                ],
+                [
+                    'name' => 'Student Count',
+                    'value' => $this->teacherService->getCountOfStudents($teacher)
+                ],
+                [
+                    'name' => 'Total Experience',
+                    'value' => $yearsOfExperience . " Years"
+                ],
+            ],
+            'teacher' => $teacher,
+            'experiences' => $this->teacherService->getTeacherExperiences($teacher),
+            'groups' => $this->teacherService->getAllTeacherGroups($teacher),
+        ]);
+    }
+
+
+    public function studentsSearchAjax(Request $request)
+    {
+
+        if ($request->ajax()) {
+
+            $students = Student::where('name', 'like', $request->student_search)->get();
+        }
+
     }
 }
