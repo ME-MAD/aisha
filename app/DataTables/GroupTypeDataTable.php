@@ -6,10 +6,6 @@ use App\Models\GroupType;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class GroupTypeDataTable extends DataTable
@@ -113,33 +109,40 @@ class GroupTypeDataTable extends DataTable
             [
                 'name' => 'id',
                 'data' => 'id',
-                'title' => 'رقم الهوية',
+                'title' => __('group.id'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'name',
                 'data' => 'name',
-                'title' => ' الاسم',
+                'title' =>  __('group.name'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'price',
                 'data' => 'price',
-                'title' => 'السعر',
+                'title' => __('group.price'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'days_num',
                 'data' => 'days_num',
-                'title' => 'عدد الايام',
+                'title' =>  __('group.days_num'),
                 "className" => 'search--col'
             ],
 
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'edit', 'data' => 'edit', 'title' =>  __('globalWorld.Edit'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+
+
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' =>  __('globalWorld.Delete'),
+                'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'
+            ],
         ];
     }
 
