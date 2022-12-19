@@ -7,36 +7,42 @@ use App\Models\GroupDay;
 use App\Http\Requests\GroupDay\StoreGroupDayRequest;
 use App\Http\Requests\GroupDay\UpdateGroupDayRequest;
 use App\Models\Group;
+use App\Services\GroupDay\GroupDayService;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupDayController extends Controller
 {
-    public function index(GroupDayDataTable $groupDayDataTable)
+
+    private $groupDayDataTable;
+    private $groupDay;
+
+    public function __construct(
+        GroupDayDataTable $groupDayDataTable,
+        GroupDayService $groupDay
+    ) {
+        $this->groupDayDataTable = $groupDayDataTable;
+        $this->groupDay          = $groupDay;
+    }
+
+    public function index()
     {
-        $groupdays = GroupDay::select(['id', 'group_id', 'day'])
-            ->with('group:id,from,to')
-            ->get();
-        $groups = Group::get();
+        $groupdays = GroupDay::select(['id', 'group_id', 'day'])->with('group:id,from,to')->get();
+        $groups    = Group::get();
 
-        return $groupDayDataTable->render('pages.groupDays.index', [
+        return $this->groupDayDataTable->render('pages.groupDays.index', [
             'groupdays' => $groupdays,
-            'groups' => $groups,
-
+            'groups'    => $groups,
         ]);
     }
 
     public function create()
     {
-        
     }
 
     public function store(StoreGroupDayRequest $request)
     {
-        GroupDay::create([
-            'group_id' => $request->group_id,
-            'day' => $request->day,
-        ]);
+        $this->groupDay->createGroupDay($request);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
@@ -49,22 +55,20 @@ class GroupDayController extends Controller
 
     public function edit(GroupDay $groupDay)
     {
-        
     }
 
     public function update(UpdateGroupDayRequest $request, GroupDay $groupDay)
     {
-        $groupDay->update([
-            'group_id' => $request->group_id,
-            'day' => $request->day,
-        ]);
+        $this->groupDay->updateGroupDay($groupDay, $request);
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group_day.index'));
     }
 
     public function delete(GroupDay $groupDay)
     {
-        $groupDay->delete();
+        $this->groupDay->deleteGroupDay($groupDay);
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
@@ -72,6 +76,7 @@ class GroupDayController extends Controller
     public function getDaysOfGroup(Request $request)
     {
         $groupDays = GroupDay::where('group_id', $request->group_id)->select(['group_id', 'day'])->get();
+
         return response()->json([
             'groupDays' => $groupDays
         ]);

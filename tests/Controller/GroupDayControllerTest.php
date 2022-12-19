@@ -2,13 +2,13 @@
 
 namespace Tests\Controller;
 
-use App\Models\GroupDay;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Tests\Traits\GroupDayTrait;
+use Illuminate\Foundation\Testing\WithFaker;
 
 class GroupDayControllerTest extends TestCase
 {
-    use WithFaker;
+    use WithFaker, GroupDayTrait;
 
 
     /**
@@ -16,10 +16,8 @@ class GroupDayControllerTest extends TestCase
      */
     public function test_validations($validationData)
     {
-
         $response = $this->post(route('admin.group_day.store'), $validationData);
         $response->assertSessionHasErrors();
-
     }
 
     public function validationData(): array
@@ -35,9 +33,7 @@ class GroupDayControllerTest extends TestCase
 
             ],
             "with No Data" => [
-                [
-
-                ]
+                []
             ],
 
         ];
@@ -53,12 +49,12 @@ class GroupDayControllerTest extends TestCase
         $this->post(route('admin.group_day.store'), $data);
 
         $this->assertDatabaseHas('group_days', $data);
-
     }
 
     public function test_can_update_GroupDay_data()
     {
-        $groupDay = GroupDay::factory()->create();
+        $groupDay = $this->generateRandomGroupDay();
+
 
         $data =
             [
@@ -69,15 +65,13 @@ class GroupDayControllerTest extends TestCase
         $this->put(route('admin.group_day.update', $groupDay), $data);
 
         $this->assertDatabaseHas('group_days', $data);
-
     }
 
     public function test_can_delete_GroupDay_data()
     {
-        $groupDay = GroupDay::factory()->create();
+        $groupDay = $this->generateRandomGroupDay();
+
         $this->get(route('admin.group_day.delete', $groupDay));
         $this->assertModelMissing($groupDay);
-
-
     }
 }
