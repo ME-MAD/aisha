@@ -8,7 +8,6 @@ function getDataShow() {
         success: function (response) {
 
             response.statistics.forEach(statistic => {
-                console.log(statistic.words);
                 $('#statustucsContaner').append(`
                     <div class="col-4">
                         <div class="card border-secondary">
@@ -96,28 +95,14 @@ function getDataShow() {
                 });
 
 
-                let studentsGroupStudentsHtml = '';
-                group.students.forEach(student => {
-                    studentsGroupStudentsHtml += `
-                        <tr>
-                            <td>${student.id}</td>
-                            <td>
-                                <a class='text-primary'
-                                    href="/admin/student/show/${student.id}"
-                                    title='Enter Page show Student'>${student.name}
-                                </a>
-                            </td>
-                            <td class="text-right">
-                                ${student.birthday}</td>
-                            <td class="text-right">
-                                ${student.phone}</td>
-                        </tr>
-                    `
-                });
+                let studentsGroupStudentsHtml = getStudentsTable(group.students);
+                
 
                 $('#ct').append(`
                     <div class="group-${group.id}">
                         <div class="content-section  animated animatedFadeInUp fadeInUp">
+
+                            <input class="from-control searchStudents" name="searchStudents" data-group-id="${group.id}" />
 
                             <div class="row inv--head-section">
 
@@ -208,7 +193,7 @@ function getDataShow() {
                                                     <th class="text-right" scope="col">Phone</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="student">
+                                            <tbody class="studentsTable">
                                                 `
                     +
                     studentsGroupStudentsHtml
@@ -222,11 +207,35 @@ function getDataShow() {
                         </div>
                     </div>
                 `)
+
+                
             });
 
             invoiceListClickEvents()
 
             initEditeExperienceModal()
+
+
+            $('.searchStudents').on('keyup',function(){
+                // console.log($(this).val());
+                console.log("hello");
+                let searchStudentsElement = this
+                $.ajax({
+                    type: 'POST',
+                    url: "/admin/student/search",
+                    data: {
+                        name: $(this).val(),
+                        group_id: $(this).data('group-id')
+                    },
+                    success:function(response){
+                        $(searchStudentsElement).parent().find('.studentsTable').html('')
+                        $(searchStudentsElement).parent().find('.studentsTable').html(
+                            getStudentsTable(response.students)
+                        )
+                    }
+                })
+            })
+            
         },
         error: function () { }
     })
@@ -237,3 +246,26 @@ function getDataShow() {
 
 
 
+function getStudentsTable(students)
+{
+    let studentsGroupStudentsHtml = '';
+    students.forEach(student => {
+        studentsGroupStudentsHtml += `
+            <tr>
+                <td>${student.id}</td>
+                <td>
+                    <a class='text-primary'
+                        href="/admin/student/show/${student.id}"
+                        title='Enter Page show Student'>${student.name}
+                    </a>
+                </td>
+                <td class="text-right">
+                    ${student.birthday}</td>
+                <td class="text-right">
+                    ${student.phone}</td>
+            </tr>
+        `
+    });
+
+    return studentsGroupStudentsHtml;
+}

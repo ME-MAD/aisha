@@ -138,7 +138,13 @@ StudentExam:
     degree : float
 
 
-
+Notes:
+    id: unsignedInteger
+    notable_type:
+    notable_id:
+    auther_id:
+    note: text
+    type: enum('personal','work','social','important')
 
 
 we need to give away 10$ a month for each student

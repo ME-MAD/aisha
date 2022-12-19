@@ -3,10 +3,9 @@
 namespace Tests\Controller;
 
 use App\Services\Experience\ExperienceService;
-use App\Services\Teacher\TeacherService;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Mockery;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
 use Mockery\MockInterface;
 use Tests\TestCase;
 use Tests\Traits\TestExperienceTrait;
@@ -20,19 +19,9 @@ class ExperienceControllerTest extends TestCase
 
     public function test_index_opens_without_errors()
     {
-        $teachers = $this->generateRandomTeacher(count: 2);
-
-        $this->instance(
-            TeacherService::class,
-            Mockery::mock(TeacherService::class, function(MockInterface $mock) use($teachers) {
-                $mock->shouldReceive('getAllTeachers')->once()->andReturn($teachers);
-            })
-        );
-
         $res = $this->call('get',route('admin.experience.index'));
 
-        $res->assertOk();
-        $res->assertViewHas('teachers',$teachers);
+        $res->assertStatus(Response::HTTP_FOUND);
     }
 
     /**
@@ -97,9 +86,9 @@ class ExperienceControllerTest extends TestCase
     {
         $experience = $this->generateRandomExperience();
 
-        $this->mock(ExperienceService::class, function(MockInterface $mock){
-            $mock->shouldReceive('deleteExperience')->once();
-        });
+        // $this->mock(ExperienceService::class, function(MockInterface $mock){
+        //     $mock->shouldReceive('deleteExperience')->once();
+        // });
 
         $res = $this->call('get',route('admin.experience.delete',$experience->id));
 

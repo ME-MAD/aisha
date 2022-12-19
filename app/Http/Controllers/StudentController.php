@@ -9,6 +9,7 @@ use App\Http\Requests\Student\UpdateStudentRequest;
 use App\Http\Traits\ImageTrait;
 use App\Models\GroupStudent;
 use App\Models\Subject;
+use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentController extends Controller
@@ -112,6 +113,22 @@ class StudentController extends Controller
         return response()->json([
             'groupStudents' => $student->groupStudents->load(['group.groupDays']),
             'subjects' => $subjects,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $name = $request->name;
+        $group_id = $request->group_id;
+
+        $students = Student::where('name', 'like','%'.$name.'%')
+            ->whereHas('groups', function($query) use ($group_id){
+                return $query->where('groups.id', $group_id);
+            })
+            ->get();
+
+        return response()->json([
+            'students' => $students
         ]);
     }
 }
