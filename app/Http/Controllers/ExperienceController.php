@@ -37,26 +37,12 @@ class ExperienceController extends Controller
         ]);
     }
 
-    public function create()
-    {
-
-    }
-
     public function store(StoreExperienceRequest $request)
     {
         $this->experienceService->createExperience($request);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
-    }
-
-    public function show(Experience $experience)
-    {
-    }
-
-    public function edit(Experience $experience)
-    {
-        
     }
 
     public function update(UpdateExperienceRequest $request, Experience $experience)

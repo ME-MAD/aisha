@@ -41,7 +41,7 @@
             "app/helpers/dataQuraan.php",
             "app/helpers/dataTgweed.php",
             "app/helpers/dataQaidaNooraniah.php",
-            "app/helpers/enums.php"
+            "app/helpers/main.php"
         ]
     },
     "autoload-dev": {

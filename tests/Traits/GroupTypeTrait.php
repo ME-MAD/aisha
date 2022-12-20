@@ -13,4 +13,13 @@ trait GroupTypeTrait
         }
         return GroupType::factory($count)->create();
     }
+
+    private function generateRandomGroupTypeData()
+    {
+        return [
+            'name'     => fake()->name,
+            'days_num' => fake()->numberBetween(1,7),
+            'price'    => fake()->numberBetween(20,500),
+        ];
+    }
 }

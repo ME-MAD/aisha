@@ -5,23 +5,28 @@ namespace Tests\Controller;
 use App\Services\Experience\ExperienceService;
 use Carbon\Carbon;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Http;
 use Mockery\MockInterface;
-use Tests\TestCase;
+use Tests\TestCaseWithTransLationsSetUp;
 use Tests\Traits\TestExperienceTrait;
 use Tests\Traits\TestTeacherTrait;
 
-class ExperienceControllerTest extends TestCase
+class ExperienceControllerTest extends TestCaseWithTransLationsSetUp
 {
     use TestTeacherTrait;
     use TestExperienceTrait;
     // use RefreshDatabase;
 
+    public function setUp() : void
+    {
+        parent::setUp();
+        $this->refreshApplicationWithLocale('en');
+    }
+
     public function test_index_opens_without_errors()
     {
         $res = $this->call('get',route('admin.experience.index'));
 
-        $res->assertStatus(Response::HTTP_FOUND);
+        $res->assertOk();
     }
 
     /**
@@ -86,9 +91,9 @@ class ExperienceControllerTest extends TestCase
     {
         $experience = $this->generateRandomExperience();
 
-        // $this->mock(ExperienceService::class, function(MockInterface $mock){
-        //     $mock->shouldReceive('deleteExperience')->once();
-        // });
+        $this->mock(ExperienceService::class, function(MockInterface $mock){
+            $mock->shouldReceive('deleteExperience')->once();
+        });
 
         $res = $this->call('get',route('admin.experience.delete',$experience->id));
 

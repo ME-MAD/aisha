@@ -15,14 +15,14 @@ class GroupDayController extends Controller
 {
 
     private $groupDayDataTable;
-    private $groupDay;
+    private $groupDayService;
 
     public function __construct(
         GroupDayDataTable $groupDayDataTable,
-        GroupDayService $groupDay
+        GroupDayService $groupDayService
     ) {
         $this->groupDayDataTable = $groupDayDataTable;
-        $this->groupDay          = $groupDay;
+        $this->groupDayService          = $groupDayService;
     }
 
     public function index()
@@ -36,30 +36,17 @@ class GroupDayController extends Controller
         ]);
     }
 
-    public function create()
-    {
-    }
-
     public function store(StoreGroupDayRequest $request)
     {
-        $this->groupDay->createGroupDay($request);
+        $this->groupDayService->createGroupDay($request);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
-    public function show(GroupDay $groupDay)
-    {
-        //
-    }
-
-    public function edit(GroupDay $groupDay)
-    {
-    }
-
     public function update(UpdateGroupDayRequest $request, GroupDay $groupDay)
     {
-        $this->groupDay->updateGroupDay($groupDay, $request);
+        $this->groupDayService->updateGroupDay($groupDay, $request);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group_day.index'));
@@ -67,7 +54,7 @@ class GroupDayController extends Controller
 
     public function delete(GroupDay $groupDay)
     {
-        $this->groupDay->deleteGroupDay($groupDay);
+        $this->groupDayService->deleteGroupDay($groupDay);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();

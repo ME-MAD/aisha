@@ -2,18 +2,25 @@
 
 namespace Tests\Controller;
 
-use Tests\TestCase;
 use Mockery\MockInterface;
 use Tests\Traits\GroupTypeTrait;
+use Tests\TestCaseWithTransLationsSetUp;
 use App\Services\GroupType\GroupTypeService;
 
-class GroupTypeControllerTest extends TestCase
+class GroupTypeControllerTest extends TestCaseWithTransLationsSetUp
 {
     use GroupTypeTrait;
 
+
+    public function setUp() : void
+    {
+        parent::setUp();
+        $this->refreshApplicationWithLocale('en');
+    }
+
+
     public function test_index_opens_without_errors()
     {
-
         $res = $this->call('get', route('admin.group_types.index'));
 
         $res->assertOk();
@@ -36,11 +43,9 @@ class GroupTypeControllerTest extends TestCase
             $mock->shouldReceive('createGroupType')->once();
         });
 
-        $res = $this->call('POST', route('admin.group_types.store'), [
-            'name'     => fake()->name,
-            'days_num' => 3,
-            'price'    => 100,
-        ]);
+        $data = $this->generateRandomGroupTypeData();
+
+        $res = $this->call('POST', route('admin.group_types.store'), $data);
 
         $res->assertSessionHasNoErrors();
     }
@@ -65,11 +70,10 @@ class GroupTypeControllerTest extends TestCase
             $mock->shouldReceive('updateGroupType')->once();
         });
 
-        $res = $this->call('PUT', route('admin.group_types.update', $groupType->id), [
-            'name'     => fake()->name,
-            'days_num' => 3,
-            'price'    => 1000,
-        ]);
+        $data = $this->generateRandomGroupTypeData(); 
+
+        $res = $this->call('PUT', route('admin.group_types.update', $groupType->id), $data);
+        
         $res->assertSessionHasNoErrors();
     }
 

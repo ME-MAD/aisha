@@ -2,14 +2,22 @@
 
 namespace Tests\Controller;
 
-use Tests\TestCase;
 use Mockery\MockInterface;
 use Tests\Traits\TestTeacherTrait;
 use App\Services\Teacher\TeacherService;
+use Tests\TestCaseWithTransLationsSetUp;
 
-class TeacherControllerTest extends TestCase
+class TeacherControllerTest extends TestCaseWithTransLationsSetUp
 {
     use TestTeacherTrait;
+
+
+    public function setUp() : void
+    {
+        parent::setUp();
+        $this->refreshApplicationWithLocale('en');
+    }
+
 
     public function test_index_opens_without_errors()
     {

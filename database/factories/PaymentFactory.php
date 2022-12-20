@@ -18,14 +18,11 @@ class PaymentFactory extends Factory
      */
     public function definition()
     {
-        $array_month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-
         return [
             'student_id' => Student::select('id')->InRandomOrder()->first()->id,
             'group_id'   => Group::select('id')->InRandomOrder()->first()->id,
             'amount'     => fake()->numberBetween(50, 1500),
-            'month'      => fake()->randomElement($array_month),
+            'month'      => fake()->randomElement(getMonthNames()),
             'paid'       => rand(0, 1),
         ];
     }

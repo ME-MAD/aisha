@@ -13,4 +13,12 @@ trait GroupDayTrait
         }
         return GroupDay::factory($count)->create();
     }
+
+    public function generateRandomGroupDayData()
+    {
+        return [
+            'group_id' => $this->generateRandomGroup()->id,
+            'day' => $this->faker()->dayOfWeek()
+        ];
+    }
 }
