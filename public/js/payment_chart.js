@@ -1,4 +1,3 @@
-const csrfToken = $('meta[name="csrf-token"]').attr('content')
 
 function GetMonthlyPaymentsThisYear(year = null) {
 
@@ -8,7 +7,6 @@ function GetMonthlyPaymentsThisYear(year = null) {
         type: 'POST',
         url: url,
         data: {
-            _token: csrfToken,
             year: year,
         },
         success: function (response) {

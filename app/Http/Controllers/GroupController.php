@@ -42,10 +42,6 @@ class GroupController extends Controller
         ]);
     }
 
-    public function create()
-    {
-    }
-
     public function store(StoreGroupRequest $request)
     {
         $this->groupService->createGroup($request);
@@ -70,12 +66,8 @@ class GroupController extends Controller
             'groupDaysCount' => $groupDaysCount,
             'groupTypeNumDays' => $groupTypeNumDays,
             'students' => $students,
-            'currentMonth' => date('F'),
+            'currentMonth' => getCurrectMonthName(),
         ]);
-    }
-
-    public function edit(Group $group)
-    {
     }
 
     public function update(UpdateGroupRequest $request, Group $group)

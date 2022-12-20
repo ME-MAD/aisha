@@ -98,6 +98,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::put('update/{student}', [StudentController::class, 'update'])->name('update');
         Route::get('delete/{student}', [StudentController::class, 'delete'])->name('delete');
         Route::get('getGroupStudents/{student}', [StudentController::class, 'getGroupStudents'])->name('getGroupStudents');
+        Route::post('search', [StudentController::class, 'search'])->name('search');
     });
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {

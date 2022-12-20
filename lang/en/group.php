@@ -16,7 +16,7 @@ return [
     'teacher_id' => 'Teacher',
     'group_type_id' => 'Group Type',
     'count Student' => 'Count Student',
-    'name' => 'name',
+    '' => '',
     '' => '',
     '' => '',
     '' => '',

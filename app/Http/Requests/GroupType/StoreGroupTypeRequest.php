@@ -24,9 +24,9 @@ class StoreGroupTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'days_num' => 'required',
-            'price' => 'required',
+            'name'     => 'required',
+            'days_num' => 'required|integer',
+            'price'    => 'required|integer',
         ];
     }
 }

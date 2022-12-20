@@ -1,3 +1,4 @@
+
 getDataShow();
 
 function getDataShow() {
@@ -7,6 +8,7 @@ function getDataShow() {
         success: function (response) {
 
             response.statistics.forEach(statistic => {
+                console.log(statistic.words);
                 $('#statustucsContaner').append(`
                     <div class="col-4">
                         <div class="card border-secondary">
@@ -52,6 +54,7 @@ function getDataShow() {
                 `)
             });
 
+
             response.groups.forEach(group => {
                 $('#pills-tab').append(`
                     <li class="nav-item">
@@ -59,10 +62,24 @@ function getDataShow() {
                             data-invoice-id="group : ${group.id}">
                             <div class="f-m-body">
                                 <div class="f-head">
-                                      <h4 class="font-weight-bold  text-capitalize">Group : </h4>
+                                    <svg viewBox="0 0 24 24" width="36" height="36"
+                                        stroke="currentColor" stroke-width="3" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="css-i6dzq1">
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
                                 </div>
                                 <div class="f-body">
-                                    <h5 class=" text-muted text-capitalize">  ${group.name}</h5>  
+                                    <p class="invoice-customer-name"><span>Age
+                                            Type:</span><span
+                                            class="badge bg-info mb-2">${group.age_type}</span>
+                                    </p>
+                                    <p class="invoice-generated-date">Time: <span
+                                            class="badge bg-success mb-2">${group.ffrom}</span>
+                                    </p>
+                                    <p class="invoice-generated-date">Time: <span
+                                            class="badge bg-danger mb-2">${group.fto}</span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +97,6 @@ function getDataShow() {
 
 
                 let studentsGroupStudentsHtml = '';
-
                 group.students.forEach(student => {
                     studentsGroupStudentsHtml += `
                         <tr>
@@ -181,20 +197,6 @@ function getDataShow() {
 
                             <div class="row inv--product-table-section">
                                 <div class="col-12">
-                                
-                                    <div class="search">
-                                            <div class="input-group mb-3">
-                                                 <input class="form-control" 
-                                                        name="student_search" 
-                                                        id="student_search" 
-                                                        data-href="/admin/teacher/studentsSearchAjax"
-                                                        />
-                                              <div class="input-group-append">
-                                                <label class="input-group-text" for="student_search">Search</label>
-                                              </div>
-                                            </div>
-                                            
-                                    </div>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead class="">
@@ -225,36 +227,9 @@ function getDataShow() {
             invoiceListClickEvents()
 
             initEditeExperienceModal()
-
-
-            // Student_Search
-            $('#student_search').on('keyup', function () {
-                console.log($(this).val())
-                getStudentSearchResponse($(this).val())
-
-            });
-
         },
-        error: function () {
-        }
-    });
-
-
-    // Student_Search
-    function getStudentSearchResponse($data) {
-        let searchHref = $('#student_search').data('href');
-
-        $.ajax({
-            url: searchHref,
-            data: $data,
-            success: function (response) {
-                console.log(response)
-            }
-        });
-
-    }
-
-
+        error: function () { }
+    })
 }
 
 

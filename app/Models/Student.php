@@ -58,4 +58,16 @@ class Student extends Model
     {
         return $this->payments()->select(['paid'])->where('group_id', $group_id)->where('month', $month)->first()->paid ?? false;
     }
+
+    public function groups()
+    {
+        return $this->hasManyThrough(
+            Group::class,
+            GroupStudent::class,
+            'student_id',
+            'id',
+            'id',
+            'group_id'
+        );
+    }
 }

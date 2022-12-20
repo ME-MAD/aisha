@@ -32,3 +32,11 @@ if (!function_exists('getMonthNames')) {
 }
 
 
+if (!function_exists('getCurrectMonthName')) {
+    function getCurrectMonthName()
+    {
+        return date('F');
+    }
+}
+
+
