@@ -39,15 +39,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
 });
 
-Route::get('/', function () {
-    return redirect(route('admin.home'));
-})->name('home');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
 
     Route::get('/', function () {
         return app()->getLocale();
     });
+
+    Route::get('/', function () {
+        return redirect(route('admin.home'));
+    })->name('home')->middleware('auth');
+
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
