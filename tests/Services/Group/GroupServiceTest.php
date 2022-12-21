@@ -17,6 +17,8 @@ class GroupServiceTest extends TestCase
         $groupObject = $this->app->make(GroupService::class);
         $data = $this->generateRandomGroupData();
 
+        // dd($data);
+
         $groupObject->createGroup((object)$data);
 
         $this->assertDatabaseHas('groups',(array) $data);

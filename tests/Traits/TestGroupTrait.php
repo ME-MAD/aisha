@@ -29,6 +29,7 @@ Trait TestGroupTrait
         $teacher = $this->generateRandomTeacher();
         $groupType = GroupType::inRandomOrder()->first();
         return [
+            'name' => fake()->name,
             'from' => "10:00",
             'to' => "11:00",
             'age_type' => Group::GROUP_TYPES[rand(0, 1)],
