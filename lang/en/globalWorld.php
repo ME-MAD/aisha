@@ -20,6 +20,16 @@ return [
     'Create payments' => 'Create payments',
     'Exams' => 'Exams',
     'Create Exam' => 'Create Exam',
+    'AISHA Admin - Login Page' => 'AISHA Admin - Login Page',
+    'Log In to' => 'Log In to',
+    'AISHA' => ' AISHA ',
+    'Email' => 'Email',
+    'Password' => 'Password',
+    'Show Password' => 'Show Password',
+    'Log In' => 'Log In',
+    'Click' => 'Click',
+    'Sign Out' => 'Sign Out',
+    '',
     'Save' => 'Save',
     'Discard' => 'Discard',
     'Show' => 'Show ',
@@ -34,6 +44,5 @@ return [
     '' => '',
     '' => '',
     '' => '',
-
 
 ];
