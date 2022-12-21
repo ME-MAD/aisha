@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\GroupController;
@@ -32,10 +32,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-/*Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('loginPage', [AuthController::class, 'loginPage'])->name('loginPage');
     Route::post('login', [AuthController::class, 'login'])->name('login');
-});*/
+});
 
 
 
