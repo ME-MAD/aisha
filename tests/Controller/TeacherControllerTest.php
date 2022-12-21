@@ -43,13 +43,9 @@ class TeacherControllerTest extends TestCaseWithTransLationsSetUp
             $mock->shouldReceive('createTeacher')->once();
         });
 
-        $res = $this->call('POST', route('admin.teacher.store'), [
-            'name'          => fake()->name,
-            'birthday'      => fake()->date(),
-            'phone'         => fake()->phoneNumber(),
-            'avatar'        => null,
-            'qualification' => fake()->text()
-        ]);
+        $data = $this->generateRandomTeacherData();
+
+        $res = $this->call('POST', route('admin.teacher.store'), $data);
 
         $res->assertSessionHasNoErrors();
     }
@@ -74,13 +70,10 @@ class TeacherControllerTest extends TestCaseWithTransLationsSetUp
             $mock->shouldReceive('updateTeacher')->once();
         });
 
-        $res = $this->call('PUT', route('admin.teacher.update', $teacher->id), [
-            'name'          => fake()->name,
-            'birthday'      => fake()->date(),
-            'phone'         => fake()->phoneNumber(),
-            'avatar'        => null,
-            'qualification' => fake()->text()
-        ]);
+        $data = $this->generateRandomTeacherData();
+
+        $res = $this->call('PUT', route('admin.teacher.update', $teacher->id), $data);
+        
         $res->assertSessionHasNoErrors();
     }
 
