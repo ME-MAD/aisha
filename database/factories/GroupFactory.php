@@ -10,6 +10,7 @@ class GroupFactory extends Factory
     public function definition()
     {
         return [
+            'name' => fake()->word,
             'from' => fake()->time(),
             'to' => fake()->time(),
             'age_type' => Group::GROUP_TYPES[rand(0, 1)],

@@ -14,7 +14,7 @@ class GroupDataTable extends DataTable
      * Build DataTable class.
      *
      * @param QueryBuilder $query Results from query() method.
-     * @return \Yajra\DataTables\EloquentDataTable
+     * @return EloquentDataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -25,7 +25,6 @@ class GroupDataTable extends DataTable
                 return view('pages.group.datatable.edit', compact('query'));
             })
             ->addColumn('delete', 'pages.group.datatable.delete')
-
             ->editColumn('groupType.name', function ($q) {
                 return $q->groupType->name ?? "";
             })
@@ -36,10 +35,10 @@ class GroupDataTable extends DataTable
                 return ($q->group_students_count);
             })
             ->editColumn('from', function ($q) {
-                return  date('h:i a', strtotime($q->from));
+                return date('h:i a', strtotime($q->from));
             })
             ->editColumn('to', function ($q) {
-                return  date('h:i a', strtotime($q->to));
+                return date('h:i a', strtotime($q->to));
             })
             // ->rawColumns(['edit', 'delete'])
 
@@ -50,7 +49,6 @@ class GroupDataTable extends DataTable
                 return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' >" . $q->id . "</a>";
             })
             ->rawColumns(['edit', 'delete', 'id', 'show'])
-
             ->setRowId('id');
     }
 
@@ -60,6 +58,7 @@ class GroupDataTable extends DataTable
         return $model->select([
             'groups.id',
             'teacher_id',
+            'name',
             'from',
             'to',
             'age_type',
@@ -79,9 +78,9 @@ class GroupDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->parameters([
-                'dom'          => 'Blrtip',
-                'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
-                'buttons'      => [
+                'dom' => 'Blrtip',
+                'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
+                'buttons' => [
                     ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
                     ['extend' => 'excel', 'className' => 'btn btn-success ', 'text' => 'Export'],
                 ],
@@ -135,6 +134,13 @@ class GroupDataTable extends DataTable
                 'data' => 'id',
                 'title' => __('group.id'),
                 "className" => 'search--col exact'
+            ],
+
+            [
+                'name' => 'name',
+                'data' => 'name',
+                'title' => __('group.name'),
+                "className" => 'search--col '
             ],
 
             [

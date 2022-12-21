@@ -1,14 +1,13 @@
-
 getDataShow();
 
 function getDataShow() {
-    let href = $('#profileAneExperience').data('href')
+    let href = $('#showTeacherAjaxContainer').data('href')
     $.ajax({
         url: href,
         success: function (response) {
 
             response.statistics.forEach(statistic => {
-                $('#statustucsContaner').append(`
+                $('#experiences_Container').append(`
                     <div class="col-4">
                         <div class="card border-secondary">
                             <div class="card-body">
@@ -61,24 +60,10 @@ function getDataShow() {
                             data-invoice-id="group : ${group.id}">
                             <div class="f-m-body">
                                 <div class="f-head">
-                                    <svg viewBox="0 0 24 24" width="36" height="36"
-                                        stroke="currentColor" stroke-width="3" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="css-i6dzq1">
-                                        <polyline points="9 18 15 12 9 6"></polyline>
-                                    </svg>
+                                  
                                 </div>
                                 <div class="f-body">
-                                    <p class="invoice-customer-name"><span>Age
-                                            Type:</span><span
-                                            class="badge bg-info mb-2">${group.age_type}</span>
-                                    </p>
-                                    <p class="invoice-generated-date">Time: <span
-                                            class="badge bg-success mb-2">${group.ffrom}</span>
-                                    </p>
-                                    <p class="invoice-generated-date">Time: <span
-                                            class="badge bg-danger mb-2">${group.fto}</span>
-                                    </p>
+                               <h3>${group.name}</h3>
                                 </div>
                             </div>
                         </div>
@@ -95,14 +80,28 @@ function getDataShow() {
                 });
 
 
-                let studentsGroupStudentsHtml = getStudentsTable(group.students);
-                
+                let studentsGroupStudentsHtml = '';
+                group.students.forEach(student => {
+                    studentsGroupStudentsHtml += `
+                        <tr>
+                            <td>${student.id}</td>
+                            <td>
+                                <a class='text-primary'
+                                    href="/admin/student/show/${student.id}"
+                                    title='Enter Page show Student'>${student.name}
+                                </a>
+                            </td>
+                            <td class="text-right">
+                                ${student.birthday}</td>
+                            <td class="text-right">
+                                ${student.phone}</td>
+                        </tr>
+                    `
+                });
 
                 $('#ct').append(`
                     <div class="group-${group.id}">
                         <div class="content-section  animated animatedFadeInUp fadeInUp">
-
-                            <input class="from-control searchStudents" name="searchStudents" data-group-id="${group.id}" />
 
                             <div class="row inv--head-section">
 
@@ -128,7 +127,6 @@ function getDataShow() {
                             </div>
 
                             <div class="row inv--detail-section">
-
                                 <div class="col-sm-7 align-self-center">
                                     <p class="inv-to">Days Num :
                                         <span class="badge bg-danger mb-2">
@@ -193,7 +191,7 @@ function getDataShow() {
                                                     <th class="text-right" scope="col">Phone</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="studentsTable">
+                                            <tbody id="student">
                                                 `
                     +
                     studentsGroupStudentsHtml
@@ -207,37 +205,14 @@ function getDataShow() {
                         </div>
                     </div>
                 `)
-
-                
             });
 
             invoiceListClickEvents()
 
             initEditeExperienceModal()
-
-
-            $('.searchStudents').on('keyup',function(){
-                // console.log($(this).val());
-                console.log("hello");
-                let searchStudentsElement = this
-                $.ajax({
-                    type: 'POST',
-                    url: "/admin/student/search",
-                    data: {
-                        name: $(this).val(),
-                        group_id: $(this).data('group-id')
-                    },
-                    success:function(response){
-                        $(searchStudentsElement).parent().find('.studentsTable').html('')
-                        $(searchStudentsElement).parent().find('.studentsTable').html(
-                            getStudentsTable(response.students)
-                        )
-                    }
-                })
-            })
-            
         },
-        error: function () { }
+        error: function () {
+        }
     })
 }
 
@@ -246,26 +221,3 @@ function getDataShow() {
 
 
 
-function getStudentsTable(students)
-{
-    let studentsGroupStudentsHtml = '';
-    students.forEach(student => {
-        studentsGroupStudentsHtml += `
-            <tr>
-                <td>${student.id}</td>
-                <td>
-                    <a class='text-primary'
-                        href="/admin/student/show/${student.id}"
-                        title='Enter Page show Student'>${student.name}
-                    </a>
-                </td>
-                <td class="text-right">
-                    ${student.birthday}</td>
-                <td class="text-right">
-                    ${student.phone}</td>
-            </tr>
-        `
-    });
-
-    return studentsGroupStudentsHtml;
-}

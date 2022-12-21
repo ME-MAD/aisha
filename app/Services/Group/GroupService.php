@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Group;
 
 use App\Models\Group;
@@ -10,6 +11,7 @@ class GroupService
     public function createGroup(object $request)
     {
         return Group::create([
+            'name' => $request->name,
             'from' => $request->from,
             'to' => $request->to,
             'teacher_id' => $request->teacher_id,
@@ -18,9 +20,10 @@ class GroupService
         ]);
     }
 
-    public function updateGroup(Group $group,object $request)
+    public function updateGroup(Group $group, object $request)
     {
         return $group->update([
+            'name' => $request->name,
             'from' => $request->from,
             'to' => $request->to,
             'group_type_id' => $request->group_type_id,
