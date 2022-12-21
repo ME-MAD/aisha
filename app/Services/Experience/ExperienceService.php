@@ -3,8 +3,8 @@
 namespace App\Services\Experience;
 
 use App\Models\Experience;
-use App\Services\Teacher\TeacherService;
 use DateTime;
+use Illuminate\Database\Eloquent\Collection;
 
 class ExperienceService
 {
@@ -33,7 +33,7 @@ class ExperienceService
         return $experience->delete();
     }
 
-    public function getCountOfExperienceYears($experiences)
+    public function getCountOfExperienceYears(Collection|array $experiences) : int
     {
         $years = 0;
         $months = 0;

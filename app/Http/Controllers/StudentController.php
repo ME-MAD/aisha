@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\StudentDataTable;
-use App\Models\Student;
 use App\Http\Requests\Student\StoreStudentRequest;
 use App\Http\Requests\Student\UpdateStudentRequest;
 use App\Http\Traits\ImageTrait;
-use App\Models\GroupStudent;
+use App\Models\Student;
 use App\Models\Subject;
+use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentController extends Controller
@@ -37,7 +37,7 @@ class StudentController extends Controller
             'birthday' => $request->birthday,
             'phone' => $request->phone,
             'qualification' => $request->qualification,
-            'avatar' =>  $fileName,
+            'avatar' => $fileName,
 
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -85,7 +85,7 @@ class StudentController extends Controller
             'birthday' => $request->birthday,
             'phone' => $request->phone,
             'qualification' => $request->qualification,
-            'avatar' =>  $fileName,
+            'avatar' => $fileName,
 
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -109,9 +109,27 @@ class StudentController extends Controller
             'lessons.studentLessons.syllabus',
             'lessons.studentLessons.studentLessonReview.syllabusReviews',
         ])->get();
+
+
         return response()->json([
             'groupStudents' => $student->groupStudents->load(['group.groupDays']),
             'subjects' => $subjects,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $name = $request->name;
+        $group_id = $request->group_id;
+
+        $students = Student::where('name', 'like','%'.$name.'%')
+            ->whereHas('groups', function($query) use ($group_id){
+                return $query->where('groups.id', $group_id);
+            })
+            ->get();
+
+        return response()->json([
+            'students' => $students
         ]);
     }
 }

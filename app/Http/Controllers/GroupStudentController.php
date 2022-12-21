@@ -10,7 +10,6 @@ use App\Models\Group;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
-use Symfony\Component\VarDumper\Cloner\Stub;
 
 class GroupStudentController extends Controller
 {
@@ -24,11 +23,6 @@ class GroupStudentController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        
-    }
-
     public function store(StoreGroupStudentRequest $request)
     {
         GroupStudent::create([
@@ -38,21 +32,6 @@ class GroupStudentController extends Controller
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
-    }
-
-    public function show(GroupStudent $groupStudent)
-    {
-        //
-    }
-
-    public function edit(GroupStudent $groupStudent)
-    {
-        
-    }
-
-    public function update(UpdateGroupStudentRequest $request, GroupStudent $groupStudent)
-    {
-        
     }
 
     public function delete(GroupStudent $groupStudent)

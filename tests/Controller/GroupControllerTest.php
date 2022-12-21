@@ -3,16 +3,26 @@ namespace Tests\Controller;
 
 use App\Models\Group;
 use App\Models\GroupType;
-use App\Services\Group\GroupService;
+use App\Models\Payment;
 use Mockery\MockInterface;
-use Tests\TestCase;
 use Tests\Traits\TestGroupTrait;
 use Tests\Traits\TestTeacherTrait;
+use App\Services\Group\GroupService;
+use Illuminate\Support\Facades\DB;
+use Tests\TestCaseWithTransLationsSetUp;
+use Tests\Traits\TestPaymentTrait;
 
-class GroupControllerTest extends TestCase
+class GroupControllerTest extends TestCaseWithTransLationsSetUp
 {
     use TestTeacherTrait;
     use TestGroupTrait;
+    use TestPaymentTrait;
+
+    public function setUp() : void
+    {
+        parent::setUp();
+        $this->refreshApplicationWithLocale('en');
+    }
 
     public function test_index_opens_without_errors()
     {
@@ -88,6 +98,32 @@ class GroupControllerTest extends TestCase
         $res = $this->call('get',route('admin.group.delete',$group->id));
 
         $res->assertSessionHasNoErrors();
+    }
+
+    public function test_getPaymentPerMonth()
+    {
+        $group = $this->generateRandomGroup();
+
+        $this->generateRandomPaymentsForGroup($group->id);
+
+        $paymentsChart = Payment::select(DB::raw("(SUM(amount)) as month_amount"), 'month')
+            ->where('group_id', '=', $group->id)
+            ->whereYear('created_at', date('Y'))
+            ->groupBy('month')
+            ->get();
+
+        $data = [];
+        foreach (getMonthNames() as $monthName) {
+            $data[$monthName] = $paymentsChart->where('month', $monthName)->first()->month_amount ?? 0;
+        }
+
+
+        $res = $this->call('get',route('admin.group.getPaymentPerMonth',$group->id));
+
+
+        $res->assertJson([
+            'values' => array_values($data)
+        ]);
     }
 
 

@@ -15,7 +15,7 @@ class TeacherDataTable extends DataTable
      * Build DataTable class.
      *
      * @param QueryBuilder $query Results from query() method.
-     * @return \Yajra\DataTables\EloquentDataTable
+     * @return EloquentDataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -45,8 +45,8 @@ class TeacherDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Teacher $model
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Teacher $model
+     * @return QueryBuilder
      */
     public function query(Teacher $model): QueryBuilder
     {
@@ -56,7 +56,7 @@ class TeacherDataTable extends DataTable
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\DataTables\Html\Builder
+     * @return HtmlBuilder
      */
     public function html(): HtmlBuilder
     {
@@ -66,9 +66,9 @@ class TeacherDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->parameters([
-                'dom'          => 'Blrtip',
-                'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
-                'buttons'      => [
+                'dom' => 'Blrtip',
+                'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
+                'buttons' => [
                     ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
                     ['extend' => 'excel', 'className' => 'btn btn-success ', 'text' => 'Export'],
                 ],
@@ -109,11 +109,7 @@ class TeacherDataTable extends DataTable
             ]);
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
+
     protected function getColumns(): array
     {
         return [
@@ -127,14 +123,14 @@ class TeacherDataTable extends DataTable
             [
                 'name' => 'name',
                 'data' => 'name',
-                'title' =>  __('teacher.name'),
+                'title' => __('teacher.name'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'avatar',
                 'data' => 'avatar',
-                'title' =>  __('teacher.avatar'),
+                'title' => __('teacher.avatar'),
                 "className" => 'search--col'
             ],
 
@@ -160,7 +156,6 @@ class TeacherDataTable extends DataTable
             ],
 
 
-
             ['name' => 'groups.count', 'data' => 'groups.count', 'title' => __('teacher.group count'), "className" => 'search--col', 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
             ['name' => 'groupStudents.count', 'data' => 'groupStudents.count', 'title' => __('teacher.student count'), "className" => 'search--col', 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
@@ -174,11 +169,7 @@ class TeacherDataTable extends DataTable
         ];
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
+
     protected function filename(): string
     {
         return 'Teacher_' . date('YmdHis');

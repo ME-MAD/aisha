@@ -17,10 +17,9 @@ class GroupTypeFactory extends Factory
     public function definition()
     {
         return [
-            // 'name' => fake()->name,
-            // 'price' => fake()->date(),
-            // 'days_num' => fake()->phoneNumber()
-            
+            'name'     => fake()->name,
+            'price'    => fake()->numberBetween($min = 50, $max = 2500),
+            'days_num' => fake()->numberBetween($min = 2, $max = 6),
         ];
     }
 }

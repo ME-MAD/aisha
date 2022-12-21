@@ -124,16 +124,16 @@ class GroupDayDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            ['name' => 'group_days.id', 'data' => 'id', 'title' => 'الرقم', "className" => 'search--col exact'],
+            ['name' => 'group_days.id', 'data' => 'id', 'title' => __('group.id'), "className" => 'search--col exact'],
 
-            ['name' => 'group.from', 'data' => 'group.from', 'title' => 'من', "className" => 'search--col'],
+            ['name' => 'group.from', 'data' => 'group.from', 'title' =>  __('group.from'), "className" => 'search--col'],
 
-            ['name' => 'group.to', 'data' => 'group.to', 'title' => 'إلى', "className" => 'search--col'],
+            ['name' => 'group.to', 'data' => 'group.to', 'title' => __('group.to'), "className" => 'search--col'],
 
-            ['name' => 'day', 'data' => 'day', 'title' => 'اليوم', "className" => 'search--col'],
+            ['name' => 'day', 'data' => 'day', 'title' => __('group.day'), "className" => 'search--col'],
 
 
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'delete', 'data' => 'delete', 'title' => __('globalWorld.Delete'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
         ];
     }
 

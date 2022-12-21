@@ -3,36 +3,30 @@
 namespace Tests\Controller;
 
 use App\Services\Experience\ExperienceService;
-use App\Services\Teacher\TeacherService;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Mockery;
+use Illuminate\Http\Response;
 use Mockery\MockInterface;
-use Tests\TestCase;
+use Tests\TestCaseWithTransLationsSetUp;
 use Tests\Traits\TestExperienceTrait;
 use Tests\Traits\TestTeacherTrait;
 
-class ExperienceControllerTest extends TestCase
+class ExperienceControllerTest extends TestCaseWithTransLationsSetUp
 {
     use TestTeacherTrait;
     use TestExperienceTrait;
     // use RefreshDatabase;
 
+    public function setUp() : void
+    {
+        parent::setUp();
+        $this->refreshApplicationWithLocale('en');
+    }
+
     public function test_index_opens_without_errors()
     {
-        $teachers = $this->generateRandomTeacher(count: 2);
-
-        $this->instance(
-            TeacherService::class,
-            Mockery::mock(TeacherService::class, function(MockInterface $mock) use($teachers) {
-                $mock->shouldReceive('getAllTeachers')->once()->andReturn($teachers);
-            })
-        );
-
         $res = $this->call('get',route('admin.experience.index'));
 
         $res->assertOk();
-        $res->assertViewHas('teachers',$teachers);
     }
 
     /**

@@ -2,72 +2,84 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header p-3 mb-2 bg-warning ">
-                <h5 class="modal-title text-white" id="editGroup">تعديل بيانات المجموعة</h5>
+                <h5 class="modal-title text-white" id="editGroup">{{ __('group.edite group') }}</h5>
             </div>
             <div class="modal-body">
                 <form id="editGroupForm" method="post">
                     @csrf
                     @method('PUT')
-                    <x-time name="from" id="from_edit" label="من" id="from" class="text-warning" />
+                    <div class="form-group row mb-4">
+                        <label for="name" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">
+                            {{__('group.name')}}
+                        </label>
+                        <input name="name" class="form-control col-xl-10 col-sm-8 col-sm-10"
+                               value="{{old('name', request('name') ?? '')}}">
+                    </div>
+                    <x-time name="from" id="from_edit" label="{{ __('group.from') }}" id="from"
+                            class="text-warning"/>
 
-                    <x-time name="to" id="from_edit" label="إلى" id="to" class="text-warning" />
-
+                    <x-time name="to" id="from_edit" label="{{ __('group.to') }}" id="to"
+                            class="text-warning"/>
 
 
                     <div class="form-group row mb-4">
-                        <label for="teacherId" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-warning"> اختر
-                            المعلم</label>
+                        <label for="teacherId"
+                               class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-warning">{{ __('group.Choose teacher') }}
+                        </label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <select id="teacherId" class="form-control basic" style="width: 100%;" name="teacher_id">
-                                <option value="">اختر المعلم</option>
+                                <option value="">{{ __('group.Choose teacher') }}</option>
                                 @foreach ($teachers as $teacher)
                                     <option value="{{ $teacher->id }}">
                                         {{ $teacher->name }}</option>
                                 @endforeach
                             </select>
                             @error('teacher_id')
-                                <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
                     <div class="form-group row mb-4">
-                        <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-warning">نوع
-                            المجموعة</label>
+                        <label for="age_type"
+                               class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-warning">{{ __('group.Choose type of group') }}
+                        </label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <select class="form-control basic" style="width: 100%;" name="group_type_id"
-                                id="groupTypeId">
-                                <option value="">اختر نوع
-                                    المجموعة</option>
+                                    id="groupTypeId">
+                                <option value="">{{ __('group.Choose type of group') }}
+                                </option>
                                 @foreach ($groupTypes as $groupType)
                                     <option value="{{ $groupType->id }}">
                                         {{ $groupType->name }}</option>
                                 @endforeach
                             </select>
                             @error('group_type_id')
-                                <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-warning">الفئه
-                            العمرية</label>
+                        <label for="age_type"
+                               class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-warning">{{ __('group.age type') }}
+                        </label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <select class="form-control basic" style="width: 100%;" name="age_type" id="ageType">
-                                <option value="kid">kid
+                                <option value="kid">{{ __('group.kid') }}
                                 </option>
                                 <option value="adult">
-                                    adult</option>
+                                    {{ __('group.adult') }}</option>
                             </select>
                             @error('age_type')
-                                <p class="text-danger">{{ $message }}</p>
+                            <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-warning">Save</button>
-                        <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Discard</button>
+                        <button type="submit" class="btn btn-warning">{{ __('globalWorld.Save') }}</button>
+                        <button class="btn" data-dismiss="modal"><i
+                                    class="flaticon-cancel-12"></i>{{ __('globalWorld.Discard') }}</button>
                     </div>
                 </form>
             </div>

@@ -2,24 +2,34 @@
 
 namespace Tests\Controller;
 
-use App\Models\GroupDay;
+use App\Services\GroupDay\GroupDayService;
+use Tests\Traits\GroupDayTrait;
+use Tests\TestCaseWithTransLationsSetUp;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
+use Mockery\MockInterface;
+use Tests\Traits\TestGroupTrait;
+use Tests\Traits\TestTeacherTrait;
 
-class GroupDayControllerTest extends TestCase
+class GroupDayControllerTest extends TestCaseWithTransLationsSetUp
 {
-    use WithFaker;
+    use WithFaker, GroupDayTrait;
+    use TestGroupTrait;
+    use TestTeacherTrait;
+
+    public function setUp() : void
+    {
+        parent::setUp();
+        $this->refreshApplicationWithLocale('en');
+    }
 
 
     /**
      * @dataProvider validationData
      */
-    public function test_validations($validationData)
+    public function test_store_validations($validationData)
     {
-
         $response = $this->post(route('admin.group_day.store'), $validationData);
         $response->assertSessionHasErrors();
-
     }
 
     public function validationData(): array
@@ -32,12 +42,9 @@ class GroupDayControllerTest extends TestCase
                     'day' => null,
                     'group_id' => 1
                 ]
-
             ],
             "with No Data" => [
-                [
-
-                ]
+                []
             ],
 
         ];
@@ -45,39 +52,42 @@ class GroupDayControllerTest extends TestCase
 
     public function test_can_store_GroupDay_data()
     {
-        $data = [
-            'group_id' => $this->faker()->numberBetween(1, 10),
-            'day' => $this->faker()->dayOfWeek()
-        ];
+        $data = $this->generateRandomGroupDayData();
 
-        $this->post(route('admin.group_day.store'), $data);
+        $this->mock(GroupDayService::class, function(MockInterface $mock){
+            $mock->shouldReceive('createGroupDay')->once();
+        });
 
-        $this->assertDatabaseHas('group_days', $data);
+        $res = $this->post(route('admin.group_day.store'), $data);
 
+        $res->assertSessionHasNoErrors();
     }
 
     public function test_can_update_GroupDay_data()
     {
-        $groupDay = GroupDay::factory()->create();
+        $groupDay = $this->generateRandomGroupDay();
 
-        $data =
-            [
-                'group_id' => 20,
-                'day' => 'Friday',
-            ];
+        $data = $this->generateRandomGroupDayData();
 
-        $this->put(route('admin.group_day.update', $groupDay), $data);
+        $this->mock(GroupDayService::class, function(MockInterface $mock){
+            $mock->shouldReceive('updateGroupDay')->once();
+        });
 
-        $this->assertDatabaseHas('group_days', $data);
+        $res = $this->put(route('admin.group_day.update', $groupDay), $data);
 
+        $res->assertSessionHasNoErrors();
     }
 
-    public function test_can_delete_GroupDay_data()
+    public function test_can_delete_GroupDay()
     {
-        $groupDay = GroupDay::factory()->create();
-        $this->get(route('admin.group_day.delete', $groupDay));
-        $this->assertModelMissing($groupDay);
+        $groupDay = $this->generateRandomGroupDay();
 
+        $this->mock(GroupDayService::class, function(MockInterface $mock){
+            $mock->shouldReceive('deleteGroupDay')->once();
+        });
 
+        $res = $this->get(route('admin.group_day.delete', $groupDay));
+
+        $res->assertSessionHasNoErrors();
     }
 }

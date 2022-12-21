@@ -2,77 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\GroupTypeDataTable;
 use App\Models\GroupType;
+use App\DataTables\GroupTypeDataTable;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Services\GroupType\GroupTypeService;
 use App\Http\Requests\GroupType\StoreGroupTypeRequest;
 use App\Http\Requests\GroupType\UpdateGroupTypeRequest;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupTypeController extends Controller
 {
 
-    // use GroupTypeTrait;
+    private $groupTypeDataTable;
+    private $groupTypeService;
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(GroupTypeDataTable $groupTypeDataTable)
-    {
-        return  $groupTypeDataTable->render('pages.groupType.index');
-        // $grouptypes = $this->getGroupType();
-        // return view('pages.groupType.index', [
-        //     "grouptypes" => $grouptypes,
-        // ]);
+    public function __construct(
+        GroupTypeDataTable $groupTypeDataTable,
+        GroupTypeService $groupTypeService
+    ) {
+        $this->groupTypeDataTable = $groupTypeDataTable;
+        $this->groupTypeService   = $groupTypeService;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index()
+    {
+        return $this->groupTypeDataTable->render('pages.groupType.index');
+    }
+
     public function create()
     {
         return view('pages.groupType.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreGroupTypeRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreGroupTypeRequest $request)
     {
-        $price = str_replace(['$', '_', ','], ['', '0', ''], $request->price);
-        GroupType::create([
-            'name' => $request->name,
-            'days_num' => $request->days_num,
-            'price' => $price,
-        ]);
+        $this->groupTypeService->createGroupType($request);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group_types.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\GroupType  $groupType
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(GroupType $groupType)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\GroupType  $groupType
-     * @return \Illuminate\Http\Response
-     */
     public function edit(GroupType $group_type)
     {
         return view('pages.groupType.edit', [
@@ -80,36 +54,19 @@ class GroupTypeController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateGroupTypeRequest  $request
-     * @param  \App\Models\GroupType  $groupType
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateGroupTypeRequest $request, GroupType $group_type)
     {
-        $price = str_replace(['$', '_', ','], ['', '0', ''], $request->price);
-        $group_type->update([
+        $this->groupTypeService->updateGroupType($group_type, $request);
 
-            'name' => $request->name,
-            'days_num' => $request->days_num,
-            'price' => $price,
-
-        ]);
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.group_types.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\GroupType  $groupType
-     * @return \Illuminate\Http\Response
-     */
+
     public function delete(GroupType $group_type)
     {
-        $group_type->delete();
+        $this->groupTypeService->deleteGroupType($group_type);
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }

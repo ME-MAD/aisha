@@ -23,7 +23,6 @@ class StoreExperienceRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
             'title' => 'required',
             'from' => 'required|date|date_format:Y-m-d|before:today|before:to',

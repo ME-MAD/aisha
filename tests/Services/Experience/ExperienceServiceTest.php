@@ -62,7 +62,7 @@ class ExperienceServiceTest extends TestCase
     }
 
 
-    public function test_get_Ccount_of_experience_years()
+    public function test_get_count_of_experience_years()
     {
         $experienceObject = $this->app->make(ExperienceService::class);
 

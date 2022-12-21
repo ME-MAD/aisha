@@ -14,7 +14,7 @@ class GroupDataTable extends DataTable
      * Build DataTable class.
      *
      * @param QueryBuilder $query Results from query() method.
-     * @return \Yajra\DataTables\EloquentDataTable
+     * @return EloquentDataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
@@ -25,7 +25,6 @@ class GroupDataTable extends DataTable
                 return view('pages.group.datatable.edit', compact('query'));
             })
             ->addColumn('delete', 'pages.group.datatable.delete')
-
             ->editColumn('groupType.name', function ($q) {
                 return $q->groupType->name ?? "";
             })
@@ -36,10 +35,10 @@ class GroupDataTable extends DataTable
                 return ($q->group_students_count);
             })
             ->editColumn('from', function ($q) {
-                return  date('h:i a', strtotime($q->from));
+                return date('h:i a', strtotime($q->from));
             })
             ->editColumn('to', function ($q) {
-                return  date('h:i a', strtotime($q->to));
+                return date('h:i a', strtotime($q->to));
             })
             // ->rawColumns(['edit', 'delete'])
 
@@ -50,7 +49,6 @@ class GroupDataTable extends DataTable
                 return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' >" . $q->id . "</a>";
             })
             ->rawColumns(['edit', 'delete', 'id', 'show'])
-
             ->setRowId('id');
     }
 
@@ -60,6 +58,7 @@ class GroupDataTable extends DataTable
         return $model->select([
             'groups.id',
             'teacher_id',
+            'name',
             'from',
             'to',
             'age_type',
@@ -79,9 +78,9 @@ class GroupDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->parameters([
-                'dom'          => 'Blrtip',
-                'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
-                'buttons'      => [
+                'dom' => 'Blrtip',
+                'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
+                'buttons' => [
                     ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
                     ['extend' => 'excel', 'className' => 'btn btn-success ', 'text' => 'Export'],
                 ],
@@ -133,56 +132,63 @@ class GroupDataTable extends DataTable
             [
                 'name' => 'groups.id',
                 'data' => 'id',
-                'title' => '#',
+                'title' => __('group.id'),
                 "className" => 'search--col exact'
+            ],
+
+            [
+                'name' => 'name',
+                'data' => 'name',
+                'title' => __('group.name'),
+                "className" => 'search--col '
             ],
 
             [
                 'name' => 'from',
                 'data' => 'from',
-                'title' => 'from',
+                'title' => __('group.from'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'to',
                 'data' => 'to',
-                'title' => 'to',
+                'title' => __('group.to'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'teacher.name',
                 'data' => 'teacher.name',
-                'title' => ' teacher_id',
+                'title' => __('group.teacher_id'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'groupType.name',
                 'data' => 'groupType.name',
-                'title' => 'group_type_id',
+                'title' => __('group.group_type_id'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'age_type',
                 'data' => 'age_type',
-                'title' => 'age_type',
+                'title' => __('group.age type'),
                 "className" => 'search--col'
             ],
             [
                 'name' => 'countStudent',
                 'data' => 'countStudent',
-                'title' => 'count Student',
+                'title' => __('group.count Student'),
                 "className" => 'not--search--col'
             ],
 
-            ['name' => 'show', 'data' => 'show', 'title' => 'show', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'show', 'data' => 'show', 'title' => __('globalWorld.Show'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'edit', 'data' => 'edit', 'title' => __('globalWorld.Edit'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'delete', 'data' => 'delete', 'title' => __('globalWorld.Delete'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
         ];
     }
 

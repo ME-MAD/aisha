@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\GroupController;
@@ -18,8 +18,6 @@ use App\Http\Controllers\SyllabusController;
 use App\Http\Controllers\SyllabusReviewController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
-use App\Models\Experience;
-use App\Models\StudentLesson;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,10 +32,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+/*Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('loginPage', [AuthController::class, 'loginPage'])->name('loginPage');
     Route::post('login', [AuthController::class, 'login'])->name('login');
-});
+});*/
 
 
 
@@ -47,12 +45,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
         return app()->getLocale();
     });
 
+
     Route::get('/', function () {
         return redirect(route('admin.home'));
-    })->name('home')->middleware('auth');
+    })->name('home');
 
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+
 
 
     Route::group(['prefix' => 'home'], function () {
@@ -64,12 +65,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::group(['prefix' => 'teacher', 'as' => 'teacher.'], function () {
         Route::get('', [TeacherController::class, 'index'])->name('index');
         Route::get('/show/{teacher}', [TeacherController::class, 'show'])->name('show');
-        Route::get('/getTeacherShowDataAjax/{teacher}', [TeacherController::class, 'getTeacherShowDataAjax'])->name('getTeacherShowDataAjax');
         Route::get('/create', [TeacherController::class, 'create'])->name('create');
         Route::post('/store', [TeacherController::class, 'store'])->name('store');
         Route::get('/edit/{teacher}', [TeacherController::class, 'edit'])->name('edit');
         Route::put('/update/{teacher}', [TeacherController::class, 'update'])->name('update');
         Route::get('/delete/{teacher}', [TeacherController::class, 'delete'])->name('delete');
+        Route::get('/getTeacherShowDataAjax/{teacher}', [TeacherController::class, 'getTeacherShowDataAjax'])->name('getTeacherShowDataAjax');
+        Route::get('/studentsSearchAjax', [TeacherController::class, 'studentsSearchAjax'])->name('studentsSearchAjax');
     });
 
     Route::group(['prefix' => 'experience', 'as' => 'experience.'], function () {
@@ -90,6 +92,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
         Route::get('show/{group}', [GroupController::class, 'show'])->name('show');
         Route::put('update/{group}', [GroupController::class, 'update'])->name('update');
         Route::get('delete/{group}', [GroupController::class, 'delete'])->name('delete');
+        Route::get('getPaymentPerMonth/{group}', [GroupController::class, 'getPaymentPerMonth'])->name('getPaymentPerMonth');
     });
 
     Route::group(['prefix' => 'student', 'as' => 'student.'], function () {
@@ -101,6 +104,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
         Route::put('update/{student}', [StudentController::class, 'update'])->name('update');
         Route::get('delete/{student}', [StudentController::class, 'delete'])->name('delete');
         Route::get('getGroupStudents/{student}', [StudentController::class, 'getGroupStudents'])->name('getGroupStudents');
+        Route::post('search', [StudentController::class, 'search'])->name('search');
     });
 
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
@@ -174,7 +178,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
         Route::get('edit/{payment}', [PaymentController::class, 'edit'])->name('edit');
         Route::put('update/{payment}', [PaymentController::class, 'update'])->name('update');
         Route::get('delete/{payment}', [PaymentController::class, 'delete'])->name('delete');
-        Route::get('getPaymentPerMonthThisYear', [PaymentController::class, 'getPaymentPerMonthThisYear'])->name('getPaymentPerMonthThisYear');
+        Route::post('getPaymentPerMonthThisYear', [PaymentController::class, 'getPaymentPerMonthThisYear'])->name('getPaymentPerMonthThisYear');
     });
 
     Route::group(['prefix' => 'group_students', 'as' => 'group_students.'], function () {
@@ -207,7 +211,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
 
         Route::post('createNewLessonAjax/', [SyllabusReviewController::class, 'createNewLessonAjax'])->name('createNewLessonAjax');
     });
-
 
 
     Route::group(['prefix' => 'student_lesson', 'as' => 'student_lesson.'], function () {
