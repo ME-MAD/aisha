@@ -1,15 +1,13 @@
-
 getDataShow();
 
 function getDataShow() {
-    let href = $('#profileAneExperience').data('href')
+    let href = $('#showTeacherAjaxContainer').data('href')
     $.ajax({
         url: href,
         success: function (response) {
 
             response.statistics.forEach(statistic => {
-                console.log(statistic.words);
-                $('#statustucsContaner').append(`
+                $('#experiences_Container').append(`
                     <div class="col-4">
                         <div class="card border-secondary">
                             <div class="card-body">
@@ -62,24 +60,10 @@ function getDataShow() {
                             data-invoice-id="group : ${group.id}">
                             <div class="f-m-body">
                                 <div class="f-head">
-                                    <svg viewBox="0 0 24 24" width="36" height="36"
-                                        stroke="currentColor" stroke-width="3" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round"
-                                        class="css-i6dzq1">
-                                        <polyline points="9 18 15 12 9 6"></polyline>
-                                    </svg>
+                                  
                                 </div>
                                 <div class="f-body">
-                                    <p class="invoice-customer-name"><span>Age
-                                            Type:</span><span
-                                            class="badge bg-info mb-2">${group.age_type}</span>
-                                    </p>
-                                    <p class="invoice-generated-date">Time: <span
-                                            class="badge bg-success mb-2">${group.ffrom}</span>
-                                    </p>
-                                    <p class="invoice-generated-date">Time: <span
-                                            class="badge bg-danger mb-2">${group.fto}</span>
-                                    </p>
+                               <h3>${group.name}</h3>
                                 </div>
                             </div>
                         </div>
@@ -143,7 +127,6 @@ function getDataShow() {
                             </div>
 
                             <div class="row inv--detail-section">
-
                                 <div class="col-sm-7 align-self-center">
                                     <p class="inv-to">Days Num :
                                         <span class="badge bg-danger mb-2">
@@ -228,7 +211,8 @@ function getDataShow() {
 
             initEditeExperienceModal()
         },
-        error: function () { }
+        error: function () {
+        }
     })
 }
 

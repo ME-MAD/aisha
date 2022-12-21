@@ -1,13 +1,15 @@
 @extends('master')
-@section('css')
+
+@push('css')
     <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/custom_dt_custom.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('adminAssets/plugins/table/datatable/custom_dt_custom.css') }}">
     <!-- END PAGE LEVEL CUSTOM STYLES -->
-@endsection
-
+@endpush
 
 @section('breadcrumb')
     <div class="page-header">
@@ -17,21 +19,22 @@
         </div>
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false"><span class="text"><span>Show</span> : Daily
+               aria-haspopup="true" aria-expanded="false"><span class="text"><span>Show</span> : Daily
                     Analytics</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-chevron-down">
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="feather feather-chevron-down">
                     <polyline points="6 9 12 15 18 9"></polyline>
-                </svg></a>
+                </svg>
+            </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown">
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.home') }}">Home</a>
+                   href="{{ route('admin.home') }}">Home</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.subject.index') }}">Subjects</a>
+                   href="{{ route('admin.subject.index') }}">Subjects</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                    href="{{ route('admin.subject.create') }}">Create Subject</a>
+                   href="{{ route('admin.subject.create') }}">Create Subject</a>
             </div>
         </div>
     </div>
@@ -53,60 +56,64 @@
                                 <h4>Subjects</h4>
                             </div>
                             <div class="col-xl-2 col-md-2 col-sm-2 col-2">
-                                <a href="{{ route('admin.subject.create') }}" class="btn btn-primary float-right">Create</a>
+                                <a href="{{ route('admin.subject.create') }}"
+                                   class="btn btn-primary float-right">Create</a>
                             </div>
                         </div>
                         <div class="table-responsive mb-4">
-                            <div id="style-3_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                            <div id="style-3_wrapper"
+                                 class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <table id="style-3" class="table style-3  table-hover">
                                             <thead>
-                                                <tr>
-                                                    <th class="checkbox-column text-center"> Id </th>
-                                                    <th class="text-center">Image</th>
-                                                    <th class="text-center">Name</th>
-                                                    <th class="text-center">Book</th>
-                                                    <th class="text-center">Edit</th>
-                                                    <th class="text-center">Delete</th>
-                                                </tr>
+                                            <tr>
+                                                <th class="checkbox-column text-center"> Id</th>
+                                                <th class="text-center">Image</th>
+                                                <th class="text-center">Name</th>
+                                                <th class="text-center">Book</th>
+                                                <th class="text-center">Edit</th>
+                                                <th class="text-center">Delete</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($subjects as $subject)
-                                                    <tr role="row">
-                                                        <td class="checkbox-column text-center sorting_1">
-                                                            {{ $subject->id }} </td>
-                                                        <td>
-                                                            <img src="{{ $subject->avatar }}" alt=""
-                                                                class="avatar-image">
-                                                        </td>
-                                                        <td>{{ $subject->name }}</td>
-                                                        <td>
-                                                            <a href="{{ $subject->book }}" target="__blank">
-                                                                <svg viewBox="0 0 24 24" width="24" height="24"
-                                                                    stroke="currentColor" stroke-width="2" fill="none"
-                                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                                    class="css-i6dzq1">
-                                                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4">
-                                                                    </path>
-                                                                    <polyline points="7 10 12 15 17 10"></polyline>
-                                                                    <line x1="12" y1="15" x2="12"
-                                                                        y2="3"></line>
-                                                                </svg>
-                                                            </a>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <div class="links--ul text-center">
-                                                                <x-edit-link :route="route('admin.subject.edit', $subject->id)" />
-                                                            </div>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <div class="links--ul text-center">
-                                                                <x-delete-link :route="route('admin.subject.delete', $subject->id)" />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                            @foreach ($subjects as $subject)
+                                                <tr role="row">
+                                                    <td class="checkbox-column text-center sorting_1">
+                                                        {{ $subject->id }} </td>
+                                                    <td>
+                                                        <img src="{{ $subject->avatar }}" alt=""
+                                                             class="avatar-image">
+                                                    </td>
+                                                    <td>{{ $subject->name }}</td>
+                                                    <td>
+                                                        <a href="{{ $subject->book }}" target="__blank">
+                                                            <svg viewBox="0 0 24 24" width="24" height="24"
+                                                                 stroke="currentColor" stroke-width="2" fill="none"
+                                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                                 class="css-i6dzq1">
+                                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4">
+                                                                </path>
+                                                                <polyline points="7 10 12 15 17 10"></polyline>
+                                                                <line x1="12" y1="15" x2="12"
+                                                                      y2="3"></line>
+                                                            </svg>
+                                                        </a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="links--ul text-center">
+                                                            <x-edit-link
+                                                                    :route="route('admin.subject.edit', $subject->id)"/>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="links--ul text-center">
+                                                            <x-delete-link
+                                                                    :route="route('admin.subject.delete', $subject->id)"/>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -121,7 +128,7 @@
 @endsection
 
 
-@section('javascript')
+@push('js')
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
     <script>
@@ -145,4 +152,4 @@
         multiCheck(c3);
     </script>
     <!-- END PAGE LEVEL SCRIPTS -->
-@endsection
+@endpush

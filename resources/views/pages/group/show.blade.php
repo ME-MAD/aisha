@@ -1,23 +1,25 @@
 @extends('master')
 
-@section('css')
+
+@push('css')
     <!--  BEGIN CUSTOM STYLE FILE  -->
-    <link href="{{ asset('adminAssets/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('adminAssets/assets/css/components/custom-modal.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('adminAssets/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('adminAssets/assets/css/components/custom-modal.css') }}" rel="stylesheet" type="text/css"/>
     <!--  END CUSTOM STYLE FILE  -->
     <link href="{{ asset('adminAssets/assets/css/components/cards/card.css') }}
-    " rel="stylesheet" type="text/css" />
-    <link href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
+    " rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css"/>
     <!--  BEGIN CUSTOM STYLE Data Table  -->
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
     <!--  END CUSTOM  Data Table  -->
     <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
-    <link href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
-    <link href="{{ asset('adminAssets/assets/css/tables/table-basic.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('adminAssets/assets/css/tables/table-basic.css') }}" rel="stylesheet" type="text/css"/>
     <!-- END PAGE LEVEL CUSTOM STYLES -->
-@endsection
+@endpush
 
 @section('breadcrumb')
     <div class="page-header">
@@ -27,20 +29,21 @@
         </div>
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false"><span class="text"><span>Show</span> : Group</span>
+               aria-haspopup="true" aria-expanded="false"><span class="text"><span>Show</span> : Group</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-chevron-down">
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="feather feather-chevron-down">
                     <polyline points="6 9 12 15 18 9"></polyline>
-                </svg></a>
+                </svg>
+            </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown">
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.home') }}">Home</a>
+                   href="{{ route('admin.home') }}">Home</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                    href="{{ route('admin.group.index') }}">Groups</a>
+                   href="{{ route('admin.group.index') }}">Groups</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                    href="{{ route('admin.group.create') }}">Create Group</a>
+                   href="{{ route('admin.group.create') }}">Create Group</a>
             </div>
         </div>
     </div>
@@ -55,13 +58,13 @@
                 <ul class="nav nav-pills mb-3 mt-3 nav-fill" id="justify-pills-tab1" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="justify-pills-teacher-tab" data-toggle="pill"
-                            href="#justify-pills-teacher" role="tab" aria-controls="justify-pills-teacher"
-                            aria-selected="true">Teacher</a>
+                           href="#justify-pills-teacher" role="tab" aria-controls="justify-pills-teacher"
+                           aria-selected="true">Teacher</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="justify-pills-groupDays-tab" data-toggle="pill"
-                            href="#justify-pills-groupDays" role="tab" aria-controls="justify-pills-groupDays"
-                            aria-selected="false">Group Days
+                           href="#justify-pills-groupDays" role="tab" aria-controls="justify-pills-groupDays"
+                           aria-selected="false">Group Days
                             @if ($groupDaysCount < $groupTypeNumDays)
                                 <span class="badge badge-danger float-right">{{ $groupDaysCount }}</span>
                             @else
@@ -74,12 +77,12 @@
                 </ul>
                 <div class="tab-content" id="justify-pills-tabContent">
                     <div class="tab-pane fade show active" id="justify-pills-teacher" role="tabpanel"
-                        aria-labelledby="justify-pills-teacher-tab">
+                         aria-labelledby="justify-pills-teacher-tab">
                         @include('pages.group.partials.teacher')
                     </div>
 
                     <div class="tab-pane fade" id="justify-pills-groupDays" role="tabpanel"
-                        aria-labelledby="justify-pills-groupDays-tab">
+                         aria-labelledby="justify-pills-groupDays-tab">
                         @include('pages.group.partials.groupDays')
                         @include('pages.groupDays.createModal')
                     </div>
@@ -90,8 +93,8 @@
                 <ul class="nav nav-pills mb-3 mt-3 nav-fill" id="justify-pills-tab2" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="justify-pills-students-tab" data-toggle="pill"
-                            href="#justify-pills-students" role="tab" aria-controls="justify-pills-students"
-                            aria-selected="true">
+                           href="#justify-pills-students" role="tab" aria-controls="justify-pills-students"
+                           aria-selected="true">
                             Students
                             <span class="badge badge-secondary float-right">{{ $countStudents }}</span>
                         </a>
@@ -99,8 +102,8 @@
 
                     <li class="nav-item">
                         <a class="nav-link" id="justify-pills-payment-tab" data-toggle="pill"
-                            href="#justify-pills-payment" role="tab" aria-controls="justify-pills-payment"
-                            aria-selected="false">Payment
+                           href="#justify-pills-payment" role="tab" aria-controls="justify-pills-payment"
+                           aria-selected="false">Payment
                             <span id="paymentsCount" class="badge badge-secondary float-right">0</span>
                         </a>
                     </li>
@@ -108,13 +111,13 @@
 
                 <div class="tab-content" id="justify-pills-tabContent">
                     <div class="tab-pane fade show active" id="justify-pills-students" role="tabpanel"
-                        aria-labelledby="justify-pills-students-tab">
+                         aria-labelledby="justify-pills-students-tab">
                         @include('pages.group.partials.students')
                         @include('pages.groupStudent.createModal')
                     </div>
 
                     <div class="tab-pane fade" id="justify-pills-payment" role="tabpanel"
-                        aria-labelledby="justify-pills-payment-tab">
+                         aria-labelledby="justify-pills-payment-tab">
                         @include('pages.group.partials.payment')
 
                     </div>
@@ -122,7 +125,7 @@
 
                 <div class="card component-card_4 col-sm-12">
                     <div class="row" id="paymentsThisMonthContainerGroup"
-                        data-href="{{ route('admin.group.getPaymentPerMonth', $group->id) }}">
+                         data-href="{{ route('admin.group.getPaymentPerMonth', $group->id) }}">
 
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing" id="canvas">
                             <canvas id="paymentsThisMonthChartOnGroupShow"></canvas>
@@ -134,10 +137,7 @@
     </div>
 @endsection
 
-
-
-
-@section('javascript')
+@push('js')
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
     <script src="{{ asset('js/payment.js') }}"></script>
     <script src="{{ asset('adminAssets/assets/shared/chart.js') }}"></script>
@@ -191,24 +191,13 @@
             "stripeClasses": [],
             "lengthMenu": [7, 10, 20, 50],
             "pageLength": 7,
-            "fnDrawCallback": function() {
+            "fnDrawCallback": function () {
                 whenMonthChangeHandlePaymentCheckBox()
             }
         });
     </script>
-
-
-
-
-
-
-
-
-
-
-
     <script>
-        $('#creatGroupDayModal').on('shown.bs.modal', function(e) {
+        $('#creatGroupDayModal').on('shown.bs.modal', function (e) {
             let href = $(this).data('href');
             let group_id = $('#group_id').data('groupid');
             $(`option`).removeAttr('disabled').css({
@@ -219,7 +208,7 @@
                 data: {
                     group_id
                 },
-                success: function(response) {
+                success: function (response) {
                     let groupDays = response.groupDays
                     groupDays.forEach(element => {
                         let groupDay = element.day
@@ -230,8 +219,10 @@
 
 
                 },
-                error: function() {}
+                error: function () {
+                }
             })
         })
     </script>
-@endsection
+@endpush
+

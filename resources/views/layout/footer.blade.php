@@ -25,7 +25,7 @@
 </script>
 
 
-@yield('javascript')
+@stack('js')
 
 
 @include('sweetalert::alert')

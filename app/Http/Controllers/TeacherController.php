@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use App\DataTables\TeacherDataTable;
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
-use App\Models\Student;
 use App\Models\Teacher;
 use App\Services\Experience\ExperienceService;
 use App\Services\Teacher\TeacherService;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TeacherController extends Controller
@@ -80,6 +78,7 @@ class TeacherController extends Controller
         $this->teacherService->setAllDataAboutTeacher($teacher);
 
         $experiences = $this->teacherService->getTeacherExperiences($teacher);
+
         $yearsOfExperience = $this->experienceService->getCountOfExperienceYears($experiences);
 
         return response()->json([
@@ -98,19 +97,12 @@ class TeacherController extends Controller
                 ],
             ],
             'teacher' => $teacher,
+
             'experiences' => $this->teacherService->getTeacherExperiences($teacher),
+
             'groups' => $this->teacherService->getAllTeacherGroups($teacher),
         ]);
     }
 
 
-    public function studentsSearchAjax(Request $request)
-    {
-
-        if ($request->ajax()) {
-
-            $students = Student::where('name', 'like', $request->student_search)->get();
-        }
-
-    }
 }

@@ -2,16 +2,15 @@
 
 namespace App\Services\Teacher;
 
-use App\Models\Teacher;
 use App\Http\Traits\ImageTrait;
+use App\Models\Teacher;
 
 class TeacherService
 {
     use ImageTrait;
 
-    private $teacherWithAllData;
+    private $allDataAboutTeacher;
 
-    
 
     public function getAllTeachers(array $columns = ['id', 'name'])
     {
@@ -19,9 +18,9 @@ class TeacherService
     }
 
 
-    public function setTeacherWithAllData(Teacher $teacher)
+    public function setAllDataAboutTeacher(Teacher $teacher)
     {
-        $this->teacherWithAllData =  $teacher->load([
+        $this->allDataAboutTeacher = $teacher->load([
             'groupStudents',
             'groups.groupDays',
             'groups.groupType',
@@ -30,52 +29,47 @@ class TeacherService
         ]);
     }
 
-    public function teacherExperiences()
+    public function getTeacherExperiences()
     {
-        return $this->teacherWithAllData->experiences;
+        return $this->allDataAboutTeacher->experiences;
     }
 
-    public function countGroups()
+    public function getCountOfGroups()
     {
-        return $this->teacherWithAllData->groups->count();
+        return $this->allDataAboutTeacher->groups->count();
     }
 
-    public function countStudent()
+    public function getCountOfStudents()
     {
-        return $this->teacherWithAllData->groupStudents->count();
+        return $this->allDataAboutTeacher->groupStudents->count();
     }
 
-    public function groups()
+    public function getAllTeacherGroups()
     {
-        return $this->teacherWithAllData->groups;
+        return $this->allDataAboutTeacher->groups;
     }
 
     public function createTeacher(object $request)
     {
-        $fileName = $this->uploadImage(
-            imageObject: $request->file('avatar'),
-            path: Teacher::AVATARS_PATH
-        );
+        $fileName = $this->uploadImage(imageObject: $request->file('avatar'), path: Teacher::AVATARS_PATH);
 
 
         return Teacher::create([
-            'name'          => $request->name,
-            'phone'         => $request->phone,
-            'birthday'      => $request->birthday,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'birthday' => $request->birthday,
             'qualification' => $request->qualification,
-            'avatar'        =>  $fileName,
+            'avatar' => $fileName,
         ]);
     }
 
-    public function updateTeacher(Teacher $teacher, object $request)
+    public function updateTeacher(Teacher $teacher, object $request): bool
     {
         $fileName = $teacher->getRawOriginal('avatar');
 
         if ($request->file('avatar')) {
 
-            $this->deleteImage(
-                path: $teacher->getAvatarPath()
-            );
+            $this->deleteImage(path: $teacher->getAvatarPath());
 
             $fileName = $this->uploadImage(
                 imageObject: $request->file('avatar'),
@@ -84,22 +78,20 @@ class TeacherService
         }
 
         return $teacher->update([
-            'name'          => $request->name,
-            'phone'         => $request->phone,
-            'birthday'      => $request->birthday,
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'birthday' => $request->birthday,
             'qualification' => $request->qualification,
-            'avatar'        => $fileName,
+            'avatar' => $fileName,
         ]);
     }
 
-    public function deleteTeacher(Teacher $teacher)
+    public function deleteTeacher(Teacher $teacher): ?bool
     {
-        $this->deleteImage(
-            path: $teacher->getAvatarPath()
-        );
+        $this->deleteImage(path: $teacher->getAvatarPath());
 
         return $teacher->delete();
     }
 
-    
+
 }
