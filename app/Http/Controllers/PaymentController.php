@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\PaymentDataTable;
-use App\Models\Payment;
-use App\Http\Requests\Payment\StorePaymentRequest;
-use App\Http\Requests\Payment\UpdatePaymentRequest;
+use Carbon\Carbon;
 use App\Models\Group;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\DataTables\PaymentDataTable;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\Payment\StorePaymentRequest;
+use App\Http\Requests\Payment\UpdatePaymentRequest;
 
 class PaymentController extends Controller
 {
@@ -154,17 +155,24 @@ class PaymentController extends Controller
     public function getPaymentPerMonthThisYear(Request $request)
     {
 
-
         $thisYear = (isset($request->year)) ? $request->year : date('Y');
 
         $paymentsChart = Payment::select(
             DB::raw("(SUM(amount)) as month_amount"),
             'month'
-        )
-            ->where('paid', 1)
-            ->whereYear('created_at', $thisYear)
-            ->groupBy('month')
-            ->get();
+        )->where('paid', 1);
+
+        if (isset($request->start_time) && isset($request->end_time)) {
+            $paymentsChart = $paymentsChart->whereBetween('created_at', [
+                Carbon::createFromFormat('Y-m-d', $request->start_time)->startOfDay()->toDateTimeString(),
+                Carbon::createFromFormat('Y-m-d', $request->end_time)->endOfDay()->toDateTimeString()
+            ]);
+        } else {
+            $paymentsChart = $paymentsChart->whereYear('created_at', $thisYear);
+        }
+
+        $paymentsChart =  $paymentsChart->groupBy('month')->get();
+
 
         $data = [];
         foreach (getMonthNames() as $monthName) {
@@ -181,10 +189,11 @@ class PaymentController extends Controller
 
 
         return response()->json([
-            'months'    => array_keys($data),
-            'values'    => array_values($data),
-            'years'     => $years,
-            'thisYear'  => $thisYear,
+            'months'         => array_keys($data),
+            'values'         => array_values($data),
+            'years'          => $years,
+            'thisYear'       => $thisYear,
+            'totalPayments'  => '',
         ]);
     }
 }
