@@ -1,6 +1,6 @@
 $.get($('#paymentsThisMonthContainerGroup').data('href'), function (response) {
 
-    console.log(response);
+    // console.log(response);
     const months = response.months;
     const values = response.values;
     // const plugin = {

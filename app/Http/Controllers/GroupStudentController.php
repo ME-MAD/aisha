@@ -41,7 +41,8 @@ class GroupStudentController extends Controller
         return redirect()->back();
     }
 
-    public function getStudentsOfGroup(Request $request)
+
+    public function getGroupStudents(Request $request)
     {
         $groupStudents = GroupStudent::where('group_id', $request->group_id)->select(['group_id', 'student_id'])->get();
 

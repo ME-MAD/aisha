@@ -27,11 +27,9 @@ class GroupDayController extends Controller
 
     public function index()
     {
-        $groupdays = GroupDay::select(['id', 'group_id', 'day'])->with('group:id,from,to')->get();
         $groups    = Group::get();
 
         return $this->groupDayDataTable->render('pages.groupDays.index', [
-            'groupdays' => $groupdays,
             'groups'    => $groups,
         ]);
     }

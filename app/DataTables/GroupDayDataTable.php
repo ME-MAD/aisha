@@ -45,7 +45,6 @@ class GroupDayDataTable extends DataTable
     public function query(GroupDay $model): QueryBuilder
     {
 
-        // return $model->newQuery();
         return $model->select([
             'group_days.id',
             'group_id',

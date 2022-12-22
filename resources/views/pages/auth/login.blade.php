@@ -127,9 +127,7 @@
     <script src="{{ asset('adminAssets/bootstrap/js/bootstrap.min.js') }}"></script>
 
     <!-- END GLOBAL MANDATORY SCRIPTS -->
-    <script src="">
-        {{ asset('adminAssets/assets/js/authentication/form-1.js') }}
-    </script>
+    <script src="{{ asset('adminAssets/assets/js/authentication/form-1.js') }}"></script>
 
 </body>
 
