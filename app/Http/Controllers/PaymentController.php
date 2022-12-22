@@ -187,13 +187,12 @@ class PaymentController extends Controller
             ->groupBy('year')
             ->get();
 
-
         return response()->json([
             'months'         => array_keys($data),
             'values'         => array_values($data),
             'years'          => $years,
             'thisYear'       => $thisYear,
-            'totalPayments'  => '',
+            'totalPayments'  => array_sum(array_values($data)),
         ]);
     }
 }

@@ -28,6 +28,7 @@ function GetMonthlyPayments(year = null, start_time = null, end_time = null) {
             const values = response.values;
             const years = response.years;
             const thisYear = response.thisYear;
+            const totalPayments = response.totalPayments;
 
 
             //---------------------------------
@@ -82,6 +83,9 @@ function GetMonthlyPayments(year = null, start_time = null, end_time = null) {
                             </button>
                         </div>
                     </div>
+                </div>
+                <div class="input-group mb-4">
+                    <p>Total Payments : $ ${totalPayments}</p>
                 </div>
             </div>`)
 
