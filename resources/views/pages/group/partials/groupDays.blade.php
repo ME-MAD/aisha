@@ -10,14 +10,14 @@
                         @if (!$group->checkIfGroupExceededGroupDaysLimit())
                             <div class="col-xl-2 col-md-2 col-sm-2 col-2 float-right">
                                 <a data-toggle='modal' data-target='#creatGroupDayModal'
-                                    class="btn btn-primary ">Create</a>
+                                    class="btn btn-primary ">{{ __('group.Create Group Days') }}</a>
                             </div>
                         @endif
                         <table id="zero-config" class="table table-hover dataTable">
                             <thead>
                                 <tr role="row">
-                                    <th class="text-center">Days</th>
-                                    <th class="text-center">Action</th>
+                                    <th class="text-center">{{ __('group.Group Days') }}</th>
+                                    <th class="text-center">{{ __('globalWorld.Delete') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

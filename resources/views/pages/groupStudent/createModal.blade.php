@@ -16,7 +16,7 @@
                             </label>
                             <div class="col-xl-10 col-lg-9 col-sm-10">
                                 <select class="form-control basic" style="width: 100%;" name="group_id" id="group_id"
-                                    data-href="{{ route('admin.group_students.getStudentsOfGroup') }}">
+                                    data-href="{{ route('admin.group_students.getGroupStudents') }}">
                                     <option value=""> {{ __('group.Choose group') }}</option>
                                     @foreach ($groups as $group)
                                         <option value="{{ $group->id }}"
@@ -37,11 +37,11 @@
                     @endif
                     <div class="form-group row mb-4">
                         <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">
-                            {{ __('group.Choose group') }}
+                            {{ __('group.Choose student') }}
                         </label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <select class="form-control basic" style="width: 100%;" name="student_id" id="student_id">
-                                <option value=""> {{ __('group.Choose group') }}</option>
+                                <option value=""> {{ __('group.Choose student') }}</option>
                                 @foreach ($students as $student)
                                     <option value="{{ $student->id }}"
                                         {{ old('student_id') == $student->id ? 'selected' : '' }}>

@@ -32,4 +32,9 @@ class GroupStudentService
     {
         return $groupStudent->delete();
     }
+
+    public function getGroupStudentsOfGroup(int $group_id)
+    {
+        return  GroupStudent::where('group_id', $group_id)->select(['group_id', 'student_id'])->get();
+    }
 }

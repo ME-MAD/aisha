@@ -5,30 +5,40 @@ namespace App\Http\Controllers;
 use App\DataTables\GroupStudentDataTable;
 use App\Models\GroupStudent;
 use App\Http\Requests\GroupStudent\StoreGroupStudentRequest;
-use App\Http\Requests\GroupStudent\UpdateGroupStudentRequest;
-use App\Models\Group;
-use App\Models\Student;
+use App\Services\Group\GroupService;
+use App\Services\GroupStudent\GroupStudentService;
+use App\Services\Student\StudentService;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupStudentController extends Controller
 {
+
+    private $groupStudentService;
+    private $groupService;
+    private $StudentService;
+
+    public function __construct(
+        GroupStudentService $groupStudentService,
+        GroupService $groupService,
+        StudentService $StudentService,
+    ) {
+        $this->groupStudentService = $groupStudentService;
+        $this->groupService = $groupService;
+        $this->StudentService = $StudentService;
+    }
+
     public function index(GroupStudentDataTable $GroupStudentDataTable)
     {
-        $groups = Group::get();
-        $students = Student::get();
         return $GroupStudentDataTable->render('pages.groupStudent.index', [
-            'groups' => $groups,
-            'students' => $students,
+            'groups' => $this->groupService->getAllGroups(),
+            'students' => $this->StudentService->getAllStudent(),
         ]);
     }
 
     public function store(StoreGroupStudentRequest $request)
     {
-        GroupStudent::create([
-            'student_id' => $request->student_id,
-            'group_id' => $request->group_id,
-        ]);
+        $this->groupStudentService->createGroupStudent($request);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
@@ -36,17 +46,17 @@ class GroupStudentController extends Controller
 
     public function delete(GroupStudent $groupStudent)
     {
-        $groupStudent->delete();
+        $this->groupStudentService->deleteGroupStudent($groupStudent);
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
-    public function getStudentsOfGroup(Request $request)
-    {
-        $groupStudents = GroupStudent::where('group_id', $request->group_id)->select(['group_id', 'student_id'])->get();
 
+    public function getGroupStudents(Request $request)
+    {
         return response()->json([
-            'groupStudents' => $groupStudents
+            'groupStudents' =>  $this->groupStudentService->getGroupStudentsOfGroup($request->group_id)
         ]);
     }
 }

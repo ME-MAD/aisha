@@ -7,24 +7,24 @@
 
             <div class="col-xl-2 col-md-2 col-sm-2 col-2">
                 <a href="{{ route('admin.teacher.edit', $group->teacher->id) }}"
-                    class="btn btn-success  float-left">Edit</a>
+                    class="btn btn-success  float-left">{{ __('globalWorld.Edit') }}</a>
             </div>
         </div>
 
         <div class="user-info">
-            <h5>Teacher Name :</h5>
+            <h5>{{ __('group.Teacher Name') }} :</h5>
             <h6 class="text-primary">{{ $group->teacher->name }}</h6>
             <br>
-            <h5> Birthday :</h5>
+            <h5> {{ __('group.Birthday') }} :</h5>
             <h6 class="text-primary">{{ $group->teacher->birthday }}</h6>
             <br>
-            <h5> Age Type :</h5>
+            <h5>{{ __('group.Age Type') }} :</h5>
             <h6 class="text-primary">{{ $group->age_type }}</h6>
             <br>
-            <h5>Teacher phone :</h5>
+            <h5>{{ __('group.Teacher phone') }} :</h5>
             <h6 class="text-primary"> {{ $group->teacher->phone }}</h6>
             <br>
-            <h5>Qualification :</h5>
+            <h5>{{ __('group.Qualification') }} :</h5>
             <h6 class="text-primary">{{ $group->teacher->qualification }}</h4>
         </div>
 
