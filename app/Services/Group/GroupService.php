@@ -8,6 +8,11 @@ class GroupService
 {
     private $groupWithAllData;
 
+    public function getAllGroups()
+    {
+        return  Group::get();
+    }
+
     public function createGroup(object $request)
     {
         return Group::create([
@@ -56,6 +61,4 @@ class GroupService
     {
         return $this->groupWithAllData->groupDays->count();
     }
-
-
 }
