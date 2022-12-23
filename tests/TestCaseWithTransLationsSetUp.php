@@ -2,10 +2,20 @@
 
 namespace Tests;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Mcamara\LaravelLocalization\LaravelLocalization;
 
 class TestCaseWithTransLationsSetUp extends TestCase
 {
+    protected function setUp() : void
+    {
+        parent::setUp();
+        $admin = User::where('email','admin@admin.com')->first();
+        
+        $this->actingAs($admin);
+    }
+
     protected function refreshApplicationWithLocale($locale)
     {
         self::tearDown();

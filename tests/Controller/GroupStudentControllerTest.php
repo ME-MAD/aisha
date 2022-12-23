@@ -9,12 +9,14 @@ use Tests\TestCaseWithTransLationsSetUp;
 use Tests\Traits\TestGroupStudentTrait;
 use Tests\Traits\TestGroupTrait;
 use Tests\Traits\TestStudentTrait;
+use Tests\Traits\TestTeacherTrait;
 
 class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
 {
     use TestGroupTrait;
     use TestStudentTrait;
     use TestGroupStudentTrait;
+    use TestTeacherTrait;
 
     public function setUp() : void
     {
