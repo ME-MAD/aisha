@@ -172,7 +172,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::group(['prefix' => 'payment', 'as' => 'payment.'], function () {
         Route::get('', [PaymentController::class, 'index'])->name('index');
         Route::get('create', [PaymentController::class, 'create'])->name('create');
-        Route::get('store', [PaymentController::class, 'store'])->name('store');
+        Route::post('store', [PaymentController::class, 'store'])->name('store');
         Route::get('getMonthOfPayment', [PaymentController::class, 'getMonthOfPayment'])->name('getMonthOfPayment');
         Route::get('getMonthCount', [PaymentController::class, 'getMonthCount'])->name('getMonthCount');
         Route::get('edit/{payment}', [PaymentController::class, 'edit'])->name('edit');
