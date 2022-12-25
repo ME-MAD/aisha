@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Payment;
 
+use App\Rules\Admin\Payment\CheckAmountInGroupPrice;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StorePaymentRequest extends FormRequest
 {
@@ -24,10 +26,10 @@ class StorePaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            "student_id" => 'required',
-            "group_id" => 'required',
-            "amount" => 'required',
-            "month" => 'required',
+            "student_id" => 'required|exists:students,id',
+            "group_id" => 'required|exists:groups,id',
+            "amount" => ['required', new CheckAmountInGroupPrice],
+            "month" => 'required', Rule::in(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']),
             "paid" => 'required',
         ];
     }
