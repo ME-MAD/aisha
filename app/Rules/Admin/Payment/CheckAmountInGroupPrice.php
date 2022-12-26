@@ -30,14 +30,16 @@ class CheckAmountInGroupPrice implements Rule
      */
     public function passes($attribute, $value)
     {
-
-        $getPriceGroupType = Group::where('id', '=', request("group_id"))
+        if(Group::where('id', '=', request("group_id"))->exists())
+        {
+            $getPriceGroupType = Group::where('id', '=', request("group_id"))
             ->with('groupType')
             ->first()->groupType->price;
 
-        if ($getPriceGroupType ===  (float)$value) {
+            if ($getPriceGroupType ===  (float)$value) {
 
-            return true;
+                return true;
+            }
         }
 
         return false;

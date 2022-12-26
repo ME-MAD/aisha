@@ -26,7 +26,10 @@ class getPaymentsOfGroupByMonth extends FormRequest
     {
         return [
             "group_id" => 'required|exists:groups,id',
-            "month" => 'required', Rule::in(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']),
+            "month" => [
+                'required', 
+                Rule::in(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
+            ],
         ];
     }
 }

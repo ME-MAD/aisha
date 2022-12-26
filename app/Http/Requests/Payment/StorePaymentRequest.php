@@ -29,7 +29,9 @@ class StorePaymentRequest extends FormRequest
             "student_id" => 'required|exists:students,id',
             "group_id" => 'required|exists:groups,id',
             "amount" => ['required', new CheckAmountInGroupPrice],
-            "month" => 'required', Rule::in(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']),
+            "month" => ['required', 
+                Rule::in(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'])
+            ],
             "paid" => 'required',
         ];
     }

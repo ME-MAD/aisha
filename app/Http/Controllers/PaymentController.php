@@ -11,7 +11,6 @@ use App\Models\Group;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\DataTables\PaymentDataTable;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\Payment\StorePaymentRequest;
 

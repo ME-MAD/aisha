@@ -128,7 +128,7 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
             "with a group not in database" => [
                 [
                     'student_id'        => $student->id,
-                    'group_id'          => intval($group->id + 1),
+                    'group_id'          => intval($group->id + 100),
                     'amount' => $group->groupType->price,
                     'month' => fake()->randomElement(getMonthNames()),
                     'paid' => "true"
@@ -136,7 +136,7 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
             ],
             "with a student not in database" => [
                 [
-                    'student_id'        => intval($student->id + 1),
+                    'student_id'        => intval($student->id + 100),
                     'group_id'          => $group->id,
                     'amount' => $group->groupType->price,
                     'month' => fake()->randomElement(getMonthNames()),
@@ -212,6 +212,12 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
                     'month' => null,
                 ],
             ],
+            "with a wrong month name" => [
+                [
+                    'group_id'          => $group->id,
+                    'month' => "ahmed",
+                ],
+            ],
         ];
     }
 
@@ -219,41 +225,45 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
     public function test_getPaymentsOfGroupByMonth_pass()
     {
         $group = $this->generateRandomGroup();
+        
         $month = fake()->randomElement(getMonthNames());
+
+        $this->generateRandomPaymentsCustomed([
+            'group_id' => $group->id,
+            'month' => $month
+        ],5);
 
         $res = $this->call('GET', route('admin.payment.getPaymentsOfGroupByMonth'), [
             'group_id' => $group->id,
             'month' => $month
         ]);
 
-        $res->assertJson([
-            'payments' => $group->payments
-        ]);
+        $res->assertJsonCount(5, 'payments');
     }
     
     
-    public function test_getPaymentPerMonthThisYear_gets_payments_this_year()
-    {
-        Payment::query()->delete();
-        $payments = collect();
-        for($i = 1; $i <= 10; $i++)
-        {
-            $payment = $this->generateRandomPaymentsCustomed([
-                'created_at' => fake()->dateTime()
-            ]);
+    // public function test_getPaymentPerMonthThisYear_gets_payments_this_year()
+    // {
+    //     Payment::query()->delete();
+    //     $payments = collect();
+    //     for($i = 1; $i <= 10; $i++)
+    //     {
+    //         $payment = $this->generateRandomPaymentsCustomed([
+    //             'created_at' => fake()->dateTime()
+    //         ]);
 
-            $payments->add($payment);
-        }
+    //         $payments->add($payment);
+    //     }
 
-        for($i = 1; $i <= 10; $i++)
-        {
-            $payment = $this->generateRandomPaymentsCustomed();
+    //     for($i = 1; $i <= 10; $i++)
+    //     {
+    //         $payment = $this->generateRandomPaymentsCustomed();
 
-            $payments->add($payment);
-        }
+    //         $payments->add($payment);
+    //     }
         
-        dd($payments->toArray());
+    //     dd($payments->toArray());
 
-        $res = $this->call('GET', route('admin.payment.getPaymentPerMonthThisYear'));
-    }
+    //     $res = $this->call('GET', route('admin.payment.getPaymentPerMonthThisYear'));
+    // }
 }
