@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\PaymentDataTable;
+use App\Http\Requests\Payment\getPaymentCountOfGroupByMonth;
 use App\Http\Requests\Payment\getPaymentsOfGroupByMonth;
 use App\Models\Payment;
 use App\Http\Requests\Payment\StorePaymentRequest;
@@ -94,8 +95,8 @@ class PaymentController extends Controller
         ]);
     }
 
-
-    public function getMonthCount(Request $request)
+    //getMonthCount
+    public function getPaymentCountOfGroupByMonth(getPaymentCountOfGroupByMonth $request)
     {
         $paymentsCount = Payment::where('group_id', $request->group_id)
             ->where('month',  $request->month)
