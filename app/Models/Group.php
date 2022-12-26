@@ -10,7 +10,7 @@ class Group extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['from', 'to', 'teacher_id', 'group_type_id', 'age_type'];
+    protected $fillable = ['name','from', 'to', 'teacher_id', 'group_type_id', 'age_type'];
 
     protected $appends = ['fto', 'ffrom'];
 

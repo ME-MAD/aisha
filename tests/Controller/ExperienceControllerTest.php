@@ -4,7 +4,6 @@ namespace Tests\Controller;
 
 use App\Services\Experience\ExperienceService;
 use Carbon\Carbon;
-use Illuminate\Http\Response;
 use Mockery\MockInterface;
 use Tests\TestCaseWithTransLationsSetUp;
 use Tests\Traits\TestExperienceTrait;
@@ -16,9 +15,10 @@ class ExperienceControllerTest extends TestCaseWithTransLationsSetUp
     use TestExperienceTrait;
     // use RefreshDatabase;
 
-    public function setUp() : void
+    protected function setUp() : void
     {
         parent::setUp();
+
         $this->refreshApplicationWithLocale('en');
     }
 
