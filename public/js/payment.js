@@ -22,6 +22,7 @@ for (let element of createcheckbox) {
         if (element.checked == true) {
             $.ajax({
                 url: href,
+                type: 'post',
                 data: {
                     student_id: student,
                     group_id: group,
@@ -65,9 +66,9 @@ for (let element of createcheckbox) {
                     let paymentsCount = $('#paymentsCount').html()
 
                     paymentsCount = parseInt(paymentsCount)
-                    
+
                     $('#paymentsCount').html(paymentsCount - 1)
-                    
+
                     Swal.fire(
                         'Success!',
                         `The month's payment has been cancelled !`,
@@ -93,8 +94,7 @@ $(".month").change(function () {
 });
 
 
-function whenMonthChangeHandlePaymentCheckBox()
-{
+function whenMonthChangeHandlePaymentCheckBox() {
     $(`.paid_finished_checkbox`).prop('checked', false);
 
     let monthCreatePayment = $('.month').val();
@@ -111,11 +111,10 @@ function whenMonthChangeHandlePaymentCheckBox()
                 if (payment.paid == 1) {
                     student_id = $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).prop('checked', true);
                     // if (student_id == payment.student_id) {
-                        // $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).prop('checked', true);
+                    // $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).prop('checked', true);
                     // }
                 }
-                else
-                {
+                else {
                     student_id = $(`#paid_finished_checkbox_${payment.student_id}_${payment.group_id}`).prop('checked', false);
                 }
             });

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
+use App\DataTables\PaymentDataTable;
+use App\Http\Requests\Payment\getPaymentCountOfGroupByMonth;
+use App\Http\Requests\Payment\getPaymentsOfGroupByMonth;
 use Carbon\Carbon;
 use App\Models\Group;
 use App\Models\Payment;
@@ -65,7 +69,7 @@ class PaymentController extends Controller
         return redirect()->back();
     }
 
-    public function getMonthOfPayment(Request $request)
+    public function getPaymentsOfGroupByMonth(getPaymentsOfGroupByMonth $request)
     {
         $payments = Payment::select(['id', 'paid', 'student_id', 'group_id', 'month'])
             ->where('month', $request->month)
@@ -77,7 +81,7 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function getMonthCount(Request $request)
+    public function getPaymentCountOfGroupByMonth(getPaymentCountOfGroupByMonth $request)
     {
         $paymentsCount = Payment::where('group_id', $request->group_id)
             ->where('month',  $request->month)

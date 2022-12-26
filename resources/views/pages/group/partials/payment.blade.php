@@ -7,8 +7,8 @@
                         <div class="col-sm-12 mb-4">
                             <select class="form-control basic month" name="month" id="month"
                                 data-group="{{ $group->id }}"
-                                data-href="{{ route('admin.payment.getMonthOfPayment') }}"
-                                data-href-payment-count="{{ route('admin.payment.getMonthCount') }}">
+                                data-href="{{ route('admin.payment.getPaymentsOfGroupByMonth') }}"
+                                data-href-payment-count="{{ route('admin.payment.getPaymentCountOfGroupByMonth') }}">
                                 <option value="" selected="selected">
                                     {{ __('group.choose the month') }}
                                 </option>
