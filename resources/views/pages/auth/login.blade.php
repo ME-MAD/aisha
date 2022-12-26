@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @if (LaravelLocalization::getCurrentLocale() == 'ar')
+    @if (LaravelLocalization::getCurrentLocale() == 'en')
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
@@ -21,16 +21,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
         <title>{{ __('globalWorld.AISHA Admin - Login Page') }}</title>
-        <link rel="icon" type="image/x-icon" href="{{ asset('adminrtl/assets/img/favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('adminRtl/assets/img/favicon.ico') }}" />
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
-        <link href="{{ asset('adminrtl/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('adminrtl/assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('adminrtl/assets/css/authentication/form-1.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('adminRtl/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('adminRtl/assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('adminRtl/assets/css/authentication/form-1.css') }}" rel="stylesheet" type="text/css" />
         <!-- END GLOBAL MANDATORY STYLES -->
         <link rel="stylesheet" type="text/css"
-            href="{{ asset('adminrtl/assets/css/forms/theme-checkbox-radio.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('adminrtl/assets/css/forms/switches.css') }}">
+            href="{{ asset('adminRtl/assets/css/forms/theme-checkbox-radio.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('adminRtl/assets/css/forms/switches.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     @endif
 </head>
