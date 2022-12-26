@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\PaymentDataTable;
+use App\Http\Requests\Payment\getPaymentsOfGroupByMonth;
 use App\Models\Payment;
 use App\Http\Requests\Payment\StorePaymentRequest;
 use App\Http\Requests\Payment\UpdatePaymentRequest;
@@ -81,7 +82,7 @@ class PaymentController extends Controller
     }
 
 
-    public function getMonthOfPayment(Request $request)
+    public function getPaymentsOfGroupByMonth(getPaymentsOfGroupByMonth $request)
     {
         $payments = Payment::select(['id', 'paid', 'student_id', 'group_id', 'month'])
             ->where('month', $request->month)

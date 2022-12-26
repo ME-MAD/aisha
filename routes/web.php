@@ -173,7 +173,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
         Route::get('', [PaymentController::class, 'index'])->name('index');
         Route::get('create', [PaymentController::class, 'create'])->name('create');
         Route::post('store', [PaymentController::class, 'store'])->name('store');
-        Route::get('getMonthOfPayment', [PaymentController::class, 'getMonthOfPayment'])->name('getMonthOfPayment');
+        Route::get('getPaymentsOfGroupByMonth', [PaymentController::class, 'getPaymentsOfGroupByMonth'])->name('getPaymentsOfGroupByMonth');
         Route::get('getMonthCount', [PaymentController::class, 'getMonthCount'])->name('getMonthCount');
         Route::get('edit/{payment}', [PaymentController::class, 'edit'])->name('edit');
         Route::put('update/{payment}', [PaymentController::class, 'update'])->name('update');
