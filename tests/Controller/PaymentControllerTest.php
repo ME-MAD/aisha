@@ -5,17 +5,18 @@ namespace Tests\Controller;
 use App\Models\Payment;
 use Tests\TestCaseWithTransLationsSetUp;
 use Tests\Traits\TestGroupTrait;
+use Tests\Traits\TestGroupTypeTrait;
 use Tests\Traits\TestPaymentTrait;
 use Tests\Traits\TestStudentTrait;
 use Tests\Traits\TestTeacherTrait;
 
 class PaymentControllerTest extends TestCaseWithTransLationsSetUp
 {
-
     use TestTeacherTrait;
     use TestGroupTrait;
     use TestStudentTrait;
     use TestPaymentTrait;
+    use TestGroupTypeTrait;
 
     public function setUp() : void
     {
@@ -241,29 +242,43 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
         $res->assertJsonCount(5, 'payments');
     }
     
-    
-    // public function test_getPaymentPerMonthThisYear_gets_payments_this_year()
-    // {
-    //     Payment::query()->delete();
-    //     $payments = collect();
-    //     for($i = 1; $i <= 10; $i++)
-    //     {
-    //         $payment = $this->generateRandomPaymentsCustomed([
-    //             'created_at' => fake()->dateTime()
-    //         ]);
+    /**
+     * @group examin
+     */
+    public function test_getPaymentPerMonthThisYear_gets_payments_this_year()
+    {
+        Payment::query()->delete();
+        $now = now()->toDateTimeString();
+        $payments = collect();
+        for($i = 1; $i <= 10; $i++)
+        {
+            $payment = $this->generateRandomPaymentsCustomed([
+                'created_at' => fake()->dateTime()
+            ]);
 
-    //         $payments->add($payment);
-    //     }
+            $payments->add($payment);
+        }
 
-    //     for($i = 1; $i <= 10; $i++)
-    //     {
-    //         $payment = $this->generateRandomPaymentsCustomed();
+        for($i = 1; $i <= 10; $i++)
+        {
+            $payment = $this->generateRandomPaymentsCustomed([
+                'created_at' => $now
+            ]);
 
-    //         $payments->add($payment);
-    //     }
-        
-    //     dd($payments->toArray());
+            $payments->add($payment);
+        }
 
-    //     $res = $this->call('GET', route('admin.payment.getPaymentPerMonthThisYear'));
-    // }
+        $paymentsGroupedByMonth = $payments->where('created_at', $now)->where('paid', 1)->groupBy('month');
+
+        $data = [];
+        foreach (getMonthNames() as $monthName) {
+            $data[$monthName] = $paymentsGroupedByMonth->get($monthName)?->sum('amount') ?? 0;
+        }
+
+        $res = $this->call('POST', route('admin.payment.getPaymentPerMonthThisYear'));
+
+        $res->assertJson([
+            'values' => array_values($data)
+        ]);
+    }
 }

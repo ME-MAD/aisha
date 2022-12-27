@@ -4,7 +4,7 @@ namespace Tests\Traits;
 
 use App\Models\GroupType;
 
-trait GroupTypeTrait
+trait TestGroupTypeTrait
 {
     private function generateRandomGroupType(int $count = 1)
     {
