@@ -55,6 +55,7 @@ for (let element of createcheckbox) {
         } else {
             $.ajax({
                 url: href,
+                type: 'post',
                 data: {
                     student_id: student,
                     group_id: group,
