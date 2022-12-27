@@ -7,6 +7,7 @@ use App\Models\GroupDay;
 use App\Http\Requests\GroupDay\StoreGroupDayRequest;
 use App\Http\Requests\GroupDay\UpdateGroupDayRequest;
 use App\Models\Group;
+use App\Services\Group\GroupService;
 use App\Services\GroupDay\GroupDayService;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -16,21 +17,22 @@ class GroupDayController extends Controller
 
     private $groupDayDataTable;
     private $groupDayService;
+    private $groupService;
 
     public function __construct(
         GroupDayDataTable $groupDayDataTable,
-        GroupDayService $groupDayService
+        GroupDayService $groupDayService,
+        GroupService $groupService
     ) {
         $this->groupDayDataTable = $groupDayDataTable;
-        $this->groupDayService          = $groupDayService;
+        $this->groupDayService   = $groupDayService;
+        $this->groupService = $groupService;
     }
 
     public function index()
     {
-        $groups    = Group::get();
-
         return $this->groupDayDataTable->render('pages.groupDays.index', [
-            'groups'    => $groups,
+            'groups'    => $this->groupService->getAllGroups(),
         ]);
     }
 
@@ -57,13 +59,11 @@ class GroupDayController extends Controller
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
-
-    public function getDaysOfGroup(Request $request)
+    //getDaysOfGroup
+    public function getGroupDaysOfGroup(Request $request)
     {
-        $groupDays = GroupDay::where('group_id', $request->group_id)->select(['group_id', 'day'])->get();
-
         return response()->json([
-            'groupDays' => $groupDays
+            'groupDays' => $this->groupDayService->getGroupDaysOfGroup($request->group_id),
         ]);
     }
 }
