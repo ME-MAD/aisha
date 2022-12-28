@@ -10,6 +10,7 @@ use Tests\Traits\TestTeacherTrait;
 use App\Services\Group\GroupService;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCaseWithTransLationsSetUp;
+use Tests\Traits\TestGroupTypeTrait;
 use Tests\Traits\TestPaymentTrait;
 
 class GroupControllerTest extends TestCaseWithTransLationsSetUp
@@ -17,6 +18,7 @@ class GroupControllerTest extends TestCaseWithTransLationsSetUp
     use TestTeacherTrait;
     use TestGroupTrait;
     use TestPaymentTrait;
+    use TestGroupTypeTrait;
 
     public function setUp() : void
     {

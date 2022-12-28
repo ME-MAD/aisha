@@ -8,6 +8,7 @@ use Tests\TestCaseWithTransLationsSetUp;
 use Illuminate\Foundation\Testing\WithFaker;
 use Mockery\MockInterface;
 use Tests\Traits\TestGroupTrait;
+use Tests\Traits\TestGroupTypeTrait;
 use Tests\Traits\TestTeacherTrait;
 
 class GroupDayControllerTest extends TestCaseWithTransLationsSetUp
@@ -15,6 +16,7 @@ class GroupDayControllerTest extends TestCaseWithTransLationsSetUp
     use WithFaker, GroupDayTrait;
     use TestGroupTrait;
     use TestTeacherTrait;
+    use TestGroupTypeTrait;
 
     public function setUp() : void
     {

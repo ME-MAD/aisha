@@ -222,7 +222,6 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
         ];
     }
 
-
     public function test_getPaymentsOfGroupByMonth_pass()
     {
         $group = $this->generateRandomGroup();

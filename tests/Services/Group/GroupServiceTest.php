@@ -4,6 +4,7 @@ namespace Tests\Services\Group;
 use App\Services\Group\GroupService;
 use Tests\TestCase;
 use Tests\Traits\TestGroupTrait;
+use Tests\Traits\TestGroupTypeTrait;
 use Tests\Traits\TestTeacherTrait;
 
 class GroupServiceTest extends TestCase
@@ -11,6 +12,7 @@ class GroupServiceTest extends TestCase
 
     use TestGroupTrait;
     use TestTeacherTrait;
+    use TestGroupTypeTrait;
 
     public function test_create_group()
     {
