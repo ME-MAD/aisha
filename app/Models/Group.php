@@ -10,7 +10,7 @@ class Group extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','from', 'to', 'teacher_id', 'group_type_id', 'age_type'];
+    protected $fillable = ['name', 'from', 'to', 'teacher_id', 'group_type_id', 'age_type'];
 
     protected $appends = ['fto', 'ffrom'];
 
@@ -19,14 +19,14 @@ class Group extends Model
     protected function from(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => date('h:i A', strtotime($value)),
+            get: fn ($value) => date('h:i', strtotime($value)),
         );
     }
 
     protected function to(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => date('h:i A', strtotime($value)),
+            get: fn ($value) => date('h:i', strtotime($value)),
         );
     }
 
