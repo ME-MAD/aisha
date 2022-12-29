@@ -2,7 +2,6 @@
 
 namespace Tests\Traits;
 
-use App\Models\GroupType;
 use App\Models\Payment;
 
 Trait TestPaymentTrait
@@ -14,7 +13,7 @@ Trait TestPaymentTrait
         ]);
     }
 
-    private function generateRandomPaymentsData()
+    private function generateRandomPaymentsData($created_at = null)
     {
         $group = $this->generateRandomGroup();
         $student = $this->generateRandomStudent();
@@ -24,48 +23,28 @@ Trait TestPaymentTrait
             'amount' => $group->groupType->price,
             'month' => fake()->randomElement(getMonthNames()),
             'paid' => fake()->boolean(),
+            'created_at' => $created_at || now()
         ];
     }
 
-    private function generateRandomPaymentsDataCustomed(array $configs, $count = 1)
+    private function generateRandomPaymentsDataCustomed(array $configs)
     {
-        if($count == 1)
-        {
-            $group = $this->generateRandomGroup();
-            $student = $this->generateRandomStudent();
-    
-            $data = [
-                'group_id' => $group->id,
-                'student_id' => $student->id,
-                'amount' => $group->groupType->price,
-                'month' => fake()->randomElement(getMonthNames()),
-                'paid' => fake()->boolean(),
-            ];
-    
-            foreach($configs as $columnName => $value)
-            {
-                $data[$columnName] = $value;
-            }
-            return $data;
-        }
-
-
-        $groups = $this->generateRandomGroup($count);
+        $group = $this->generateRandomGroup();
         $student = $this->generateRandomStudent();
 
-        $data = [];
-        for($i = 1; $i <= $count; $i++)
-        {
-            $data []= [
-                'group_id' => $groups[$i - 1]['id'],
-                'student_id' => $student->id,
-                'amount' => GroupType::find($groups[$i -1]['group_type_id'])->amount,
-                'month' => fake()->randomElement(getMonthNames()),
-                'paid' => fake()->boolean(),
-            ];
-        }
+        $data = [
+            'group_id' => $group->id,
+            'student_id' => $student->id,
+            'amount' => $group->groupType->price,
+            'month' => fake()->randomElement(getMonthNames()),
+            'paid' => fake()->boolean(),
+        ];
 
-       
+        foreach($configs as $columnName => $value)
+        {
+            $data[$columnName] = $value;
+        }
+        return $data;
     }
 
     private function generateRandomPaymentsCustomed(array $configs = [], int $count = 1)
