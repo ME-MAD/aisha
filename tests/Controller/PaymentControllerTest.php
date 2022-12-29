@@ -248,28 +248,16 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
     {
         Payment::query()->delete();
 
+
         $now = now()->toDateTimeString();
 
-        $payments = collect();
-        for($i = 1; $i <= 10; $i++)
-        {
-            $payment = $this->generateRandomPaymentsDataCustomed([
-                'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years')
-            ]);
+        $payments = $this->generateRandomPaymentsCustomed([
+            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years')
+        ], 10);
 
-            $payments->add($payment);
-        }
-
-        for($i = 1; $i <= 10; $i++)
-        {
-            $payment = $this->generateRandomPaymentsDataCustomed([
-                'created_at' => $now
-            ]);
-
-            $payments->add($payment);
-        }
-
-        Payment::insert($payments->toArray());
+        $payments = $payments->merge($this->generateRandomPaymentsCustomed([
+            'created_at' => $now
+        ], 10));
 
         $paymentsGroupedByMonth = $payments->where('created_at', $now)->where('paid', 1)->groupBy('month');
 
@@ -295,28 +283,13 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
         $pastDate = now()->subYears(4);
         $now = now()->toDateTimeString();
 
-        $payments = collect();
-        $paymentsUnderTest = collect();
-        for($i = 1; $i <= 10; $i++)
-        {
-            $payment = $this->generateRandomPaymentsDataCustomed([
-                'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years')
-            ]);
+        $paymentsUnderTest = $this->generateRandomPaymentsCustomed([
+            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years')
+        ], 10);
 
-            $payments->add($payment);
-        }
-        $paymentsUnderTest = clone $payments;
-
-        for($i = 1; $i <= 10; $i++)
-        {
-            $payment = $this->generateRandomPaymentsDataCustomed([
-                'created_at' => $now
-            ]);
-
-            $payments->add($payment);
-        }
-
-        Payment::insert($payments->toArray());
+        $this->generateRandomPaymentsDataCustomed([
+            'created_at' => $now
+        ], 10);
 
         $paymentsGroupedByMonth = $paymentsUnderTest->where('paid', 1)->groupBy('month');
 
