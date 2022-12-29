@@ -7,35 +7,48 @@
                         <div class="col-sm-12 mb-4">
                             <select class="form-control basic month" name="month" id="month"
                                 data-group="{{ $group->id }}"
-                                data-href="{{ route('admin.payment.getMonthOfPayment') }}"
-                                data-href-payment-count="{{ route('admin.payment.getMonthCount') }}">
+                                data-href="{{ route('admin.payment.getPaymentsOfGroupByMonth') }}"
+                                data-href-payment-count="{{ route('admin.payment.getPaymentCountOfGroupByMonth') }}">
                                 <option value="" selected="selected">
-                                    choose the month
+                                    {{ __('group.choose the month') }}
                                 </option>
                                 <option value="January" selected="selected" {{ $currentMonth ? 'selected' : '' }}>
-                                    January</option>
+
+                                    {{ __('group.January') }}
+                                </option>
                                 <option value="February" selected="selected" {{ $currentMonth ? 'selected' : '' }}>
-                                    February</option>
-                                <option value="March" selected="selected" {{ $currentMonth ? 'selected' : '' }}>March
+                                    {{ __('group.February') }}
                                 </option>
-                                <option value="April" selected="selected" {{ $currentMonth ? 'selected' : '' }}>April
+                                <option value="March" selected="selected" {{ $currentMonth ? 'selected' : '' }}>
+                                    {{ __('group.March') }}
                                 </option>
-                                <option value="May" selected="selected" {{ $currentMonth ? 'selected' : '' }}>May
+                                <option value="April" selected="selected" {{ $currentMonth ? 'selected' : '' }}>
+                                    {{ __('group.April') }}
                                 </option>
-                                <option value="June" selected="selected" {{ $currentMonth ? 'selected' : '' }}>June
+                                <option value="May" selected="selected" {{ $currentMonth ? 'selected' : '' }}>
+                                    {{ __('group.May') }}
                                 </option>
-                                <option value="July" selected="selected" {{ $currentMonth ? 'selected' : '' }}>July
+                                <option value="June" selected="selected" {{ $currentMonth ? 'selected' : '' }}>
+                                    {{ __('group.June') }}
                                 </option>
-                                <option value="August" selected="selected" {{ $currentMonth ? 'selected' : '' }}>August
+                                <option value="July" selected="selected" {{ $currentMonth ? 'selected' : '' }}>
+                                    {{ __('group.July') }}
+                                </option>
+                                <option value="August" selected="selected" {{ $currentMonth ? 'selected' : '' }}>
+                                    {{ __('group.August') }}
                                 </option>
                                 <option value="September" selected="selected" {{ $currentMonth ? 'selected' : '' }}>
-                                    September</option>
+                                    {{ __('group.September') }}
+                                </option>
                                 <option value="October" selected="selected" {{ $currentMonth ? 'selected' : '' }}>
-                                    October</option>
+                                    {{ __('group.October') }}
+                                </option>
                                 <option value="November" selected="selected" {{ $currentMonth ? 'selected' : '' }}>
-                                    November</option>
+                                    {{ __('group.November') }}
+                                </option>
                                 <option value="December" selected="selected" {{ $currentMonth ? 'selected' : '' }}>
-                                    December</option>
+                                    {{ __('group.December') }}
+                                </option>
                             </select>
                         </div>
                         <table id="zero-config3" class="table table-hover dataTable">
@@ -45,16 +58,17 @@
                                 <tr role="row">
                                     <th class="sorting_asc" tabindex="0" aria-controls="multi-column-ordering"
                                         rowspan="1" colspan="1" aria-sort="ascending"
-                                        aria-label="Name: activate to sort column descending" style="width: 82px;">S.No
+                                        aria-label="Name: activate to sort column descending" style="width: 82px;">
+                                        {{ __('group.S.No') }}
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="multi-column-ordering"
                                         rowspan="1" colspan="1"
                                         aria-label="birthDay: activate to sort column ascending" style="width: 70px;">
-                                        Name</th>
+                                        {{ __('group.Name') }}</th>
                                     <th class="sorting" tabindex="0" aria-controls="multi-column-ordering"
                                         rowspan="1" colspan="1"
                                         aria-label="paid: activate to sort column ascending" style="width: 70px;">
-                                        Paid</th>
+                                        {{ __('group.Paid') }}</th>
 
                                 </tr>
                             </thead>
@@ -94,9 +108,9 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th rowspan="1" colspan="1">S.No</th>
-                                    <th rowspan="1" colspan="1">Name</th>
-                                    <th rowspan="1" colspan="1">Paid</th>
+                                    <th rowspan="1" colspan="1"> {{ __('group.S.No') }}</th>
+                                    <th rowspan="1" colspan="1">{{ __('group.Name') }}</th>
+                                    <th rowspan="1" colspan="1"> {{ __('group.Paid') }}</th>
 
 
                                 </tr>

@@ -8,6 +8,7 @@ use Mockery\MockInterface;
 use Tests\TestCaseWithTransLationsSetUp;
 use Tests\Traits\TestGroupStudentTrait;
 use Tests\Traits\TestGroupTrait;
+use Tests\Traits\TestGroupTypeTrait;
 use Tests\Traits\TestStudentTrait;
 use Tests\Traits\TestTeacherTrait;
 
@@ -17,6 +18,7 @@ class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
     use TestStudentTrait;
     use TestGroupStudentTrait;
     use TestTeacherTrait;
+    use TestGroupTypeTrait;
 
     public function setUp() : void
     {

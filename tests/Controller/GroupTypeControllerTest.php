@@ -3,13 +3,13 @@
 namespace Tests\Controller;
 
 use Mockery\MockInterface;
-use Tests\Traits\GroupTypeTrait;
 use Tests\TestCaseWithTransLationsSetUp;
 use App\Services\GroupType\GroupTypeService;
+use Tests\Traits\TestGroupTypeTrait;
 
 class GroupTypeControllerTest extends TestCaseWithTransLationsSetUp
 {
-    use GroupTypeTrait;
+    use TestGroupTypeTrait;
 
 
     public function setUp() : void

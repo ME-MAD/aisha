@@ -1,7 +1,9 @@
 @extends('master')
 
-
 @push('css')
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="{{ asset('adminAssets/plugins/flatpickr/flatpickr.css') }}" rel="stylesheet" type="text/css">
+    <!-- END THEME GLOBAL STYLES -->
 @endpush
 
 @section('breadcrumb')
@@ -20,12 +22,9 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown">
-                <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics" href="javascript:void(0);">Daily
-                    Analytics</a>
-                <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics" href="javascript:void(0);">Weekly
-                    Analytics</a>
-                <a class="dropdown-item" data-value="<span>Show</span> : Monthly Analytics"
-                    href="javascript:void(0);">Monthly Analytics</a>
+                <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics" href="javascript:void(0);">Daily Analytics</a>
+                <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics" href="javascript:void(0);">Weekly Analytics</a>
+                <a class="dropdown-item" data-value="<span>Show</span> : Monthly Analytics" href="javascript:void(0);">Monthly Analytics</a>
                 <a class="dropdown-item" data-value="Download All" href="javascript:void(0);">Download All</a>
                 <a class="dropdown-item" data-value="Share Statistics" href="javascript:void(0);">Share Statistics</a>
             </div>
@@ -38,40 +37,40 @@
         <div class="row">
 
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing" id="statustucsContanerOne">
-
                 <!-- on file ajax js/home.js -->
-
             </div>
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing" id="statustucsContanerTwo">
-
                 <!-- on file ajax js/home.js -->
-
             </div>
         </div>
+
 
 
         <div class="row" id="paymentsThisMonthContainer"
             data-href="{{ route('admin.payment.getPaymentPerMonthThisYear') }}">
 
-            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12 layout-spacing" id="canvas">
-                <div id="btns-years-container">
-                    <!--btns-years-container -->
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 layout-spacing" id="canvas">
+
+                <div id="content-tables-search">
+                    <!-- content tables search -->
                 </div>
 
                 <canvas id="paymentsThisMonthChart">
-                    <!-- paymentsThisMonthChart -->
+                    <!-- payments this month chart -->
                 </canvas>
             </div>
 
         </div>
+
     </div>
 @endsection
 
 
 @push('js')
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="{{ asset('adminAssets/plugins/flatpickr/flatpickr.js') }}"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script src="{{ asset('js/home.js') }}"></script>
     <script src="{{ asset('js/payment_chart.js') }}"></script>
 @endpush
-{{-- btn-n-add --}}

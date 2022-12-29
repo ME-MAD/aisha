@@ -10,7 +10,8 @@ Trait TestGroupTrait
     private function generateRandomGroup(int $count = 1)
     {
         $teacher = $this->generateRandomTeacher();
-        $groupType = GroupType::inRandomOrder()->first();
+        $groupType = $this->generateRandomGroupType();
+        
         if($count == 1)
         {
             return Group::factory()->create([
@@ -27,7 +28,8 @@ Trait TestGroupTrait
     private function generateRandomGroupData()
     {
         $teacher = $this->generateRandomTeacher();
-        $groupType = GroupType::inRandomOrder()->first();
+        $groupType = $this->generateRandomGroupType();
+
         return [
             'name' => fake()->name,
             'from' => "10:00",

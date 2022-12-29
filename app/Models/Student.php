@@ -56,7 +56,7 @@ class Student extends Model
 
     public function checkPaid(int $group_id, string $month)
     {
-        return $this->payments()->select(['paid'])->where('group_id', $group_id)->where('month', $month)->first()->paid ?? false;
+        return $this->payments->where('group_id', $group_id)->where('month', $month)->first()->paid ?? false;
     }
 
     public function groups()

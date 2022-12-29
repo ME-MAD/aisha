@@ -6,8 +6,10 @@
                     <div class="col-sm-12">
                         @if (!$group->checkIfGroupExceededGroupDaysLimit())
                             <div class="col-xl-2 col-md-2 col-sm-2 col-2 float-right">
-                                <a data-toggle='modal' data-target='#creatGroupDayModal'
-                                    class="btn btn-primary ">Create</a>
+                                <a data-toggle='modal' data-target='#creatGroupStudentModal' class="btn btn-primary"
+                                    data-href="{{ route('admin.group_students.getGroupStudents') }}"
+                                    id="creatGroupStudentModalInGroupShow"
+                                    data-group_id="{{ $group->id }}">{{ __('group.Create Group Student') }}</a>
                             </div>
                         @endif
                         <table id="zero-config2" class="table table-hover dataTable">
@@ -15,19 +17,22 @@
                                 <tr role="row">
                                     <th class="sorting_asc" tabindex="0" aria-controls="multi-column-ordering"
                                         rowspan="1" colspan="1" aria-sort="ascending"
-                                        aria-label="Name: activate to sort column descending" style="width: 82px;">Name
+                                        aria-label="Name: activate to sort column descending" style="width: 82px;">
+                                        {{ __('group.name') }}
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="multi-column-ordering"
                                         rowspan="1" colspan="1"
                                         aria-label="Position: activate to sort column ascending" style="width: 70px;">
-                                        BirthDay</th>
+                                        {{ __('group.Birthday') }}</th>
                                     <th class="sorting" tabindex="0" aria-controls="multi-column-ordering"
                                         rowspan="1" colspan="1"
                                         aria-label="Office: activate to sort column ascending" style="width: 49px;">
-                                        Phone</th>
+                                        {{ __('group.Phone') }}
+                                    </th>
                                     <th class="sorting" tabindex="0" aria-controls="multi-column-ordering"
                                         rowspan="1" colspan="1"
-                                        aria-label="Age: activate to sort column ascending" style="width: 27px;">Delete
+                                        aria-label="Age: activate to sort column ascending" style="width: 27px;">
+                                        {{ __('globalWorld.Delete') }}
                                     </th>
 
                                 </tr>
@@ -64,11 +69,10 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th rowspan="1" colspan="1">Name</th>
-                                    <th rowspan="1" colspan="1">BirthDay</th>
-                                    <th rowspan="1" colspan="1">Phone</th>
-                                    <th rowspan="1" colspan="1">Delete</th>
-
+                                    <th rowspan="1" colspan="1"> {{ __('group.name') }}</th>
+                                    <th rowspan="1" colspan="1">{{ __('group.Birthday') }}</th>
+                                    <th rowspan="1" colspan="1"> {{ __('group.Phone') }}</th>
+                                    <th rowspan="1" colspan="1"> {{ __('globalWorld.Delete') }}</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -76,6 +80,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>

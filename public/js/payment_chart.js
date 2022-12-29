@@ -1,13 +1,24 @@
 
-function GetMonthlyPaymentsThisYear(year = null) {
+
+
+function GetMonthlyPayments(year = null, start_time = null, end_time = null) {
 
     url = $('#paymentsThisMonthContainer').data('href');
+
+    var startTime = $('#date-from').val()
+    var endTime = $('#date-to').val()
+
+
+
     //Start ajax
     $.ajax({
         type: 'POST',
         url: url,
         data: {
+            //start_time,end_time
             year: year,
+            start_time: startTime,
+            end_time: endTime,
         },
         success: function (response) {
             //Start function success
@@ -17,24 +28,71 @@ function GetMonthlyPaymentsThisYear(year = null) {
             const values = response.values;
             const years = response.years;
             const thisYear = response.thisYear;
+            const totalPayments = response.totalPayments;
 
 
             //---------------------------------
-            //Start append buttons content
             let allBtnYears = ``;
             years.forEach((item) => {
-                allBtnYears += `<button type="button" class="btn ${(item.year == thisYear) ? 'btn-primary' : 'btn-outline-primary'} buttonPaymentsThisYearsChart" data-year="${item.year}">
+                allBtnYears += `<button style="margin-left:15px" type="button" class="btn ${(item.year == thisYear) ? 'btn-primary' : 'btn-outline-primary'} buttonPaymentsThisYearsChart" data-year="${item.year}">
                                 ${item.year}
                             </button>`
-
             });
 
 
-            $('#btns-years-container').html(`<div>
-                                                ${allBtnYears}
-                                            </div>`);
-            //End append buttons content
-            //---------------------------------
+            $('#content-tables-search').html(`
+            <ul class="nav nav-tabs  mb-3 mt-3" id="simpletab" role="tablist">
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary active" id="search-year-tab" data-toggle="tab" href="#search-year" role="tab" aria-controls="search-year" aria-selected="true">
+                    Search By Years
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-outline-primary" id="search-date-tab" data-toggle="tab" href="#search-date" role="tab"
+                    aria-controls="contact" aria-selected="false">
+                    Search By Date
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="simpletabContent">
+
+                <div class="tab-pane fade show active" id="search-year" role="tabpanel" aria-labelledby="search-year-tab">
+                    <div class="input-group mb-4">
+                        ${allBtnYears}
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="search-date" role="tabpanel" aria-labelledby="search-date-tab">
+                    <div class="input-group mb-4">
+
+                        <input id="date-from" name="from" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date From..">
+                        <input id="date-to" name="to" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date To..">
+
+                        <div class="input-group-prepend">
+                            <button type="button" style="margin-left:15px" class="btn btn-outline-primary" id="buttonPaymentsSearch">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-search">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-4">
+                    <p>Total Payments : $ ${totalPayments}</p>
+                </div>
+            </div>`)
+
+            var f1 = flatpickr(document.getElementById('date-from'));
+            var f1 = flatpickr(document.getElementById('date-to'));
+
+
 
 
             //---------------------------------
@@ -69,10 +127,21 @@ function GetMonthlyPaymentsThisYear(year = null) {
             //Start Get Payments This Years
             $('.buttonPaymentsThisYearsChart').on('click', function () {
                 myChart.destroy()
-                GetMonthlyPaymentsThisYear($(this).data('year'))
+                GetMonthlyPayments($(this).data('year'))
             })
             //End Get Payments This Years
             //---------------------------------
+
+
+            //---------------------------------
+            //Start Search Button
+            $('#buttonPaymentsSearch').on('click', function () {
+                myChart.destroy()
+                GetMonthlyPayments($('#date-from').val(), $('#date-to').val())
+            })
+            //End Search Button
+            //---------------------------------
+
 
 
             //----------------------------------------------------------
@@ -83,8 +152,8 @@ function GetMonthlyPaymentsThisYear(year = null) {
         }
     })
     //End ajax
+
 }
 
-GetMonthlyPaymentsThisYear()
-
+GetMonthlyPayments()
 
