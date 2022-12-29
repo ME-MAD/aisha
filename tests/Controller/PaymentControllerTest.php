@@ -247,12 +247,14 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
     public function test_getPaymentPerMonthThisYear_gets_payments_this_year()
     {
         Payment::query()->delete();
+
         $now = now()->toDateTimeString();
+
         $payments = collect();
         for($i = 1; $i <= 10; $i++)
         {
-            $payment = $this->generateRandomPaymentsCustomed([
-                'created_at' => fake()->dateTime()
+            $payment = $this->generateRandomPaymentsDataCustomed([
+                'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years')
             ]);
 
             $payments->add($payment);
@@ -260,12 +262,14 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
 
         for($i = 1; $i <= 10; $i++)
         {
-            $payment = $this->generateRandomPaymentsCustomed([
+            $payment = $this->generateRandomPaymentsDataCustomed([
                 'created_at' => $now
             ]);
 
             $payments->add($payment);
         }
+
+        Payment::insert($payments->toArray());
 
         $paymentsGroupedByMonth = $payments->where('created_at', $now)->where('paid', 1)->groupBy('month');
 
@@ -275,6 +279,55 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
         }
 
         $res = $this->call('POST', route('admin.payment.getPaymentPerMonthThisYear'));
+
+        $res->assertJson([
+            'values' => array_values($data)
+        ]);
+    }
+
+    /**
+     * @group examin
+     */
+    public function test_getPaymentPerMonthThisYear_gets_payments_by_giving_correct_year()
+    {
+        Payment::query()->delete();
+
+        $pastDate = now()->subYears(4);
+        $now = now()->toDateTimeString();
+
+        $payments = collect();
+        $paymentsUnderTest = collect();
+        for($i = 1; $i <= 10; $i++)
+        {
+            $payment = $this->generateRandomPaymentsDataCustomed([
+                'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years')
+            ]);
+
+            $payments->add($payment);
+        }
+        $paymentsUnderTest = clone $payments;
+
+        for($i = 1; $i <= 10; $i++)
+        {
+            $payment = $this->generateRandomPaymentsDataCustomed([
+                'created_at' => $now
+            ]);
+
+            $payments->add($payment);
+        }
+
+        Payment::insert($payments->toArray());
+
+        $paymentsGroupedByMonth = $paymentsUnderTest->where('paid', 1)->groupBy('month');
+
+        $data = [];
+        foreach (getMonthNames() as $monthName) {
+            $data[$monthName] = $paymentsGroupedByMonth->get($monthName)?->sum('amount') ?? 0;
+        }
+
+        $res = $this->call('POST', route('admin.payment.getPaymentPerMonthThisYear'),[
+            'year' => $pastDate->year
+        ]);
 
         $res->assertJson([
             'values' => array_values($data)

@@ -13,17 +13,41 @@ Trait TestTeacherTrait
         {
             return Teacher::factory()->create();
         }
-        return Teacher::factory($count)->create();
+        $data = $this->generateRandomTeacherData($count);
+
+        Teacher::insert($data);
+
+        return $data;
+        // return Teacher::factory($count)->create();
     }
 
-    private function generateRandomTeacherData()
+    private function generateRandomTeacherData($count = 1)
     {
-        return [
-            'name'          => fake()->name,
-            'birthday'      => fake()->date,
-            'phone'         => fake()->phoneNumber,
-            'avatar'        => UploadedFile::fake()->image('avatar.jpg'),
-            'qualification' => fake()->text
-        ];
+
+        if($count == 1)
+        {
+            return [
+                'name'          => fake()->name,
+                'birthday'      => fake()->date,
+                'phone'         => fake()->phoneNumber,
+                'avatar'        => UploadedFile::fake()->image('avatar.jpg'),
+                'qualification' => fake()->text
+            ];
+        }
+        
+        $data = [];
+        for($i = 1; $i <= $count; $i++)
+        {
+            $data []= [
+                'name'          => fake()->name,
+                'birthday'      => fake()->date,
+                'phone'         => fake()->phoneNumber,
+                'avatar'        => UploadedFile::fake()->image('avatar.jpg'),
+                'qualification' => fake()->text,
+                'created_at' => now()->toDateTimeString(),
+                'updated_at' => now()->toDateTimeString()
+            ];
+        }
+        return $data;
     }
 }
