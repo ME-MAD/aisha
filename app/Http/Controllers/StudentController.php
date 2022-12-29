@@ -19,6 +19,7 @@ class StudentController extends Controller
     {
         return $studentDataTable->render('pages.student.index');
     }
+    
 
     public function create()
     {

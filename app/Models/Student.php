@@ -70,4 +70,15 @@ class Student extends Model
             'group_id'
         );
     }
+
+
+    public function notes()
+    {
+        return $this->morphMany(Note::class, 'notable');
+    }
+
+    public function ownNotes()
+    {
+        return $this->morphMany(Note::class, 'notby');
+    }
 }
