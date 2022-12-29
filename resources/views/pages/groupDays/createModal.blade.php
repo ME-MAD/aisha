@@ -1,5 +1,5 @@
 <div class="modal fade" id="creatGroupDayModal" tabindex="-1" role="dialog" aria-labelledby="creatGroupDayModal"
-    aria-hidden="true" data-toggle="modal" data-href="{{ route('admin.group_day.getDaysOfGroup') }}">
+    aria-hidden="true" data-toggle="modal" data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header p-3 mb-2 bg-primary">
@@ -17,7 +17,7 @@
                             </label>
                             <div class="col-xl-10 col-lg-9 col-sm-10">
                                 <select class="form-control basic chickgroup" style="width: 100%;" name="group_id"
-                                    id="group_id" data-href="{{ route('admin.group_day.getDaysOfGroup') }}">
+                                    id="group_id" data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
                                     <option value=""> {{ __('group.Choose group') }}</option>
                                     @foreach ($groups as $group)
                                         @if (!$group->checkIfGroupExceededGroupDaysLimit())
@@ -33,7 +33,7 @@
                                     @endforeach
                                 </select>
                                 @error('group_id')
-                                    <p class="text-danger" data-href="{{ route('admin.group_day.getDaysOfGroup') }}">
+                                    <p class="text-danger" data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
                                         {{ $message }}</p>
                                 @enderror
                             </div>
