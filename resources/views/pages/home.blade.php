@@ -37,11 +37,11 @@
 
 @section('content')
     <div class="text-center w-100">
-        <div class="container" id="paymentsThisMonthContainer"
+        <div class="px-3" id="paymentsThisMonthContainer"
             data-href="{{ route('admin.payment.getPaymentPerMonthThisYear') }}">
 
-            <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 layout-spacing" id="canvas">
+            <div class="row align-items-center">
+                <div class="col-8 layout-spacing" id="canvas">
                     <div id="content-tables-search">
                         <!-- content tables search -->
                     </div>
@@ -50,7 +50,7 @@
                     </canvas>
                 </div>
 
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 layout-spacing">
+                <div class="col-4 layout-spacing">
                     <div class="" id="paymentsThisMonthContainerGroup" data-href="{{ route('admin.getDataAjax') }}">
 
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing" id="canvas">
