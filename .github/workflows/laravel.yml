@@ -15,7 +15,7 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ALLOW_EMPTY_PASSWORD:
+          MYSQL_ROOT_PASSWORD: 123
           MYSQL_DATABASE: aisha_test
         ports:
           - 33306:3306
