@@ -36,7 +36,6 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
     - name: running tests
       env:
-        DB_HOST: localhost
         DB_DATABASE_TEST: aisha_test
         DB_USERNAME_TEST: root
         DB_PASSWORD_TEST: 123
