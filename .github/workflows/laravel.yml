@@ -34,7 +34,7 @@ jobs:
         DB_DATABASE_TEST: aisha_test
         DB_USERNAME_TEST: root
         DB_PASSWORD_TEST: root
-      run: mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE_TEST }};' -u${{ env.DB_USERNAME_TEST }} -p${{ env.DB_PASSWORD_TEST }} && php artisan migrate:fresh --database=mysql_testing && php artisan db:seed AdminSeeder
+      run: mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE_TEST }};' -u${{ env.DB_USERNAME_TEST }} -p${{ env.DB_PASSWORD_TEST }} && php artisan migrate:fresh --database=mysql_testing && php artisan db:seed
     - name: running tests
       env:
         DB_DATABASE_TEST: aisha_test
