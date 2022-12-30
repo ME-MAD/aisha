@@ -20,10 +20,10 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate([
             'email' => 'admin@admin.com',
         ], [
-
             'name' => 'admin',
             'password' => Hash::make('123')
         ]);
+
 
         GroupType::updateOrCreate([
             'name' => 'normal',
@@ -31,18 +31,21 @@ class DatabaseSeeder extends Seeder
             'price' => 80,
             'days_num' => 2
         ]);
+
         GroupType::updateOrCreate([
             'name' => 'dense',
         ], [
             'price' => 120,
             'days_num' => 4
         ]);
+        
         GroupType::updateOrCreate([
             'name' => 'all week',
         ], [
             'price' => 200,
             'days_num' => 6
         ]);
+
 
         $this->call([
             QuraanSeeder::class,

@@ -18,8 +18,8 @@ class GroupTypeFactory extends Factory
     {
         return [
             'name'     => fake()->unique()->name,
-            'price'    => fake()->numberBetween($min = 50, $max = 2500),
-            'days_num' => fake()->numberBetween($min = 2, $max = 6),
+            'price'    => fake()->numberBetween(50, 2500),
+            'days_num' => fake()->numberBetween(2, 6),
         ];
     }
 }
