@@ -31,12 +31,14 @@ jobs:
         DB_DATABASE_TEST: aisha_test
         DB_USERNAME_TEST: root
         DB_PASSWORD_TEST: root
+        DB_PASSWORD: root
       run: mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE_TEST }};' -u${{ env.DB_USERNAME_TEST }} -p${{ env.DB_PASSWORD_TEST }} 
     - name: running tests
       env:
         DB_DATABASE_TEST: aisha_test
         DB_USERNAME_TEST: root
         DB_PASSWORD_TEST: root
+        DB_PASSWORD: root
       run: php artisan test
 # name: Laravel
 
