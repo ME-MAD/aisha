@@ -110,9 +110,9 @@ class PaymentController extends Controller
             ->from($request->start_time ?? null)
             ->to($request->end_time ?? null);
         
-        if($request->year)
+        if( !($request->start_time || $request->end_time) )
         {
-            $query->year($request->year);
+            $query->year($thisYear);
         }
         
         $data = $query->getForChart();

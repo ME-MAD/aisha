@@ -245,7 +245,6 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
     {
         Payment::query()->delete();
 
-
         $now = now()->toDateTimeString();
 
         $payments = $this->generateRandomPaymentsCustomed([
