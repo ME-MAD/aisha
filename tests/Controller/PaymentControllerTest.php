@@ -241,9 +241,6 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
         $res->assertJsonCount(5, 'payments');
     }
     
-    /**
-     * @group examin
-     */
     public function test_getPaymentPerMonthThisYear_gets_payments_this_year()
     {
         Payment::query()->delete();
@@ -273,9 +270,6 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
         ]);
     }
 
-    /**
-     * @group examin
-     */
     public function test_getPaymentPerMonthThisYear_gets_payments_by_giving_correct_year()
     {
         Payment::query()->delete();
@@ -308,9 +302,6 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
         ]);
     }
 
-    /**
-     * @group examin
-     */
     public function test_getPaymentPerMonthThisYear_gets_payments_by_giving_wrong_year()
     {
         Payment::query()->delete();
@@ -346,9 +337,6 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
     }
 
 
-    /**
-     * @group examin2
-     */
     public function test_getPaymentPerMonthThisYear_gets_payments_by_giving_start_date_only()
     {
         Payment::query()->delete();
@@ -407,9 +395,6 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
     }
 
 
-    /**
-     * @group examin2
-     */
     public function test_getPaymentPerMonthThisYear_gets_payments_by_giving_end_date_only()
     {
         Payment::query()->delete();
@@ -466,9 +451,6 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
     }
 
 
-    /**
-     * @group examin2
-     */
     public function test_getPaymentPerMonthThisYear_gets_payments_by_giving_start_date_and_end_date()
     {
         Payment::query()->delete();
