@@ -102,12 +102,23 @@ class PaymentController extends Controller
             'month'
         )->where('paid', 1);
  
-        if (isset($request->start_time) && isset($request->end_time)) {
+        if (isset($request->start_time) && isset($request->end_time)) 
+        {
             $paymentsChart = $paymentsChart->whereBetween('created_at', [
-                Carbon::createFromFormat('Y-m-d', $request->start_time)->startOfDay()->toDateTimeString(),
-                Carbon::createFromFormat('Y-m-d', $request->end_time)->endOfDay()->toDateTimeString()
+                date('Y-m-d',strtotime($request->start_time)),
+                date('Y-m-d',strtotime($request->end_time))
             ]);
-        } else {
+        } 
+        else if(isset($request->start_time))
+        {
+            $paymentsChart = $paymentsChart->where('created_at', '>=', date('Y-m-d',strtotime($request->start_time)));
+        }
+        else if(isset($request->end_time))
+        {
+            $paymentsChart = $paymentsChart->where('created_at', '<=', date('Y-m-d',strtotime($request->end_time)));
+        }
+        else 
+        {
             $paymentsChart = $paymentsChart->whereYear('created_at', $thisYear);
         }
 

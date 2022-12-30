@@ -284,10 +284,11 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
         $now = now()->toDateTimeString();
 
         $paymentsUnderTest = $this->generateRandomPaymentsCustomed([
-            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years')
+            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years'),
+            'paid' => true
         ], 10);
 
-        $this->generateRandomPaymentsDataCustomed([
+        $this->generateRandomPaymentsCustomed([
             'created_at' => $now
         ], 10);
 
@@ -300,6 +301,234 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
 
         $res = $this->call('POST', route('admin.payment.getPaymentPerMonthThisYear'),[
             'year' => $pastDate->year
+        ]);
+
+        $res->assertJson([
+            'values' => array_values($data)
+        ]);
+    }
+
+    /**
+     * @group examin
+     */
+    public function test_getPaymentPerMonthThisYear_gets_payments_by_giving_wrong_year()
+    {
+        Payment::query()->delete();
+
+        $now = now()->toDateTimeString();
+
+        $this->generateRandomPaymentsCustomed([
+            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years'),
+            'paid' => true
+        ], 1);
+        $this->generateRandomPaymentsCustomed([
+            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years'),
+            'paid' => true
+        ], 1);
+        $this->generateRandomPaymentsCustomed([
+            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years'),
+            'paid' => true
+        ], 1);
+        $this->generateRandomPaymentsCustomed([
+            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years'),
+            'paid' => true
+        ], 1);
+
+        $this->generateRandomPaymentsCustomed([], 3);
+
+        $res = $this->call('POST', route('admin.payment.getPaymentPerMonthThisYear'),[
+            'year' => now()->subYears(5)->year
+        ]);
+
+        $res->assertJson([
+            'values' => [0,0,0,0,0,0,0,0,0,0,0,0]
+        ]);
+    }
+
+
+    /**
+     * @group examin2
+     */
+    public function test_getPaymentPerMonthThisYear_gets_payments_by_giving_start_date_only()
+    {
+        Payment::query()->delete();
+
+        $start_time = "2017-02-09 00:00:00";
+
+        $paymentsUnderTest = $this->generateRandomPaymentsCustomed([
+            'created_at' => fake()->dateTimeBetween("-7 years" , '-4 years'),
+            'paid' => true
+        ], 2);
+
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-07 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-08 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-09 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-10 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-11 21:28:05",
+            'paid' => true
+        ], 1));
+
+
+
+        $paymentsGroupedByMonth = $paymentsUnderTest->where('paid', 1)
+            ->where('created_at', ">=", $start_time)
+            ->groupBy('month');
+
+        $data = [];
+        foreach (getMonthNames() as $monthName) {
+            $data[$monthName] = $paymentsGroupedByMonth->get($monthName)?->sum('amount') ?? 0;
+        }
+
+        $res = $this->call('POST', route('admin.payment.getPaymentPerMonthThisYear'),[
+            'start_time' => $start_time
+        ]);
+
+        $res->assertJson([
+            'values' => array_values($data)
+        ]);
+    }
+
+
+    /**
+     * @group examin2
+     */
+    public function test_getPaymentPerMonthThisYear_gets_payments_by_giving_end_date_only()
+    {
+        Payment::query()->delete();
+
+        $end_time = "2017-02-09 00:00:00";
+
+        $paymentsUnderTest = $this->generateRandomPaymentsCustomed([
+            'created_at' => fake()->dateTimeBetween("-7 years" , '-4 years'),
+            'paid' => true
+        ], 2);
+
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-07 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-08 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-09 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-10 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-11 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsGroupedByMonth = $paymentsUnderTest->where('paid', 1)
+            ->where('created_at', "<=", $end_time)
+            ->groupBy('month');
+
+        $data = [];
+        foreach (getMonthNames() as $monthName) {
+            $data[$monthName] = $paymentsGroupedByMonth->get($monthName)?->sum('amount') ?? 0;
+        }
+
+        $res = $this->call('POST', route('admin.payment.getPaymentPerMonthThisYear'),[
+            'end_time' => $end_time
+        ]);
+
+        $res->assertJson([
+            'values' => array_values($data)
+        ]);
+    }
+
+
+    /**
+     * @group examin2
+     */
+    public function test_getPaymentPerMonthThisYear_gets_payments_by_giving_start_date_and_end_date()
+    {
+        Payment::query()->delete();
+
+        $start_time = "2017-02-08 00:00:00";
+        $end_time = "2017-02-12 00:00:00";
+
+        $paymentsUnderTest = $this->generateRandomPaymentsCustomed([
+            'created_at' => fake()->dateTimeBetween("-7 years" , '-4 years'),
+            'paid' => true
+        ], 2);
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-07 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-08 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-09 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-10 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-11 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-12 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsUnderTest = $paymentsUnderTest->add($this->generateRandomPaymentsCustomed([
+            'created_at' => "2017-02-13 21:28:05",
+            'paid' => true
+        ], 1));
+
+        $paymentsGroupedByMonth = $paymentsUnderTest->where('paid', 1)
+            ->where('created_at', ">=", $start_time)
+            ->where('created_at', "<=", $end_time)
+            ->groupBy('month');
+
+        $data = [];
+        foreach (getMonthNames() as $monthName) {
+            $data[$monthName] = $paymentsGroupedByMonth->get($monthName)?->sum('amount') ?? 0;
+        }
+
+        $res = $this->call('POST', route('admin.payment.getPaymentPerMonthThisYear'),[
+            'start_time' => $start_time,
+            'end_time' => $end_time
         ]);
 
         $res->assertJson([
