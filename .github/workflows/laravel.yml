@@ -28,6 +28,9 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
     - name: create database
       env:
+        DB_DATABASE: aisha_test
+        DB_USERNAME: root
+        DB_PASSWORD: root
         DB_DATABASE_TEST: aisha_test
         DB_USERNAME_TEST: root
         DB_PASSWORD_TEST: root
