@@ -13,9 +13,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\Payment\StorePaymentRequest;
+use App\Services\Payment\PaymentChartService;
 
 class PaymentController extends Controller
 {
+    private $paymentChartService;
+    
+    public function __construct(PaymentChartService $paymentChartService)
+    {
+        $this->paymentChartService = $paymentChartService;
+    }
+
     public function index(PaymentDataTable $paymentDataTable)
     {
         return $paymentDataTable->render('pages.payment.index');
@@ -95,37 +103,21 @@ class PaymentController extends Controller
     public function getPaymentPerMonthThisYear(Request $request)
     {
 
-        $thisYear = (isset($request->year)) ? $request->year : date('Y');
+        $thisYear = $request->year ?? date('Y');
 
-        $paymentsChart = Payment::select(
-            DB::raw("(SUM(amount)) as month_amount"),
-            'month'
-        )->where('paid', 1);
- 
-        if (isset($request->start_time) && isset($request->end_time)) {
-            $paymentsChart = $paymentsChart->whereBetween('created_at', [
-                Carbon::createFromFormat('Y-m-d', $request->start_time)->startOfDay()->toDateTimeString(),
-                Carbon::createFromFormat('Y-m-d', $request->end_time)->endOfDay()->toDateTimeString()
-            ]);
-        } else {
-            $paymentsChart = $paymentsChart->whereYear('created_at', $thisYear);
+        $query = $this->paymentChartService->sumOfAmountAndMonth()
+            ->paid()
+            ->from($request->start_time ?? null)
+            ->to($request->end_time ?? null);
+        
+        if( !($request->start_time || $request->end_time) )
+        {
+            $query->year($thisYear);
         }
-
-        $paymentsChart =  $paymentsChart->groupBy('month')->get();
-
-
-        $data = [];
-        foreach (getMonthNames() as $monthName) {
-            $data[$monthName] = $paymentsChart->where('month', $monthName)->first()->month_amount ?? 0;
-        }
-
-
-        $years = Payment::select(
-            DB::raw("YEAR(created_at) as year")
-        )
-            ->where('paid', 1)
-            ->groupBy('year')
-            ->get();
+        
+        $data = $query->getForChart();
+            
+        $years = $this->paymentChartService->getAllPossibleYears();
 
         return response()->json([
             'months'         => array_keys($data),

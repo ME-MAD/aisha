@@ -11,6 +11,8 @@ trait GroupDayTrait
         if ($count == 1) {
             return GroupDay::factory()->create();
         }
+
+        $data = $this->generateRandomGroupDayData();
         return GroupDay::factory($count)->create();
     }
 
