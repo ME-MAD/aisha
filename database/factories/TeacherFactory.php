@@ -17,10 +17,10 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            'name'          => fake()->name,
-            'birthday'      => fake()->date(),
-            'phone'         => fake()->phoneNumber(),
-            'avatar'        => fake()->name(),
+            'name' => fake()->name,
+            'birthday' => fake()->date(),
+            'phone' => fake()->phoneNumber(),
+            'avatar' => fake()->name(),
             'qualification' => fake()->text()
         ];
     }

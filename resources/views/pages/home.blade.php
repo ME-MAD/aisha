@@ -36,10 +36,8 @@
 @endsection
 
 @section('content')
-
     <div class="text-center w-100">
         <div class="px-3" id="paymentsThisMonthContainer"
-        
             data-href="{{ route('admin.payment.getPaymentPerMonthThisYear') }}">
 
             <div class="row align-items-center">

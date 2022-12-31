@@ -2,19 +2,18 @@
 
 namespace Tests\Controller;
 
+use App\Services\Experience\ExperienceService;
 use Carbon\Carbon;
 use Mockery\MockInterface;
-use Tests\Traits\TestTeacherTrait;
-use Tests\Traits\TestExperienceTrait;
 use Tests\TestCaseWithTransLationsSetUp;
-use App\Services\Experience\ExperienceService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Traits\TestExperienceTrait;
+use Tests\Traits\TestTeacherTrait;
 
 class ExperienceControllerTest extends TestCaseWithTransLationsSetUp
 {
     use TestTeacherTrait;
     use TestExperienceTrait;
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     protected function setUp() : void
     {
@@ -65,7 +64,7 @@ class ExperienceControllerTest extends TestCaseWithTransLationsSetUp
     public function test_update_validations($data)
     {
         $experience = $this->generateRandomExperience();
-
+        
         $res = $this->call('PUT',route('admin.experience.update',$experience->id),$data);
 
         $res->assertSessionHasErrors();
@@ -106,11 +105,11 @@ class ExperienceControllerTest extends TestCaseWithTransLationsSetUp
     {
         $this->refreshApplication();
         $teacher = $this->generateRandomTeacher();
-
+        
         return [
             "without data" => [
                 [
-
+                    
                 ],
             ],
             "without a title" => [
@@ -137,7 +136,7 @@ class ExperienceControllerTest extends TestCaseWithTransLationsSetUp
                     'teacher_id' =>  $teacher->id
                 ],
             ],
-            "without teacher_id" => [
+            "without teacher_id" => [ 
                 [
                     'title' => 'this is title for exps',
                     'from' => Carbon::now()->subDays(20)->toDateString(),
@@ -169,7 +168,7 @@ class ExperienceControllerTest extends TestCaseWithTransLationsSetUp
                     'teacher_id' =>  $teacher->id
                 ]
             ]
-
+            
         ];
     }
 }
