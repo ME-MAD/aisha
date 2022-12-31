@@ -47,15 +47,15 @@ class NoteService
 
     private function teacher()
     {
-        return Note::where('notable_type', Teacher::class);
+        return Note::where('notable_type', Teacher::class)->with(['notableTeacher']);
+
     }
 
     private function student()
     {
-        // return Note::where('notable_type', Student::class)->with(['student'])->get();
-        $test = Note::where('notable_type', Student::class)->with(['student'])->get();
 
-        dd($test);
+        return Note::where('notable_type', Student::class)
+        ->with(['notableStudent']);
     }
 
     private function subject()

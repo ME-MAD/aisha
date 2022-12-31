@@ -38,8 +38,20 @@ class Note extends Model
         return $this->morphTo(Student::class, 'notable_type', 'notable_id');
     }
 
+    public function notableTeacher()
+    {
+        return $this->morphTo(Teacher::class, 'notable_type', 'notable_id');
+    }
 
+    public function notbyStudent()
+    {
+        return $this->morphTo(Student::class, 'notby_type', 'notby_id');
+    }
 
+    public function notbyTeacher()
+    {
+        return $this->morphTo(Teacher::class, 'notby_type', 'notby_id');
+    }
 
 
 

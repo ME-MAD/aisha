@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use App\Models\Student;
+use App\Models\Teacher;
+use Illuminate\Http\Request;
+use App\Services\Note\NoteService;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\Note\StoreNoteRequest;
 use App\Http\Requests\Note\UpdateNoteRequest;
-use App\Models\Teacher;
-use App\Services\Note\NoteService;
-use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
@@ -24,17 +25,8 @@ class NoteController extends Controller
 
     public function index()
     {
-        $test = Note::where('notable_type', Student::class)->with(['student'])->get();
         return view('pages.student.notes');
     }
-
-    // public function getStudentsNotesByAjax()
-    // {
-    //     $data = Note::where('notable_type', Student::class)->get();
-    //     return response()->json([
-    //         'data' => $data
-    //     ]);
-    // }
 
     public function getStaffDetails()
     {
@@ -54,7 +46,10 @@ class NoteController extends Controller
 
         $pagesCount = intval($query->count() / $perPage);
 
-        $data = $query->offset(($pageNumber - 1) * 4)->limit($perPage)->get();
+        $data = $query->offset(($pageNumber - 1) * 4)
+            ->limit($perPage)
+            ->orderBy('id', 'DESC')
+            ->get();
 
 
         return response()->json([
@@ -78,12 +73,11 @@ class NoteController extends Controller
             'note' => $request->note,
             'type' => $request->type,
 
-            'notby_type' => Teacher::class,
-            'notby_id' => 1, //Auth Teacher id
+            'notby_type' => Auth::user()::class,
+            'notby_id'   => Auth::id(),
 
             'notable_type' => Student::class,
-            // 'notable_id' => 2, //Student id
-            'notable_id' => $request->notable_id, //Student id
+            'notable_id'   => $request->notable_id, //Student id
         ]);
 
 
