@@ -21,7 +21,7 @@ class PaymentFactory extends Factory
         return [
             'student_id' => Student::select('id')->InRandomOrder()->first()->id,
             'group_id'   => Group::select('id')->InRandomOrder()->first()->id,
-            'amount'     => fake()->numberBetween(50, 1500),
+            'amount'     => fake()->numberBetween(50, 200),
             'month'      => fake()->randomElement(getMonthNames()),
             'paid'       => rand(0, 1),
         ];

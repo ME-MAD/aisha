@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'price' => 120,
             'days_num' => 4
         ]);
-        
+
         GroupType::updateOrCreate([
             'name' => 'all week',
         ], [
@@ -48,9 +48,10 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
-            QuraanSeeder::class,
-            TgweedSeeder::class,
-            QaidaNooraniahSeeder::class,
+            // QuraanSeeder::class,
+            // TgweedSeeder::class,
+            // QaidaNooraniahSeeder::class,
+            FactorySeeder::class,
         ]);
     }
 }
