@@ -19,6 +19,7 @@ class StudentController extends Controller
     {
         return $studentDataTable->render('pages.student.index');
     }
+    
 
     public function store(StoreStudentRequest $request)
     {
@@ -105,4 +106,5 @@ class StudentController extends Controller
             'subjects' => $subjects,
         ]);
     }
+
 }
