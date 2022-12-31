@@ -21,11 +21,6 @@ class StudentController extends Controller
     }
     
 
-    public function create()
-    {
-        //
-    }
-
     public function store(StoreStudentRequest $request)
     {
         $fileName = $this->uploadImage(
@@ -58,11 +53,6 @@ class StudentController extends Controller
             'student' => $student,
             'subjects' => $subjects,
         ]);
-    }
-
-    public function edit(Student $student)
-    {
-        //
     }
 
     public function update(UpdateStudentRequest $request, Student $student)
@@ -111,26 +101,10 @@ class StudentController extends Controller
             'lessons.studentLessons.studentLessonReview.syllabusReviews',
         ])->get();
 
-
         return response()->json([
             'groupStudents' => $student->groupStudents->load(['group.groupDays']),
             'subjects' => $subjects,
         ]);
     }
 
-    public function search(Request $request)
-    {
-        $name = $request->name;
-        $group_id = $request->group_id;
-
-        $students = Student::where('name', 'like','%'.$name.'%')
-            ->whereHas('groups', function($query) use ($group_id){
-                return $query->where('groups.id', $group_id);
-            })
-            ->get();
-
-        return response()->json([
-            'students' => $students
-        ]);
-    }
 }

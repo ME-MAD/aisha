@@ -96,7 +96,7 @@ $(".month").change(function () {
 
 
 function whenMonthChangeHandlePaymentCheckBox() {
-    $(`.paid_finished_checkbox`).prop('checked', false);
+    $(`.paid_finished_checkbox_by_show_payment`).prop('checked', false);
 
     let monthCreatePayment = $('.month').val();
     let group = $('.month').data('group');

@@ -94,7 +94,8 @@
                                             </div>
                                         </td>
                                         <td id="checkbok">
-                                            <input type="checkbox" class="paid_finished_checkbox big-checkbox"
+                                            <input type="checkbox"
+                                                class="paid_finished_checkbox big-checkbox paid_finished_checkbox_by_show_payment"
                                                 id="paid_finished_checkbox_{{ $student->id }}_{{ $group->id }}"
                                                 data-href="{{ route('admin.payment.store') }}"
                                                 data-student="{{ $student->id }}" data-group="{{ $group->id }}"

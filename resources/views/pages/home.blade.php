@@ -22,9 +22,12 @@
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown">
-                <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics" href="javascript:void(0);">Daily Analytics</a>
-                <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics" href="javascript:void(0);">Weekly Analytics</a>
-                <a class="dropdown-item" data-value="<span>Show</span> : Monthly Analytics" href="javascript:void(0);">Monthly Analytics</a>
+                <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics" href="javascript:void(0);">Daily
+                    Analytics</a>
+                <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics" href="javascript:void(0);">Weekly
+                    Analytics</a>
+                <a class="dropdown-item" data-value="<span>Show</span> : Monthly Analytics"
+                    href="javascript:void(0);">Monthly Analytics</a>
                 <a class="dropdown-item" data-value="Download All" href="javascript:void(0);">Download All</a>
                 <a class="dropdown-item" data-value="Share Statistics" href="javascript:void(0);">Share Statistics</a>
             </div>
@@ -33,34 +36,37 @@
 @endsection
 
 @section('content')
-    <div class="text-center w-100" id="getfromdata" data-href="{{ route('admin.getDataAjax') }}">
-        <div class="row">
 
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing" id="statustucsContanerOne">
-                <!-- on file ajax js/home.js -->
-            </div>
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing" id="statustucsContanerTwo">
-                <!-- on file ajax js/home.js -->
-            </div>
-        </div>
-
-
-
-        <div class="row" id="paymentsThisMonthContainer"
+    <div class="text-center w-100">
+        <div class="px-3" id="paymentsThisMonthContainer"
+        
             data-href="{{ route('admin.payment.getPaymentPerMonthThisYear') }}">
 
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 layout-spacing" id="canvas">
-
-                <div id="content-tables-search">
-                    <!-- content tables search -->
+            <div class="row align-items-center">
+                <div class="col-8 layout-spacing" id="canvas">
+                    <div id="content-tables-search">
+                        <!-- content tables search -->
+                    </div>
+                    <canvas id="paymentsThisMonthChart">
+                        <!-- payments this month chart -->
+                    </canvas>
                 </div>
 
-                <canvas id="paymentsThisMonthChart">
-                    <!-- payments this month chart -->
-                </canvas>
+                <div class="col-4 layout-spacing">
+                    <div class="" id="paymentsThisMonthContainerGroup" data-href="{{ route('admin.getDataAjax') }}">
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing" id="canvas">
+                            <canvas id="paymentsThisMonthChartOnGroupShow"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
+
+
+
+
 
     </div>
 @endsection

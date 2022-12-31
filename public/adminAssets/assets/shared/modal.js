@@ -147,12 +147,13 @@ function initEditeGroupModal() {
         let Group = $(this).data('group')
         let href = $(this).data('href')
 
-        $('#editGroupForm #from').val(Group.from)
+        $('#editGroupForm #name').val(Group.name)
+        $('#editGroupForm #frome').val(Group.from)
         $('#editGroupForm #to').val(Group.to)
         $('#editGroupForm #teacherId').val(Group.teacher_id)
         $('#editGroupForm #groupTypeId').val(Group.group_type_id)
         $('#editGroupForm #ageType').val(Group.age_type)
-        console.log(Group.age_type);
+
 
 
         $('#editGroupForm').attr('action', href)

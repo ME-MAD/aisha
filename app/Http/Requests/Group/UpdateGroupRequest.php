@@ -24,7 +24,7 @@ class UpdateGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:groups,name',
+            'name' => 'required|unique:groups,name,' . $this->group->id,
             'from' => 'required|date_format:H:i',
             'to' => 'required|date_format:H:i|after:from',
             'teacher_id' => 'required',

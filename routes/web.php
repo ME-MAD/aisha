@@ -127,7 +127,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
         Route::put('update/{group_day}', [GroupDayController::class, 'update'])->name('update');
         Route::get('delete/{group_day}', [GroupDayController::class, 'delete'])->name('delete');
 
-        Route::get('getDaysOfGroup', [GroupDayController::class, 'getDaysOfGroup'])->name('getDaysOfGroup');
+        Route::get('getGroupDaysOfGroup', [GroupDayController::class, 'getGroupDaysOfGroup'])->name('getGroupDaysOfGroup');
     });
 
 
