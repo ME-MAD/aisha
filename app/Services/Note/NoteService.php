@@ -40,7 +40,7 @@ class NoteService
 
 
 
-    public function run(string $type)
+    public function getNotesByType(string $type)
     {
         return $this->$type();
     }
@@ -48,14 +48,12 @@ class NoteService
     private function teacher()
     {
         return Note::where('notable_type', Teacher::class)->with(['notableTeacher']);
-
     }
 
     private function student()
     {
-
         return Note::where('notable_type', Student::class)
-        ->with(['notableStudent']);
+            ->with(['notable']);
     }
 
     private function subject()

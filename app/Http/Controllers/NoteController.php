@@ -31,6 +31,7 @@ class NoteController extends Controller
     public function getStaffDetails()
     {
         $data = Student::select(['id', 'name'])->get();
+
         return response()->json([
             'students' => $data,
             'types'    => Note::TYPE
@@ -39,14 +40,14 @@ class NoteController extends Controller
 
     public function getNotesStaffDetails(Request $request)
     {
-        $perPage    = $request->number_products;
-        $pageNumber = $request->page_number;
+        $perPage    = $request->number_products; // 6
+        $pageNumber = $request->page_number; // 1
 
-        $query = $this->noteService->run($request->type);
+        $query = $this->noteService->getNotesByType($request->type);
 
-        $pagesCount = intval($query->count() / $perPage);
+        $pagesCount = ceil($query->count() / $perPage);
 
-        $data = $query->offset(($pageNumber - 1) * 4)
+        $data = $query->offset(($pageNumber - 1) * $perPage)
             ->limit($perPage)
             ->orderBy('id', 'DESC')
             ->get();

@@ -18,7 +18,7 @@ class GroupTypeFactory extends Factory
     {
         return [
             'name'     => fake()->unique()->name,
-            'price'    => fake()->numberBetween(50, 2500),
+            'price'    => fake()->numberBetween(int1: 50,int2: 2500),
             'days_num' => fake()->numberBetween(2, 6),
         ];
     }

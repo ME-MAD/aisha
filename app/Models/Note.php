@@ -33,15 +33,15 @@ class Note extends Model
         'important'
     ];
 
-    public function notableStudent()
+    public function notable()
     {
-        return $this->morphTo(Student::class, 'notable_type', 'notable_id');
+        return $this->morphTo();
     }
 
-    public function notableTeacher()
-    {
-        return $this->morphTo(Teacher::class, 'notable_type', 'notable_id');
-    }
+    // public function notableTeacher()
+    // {
+    //     return $this->morphTo(Teacher::class, 'notable_type', 'notable_id');
+    // }
 
     public function notbyStudent()
     {

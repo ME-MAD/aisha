@@ -27,29 +27,6 @@ class FactorySeeder extends Seeder
      */
     public function run()
     {
-        //-------------------  GroupType   -----------------------//
-
-        GroupType::updateOrCreate([
-            'name' => 'normal',
-        ], [
-            'price' => 80,
-            'days_num' => 2
-        ]);
-        GroupType::updateOrCreate([
-            'name' => 'dense',
-        ], [
-            'price' => 120,
-            'days_num' => 4
-        ]);
-        GroupType::updateOrCreate([
-            'name' => 'all week',
-        ], [
-            'price' => 200,
-            'days_num' => 6
-        ]);
-
-        //-----------------------------------------------------------//
-
         Teacher::factory(2)->create()->each(function ($teacher) {
             Experience::factory(3)->create([
                 'teacher_id' => $teacher->id

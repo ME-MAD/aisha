@@ -15,6 +15,7 @@ class PaymentChartService
             DB::raw("(SUM(amount)) as month_amount"),
             'month'
         );
+
         return $this;
     }
 
@@ -49,14 +50,6 @@ class PaymentChartService
         return $this->getDataEachMonth($paymentsChart);
     }   
 
-    public function getAllPossibleYears()
-    {
-        return Payment::select(DB::raw("YEAR(created_at) as year"))
-            ->where('paid', 1)
-            ->groupBy('year')
-            ->get();
-    }
-
     private function getDataEachMonth($paymentsChart)
     {
         $data = [];
@@ -64,5 +57,13 @@ class PaymentChartService
             $data[$monthName] = $paymentsChart->where('month', $monthName)->first()->month_amount ?? 0;
         }
         return $data;
+    }
+
+    public function getAllPossibleYears()
+    {
+        return Payment::select(DB::raw("YEAR(created_at) as year"))
+            ->where('paid', 1)
+            ->groupBy('year')
+            ->get();
     }
 }

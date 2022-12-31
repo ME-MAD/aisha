@@ -27,15 +27,12 @@ function getStudentNotesByAjax(pageNumber = 1, number_products = 6) {
             //----------------------------------------------------------
 
             // console.log(response.data[0]['app\\_models\\_student'])
-            console.log(response.data)
-
+            
             if (!(response.data.length > 0)) {
                 $('#content-notes').html(`
                 <h6 class="d-flex align-items-center justify-content-center text-danger">
                     There are no notes for students
                 </h6>`);
-
-                return;
             }
 
 
@@ -171,6 +168,8 @@ function getStudentNotesByAjax(pageNumber = 1, number_products = 6) {
                 </li>`
             }
 
+            console.log(allLinks);
+
             $('#paginating-container').html(`
                 <div class="paginating-container pagination-default">
                     <ul class="pagination" style="flex-wrap:wrap;">
@@ -259,7 +258,6 @@ function getStudentNotesByAjax(pageNumber = 1, number_products = 6) {
 
 
             //----------------------------------------------------------
-
             //Start ajax
             $.ajax({
                 type: 'POST',
@@ -268,7 +266,7 @@ function getStudentNotesByAjax(pageNumber = 1, number_products = 6) {
                 success: function (response) {
                     //Start function success
                     //----------------------------------------------------------
-
+                    console.log(response);
                     // Start append input student type options
                     let allType = ``;
                     response.types.forEach((data) => {
@@ -319,57 +317,17 @@ function getStudentNotesByAjax(pageNumber = 1, number_products = 6) {
                 $('#btn-n-add').show();
             })
 
-            $("#btn-n-add").on('click', function (event) {
-
-                var type = $('#input-type').val();
-                var user_id = $('#input-student').val();
-                var note = $('#input-note').val();
-
-
-                //Start ajax
-                $.ajax({
-                    type: 'POST',
-                    url: '/admin/note/store',
-                    data: {
-                        type: type,
-                        note: note,
-                        notable_id: user_id,
-                    },
-                    success: function (response) {
-                        //Start function success
-                        //----------------------------------------------------------
-
-                        $('#notesMailModal').modal('hide');
-
-                        // $('#input-note').text('');
-                        $('#notesMailModalTitle')[0].reset()
-
-
-                        swal({
-                            title: 'success',
-                            text: "تمت العملية بنجاح",
-                            type: 'success',
-                            padding: '2em'
-                        })
-
-                        getStudentNotesByAjax()
-                        //----------------------------------------------------------
-                        //End function success
-                    },
-                    error: function (reject) {
-
-                        console.log(reject)
-                        // let res = $.parseJSON(reject.responseText);
-                        // $.each(res.errors, function(key, value) {
-                        //     $("#" + key).text(value[0]);
-                        // })
-                    }
-                })
-                //End ajax
 
 
 
-            });
+            
+            
+
+
+
+
+
+
             //----------------------------------------------------------
 
 
@@ -438,9 +396,63 @@ function getStudentNotesByAjax(pageNumber = 1, number_products = 6) {
 
 getStudentNotesByAjax()
 
+handleStoreEvent()
+
+
+function handleStoreEvent()
+{
+    $("#btn-n-add").on('click', function (event) {
+
+        var type = $('#input-type').val();
+        var user_id = $('#input-student').val();
+        var note = $('#input-note').val();
+
+
+        //Start ajax
+        $.ajax({
+            type: 'POST',
+            url: '/admin/note/store',
+            data: {
+                type: type,
+                note: note,
+                notable_id: user_id,
+            },
+            success: function (response) {
+                //Start function success
+                //----------------------------------------------------------
+
+                $('#notesMailModal').modal('hide');
+
+                // $('#input-note').text('');
+                $('#notesMailModalTitle')[0].reset()
+
+
+                swal({
+                    title: 'success',
+                    text: "تمت العملية بنجاح",
+                    type: 'success',
+                    padding: '2em'
+                })
+
+                getStudentNotesByAjax()
+                //----------------------------------------------------------
+                //End function success
+            },
+            error: function (reject) {
+
+                console.log(reject)
+                // let res = $.parseJSON(reject.responseText);
+                // $.each(res.errors, function(key, value) {
+                //     $("#" + key).text(value[0]);
+                // })
+            }
+        })
+        //End ajax
 
 
 
+    });
+}
 
 
 
