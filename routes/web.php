@@ -224,4 +224,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     Route::group(['prefix' => 'student_lesson_review', 'as' => 'student_lesson_review.'], function () {
         Route::get('ajaxStudentLessonFinishedReview', [StudentLessonReviewController::class, 'ajaxStudentLessonFinishedReview'])->name('ajaxStudentLessonFinishedReview');
     });
+
+    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        Route::get('', [UserController::class, 'index'])->name('index');
+        Route::get('create', [UserController::class, 'create'])->name('create');
+        Route::post('store', [UserController::class, 'store'])->name('store');
+        Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit');
+        Route::put('update/{user}', [UserController::class, 'update'])->name('update');
+        Route::get('delete/{user}', [UserController::class, 'delete'])->name('delete');
+    });
 });

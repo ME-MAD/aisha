@@ -160,3 +160,19 @@ function initEditeGroupModal() {
 
     })
 }
+
+
+
+
+//Edit Modal User
+function initEditeUserModal() {
+    $('.editUserButton').on('click', function () {
+        let user = $(this).data('user')
+        let href = $(this).data('href')
+
+        $('#editUserForm #name').val(user.name)
+        $('#editUserForm #email').val(user.email)
+
+        $('#editUserForm').attr('action', href)
+    })
+}

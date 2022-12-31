@@ -2,69 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\User\UserStoreRequest;
-use App\Http\Requests\User\UserUpdateRequest;
-use App\Http\Requests\User\UserDeleteRequest;
-use RealRashid\SweetAlert\Facades\Alert;
-use App\Http\Traits\UserTrait;
+use App\DataTables\UserDataTable;
+use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
-    use UserTrait;
-    public function index()
+    public function index(UserDataTable $userDataTable)
     {
-        $users = $this->getUsersDesc();
-        return view('admin.pages.user.index', [
-            "users" => $users
-        ]);
+        return $userDataTable->render('pages.user.index');
     }
 
-    public function create()
-    {
-        return view('admin.pages.user.create');
-    }
-
-    public function store(UserStorRequest $request)
+    public function store(StoreUserRequest $request)
     {
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->password)
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route("admin.user.index"));
+        return redirect()->back();
     }
 
-    public function edit(User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-
-        return view('admin.pages.user.edit', [
-            "user" => $user
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password ? Hash::make($request->password) : $user->password
         ]);
-    }
-
-    public function update(UserUpdateRequest $request, User $user)
-    {
-        $user->update(
-            [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password)
-            ]
-
-        );
         Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route("admin.user.index"));
+        return redirect()->back();
     }
 
-    public function delete(UserDeleteRequest $request, User $user)
+    public function delete(User $user)
     {
-
-
         $user->delete();
-        Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route("admin.user.index"));
+        Alert::success('نجاح', 'تمت العملية بنجاح');
+        return redirect()->back();
     }
 }
