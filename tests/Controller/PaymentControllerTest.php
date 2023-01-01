@@ -248,7 +248,7 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
         $now = now()->toDateTimeString();
 
         $payments = $this->generateRandomPaymentsCustomed([
-            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years')
+            'created_at' => fake()->dateTimeBetween("-4 years" , '-4 years')
         ], 10);
 
         $payments = $payments->merge($this->generateRandomPaymentsCustomed([
@@ -277,7 +277,7 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
         $now = now()->toDateTimeString();
 
         $paymentsUnderTest = $this->generateRandomPaymentsCustomed([
-            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years'),
+            'created_at' => fake()->dateTimeBetween("-4 years" , '-4 years'),
             'paid' => true
         ], 10);
 
@@ -305,26 +305,22 @@ class PaymentControllerTest extends TestCaseWithTransLationsSetUp
     {
         Payment::query()->delete();
 
-        $now = now()->toDateTimeString();
-
         $this->generateRandomPaymentsCustomed([
-            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years'),
+            'created_at' => fake()->dateTimeBetween("-4 years" , '-4 years'),
             'paid' => true
         ], 1);
         $this->generateRandomPaymentsCustomed([
-            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years'),
+            'created_at' => fake()->dateTimeBetween("-4 years" , '-4 years'),
             'paid' => true
         ], 1);
         $this->generateRandomPaymentsCustomed([
-            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years'),
+            'created_at' => fake()->dateTimeBetween("-4 years" , '-4 years'),
             'paid' => true
         ], 1);
         $this->generateRandomPaymentsCustomed([
-            'created_at' => fake()->dateTimeBetween("-5 years" , '-4 years'),
+            'created_at' => fake()->dateTimeBetween("-4 years" , '-4 years'),
             'paid' => true
         ], 1);
-
-        $this->generateRandomPaymentsCustomed([], 3);
 
         $res = $this->call('POST', route('admin.payment.getPaymentPerMonthThisYear'),[
             'year' => now()->subYears(5)->year

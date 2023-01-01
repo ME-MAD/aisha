@@ -144,6 +144,14 @@ class ExperienceControllerTest extends TestCaseWithTransLationsSetUp
                     'teacher_id' => null
                 ],
             ],
+            "without teacher that doesn't exist" => [ 
+                [
+                    'title' => 'this is title for exps',
+                    'from' => Carbon::now()->subDays(20)->toDateString(),
+                    'to' => Carbon::now()->subDays(10)->toDateString(),
+                    'teacher_id' =>  intval($teacher->id + 1)
+                ],
+            ],
             "if (from) is greater than (to)" => [
                 [
                     'title' => 'this is title for exps',

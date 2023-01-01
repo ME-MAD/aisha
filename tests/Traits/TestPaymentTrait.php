@@ -50,7 +50,7 @@ Trait TestPaymentTrait
     private function generateRandomPaymentsCustomed(array $configs = [], int $count = 1)
     {
         $data = $this->generateRandomPaymentsDataCustomed($configs);
-
+        
         if($count == 1)
         {
             return Payment::factory()->create($data);
