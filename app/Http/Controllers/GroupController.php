@@ -10,6 +10,7 @@ use App\Models\Payment;
 use App\Models\Student;
 use App\Services\Group\GroupService;
 use App\Services\GroupType\GroupTypeService;
+use App\Services\Payment\PaymentChartService;
 use App\Services\Teacher\TeacherService;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -20,15 +21,18 @@ class GroupController extends Controller
     private $teacherService;
     private $groupTypeService;
     private $groupService;
+    private $paymentChartService;
 
     public function __construct(
         TeacherService $teacherService,
         GroupTypeService $groupTypeService,
-        GroupService $groupService
+        GroupService $groupService,
+        PaymentChartService $paymentChartService,
     ) {
         $this->teacherService = $teacherService;
         $this->groupTypeService = $groupTypeService;
         $this->groupService = $groupService;
+        $this->paymentChartService = $paymentChartService;
     }
 
     public function index(GroupDataTable $GroupDataTable)
@@ -89,20 +93,14 @@ class GroupController extends Controller
     public function getPaymentPerMonth(Group $group)
     {
 
-        $paymentsChart = Payment::select(DB::raw("(SUM(amount)) as month_amount"), 'month')
-            ->where('group_id', '=', $group->id)
-            ->whereYear('created_at', date('Y'))
-            ->groupBy('month')
-            ->get();
-
-        $data = [];
-        foreach (getMonthNames() as $monthName) {
-            $data[$monthName] = $paymentsChart->where('month', $monthName)->first()->month_amount ?? 0;
-        }
+        $this->paymentChartService->sumOfAmountAndMonth()
+            ->group_id($group->id)
+            ->year(date('Y'))
+            ->getForChart();
 
         return response()->json([
-            'months' => array_keys($data),
-            'values' => array_values($data),
+            'months' => array_keys($this->paymentChartService->getForChart()),
+            'values' => array_values($this->paymentChartService->getForChart()),
         ]);
     }
 }
