@@ -32,7 +32,7 @@ class FactorySeeder extends Seeder
                 'teacher_id' => $teacher->id
             ]);
 
-            Group::factory(10)->create([
+            Group::factory(3)->create([
                 'teacher_id' => $teacher->id,
                 'group_type_id' => rand(1, 3)
             ])->each(function ($group) {
@@ -59,6 +59,11 @@ class FactorySeeder extends Seeder
                         GroupStudent::factory(1)->create([
                             'student_id' => $student->id,
                             'group_id' => $group->id
+                        ]);
+
+                        Payment::factory(3)->create([
+                            'student_id' => $student->id,
+                            'group_id' => $group->id,
                         ]);
                     });
                 });
