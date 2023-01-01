@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\GroupDayDataTable;
-use App\Models\GroupDay;
 use App\Http\Requests\GroupDay\StoreGroupDayRequest;
 use App\Http\Requests\GroupDay\UpdateGroupDayRequest;
-use App\Models\Group;
+use App\Models\GroupDay;
 use App\Services\Group\GroupService;
 use App\Services\GroupDay\GroupDayService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -21,18 +21,19 @@ class GroupDayController extends Controller
 
     public function __construct(
         GroupDayDataTable $groupDayDataTable,
-        GroupDayService $groupDayService,
-        GroupService $groupService
-    ) {
+        GroupDayService   $groupDayService,
+        GroupService      $groupService
+    )
+    {
         $this->groupDayDataTable = $groupDayDataTable;
-        $this->groupDayService   = $groupDayService;
+        $this->groupDayService = $groupDayService;
         $this->groupService = $groupService;
     }
 
     public function index()
     {
         return $this->groupDayDataTable->render('pages.groupDays.index', [
-            'groups'    => $this->groupService->getAllGroups(),
+            'groups' => $this->groupService->getAllGroups(),
         ]);
     }
 
@@ -59,8 +60,9 @@ class GroupDayController extends Controller
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
+
     //getDaysOfGroup
-    public function getGroupDaysOfGroup(Request $request)
+    public function getGroupDaysOfGroup(Request $request): JsonResponse
     {
         return response()->json([
             'groupDays' => $this->groupDayService->getGroupDaysOfGroup($request->group_id),
