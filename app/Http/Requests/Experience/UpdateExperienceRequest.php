@@ -27,7 +27,7 @@ class UpdateExperienceRequest extends FormRequest
             'title' => 'required',
             'from' => 'required|date|date_format:Y-m-d|before:today|before:to',
             'to' => 'required|date|date_format:Y-m-d|before:today|after:from',
-            'teacher_id' => 'required',
+            'teacher_id' => 'required|exists:teachers,id',
         ];
     }
 }
