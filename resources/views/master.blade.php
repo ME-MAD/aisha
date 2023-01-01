@@ -12,20 +12,19 @@
 
 
 
-
-
     <!--  BEGIN CONTENT PART  -->
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
+            <div class="container-fluid">
+
+                @yield('breadcrumb')
+
+                <div class="row layout-top-spacing">
 
 
-            @yield('breadcrumb')
+                    @yield('content')
 
-            <div class="row layout-top-spacing">
-
-                @yield('content')
-
+                </div>
             </div>
-
 
 @include('layout.footer')

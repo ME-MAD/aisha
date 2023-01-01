@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 // Edit Syllabus
 $('.editSyllabusButton').on('click', function () {
     let syllabus_id = $(this).data('syllabusid')
@@ -24,15 +17,12 @@ $('.editSyllabusButton').on('click', function () {
 })
 
 
-
-
 // Edit Lessons
 $('.progressOfSubjectLink').on('click', function () {
     let chapters_count = $(this).data('chapterscount')
     let group_id = $(this).data('groupid')
     let lesson_id = $(this).data('lessonid')
     let finishedChaptersCount = $(this).data('finishedchapterscount')
-
 
 
     $('#showSubjectForm #max_chapters').val(chapters_count)
@@ -45,7 +35,6 @@ $('.progressOfSubjectLink').on('click', function () {
     $('#showSubjectForm #lesson_id').val(lesson_id)
 
 
-
 })
 
 
@@ -55,27 +44,19 @@ $('.progressOfSubjectLink').on('click', function () {
 function initEditeTeacherModal() {
     $('.editTeacherButton').on('click', function () {
         let teacher = $(this).data('teacher')
-        let href = $(this).data('href')
-        // let srcAvatar = '/image/teacher/' + teacher.avatar
 
+        let href = $(this).data('href')
 
         $('#editTeacherForm #name').val(teacher.name)
         $('#editTeacherForm #birthday').val(teacher.birthday)
         $('#editTeacherForm #phone').val(teacher.phone)
         $('#editTeacherForm #qualification').val(teacher.qualification)
 
-        // $('#editTeacherForm #avatarName').html(teacher.avatar)
-        // $('#editTeacherForm #avatar').attr("src", srcAvatar)
 
         $('#editTeacherForm').attr('action', href)
 
     })
 }
-
-
-
-
-
 
 
 //----------------------------Modal Lesson-----------------------------------//
@@ -96,8 +77,6 @@ function initEditeLessonModal() {
         $('#editExperienceForm').attr('action', href)
     })
 }
-
-
 
 
 //----------------------------Modal Student-----------------------------------//
@@ -138,10 +117,7 @@ function initEditeGroupTypeModal() {
 }
 
 
-
-
-
-//Edite Modal Group 
+//Edite Modal Group
 function initEditeGroupModal() {
     $('.editGroupButton').on('click', function () {
         let Group = $(this).data('group')

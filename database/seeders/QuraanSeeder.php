@@ -23,13 +23,13 @@ class QuraanSeeder extends Seeder
 
         foreach ($chapters as $chapter) {
             Lesson::updateOrCreate([
-                'title'      => $chapter['surah_ar'],
+                'title' => $chapter['surah_ar'],
                 'subject_id' => $subject->id,
             ], [
                 'chapters_count' => $chapter['surah_count'],
                 'from_page' => $chapter['from_page'],
                 'to_page' => $chapter['to_page'],
             ]);
-        };
+        }
     }
 }

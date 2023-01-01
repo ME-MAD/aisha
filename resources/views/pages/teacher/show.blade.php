@@ -1,13 +1,22 @@
 @extends('master')
 
 @push('css')
-    <!--  BEGIN CUSTOM STYLE FILE  -->
-    <link href="{{ asset('adminAssets/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('adminAssets/assets/css/components/custom-modal.css') }}" rel="stylesheet" type="text/css"/>
-    <!--  END CUSTOM STYLE FILE  -->
-    <!--  BEGIN CUSTOM STYLE FILE  -->
-    <link href="{{ asset('adminAssets/assets/css/apps/invoice.css') }}" rel="stylesheet" type="text/css"/>
-    <!--  END CUSTOM STYLE FILE  -->
+    @if (LaravelLocalization::getCurrentLocale() == 'ar')
+        <link href="{{ asset('adminRtl/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('adminRtl/assets/css/components/custom-modal.css') }}" rel="stylesheet"
+              type="text/css"/>
+        <link href="{{ asset('adminRtl/assets/css/apps/invoice.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('adminRtl/assets/css/myStylesAr.css') }}" rel="stylesheet" type="text/css"/>
+
+    @else
+        <link href="{{ asset('adminAssets/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('adminAssets/assets/css/components/custom-modal.css') }}" rel="stylesheet"
+              type="text/css"/>
+        <link href="{{ asset('adminAssets/assets/css/apps/invoice.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('adminAssets/assets/css/myStyles.css') }}" rel="stylesheet" type="text/css"/>
+
+    @endif
+
 @endpush
 @section('breadcrumb')
     <div class="page-header">
@@ -54,10 +63,10 @@
 
         @include('pages.teacher.partials.statistics')
 
+        @include('pages.teacher.partials.experience')
 
     </div>
 
-    @include('pages.teacher.partials.experience')
 
     @include('pages.teacher.partials.students')
 

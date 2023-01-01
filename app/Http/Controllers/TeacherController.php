@@ -8,6 +8,7 @@ use App\Http\Requests\Teacher\UpdateTeacherRequest;
 use App\Models\Teacher;
 use App\Services\Experience\ExperienceService;
 use App\Services\Teacher\TeacherService;
+use Illuminate\Http\JsonResponse;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TeacherController extends Controller
@@ -73,7 +74,7 @@ class TeacherController extends Controller
         return redirect()->back();
     }
 
-    public function getTeacherShowDataAjax(Teacher $teacher)
+    public function getTeacherShowDataAjax(Teacher $teacher): JsonResponse
     {
         $this->teacherService->setAllDataAboutTeacher($teacher);
 

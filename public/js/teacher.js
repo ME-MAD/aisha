@@ -25,15 +25,15 @@ function getDataShow() {
             });
 
             response.experiences.forEach(experience => {
-                $('#experience').append(`
+                $('#experience_Content').append(`
                     <div class="item-timeline">
                         <div class="t-meta-date">
                             <p class="">${experience.from}</p>
                             <p class="">${experience.to}</p>
                         </div>
                         <div class="t-dot" data-original-title="" title=""></div>
-                        <div class="t-text">
-                            <a class="editExperienceButton title" data-title="${experience.title}"
+                        <div class="t-text d-flex justify-content-between">
+                            <a class="editExperienceButton title " data-title="${experience.title}"
                             data-from="${experience.from}"
                             data-to="${experience.to}"
                             data-teacherid="${experience.teacher_id}"
@@ -41,17 +41,16 @@ function getDataShow() {
                             data-target="#editexperience"
                             data-href="/admin/experience/update/${experience.id}">
                                 <p>${experience.title}</p>
+                                
                             </a>
+                       <a class="deleteButton" href="/admin/experience/delete/${experience.id}">
+                           <i class="fa-solid fa-rectangle-xmark"></i>
+                        </a>
                         </div>
-                        <div class="deleteButton">
-                            <a href="/admin/experience/delete/${experience.id}">
-                                <i class="fa-solid fa-rectangle-xmark"></i>
-                            </a>
-                        </div>
+                        
                     </div>
                 `)
             });
-
 
             response.groups.forEach(group => {
                 $('#pills-tab').append(`
@@ -192,7 +191,7 @@ function getDataShow() {
                                                 </tr>
                                             </thead>
                                             <tbody id="student">
-                                                `
+                                            `
                     +
                     studentsGroupStudentsHtml
                     +
@@ -217,7 +216,7 @@ function getDataShow() {
 }
 
 
-
+//
 
 
 

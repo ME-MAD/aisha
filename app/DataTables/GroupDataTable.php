@@ -10,17 +10,11 @@ use Yajra\DataTables\Services\DataTable;
 
 class GroupDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param QueryBuilder $query Results from query() method.
-     * @return EloquentDataTable
-     */
+
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
 
         return (new EloquentDataTable($query))
-            // ->addColumn('edit', 'pages.group.datatable.edit')
             ->addColumn('edit', function ($query) {
                 return view('pages.group.datatable.edit', compact('query'));
             })
@@ -69,6 +63,8 @@ class GroupDataTable extends DataTable
             'teacher:id,name',
             'groupType:id,name'
         ]);
+
+
     }
 
     public function html(): HtmlBuilder
@@ -121,11 +117,7 @@ class GroupDataTable extends DataTable
             ]);
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
+
     protected function getColumns(): array
     {
         return [
