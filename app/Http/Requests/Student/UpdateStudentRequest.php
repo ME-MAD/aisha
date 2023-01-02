@@ -24,12 +24,12 @@ class UpdateStudentRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"required",
-            "birthday"=>"required",
-            "phone"=>"required",
-            "qualification"=>"required",
-           
-           
-         ];
+            "name" => "required",
+            "birthday" => "nullable",
+            "phone" => "required",
+            "qualification" => "nullable",
+
+
+        ];
     }
 }
