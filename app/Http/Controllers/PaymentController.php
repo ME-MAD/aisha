@@ -64,7 +64,7 @@ class PaymentController extends Controller
     public function getPaymentsOfGroupByMonth(getPaymentsOfGroupByMonth $request)
     {
         return response()->json([
-            'payments' => $this->PaymentService->getPaymentsOfGroupByMonth($request->month, $request->group_id)
+            'payments' => $this->PaymentService->getPaymentsOfGroupByMonth($request->group_id, $request->month)
         ]);
     }
 
