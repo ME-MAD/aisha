@@ -26,7 +26,7 @@ class PaymentChartService
         return $this;
     }
 
-    public function group_id(int $group_id)
+    public function fromGroup(int $group_id)
     {
         $this->query->where('group_id', '=', $group_id);
         return $this;

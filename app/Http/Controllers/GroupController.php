@@ -94,7 +94,7 @@ class GroupController extends Controller
     {
 
         $this->paymentChartService->sumOfAmountAndMonth()
-            ->group_id($group->id)
+            ->fromGroup($group->id)
             ->year(date('Y'))
             ->getForChart();
 
