@@ -17,20 +17,20 @@ class GroupDayService
 
         return GroupDay::create([
             'group_id' => $request->group_id,
-            'day'      => $request->day,
+            'day' => $request->day,
         ]);
     }
 
-    public function updateGroupDay(GroupDay $groupDay, object $request)
+    public function updateGroupDay(GroupDay $groupDay, object $request): bool
     {
 
         return $groupDay->update([
             'group_id' => $request->group_id,
-            'day'      => $request->day,
+            'day' => $request->day,
         ]);
     }
 
-    public function deleteGroupDay(GroupDay $groupDay)
+    public function deleteGroupDay(GroupDay $groupDay): ?bool
     {
         return $groupDay->delete();
     }

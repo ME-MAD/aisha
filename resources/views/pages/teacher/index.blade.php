@@ -1,6 +1,7 @@
 @extends('master')
 
 @push('css')
+
     <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
@@ -10,7 +11,6 @@
           href="{{ asset('adminAssets/plugins/table/datatable/custom_dt_custom.css') }}">
     <!-- END PAGE LEVEL CUSTOM STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}" rel="stylesheet"
           type="text/css"/>
     <!-- END PAGE LEVEL STYLES -->
@@ -23,7 +23,7 @@
         <div class="dropdown filter custom-dropdown-icon">
             <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false"><span class="text"><span>{{ __('teacher.Show') }}</span> :
-                    {{ __('teacher.Dail Analytics') }} </span>
+                {{ __('teacher.Dail Analytics') }} </span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                      class="feather feather-chevron-down">
@@ -67,10 +67,10 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         {!! $dataTable->table(
-                                            [
-                                                'class' => 'table',
-                                            ],
-                                            true,
+                                        [
+                                        'class' => 'table',
+                                        ],
+                                        true,
                                         ) !!}
                                     </div>
                                 </div>
@@ -93,10 +93,9 @@
 @push('js')
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
-    <script src="/vendor/datatables/buttons.server-side.js"></script>
+    <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
     {!! $dataTable->scripts() !!}
     <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <script src="{{ asset('adminAssets/assets/js/scrollspyNav.js') }}"></script>
     <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
     <script>
         var firstUpload = new FileUploadWithPreview('myFirstImage')

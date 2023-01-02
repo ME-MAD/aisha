@@ -38,7 +38,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'guest'], f
 });
 
 
-
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
 
     Route::get('/', function () {
@@ -52,8 +51,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
 
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-
-
 
 
     Route::group(['prefix' => 'home'], function () {
@@ -225,12 +222,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
         Route::get('ajaxStudentLessonFinishedReview', [StudentLessonReviewController::class, 'ajaxStudentLessonFinishedReview'])->name('ajaxStudentLessonFinishedReview');
     });
 
-    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
-        Route::get('', [UserController::class, 'index'])->name('index');
-        Route::get('create', [UserController::class, 'create'])->name('create');
-        Route::post('store', [UserController::class, 'store'])->name('store');
-        Route::get('edit/{user}', [UserController::class, 'edit'])->name('edit');
-        Route::put('update/{user}', [UserController::class, 'update'])->name('update');
-        Route::get('delete/{user}', [UserController::class, 'delete'])->name('delete');
-    });
+
 });

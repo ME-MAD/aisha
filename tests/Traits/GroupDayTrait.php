@@ -16,7 +16,7 @@ trait GroupDayTrait
         return GroupDay::factory($count)->create();
     }
 
-    public function generateRandomGroupDayData()
+    public function generateRandomGroupDayData(): array
     {
         return [
             'group_id' => $this->generateRandomGroup()->id,

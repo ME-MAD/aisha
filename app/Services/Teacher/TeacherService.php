@@ -68,7 +68,6 @@ class TeacherService
         $fileName = $teacher->getRawOriginal('avatar');
 
         if ($request->file('avatar')) {
-
             $this->deleteImage(path: $teacher->getAvatarPath());
 
             $fileName = $this->uploadImage(
@@ -92,6 +91,4 @@ class TeacherService
 
         return $teacher->delete();
     }
-
-
 }

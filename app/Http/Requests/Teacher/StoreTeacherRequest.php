@@ -18,7 +18,7 @@ class StoreTeacherRequest extends FormRequest
         return [
             'name' => 'required',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'birthday' => 'required',
+            'birthday' => 'nullable',
             'phone' => 'required',
             'qualification' => 'required',
         ];

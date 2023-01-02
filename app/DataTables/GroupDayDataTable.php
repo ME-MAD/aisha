@@ -6,26 +6,15 @@ use App\Models\GroupDay;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class GroupDayDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param QueryBuilder $query Results from query() method.
-     * @return \Yajra\DataTables\EloquentDataTable
-     */
+
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-
             ->addColumn('delete', 'pages.groupDays.datatable.delete')
-
             ->editColumn('group.from', function ($q) {
                 return $q->group->from ?? "";
             })
@@ -36,15 +25,9 @@ class GroupDayDataTable extends DataTable
             ->setRowId('id');
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\GroupDay $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
+
     public function query(GroupDay $model): QueryBuilder
     {
-
         return $model->select([
             'group_days.id',
             'group_id',
@@ -60,11 +43,6 @@ class GroupDayDataTable extends DataTable
         ]);
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html(): HtmlBuilder
     {
         return $this->builder()
@@ -72,9 +50,9 @@ class GroupDayDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->parameters([
-                'dom'          => 'Blrtip',
-                'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
-                'buttons'      => [
+                'dom' => 'Blrtip',
+                'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
+                'buttons' => [
                     ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
                     ['extend' => 'excel', 'className' => 'btn btn-success ', 'text' => 'Export'],
                 ],
@@ -115,17 +93,13 @@ class GroupDayDataTable extends DataTable
             ]);
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
+
     protected function getColumns(): array
     {
         return [
             ['name' => 'group_days.id', 'data' => 'id', 'title' => __('group.id'), "className" => 'search--col exact'],
 
-            ['name' => 'group.from', 'data' => 'group.from', 'title' =>  __('group.from'), "className" => 'search--col'],
+            ['name' => 'group.from', 'data' => 'group.from', 'title' => __('group.from'), "className" => 'search--col'],
 
             ['name' => 'group.to', 'data' => 'group.to', 'title' => __('group.to'), "className" => 'search--col'],
 
@@ -136,11 +110,7 @@ class GroupDayDataTable extends DataTable
         ];
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
+
     protected function filename(): string
     {
         return 'GroupDay_' . date('YmdHis');

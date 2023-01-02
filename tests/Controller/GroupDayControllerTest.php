@@ -2,11 +2,12 @@
 
 namespace Tests\Controller;
 
+use App\Models\GroupDay;
 use App\Services\GroupDay\GroupDayService;
-use Tests\Traits\GroupDayTrait;
-use Tests\TestCaseWithTransLationsSetUp;
 use Illuminate\Foundation\Testing\WithFaker;
 use Mockery\MockInterface;
+use Tests\TestCaseWithTransLationsSetUp;
+use Tests\Traits\GroupDayTrait;
 use Tests\Traits\TestGroupTrait;
 use Tests\Traits\TestGroupTypeTrait;
 use Tests\Traits\TestTeacherTrait;
@@ -18,10 +19,16 @@ class GroupDayControllerTest extends TestCaseWithTransLationsSetUp
     use TestTeacherTrait;
     use TestGroupTypeTrait;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->refreshApplicationWithLocale('en');
+    }
+
+    public function test_index_page_Has_No_Errors()
+    {
+        $this->get(route('admin.group_day.index'))
+            ->assertOk();
     }
 
 
@@ -56,7 +63,7 @@ class GroupDayControllerTest extends TestCaseWithTransLationsSetUp
     {
         $data = $this->generateRandomGroupDayData();
 
-        $this->mock(GroupDayService::class, function(MockInterface $mock){
+        $this->mock(GroupDayService::class, function (MockInterface $mock) {
             $mock->shouldReceive('createGroupDay')->once();
         });
 
@@ -71,7 +78,7 @@ class GroupDayControllerTest extends TestCaseWithTransLationsSetUp
 
         $data = $this->generateRandomGroupDayData();
 
-        $this->mock(GroupDayService::class, function(MockInterface $mock){
+        $this->mock(GroupDayService::class, function (MockInterface $mock) {
             $mock->shouldReceive('updateGroupDay')->once();
         });
 
@@ -84,12 +91,26 @@ class GroupDayControllerTest extends TestCaseWithTransLationsSetUp
     {
         $groupDay = $this->generateRandomGroupDay();
 
-        $this->mock(GroupDayService::class, function(MockInterface $mock){
+        $this->mock(GroupDayService::class, function (MockInterface $mock) {
             $mock->shouldReceive('deleteGroupDay')->once();
         });
 
         $res = $this->get(route('admin.group_day.delete', $groupDay));
 
         $res->assertSessionHasNoErrors();
+    }
+
+
+    public function test_get_groupDays_of_Group_Has_No_Errors()
+    {
+        $group = $this->generateRandomGroup();
+
+        $response = $this->get(route('admin.group_day.getGroupDaysOfGroup'),[
+            'group_id' => $group->id
+        ]);
+
+        $response->assertJson([
+            "groupDays" => GroupDay::where('group_id', $group->id)->select(['group_id', 'day'])->get()->toArray()
+        ]);
     }
 }
