@@ -7,30 +7,29 @@ use App\Models\Payment;
 
 class PaymentService
 {
-    public function updateOrCreatePayment(object $request)
+    public function updateOrCreatePaid(object $request)
     {
-        if ($request->paid == "true") {
-            return  Payment::updateOrCreate([
-                'student_id' => $request->student_id,
-                'group_id' => $request->group_id,
-                'amount' => $request->amount,
-                'month' => $request->month,
-            ], [
-                'paid' => true,
-            ]);
-        } else {
-            return  Payment::updateOrCreate([
-                'student_id' => $request->student_id,
-                'group_id' => $request->group_id,
-                'amount' => $request->amount,
-                'month' => $request->month,
-            ], [
-                'paid' => false,
-            ]);
-        }
+        $this->updateOrCreate($request , true);
     }
 
-    public function getPaymentsOfGroupByMonth($month, int $group_id)
+    public function updateOrCreateNotPaid(object $request)
+    {
+        $this->updateOrCreate($request , false);
+    }
+
+    private function updateOrCreate(object $request, bool $paid)
+    {
+        Payment::updateOrCreate([
+            'student_id' => $request->student_id,
+            'group_id' => $request->group_id,
+            'amount' => $request->amount,
+            'month' => $request->month,
+        ], [
+            'paid' => $paid,
+        ]);
+    }
+
+    public function getPaymentsOfGroupByMonth(int $group_id,string $month)
     {
         return Payment::select(['id', 'paid', 'student_id', 'group_id', 'month'])
             ->where('month', $month)
@@ -38,7 +37,7 @@ class PaymentService
             ->get();
     }
 
-    public function getPaymentCountOfGroupByMonth(int $group_id, $month)
+    public function getPaymentCountOfGroupByMonth(int $group_id,string $month)
     {
         return Payment::where('group_id', $group_id)
             ->where('month',  $month)
