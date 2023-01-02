@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Payment;
 
 use App\Models\Payment;
@@ -25,6 +26,12 @@ class PaymentChartService
         return $this;
     }
 
+    public function fromGroup(int $group_id)
+    {
+        $this->query->where('group_id', '=', $group_id);
+        return $this;
+    }
+
     public function from(string $startTime = null)
     {
         $startTime && $this->query->where('created_at', '>=', date('Y-m-d', strtotime($startTime)));
@@ -48,7 +55,7 @@ class PaymentChartService
         $paymentsChart =  $this->query->groupBy('month')->get();
 
         return $this->getDataEachMonth($paymentsChart);
-    }   
+    }
 
     private function getDataEachMonth($paymentsChart)
     {
