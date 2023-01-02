@@ -61,7 +61,6 @@ class GroupDayController extends Controller
         return redirect()->back();
     }
 
-    //getDaysOfGroup
     public function getGroupDaysOfGroup(Request $request): JsonResponse
     {
         return response()->json([
