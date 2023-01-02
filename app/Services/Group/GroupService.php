@@ -61,4 +61,20 @@ class GroupService
     {
         return $this->groupWithAllData->groupDays->count();
     }
+
+    public function getGruopsByCreatePayment($currentMonth)
+    {
+        $gorups = Group::with([
+            'students.payments',
+            'groupType',
+            'payments' => function ($query) use ($currentMonth) {
+                return $query->where('month', $currentMonth);
+            }
+        ])->get();
+
+        $gorups->map(function ($group) {
+            $group->allStudentsPaid = $group->students->count() == $group->payments->where('paid', true)->count();
+        });
+        return $gorups;
+    }
 }
