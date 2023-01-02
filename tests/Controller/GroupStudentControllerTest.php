@@ -2,6 +2,7 @@
 
 namespace Tests\Controller;
 
+use App\Models\GroupStudent;
 use Tests\TestCaseWithTransLationsSetUp;
 use Tests\Traits\TestGroupStudentTrait;
 use Tests\Traits\TestGroupTrait;
@@ -89,8 +90,15 @@ class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
 
     public function test_get_Group_Students_Has_No_Errors()
     {
-        $response = $this->get(route('admin.group_students.getGroupStudents'));
-        $response->assertSessionHasNoErrors();
+        $group = $this->generateRandomGroup();
+
+        $response = $this->call('get',route('admin.group_students.getGroupStudents'),[
+            'group_id' => $group->id
+        ]);
+
+        $response->assertJson([
+            'groupStudents' => GroupStudent::where('group_id', $group->id)->select(['group_id', 'student_id'])->get()->toArray()
+        ]);
     }
 
 

@@ -13,7 +13,6 @@
         <link href="{{ asset('adminAssets/assets/css/components/custom-modal.css') }}" rel="stylesheet"
               type="text/css"/>
         <link href="{{ asset('adminAssets/assets/css/apps/invoice.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('adminAssets/assets/css/myStyles.css') }}" rel="stylesheet" type="text/css"/>
 
     @endif
 

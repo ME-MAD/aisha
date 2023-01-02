@@ -2,6 +2,7 @@
 
 namespace Tests\Controller;
 
+use App\Models\GroupDay;
 use App\Services\GroupDay\GroupDayService;
 use Illuminate\Foundation\Testing\WithFaker;
 use Mockery\MockInterface;
@@ -102,11 +103,14 @@ class GroupDayControllerTest extends TestCaseWithTransLationsSetUp
 
     public function test_get_groupDays_of_Group_Has_No_Errors()
     {
-        $this->mock(GroupDayService::class, function (MockInterface $mock) {
-            $mock->shouldReceive('getGroupDaysOfGroup')->once();
-        });
-        $response = $this->get(route('admin.group_day.getGroupDaysOfGroup'));
+        $group = $this->generateRandomGroup();
 
-        $response->assertSessionHasNoErrors();
+        $response = $this->get(route('admin.group_day.getGroupDaysOfGroup'),[
+            'group_id' => $group->id
+        ]);
+
+        $response->assertJson([
+            "groupDays" => GroupDay::where('group_id', $group->id)->select(['group_id', 'day'])->get()->toArray()
+        ]);
     }
 }
