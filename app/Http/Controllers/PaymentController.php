@@ -11,15 +11,24 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\Payment\StorePaymentRequest;
+use App\Services\Group\GroupService;
 use App\Services\Payment\PaymentChartService;
+use App\Services\Payment\PaymentService;
 
 class PaymentController extends Controller
 {
     private $paymentChartService;
-    
-    public function __construct(PaymentChartService $paymentChartService)
-    {
+    private $PaymentService;
+    private $groupService;
+
+    public function __construct(
+        PaymentChartService $paymentChartService,
+        PaymentService $PaymentService,
+        GroupService $groupService
+    ) {
         $this->paymentChartService = $paymentChartService;
+        $this->PaymentService = $PaymentService;
+        $this->groupService = $groupService;
     }
 
     public function index(PaymentDataTable $paymentDataTable)
@@ -31,20 +40,11 @@ class PaymentController extends Controller
     {
         $currentMonth = getCurrectMonthName();
 
-        $gorups = Group::with([
-            'students.payments',
-            'groupType',
-            'payments' => function ($query) use ($currentMonth) {
-                return $query->where('month', $currentMonth);
-            }
-        ])->get();
-
-        $gorups->map(function ($group) {
-            $group->allStudentsPaid = $group->students->count() == $group->payments->where('paid', true)->count();
-        });
+        $groups = $this->groupService->getGruopsWithPaymentsByMonth($currentMonth);
+        $this->groupService->appendAllStudentsPaidToGroups($groups);
 
         return view('pages.payment.create', [
-            'gorups' => $gorups,
+            'gorups' =>  $groups,
             'currentMonth' => $currentMonth,
         ]);
     }
@@ -52,49 +52,26 @@ class PaymentController extends Controller
     public function store(StorePaymentRequest $request)
     {
         if ($request->paid == "true") {
-            Payment::updateOrCreate([
-                'student_id' => $request->student_id,
-                'group_id' => $request->group_id,
-                'amount' => $request->amount,
-                'month' => $request->month,
-            ], [
-                'paid' => true,
-            ]);
+            $this->PaymentService->updateOrCreatePaid($request);
         } else {
-            Payment::updateOrCreate([
-                'student_id' => $request->student_id,
-                'group_id' => $request->group_id,
-                'amount' => $request->amount,
-                'month' => $request->month,
-            ], [
-                'paid' => false,
-            ]);
+            $this->PaymentService->updateOrCreateNotPaid($request);
         }
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
     public function getPaymentsOfGroupByMonth(getPaymentsOfGroupByMonth $request)
     {
-        $payments = Payment::select(['id', 'paid', 'student_id', 'group_id', 'month'])
-            ->where('month', $request->month)
-            ->where('group_id', $request->group_id)
-            ->get();
-
         return response()->json([
-            'payments' => $payments
+            'payments' => $this->PaymentService->getPaymentsOfGroupByMonth($request->month, $request->group_id)
         ]);
     }
 
     public function getPaymentCountOfGroupByMonth(getPaymentCountOfGroupByMonth $request)
     {
-        $paymentsCount = Payment::where('group_id', $request->group_id)
-            ->where('month',  $request->month)
-            ->where('paid', true)
-            ->count();
-
         return response()->json([
-            'paymentsCount' => $paymentsCount
+            'paymentsCount' => $this->PaymentService->getPaymentCountOfGroupByMonth($request->group_id, $request->month)
         ]);
     }
 
@@ -107,14 +84,13 @@ class PaymentController extends Controller
             ->paid()
             ->from($request->start_time ?? null)
             ->to($request->end_time ?? null);
-        
-        if( !($request->start_time || $request->end_time) )
-        {
+
+        if (!($request->start_time || $request->end_time)) {
             $query->year($thisYear);
         }
-        
+
         $data = $query->getForChart();
-            
+
         $years = $this->paymentChartService->getAllPossibleYears();
 
         return response()->json([
