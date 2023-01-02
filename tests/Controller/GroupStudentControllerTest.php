@@ -2,9 +2,6 @@
 
 namespace Tests\Controller;
 
-use App\Services\Experience\ExperienceService;
-use Carbon\Carbon;
-use Mockery\MockInterface;
 use Tests\TestCaseWithTransLationsSetUp;
 use Tests\Traits\TestGroupStudentTrait;
 use Tests\Traits\TestGroupTrait;
@@ -20,7 +17,7 @@ class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
     use TestTeacherTrait;
     use TestGroupTypeTrait;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->refreshApplicationWithLocale('en');
@@ -28,9 +25,19 @@ class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
 
     public function test_index_opens_without_errors()
     {
-        $res = $this->call('get',route('admin.group_students.index'));
+        $res = $this->call('get', route('admin.group_students.index'));
 
         $res->assertOk();
+    }
+
+
+    public function test_store_pass_with_all_data()
+    {
+        $data = $this->generateRandomGroupStudentData();
+
+        $res = $this->call('POST', route('admin.group_students.store'), $data);
+
+        $res->assertSessionHasNoErrors();
     }
 
     /**
@@ -39,49 +46,21 @@ class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
      */
     public function test_store_validations($data)
     {
-        $res = $this->call('POST',route('admin.group_students.store'), $data);
+        $res = $this->call('POST', route('admin.group_students.store'), $data);
 
         $res->assertSessionHasErrors();
     }
 
-    public function test_store_pass_with_all_data()
-    {
-        $data = $this->generateRandomGroupStudentData();
-        // $this->mock(ExperienceService::class, function(MockInterface $mock){
-        //     $mock->shouldReceive('createExperience')->once();
-        // });
-
-        
-
-        $res = $this->call('POST',route('admin.group_students.store'), $data);
-
-        $res->assertSessionHasNoErrors();
-    }
-
-    public function test_delete_works_without_errors()
-    {
-        $groupStudent = $this->generateRandomGroupStudent();
-
-        // $this->mock(ExperienceService::class, function(MockInterface $mock){
-        //     $mock->shouldReceive('deleteExperience')->once();
-        // });
-
-        $res = $this->call('get',route('admin.group_students.delete',$groupStudent->id));
-
-        $res->assertSessionHasNoErrors();
-    }
-
-
-    public function storeValidationProvider() : array
+    public function storeValidationProvider(): array
     {
         $this->refreshApplication();
         $student = $this->generateRandomStudent();
         $group = $this->generateRandomGroup();
-        
+
         return [
             "without data" => [
                 [
-                    
+
                 ],
             ],
             "without a student_id" => [
@@ -90,7 +69,7 @@ class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
                     'group_id' => $group->id,
                 ],
             ],
-            "without a group_id" =>[
+            "without a group_id" => [
                 [
                     'student_id' => $student->id,
                     'group_id' => null,
@@ -98,4 +77,21 @@ class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
             ],
         ];
     }
+
+    public function test_delete_works_without_errors()
+    {
+        $groupStudent = $this->generateRandomGroupStudent();
+
+        $res = $this->call('get', route('admin.group_students.delete', $groupStudent->id));
+
+        $res->assertSessionHasNoErrors();
+    }
+
+    public function test_get_Group_Students_Has_No_Errors()
+    {
+        $response = $this->get(route('admin.group_students.getGroupStudents'));
+        $response->assertSessionHasNoErrors();
+    }
+
+
 }
