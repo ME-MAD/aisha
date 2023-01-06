@@ -18,7 +18,6 @@ class UserDataTable extends DataTable
                 return view('pages.user.datatable.edit', compact('query'));
             })
             ->addColumn('delete', 'pages.user.datatable.delete')
-
             ->rawColumns(['edit', 'delete'])
             ->setRowId('id');
     }
@@ -26,12 +25,12 @@ class UserDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\Lesson $model
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param Lesson $model
+     * @return QueryBuilder
      */
-    public function query(Lesson $model): QueryBuilder
+    public function query(User $model): QueryBuilder
     {
-        return User::select([
+        return $model::select([
             'id',
             'name',
             'email',
@@ -41,7 +40,7 @@ class UserDataTable extends DataTable
     /**
      * Optional method if you want to use html builder.
      *
-     * @return \Yajra\DataTables\Html\Builder
+     * @return HtmlBuilder
      */
     public function html(): HtmlBuilder
     {
@@ -50,9 +49,9 @@ class UserDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->parameters([
-                'dom'          => 'Blrtip',
-                'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
-                'buttons'      => [
+                'dom' => 'Blrtip',
+                'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
+                'buttons' => [
                     ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
                     ['extend' => 'excel', 'className' => 'btn btn-success ', 'text' => 'Export'],
                 ],

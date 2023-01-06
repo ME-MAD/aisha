@@ -131,13 +131,10 @@ function initEditeGroupModal() {
         $('#editGroupForm #ageType').val(Group.age_type)
 
 
-
         $('#editGroupForm').attr('action', href)
 
     })
 }
-
-
 
 
 //Edit Modal User
