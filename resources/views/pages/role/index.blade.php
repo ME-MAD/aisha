@@ -5,7 +5,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
     <link rel="stylesheet" type="text/css"
           href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
+
 @endpush
+
+
 
 @section('content')
     <div class="container-fluid">
@@ -16,9 +19,7 @@
                         <h3 class="text-capitalize">
                             {{__('roles.roles')}}
                         </h3>
-                        <a class="icon"
-                           data-toggle='modal'
-                           data-target='#createRoleModal'>
+                        <a class="icon" href="{{route('admin.role.create')}}">
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
                     </div>

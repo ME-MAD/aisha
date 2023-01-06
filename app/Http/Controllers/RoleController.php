@@ -21,6 +21,11 @@ class RoleController extends Controller
         return $roleDataTable->render('pages.role.index');
     }
 
+    public function create()
+    {
+        return view('pages.role.create');
+    }
+
     public function store(StoreRoleRequest $request): RedirectResponse
     {
         Role::create([
@@ -33,7 +38,7 @@ class RoleController extends Controller
         return back();
     }
 
-    public function update(UpdateRoleRequest $request, Role $role)
+    public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
     {
         $role->update([
             'name' => $request->name,
@@ -44,7 +49,7 @@ class RoleController extends Controller
         return back();
     }
 
-    public function delete(Role $role)
+    public function delete(Role $role): RedirectResponse
     {
         $role->delete();
         Alert::toast('تمت العملية بنجاح', 'success');
