@@ -11,11 +11,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class RoleController extends Controller
 {
-    private $roleModel;
-
-    public function __construct(Role $role)
+    public function __construct()
     {
-        $this->roleModel = $role;
+
     }
 
     public function index(RoleDataTable $roleDataTable)
@@ -25,7 +23,11 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request): RedirectResponse
     {
-        $this->roleModel::create($request->validated());
+        Role::create([
+            'name' => $request->name,
+            'display_name' => $request->display_name,
+            'description' => $request->description
+        ]);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return back();
@@ -36,7 +38,7 @@ class RoleController extends Controller
         $role->update([
             'name' => $request->name,
             'display_name' => $request->display_name,
-            'description' => $request->description,
+            'description' => $request->description
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
         return back();
