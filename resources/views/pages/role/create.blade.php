@@ -97,11 +97,13 @@
                                             <x-text name="name"
                                                     label="{{__('roles.create name')}}"
                                                     class="text-capitalize text-muted "
+                                                    labelClass="text-dark"
                                                     :value="old('name')"/>
                                         </div>
                                         <div class="form-group mb-3">
                                             <x-text name="display_name" label="{{__('roles.create display_name')}}"
                                                     class="text-capitalize text-muted "
+                                                    labelClass="text-dark"
                                                     :value="old('display_name')"/>
                                         </div>
                                         <div class="form-group mb-3">

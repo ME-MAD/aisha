@@ -1,6 +1,6 @@
 <div class="form-group row mb-4">
     <label for="name"
-           class="col-xl-12 col-form-label text-primary">{{ $label }}</label>
+           class="col-xl-12 col-form-label {{$labelClass ?? 'text-primary'}}">{{ $label }}</label>
     <div class="col-xl-12">
         <input type="text"
                class="form-control {{$class ?? ''}}"
