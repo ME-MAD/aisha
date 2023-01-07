@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Student;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateStudentRequest extends FormRequest
 {
@@ -15,7 +16,7 @@ class UpdateStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["nullable", "string"],
+            "name" => ["required", "string", Rule::unique('students', 'name')->ignore($this->name)],
             "birthday" => ["nullable", "date"],
             "phone" => ["nullable", "string"],
             "qualification" => ["nullable", "string"],

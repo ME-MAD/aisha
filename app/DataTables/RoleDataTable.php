@@ -100,28 +100,28 @@ class RoleDataTable extends DataTable
             [
                 'name' => 'name',
                 'data' => 'name',
-                'title' => 'name',
+                'title' => __('roles.name'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'display_name',
                 'data' => 'display_name',
-                'title' => 'display_name',
+                'title' => __('roles.display_name'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'description',
                 'data' => 'description',
-                'title' => 'description',
+                'title' => __('roles.description'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'actions' => 'actions',
                 'data' => 'actions',
-                'title' => 'actions',
+                'title' => __('roles.actions'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
