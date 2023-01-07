@@ -10,6 +10,7 @@ use App\Http\Controllers\GroupTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentLessonController;
 use App\Http\Controllers\StudentLessonReviewController;
@@ -222,5 +223,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
         Route::get('ajaxStudentLessonFinishedReview', [StudentLessonReviewController::class, 'ajaxStudentLessonFinishedReview'])->name('ajaxStudentLessonFinishedReview');
     });
 
+    Route::group(['prefix' => 'role', 'as' => 'role.'], function () {
+        Route::get('', [RoleController::class, 'index'])->name('index');
+        Route::get('create', [RoleController::class, 'create'])->name('create');
+        Route::post('store', [RoleController::class, 'store'])->name('store');
+        Route::get('edit/{role}', [RoleController::class, 'edit'])->name('edit');
+        Route::put('update/{role}', [RoleController::class, 'update'])->name('update');
+        Route::delete('delete/{role}', [RoleController::class, 'delete'])->name('delete');
+    });
 
 });

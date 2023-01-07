@@ -9,7 +9,6 @@
           href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
 @endpush
 
-
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">

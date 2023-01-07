@@ -35,14 +35,13 @@ return [
     'Show' => 'Show ',
     'Edit' => 'Edit',
     'Delete' => 'Delete',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    'settings' => 'settings',
+    'users' => 'users',
+    'Close' => 'Close',
+    'create' => 'create',
+    'update' => 'update',
+    'discard' => 'discard',
+    'home' => 'home'
+
 
 ];

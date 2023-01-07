@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css"
           href="{{ asset('adminAssets/plugins/table/datatable/custom_dt_custom.css') }}">
     <!-- END PAGE LEVEL CUSTOM STYLES -->
+
     <!-- BEGIN PAGE LEVEL STYLES -->
     <link href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}" rel="stylesheet"
           type="text/css"/>
@@ -36,7 +37,6 @@
                    href="{{ route('admin.home') }}">{{ __('teacher.Home') }}</a>
                 <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
                    href="{{ route('admin.teacher.index') }}">{{ __('teacher.Teachers') }}</a>
-
             </div>
         </div>
     </div>
