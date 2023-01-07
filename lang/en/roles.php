@@ -15,5 +15,8 @@ return [
 
 
     'info' => 'role info',
-    'permissions' => 'role permissions'
+    'permissions' => 'role permissions',
+
+    'actions' => 'edit or delete'
+
 ];
