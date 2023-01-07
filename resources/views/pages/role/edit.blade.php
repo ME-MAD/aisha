@@ -2,7 +2,6 @@
 
 
 @push('css')
-
     @if (LaravelLocalization::getCurrentLocale() == 'ar')
         {{--BreadCrumb--}}
         <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
@@ -16,7 +15,6 @@
         <link href="{{asset('adminAssets/assets/css/components/tabs-accordian/custom-tabs.css')}}" rel="stylesheet"
               type="text/css">
     @endif
-
 @endpush
 
 @section('breadcrumb')
@@ -34,11 +32,11 @@
                             </a>
                         </li>
                         <li class="active">
-                            <a href="{{route('admin.role.create')}}"
+                            <a href="{{route('admin.role.edit' ,$role->id)}}"
                                class="d-flex justify-content-center align-items-center">
 
-                                <i class="fa-solid fa-circle-plus fa-2x mx-2"></i>
-                                <span class="font-weight-bold ">{{__('roles.create')}}</span>
+                                <i class="fa-solid fa-pen-to-square fa-2x mx-2"></i>
+                                <span class="font-weight-bold mx-1">{{__('globalWorld.update')}}</span>
                             </a>
                         </li>
                     </ul>
@@ -56,7 +54,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="font-weight-bold text-capitalize">{{__('roles.create')}}</h3>
+                        <h3 class="font-weight-bold text-capitalize">{{__('roles.update')}}</h3>
                     </div>
                     <div class="card-body">
 
@@ -72,7 +70,7 @@
                                    aria-selected="true">
                                     <i class="fa-solid fa-user-gear fa-2x"></i>
 
-                                    <span class="font-weight-bold text-capitalize">{{__('roles.info')}}</span>
+                                    <span class="font-weight-bold">{{__('roles.info')}}</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -86,7 +84,7 @@
 
                                     <i class="fa-solid fa-gears fa-2x"></i>
 
-                                    <span class="font-weight-bold text-capitalize">{{__('roles.permissions')}}</span>
+                                    <span class="font-weight-bold">{{__('roles.permissions')}}</span>
 
                                 </a>
                             </li>
@@ -96,13 +94,12 @@
                         <div class="tab-content " id="animateLineContent-4">
                             <div class="tab-pane fade show active" id="animated-underline-home" role="tabpanel"
                                  aria-labelledby="animated-underline-home-tab">
-
-                                <form action="{{ route('admin.role.store') }}" method="post">
+                                <form action="{{ route('admin.role.update' ,$role->id) }}" method="post">
                                     <div class="modal-body  my-5 rounded border border-solid b-1 bg-light">
                                         @csrf
+                                        @method('put')
 
                                         @include('pages.role.partials.form')
-
 
                                     </div>
 
@@ -113,7 +110,7 @@
                                         </button>
 
                                         <button type="submit"
-                                                class="btn btn-primary font-weight-bold text-white">{{__('globalWorld.create')}}
+                                                class="btn btn-success font-weight-bold text-white">{{__('globalWorld.update')}}
                                         </button>
 
                                     </div>
@@ -142,5 +139,5 @@
 
 @endsection
 
-
+@push('js') @endpush
 

@@ -40,9 +40,7 @@
             </div>
         </div>
     </div>
-
-    @include('pages.role.createModal')
-    @include('pages.role.editModal')
+    
 @endsection
 
 

@@ -1,9 +1,7 @@
 <div class="actions d-flex justify-content-center align-items-center text-center">
-
-    <a class='editRoleButton  text-success mx-1 '
-
+    <a class='text-success mx-1 '
        data-role="{{ $query }}"
-       data-href="{{ route('admin.role.update', $query->id) }}">
+       href="{{ route('admin.role.edit', $query->id) }}">
 
         <i class="icon fa-solid fa-pen-to-square fa-xl"></i>
     </a>

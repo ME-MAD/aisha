@@ -6,7 +6,6 @@ use App\Models\Role;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
 class RoleDataTable extends DataTable
@@ -45,11 +44,11 @@ class RoleDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->parameters([
-                'dom'          => 'Blrtip',
-                'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
-                'buttons'      => [
+                'dom' => 'Blrtip',
+                'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
+                'buttons' => [
                     ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
-                    ['extend' => 'excel', 'className' => 'btn btn-success ', 'text' => 'Export'],
+                    ['extend' => 'excel', 'className' => 'btn btn-success  my-3 ', 'text' => 'Export'],
                 ],
                 'order' => [
                     0, 'desc'
@@ -84,7 +83,7 @@ class RoleDataTable extends DataTable
                 refreshAllTableLinks()
             }",
 
-        ]);
+            ]);
     }
 
 
@@ -92,11 +91,44 @@ class RoleDataTable extends DataTable
     {
         return [
 
-            Column::make('id', 'id'),
-            Column::make('name', 'name'),
-            Column::make('display_name', 'display_name'),
-            Column::make('description', 'description'),
-            Column::make('actions', 'actions'),
+            [
+                'name' => 'id',
+                'data' => 'id',
+                'title' => '#',
+                "className" => 'search--col exact'
+            ],
+            [
+                'name' => 'name',
+                'data' => 'name',
+                'title' => 'name',
+                "className" => 'search--col exact'
+            ],
+
+            [
+                'name' => 'display_name',
+                'data' => 'display_name',
+                'title' => 'display_name',
+                "className" => 'search--col exact'
+            ],
+
+            [
+                'name' => 'description',
+                'data' => 'description',
+                'title' => 'description',
+                "className" => 'search--col exact'
+            ],
+
+            [
+                'actions' => 'actions',
+                'data' => 'actions',
+                'title' => 'actions',
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
+
 
         ];
     }

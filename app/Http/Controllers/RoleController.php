@@ -6,6 +6,9 @@ use App\DataTables\RoleDataTable;
 use App\Http\Requests\Role\StoreRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
 use App\Models\Role;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -35,7 +38,12 @@ class RoleController extends Controller
         ]);
 
         Alert::toast('تمت العملية بنجاح', 'success');
-        return back();
+        return redirect(route('admin.role.index'));
+    }
+
+    public function edit(Role $role): Factory|View|Application
+    {
+        return view('pages.role.edit', compact('role'));
     }
 
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
@@ -46,7 +54,7 @@ class RoleController extends Controller
             'description' => $request->description
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
-        return back();
+        return redirect(route('admin.role.index'));
     }
 
     public function delete(Role $role): RedirectResponse

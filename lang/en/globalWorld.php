@@ -40,7 +40,8 @@ return [
     'Close' => 'Close',
     'create' => 'create',
     'update' => 'update',
-    'discard' => 'discard'
+    'discard' => 'discard',
+    'home' => 'home'
 
 
 ];

@@ -41,6 +41,7 @@ return [
     'Close' => 'اغلاق',
     'create' => 'انشاء',
     'update' => 'تحديث',
-    'discard' => 'تجاهل'
+    'discard' => 'تجاهل',
+    'home' => 'الرئيسيه'
 
 ];
