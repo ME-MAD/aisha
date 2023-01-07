@@ -48,10 +48,10 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
-            QuraanSeeder::class,
-            TgweedSeeder::class,
-            QaidaNooraniahSeeder::class,
-
+            // QuraanSeeder::class,
+            // TgweedSeeder::class,
+            // QaidaNooraniahSeeder::class,
+            PermissionSeeder::class
         ]);
     }
 }

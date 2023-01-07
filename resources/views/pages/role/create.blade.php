@@ -17,6 +17,8 @@
               type="text/css">
     @endif
 
+    <link href="{{asset('adminAssets/assets/css/tables/table-basic.css')}}" rel="stylesheet" type="text/css" />
+
 @endpush
 
 @section('breadcrumb')
@@ -123,7 +125,7 @@
                             <div class="tab-pane fade" id="animated-underline-profile" role="tabpanel"
                                  aria-labelledby="animated-underline-profile-tab">
                                 <div class="media">
-
+                                    @include('pages.role.partials.permissions')
                                 </div>
                             </div>
 

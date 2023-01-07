@@ -7,6 +7,10 @@
     text-align: center;
 }
 
+body{
+    max-width: initial;
+}
+
 table tbody tr td {
     text-align: center;
 }

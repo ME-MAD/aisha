@@ -40,3 +40,84 @@ if (!function_exists('getCurrectMonthName')) {
 }
 
 
+if (!function_exists('getPermissionKeys')) {
+    function getPermissionKeys()
+    {
+        return [
+            'c' => 'create',
+            'u' => 'update',
+            'd' => 'delete',
+            'e' => 'edit',
+            's' => 'show',
+            'i' => 'index'
+        ];
+    }
+}
+
+if (!function_exists('getPermissionTables')) {
+    function getPermissionTables()
+    {
+        return [
+            'exam',
+            'experience',
+            'group',
+            'groupDay',
+            'groupStudent',
+            'groupType',
+            'lesson',
+            'payment',
+            'role',
+            'student',
+            'studentLesson',
+            'studentLessonReview',
+            'subject',
+            'syllabus',
+            'syllabusReview',
+            'teacher',
+            'user',
+        ];
+    }
+}
+
+
+if (!function_exists('getPermissionsForView')) {
+    function getPermissionsForView()
+    {
+        $keys = getPermissionKeys();
+        $tables = getPermissionTables();
+
+        $permissions = [];
+
+        foreach($tables as $table)
+        {
+            foreach($keys as $key => $value)
+            {
+                $permissions [$table] []= [
+                    'key' => $value,
+                    'value' => "$value-$table"
+                ];
+            }
+        }
+        return $permissions;
+    }
+}
+
+
+if (!function_exists('getPermissionsForSeeder')) {
+    function getPermissionsForSeeder()
+    {
+        $keys = getPermissionKeys();
+        $tables = getPermissionTables();
+
+        $permissions = [];
+
+        foreach($tables as $table)
+        {
+            foreach($keys as $key => $value)
+            {
+                $permissions [] ['name']= "$value-$table";
+            }
+        }
+        return $permissions;
+    }
+}
