@@ -22,7 +22,7 @@ class TgweedSeeder extends Seeder
         $chapters = chapterTgweed();
 
         foreach ($chapters as $chapter) {
-            Lesson::updateOrCreate([
+            Lesson::upsert([
                 'title'      => $chapter['lesson_ar'],
                 'subject_id' => $subject->id,
             ], [
