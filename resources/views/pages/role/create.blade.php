@@ -19,6 +19,8 @@
 
     <link href="{{asset('adminAssets/assets/css/tables/table-basic.css')}}" rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet" href="{{asset('css/myCheckbox.css')}}">
+
 @endpush
 
 @section('breadcrumb')
@@ -57,84 +59,94 @@
             <div class="col-md-12">
 
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="font-weight-bold text-capitalize">{{__('roles.create')}}</h3>
-                    </div>
-                    <div class="card-body">
+                    <form action="{{ route('admin.role.store') }}" method="post">
+                        @csrf
 
-                        <ul class="nav nav-tabs  mb-3" id="animateLine" role="tablist">
+                        <div class="card-header">
+                            <h3 class="font-weight-bold text-capitalize">{{__('roles.create')}}</h3>
+                        </div>
+                        <div class="card-body">
 
-                            <li class="nav-item">
-                                <a class="nav-link active"
-                                   id="animated-underline-home-tab"
-                                   data-toggle="tab"
-                                   href="#animated-underline-home"
-                                   role="tab"
-                                   aria-controls="animated-underline-home"
-                                   aria-selected="true">
-                                    <i class="fa-solid fa-user-gear fa-2x"></i>
+                            <ul class="nav nav-tabs  mb-3" id="animateLine" role="tablist">
 
-                                    <span class="font-weight-bold text-capitalize">{{__('roles.info')}}</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                   id="animated-underline-profile-tab"
-                                   data-toggle="tab"
-                                   href="#animated-underline-profile"
-                                   role="tab"
-                                   aria-controls="animated-underline-profile"
-                                   aria-selected="false">
+                                <li class="nav-item">
+                                    <a class="nav-link active"
+                                    id="animated-underline-home-tab"
+                                    data-toggle="tab"
+                                    href="#animated-underline-home"
+                                    role="tab"
+                                    aria-controls="animated-underline-home"
+                                    aria-selected="true">
+                                        <i class="fa-solid fa-user-gear fa-2x"></i>
 
-                                    <i class="fa-solid fa-gears fa-2x"></i>
+                                        <span class="font-weight-bold text-capitalize">{{__('roles.info')}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                    id="animated-underline-profile-tab"
+                                    data-toggle="tab"
+                                    href="#animated-underline-profile"
+                                    role="tab"
+                                    aria-controls="animated-underline-profile"
+                                    aria-selected="false">
 
-                                    <span class="font-weight-bold text-capitalize">{{__('roles.permissions')}}</span>
+                                        <i class="fa-solid fa-gears fa-2x"></i>
 
-                                </a>
-                            </li>
+                                        <span class="font-weight-bold text-capitalize">{{__('roles.permissions')}}</span>
 
-                        </ul>
+                                    </a>
+                                </li>
 
-                        <div class="tab-content " id="animateLineContent-4">
-                            <div class="tab-pane fade show active" id="animated-underline-home" role="tabpanel"
-                                 aria-labelledby="animated-underline-home-tab">
+                            </ul>
 
-                                <form action="{{ route('admin.role.store') }}" method="post">
+
+                            <div class="tab-content " id="animateLineContent-4">
+                                <div class="tab-pane fade show active" id="animated-underline-home" role="tabpanel"
+                                    aria-labelledby="animated-underline-home-tab">
+
+
                                     <div class="modal-body  my-5 rounded border border-solid b-1 bg-light">
-                                        @csrf
 
                                         @include('pages.role.partials.form')
 
 
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button"
-                                                class="btn btn-danger font-weight-bold text-white"
-                                                data-dismiss="modal">{{__('globalWorld.Close')}}
-                                        </button>
-
-                                        <button type="submit"
-                                                class="btn btn-primary font-weight-bold text-white">{{__('globalWorld.create')}}
-                                        </button>
 
                                     </div>
-                                </form>
-                            </div>
 
-                            <div class="tab-pane fade" id="animated-underline-profile" role="tabpanel"
-                                 aria-labelledby="animated-underline-profile-tab">
-                                <div class="media">
-                                    @include('pages.role.partials.permissions')
+
+
+                                </div>
+
+                                <div class="tab-pane fade" id="animated-underline-profile" role="tabpanel"
+                                    aria-labelledby="animated-underline-profile-tab">
+                                    <div class="media">
+
+
+
+
+                                        @include('pages.role.partials.permissions')
+
+
+
+
+                                    </div>
                                 </div>
                             </div>
 
-
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <h4>Test</h4>
-                    </div>
+                        <div class="card-footer">
+                            <button type="button"
+                                    class="btn btn-danger font-weight-bold text-white"
+                                    data-dismiss="modal">{{__('globalWorld.Close')}}
+                            </button>
+
+                            <button type="submit"
+                                    class="btn btn-primary font-weight-bold text-white">{{__('globalWorld.create')}}
+                            </button>
+                        </div>
+                    </form>
+
                 </div>
 
 

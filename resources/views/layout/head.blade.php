@@ -40,7 +40,7 @@
     @stack('css')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css">
-    <link rel="stylesheet" href="{{ asset('adminAssets/assets/css/myStyles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/myStyles.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

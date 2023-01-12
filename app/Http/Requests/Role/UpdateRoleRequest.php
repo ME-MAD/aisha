@@ -17,7 +17,7 @@ class UpdateRoleRequest extends FormRequest
     {
         return
             [
-                'name' => ['nullable', 'string', Rule::unique('roles', 'name')],
+                'name' => ['required', 'string', Rule::unique('roles', 'name')->ignore($this->name)],
                 'display_name' => ['nullable', 'string', Rule::unique('roles', 'name')],
                 'description' => ['nullable', 'string']
             ];

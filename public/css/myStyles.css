@@ -63,3 +63,8 @@ table tbody tr td {
 .icon {
     cursor: pointer;
 }
+
+
+.opacity-0{
+    opacity: 0;
+}
