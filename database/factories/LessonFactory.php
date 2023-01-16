@@ -16,9 +16,14 @@ class LessonFactory extends Factory
      */
     public function definition()
     {
-        return [
+        $from_page = fake()->numberBetween(1, 50);
+        $to_page = $from_page + 50;
 
-            'title' => fake()->text()
+        return [
+            'title' => fake()->text(),
+            'chapters_count' => fake()->numberBetween(1,200),
+            'from_page' => $from_page,
+            'to_page' => $to_page
         ];
     }
 }
