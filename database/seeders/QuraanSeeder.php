@@ -16,7 +16,7 @@ class QuraanSeeder extends Seeder
     public function run()
     {
 
-        $subject = Subject::upsert([
+        $subject = Subject::updateOrCreate([
             'name' => 'القرآن الكريم'
         ], []);
 
