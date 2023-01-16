@@ -16,7 +16,7 @@ class QaidaNooraniahSeeder extends Seeder
      */
     public function run()
     {
-        $subject = Subject::updateOrCreate([
+        $subject = Subject::firstOrCreate([
             'name' => 'القاعدة النورنية'
         ], []);
 

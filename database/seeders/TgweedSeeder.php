@@ -15,7 +15,7 @@ class TgweedSeeder extends Seeder
      */
     public function run()
     {
-        $subject = Subject::updateOrCreate([
+        $subject = Subject::firstOrCreate([
             'name' => 'المنهج المفيد لمراكز تعليم الجويد'
         ], []);
 
