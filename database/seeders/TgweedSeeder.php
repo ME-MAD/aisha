@@ -15,21 +15,26 @@ class TgweedSeeder extends Seeder
      */
     public function run()
     {
-        $subject = Subject::updateOrCreate([
+        $subject = Subject::firstOrCreate([
             'name' => 'المنهج المفيد لمراكز تعليم الجويد'
         ], []);
 
         $chapters = chapterTgweed();
+        $chaptersarray = [];
 
-        foreach ($chapters as $chapter) {
-            Lesson::updateOrCreate([
-                'title'      => $chapter['lesson_ar'],
+        foreach ($chapters as  $chapter) {
+
+            $chaptersarray[] = [
+                'title' => $chapter['lesson_ar'],
                 'subject_id' => $subject->id,
-            ], [
                 'chapters_count' => $chapter['num_pages'],
                 'from_page' => $chapter['from_page'],
                 'to_page' => $chapter['to_page'],
-            ]);
-        };
+            ];
+        }
+        Lesson::upsert(
+            $chaptersarray,
+            ['title', 'subject_id']
+        );
     }
 }
