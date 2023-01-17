@@ -8,45 +8,43 @@ use App\Http\Requests\Student\UpdateStudentRequest;
 use App\Http\Traits\ImageTrait;
 use App\Models\Student;
 use App\Models\Subject;
-use Illuminate\Http\Request;
+use App\Services\Student\StudentService;
+use App\Services\Subject\SubjectService;
+use Illuminate\Http\RedirectResponse;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentController extends Controller
 {
     use ImageTrait;
 
+    private $studentService;
+    private $subjectService;
+
+    public function __construct(StudentService $studentService, SubjectService $subjectService)
+    {
+        $this->studentService = $studentService;
+        $this->subjectService = $subjectService;
+    }
+
     public function index(StudentDataTable $studentDataTable)
     {
         return $studentDataTable->render('pages.student.index');
     }
 
-    public function store(StoreStudentRequest $request)
+    public function store(StoreStudentRequest $request): RedirectResponse
     {
-        $fileName = $this->uploadImage(
-            imageObject: $request->file('avatar'),
-            path: Student::AVATARS_PATH
-        );
 
-        Student::create([
-            'name' => $request->name,
-            'birthday' => $request->birthday,
-            'phone' => $request->phone,
-            'qualification' => $request->qualification,
-            'avatar' => $fileName,
+        $this->studentService->createStudent($request);
 
-        ]);
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
     public function show(Student $student)
     {
-        $subjects = Subject::with('lessons')->get();
-        $student->load([
-            'groupStudents' => function ($q) {
-                $q->with('group.studentLessons');
-            }
-        ]);
+        $subjects = $this->subjectService->getSubjectsWtihLessons();
+
+        $this->studentService->getStudentWithGroupStudents($student);
 
         return view('pages.student.show', [
             'student' => $student,
@@ -54,52 +52,27 @@ class StudentController extends Controller
         ]);
     }
 
-    public function update(UpdateStudentRequest $request, Student $student)
+    public function update(UpdateStudentRequest $request, Student $student): RedirectResponse
     {
-        $fileName = $student->getRawOriginal('avatar');
 
-        if ($request->file('avatar')) {
+        $this->studentService->updateStudent($request, $student);
 
-            $this->deleteImage(
-                path: $student->getAvatarPath()
-            );
-
-            $fileName = $this->uploadImage(
-                imageObject: $request->file('avatar'),
-                path: Student::AVATARS_PATH
-            );
-        }
-
-        $student->update([
-            'name' => $request->name,
-            'birthday' => $request->birthday,
-            'phone' => $request->phone,
-            'qualification' => $request->qualification,
-            'avatar' => $fileName,
-
-        ]);
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
-    public function delete(Student $student)
+    public function delete(Student $student): RedirectResponse
     {
-        $this->deleteImage(
-            path: $student->getAvatarPath()
-        );
-
-        $student->delete();
+        $this->studentService->deleteStudent($student);
+        
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
     public function getGroupStudents(Student $student)
     {
-        $subjects = Subject::with([
-            'lessons.studentLessons.syllabus',
-            'lessons.studentLessons.studentLessonReview.syllabusReviews',
-        ])->get();
-
+        $subjects = $this->subjectService->getSubjectsWithLessonsWithReviews();
+         
         return response()->json([
             'groupStudents' => $student->groupStudents->load(['group.groupDays']),
             'subjects' => $subjects,
