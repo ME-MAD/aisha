@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
             QuraanSeeder::class,
             TgweedSeeder::class,
             QaidaNooraniahSeeder::class,
-            // PermissionSeeder::class
+            PermissionSeeder::class
         ]);
     }
 }
