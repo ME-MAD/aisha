@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('subject_id');
-            $table->string('title')->unique();
+            $table->string('title',512)->unique();
             $table->unsignedInteger('chapters_count')->default(0);
             $table->unsignedInteger('from_page')->default(0);
             $table->unsignedInteger('to_page')->default(0);
