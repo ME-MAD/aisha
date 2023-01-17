@@ -59,39 +59,20 @@ class StudentService
         ]);
     }
 
-    public function showStudent($student): Factory|View|Application
+    public function getStudentWithGroupStudents($student)
     {
-        $subjects = Subject::with('lessons')->get();
-
         $student->load([
             'groupStudents' => function ($q) {
                 $q->with('group.studentLessons');
             }
         ]);
-
-        return view('pages.student.show', [
-            'student' => $student,
-            'subjects' => $subjects,
-        ]);
     }
 
     public function deleteStudent($student): void
     {
-
         $this->deleteImage(path: $student->getAvatarPath());
         $student->delete();
     }
 
-    public function getGroupStudent($student): JsonResponse
-    {
-        $subjects = Subject::with([
-            'lessons.studentLessons.syllabus',
-            'lessons.studentLessons.studentLessonReview.syllabusReviews',
-        ])->get();
-
-        return response()->json([
-            'groupStudents' => $student->groupStudents->load(['group.groupDays']),
-            'subjects' => $subjects,
-        ]);
-    }
+   
 }
