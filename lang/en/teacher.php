@@ -29,7 +29,7 @@ return [
     'Chart' => 'Chart',
     'Info' => 'Info',
     'total experience years' => 'Total Experience Years',
-    '' => '',
+    'Update' => 'Update',
     '' => '',
     '' => '',
     '' => '',

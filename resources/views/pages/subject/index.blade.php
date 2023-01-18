@@ -1,14 +1,35 @@
 @extends('master')
 
 @push('css')
-    <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('adminAssets/plugins/table/datatable/custom_dt_custom.css') }}">
-    <!-- END PAGE LEVEL CUSTOM STYLES -->
+    @if(LaravelLocalization::getCurrentLocale() == 'ar')
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/assets/css/forms/theme-checkbox-radio.css') }}">
+
+    @else
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
+
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
+    @endif
 @endpush
 
 @section('breadcrumb')
@@ -129,7 +150,7 @@
 
 
 @push('js')
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
     <script>
         // var e;
@@ -151,5 +172,5 @@
 
         multiCheck(c3);
     </script>
-    <!-- END PAGE LEVEL SCRIPTS -->
+
 @endpush

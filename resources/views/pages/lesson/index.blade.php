@@ -2,11 +2,32 @@
 
 
 @push('css')
-    <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
+    @if(LaravelLocalization::getCurrentLocale() == 'ar')
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/assets/css/forms/theme-checkbox-radio.css') }}">
+    @else
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
+    @endif
 @endpush
 
 
@@ -63,7 +84,7 @@
 
                                         {!! $dataTable->table(
                                             [
-                                                'class' => 'table',
+                                                'class' => 'table text-center',
                                             ],
                                             true,
                                         ) !!}
@@ -84,11 +105,11 @@
 
 
 @push('js')
+    {{--Begin Data_Table--}}
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
-
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
-
-    <script src="/vendor/datatables/buttons.server-side.js"></script>
-
     {!! $dataTable->scripts() !!}
+    {{--End Data_Table--}}
+
+    <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
 @endpush

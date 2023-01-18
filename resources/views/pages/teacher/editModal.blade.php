@@ -1,8 +1,8 @@
 <div class="modal fade" id="editTeacher" tabindex="-1" role="dialog" aria-labelledby="editTeacher" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header p-3 mb-2 bg-warning ">
-                <h5 class="modal-title text-white" id="editTeacher">{{ __('teacher.edite teacher') }}</h5>
+            <div class="modal-header p-3 mb-2 bg-dark  ">
+                <h5 class="modal-title text-white font-weight-bold"  id="editTeacher">{{ __('teacher.edite teacher') }}</h5>
             </div>
             <div class="modal-body">
                 <form id="editTeacherForm" method="post" enctype="multipart/form-data">
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-warning">{{ __('teacher.Save') }}</button>
+                        <button type="submit" class="btn btn-success">{{ __('teacher.Update') }}</button>
                         <button class="btn" data-dismiss="modal"><i
                                 class="flaticon-cancel-12"></i>{{ __('teacher.Discard') }}</button>
                     </div>

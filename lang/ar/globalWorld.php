@@ -40,7 +40,7 @@ return [
 
     'Close' => 'اغلاق',
     'create' => 'انشاء',
-    'update' => 'تحديث',
+    'Update' => 'تحديث',
     'discard' => 'تجاهل',
     'home' => 'الرئيسيه'
 

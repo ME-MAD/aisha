@@ -18,19 +18,34 @@
                     <x-text name="qualification" label="{{ __('teacher.qualification') }}" :value="old('qualification')" />
 
                     <div class="custom-file-container" data-upload-id="myFirstImage">
-                        <label>{{ __('teacher.avatar') }}<a href="javascript:void(0)"
-                                class="custom-file-container__image-clear" title="Clear Image"></a></label>
-                        <label class="custom-file-container__custom-file">
-                            <input type="file" class="custom-file-container__custom-file__custom-file-input"
-                                accept="image/*" name="avatar">
-                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
-                            <span class="custom-file-container__custom-file__custom-file-control"></span>
+
+                        <label>{{ __('teacher.avatar') }}
+                            <a href="javascript:void(0)"
+                                class="custom-file-container__image-clear"
+                               title="Clear Image">
+
+                            </a>
                         </label>
+                        <label class="custom-file-container__custom-file">
+
+                            <input type="file"
+                                   class="custom-file-container__custom-file__custom-file-input"
+                                accept="image/*"
+                                   name="avatar">
+
+                            <input type="hidden"
+                                   name="MAX_FILE_SIZE"
+                                   value="10485760" />
+
+                            <span class="custom-file-container__custom-file__custom-file-control"></span>
+
+                        </label>
+
                         <div class="custom-file-container__image-preview"></div>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">{{ __('teacher.Save') }}</button>
+                        <button type="submit" class="btn btn-dark">{{ __('teacher.Save') }}</button>
                         <button class="btn" data-dismiss="modal"><i
                                 class="flaticon-cancel-12"></i>{{ __('teacher.Discard') }}</button>
                     </div>

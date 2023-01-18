@@ -2,8 +2,16 @@
 
 
 @push('css')
-    <link href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}" rel="stylesheet"
-          type="text/css"/>
+    @if(LaravelLocalization::getCurrentLocale() == 'ar')
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/plugins/file-upload/file-upload-with-preview.min.css') }}"
+        />
+    @else
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
+    @endif
 @endpush
 
 @section('breadcrumb')
@@ -57,8 +65,8 @@
 
                             <div class="form-group row mb-4">
                                 <label for="book"
-                                       class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">Book</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                       class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold text-capitalize">Book</label>
+                                <div class="col-xl-12 col-md-6">
                                     <div class="custom-file-container" data-upload-id="myFirstImage1">
                                         <label>Upload <a href="javascript:void(0)"
                                                          class="custom-file-container__image-clear" title="Clear Image">x</a></label>
@@ -77,9 +85,10 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
-                                <label for="book" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">تعديل
+                                <label for="book"
+                                       class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold text-capitalize">تعديل
                                     غلاف الكتاب</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                <div class="col-xl-12 col-md-6 ">
                                     <div class="custom-file-container" data-upload-id="myFirstImage2">
                                         <label>Upload <a href="javascript:void(0)"
                                                          class="custom-file-container__image-clear" title="Clear Image">x</a></label>

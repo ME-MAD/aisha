@@ -1,6 +1,6 @@
 <div class="form-group row mb-4">
-    <label for="brithday" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">{{ $label }}</label>
-    <div class="col-xl-10 col-lg-9 col-sm-10">
+    <label for="brithday" class="col-xl-12 col-md-6 col-form-label text-muted font-weight-bold text-capitalize">{{ $label }}</label>
+    <div class="col-xl-12 col-md-6 ">
         <input type="date" 
             class="form-control {{$class ?? ''}}"
             id="{{$id ?? $name}}"
