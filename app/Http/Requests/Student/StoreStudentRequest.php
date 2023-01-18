@@ -16,7 +16,7 @@ class StoreStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required", "string"],
+            "name" => ["required", "string" ,'alpha'],
             "birthday" => ["nullable", "date"],
             "phone" => ["required", "string"],
             "qualification" => ["nullable", "string"],
