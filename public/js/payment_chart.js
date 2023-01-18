@@ -19,6 +19,7 @@ function GetMonthlyPayments(year = null, start_time = null, end_time = null) {
             year: year,
             start_time: startTime,
             end_time: endTime,
+            _token: $('meta[name="csrf-token"]').attr('content')
         },
         success: function (response) {
             //Start function success

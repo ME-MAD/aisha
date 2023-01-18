@@ -16,7 +16,7 @@ class StoreTeacherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+            'name' => 'required|alpha|max:255',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'birthday' => 'nullable',
             'phone' => 'required',
