@@ -1,7 +1,18 @@
 @extends('master')
 
 @push('css')
-    <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/select2/select2.min.css')}}">
+    @if(LaravelLocalization::getCurrentLocale() == 'ar')
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{asset('adminRtl/plugins/select2/select2.min.css')}}">
+
+    @else
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{asset('adminAssets/plugins/select2/select2.min.css')}}">
+
+    @endif
 @endpush
 
 
@@ -52,10 +63,11 @@
 
 
                             <div class="form-group row mb-4">
-                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">
+                                <label for="age_type"
+                                       class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
                                     اختر
                                     الطالب</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                <div class="col-xl-12 col-md-6">
                                     <select class="form-control basic"
                                             style="width: 100%;"
                                             name="student_id" id="student_id">
@@ -74,10 +86,11 @@
 
 
                             <div class="form-group row mb-4">
-                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">
+                                <label for="age_type"
+                                       class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
                                     اختر
                                     المجموعة</label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                <div class="col-xl-12 col-md-6">
                                     <select class="form-control basic"
                                             style="width: 100%;"
                                             name="group_id" id="group_id">
@@ -97,10 +110,12 @@
 
 
                             <div class="form-group row mb-4">
-                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary"> من
+                                <label for="age_type"
+                                       class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
+                                    من
                                     درس
                                 </label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                <div class="col-xl-12 col-md-6">
                                     <select class="form-control basic"
                                             style="width: 100%;"
                                             name="lesson_from" id="lesson_from">
@@ -118,10 +133,11 @@
                             </div>
 
                             <div class="form-group row mb-4">
-                                <label for="age_type" class="col-xl-2 col-sm-3 col-sm-2 col-form-label text-primary">
+                                <label for="age_type"
+                                       class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
                                     الى درس
                                 </label>
-                                <div class="col-xl-10 col-lg-9 col-sm-10">
+                                <div class="col-xl-12 col-md-6">
                                     <select class="form-control basic"
                                             style="width: 100%;"
                                             name="lesson_to" id="lesson_to">
@@ -140,8 +156,12 @@
 
 
                             <div class="form-group row">
-                                <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary mt-3">Lets Go</button>
+                                <div class="col-12">
+                                    <button type="submit"
+                                            class="btn btn-primary font-weight-bold text-capitalize">
+                                        {{ __('globalWorld.Save') }}
+                                    </button>
+                                    .
                                 </div>
                             </div>
                         </form>

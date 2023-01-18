@@ -2,20 +2,43 @@
 
 @push('css')
 
-    <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('adminAssets/plugins/table/datatable/custom_dt_custom.css') }}">
-    <!-- END PAGE LEVEL CUSTOM STYLES -->
+    @if(LaravelLocalization::getCurrentLocale() == 'ar')
 
-    <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}" rel="stylesheet"
-          type="text/css"/>
-    <!-- END PAGE LEVEL STYLES -->
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/assets/css/forms/theme-checkbox-radio.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
+    @else
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
+    @endif
 @endpush
+
 @section('breadcrumb')
     <div class="page-header">
         <div class="page-title">
@@ -41,8 +64,6 @@
         </div>
     </div>
 @endsection
-
-
 
 @section('content')
     <div class="container-fluid">
@@ -91,14 +112,20 @@
 
 
 @push('js')
+    {{--Begin Data_Table--}}
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
-    <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
     {!! $dataTable->scripts() !!}
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    {{--End Data_Table--}}
+
+    {{--Begin File_Upload--}}
     <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
     <script>
         var firstUpload = new FileUploadWithPreview('myFirstImage')
         var secondUpload = new FileUploadWithPreview('mySecondImage')
     </script>
+    {{--End File_Upload--}}
+
+    <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
+
 @endpush

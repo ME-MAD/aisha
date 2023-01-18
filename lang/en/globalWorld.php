@@ -39,7 +39,7 @@ return [
     'users' => 'users',
     'Close' => 'Close',
     'create' => 'create',
-    'update' => 'update',
+    'Update' => 'update',
     'discard' => 'discard',
     'home' => 'home'
 

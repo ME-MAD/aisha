@@ -1,19 +1,51 @@
 @extends('master')
 
 
-
 @push('css')
-    <link href="{{ asset('adminAssets/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('adminAssets/plugins/table/datatable/custom_dt_html5.css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
-    {{--   BEGIN CUSTOM STYLE FILE--}}
-    <link href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('adminAssets/assets/css/components/timeline/custom-timeline.css') }}" rel="stylesheet"
-          type="text/css"/>
-    {{--    END CUSTOM STYLE FILE  --}}
+
+    @if(LaravelLocalization::getCurrentLocale() == 'ar')
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/assets/css/users/user-profile.css') }}"/>
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/assets/css/scrollspyNav.css') }}"/>
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminRtl/assets/css/components/timeline/custom-timeline.css') }}"/>
+    @else
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/assets/css/users/user-profile.css') }}"/>
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}"/>
+
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/assets/css/components/timeline/custom-timeline.css') }}"/>
+    @endif
+
 @endpush
 
 @section('breadcrumb')
@@ -43,8 +75,6 @@
         </div>
     </div>
 @endsection
-
-
 
 @section('content')
     <div class="container-fluid">
@@ -76,9 +106,8 @@
 
 
 @push('js')
-    <!-- BEGIN PAGE LEVEL CUSTOM SCRIPTS -->
+
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
-    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/jszip.min.js') }}"></script>
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/buttons.html5.min.js') }}"></script>
@@ -120,5 +149,5 @@
             "pageLength": 7
         });
     </script>
-    <!-- END PAGE LEVEL CUSTOM SCRIPTS -->
+
 @endpush
