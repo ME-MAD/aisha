@@ -4,10 +4,11 @@
             <img src="{{ asset('adminAssets/assets/img/mother.png') }}" class="" alt="..." style="width: 200px">
             <br>
             <br>
-
             <div class="col-xl-2 col-md-2 col-sm-2 col-2">
-                <a href="{{ route('admin.teacher.edit', $group->teacher->id) }}"
-                    class="btn btn-success  float-left">{{ __('globalWorld.Edit') }}</a>
+                    <a class="mt-2 editTeacherButton" data-toggle='modal' data-target='#editTeacher'
+                    data-teacher="{{ $group->teacher }}" data-href="{{ route('admin.teacher.update',$group->teacher->id) }}">
+                     <i class="fa-solid fa-user-pen text-primary fa-2x"></i>
+                 </a>
             </div>
         </div>
 

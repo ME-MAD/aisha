@@ -135,13 +135,18 @@
             </div>
         </div>
     </div>
+    @include('pages.teacher.editModal')
 @endsection
 
 @push('js')
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
     <script src="{{ asset('js/payment.js') }}"></script>
+    <script src="{{ asset('js/teacher.js') }}"></script>
     <script src="{{ asset('adminAssets/assets/shared/chart.js') }}"></script>
     <script src="{{ asset('js/group_chart.js') }}"></script>
+    <script>
+        initEditeTeacherModal()
+    </script>
     <script>
         $('#zero-config').DataTable({
             "oLanguage": {
