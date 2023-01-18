@@ -24,7 +24,7 @@ class UpdateTeacherRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|alpha|max:255',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'birthday' => 'nullable',
             'phone' => 'required',
