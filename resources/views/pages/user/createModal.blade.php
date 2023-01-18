@@ -13,6 +13,18 @@
 
                     <x-text name="email" label="Email" :value="old('email')" />
 
+                    <div class="col-xl-12 col-md-6">
+                        <select class="form-control basic" style="width: 100%;" name="role" id="role">
+                            <option value=""> {{ __('group.Choose role') }}</option>
+                            @foreach ($roles as $role)
+                                <option value="{{$role->name}}">{{$role->name}}</option>
+                            @endforeach
+                        </select>
+                        @error('role')
+                        <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <x-text name="password" label="Password" :value="old('password')" />
 
                     <x-text name="password_confirmation" label="Confirm Password" />

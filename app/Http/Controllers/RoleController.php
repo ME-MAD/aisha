@@ -50,10 +50,6 @@ class RoleController extends Controller
 
         AttachPermissionsToRoleJob::dispatch($allPermissionsNames, $role);
 
-        // $allPermissions = Permission::whereIn('name',$allPermissionsNames)->get();
-
-        // $role->attachPermissions($allPermissions);
-
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.role.index'));
     }

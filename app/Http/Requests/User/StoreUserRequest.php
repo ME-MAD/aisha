@@ -27,7 +27,8 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => "required",
             'email' => ['required', Rule::unique('users', 'email')->ignore($this->email)],
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed',
+            'role' => 'required|exists:roles,name'
         ];
     }
 }
