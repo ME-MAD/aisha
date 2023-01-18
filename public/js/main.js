@@ -1,7 +1,10 @@
 $(document).ready(function () {
     $.ajaxSetup({ 
         headers: { "X-CSRF-TOKEN": $('meta[name="csrf_token"]').attr("content") },
-        async: true
+        async: true,
+        data:{
+            _token: $('meta[name="csrf-token"]').attr('content')
+        }
     });
 
     refreshAllTableLinks()

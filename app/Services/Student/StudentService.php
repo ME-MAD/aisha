@@ -4,11 +4,6 @@ namespace App\Services\Student;
 
 use App\Http\Traits\ImageTrait;
 use App\Models\Student;
-use App\Models\Subject;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\JsonResponse;
 
 class StudentService
 {
@@ -32,13 +27,13 @@ class StudentService
             'phone' => $request->phone,
             'qualification' => $request->qualification,
             'avatar' => $fileName,
-
         ]);
     }
 
     public function updateStudent($request, $student): void
     {
         $fileName = $student->getRawOriginal('avatar');
+        
         if ($request->file('avatar')) {
 
             $this->deleteImage(
@@ -55,7 +50,6 @@ class StudentService
             'phone' => $request->phone,
             'qualification' => $request->qualification,
             'avatar' => $fileName,
-
         ]);
     }
 
@@ -73,6 +67,4 @@ class StudentService
         $this->deleteImage(path: $student->getAvatarPath());
         $student->delete();
     }
-
-   
 }

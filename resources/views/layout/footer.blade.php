@@ -18,9 +18,8 @@
 </script>
 <script src="{{ asset('adminAssets/assets/js/custom.js') }}"></script>
 <!-- END GLOBAL MANDATORY SCRIPTS -->
-<script src="{{ asset('adminAssets/assets/js/shared/modals.js') }}"></script>
-<script src="{{ asset('adminAssets/assets/shared/main.js') }}"></script>
-<script src="{{ asset('adminAssets/assets/shared/modal.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/modal.js') }}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.js">
 </script>
 

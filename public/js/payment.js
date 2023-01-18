@@ -1,6 +1,6 @@
 
 let createcheckbox = document.getElementsByClassName('paid_finished_checkbox');
-
+let token = $('meta[name="csrf_token"]').attr("content");
 whenMonthChangeHandlePaymentCheckBox()
 
 for (let element of createcheckbox) {
@@ -28,7 +28,7 @@ for (let element of createcheckbox) {
                     group_id: group,
                     amount: amount,
                     month: monthCreatePayment,
-                    paid: true
+                    paid: true,
                 },
                 success: function (response) {
                     let paymentsCount = $('#paymentsCount').html()
@@ -47,7 +47,7 @@ for (let element of createcheckbox) {
                     month == null ? $(`.paid_finished_checkbox`).prop('checked', false) : '';
                     Swal.fire(
                         'Warning!',
-                        `${response.responseJSON.message}mohamed sharaf`,
+                        `${response.responseJSON.message}`,
                         'error'
                     )
                 }

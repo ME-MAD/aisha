@@ -7,8 +7,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
-    <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}" rel="stylesheet" type="text/css"/>
+
+    @if (LaravelLocalization::getCurrentLocale() == 'ar')
+        <link href="{{ asset('adminRtl/plugins/file-upload/file-upload-with-preview.min.css') }}" rel="stylesheet" type="text/css"/>
+    @else
+        <link href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}" rel="stylesheet" type="text/css"/>
+    @endif
     <!-- END PAGE LEVEL STYLES -->
 @endpush
 
