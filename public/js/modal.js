@@ -65,7 +65,6 @@ function initEditeTeacherModal() {
 function initEditeLessonModal() {
     $('.editLessonButton').on('click', function () {
         let lesson = $(this).data('lesson')
-        console.log(lesson);
         let href = $(this).data('href')
 
         $('#editLessonForm #subject_id').val(lesson.subject_id)
@@ -85,7 +84,6 @@ function initEditeLessonModal() {
 function initEditeStudentModal() {
     $('.editStudentButton').on('click', function () {
         let student = $(this).data('student')
-        console.log(student);
         let href = $(this).data('href')
 
         $('#editStudentForm #name').val(student.name)
@@ -104,7 +102,6 @@ function initEditeStudentModal() {
 function initEditeGroupTypeModal() {
     $('.editGroupTypeButton').on('click', function () {
         let GroupType = $(this).data('grouptype')
-
         let href = $(this).data('href')
 
         $('#editGroupTypeForm #name').val(GroupType.name)
