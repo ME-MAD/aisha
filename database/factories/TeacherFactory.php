@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use Illuminate\Support\Facades\Hash;
 
 class TeacherFactory extends Factory
 {
@@ -15,13 +15,14 @@ class TeacherFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name,
-            'email' => fake()->safeEmail(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            'birthday' => fake()->date(),
-            'phone' => fake()->phoneNumber(),
-            'avatar' => fake()->name(),
-            'qualification' => fake()->text()
+            'name'          => fake()->name,
+            'birthday'      => fake()->date(),
+            'phone'         => fake()->phoneNumber(),
+            'avatar'        => fake()->name(),
+            'qualification' => fake()->text(),
+            'email'         => fake()->email(),
+            'password'      => Hash::make('24682468'),
         ];
     }
 }
+

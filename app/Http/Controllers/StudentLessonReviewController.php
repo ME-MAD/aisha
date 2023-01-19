@@ -4,41 +4,38 @@ namespace App\Http\Controllers;
 
 use App\Models\StudentLesson;
 use App\Models\StudentLessonReview;
-use Illuminate\Http\Request;
+use App\Http\Requests\StudentLesson\StudentLessonReviewRequest;
+use App\Services\StudentLesson\StudentLessonService;
+use App\Services\StudentLessonReview\StudentLessonReviewService;
 
 class StudentLessonReviewController extends Controller
 {
-    public function ajaxStudentLessonFinishedReview(Request $request)
-    {
-        $studentLesson = StudentLesson::firstOrCreate([
-            'group_id' => $request->group_id,
-            'lesson_id' => $request->lesson_id,
-            'student_id' => $request->student_id
-        ],[
-            
-        ]);
 
-        if($request->finished == "true")
+    public $studentLessonReviewService;
+    public $studentLessonService;
+
+    public function __construct(StudentLessonReviewService $studentLessonReviewService, StudentLessonService $studentLessonService)
+    {
+        $this->studentLessonReviewService = $studentLessonReviewService;
+        $this->studentLessonService = $studentLessonService;
+    }
+
+
+    public function ajaxStudentLessonFinishedReview(StudentLessonReviewRequest $request)
+    {
+        $studentLesson = $this->studentLessonService->firstOrCreateStudentLesson($request);
+
+        $data = $request->all();
+        $data['student_lesson_id'] = $studentLesson->id;
+
+        if ($request->finished == "true") 
         {
-            StudentLessonReview::updateOrCreate([
-                'student_lesson_id' => $studentLesson->id
-            ], [
-                'finished' => true,
-                'percentage' => 100,
-                'last_chapter_finished' => $request->chapters_count,
-                'last_page_finished' => $request->last_page_finished,
-            ]);
-        }
+            $this->studentLessonReviewService->finished((object) $data);
+        } 
         else
         {
-            StudentLessonReview::updateOrCreate([
-                'student_lesson_id' => $studentLesson->id
-            ], [
-                'finished' => false,
-            ]);
+            $this->studentLessonReviewService->notFinished((object) $data);
         }
-
-        
 
         return response()->json([
             'status' => 200

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,7 +23,9 @@ class StudentFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'birthday' => fake()->date(),
             'phone' => fake()->phoneNumber,
-            'qualification' => fake()->text()
+            'qualification' => fake()->text(),
+            'email'         => fake()->email(),
+            'password'      => Hash::make('24682468'),
         ];
     }
 }

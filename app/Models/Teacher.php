@@ -12,6 +12,7 @@ class Teacher extends Model
 
     protected $fillable = ['name','email', 'password', 'phone', 'birthday', 'avatar', 'qualification'];
 
+
     const AVATARS_PATH = 'images/teacher/avatars/';
 
     protected function avatar(): Attribute
