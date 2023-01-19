@@ -220,7 +220,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], fu
     });
 
     Route::group(['prefix' => 'student_lesson_review', 'as' => 'student_lesson_review.'], function () {
-        Route::get('ajaxStudentLessonFinishedReview', [StudentLessonReviewController::class, 'ajaxStudentLessonFinishedReview'])->name('ajaxStudentLessonFinishedReview');
+        Route::post('ajaxStudentLessonFinishedReview', [StudentLessonReviewController::class, 'ajaxStudentLessonFinishedReview'])->name('ajaxStudentLessonFinishedReview');
     });
 
     Route::group(['prefix' => 'role', 'as' => 'role.'], function () {

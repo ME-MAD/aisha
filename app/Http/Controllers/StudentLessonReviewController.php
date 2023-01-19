@@ -4,41 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\StudentLesson;
 use App\Models\StudentLessonReview;
-use Illuminate\Http\Request;
+use App\Http\Requests\StudentLesson\StudentLessonReviewRequest;
+use App\Services\StudentLessonReview\StudentLessonReviewService;
 
 class StudentLessonReviewController extends Controller
 {
-    public function ajaxStudentLessonFinishedReview(Request $request)
+
+    public $studentLessonReviewService;
+
+    public function __construct(StudentLessonReviewService $studentLessonReviewService)
     {
-        $studentLesson = StudentLesson::firstOrCreate([
-            'group_id' => $request->group_id,
-            'lesson_id' => $request->lesson_id,
-            'student_id' => $request->student_id
-        ],[
-            
-        ]);
+        $this->studentLessonReviewService = $studentLessonReviewService;
+    }
 
-        if($request->finished == "true")
-        {
-            StudentLessonReview::updateOrCreate([
-                'student_lesson_id' => $studentLesson->id
-            ], [
-                'finished' => true,
-                'percentage' => 100,
-                'last_chapter_finished' => $request->chapters_count,
-                'last_page_finished' => $request->last_page_finished,
-            ]);
-        }
-        else
-        {
-            StudentLessonReview::updateOrCreate([
-                'student_lesson_id' => $studentLesson->id
-            ], [
-                'finished' => false,
-            ]);
-        }
 
-        
+    public function ajaxStudentLessonFinishedReview(StudentLessonReviewRequest $request)
+    {
+        $this->studentLessonReviewService->firstOrCreateStudentLesson($request);
+
+        if ($request->finished == "true") {
+            $this->studentLessonReviewService->finished($request);
+        } else {
+            $this->studentLessonReviewService->notFinished($request);
+        }
 
         return response()->json([
             'status' => 200

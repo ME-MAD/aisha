@@ -17,7 +17,7 @@ function renderSubjectsInStudentsShow(){
                     <div id="groupStudentContainer${groupStudent.id}"></div>
                 `)
                 renderSubjectsForEachGroup(groupStudent)
-                
+
             });
         },
         error: function () { }
@@ -51,7 +51,7 @@ function renderSubjectsForEachGroup(groupStudent)
             </div>
         `
     });
-        
+
     groupStudent.group.group_days.forEach(groupDay => {
         groupDaysElements += `
             <span class="badge bg-info text-light">${groupDay.day}</span>
@@ -59,13 +59,13 @@ function renderSubjectsForEachGroup(groupStudent)
     });
 
     $(`#groupStudentContainer${groupStudent.id}`).append(`
-        <p class="text-center"> 
+        <p class="text-center">
 
             <span class="badge bg-primary text-light">From</span>
             ${groupStudent.group.from} :
             <span class="badge bg-primary text-light">To</span>
             ${groupStudent.group.to}
-            
+
             ${groupDaysElements}
 
         </p>
@@ -85,7 +85,7 @@ function renderSubjectsForEachGroup(groupStudent)
         let groupId = subjectsContainer.data('group-id')
         let lessonsElements = ''
 
-        
+
         handleShowingOfTheBook(1 , subject)
 
 
@@ -96,7 +96,7 @@ function renderSubjectsForEachGroup(groupStudent)
                 )
             })[0]
 
-            
+
 
             let studentLessonShowURL = (studentLesson?.id || false) ? `/admin/student_lesson/show/${studentLesson.id}`:'#'
 
@@ -106,7 +106,7 @@ function renderSubjectsForEachGroup(groupStudent)
             let studentLessonIsFinished = studentLesson ? studentLesson.finished : false
             let studentLessonLastPageFinished = studentLesson ? studentLesson.last_page_finished : 0
 
-            
+
             let studentLessonReview = studentLesson?.student_lesson_review
 
             let nextLessonReview = studentLessonReview?.syllabus_reviews.filter(syllabusReview => syllabusReview.finished == 0)[0]
@@ -123,7 +123,7 @@ function renderSubjectsForEachGroup(groupStudent)
 
                         <div class="studentLessonContainer">
                             <button class="btn btn-success goToReviewButton">
-                                Go To Review 
+                                Go To Review
                                 <i class="fa-solid fa-arrow-right-arrow-left"></i>
                             </button>
 
@@ -148,8 +148,8 @@ function renderSubjectsForEachGroup(groupStudent)
                                 </span>
 
                                 <label class="switch s-icons s-outline  s-outline-success">
-                                    <input 
-                                        type="checkbox" 
+                                    <input
+                                        type="checkbox"
                                         class="lesson_finished_checkbox"
                                         data-group-id="${groupId}"
                                         data-lesson-id="${lesson.id}"
@@ -173,7 +173,7 @@ function renderSubjectsForEachGroup(groupStudent)
                                 data-studentid="${studentId}">
                                 <div class="progress br-30">
                                     <div class="progress-bar bg-primary" role="progressbar"
-                                        aria-valuenow="${studentFinishedChaptersPercentage}" 
+                                        aria-valuenow="${studentFinishedChaptersPercentage}"
                                         style="width:${studentFinishedChaptersPercentage}%"
                                         aria-valuemin="0" aria-valuemax="100">
                                         <div class="progress-title">
@@ -184,8 +184,8 @@ function renderSubjectsForEachGroup(groupStudent)
                                     </div>
                                 </div>
                             </a>
-                            
-                        
+
+
 
                             <div class="row">
                                 <div class="p-3 text-center col" style="font-size:1.5rem;">
@@ -221,7 +221,7 @@ function renderSubjectsForEachGroup(groupStudent)
                                                 </span>
                                             </span>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="mb-3">
                                         <select class="form-control newLessonRate ${nextLesson ? '' : 'd-none'}">
@@ -240,7 +240,7 @@ function renderSubjectsForEachGroup(groupStudent)
                                         </button>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -258,7 +258,7 @@ function renderSubjectsForEachGroup(groupStudent)
                         <div class="studentLessonContainerReview">
 
                             <button class="btn btn-dark goToLessonButton">
-                                Go To Lesson 
+                                Go To Lesson
                                 <i class="fa-solid fa-arrow-right-arrow-left"></i>
                             </button>
 
@@ -283,8 +283,8 @@ function renderSubjectsForEachGroup(groupStudent)
                                 </span>
 
                                 <label class="switch s-icons s-outline  s-outline-success">
-                                    <input 
-                                        type="checkbox" 
+                                    <input
+                                        type="checkbox"
                                         class="lesson_finished_checkbox_review"
                                         data-group-id="${groupId}"
                                         data-lesson-id="${lesson.id}"
@@ -308,7 +308,7 @@ function renderSubjectsForEachGroup(groupStudent)
                                 data-studentid="${studentId}">
                                 <div class="progress br-30">
                                     <div class="progress-bar bg-primary" role="progressbar"
-                                        aria-valuenow="${studentFinishedChaptersPercentageReview}" 
+                                        aria-valuenow="${studentFinishedChaptersPercentageReview}"
                                         style="width:${studentFinishedChaptersPercentageReview}%"
                                         aria-valuemin="0" aria-valuemax="100">
                                         <div class="progress-title">
@@ -319,8 +319,8 @@ function renderSubjectsForEachGroup(groupStudent)
                                     </div>
                                 </div>
                             </a>
-                            
-                        
+
+
 
                             <div class="row">
                                 <div class="p-3 text-center col" style="font-size:1.5rem;">
@@ -356,7 +356,7 @@ function renderSubjectsForEachGroup(groupStudent)
                                                 </span>
                                             </span>
                                         </div>
-                                        
+
                                     </div>
                                     <div class="mb-3">
                                         <select class="form-control newLessonRateReview ${nextLessonReview ? '' : 'd-none'}">
@@ -375,7 +375,7 @@ function renderSubjectsForEachGroup(groupStudent)
                                         </button>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -383,21 +383,21 @@ function renderSubjectsForEachGroup(groupStudent)
                     </div>
 
 
-                   
+
 
 
 
                 </div>
-                
+
             `
 
-            
+
         });
 
         subjectsContainer.html('')
 
         subjectsContainer.html(`
-            
+
             <div class="col-12">
                 <button class="btn btn-info mb-4" id="backToSubjects${groupStudent.id}">
                     <i class="fa-solid fa-backward"></i>
@@ -429,7 +429,7 @@ function renderSubjectsForEachGroup(groupStudent)
         $('.nextLessonToPageReview').on('click',function(){
             openPageFromTheBook(this, subject)
         })
-        
+
         // $('.nextReviewLessonFromPage').on('click',function(){
         //     openPageFromTheBook(this, subject)
         // })
@@ -453,7 +453,7 @@ function renderSubjectsForEachGroup(groupStudent)
         })
 
         studentLessonFinishedAjax()
-       
+
 
         $(`#backToSubjects${groupStudent.id}`).on('click',function(){
 
@@ -491,10 +491,10 @@ function studentLessonFinishedAjax()
                     let mainParent = $(lesson_finished_checkbox).parent().parent().parent()
 
                     changePercentageBar(mainParent, 100)
-                    
+
                     mainParent.find('.studentFinishedChaptersCountElement').html(chapters_count)
                     mainParent.find('.studentLessonLastPageFinishedElement').html(last_page_finished)
-                   
+
                     mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',last_page_finished)
 
                     Swal.fire(
@@ -553,6 +553,7 @@ function studentLessonFinishedAjax()
         if (lesson_finished_checkbox.checked == true) {
             $.ajax({
                 url: '/admin/student_lesson_review/ajaxStudentLessonFinishedReview',
+                type: 'POST',
                 data: {
                     group_id: group_id,
                     lesson_id: lesson_id,
@@ -565,10 +566,10 @@ function studentLessonFinishedAjax()
                     let mainParent = $(lesson_finished_checkbox).parent().parent().parent()
 
                     changePercentageBar(mainParent, 100)
-                    
+
                     mainParent.find('.studentFinishedChaptersCountElement').html(chapters_count)
                     mainParent.find('.studentLessonLastPageFinishedElement').html(last_page_finished)
-                   
+
                     mainParent.find('.openStudentLastPageFinishedElementReview').data('last-page-finished',last_page_finished)
 
                     Swal.fire(
@@ -589,6 +590,7 @@ function studentLessonFinishedAjax()
         } else {
             $.ajax({
                 url: '/admin/student_lesson_review/ajaxStudentLessonFinishedReview',
+                type: 'POST',
                 data: {
                     group_id: group_id,
                     lesson_id: lesson_id,
@@ -616,11 +618,11 @@ function studentLessonFinishedAjax()
     })
 
 
-    
+
     addNewLessonHandler()
 
 
-    
+
 
     $('.finishNewLessonButtonReview').on('click',function(){
         let syllabi_review_id = $(this).data('syllabi-review-id')
@@ -782,8 +784,8 @@ function addNewLessonHandler()
         let to_chapter = $('#newLessonForm #to_chapter').val()
         let from_page = $('#newLessonForm #from_page').val()
         let to_page = $('#newLessonForm #to_page').val()
-        
-        
+
+
         let url = $(this).data('url')
 
         $.ajax({
@@ -863,8 +865,8 @@ function addNewLessonHandler()
         let to_chapter = $('#newLessonFromReview #to_chapter').val()
         let from_page = $('#newLessonFromReview #from_page').val()
         let to_page = $('#newLessonFromReview #to_page').val()
-        
-        
+
+
         let url = $(this).data('url')
 
         $.ajax({
@@ -999,15 +1001,15 @@ function handleShowingOfTheBook(pageCount = 1, subject){
     `)
     $('#zoom-view-port').html(`
         <div id="show-lesson-con">
-        
+
         </div>
     `)
 
     const fullPage = document.querySelector('#fullpage');
-    
+
     $('#show-lesson-con').append(`
         <div>
-            <img 
+            <img
                 src="/files/subjects/${subject.name}/1.jpg"
                 alt=""
                 class="w-100 full--screen"
@@ -1035,7 +1037,7 @@ function handleShowingOfTheBook(pageCount = 1, subject){
         fullPage.style.display = 'block';
     })
 
-    book.bind('start', 
+    book.bind('start',
         function (event, pageObject, corner)
         {
             if (corner == 'tl' || corner == 'tr' || corner == 'bl' || corner == 'br')
@@ -1055,7 +1057,7 @@ function handleShowingOfTheBook(pageCount = 1, subject){
         {
             addPage(book, subject.name, pageCount)
         }
-        
+
         pageCount += 1
         if(subject.pagesCount >= pageCount)
         {
@@ -1076,7 +1078,7 @@ function handleShowingOfTheBook(pageCount = 1, subject){
 function addPage(book, subjectName, pageCount){
     book.turn('addPage',`
         <div>
-            <img 
+            <img
                 src="/files/subjects/${subjectName}/${pageCount}.jpg"
                 alt=""
                 class="w-100 full--screen"
