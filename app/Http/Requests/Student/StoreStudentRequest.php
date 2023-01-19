@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Student;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreStudentRequest extends FormRequest
 {
@@ -17,6 +18,8 @@ class StoreStudentRequest extends FormRequest
     {
         return [
             "name" => ["required", "string" ,'alpha'],
+            'email' => ['required', Rule::unique('students', 'email')->ignore($this->email)],
+            'password' => 'required|confirmed',
             "birthday" => ["nullable", "date"],
             "phone" => ["required", "string"],
             "qualification" => ["nullable", "string"],

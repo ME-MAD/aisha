@@ -4,6 +4,7 @@ namespace App\Services\Student;
 
 use App\Http\Traits\ImageTrait;
 use App\Models\Student;
+use Illuminate\Support\Facades\Hash;
 
 class StudentService
 {
@@ -23,6 +24,8 @@ class StudentService
 
         Student::create([
             'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
             'birthday' => $request->birthday,
             'phone' => $request->phone,
             'qualification' => $request->qualification,
@@ -46,6 +49,8 @@ class StudentService
         }
         $student->update([
             'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password ? Hash::make($request->password) : $student->password,
             'birthday' => $request->birthday,
             'phone' => $request->phone,
             'qualification' => $request->qualification,

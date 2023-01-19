@@ -96,6 +96,13 @@ class StudentDataTable extends DataTable
 
             ['name' => 'avatar', 'data' => 'avatar', 'title' => ' الصور', "className" => 'search--col'],
 
+            [
+                'name' => 'email',
+                'data' => 'email',
+                'title' => 'Email',
+                "className" => 'search--col'
+            ],
+
             ['name' => 'birthday', 'data' => 'birthday', 'title' => ' تاريخ الميلاد', "className" => 'search--col'],
 
             ['name' => 'phone', 'data' => 'phone', 'title' => ' الهاتف', "className" => 'search--col'],

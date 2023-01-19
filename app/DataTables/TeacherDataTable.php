@@ -133,7 +133,13 @@ class TeacherDataTable extends DataTable
                 'title' => __('teacher.avatar'),
                 "className" => 'search--col'
             ],
-
+            
+            [
+                'name' => 'email',
+                'data' => 'email',
+                'title' => 'Email',
+                "className" => 'search--col'
+            ],
 
             [
                 'name' => 'birthday',

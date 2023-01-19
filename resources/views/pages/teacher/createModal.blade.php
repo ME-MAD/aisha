@@ -11,6 +11,12 @@
 
                     <x-text name="name" label="{{ __('teacher.name') }}" :value="old('name')" />
 
+                    <x-text name="email" label="Email" :value="old('email')" />
+
+                    <x-text name="password" label="Password" :value="old('password')" />
+
+                    <x-text name="password_confirmation" label="Confirm Password" />
+                    
                     <x-date name="birthday" label="{{ __('teacher.birthday') }}" :value="old('birthday')" />
 
                     <x-text name="phone" label="{{ __('teacher.phone') }}" :value="old('phone')" />

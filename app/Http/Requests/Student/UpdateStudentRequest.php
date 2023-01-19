@@ -17,6 +17,8 @@ class UpdateStudentRequest extends FormRequest
     {
         return [
             "name" => ["required", "string",'alpha', Rule::unique('students', 'name')->ignore($this->name)],
+            'email' => ['required', Rule::unique('students', 'email')->ignore($this->student->id)],
+            'password' => 'nullable|confirmed',
             "birthday" => ["nullable", "date"],
             "phone" => ["nullable", "string"],
             "qualification" => ["nullable", "string"],
