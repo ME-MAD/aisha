@@ -18,7 +18,7 @@ class StoreStudentRequest extends FormRequest
     {
         return [
             "name" => ["required", "string" ,'alpha'],
-            'email' => ['required', Rule::unique('students', 'email')->ignore($this->email)],
+            'email' => ['required', Rule::unique('students', 'email')],
             'password' => 'required|confirmed',
             "birthday" => ["nullable", "date"],
             "phone" => ["required", "string"],
