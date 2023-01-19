@@ -18,7 +18,7 @@ class StoreTeacherRequest extends FormRequest
     {
         return [
             'name' => 'required|alpha|max:255',
-            'email' => ['required', Rule::unique('teachers', 'email')->ignore($this->email)],
+            'email' => ['required', Rule::unique('teachers', 'email')],
             'password' => 'required|confirmed',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'birthday' => 'nullable',
