@@ -11,6 +11,12 @@
 
                     <x-text name="name" label="الإسم" id="name" />
 
+                    <x-text name="email" label="Email" :value="old('email')" id="email" />
+
+                    <x-text name="password" label="Password" :value="old('password')" />
+
+                    <x-text name="password_confirmation" label="Confirm Password" />
+
                     <x-date name="birthday" label="تاريخ الميلاد" id="birthday" />
 
                     <x-text name="phone" label="الهاتف" id="phone" />

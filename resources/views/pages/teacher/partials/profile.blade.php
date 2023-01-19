@@ -35,6 +35,10 @@
                         <i class="fa-solid fa-paperclip text-dark  mr-2 "></i>
                         {{ $teacher->qualification }}
                     </li>
+                    <li class=" mb-2 d-flex justify-content-start align-items-center">
+                        <i class="fa-solid fa-paperclip text-dark  mr-2 "></i>
+                        {{ $teacher->email }}
+                    </li>
 
                 </ul>
             </div>

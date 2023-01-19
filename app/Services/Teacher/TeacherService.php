@@ -4,6 +4,7 @@ namespace App\Services\Teacher;
 
 use App\Http\Traits\ImageTrait;
 use App\Models\Teacher;
+use Illuminate\Support\Facades\Hash;
 
 class TeacherService
 {
@@ -53,9 +54,10 @@ class TeacherService
     {
         $fileName = $this->uploadImage(imageObject: $request->file('avatar'), path: Teacher::AVATARS_PATH);
 
-
         return Teacher::create([
             'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'birthday' => $request->birthday,
             'qualification' => $request->qualification,
@@ -75,9 +77,11 @@ class TeacherService
                 path: Teacher::AVATARS_PATH
             );
         }
-
+        
         return $teacher->update([
             'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password ? Hash::make($request->password) : $teacher->password,
             'phone' => $request->phone,
             'birthday' => $request->birthday,
             'qualification' => $request->qualification,

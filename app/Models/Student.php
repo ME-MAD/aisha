@@ -10,7 +10,8 @@ class Student extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'email', 'birthday', 'phone', 'qualification', 'avatar', 'password'];
+    protected $fillable = ['name','email', 'password', 'birthday', 'phone', 'qualification', 'avatar'];
+
 
     const AVATARS_PATH = 'images/student/avatars/';
 

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Teacher;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreTeacherRequest extends FormRequest
 {
@@ -17,6 +18,8 @@ class StoreTeacherRequest extends FormRequest
     {
         return [
             'name' => 'required|alpha|max:255',
+            'email' => ['required', Rule::unique('teachers', 'email')->ignore($this->email)],
+            'password' => 'required|confirmed',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'birthday' => 'nullable',
             'phone' => 'required',

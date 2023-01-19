@@ -10,6 +10,12 @@
                     @method('PUT')
 
                     <x-text name="name" label="{{ __('teacher.name') }}" id="name" />
+                    
+                    <x-text name="email" label="Email" :value="old('email')" id="email" />
+
+                    <x-text name="password" label="Password" :value="old('password')" />
+
+                    <x-text name="password_confirmation" label="Confirm Password" />
 
                     <x-date name="birthday" label="{{ __('teacher.birthday') }}" id="birthday" />
 

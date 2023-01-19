@@ -48,6 +48,7 @@ function initEditeTeacherModal() {
         let href = $(this).data('href')
 
         $('#editTeacherForm #name').val(teacher.name)
+        $('#editTeacherForm #email').val(teacher.email)
         $('#editTeacherForm #birthday').val(teacher.birthday)
         $('#editTeacherForm #phone').val(teacher.phone)
         $('#editTeacherForm #qualification').val(teacher.qualification)
@@ -87,6 +88,7 @@ function initEditeStudentModal() {
         let href = $(this).data('href')
 
         $('#editStudentForm #name').val(student.name)
+        $('#editStudentForm #email').val(student.email)
         $('#editStudentForm #birthday').val(student.birthday)
         $('#editStudentForm #phone').val(student.phone)
         $('#editStudentForm #qualification').val(student.qualification)
