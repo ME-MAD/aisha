@@ -45,7 +45,14 @@ class StudentLessonController extends Controller
      */
     public function store(StoreStudentLessonRequest $request)
     {
-        $this->studentLessonService->store($request);
+        if ($this->studentLessonService->isChapterFinished($request)) 
+        {
+           $this->studentLessonService->finishStudentLesson($request);
+        } 
+        else 
+        {
+            $this->studentLessonService->store($request);
+        }
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
@@ -53,7 +60,14 @@ class StudentLessonController extends Controller
 
     public function ajaxStudentLessonFinished(Request $request)
     {
-        $this->studentLessonService->ajaxStudentLessonFinished($request);
+        if ($request->finished == "true") 
+        {
+            $this->studentLessonService->finishStudentLesson($request);
+        } 
+        else 
+        {
+            $this->studentLessonService->unFinishStudentLesson($request);
+        }
     }
 
 

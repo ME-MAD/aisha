@@ -54,9 +54,12 @@ class StudentLessonReviewRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->finished == true) {
+        if ($this->finished == "true") 
+        {
             return $this->finished();
-        } else {
+        } 
+        else 
+        {
             return $this->notFinished();
         }
     }
