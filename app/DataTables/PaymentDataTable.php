@@ -26,13 +26,11 @@ class PaymentDataTable extends DataTable
             ->editColumn('group.from', function ($q) {
                 return $q->group->from ? $q->group->from . " - " . $q->group->to : '';
             })
-            ->addColumn('edit', function ($query) {
-                return view('pages.group.datatable.edit', compact('query'));
-            })
+
             ->editColumn('show', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' ><i class='fa-solid fa-eye'></i></a>";
             })
-            ->rawColumns(['edit', 'delete', 'id', 'show'])
+            ->rawColumns(['delete', 'id', 'show'])
             ->setRowId('id');
     }
 
@@ -161,8 +159,6 @@ class PaymentDataTable extends DataTable
             ],
 
             ['name' => 'show', 'data' => 'show', 'title' => 'show', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
-
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
             ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
         ];
