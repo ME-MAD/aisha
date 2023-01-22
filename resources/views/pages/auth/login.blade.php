@@ -67,10 +67,21 @@
                 </li>
                 <div class="form-container">
                     <div class="form-content">
-                        <h1 class="">{{ __('globalWorld.Log In to') }}<a href="index.html"><span
-                                    class="brand-name">{{ __('globalWorld.AISHA') }}</span></a></h1>
+                        <h1 class="">{{ __('globalWorld.Log In to') }}<a href="index.html">
+
+                            @if($type == 'student')
+                            <span class="brand-name">طالب</span>
+                            @elseif($type == 'teacher')
+                            <span class="brand-name">معلم</span>
+                            @else
+                            <span class="brand-name">ادمن</span>
+                            @endif
+
+                        </a>
+                    </h1>
+                                    
                         <p class="signup-link"><a href="auth_register.html"></a></p>
-                        <form class="text-left" method="POST" action="{{ route('admin.login') }}">
+                        <form class="text-left" method="POST" action="{{ route('login') }}">
                             <div class="form">
                                 @csrf
                                 <div id="email-field" class="field-wrapper input">
@@ -83,6 +94,7 @@
                                     </svg>
                                     <input id="email" name="email" type="text" value=""
                                         placeholder="{{ __('globalWorld.Email') }}">
+                                    <input type="hidden" value="{{$type}}" name="type">
                                 </div>
                                 <div id="password-field" class="field-wrapper input mb-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

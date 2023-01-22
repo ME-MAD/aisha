@@ -19,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
-
+    
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      *
@@ -36,6 +36,12 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware(['web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'])->prefix(LaravelLocalization::setLocale())
                 ->group(base_path('routes/web.php'));
+
+                Route::middleware(['web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'])->prefix(LaravelLocalization::setLocale())
+                ->group(base_path('routes/student.php'));
+
+                Route::middleware(['web', 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath'])->prefix(LaravelLocalization::setLocale())
+                ->group(base_path('routes/teacher.php'));
         });
     }
 
