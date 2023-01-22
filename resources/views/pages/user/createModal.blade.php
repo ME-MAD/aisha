@@ -3,21 +3,27 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="creatUserModalTitle">إضافة درس</h5>
+                <h5 class="modal-title text-capitalize font-weight-bold text-muted" id="creatUserModalTitle">{{trans('user.add user')}}</h5>
             </div>
             <div class="modal-body">
                 <form action="{{ route('admin.user.store') }}" method="post">
                     @csrf
 
-                    <x-text name="name" label="Name" :value="old('name')" />
+                    <x-text name="name" label="{{trans('user.name')}}" :value="old('name')"/>
 
-                    <x-text name="email" label="Email" :value="old('email')" />
+                    <x-text name="email" label="{{trans('user.email')}}" :value="old('email')" />
 
-                    <div class="col-xl-12 col-md-6">
-                        <select class="form-control basic" style="width: 100%;" name="role" id="role">
-                            <option value=""> {{ __('group.Choose role') }}</option>
+                    <div class="form-group">
+                        <label for="role" class="text-capitalize font-weight-bold text-muted">{{trans('user.role')}}</label>
+                        <select class="form-control basic"
+                                name="role"
+                                id="role">
+                            <option >{{trans('user.roles')}}</option>
+
                             @foreach ($roles as $role)
-                                <option value="{{$role->name}}">{{$role->name}}</option>
+
+                                <option  class="active" value="{{$role->name}}">{{$role->name}}</option>
+
                             @endforeach
                         </select>
                         @error('role')
@@ -25,13 +31,13 @@
                         @enderror
                     </div>
 
-                    <x-text name="password" label="Password" :value="old('password')" />
+                    <x-text name="password" label="{{trans('user.password')}}" :value="old('password')" />
 
-                    <x-text name="password_confirmation" label="Confirm Password" />
+                    <x-text name="password_confirmation" label="{{trans('user.confirm password')}}" />
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Discard</button>
+                        <button type="submit" class="btn btn-primary text-capitalize font-weight-bold ">{{trans('user.save')}}</button>
+                        <button class="btn btn-light-default  text-capitalize font-weight-bold " data-dismiss="modal"><i class="flaticon-cancel-12"></i>{{trans('user.discard')}}</button>
                     </div>
 
                 </form>

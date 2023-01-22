@@ -22,19 +22,14 @@ class UserDataTable extends DataTable
             ->setRowId('id');
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param Lesson $model
-     * @return QueryBuilder
-     */
+
     public function query(User $model): QueryBuilder
     {
         return $model::select([
-            'id',
-            'name',
-            'email',
-        ]);
+            'users.id',
+            'users.name',
+            'users.email',
+        ])->with('role:id,name');
     }
 
     /**
@@ -117,6 +112,12 @@ class UserDataTable extends DataTable
                 'name' => 'email',
                 'data' => 'email',
                 'title' => 'Email',
+                "className" => 'search--col'
+            ],
+            [
+                'name' => 'role.name',
+                'data' => 'role.name',
+                'title' => 'role',
                 "className" => 'search--col'
             ],
 

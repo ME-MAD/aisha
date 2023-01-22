@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index(UserDataTable $userDataTable)
     {
-        $roles = Role::select('name')->get();
+        $roles = Role::select(['id','name'])->get();
         return $userDataTable->render('pages.user.index',[
             'roles' => $roles
         ]);
@@ -41,12 +41,19 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => $request->password ? Hash::make($request->password) : $user->password
         ]);
+
+        $user->detachRole($user->role);
+
+        $user->attachRole($request->role);
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
     public function delete(User $user)
     {
+        $user->detachRole($user->role);
+
         $user->delete();
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
