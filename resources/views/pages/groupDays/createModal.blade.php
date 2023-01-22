@@ -38,38 +38,37 @@
                         <input type="hidden" name="group_id" id="group_id" value="{{ $group->id }}"
                                data-groupid="{{ $group->id }}">
                     @endif
-
                     <div class="form-group row mb-4">
                         <label for="day" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
                             {{ __('group.day') }}</label>
                         <div class="col-xl-12 col-md-6  ">
                             <select class="form-control basic" style="width: 100%;" name="day[]" id="day">
 
-                                <option value="Monday"{{ old('day') == 'Monday' ? 'selected' : '' }}>
+                                <option value="Monday">
                                     {{ __('group.Monday') }}
                                 </option>
 
-                                <option value="Tuesday" {{ old('day') == 'Tuesday' ? 'selected' : '' }}>
+                                <option value="Tuesday">
                                     {{ __('group.Tuesday') }}
                                 </option>
 
-                                <option value="Wednesday" {{ old('day') == 'Wednesday' ? 'selected' : '' }}>
+                                <option value="Wednesday">
                                     {{ __('group.Wednesday') }}
                                 </option>
 
-                                <option value="Thursday" {{ old('day') == 'Thursday' ? 'selected' : '' }}>
+                                <option value="Thursday">
                                     {{ __('group.Thursday') }}
                                 </option>
 
-                                <option value="Friday" {{ old('day') == 'Friday' ? 'selected' : '' }}>
+                                <option value="Friday">
                                     {{ __('group.Friday') }}
                                 </option>
 
-                                <option value="Saturday" {{ old('day') == 'Saturday' ? 'selected' : '' }}>
+                                <option value="Saturday">
                                     {{ __('group.Saturday') }}
                                 </option>
 
-                                <option value="Sunday" {{ old('day') == 'Sunday' ? 'selected' : '' }}>
+                                <option value="Sunday">
                                     {{ __('group.Sunday') }}
                                 </option>
 

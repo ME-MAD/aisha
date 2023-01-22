@@ -14,10 +14,10 @@ class GroupDayService
 
     public function createGroupDay(object $request)
     {
-        $daysData = json_encode( $request->day);
-        return GroupDay::create([
+        return GroupDay::updateOrCreate([
             'group_id' => $request->group_id,
-            'day' => $daysData,
+        ],[
+            'day' => $request->day,
         ]);
     }
 

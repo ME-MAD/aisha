@@ -12,16 +12,13 @@ class GroupDay extends Model
     use HasFactory;
     protected $fillable = ['group_id', 'day'];
 
+    protected $casts = [
+        'day' => "object"
+    ];
+
 
     public function group()
     {
         return $this->belongsTo(Group::class,'group_id');
-    }
-
-    protected function day(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => json_decode($value),
-        );
     }
 }
