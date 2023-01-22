@@ -14,9 +14,9 @@ class GroupDayService
 
     public function createGroupDay(object $request)
     {
-
-        return GroupDay::create([
+        return GroupDay::updateOrCreate([
             'group_id' => $request->group_id,
+        ],[
             'day' => $request->day,
         ]);
     }

@@ -21,7 +21,11 @@ class GroupDayDataTable extends DataTable
             ->editColumn('group.to', function ($q) {
                 return $q->group->to ?? "";
             })
-            ->rawColumns(['delete'])
+            ->editColumn('day' ,function ($query)
+            {
+                return view('pages.groupDays.datatable.day', compact('query'));
+            })
+            ->rawColumns(['delete','day'])
             ->setRowId('id');
     }
 
@@ -36,6 +40,7 @@ class GroupDayDataTable extends DataTable
             'group' => function ($q) {
                 return $q->select([
                     'groups.id',
+                    'groups.name',
                     'groups.from',
                     'groups.to'
                 ]);
@@ -98,6 +103,8 @@ class GroupDayDataTable extends DataTable
     {
         return [
             ['name' => 'group_days.id', 'data' => 'id', 'title' => __('group.id'), "className" => 'search--col exact'],
+
+            ['name' => 'group_days.name', 'data' => 'group.name', 'title' => __('group.name'), "className" => 'search--col exact'],
 
             ['name' => 'group.from', 'data' => 'group.from', 'title' => __('group.from'), "className" => 'search--col'],
 

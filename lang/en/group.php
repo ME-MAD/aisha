@@ -66,7 +66,7 @@ return [
     'December' => 'December',
     'S.No' => 'Id',
     'Paid' => 'Paid',
-    '' => '',
+    'choose days' => 'choose days',
     '' => '',
     '' => '',
     '' => '',
