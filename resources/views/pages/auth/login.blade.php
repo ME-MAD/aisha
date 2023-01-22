@@ -67,8 +67,7 @@
                 </li>
                 <div class="form-container">
                     <div class="form-content">
-                        <h1 class="">{{ __('globalWorld.Log In to') }}<a href="index.html">
-
+                        <h1 class="">{{ __('globalWorld.Log In to') }}
                             @if($type == 'student')
                             <span class="brand-name">طالب</span>
                             @elseif($type == 'teacher')
@@ -76,9 +75,7 @@
                             @else
                             <span class="brand-name">ادمن</span>
                             @endif
-
-                        </a>
-                    </h1>
+                        </h1>
                                     
                         <p class="signup-link"><a href="auth_register.html"></a></p>
                         <form class="text-left" method="POST" action="{{ route('login') }}">
