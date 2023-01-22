@@ -32,14 +32,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/selectionloginPage', [AuthController::class, 'index'])->name('selectionloginPage');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'guest'], function () {
-    Route::get('loginPage', [AuthController::class, 'loginPage'])->name('loginPage');
-    Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::group(['namespace' => 'Auth'], function () {
+
+Route::get('/login/{type}',[AuthController::class, 'loginForm'])->name('login.show');
+
+Route::post('/login',[AuthController::class, 'login'])->name('login');
+
 });
 
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth'], function () {
 
     Route::get('/', function () {
         return app()->getLocale();
