@@ -22,10 +22,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'password' => Hash::make('123')
         ]);
-
-        $adminRole = Role::where('name' ,'admin')->first();
-
-        $admin->attachRole($adminRole);
+        
+        if( !$admin->hasRole('admin') )
+        {
+            $admin->attachRole('admin');
+        }
 
         GroupType::updateOrCreate([
             'name' => 'normal',

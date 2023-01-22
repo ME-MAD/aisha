@@ -26,9 +26,9 @@ class UserDataTable extends DataTable
     public function query(User $model): QueryBuilder
     {
         return $model::select([
-            'id',
-            'name',
-            'email',
+            'users.id',
+            'users.name',
+            'users.email',
         ])->with('role:id,name');
     }
 
@@ -115,7 +115,7 @@ class UserDataTable extends DataTable
                 "className" => 'search--col'
             ],
             [
-                'name' => 'role',
+                'name' => 'role.name',
                 'data' => 'role.name',
                 'title' => 'role',
                 "className" => 'search--col'
