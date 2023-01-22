@@ -39,8 +39,8 @@ class GroupDayController extends Controller
 
     public function store(StoreGroupDayRequest $request)
     {
-        $this->groupDayService->createGroupDay($request);
 
+        $this->groupDayService->createGroupDay($request);
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }

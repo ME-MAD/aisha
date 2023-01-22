@@ -30,7 +30,9 @@
               type="text/css"
               href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
     @endif
-
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endpush
 
 @section('breadcrumb')
@@ -86,7 +88,7 @@
                                     <div class="col-sm-12">
                                         {!! $dataTable->table(
                                             [
-                                                'class' => 'table',
+                                                'class' => 'table text-center',
                                             ],
                                             true,
                                         ) !!}
@@ -114,6 +116,33 @@
     {{--End Data_Table--}}
 
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
+
+    {{--Begin Select 2 --}}
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+
+    <script>
+        $('#group_id').select2({
+            theme: "basic",
+            dropdownParent: $('#creatGroupDayModal'),
+        });
+    </script>
+
+    <script>
+        $('#day').select2({
+            tags:true,
+            multiple:true,
+            placeholder: "{{trans('group.choose days')}}",
+            closeOnSelect:false,
+            scrollAfterSelect:true,
+            dropdownParent: $('#creatGroupDayModal'),
+            allowClear: true
+
+        });
+    </script>
+
+
+
+    {{--End Select 2 --}}
 
     <script>
         $('#group_id').on('change', function () {

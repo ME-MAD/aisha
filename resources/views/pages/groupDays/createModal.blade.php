@@ -16,18 +16,14 @@
                                 {{ __('group.Choose group') }}
                             </label>
                             <div class="col-xl-12 col-md-6  ">
-                                <select class="form-control basic chickgroup" style="width: 100%;" name="group_id"
+                                <select  class="form-control basic" style="width: 100%;" name="group_id"
                                         id="group_id" data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
                                     <option value=""> {{ __('group.Choose group') }}</option>
                                     @foreach ($groups as $group)
                                         @if (!$group->checkIfGroupExceededGroupDaysLimit())
-                                            <option value="{{ $group->id }}"
-                                                    {{ old('group_id') == $group->id ? 'selected' : '' }}>
-                                                {{ $group->ffrom }} :
-                                                {{ $group->fto }} -
-                                                {{ $group->groupType->days_num }} Namber Days :
-                                                Remainging
-                                                {{ $group->getRemainingGroupDaysCount() }}
+
+                                            <option value="{{ $group->id }}" {{ old('group_id') == $group->id ? 'selected' : '' }}>
+                                                       {{ $group->name }}
                                             </option>
                                         @endif
                                     @endforeach
@@ -47,7 +43,8 @@
                         <label for="day" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
                             {{ __('group.day') }}</label>
                         <div class="col-xl-12 col-md-6  ">
-                            <select class="form-control" style="width: 100%;" name="day" id="day">
+                            <select class="form-control basic" style="width: 100%;" name="day[]" id="day">
+
                                 <option value="Monday"{{ old('day') == 'Monday' ? 'selected' : '' }}>
                                     {{ __('group.Monday') }}
                                 </option>
