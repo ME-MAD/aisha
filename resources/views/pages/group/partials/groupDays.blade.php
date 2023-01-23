@@ -17,7 +17,7 @@
                             <thead>
                                 <tr role="row">
                                     <th class="text-center">{{ __('group.Group Days') }}</th>
-                                    <th class="text-center">{{ __('globalWorld.Delete') }}</th>
+                                    <th class="text-center">{{ __('global.Delete') }}</th>
                                 </tr>
                             </thead>
                             <tbody>

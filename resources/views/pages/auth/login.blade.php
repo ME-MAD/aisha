@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-        <title>{{ __('globalWorld.AISHA Admin - Login Page') }}</title>
+        <title>{{ __('global.AISHA Admin - Login Page') }}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('adminAssets/assets/img/favicon.ico') }}" />
         <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
         <link href="{{ asset('adminAssets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -22,7 +22,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-        <title>{{ __('globalWorld.AISHA Admin - Login Page') }}</title>
+        <title>{{ __('global.AISHA Admin - Login Page') }}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('adminRtl/assets/img/favicon.ico') }}" />
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
@@ -67,7 +67,7 @@
                 </li>
                 <div class="form-container">
                     <div class="form-content">
-                        <h1 class="">{{ __('globalWorld.Log In to') }}
+                        <h1 class="">{{ __('global.Log In to') }}
                             @if($type == 'student')
                             <span class="brand-name">طالب</span>
                             @elseif($type == 'teacher')
@@ -90,7 +90,7 @@
                                         <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path>
                                     </svg>
                                     <input id="email" name="email" type="text" value=""
-                                        placeholder="{{ __('globalWorld.Email') }}">
+                                        placeholder="{{ __('global.Email') }}">
                                     <input type="hidden" value="{{$type}}" name="type">
                                 </div>
                                 <div id="password-field" class="field-wrapper input mb-2">
@@ -102,11 +102,11 @@
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                     </svg>
                                     <input id="password" name="password" type="password" class="form-control"
-                                        placeholder="{{ __('globalWorld.Password') }}">
+                                        placeholder="{{ __('global.Password') }}">
                                 </div>
                                 <div class="d-sm-flex justify-content-between">
                                     <div class="field-wrapper toggle-pass">
-                                        <p class="d-inline-block">{{ __('globalWorld.Show Password') }}</p>
+                                        <p class="d-inline-block">{{ __('global.Show Password') }}</p>
                                         <label class="switch s-primary">
                                             <input type="checkbox" id="toggle-password" class="d-none">
                                             <span class="slider round"></span>
@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="field-wrapper">
                                         <button type="submit" class="btn btn-primary"
-                                            value="">{{ __('globalWorld.Log In') }}</button>
+                                            value="">{{ __('global.Log In') }}</button>
                                     </div>
                                 </div>
                                 <div class="field-wrapper text-center keep-logged-in">

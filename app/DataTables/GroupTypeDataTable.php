@@ -134,13 +134,13 @@ class GroupTypeDataTable extends DataTable
                 "className" => 'search--col'
             ],
 
-            ['name' => 'edit', 'data' => 'edit', 'title' =>  __('globalWorld.Edit'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'edit', 'data' => 'edit', 'title' =>  __('global.Edit'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
 
             [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' =>  __('globalWorld.Delete'),
+                'title' =>  __('global.Delete'),
                 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'
             ],
         ];

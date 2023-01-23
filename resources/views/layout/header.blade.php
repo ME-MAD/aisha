@@ -14,7 +14,7 @@
         <div class="nav-logo align-self-center">
             <a class="navbar-brand" href="{{ route('admin.home') }}"><img alt="logo"
                     src="{{ asset('images/home.jpg') }}"> <span
-                    class="navbar-brand-name">{{ __('globalWorld.HOME') }}</span></a>
+                    class="navbar-brand-name">{{ __('global.HOME') }}</span></a>
         </div>
 
         <ul class="navbar-item flex-row mr-auto">
@@ -245,7 +245,7 @@
                         <img src="{{ asset('adminAssets/assets/img/90x90.jpg') }}" class="img-fluid"
                             alt="admin-profile">
                         <div class="media-body align-self-center">
-                            <h6><span>{{ __('globalWorld.Click') }} : </span>AISHA</h6>
+                            <h6><span>{{ __('global.Click') }} : </span>AISHA</h6>
                         </div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -295,7 +295,7 @@
                                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                     <polyline points="16 17 21 12 16 7"></polyline>
                                     <line x1="21" y1="12" x2="9" y2="12"></line>
-                                </svg>{{ __('globalWorld.Sign Out') }}</a>
+                                </svg>{{ __('global.Sign Out') }}</a>
                         </div>
                     </div>
                 </div>

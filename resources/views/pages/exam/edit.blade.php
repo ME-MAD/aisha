@@ -159,7 +159,7 @@
                             <div class="form-group row">
                                 <div class="col-12">
                                     <button type="submit"
-                                            class="btn btn-success font-weight-bold text-capitalize">{{ __('globalWorld.Update') }}</button>
+                                            class="btn btn-success font-weight-bold text-capitalize">{{ __('global.Update') }}</button>
                                 </div>
                             </div>
                         </form>

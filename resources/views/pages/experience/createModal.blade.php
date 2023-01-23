@@ -44,11 +44,11 @@
                     <div class="modal-footer">
                         <button type="submit"
                                 class="btn btn-primary font-weight-bold text-capitalize">
-                            {{ __('globalWorld.Save') }}
+                            {{ __('global.Save') }}
                         </button>
 
                         <button class="btn btn-light-default font-weight-bold text-capitalize" data-dismiss="modal">
-                            <i class="flaticon-cancel-12"></i>{{ __('globalWorld.Discard') }}
+                            <i class="flaticon-cancel-12"></i>{{ __('global.Discard') }}
                         </button>
                     </div>
 
