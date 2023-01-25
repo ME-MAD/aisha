@@ -113,7 +113,7 @@ class GroupDayDataTable extends DataTable
             ['name' => 'day', 'data' => 'day', 'title' => __('group.day'), "className" => 'search--col'],
 
 
-            ['name' => 'delete', 'data' => 'delete', 'title' => __('globalWorld.Delete'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            ['name' => 'delete', 'data' => 'delete', 'title' => __('global.Delete'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
         ];
     }
 

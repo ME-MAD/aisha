@@ -159,7 +159,7 @@
                                 <div class="col-12">
                                     <button type="submit"
                                             class="btn btn-primary font-weight-bold text-capitalize">
-                                        {{ __('globalWorld.Save') }}
+                                        {{ __('global.Save') }}
                                     </button>
                                     .
                                 </div>

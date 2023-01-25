@@ -32,7 +32,7 @@
                                     <th class="sorting" tabindex="0" aria-controls="multi-column-ordering"
                                         rowspan="1" colspan="1"
                                         aria-label="Age: activate to sort column ascending" style="width: 27px;">
-                                        {{ __('globalWorld.Delete') }}
+                                        {{ __('global.Delete') }}
                                     </th>
 
                                 </tr>
@@ -72,7 +72,7 @@
                                     <th rowspan="1" colspan="1"> {{ __('group.name') }}</th>
                                     <th rowspan="1" colspan="1">{{ __('group.Birthday') }}</th>
                                     <th rowspan="1" colspan="1"> {{ __('group.Phone') }}</th>
-                                    <th rowspan="1" colspan="1"> {{ __('globalWorld.Delete') }}</th>
+                                    <th rowspan="1" colspan="1"> {{ __('global.Delete') }}</th>
                                 </tr>
                             </tfoot>
                         </table>

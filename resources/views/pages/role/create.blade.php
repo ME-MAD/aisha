@@ -34,7 +34,7 @@
                             <a href="{{route('admin.role.index')}}"
                                class="d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                                <span class="font-weight-bold mt-1">{{__('globalWorld.home')}}</span>
+                                <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
                             </a>
                         </li>
                         <li class="active">
@@ -138,11 +138,11 @@
                         <div class="card-footer">
                             <button type="button"
                                     class="btn btn-danger font-weight-bold text-white"
-                                    data-dismiss="modal">{{__('globalWorld.Close')}}
+                                    data-dismiss="modal">{{__('global.Close')}}
                             </button>
 
                             <button type="submit"
-                                    class="btn btn-primary font-weight-bold text-white">{{__('globalWorld.create')}}
+                                    class="btn btn-primary font-weight-bold text-white">{{__('global.create')}}
                             </button>
                         </div>
                     </form>

@@ -28,7 +28,7 @@
                             <a href="{{route('admin.role.index')}}"
                                class="d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                                <span class="font-weight-bold mt-1">{{__('globalWorld.home')}}</span>
+                                <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
                             </a>
                         </li>
                         <li class="active">
@@ -36,7 +36,7 @@
                                class="d-flex justify-content-center align-items-center">
 
                                 <i class="fa-solid fa-pen-to-square fa-2x mx-2"></i>
-                                <span class="font-weight-bold mx-1">{{__('globalWorld.update')}}</span>
+                                <span class="font-weight-bold mx-1">{{__('global.update')}}</span>
                             </a>
                         </li>
                     </ul>
@@ -106,11 +106,11 @@
                                     <div class="modal-footer">
                                         <button type="button"
                                                 class="btn btn-danger font-weight-bold text-white"
-                                                data-dismiss="modal">{{__('globalWorld.Close')}}
+                                                data-dismiss="modal">{{__('global.Close')}}
                                         </button>
 
                                         <button type="submit"
-                                                class="btn btn-success font-weight-bold text-white">{{__('globalWorld.update')}}
+                                                class="btn btn-success font-weight-bold text-white">{{__('global.update')}}
                                         </button>
 
                                     </div>

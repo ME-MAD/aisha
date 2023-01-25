@@ -146,7 +146,7 @@ class GroupStudentDataTable extends DataTable
             [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => __('globalWorld.Delete'),
+                'title' => __('global.Delete'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
