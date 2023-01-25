@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\DataTables\GroupDayDataTable;
 use App\Http\Requests\GroupDay\StoreGroupDayRequest;
-use App\Http\Requests\GroupDay\UpdateGroupDayRequest;
 use App\Models\GroupDay;
 use App\Services\Group\GroupService;
 use App\Services\GroupDay\GroupDayService;
@@ -42,14 +41,6 @@ class GroupDayController extends Controller
         $this->groupDayService->createGroupDay($request);
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
-    }
-
-    public function update(UpdateGroupDayRequest $request, GroupDay $groupDay)
-    {
-        $this->groupDayService->updateGroupDay($groupDay, $request);
-
-        Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route('admin.group_day.index'));
     }
 
     public function delete(GroupDay $groupDay)
