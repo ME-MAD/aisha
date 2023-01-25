@@ -17,10 +17,15 @@ class CheckIfCountOfGroupDayIsAvailable implements Rule
 
     public function passes($attribute, $value): bool
     {
-        $group = Group::find(request('group_id'));
-        $this->maxDaysOfGroup = $group->groupType->days_num;
+        if(request('group_id'))
+        {
+            $group = Group::find(request('group_id'));
 
-        return $this->maxDaysOfGroup <= count($value);
+            $this->maxDaysOfGroup = $group->groupType->days_num;
+    
+            return  count($value) <= $this->maxDaysOfGroup;
+        }
+        return false;
     }
 
 
