@@ -16,16 +16,7 @@ class GroupDayService
     {
         return GroupDay::updateOrCreate([
             'group_id' => $request->group_id,
-        ],[
-            'day' => $request->day,
-        ]);
-    }
-
-    public function updateGroupDay(GroupDay $groupDay, object $request): bool
-    {
-
-        return $groupDay->update([
-            'group_id' => $request->group_id,
+        ], [
             'day' => $request->day,
         ]);
     }
