@@ -44,7 +44,7 @@
                         <div class="col-xl-12 col-md-6  ">
                             <select class="form-control basic" style="width: 100%;" name="day[]" id="day">
 
-                                <option value="Monday">
+                                {{-- <option value="Monday">
                                     {{ __('group.Monday') }}
                                 </option>
 
@@ -70,7 +70,7 @@
 
                                 <option value="Sunday">
                                     {{ __('group.Sunday') }}
-                                </option>
+                                </option> --}}
 
                             </select>
                             @error('day')

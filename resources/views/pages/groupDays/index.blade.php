@@ -125,26 +125,17 @@
             theme: "basic",
             dropdownParent: $('#creatGroupDayModal'),
         });
-    </script>
-
-    <script>
-        $('#day').select2({
+        
+        const selectDay = $('#day').select2({
             tags:true,
             multiple:true,
             placeholder: "{{trans('group.choose days')}}",
             closeOnSelect:false,
             scrollAfterSelect:true,
             dropdownParent: $('#creatGroupDayModal'),
-            allowClear: true
-
+            allowClear: true,
         });
-    </script>
 
-
-
-    {{--End Select 2 --}}
-
-    <script>
         $('#group_id').on('change', function () {
             let href = $(this).data('href');
             let group_id = $(this).val();
@@ -159,14 +150,6 @@
                 },
                 success: function (response) {
                     let groupDays = response.groupDays
-                    groupDays.forEach(element => {
-                        let groupDay = element.day
-                        $(`option[value=${groupDay}]`).attr('disabled', true).css({
-                            'color': 'red'
-                        })
-                    });
-
-
                 },
                 error: function () {
                 }
