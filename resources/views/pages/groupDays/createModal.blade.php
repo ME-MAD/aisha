@@ -16,14 +16,15 @@
                                 {{ __('group.Choose group') }}
                             </label>
                             <div class="col-xl-12 col-md-6  ">
-                                <select  class="form-control basic" style="width: 100%;" name="group_id"
+                                <select class="form-control basic" style="width: 100%;" name="group_id"
                                         id="group_id" data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
                                     <option value=""> {{ __('group.Choose group') }}</option>
                                     @foreach ($groups as $group)
                                         @if (!$group->checkIfGroupExceededGroupDaysLimit())
 
-                                            <option value="{{ $group->id }}" {{ old('group_id') == $group->id ? 'selected' : '' }}>
-                                                       {{ $group->name }}
+                                            <option
+                                                value="{{ $group->id }}" {{ old('group_id') == $group->id ? 'selected' : '' }}>
+                                                {{ $group->name }}
                                             </option>
                                         @endif
                                     @endforeach
@@ -42,35 +43,36 @@
                         <label for="day" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
                             {{ __('group.day') }}</label>
                         <div class="col-xl-12 col-md-6  ">
-                            <select class="form-control basic" style="width: 100%;" name="day[]" id="day">
+                            <select class="form-control js-example-data-ajax" style="width: 100%;" name="day[]"
+                                    id="day">
+                                
+                                {{--                                <option value="Monday">--}}
+                                {{--                                    {{ __('group.Monday') }}--}}
+                                {{--                                </option>--}}
 
-                                {{-- <option value="Monday">
-                                    {{ __('group.Monday') }}
-                                </option>
+                                {{--                                <option value="Tuesday">--}}
+                                {{--                                    {{ __('group.Tuesday') }}--}}
+                                {{--                                </option>--}}
 
-                                <option value="Tuesday">
-                                    {{ __('group.Tuesday') }}
-                                </option>
+                                {{--                                <option value="Wednesday">--}}
+                                {{--                                    {{ __('group.Wednesday') }}--}}
+                                {{--                                </option>--}}
 
-                                <option value="Wednesday">
-                                    {{ __('group.Wednesday') }}
-                                </option>
+                                {{--                                <option value="Thursday">--}}
+                                {{--                                    {{ __('group.Thursday') }}--}}
+                                {{--                                </option>--}}
 
-                                <option value="Thursday">
-                                    {{ __('group.Thursday') }}
-                                </option>
+                                {{--                                <option value="Friday">--}}
+                                {{--                                    {{ __('group.Friday') }}--}}
+                                {{--                                </option>--}}
 
-                                <option value="Friday">
-                                    {{ __('group.Friday') }}
-                                </option>
+                                {{--                                <option value="Saturday">--}}
+                                {{--                                    {{ __('group.Saturday') }}--}}
+                                {{--                                </option>--}}
 
-                                <option value="Saturday">
-                                    {{ __('group.Saturday') }}
-                                </option>
-
-                                <option value="Sunday">
-                                    {{ __('group.Sunday') }}
-                                </option> --}}
+                                {{--                                <option value="Sunday">--}}
+                                {{--                                    {{ __('group.Sunday') }}--}}
+                                {{--                                </option>--}}
 
                             </select>
                             @error('day')
