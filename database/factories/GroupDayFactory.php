@@ -20,7 +20,7 @@ class GroupDayFactory extends Factory
 
 
         return [
-            'day' => $this->faker->dayOfWeek,
+            'day' => [$this->faker->dayOfWeek()],
             'group_id' => $this->faker->numberBetween(1, 5),
         ];
     }

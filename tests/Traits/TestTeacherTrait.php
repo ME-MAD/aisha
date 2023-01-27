@@ -18,8 +18,13 @@ Trait TestTeacherTrait
 
     private function generateRandomTeacherData()
     {
+        $password = fake()->password;
+
         return [
             'name'          => fake()->name,
+            'email' => fake()->email,
+            'password' => $password,
+            'password_confirmation' => $password,
             'birthday'      => fake()->date,
             'phone'         => fake()->phoneNumber,
             'avatar'        => UploadedFile::fake()->image('avatar.jpg'),

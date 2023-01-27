@@ -17,7 +17,10 @@ class StudentLessonFactory extends Factory
     public function definition()
     {
         return [
-            "finished" => fake()->boolean()
+            "finished" => fake()->boolean(),
+            'percentage' => fake()->numberBetween(0,1),
+            'last_chapter_finished' => fake()->numberBetween(1,50),
+            'last_page_finished' => fake()->numberBetween(1,50),
         ];
     }
 }

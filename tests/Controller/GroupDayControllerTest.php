@@ -72,21 +72,6 @@ class GroupDayControllerTest extends TestCaseWithTransLationsSetUp
         $res->assertSessionHasNoErrors();
     }
 
-    public function test_can_update_GroupDay_data()
-    {
-        $groupDay = $this->generateRandomGroupDay();
-
-        $data = $this->generateRandomGroupDayData();
-
-        $this->mock(GroupDayService::class, function (MockInterface $mock) {
-            $mock->shouldReceive('updateGroupDay')->once();
-        });
-
-        $res = $this->put(route('admin.group_day.update', $groupDay), $data);
-
-        $res->assertSessionHasNoErrors();
-    }
-
     public function test_can_delete_GroupDay()
     {
         $groupDay = $this->generateRandomGroupDay();

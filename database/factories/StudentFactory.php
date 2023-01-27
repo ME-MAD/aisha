@@ -24,8 +24,8 @@ class StudentFactory extends Factory
             'birthday' => fake()->date(),
             'phone' => fake()->phoneNumber,
             'qualification' => fake()->text(),
-            'email'         => fake()->email(),
-            'password'      => Hash::make('24682468'),
+            'email' => fake()->email,
+            'password' => fake()->password,
         ];
     }
 }

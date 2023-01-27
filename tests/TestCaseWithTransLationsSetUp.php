@@ -13,7 +13,7 @@ class TestCaseWithTransLationsSetUp extends TestCase
         parent::setUp();
         $admin = User::where('email','admin@admin.com')->first();
         
-        $this->actingAs($admin);
+        $this->actingAs($admin,'admin');
     }
 
     protected function refreshApplicationWithLocale($locale)

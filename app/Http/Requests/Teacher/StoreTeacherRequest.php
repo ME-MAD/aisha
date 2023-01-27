@@ -17,7 +17,7 @@ class StoreTeacherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|alpha|max:255',
+            'name' => 'required|max:255',
             'email' => ['required', Rule::unique('teachers', 'email')],
             'password' => 'required|confirmed',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',

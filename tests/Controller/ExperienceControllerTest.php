@@ -4,6 +4,7 @@ namespace Tests\Controller;
 
 use App\Services\Experience\ExperienceService;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery\MockInterface;
 use Tests\TestCaseWithTransLationsSetUp;
 use Tests\Traits\TestExperienceTrait;

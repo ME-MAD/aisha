@@ -20,7 +20,7 @@ trait GroupDayTrait
     {
         return [
             'group_id' => $this->generateRandomGroup()->id,
-            'day' => $this->faker()->dayOfWeek()
+            'day' => [$this->faker()->dayOfWeek()]
         ];
     }
 }

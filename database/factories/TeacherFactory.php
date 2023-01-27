@@ -20,8 +20,8 @@ class TeacherFactory extends Factory
             'phone'         => fake()->phoneNumber(),
             'avatar'        => fake()->name(),
             'qualification' => fake()->text(),
-            'email'         => fake()->email(),
-            'password'      => Hash::make('24682468'),
+            'email' => fake()->email,
+            'password' => fake()->password,
         ];
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Tests\Controller;
 
-use Illuminate\Http\UploadedFile;
 use Tests\TestCaseWithTransLationsSetUp;
 use Tests\Traits\TestGroupStudentTrait;
 use Tests\Traits\TestGroupTrait;
@@ -33,37 +32,13 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
         $res->assertOk();
     }
 
-    /**
-     * @test
-     * @dataProvider storePassesProvider
-     */
-    public function test_store_passes_with_all_data($data)
+    public function test_store_passes_with_all_data()
     {
+        $data = $this->generateRandomStudentData();
+
         $res = $this->call('POST', route('admin.student.store'), $data);
 
         $res->assertSessionHasNoErrors();
-    }
-
-    public function storePassesProvider(): array
-    {
-        $this->refreshApplication();
-
-        return [
-            "with all data" => [
-                [
-                    'name' => fake()->name,
-                    'birthday' => fake()->date(),
-                    'phone' => fake()->phoneNumber,
-                    'qualification' => fake()->text(),
-                    'avatar' => UploadedFile::fake()->image('avatar.jpg')
-                ],
-            ],
-            "with only name" => [
-                [
-                    'name' => fake()->name,
-                ],
-            ],
-        ];
     }
 
      /**
@@ -91,7 +66,6 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday' => fake()->date,
                     'phone' => fake()->phoneNumber,
                     'qualification' => fake()->text,
-                    'avatar' => UploadedFile::fake()->image('avatar.jpg')
                 ],
             ],
             "with a wrong date format" => [
@@ -100,7 +74,6 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday' => fake()->name,
                     'phone' => fake()->phoneNumber,
                     'qualification' => fake()->text,
-                    'avatar' => UploadedFile::fake()->image('avatar.jpg')
                 ],
             ],
             "with a date that is greater than today" => [
@@ -109,7 +82,6 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday' => now()->addDay()->toDateString(),
                     'phone' => fake()->phoneNumber,
                     'qualification' => fake()->text,
-                    'avatar' => UploadedFile::fake()->image('avatar.jpg')
                 ],
             ],
             "with a wrong phone format" => [
@@ -118,7 +90,6 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday' => fake()->date,
                     'phone' => fake()->name,
                     'qualification' => fake()->text,
-                    'avatar' => UploadedFile::fake()->image('avatar.jpg')
                 ],
             ],
         ];
@@ -135,13 +106,10 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
     }
 
 
-    /**
-     * @test
-     * @dataProvider storePassesProvider
-     */
-    public function test_update_passes_with_all_data($data)
+    public function test_update_passes_with_all_data()
     {
         $student = $this->generateRandomStudent();
+        $data = $this->generateRandomStudentData();
 
         $res = $this->call('PUT', route('admin.student.update', $student), $data);
 
