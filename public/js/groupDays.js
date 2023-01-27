@@ -1,20 +1,10 @@
 $(document).ready(function () {
-    let href, group_id, groupDays, days, option;
+    let href, group_id, groupDays;
 
     $('#group_id').select2({
         theme: "basic",
         dropdownParent: $('#creatGroupDayModal'),
 
-    });
-
-
-    const selectDays = $('#day').select2({
-
-        tags: true,
-        multiple: true,
-        closeOnSelect: false,
-        dropdownParent: $('#creatGroupDayModal'),
-        allowClear: true,
     });
 
 
@@ -29,22 +19,18 @@ $(document).ready(function () {
 
             success: function (response) {
                 groupDays = response.groupDays;
-
-                for (let i = 0; i < groupDays.length; i++) {
-                    days = groupDays[i].day;
+                
+                if(groupDays)
+                {
+                    $('#day').selectpicker('val', groupDays.day);
                 }
-
-                for (let i = 0; i < days.length; i++) {
-                    option = new Option(days[i], response.id, false, true);
-                    selectDays.append(option).trigger('change');
+                else
+                {
+                    $('#day').selectpicker('val', []);
                 }
             },
             error: function () {
             }
         });
-        selectDays.val(option).trigger('change');
-
     });
-
-
 })
