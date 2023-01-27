@@ -33,6 +33,7 @@
     <link rel="stylesheet"
           type="text/css"
           href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
+          <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.css')}}">
 @endpush
 
 @section('breadcrumb')
@@ -108,52 +109,15 @@
 
 @push('js')
 
-    {{--Begin Data_Table--}}
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
     {!! $dataTable->scripts() !!}
 
-    {{--End Data_Table--}}
-
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
 
-    {{--Begin Select 2 --}}
     <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
 
-    <script>
-        $('#group_id').select2({
-            theme: "basic",
-            dropdownParent: $('#creatGroupDayModal'),
-        });
-        
-        const selectDay = $('#day').select2({
-            tags:true,
-            multiple:true,
-            placeholder: "{{trans('group.choose days')}}",
-            closeOnSelect:false,
-            scrollAfterSelect:true,
-            dropdownParent: $('#creatGroupDayModal'),
-            allowClear: true,
-        });
+    <script src="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.js')}}"></script>
 
-        $('#group_id').on('change', function () {
-            let href = $(this).data('href');
-            let group_id = $(this).val();
-            console.log(group_id);
-            $(`option`).removeAttr('disabled').css({
-                'color': 'black'
-            });
-            $.ajax({
-                url: href,
-                data: {
-                    group_id
-                },
-                success: function (response) {
-                    let groupDays = response.groupDays
-                },
-                error: function () {
-                }
-            })
-        })
-    </script>
+    <script src="{{asset('js/groupDays.js')}}"></script>
 @endpush

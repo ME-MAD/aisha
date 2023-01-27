@@ -28,6 +28,6 @@ class GroupDayService
 
     public function getGroupDaysOfGroup($group_id)
     {
-        return GroupDay::where('group_id', $group_id)->select(['group_id', 'day'])->get();
+        return GroupDay::where('group_id', $group_id)->select(['group_id', 'day'])->first();
     }
 }
