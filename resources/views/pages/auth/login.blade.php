@@ -8,14 +8,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
         <title>{{ __('global.AISHA Admin - Login Page') }}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('adminAssets/assets/img/favicon.ico') }}" />
-        <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
+        <link href="{{asset('fonts/fonts_en.css')}}" rel="stylesheet">
         <link href="{{ asset('adminAssets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('adminAssets/assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('adminAssets/assets/css/authentication/form-1.css') }}" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css"
             href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/switches.css') }}">
-        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"> --}}
         <link href="{{ asset('adminAssets/plugins/font-icons/fontawesome/css/all.css') }}" rel="stylesheet"
             type="text/css" />
     @else
@@ -25,7 +24,7 @@
         <title>{{ __('global.AISHA Admin - Login Page') }}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('adminRtl/assets/img/favicon.ico') }}" />
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
+        <link href="{{asset('fonts/fonts_ar.css')}}" rel="stylesheet">
         <link href="{{ asset('adminRtl/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('adminRtl/assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('adminRtl/assets/css/authentication/form-1.css') }}" rel="stylesheet" type="text/css" />
@@ -33,7 +32,6 @@
         <link rel="stylesheet" type="text/css"
             href="{{ asset('adminRtl/assets/css/forms/theme-checkbox-radio.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('adminRtl/assets/css/forms/switches.css') }}">
-        {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"> --}}
         <link href="{{ asset('adminAssets/plugins/font-icons/fontawesome/css/all.css') }}" rel="stylesheet"
             type="text/css" />
     @endif
