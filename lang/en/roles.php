@@ -13,6 +13,7 @@ return [
 
     'update' => 'update role',
 
+    'give this role all permissions' => 'give this role all permissions',
 
     'info' => 'role info',
     'permissions' => 'role permissions',

@@ -17,7 +17,7 @@
               type="text/css">
     @endif
 
-    <link href="{{asset('adminAssets/assets/css/tables/table-basic.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('adminAssets/assets/css/tables/table-basic.css')}}" rel="stylesheet" type="text/css"/>
 
     <link rel="stylesheet" href="{{asset('css/myCheckbox.css')}}">
 
@@ -71,12 +71,12 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link active"
-                                    id="animated-underline-home-tab"
-                                    data-toggle="tab"
-                                    href="#animated-underline-home"
-                                    role="tab"
-                                    aria-controls="animated-underline-home"
-                                    aria-selected="true">
+                                       id="animated-underline-home-tab"
+                                       data-toggle="tab"
+                                       href="#animated-underline-home"
+                                       role="tab"
+                                       aria-controls="animated-underline-home"
+                                       aria-selected="true">
                                         <i class="fa-solid fa-user-gear fa-2x"></i>
 
                                         <span class="font-weight-bold text-capitalize">{{__('roles.info')}}</span>
@@ -84,16 +84,17 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link"
-                                    id="animated-underline-profile-tab"
-                                    data-toggle="tab"
-                                    href="#animated-underline-profile"
-                                    role="tab"
-                                    aria-controls="animated-underline-profile"
-                                    aria-selected="false">
+                                       id="animated-underline-permission-tab"
+                                       data-toggle="tab"
+                                       href="#animated-underline-permission"
+                                       role="tab"
+                                       aria-controls="animated-underline-permission"
+                                       aria-selected="false">
 
                                         <i class="fa-solid fa-gears fa-2x"></i>
 
-                                        <span class="font-weight-bold text-capitalize">{{__('roles.permissions')}}</span>
+                                        <span
+                                            class="font-weight-bold text-capitalize">{{__('roles.permissions')}}</span>
 
                                     </a>
                                 </li>
@@ -103,31 +104,24 @@
 
                             <div class="tab-content " id="animateLineContent-4">
                                 <div class="tab-pane fade show active" id="animated-underline-home" role="tabpanel"
-                                    aria-labelledby="animated-underline-home-tab">
+                                     aria-labelledby="animated-underline-home-tab">
 
 
                                     <div class="modal-body  my-5 rounded border border-solid b-1 bg-light">
 
                                         @include('pages.role.partials.form')
 
-
-
                                     </div>
-
 
 
                                 </div>
 
-                                <div class="tab-pane fade" id="animated-underline-profile" role="tabpanel"
-                                    aria-labelledby="animated-underline-profile-tab">
+                                <div class="tab-pane fade" id="animated-underline-permission" role="tabpanel"
+                                     aria-labelledby="animated-underline-permission-tab">
                                     <div class="media">
 
 
-
-
                                         @include('pages.role.partials.permissions')
-
-
 
 
                                     </div>

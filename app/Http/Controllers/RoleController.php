@@ -6,7 +6,7 @@ use App\DataTables\RoleDataTable;
 use App\Http\Requests\Role\StoreRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
 use App\Jobs\AttachPermissionsToRoleJob;
-use App\Models\Permission;
+use App\Models\PermissionRole;
 use App\Models\Role;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -39,15 +39,7 @@ class RoleController extends Controller
             'description' => $request->description
         ]);
 
-        $allPermissionsNames = [];
-        foreach($request->permissions as $table => $permissions)
-        {
-            foreach($permissions as $permission)
-            {
-                $allPermissionsNames []= $permission;
-            }
-        }
-
+        $allPermissionsNames = $this->getAllPermissionNames($request->permissions);
         AttachPermissionsToRoleJob::dispatch($allPermissionsNames, $role);
 
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -56,7 +48,12 @@ class RoleController extends Controller
 
     public function edit(Role $role): Factory|View|Application
     {
-        return view('pages.role.edit', compact('role'));
+        $rolePermissions = $role->permissions()->select('name')->get()->pluck('name');
+
+        return view('pages.role.edit', [
+            'role' => $role,
+            'rolePermissions' => $rolePermissions->toArray(),
+        ]);
     }
 
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
@@ -66,14 +63,39 @@ class RoleController extends Controller
             'display_name' => $request->display_name,
             'description' => $request->description
         ]);
+
+        $allPermissionsNames = $this->getAllPermissionNames($request->permissions);
+
+        PermissionRole::where('role_id', $role->id)->delete();
+        
+        AttachPermissionsToRoleJob::dispatch($allPermissionsNames, $role);
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.role.index'));
     }
 
     public function delete(Role $role): RedirectResponse
     {
+        $role->detachPermissions($role->permissions);
         $role->delete();
         Alert::toast('تمت العملية بنجاح', 'success');
         return back();
+    }
+
+
+    private function getAllPermissionNames($requestPermissions): array
+    {
+        $allPermissionsNames = [];
+
+        if( !is_null($requestPermissions) )
+        {
+            foreach ($requestPermissions as $table => $permissions) {
+                foreach ($permissions as $permission) {
+                    $allPermissionsNames [] = $permission;
+                }
+            }
+        }
+        
+        return $allPermissionsNames;
     }
 }

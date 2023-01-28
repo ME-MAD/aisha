@@ -12,6 +12,8 @@ return [
     'create' => 'انشاء وظيفة',
     'update' => 'تحديث الوظيفه',
 
+    'give this role all permissions' => 'اعطاء جميع الصلاحيات لهذه الوظيفه',
+
     'info' => 'بيانات الوظيفه ',
     'permissions' => 'صلاحيات الوظيفه',
 
