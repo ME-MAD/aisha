@@ -526,6 +526,14 @@ function studentLessonFinishedAjax()
                     let mainParent = $(lesson_finished_checkbox).parent().parent().parent()
                     changePercentageBar(mainParent, 0)
 
+                    $('#newLessonForm #from_page').val(0)
+                    $('#newLessonForm #from_chapter').val(0)
+
+                    mainParent.find('.studentFinishedChaptersCountElement').html(0)
+                    mainParent.find('.studentLessonLastPageFinishedElement').html(0)
+
+                    mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',0)
+
                     Swal.fire(
                         'Success!2',
                         `Finished Successfully !`,
@@ -703,6 +711,11 @@ function studentLessonFinishedAjax()
             success: function(response) {
                 if(response.status == 200)
                 {
+                    if(rate == "fail")
+                    {
+                        location.reload();
+                        return;
+                    }
                     mainParent.find('.newLessonContainerElement').addClass('d-none')
 
                     mainParent.find('.newLessonButton').removeClass('d-none')
@@ -719,11 +732,14 @@ function studentLessonFinishedAjax()
                     mainParent.find('.newLessonRate').addClass('d-none')
                     changePercentageBar(mainParent, response.studentLesson.percentage)
 
+
                     Swal.fire(
                         'Success!6',
                         `Finished Successfully !`,
                         'success',
                     )
+
+                    
                 }
                 else if(response.status == 400)
                 {

@@ -117,7 +117,7 @@ class SyllabusController extends Controller
         $student_lesson_id = $request->student_lesson_id;
         if( !$request->student_lesson_id )
         {
-            $studentLesson = $this->studentLessonService->createNewLesson($request);
+            $studentLesson = $this->studentLessonService->firstOrCreateStudentLesson($request);
             $student_lesson_id = $studentLesson->id;
         }
 
@@ -160,7 +160,7 @@ class SyllabusController extends Controller
         if($request->rate == "fail")
         {
             $syllabus->update([
-                'finished' => false,
+                'finished' => true,
                 'rate' => $request->rate
             ]);
             syllabus::create([
@@ -171,7 +171,8 @@ class SyllabusController extends Controller
                 'to_page' => $syllabus->to_page,
                 'finished' => false
             ]);
-        }else
+        }
+        else
         {
             $syllabus->update([
                 'finished' => true,
