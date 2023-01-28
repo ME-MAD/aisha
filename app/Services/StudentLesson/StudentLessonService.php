@@ -41,7 +41,10 @@ class StudentLessonService
             ['lesson_id' , $request->lesson_id],
             ['group_id' , $request->group_id],
         ])->update([
-            'finished' => false
+            'percentage' => 0,
+            'finished' => false,
+            'last_chapter_finished' => 0,
+            'last_page_finished' => 0,
         ]);
     }
 

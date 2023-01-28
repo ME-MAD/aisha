@@ -498,7 +498,7 @@ function studentLessonFinishedAjax()
                     mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',last_page_finished)
 
                     Swal.fire(
-                        'Success!',
+                        'Success!1',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -522,8 +522,20 @@ function studentLessonFinishedAjax()
                     finished: false,
                 },
                 success: function(response) {
+
+                    let mainParent = $(lesson_finished_checkbox).parent().parent().parent()
+                    changePercentageBar(mainParent, 0)
+
+                    $('#newLessonForm #from_page').val(0)
+                    $('#newLessonForm #from_chapter').val(0)
+
+                    mainParent.find('.studentFinishedChaptersCountElement').html(0)
+                    mainParent.find('.studentLessonLastPageFinishedElement').html(0)
+
+                    mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',0)
+
                     Swal.fire(
-                        'Success!',
+                        'Success!2',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -573,7 +585,7 @@ function studentLessonFinishedAjax()
                     mainParent.find('.openStudentLastPageFinishedElementReview').data('last-page-finished',last_page_finished)
 
                     Swal.fire(
-                        'Success!',
+                        'Success!3',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -598,8 +610,12 @@ function studentLessonFinishedAjax()
                     finished: false,
                 },
                 success: function(response) {
+                    let mainParent = $(lesson_finished_checkbox).parent().parent().parent()
+
+                    changePercentageBar(mainParent, 0)
+                    
                     Swal.fire(
-                        'Success!',
+                        'Success!4',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -655,7 +671,7 @@ function studentLessonFinishedAjax()
                     changePercentageBar(mainParent, response.studentLessonReview.percentage)
 
                     Swal.fire(
-                        'Success!',
+                        'Success!5',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -695,6 +711,11 @@ function studentLessonFinishedAjax()
             success: function(response) {
                 if(response.status == 200)
                 {
+                    if(rate == "fail")
+                    {
+                        location.reload();
+                        return;
+                    }
                     mainParent.find('.newLessonContainerElement').addClass('d-none')
 
                     mainParent.find('.newLessonButton').removeClass('d-none')
@@ -711,11 +732,14 @@ function studentLessonFinishedAjax()
                     mainParent.find('.newLessonRate').addClass('d-none')
                     changePercentageBar(mainParent, response.studentLesson.percentage)
 
+
                     Swal.fire(
-                        'Success!',
+                        'Success!6',
                         `Finished Successfully !`,
                         'success',
                     )
+
+                    
                 }
                 else if(response.status == 400)
                 {
@@ -806,7 +830,7 @@ function addNewLessonHandler()
                 if(response.status == 200)
                 {
                     Swal.fire(
-                        'Success!',
+                        'Success!7',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -887,7 +911,7 @@ function addNewLessonHandler()
                 if(response.status == 200)
                 {
                     Swal.fire(
-                        'Success!',
+                        'Success!8',
                         `Finished Successfully !`,
                         'success',
                     )

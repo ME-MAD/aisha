@@ -26,6 +26,7 @@ class StudentLessonReviewService
             'student_lesson_id'     =>  $request->student_lesson_id
         ], [
             'finished' => false,
+            'percentage'  => 0,
         ]);
     }
 }
