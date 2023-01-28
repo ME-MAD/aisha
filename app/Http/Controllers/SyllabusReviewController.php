@@ -54,10 +54,28 @@ class SyllabusReviewController extends Controller
         //     ]);
         // }
 
-        $syllabusReview->update([
-            'finished' => true,
-            'rate' => $request->rate
-        ]);
+        if($request->rate == "fail")
+        {
+            // dd($syllabusReview);
+            $syllabusReview->update([
+                'finished' => false,
+                'rate' => $request->rate
+            ]);
+            SyllabusReview::create([
+                'student_lesson_review_id' => $syllabusReview->student_lesson_review_id,
+                'from_chapter' => $syllabusReview->from_chapter,
+                'to_chapter' => $syllabusReview->to_chapter,
+                'from_page' => $syllabusReview->from_page,
+                'to_page' => $syllabusReview->to_page,
+                'finished' => false
+            ]);
+        }else
+        {
+            $syllabusReview->update([
+                'finished' => true,
+                'rate' => $request->rate
+            ]);
+        }
 
         $studentLessonReview = $syllabusReview->studentLessonReview;
         $lesson = $studentLessonReview->studentLesson->lesson;

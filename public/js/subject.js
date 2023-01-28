@@ -498,7 +498,7 @@ function studentLessonFinishedAjax()
                     mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',last_page_finished)
 
                     Swal.fire(
-                        'Success!',
+                        'Success!1',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -522,8 +522,12 @@ function studentLessonFinishedAjax()
                     finished: false,
                 },
                 success: function(response) {
+
+                    let mainParent = $(lesson_finished_checkbox).parent().parent().parent()
+                    changePercentageBar(mainParent, 0)
+
                     Swal.fire(
-                        'Success!',
+                        'Success!2',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -573,7 +577,7 @@ function studentLessonFinishedAjax()
                     mainParent.find('.openStudentLastPageFinishedElementReview').data('last-page-finished',last_page_finished)
 
                     Swal.fire(
-                        'Success!',
+                        'Success!3',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -598,8 +602,12 @@ function studentLessonFinishedAjax()
                     finished: false,
                 },
                 success: function(response) {
+                    let mainParent = $(lesson_finished_checkbox).parent().parent().parent()
+
+                    changePercentageBar(mainParent, 0)
+                    
                     Swal.fire(
-                        'Success!',
+                        'Success!4',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -655,7 +663,7 @@ function studentLessonFinishedAjax()
                     changePercentageBar(mainParent, response.studentLessonReview.percentage)
 
                     Swal.fire(
-                        'Success!',
+                        'Success!5',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -712,7 +720,7 @@ function studentLessonFinishedAjax()
                     changePercentageBar(mainParent, response.studentLesson.percentage)
 
                     Swal.fire(
-                        'Success!',
+                        'Success!6',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -806,7 +814,7 @@ function addNewLessonHandler()
                 if(response.status == 200)
                 {
                     Swal.fire(
-                        'Success!',
+                        'Success!7',
                         `Finished Successfully !`,
                         'success',
                     )
@@ -887,7 +895,7 @@ function addNewLessonHandler()
                 if(response.status == 200)
                 {
                     Swal.fire(
-                        'Success!',
+                        'Success!8',
                         `Finished Successfully !`,
                         'success',
                     )

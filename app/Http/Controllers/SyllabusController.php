@@ -118,7 +118,6 @@ class SyllabusController extends Controller
         if( !$request->student_lesson_id )
         {
             $studentLesson = $this->studentLessonService->createNewLesson($request);
-
             $student_lesson_id = $studentLesson->id;
         }
 
@@ -149,6 +148,8 @@ class SyllabusController extends Controller
 
     public function finishNewLessonAjax(Request $request, syllabus $syllabus)
     {
+        
+
         if($syllabus->finished == true)
         {
             return response()->json([
@@ -156,10 +157,28 @@ class SyllabusController extends Controller
             ]);
         }
 
-        $syllabus->update([
-            'finished' => true,
-            'rate' => $request->rate
-        ]);
+        if($request->rate == "fail")
+        {
+            $syllabus->update([
+                'finished' => false,
+                'rate' => $request->rate
+            ]);
+            syllabus::create([
+                'student_lesson_id' => $syllabus->student_lesson_id,
+                'from_chapter' => $syllabus->from_chapter,
+                'to_chapter' => $syllabus->to_chapter,
+                'from_page' => $syllabus->from_page,
+                'to_page' => $syllabus->to_page,
+                'finished' => false
+            ]);
+        }else
+        {
+            $syllabus->update([
+                'finished' => true,
+                'rate' => $request->rate
+            ]);
+        }
+      
 
         $studentLesson = $syllabus->studentLesson;
         $lesson = $studentLesson->lesson;
