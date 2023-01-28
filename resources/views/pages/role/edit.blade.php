@@ -15,6 +15,8 @@
         <link href="{{asset('adminAssets/assets/css/components/tabs-accordian/custom-tabs.css')}}" rel="stylesheet"
               type="text/css">
     @endif
+    <link rel="stylesheet" href="{{asset('css/myCheckbox.css')}}">
+
 @endpush
 
 @section('breadcrumb')
@@ -56,80 +58,134 @@
                     <div class="card-header">
                         <h3 class="font-weight-bold text-capitalize">{{__('roles.update')}}</h3>
                     </div>
-                    <div class="card-body">
+                    <form action="{{ route('admin.role.update' ,$role->id) }}" method="post">
+                        @csrf
+                        @method('put')
+                        <div class="card-body">
+                            <ul class="nav nav-tabs  mb-3" id="animateLine" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active"
+                                       id="animated-underline-home-tab"
+                                       data-toggle="tab"
+                                       href="#animated-underline-home"
+                                       role="tab"
+                                       aria-controls="animated-underline-home"
+                                       aria-selected="true">
+                                        <i class="fa-solid fa-user-gear fa-2x"></i>
 
-                        <ul class="nav nav-tabs  mb-3" id="animateLine" role="tablist">
+                                        <span class="font-weight-bold">{{__('roles.info')}}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       id="animated-underline-permission-tab"
+                                       data-toggle="tab"
+                                       href="#animated-underline-permission"
+                                       role="tab"
+                                       aria-controls="animated-underline-permission"
+                                       aria-selected="false">
 
-                            <li class="nav-item">
-                                <a class="nav-link active"
-                                   id="animated-underline-home-tab"
-                                   data-toggle="tab"
-                                   href="#animated-underline-home"
-                                   role="tab"
-                                   aria-controls="animated-underline-home"
-                                   aria-selected="true">
-                                    <i class="fa-solid fa-user-gear fa-2x"></i>
+                                        <i class="fa-solid fa-gears fa-2x"></i>
 
-                                    <span class="font-weight-bold">{{__('roles.info')}}</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                   id="animated-underline-profile-tab"
-                                   data-toggle="tab"
-                                   href="#animated-underline-profile"
-                                   role="tab"
-                                   aria-controls="animated-underline-profile"
-                                   aria-selected="false">
+                                        <span class="font-weight-bold">{{__('roles.permissions')}}</span>
 
-                                    <i class="fa-solid fa-gears fa-2x"></i>
+                                    </a>
+                                </li>
 
-                                    <span class="font-weight-bold">{{__('roles.permissions')}}</span>
+                            </ul>
 
-                                </a>
-                            </li>
-
-                        </ul>
-
-                        <div class="tab-content " id="animateLineContent-4">
-                            <div class="tab-pane fade show active" id="animated-underline-home" role="tabpanel"
-                                 aria-labelledby="animated-underline-home-tab">
-                                <form action="{{ route('admin.role.update' ,$role->id) }}" method="post">
+                            <div class="tab-content " id="animateLineContent-4">
+                                <div class="tab-pane fade show active" id="animated-underline-home" role="tabpanel"
+                                     aria-labelledby="animated-underline-home-tab">
                                     <div class="modal-body  my-5 rounded border border-solid b-1 bg-light">
-                                        @csrf
-                                        @method('put')
 
                                         @include('pages.role.partials.form')
-
                                     </div>
-
-                                    <div class="modal-footer">
-                                        <button type="button"
-                                                class="btn btn-danger font-weight-bold text-white"
-                                                data-dismiss="modal">{{__('global.Close')}}
-                                        </button>
-
-                                        <button type="submit"
-                                                class="btn btn-success font-weight-bold text-white">{{__('global.update')}}
-                                        </button>
-
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="tab-pane fade" id="animated-underline-profile" role="tabpanel"
-                                 aria-labelledby="animated-underline-profile-tab">
-                                <div class="media">
-
                                 </div>
+
+                                <div class="tab-pane fade" id="animated-underline-permission" role="tabpanel"
+                                     aria-labelledby="animated-underline-permission-tab">
+                                    <div
+                                        class="d-flex justify-content-between align-items-center mx-2 my-3 p-3 rounded bg-light">
+                                        <h4 class="font-weight-bold text-capitalize
+                                     text-dark">{{__('roles.give this role all permissions')}}</h4>
+                                        <a> <i class="far fa-check-circle fa-2x" id="giveAllPermissions"></i></a>
+
+                                    </div>
+                                    <div class="media">
+                                        <div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered mb-4 text-center">
+                                                <thead>
+                                                <tr>
+                                                    <th>Table</th>
+                                                    <th>Create</th>
+                                                    <th>Update</th>
+                                                    <th>Delete</th>
+                                                    <th>Edit</th>
+                                                    <th>show</th>
+                                                    <th>index</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody id="permissionBody">
+                                                @foreach (getPermissionsForView() as $table => $permissions)
+                                                    <tr>
+                                                        <td>
+                                                            <label class="control control-checkbox">
+                                                                {{$table}}
+                                                                <input type="checkbox"
+                                                                       name="permissions[{{$table}}][]"
+                                                                       id="{{$table}}"
+                                                                       class="checkAll auto"
+                                                                       data-table="{{$table}}"/>
+
+                                                                <div class="control_indicator"></div>
+                                                            </label>
+                                                        </td>
+
+                                                        @foreach ($permissions as $permission)
+
+                                                            <td>
+                                                                <label class="control control-checkbox">
+                                                                    <span class="opacity-0">Hello</span>
+
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        class="permissionCheckbox"
+                                                                        name="permissions[{{$table}}][]"
+                                                                        value="{{$permission['value'] }}"
+                                                                        data-table="{{$table}}"/>
+
+                                                                    <div class="control_indicator"></div>
+                                                                </label>
+                                                            </td>
+
+                                                        @endforeach
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-
-
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <h4>Test</h4>
-                    </div>
+                        <div class="card-footer">
+                            <button type="button"
+                                    class="btn btn-danger font-weight-bold text-white"
+                                    data-dismiss="modal">{{__('global.Close')}}
+                            </button>
+
+                            <button type="submit"
+                                    class="btn btn-success font-weight-bold text-white">{{__('global.Update')}}
+                            </button>
+                        </div>
+
+                    </form>
+
                 </div>
 
 
@@ -139,5 +195,96 @@
 
 @endsection
 
-@push('js') @endpush
+@push('js')
+
+    <script>
+        let rolePermissions, allCheckboxes, getPermissionsForView, tableName;
+
+        // Get Data From Back-End
+        getPermissionsForView = @json( getPermissionsForView());
+        rolePermissions =@json($rolePermissions);
+
+
+        // Convert Data From Back-End To Arrays
+        $AllPermissions = Object.keys(getPermissionsForView);
+        $RolePermissions = Object.values(rolePermissions);
+
+        allCheckboxes = document.querySelectorAll(`.permissionCheckbox`);
+
+        for (let i = 0; i < allCheckboxes.length; i++) {
+            // Make Checkbox Check If This Check box == Role-> Check Box
+            let tableName = $(allCheckboxes[i]).data('table');
+
+            if ($RolePermissions.includes(allCheckboxes[i].value)) {
+                allCheckboxes[i].setAttribute('checked', 'checked');
+            }
+        }
+
+    </script>
+
+    <script>
+
+
+        $('#giveAllPermissions').on('click', function (e) {
+            e.preventDefault();
+
+            if ($('.permissionCheckbox').attr('checked')) {
+                $('.permissionCheckbox').removeAttr('checked');
+                $('#giveAllPermissions').css({
+                    color: '#515365',
+                });
+
+            } else {
+                $('.permissionCheckbox').attr('checked', 'checked');
+                $('#giveAllPermissions').css({
+                    color: '#e95f2b',
+                });
+            }
+
+        })
+
+    </script>
+
+    <script>
+
+
+        // make all checkbox checked when click on checkAll
+        $('.checkAll').on('change', function () {
+
+            let table = $(this).data('table')
+
+            if (this.checked == true) {
+                $(`input[name='permissions[${table}][]']`).prop('checked', true)
+            } else {
+                $(`input[name='permissions[${table}][]']`).prop('checked', false)
+            }
+        })
+
+        // check if all checkbox is checked then make checkAll checked
+        $(".permissionCheckbox").change(function () {
+
+            let table = $(this).data('table')
+            let allCheckboxes = document.querySelectorAll(`input[name='permissions[${table}][]']:not([id="${table}"])`);
+            let checkboxChecked = document.querySelectorAll(`input[name='permissions[${table}][]']:not([id="${table}"]):checked`);
+
+            if (allCheckboxes.length == checkboxChecked.length) {
+                $(`input[name='permissions[${table}][]']`).prop('checked', true);
+
+                $('#giveAllPermissions').css({
+                    color: '#e95f2b',
+                });
+
+            } else {
+                $(`#${table}`).prop('checked', false);
+
+                $('#giveAllPermissions').css({
+                    color: '#515365',
+                });
+            }
+
+        });
+
+    </script>
+
+@endpush
 
