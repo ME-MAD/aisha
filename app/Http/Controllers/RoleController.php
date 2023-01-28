@@ -76,7 +76,7 @@ class RoleController extends Controller
 
     public function delete(Role $role): RedirectResponse
     {
-        $role->detachPermissions($role->permissions);
+        PermissionRole::where('role_id', $role->id)->delete();
         $role->delete();
         Alert::toast('تمت العملية بنجاح', 'success');
         return back();
