@@ -156,7 +156,9 @@
                                                                         class="permissionCheckbox"
                                                                         name="permissions[{{$table}}][]"
                                                                         value="{{$permission['value'] }}"
-                                                                        data-table="{{$table}}"/>
+                                                                        data-table="{{$table}}"
+                                                                        {{in_array($permission['value'], $rolePermissions) ? 'checked' : ''}}
+                                                                        />
 
                                                                     <div class="control_indicator"></div>
                                                                 </label>
@@ -198,49 +200,29 @@
 @push('js')
 
     <script>
-        let rolePermissions, allCheckboxes, getPermissionsForView, tableName;
-
-        // Get Data From Back-End
-        getPermissionsForView = @json( getPermissionsForView());
-        rolePermissions =@json($rolePermissions);
-
-
-        // Convert Data From Back-End To Arrays
-        $AllPermissions = Object.keys(getPermissionsForView);
-        $RolePermissions = Object.values(rolePermissions);
-
-        allCheckboxes = document.querySelectorAll(`.permissionCheckbox`);
-
-        for (let i = 0; i < allCheckboxes.length; i++) {
-            // Make Checkbox Check If This Check box == Role-> Check Box
-            let tableName = $(allCheckboxes[i]).data('table');
-
-            if ($RolePermissions.includes(allCheckboxes[i].value)) {
-                allCheckboxes[i].setAttribute('checked', 'checked');
-            }
-        }
-
-    </script>
-
-    <script>
-
-
+        let allChecked = false;
+        
         $('#giveAllPermissions').on('click', function (e) {
             e.preventDefault();
 
-            if ($('.permissionCheckbox').attr('checked')) {
-                $('.permissionCheckbox').removeAttr('checked');
+            if (!allChecked) 
+            {
+                $('.permissionCheckbox').prop('checked', true);
+                $('.checkAll').prop('checked', true);
                 $('#giveAllPermissions').css({
                     color: '#515365',
                 });
-
-            } else {
-                $('.permissionCheckbox').attr('checked', 'checked');
+                allChecked = true;
+            } 
+            else 
+            {
+                $('.permissionCheckbox').prop('checked', false);
+                $('.checkAll').prop('checked', false);
                 $('#giveAllPermissions').css({
                     color: '#e95f2b',
                 });
+                allChecked = false;
             }
-
         })
 
     </script>

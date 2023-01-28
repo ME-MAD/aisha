@@ -6,6 +6,7 @@ use App\DataTables\RoleDataTable;
 use App\Http\Requests\Role\StoreRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
 use App\Jobs\AttachPermissionsToRoleJob;
+use App\Models\PermissionRole;
 use App\Models\Role;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -47,22 +48,16 @@ class RoleController extends Controller
 
     public function edit(Role $role): Factory|View|Application
     {
-
-        $rolePermission = [];
-        foreach ($role->permissions as $permission) {
-            $rolePermission[] = $permission->name;
-        }
+        $rolePermissions = $role->permissions()->select('name')->get()->pluck('name');
 
         return view('pages.role.edit', [
             'role' => $role,
-            'rolePermissions' => $rolePermission,
-
+            'rolePermissions' => $rolePermissions->toArray(),
         ]);
     }
 
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
     {
-
         $role->update([
             'name' => $request->name,
             'display_name' => $request->display_name,
@@ -70,7 +65,9 @@ class RoleController extends Controller
         ]);
 
         $allPermissionsNames = $this->getAllPermissionNames($request->permissions);
-        $role->detachPermissions($role->permissions);
+
+        PermissionRole::where('role_id', $role->id)->delete();
+        
         AttachPermissionsToRoleJob::dispatch($allPermissionsNames, $role);
 
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -86,15 +83,19 @@ class RoleController extends Controller
     }
 
 
-    public function getAllPermissionNames($requestPermissions): array
+    private function getAllPermissionNames($requestPermissions): array
     {
         $allPermissionsNames = [];
 
-        foreach ($requestPermissions as $table => $permissions) {
-            foreach ($permissions as $permission) {
-                $allPermissionsNames [] = $permission;
+        if( !is_null($requestPermissions) )
+        {
+            foreach ($requestPermissions as $table => $permissions) {
+                foreach ($permissions as $permission) {
+                    $allPermissionsNames [] = $permission;
+                }
             }
         }
+        
         return $allPermissionsNames;
     }
 }
