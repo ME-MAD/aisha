@@ -21,7 +21,6 @@ $.get($('#paymentsThisMonthContainerGroup').data('href'), function (response) {
                 backgroundColor: [
                     '#e07be0',
                     '#420039'
-
                 ]
             }]
         },
