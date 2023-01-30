@@ -98,6 +98,7 @@
 
                                     </a>
                                 </li>
+                                
 
                             </ul>
 
@@ -118,6 +119,13 @@
 
                                 <div class="tab-pane fade" id="animated-underline-permission" role="tabpanel"
                                      aria-labelledby="animated-underline-permission-tab">
+                                     <div
+                                     class="d-flex justify-content-between align-items-center mx-2 my-3 p-3 rounded bg-light">
+                                     <h4 class="font-weight-bold text-capitalize
+                                  text-dark">{{__('roles.give this role all permissions')}}</h4>
+                                     <a> <i class="far fa-check-circle fa-2x" id="giveAllPermissions"></i></a>
+
+                                 </div>
                                     <div class="media">
 
 
@@ -149,6 +157,38 @@
     </div>
 
 @endsection
+@push('js')
 
+    <script>
+        let allChecked = false;
+        
+        $('#giveAllPermissions').on('click', function (e) {
+            e.preventDefault();
+
+            if (!allChecked) 
+            {
+                $('.permissionCheckbox').prop('checked', true);
+                $('.checkAll').prop('checked', true);
+                $('#giveAllPermissions').css({
+                    color: '#515365',
+                });
+                allChecked = true;
+            } 
+            else 
+            {
+                $('.permissionCheckbox').prop('checked', false);
+                $('.checkAll').prop('checked', false);
+                $('#giveAllPermissions').css({
+                    color: '#e95f2b',
+                });
+                allChecked = false;
+            }
+        })
+
+    </script>
+
+  
+
+@endpush
 
 
