@@ -139,9 +139,4 @@ class SubjectController extends Controller
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
-
-    public function getSubjectBook(Subject $subject)
-    {
-        dd($subject);
-    }
 }

@@ -37,6 +37,7 @@ class PDFService
     {
         $pdf = new Pdf(public_path($pdfFileName));
         $numberOfPages = $pdf->getNumberOfPages();
+        
         $path = public_path('files/subjects/' . $createdDirectoryName . "/");
 
         if(!File::exists($path)) 
