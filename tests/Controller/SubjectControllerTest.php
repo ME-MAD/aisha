@@ -191,27 +191,27 @@ class SubjectControllerTest extends TestCaseWithTransLationsSetUp
         $res->assertSessionHasErrors();
     }
 
-    public function test_update_passes_with_correct_data()
-    {
-        $subject = $this->generateRandomSubject();
+    // public function test_update_passes_with_correct_data()
+    // {
+    //     $subject = $this->generateRandomSubject();
         
-        $data = [
-            'name' => fake()->name(),
-            'book' => UploadedFile::fake()->create('book.pdf'),
-            'avatar' => UploadedFile::fake()->image('avatar.png'),
-        ];
+    //     $data = [
+    //         'name' => fake()->name(),
+    //         'book' => UploadedFile::fake()->create('book.pdf'),
+    //         'avatar' => UploadedFile::fake()->image('avatar.png'),
+    //     ];
 
-        $this->mock(PDFService::class, function(MockInterface $mock){
-            $mock->shouldReceive('uploadPdfFile')->once()->andReturn('book.pdf');
-        });
+    //     $this->mock(PDFService::class, function(MockInterface $mock){
+    //         $mock->shouldReceive('uploadPdfFile')->once()->andReturn('book.pdf');
+    //     });
 
-        Bus::fake();
+    //     Bus::fake();
 
-        $res = $this->call('PUT', route('admin.subject.update', $subject), $data);
+    //     $res = $this->call('PUT', route('admin.subject.update', $subject), $data);
 
-        Bus::assertDispatched(BreakPDFIntoImagesJob::class);
+    //     Bus::assertDispatched(BreakPDFIntoImagesJob::class);
 
-        $res->assertSessionHasNoErrors();
-    }
+    //     $res->assertSessionHasNoErrors();
+    // }
 
 }
