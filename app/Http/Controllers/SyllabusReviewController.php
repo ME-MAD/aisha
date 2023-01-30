@@ -56,7 +56,6 @@ class SyllabusReviewController extends Controller
 
         if($request->rate == "fail")
         {
-            // dd($syllabusReview);
             $syllabusReview->update([
                 'finished' => false,
                 'rate' => $request->rate

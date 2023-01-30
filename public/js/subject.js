@@ -654,6 +654,11 @@ function studentLessonFinishedAjax()
             success: function(response) {
                 if(response.status == 200)
                 {
+                    if(rate == "fail")
+                    {
+                        location.reload();
+                        return;
+                    }
                     mainParent.find('.newLessonContainerElementReview').addClass('d-none')
 
                     mainParent.find('.newLessonButtonReview').removeClass('d-none')
