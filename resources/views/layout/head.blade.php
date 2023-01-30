@@ -24,6 +24,7 @@
           type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
 
+    <link rel="stylesheet" href="{{asset('adminAssets/assets/css/sweetalert.css')}}">
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     <link href="{{ asset('adminAssets/plugins/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
