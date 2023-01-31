@@ -2,15 +2,22 @@
 
 namespace App\Services\Teacher;
 
-use App\Http\Traits\ImageTrait;
 use App\Models\Teacher;
+use App\Services\ImageService;
 use Illuminate\Support\Facades\Hash;
 
 class TeacherService
 {
-    use ImageTrait;
-
+    private $imageService;
     private $allDataAboutTeacher;
+
+    public function __construct(
+        ImageService $imageService
+    )
+    {
+        $this->imageService = $imageService;
+    }
+
 
 
     public function getAllTeachers(array $columns = ['id', 'name'])
@@ -52,7 +59,7 @@ class TeacherService
 
     public function createTeacher(object $request)
     {
-        $fileName = $this->uploadImage(imageObject: $request->file('avatar'), path: Teacher::AVATARS_PATH);
+        $fileName = $this->imageService->uploadImage(imageObject: $request->file('avatar'), path: Teacher::AVATARS_PATH);
 
         return Teacher::create([
             'name' => $request->name,
@@ -70,9 +77,9 @@ class TeacherService
         $fileName = $teacher->getRawOriginal('avatar');
 
         if ($request->file('avatar')) {
-            $this->deleteImage(path: $teacher->getAvatarPath());
+            $this->imageService->deleteImage(path: $teacher->getAvatarPath());
 
-            $fileName = $this->uploadImage(
+            $fileName = $this->imageService->uploadImage(
                 imageObject: $request->file('avatar'),
                 path: Teacher::AVATARS_PATH
             );
@@ -91,7 +98,7 @@ class TeacherService
 
     public function deleteTeacher(Teacher $teacher): ?bool
     {
-        $this->deleteImage(path: $teacher->getAvatarPath());
+        $this->imageService->deleteImage(path: $teacher->getAvatarPath());
 
         return $teacher->delete();
     }

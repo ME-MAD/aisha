@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Subject;
 use App\Http\Requests\Subject\StoreSubjectRequest;
 use App\Http\Requests\Subject\UpdateSubjectRequest;
-use App\Http\Traits\ImageTrait;
+// use App\Http\Traits\ImageTrait;
 use App\Jobs\BreakPDFIntoImagesJob;
 use App\Services\PDFService;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SubjectController extends Controller
 {
-    use ImageTrait;
+    // use ImageTrait;
 
     private $PDFService;
 

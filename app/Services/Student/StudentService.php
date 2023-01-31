@@ -2,13 +2,20 @@
 
 namespace App\Services\Student;
 
-use App\Http\Traits\ImageTrait;
 use App\Models\Student;
+use App\Services\ImageService;
 use Illuminate\Support\Facades\Hash;
 
 class StudentService
 {
-    use ImageTrait;
+    private $imageService;
+
+    public function __construct(
+        ImageService $imageService
+    )
+    {
+        $this->imageService = $imageService;
+    }
 
     public function getAllStudent()
     {
@@ -17,7 +24,7 @@ class StudentService
 
     public function createStudent($request): void
     {
-        $fileName = $this->uploadImage(
+        $fileName = $this->imageService->uploadImage(
             imageObject: $request->file('avatar'),
             path: Student::AVATARS_PATH
         );
@@ -39,10 +46,10 @@ class StudentService
         
         if ($request->file('avatar')) {
 
-            $this->deleteImage(
+            $this->imageService->deleteImage(
                 path: $student->getAvatarPath()
             );
-            $fileName = $this->uploadImage(
+            $fileName = $this->imageService->uploadImage(
                 imageObject: $request->file('avatar'),
                 path: Student::AVATARS_PATH
             );
@@ -69,7 +76,7 @@ class StudentService
 
     public function deleteStudent($student): void
     {
-        $this->deleteImage(path: $student->getAvatarPath());
+        $this->imageService->deleteImage(path: $student->getAvatarPath());
         $student->delete();
     }
 }

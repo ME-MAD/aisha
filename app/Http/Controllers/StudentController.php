@@ -15,7 +15,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentController extends Controller
 {
-    use ImageTrait;
+    // use ImageTrait;
 
     private $studentService;
     private $subjectService;
