@@ -49,10 +49,9 @@ class StudentLessonController extends Controller
         ]);
     }
 
-    public function show(StudentLesson $studentLesson)
+    public function show(StudentLesson $studentLesson): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         $studentLessonReview = $this->studentLessonService->getStudentLessonReview($studentLesson);
-        dd($studentLesson);
 
         return view('pages.studentLesson.show', [
             'studentLesson' => $studentLesson,
