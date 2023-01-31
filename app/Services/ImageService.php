@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Traits;
+namespace App\Services;
 
 use Illuminate\Http\UploadedFile;
 
-trait ImageTrait
+class ImageService
 {
-    private function uploadImage(?UploadedFile $imageObject, string $path): ?string
+
+    public function uploadImage(?UploadedFile $imageObject, string $path): ?string
     {
         if ($imageObject) {
             $fileName = now()->timestamp . "_" . $imageObject->getClientOriginalName();
@@ -15,10 +16,11 @@ trait ImageTrait
         return $fileName ?? null;
     }
 
-    private function deleteImage(string $path): void
+    public function deleteImage(string $path): void
     {
         if (file_exists($path)) {
             unlink($path);
         }
     }
+    
 }
