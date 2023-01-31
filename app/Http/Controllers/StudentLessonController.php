@@ -20,11 +20,11 @@ class StudentLessonController extends Controller
 
     public function store(StoreStudentLessonRequest $request)
     {
-        if ($this->studentLessonService->isChapterFinished($request)) 
+        if ($this->studentLessonService->isChapterFinished($request))
         {
            $this->studentLessonService->finishStudentLesson($request);
-        } 
-        else 
+        }
+        else
         {
             $this->studentLessonService->store($request);
         }
@@ -35,11 +35,11 @@ class StudentLessonController extends Controller
 
     public function ajaxStudentLessonFinished(Request $request)
     {
-        if ($request->finished == "true") 
+        if ($request->finished == "true")
         {
             $this->studentLessonService->finishStudentLesson($request);
-        } 
-        else 
+        }
+        else
         {
             $this->studentLessonService->unFinishStudentLesson($request);
         }
@@ -51,13 +51,15 @@ class StudentLessonController extends Controller
 
     public function show(StudentLesson $studentLesson)
     {
-        $studentLesson->load(['syllabus', 'lesson.subject', 'student',  'studentLessonReview.syllabusReviews']);
-
-        $studentLessonReview = $studentLesson->studentLessonReview;
+        $studentLessonReview = $this->studentLessonService->getStudentLessonReview($studentLesson);
+        dd($studentLesson);
 
         return view('pages.studentLesson.show', [
             'studentLesson' => $studentLesson,
             'studentLessonReview' => $studentLessonReview
         ]);
     }
+
+
+
 }

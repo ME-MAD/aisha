@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\StudentLesson;
 
+use App\Rules\CheckIsChaptersCountOfLesson;
+use App\Rules\CheckIsMaxChaptersCountOfLessonValid;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreStudentLessonRequest extends FormRequest
 {
@@ -24,11 +27,11 @@ class StoreStudentLessonRequest extends FormRequest
     public function rules()
     {
         return [
-            "group_id" => 'required',
-            "lesson_id" => "required",
-            "student_id" => "required",
-            "max_chapters" => "required",
-            "chapters_count" => "required"
+            "group_id" =>         [ 'required',Rule::exists('groups','id')],
+            "lesson_id" =>        [ "required",Rule::exists('lessons','id')],
+            "student_id" =>       [ "required",Rule::exists('students','id')],
+            "max_chapters" =>     [ "required",'integer' , new CheckIsMaxChaptersCountOfLessonValid()],
+            "chapters_count" =>   [ "required",'integer']
         ];
     }
 }
