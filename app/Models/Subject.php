@@ -10,7 +10,7 @@ class Subject extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'avatar', 'book'];
+    protected $fillable = ['name', 'avatar', 'book','pages_count'];
     protected $appends = ['pagesCount'];
     const AVATARS_PATH = 'images/subject/avatars/';
 
@@ -57,8 +57,8 @@ class Subject extends Model
         return "files/subjects/" . $this->name . "/";
     }
 
-    public function getPagesCountAttribute()
-    {
-        return count(glob($this->directoryPath() . "*"));
-    }
+    // public function getPagesCountAttribute()
+    // {
+    //     return count(glob($this->directoryPath() . "*"));
+    // }
 }

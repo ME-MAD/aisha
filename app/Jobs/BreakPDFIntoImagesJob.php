@@ -34,6 +34,6 @@ class BreakPDFIntoImagesJob implements ShouldQueue
      */
     public function handle()
     {
-        $this->pdfService->explodePdfToImages($this->subject->book, $this->subject->name);
+        $this->pdfService->explodePdfToImages($this->subject);
     }
 }
