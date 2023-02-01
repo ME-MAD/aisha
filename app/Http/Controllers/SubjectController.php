@@ -40,7 +40,7 @@ class SubjectController extends Controller
         $fileName = $this->uploadImage(
             imageObject: $request->file('avatar'),
             path: Subject::AVATARS_PATH
-        );
+        ); 
 
         $book_name = $this->PDFService->uploadPdfFile(
             $request->file('book'),
@@ -56,9 +56,18 @@ class SubjectController extends Controller
             'avatar' =>  $fileName,
         ]);
 
-        BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
-
+        $numberOfPages =$this->PDFService->explodePdfToImages($subject->book, $subject->name);
+          
+        $subject->update([
+                'id' => $subject->id,
+                'name' => $request->name,
+                'book' => $book_name,
+                'avatar' =>  $fileName,
+                'pages_count' => $numberOfPages
+        ]);
+      
         Alert::toast('قد تاخذ عملية تجهيز الكتاب بعض الوقت', 'warning');
+   
         return redirect(route('admin.subject.index'));
     }
 

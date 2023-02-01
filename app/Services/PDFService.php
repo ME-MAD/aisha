@@ -49,9 +49,11 @@ class PDFService
         for($i = 1; $i <= $numberOfPages; $i++)
         {
             $jobs []= new ConvertPdfPageIntoImageJob($pdf, $i, $createdDirectoryName);
-        }
-        // ConvertPdfPageIntoImageJob::withChain($jobs)->dispatch($pdf, 1, $createdDirectoryName);
+        } 
+       
         Bus::chain($jobs)->dispatch();
+        
+        return $numberOfPages;
     }
 
     public function deleteFile($path)
