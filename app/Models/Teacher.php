@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laratrust\Traits\LaratrustUserTrait;
 
 class Teacher extends Authenticatable
 {
     use HasFactory;
+    use LaratrustUserTrait;
 
     protected $fillable = ['name','email', 'password', 'phone', 'birthday', 'avatar', 'qualification'];
 

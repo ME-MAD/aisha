@@ -35,7 +35,6 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $dataLoginPage = $request->only(['email', 'password']);
-
         if (Auth::guard($request->type)->attempt($dataLoginPage)) 
         {
             Session::put('admin_guard', $request->type);
@@ -50,6 +49,7 @@ class AuthController extends Controller
 
     public function logout()
     {
+
         $guard = Session::get('admin_guard');
 
         Auth::guard($guard)->logout();
