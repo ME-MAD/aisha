@@ -14,8 +14,15 @@
 
         <ul class="list-unstyled menu-categories" id="topAccordion">
 
-            <li class="menu single-menu active">
-                <a href="#dashboard" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle autodroprown">
+            <li class="menu single-menu
+            {{
+                    request()->routeIs('admin.home') ||
+                    request()->routeIs('admin.user.index') ||
+                    request()->routeIs('admin.role.index') ? 'active' : ''
+            }}">
+
+                <a href="{{route('admin.home')}}" data-toggle="collapse" aria-expanded="true"
+                   class="dropdown-toggle autodroprown">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -23,7 +30,8 @@
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
-                        <span class="font-weight-bold text-capitalize">{{__('global.settings')}}</span>
+                        <span class="font-weight-bold text-capitalize">
+                            {{__('global.settings')}}</span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -32,19 +40,24 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="dashboard" data-parent="#topAccordion">
-                    <li class="active">
+                    <li class="{{request()->routeIs('admin.user.index') ? 'active' : '' }}">
                         <a href="{{route('admin.user.index')}}"
                            class="text-capitalize font-weight-bold">{{__('global.users')}} </a>
                     </li>
-                    <li class="">
+                    <li class="{{request()->routeIs('admin.role.index') ? 'active' : '' }}">
                         <a href="{{route('admin.role.index')}}"
                            class="text-capitalize font-weight-bold">{{__('roles.roles')}} </a>
                     </li>
                 </ul>
             </li>
 
-            <li class="menu single-menu">
-                <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <li class="menu single-menu {{
+                    request()->routeIs('admin.teacher.index') ||
+                    request()->routeIs('admin.experience.index')  ? 'active' : ''
+            }}
+            ">
+                <a href="{{route('admin.teacher.index')}}" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">
                     <div class="">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
                              fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
@@ -60,18 +73,25 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
-                    <li>
+                    <li class="{{
+                                    request()->routeIs('admin.teacher.index')  ? 'active' : ''
+                                }}">
                         <a href="{{ route('admin.teacher.index') }}"> {{ __('global.Teachers') }} </a>
                     </li>
-                    <li>
+                    <li class="{{
+                                    request()->routeIs('admin.experience.index')  ? 'active' : ''
+                                }}">
                         <a href="{{ route('admin.experience.index') }}">{{ __('global.Experiences') }}</a>
                     </li>
                 </ul>
             </li>
 
 
-            <li class="menu single-menu">
-                <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <li class="menu single-menu {{
+                                    request()->routeIs('admin.student.index')  ? 'active' : ''
+                                }}">
+                <a href="{{route('admin.student.index')}}" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">
                     <div class="">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
                              fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
@@ -89,15 +109,26 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
-                    <li>
+                    <li class="{{
+                                    request()->routeIs('admin.student.index')  ? 'active' : ''
+                                }}">
                         <a href="{{ route('admin.student.index') }}"> {{ __('global.Students') }} </a>
                     </li>
                 </ul>
             </li>
 
 
-            <li class="menu single-menu">
-                <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <li class="menu single-menu {{
+                                    request()->routeIs('admin.group.index')||
+                                    request()->routeIs('admin.group_day.index')||
+                                    request()->routeIs('admin.group_students.index')||
+                                    request()->routeIs('admin.group_types.index')  ? 'active' : ''
+                                }}">
+                <a href="{{route('admin.group.index')}}"
+                   data-toggle="collapse"
+                   aria-expanded="false"
+                   class="dropdown-toggle">
+
                     <div class="">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                              stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -116,17 +147,19 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
-                    <li>
+                    <li class="{{ request()->routeIs('admin.group.index') ? 'active' : ''}}">
                         <a href="{{ route('admin.group.index') }}"> {{ __('global.groups') }} </a>
                     </li>
-                    <li>
+                    <li class="{{ request()->routeIs('admin.group_day.index') ? 'active' : ''}}">
                         <a href="{{ route('admin.group_day.index') }}">{{ __('global.Group Days') }}</a>
                     </li>
-                    <li>
-                        <a
-                                href="{{ route('admin.group_students.index') }}">{{ __('global.Group Students') }}</a>
+                    <li class="{{ request()->routeIs('admin.group_students.index') ? 'active' : ''}}">
+
+                        <a href="{{ route('admin.group_students.index') }}">{{ __('global.Group Students') }}</a>
+
                     </li>
-                    <li>
+                    <li class="{{ request()->routeIs('admin.group_types.index') ? 'active' : ''}}">
+
                         <a href="{{ route('admin.group_types.index') }}">{{ __('global.Group Types') }}</a>
                     </li>
 
@@ -134,8 +167,12 @@
             </li>
 
 
-            <li class="menu single-menu">
-                <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <li class="menu single-menu
+                                {{
+                                    request()->routeIs('admin.subject.index')||
+                                     request()->routeIs('admin.lesson.index')  ? 'active' : ''
+                                }}">
+                <a href="{{ route('admin.subject.index') }}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                              stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -152,18 +189,21 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
-                    <li>
+                    <li class="{{request()->routeIs('admin.subject.index')? 'active' : ''}}">
                         <a href="{{ route('admin.subject.index') }}"> {{ __('global.Subjects') }} </a>
                     </li>
-                    <li>
+                    <li class="{{request()->routeIs('admin.lesson.index')? 'active' : ''}}">
                         <a href="{{ route('admin.lesson.index') }}"> {{ __('global.Lessons') }} </a>
                     </li>
                 </ul>
             </li>
 
 
-            <li class="menu single-menu">
-                <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <li class="menu single-menu
+                              {{     request()->routeIs('admin.payment.index')||
+                                     request()->routeIs('admin.payment.create')  ? 'active' : ''
+                                }}">
+                <a href="{{ route('admin.payment.index') }}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                              stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -181,17 +221,24 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
-                    <li>
+                    <li class="{{request()->routeIs('admin.payment.index')? 'active' : ''}}">
                         <a href="{{ route('admin.payment.index') }}">{{ __('global.Payment') }}</a>
                     </li>
-                    <li>
+                    <li class="{{request()->routeIs('admin.payment.create')? 'active' : ''}}">
                         <a href="{{ route('admin.payment.create') }}">{{ __('global.Create payments') }}</a>
                     </li>
                 </ul>
             </li>
 
-            <li class="menu single-menu">
-                <a href="#app" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <li class="menu single-menu {{
+                                        request()->routeIs('admin.exam.index')||
+                                     request()->routeIs('admin.exam.create')  ? 'active' : ''
+                                }}">
+                <a href="{{ route('admin.exam.index') }}"
+                   data-toggle="collapse"
+                   aria-expanded="false"
+                   class="dropdown-toggle">
+
                     <div class="">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                              stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -210,10 +257,10 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
-                    <li>
+                    <li class="{{request()->routeIs('admin.exam.index')? 'active' : ''}}">
                         <a href="{{ route('admin.exam.index') }}">{{ __('global.Exams') }}</a>
                     </li>
-                    <li>
+                    <li class="{{request()->routeIs('admin.exam.create')? 'active' : ''}}">
                         <a href="{{ route('admin.exam.create') }}">{{ __('global.Create Exam') }}</a>
                     </li>
                 </ul>
