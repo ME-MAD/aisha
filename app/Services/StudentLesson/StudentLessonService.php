@@ -33,7 +33,7 @@ class StudentLessonService
             'last_page_finished' => intval($request->last_page_finished),
         ]);
     }
-    
+
     public function unFinishStudentLesson(object $request)
     {
         StudentLesson::where([
@@ -96,7 +96,16 @@ class StudentLessonService
             'lesson_id' => $request->lesson_id,
             'group_id' => $request->group_id,
         ], [
-            
+
         ]);
+    }
+
+
+    public function getStudentLessonReview($studentLesson): mixed
+    {
+        $studentLesson->load(['syllabus', 'lesson.subject', 'student', 'studentLessonReview.syllabusReviews']);
+
+        return  $studentLesson->studentLessonReview;
+
     }
 }
