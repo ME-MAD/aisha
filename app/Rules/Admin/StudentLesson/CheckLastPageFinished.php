@@ -28,11 +28,7 @@ class CheckLastPageFinished implements Rule
     {
         $lesson = Lesson::find(request('lesson_id'));
         
-        if($value == $lesson->to_page)
-        {
-           return $lesson->to_page;
-        }
-        return false;
+        return $value == $lesson->to_page;
     }
 
     /**
@@ -42,6 +38,6 @@ class CheckLastPageFinished implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'the last page finished is not equal to lesson pages count';
     }
 }
