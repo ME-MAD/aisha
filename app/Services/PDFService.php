@@ -33,12 +33,16 @@ class PDFService
         return $fileName;
     }
 
-    public function explodePdfToImages($pdfFileName,$createdDirectoryName)
+    public function explodePdfToImages($subject)
     {
-        $pdf = new Pdf(public_path($pdfFileName));
+        $pdf = new Pdf(public_path($subject->book));
         $numberOfPages = $pdf->getNumberOfPages();
+
+        $subject->update([
+            'pages_count' => $numberOfPages
+        ]);
         
-        $path = public_path('files/subjects/' . $createdDirectoryName . "/");
+        $path = public_path('files/subjects/' . $subject->name . "/");
 
         if(!File::exists($path)) 
         {
@@ -48,7 +52,7 @@ class PDFService
         $jobs = [];
         for($i = 1; $i <= $numberOfPages; $i++)
         {
-            $jobs []= new ConvertPdfPageIntoImageJob($pdf, $i, $createdDirectoryName);
+            $jobs []= new ConvertPdfPageIntoImageJob($pdf, $i, $subject->name);
         }
         // ConvertPdfPageIntoImageJob::withChain($jobs)->dispatch($pdf, 1, $createdDirectoryName);
         Bus::chain($jobs)->dispatch();

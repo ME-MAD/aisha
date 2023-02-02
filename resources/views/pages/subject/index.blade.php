@@ -92,6 +92,7 @@
                                                 <th class="checkbox-column text-center"> Id</th>
                                                 <th class="text-center">Image</th>
                                                 <th class="text-center">Name</th>
+                                                <th class="text-center">Pages Count</th>
                                                 <th class="text-center">Book</th>
                                                 <th class="text-center">Edit</th>
                                                 <th class="text-center">Delete</th>
@@ -107,6 +108,7 @@
                                                              class="avatar-image">
                                                     </td>
                                                     <td>{{ $subject->name }}</td>
+                                                    <td>{{ $subject->pages_count }}</td>
                                                     <td>
                                                         <a href="{{ $subject->book }}" target="__blank">
                                                             <svg viewBox="0 0 24 24" width="24" height="24"
