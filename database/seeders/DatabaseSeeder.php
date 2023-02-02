@@ -51,10 +51,11 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
+            FactorySeeder::class,
             QuraanSeeder::class,
             TgweedSeeder::class,
             QaidaNooraniahSeeder::class,
-            PermissionSeeder::class
+            // PermissionSeeder::class,
         ]);
     }
 }
