@@ -1,5 +1,5 @@
 <div class="modal fade" id="creatStudentModal" tabindex="-1" role="dialog" aria-labelledby="creatStudentModal"
-    aria-hidden="true">
+     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header p-3 mb-2 bg-primary">
@@ -9,27 +9,75 @@
                 <form action="{{ route('admin.student.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
-                    <x-text name="name" label="الإسم" :value="old('name')" />
+                    <x-text name="name"
+                            label="{{trans('student.name')}}"
+                            placeholder="{{trans('student.name')}}"
+                            :value="old('name')"/>
 
-                    <x-text name="email" label="Email" :value="old('email')" />
+                    <x-text name="email"
+                            label="{{trans('student.email')}}"
+                            placeholder="{{trans('student.email')}}"
+                            :value="old('email')"/>
 
-                    <x-text name="password" label="Password" :value="old('password')" />
+                    <x-text name="password"
+                            label="{{trans('student.password')}}"
+                            placeholder="{{trans('student.password')}}"
+                            :value="old('password')"/>
 
-                    <x-text name="password_confirmation" label="Confirm Password" />
+                    <x-text name="password_confirmation"
+                            label="{{trans('student.confirm password')}}"
+                            placeholder="{{trans('student.confirm password')}}" />
 
-                    <x-date name="birthday" label="تاريخ الميلاد" :value="old('birthday')" />
+                    <div class="form-group my-2">
+                        <label
+                            class="font-weight-bold text-capitalize text-muted"> {{__('student.choose role')}} </label>
 
-                    <x-text name="phone" label="الهاتف" :value="old('phone')" />
+                        <select class="form-control selectpicker my-2" style="width: 100%;"
+                                name="role"
+                                id="role">
+                            <option value="">{{__('student.choose role')}}</option>
+                            @forelse($roles as $role)
+                                <option value="{{$role->name}}">
+                                    {{$role->name}}
+                                </option>
+                            @empty
+                                <option value="">
+                                    No Roles Founded
+                                </option>
+                            @endforelse
+                        </select>
+                        @error('role')
+                        <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                    <x-text name="qualification" label="المؤهل" :value="old('qualification')" />
+                    <x-date name="birthday"
+                            label="{{__('student.birthday')}}"
+                            placeholder="{{__('student.birthday')}}"
+                            :value="old('birthday')"/>
+
+                    <x-text name="phone"
+                            label="{{__('student.phone')}}"
+                            placeholder="{{__('student.phone')}}"
+                            :value="old('phone')"/>
+
+                    <x-text name="qualification"
+                            label="{{__('student.qualification')}}"
+                            placeholder="{{__('student.qualification')}}"
+                            :value="old('qualification')"/>
 
                     <div class="custom-file-container" data-upload-id="myFirstImage">
-                        <label>اختر صوره <a href="javascript:void(0)" class="custom-file-container__image-clear"
-                                title="Clear Image"></a></label>
+                        <label>
+                            {{trans('student.choose photo')}}
+                            <a href="javascript:void(0)"
+                               class="custom-file-container__image-clear"
+                               title="Clear Image">
+                            </a>
+                        </label>
                         <label class="custom-file-container__custom-file">
                             <input type="file" class="custom-file-container__custom-file__custom-file-input"
-                                accept="image/*" name="avatar">
-                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                                   accept="image/*" name="avatar">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760"/>
                             <span class="custom-file-container__custom-file__custom-file-control"></span>
                         </label>
                         <div class="custom-file-container__image-preview"></div>
@@ -37,8 +85,14 @@
 
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Discard</button>
+                        <button type="submit" class="btn btn-primary text-capitalize font-weight-bold">
+                            {{__('student.save')}}
+                        </button>
+
+                        <button class="btn text-capitalize font-weight-bold" data-dismiss="modal">
+                            <i class="flaticon-cancel-12"></i>
+                            {{__('student.discard')}}
+                        </button>
                     </div>
 
                 </form>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class StudentService
 {
-    private $imageService;
+    private ImageService $imageService;
 
     public function __construct(
         ImageService $imageService
@@ -29,7 +29,7 @@ class StudentService
             path: Student::AVATARS_PATH
         );
 
-        Student::create([
+      $student = Student::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -38,12 +38,13 @@ class StudentService
             'qualification' => $request->qualification,
             'avatar' => $fileName,
         ]);
+
     }
 
     public function updateStudent($request, $student): void
     {
         $fileName = $student->getRawOriginal('avatar');
-        
+
         if ($request->file('avatar')) {
 
             $this->imageService->deleteImage(

@@ -1,19 +1,32 @@
 @extends('master')
 
-
-
 @push('css')
-    <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
+
 
     @if (LaravelLocalization::getCurrentLocale() == 'ar')
-        <link href="{{ asset('adminRtl/plugins/file-upload/file-upload-with-preview.min.css') }}" rel="stylesheet" type="text/css"/>
+        <link  rel="stylesheet"
+               type="text/css"
+               href="{{ asset('adminRtl/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
     @else
-        <link href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}" rel="stylesheet" type="text/css"/>
+        <link  rel="stylesheet"
+               type="text/css"
+               href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
     @endif
-    <!-- END PAGE LEVEL STYLES -->
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.css')}}">
 @endpush
 
 
@@ -93,20 +106,14 @@
 
 @push('js')
 
-    <!-- BEGIN PAGE LEVEL CUSTOM SCRIPTS -->
     <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
-    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
-    <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
-    <!-- END PAGE LEVEL CUSTOM SCRIPTS -->
-    <script src="/vendor/datatables/buttons.server-side.js"></script>
-
+    <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js')}}"></script>
     {!! $dataTable->scripts() !!}
 
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
     <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
-    <script>
-        var firstUpload = new FileUploadWithPreview('myFirstImage')
-        var secondUpload = new FileUploadWithPreview('mySecondImage')
-    </script>
+    <script src="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.js')}}"></script>
+
+    <script src="{{asset('js/student.js')}}"></script>
 @endpush
 

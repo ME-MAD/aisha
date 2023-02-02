@@ -18,7 +18,8 @@
             {{
                     request()->routeIs('admin.home') ||
                     request()->routeIs('admin.user.index') ||
-                    request()->routeIs('admin.role.index') ? 'active' : ''
+                    request()->routeIs('admin.role.index') ||
+                    request()->routeIs('admin.role.edit') ? 'active' : ''
             }}">
 
                 <a href="{{route('admin.home')}}" data-toggle="collapse" aria-expanded="true"
@@ -44,7 +45,10 @@
                         <a href="{{route('admin.user.index')}}"
                            class="text-capitalize font-weight-bold">{{__('global.users')}} </a>
                     </li>
-                    <li class="{{request()->routeIs('admin.role.index') ? 'active' : '' }}">
+                    <li class="{{
+                                request()->routeIs('admin.role.index') ||
+                                 request()->routeIs('admin.role.edit') ? 'active' : ''
+                            }}">
                         <a href="{{route('admin.role.index')}}"
                            class="text-capitalize font-weight-bold">{{__('roles.roles')}} </a>
                     </li>
@@ -53,6 +57,7 @@
 
             <li class="menu single-menu {{
                     request()->routeIs('admin.teacher.index') ||
+                    request()->routeIs('admin.teacher.show')||
                     request()->routeIs('admin.experience.index')  ? 'active' : ''
             }}
             ">
@@ -88,7 +93,8 @@
 
 
             <li class="menu single-menu {{
-                                    request()->routeIs('admin.student.index')  ? 'active' : ''
+                                    request()->routeIs('admin.student.index') ||
+                                    request()->routeIs('admin.student.show') ? 'active' : ''
                                 }}">
                 <a href="{{route('admin.student.index')}}" data-toggle="collapse" aria-expanded="false"
                    class="dropdown-toggle">

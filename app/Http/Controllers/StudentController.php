@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\StudentDataTable;
 use App\Http\Requests\Student\StoreStudentRequest;
 use App\Http\Requests\Student\UpdateStudentRequest;
+use App\Models\Role;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Services\Student\StudentService;
@@ -14,8 +15,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentController extends Controller
 {
-    private $studentService;
-    private $subjectService;
+    private StudentService $studentService;
+    private SubjectService $subjectService;
 
     public function __construct(StudentService $studentService, SubjectService $subjectService)
     {
@@ -25,12 +26,15 @@ class StudentController extends Controller
 
     public function index(StudentDataTable $studentDataTable)
     {
-        return $studentDataTable->render('pages.student.index');
+        $roles = Role::select(['id','name','display_name','description'])->get();
+
+        return $studentDataTable->render('pages.student.index',[
+            'roles' =>$roles,
+        ]);
     }
 
     public function store(StoreStudentRequest $request): RedirectResponse
     {
-
         $this->studentService->createStudent($request);
 
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -61,7 +65,7 @@ class StudentController extends Controller
     public function delete(Student $student): RedirectResponse
     {
         $this->studentService->deleteStudent($student);
-        
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
@@ -69,7 +73,7 @@ class StudentController extends Controller
     public function getGroupStudents(Student $student)
     {
         $subjects = $this->subjectService->getSubjectsWithLessonsWithReviews();
-         
+
         return response()->json([
             'groupStudents' => $student->groupStudents->load(['group.groupDays']),
             'subjects' => $subjects,
