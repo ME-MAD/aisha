@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 class Text extends Component
 {
 
-    
+
     /**
      * Create a new component instance.
      *
@@ -18,9 +18,10 @@ class Text extends Component
     public $value = null,
     public $class = null,
     public $id = null,
-    public $labelClass = null)
+    public $labelClass = null,
+    public  $placeholder = null )
     {
-       
+
     }
 
     /**

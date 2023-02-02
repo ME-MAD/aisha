@@ -5,7 +5,7 @@
         <input type="text"
                class="form-control {{$class ?? ''}}"
                id="{{$id ?? $name}}"
-               placeholder=""
+               placeholder="{{$placeholder ?? ''}}"
                name="{{ $name }}"
                value="{{$value ?? ''}}">
         @error($name)

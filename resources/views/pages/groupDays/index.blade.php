@@ -33,7 +33,10 @@
     <link rel="stylesheet"
           type="text/css"
           href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
-          <link rel="stylesheet" type="text/css" href="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.css')}}">
+
+          <link rel="stylesheet"
+                type="text/css"
+                href="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.css')}}">
 @endpush
 
 @section('breadcrumb')
