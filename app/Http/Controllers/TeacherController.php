@@ -78,7 +78,7 @@ class TeacherController extends Controller
     {
         $this->teacherService->setAllDataAboutTeacher($teacher);
 
-        $experiences = $this->teacherService->getTeacherExperiences($teacher);
+        $experiences = $this->teacherService->getTeacherExperiences();
 
         $yearsOfExperience = $this->experienceService->getCountOfExperienceYears($experiences);
 

@@ -32,12 +32,12 @@ class ExperienceController extends Controller
         $this->teacherService = $teacherService;
         $this->experienceService = $experienceService;
 
-        $this->handlePermissions([
-            'index' => 'index-experience',
-            'store' => 'store-experience',
-            'update' => 'update-experience',
-            'delete' => 'delete-experience',
-        ]);
+        // $this->handlePermissions([
+        //     'index' => 'index-experience',
+        //     'store' => 'store-experience',
+        //     'update' => 'update-experience',
+        //     'delete' => 'delete-experience',
+        // ]);
     }
 
     public function index()

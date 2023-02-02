@@ -8,16 +8,26 @@ use Illuminate\Contracts\Validation\Rule;
 class LessThanLessonPagesNumberRule implements Rule
 {
 
-    private $studentLesson;
     private $message = '';
-
-    public function __construct(StudentLesson $studentLesson)
-    {
-        $this->studentLesson = $studentLesson;
-    }
+    private $studentLesson;
 
     public function passes($attribute, $value)
     {
+
+        if(! request('group_id') || !request('lesson_id') || !request('student_id'))
+        {
+            $this->message = "the group or student or lesson not found";
+            return false;
+        }
+
+        $this->studentLesson = StudentLesson::firstOrCreate([
+            'group_id' => request('group_id'),
+            'lesson_id' => request('lesson_id'),
+            'student_id' => request('student_id')
+        ],[
+            
+        ]);
+
         if($this->lessThanLessonPages($value))
         {
             $this->message = "The $attribute Should Be Greater Than " . $this->studentLesson->lesson->from_page;

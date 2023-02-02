@@ -3,6 +3,8 @@
 namespace Tests\Controller;
 
 use App\Jobs\BreakPDFIntoImagesJob;
+use App\Models\Subject;
+use App\Services\ImageService;
 use App\Services\PDFService;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Bus;
@@ -105,11 +107,18 @@ class SubjectControllerTest extends TestCaseWithTransLationsSetUp
         $data = [
             'name' => fake()->name(),
             'book' => UploadedFile::fake()->create('book.pdf'),
-            'avatar' => UploadedFile::fake()->image('avatar.png'),
+            'avatar' => UploadedFile::fake()->image('avatar_store.png'),
         ];
 
         $this->mock(PDFService::class, function(MockInterface $mock){
             $mock->shouldReceive('uploadPdfFile')->once()->andReturn('book.pdf');
+        });
+
+        $this->mock(ImageService::class, function(MockInterface $mock) use($data){
+            $mock->shouldReceive('uploadImage')->once()->with(
+                $data['avatar'],
+                Subject::AVATARS_PATH
+            )->andReturn('avatar_store.png');
         });
 
         Bus::fake();
@@ -191,27 +200,107 @@ class SubjectControllerTest extends TestCaseWithTransLationsSetUp
         $res->assertSessionHasErrors();
     }
 
-    // public function test_update_passes_with_correct_data()
-    // {
-    //     $subject = $this->generateRandomSubject();
+    public function test_update_passes_with_avatar_with_book()
+    {
+        $subject = $this->generateRandomSubject();
         
-    //     $data = [
-    //         'name' => fake()->name(),
-    //         'book' => UploadedFile::fake()->create('book.pdf'),
-    //         'avatar' => UploadedFile::fake()->image('avatar.png'),
-    //     ];
+        $data = [
+            'name' => fake()->name(),
+            'book' => UploadedFile::fake()->create('book_update.pdf'),
+            'avatar' => UploadedFile::fake()->image('avatar_update.png'),
+        ];
 
-    //     $this->mock(PDFService::class, function(MockInterface $mock){
-    //         $mock->shouldReceive('uploadPdfFile')->once()->andReturn('book.pdf');
-    //     });
+        $this->mock(ImageService::class, function(MockInterface $mock) use($data, $subject){
+            $mock->shouldReceive('deleteImage')->once()->with($subject->getAvatarPath());
 
-    //     Bus::fake();
+            $mock->shouldReceive('uploadImage')->once()->with(
+                $data['avatar'],
+                Subject::AVATARS_PATH
+            )->andReturn('avatar_update.png');
+        });
 
-    //     $res = $this->call('PUT', route('admin.subject.update', $subject), $data);
+        $this->mock(PDFService::class, function(MockInterface $mock) use($data,$subject){
+            $mock->shouldReceive('deleteFile')->once();
 
-    //     Bus::assertDispatched(BreakPDFIntoImagesJob::class);
+            $mock->shouldReceive('deleteDirectory')->once()->with($subject->directoryName());
 
-    //     $res->assertSessionHasNoErrors();
-    // }
+            $mock->shouldReceive('uploadPdfFile')->once()->with(
+                $data['book'],
+                $data['name'],
+                'subjects',
+                null,
+                'book'
+            )->andReturn("book_update.pdf");
+        });
 
+        Bus::fake();
+
+        $res = $this->call('PUT', route('admin.subject.update', $subject), $data);
+
+        Bus::assertDispatched(BreakPDFIntoImagesJob::class);
+
+        $res->assertSessionHasNoErrors();
+    }
+    
+    public function test_update_passes_without_avatar_without_book()
+    {
+        $subject = $this->generateRandomSubject();
+        
+        $data = [
+            'name' => fake()->name(),
+            'book' => null,
+            'avatar' => null,
+        ];
+
+        $this->mock(ImageService::class, function(MockInterface $mock) use($data, $subject){
+            $mock->shouldReceive('deleteImage')->never()->with($subject->getAvatarPath());
+
+            $mock->shouldReceive('uploadImage')->never()->with(
+                $data['avatar'],
+                Subject::AVATARS_PATH
+            )->andReturn('avatar_update.png');
+        });
+
+        $this->mock(PDFService::class, function(MockInterface $mock) use($data,$subject){
+            $mock->shouldReceive('deleteFile')->never();
+
+            $mock->shouldReceive('deleteDirectory')->never()->with($subject->directoryName());
+
+            $mock->shouldReceive('uploadPdfFile')->never()->with(
+                $data['book'],
+                $data['name'],
+                'subjects',
+                null,
+                'book'
+            )->andReturn("book_update.pdf");
+        });
+
+        Bus::fake();
+
+        $res = $this->call('PUT', route('admin.subject.update', $subject), $data);
+
+        Bus::assertDispatched(BreakPDFIntoImagesJob::class);
+
+        $res->assertSessionHasNoErrors();
+    }
+
+
+    public function test_delete_pass()
+    {
+        $subject = $this->generateRandomSubject();
+
+        $this->mock(ImageService::class, function(MockInterface $mock) use($subject){
+            $mock->shouldReceive('deleteImage')->once()->with($subject->getAvatarPath());
+        });
+
+        $this->mock(PDFService::class, function(MockInterface $mock) use($subject){
+            $mock->shouldReceive('deleteFile')->once();
+
+            $mock->shouldReceive('deleteDirectory')->once()->with($subject->directoryName());
+        });
+
+        $res = $this->call('GET', route('admin.subject.delete', $subject));
+
+        $res->assertSessionHasNoErrors();
+    }
 }

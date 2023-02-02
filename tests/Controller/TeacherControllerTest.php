@@ -2,6 +2,7 @@
 
 namespace Tests\Controller;
 
+use App\Models\Teacher;
 use App\Models\User;
 use Mockery\MockInterface;
 use Tests\Traits\TestTeacherTrait;
@@ -90,6 +91,16 @@ class TeacherControllerTest extends TestCaseWithTransLationsSetUp
         $res = $this->call('get', route('admin.teacher.delete', $teacher->id));
 
         $res->assertSessionHasNoErrors();
+    }
+
+    public function test_get_teacher_show_data_ajax()
+    {
+        $teacher = $this->generateRandomTeacher();
+
+        $res = $this->call('get', route('admin.teacher.getTeacherShowDataAjax', $teacher->id));
+
+        $res->assertSessionHasNoErrors();
+        $res->assertOk();
     }
 
 
