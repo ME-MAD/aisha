@@ -16,18 +16,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RoleSeeder::class);
 
-       $admin = User::updateOrCreate([
-            'email' => 'admin@admin.com',
-        ], [
-            'name' => 'admin',
-            'password' => Hash::make('123')
-        ]);
+        $this->call(AdminSeeder::class);
         
-        if( !$admin->hasRole('admin') )
-        {
-            $admin->attachRole('admin');
-        }
-
         GroupType::updateOrCreate([
             'name' => 'normal',
         ], [
@@ -54,7 +44,7 @@ class DatabaseSeeder extends Seeder
             QuraanSeeder::class,
             TgweedSeeder::class,
             QaidaNooraniahSeeder::class,
-            PermissionSeeder::class
+            PermissionSeeder::class,
         ]);
     }
 }
