@@ -1082,13 +1082,13 @@ function handleShowingOfTheBook(pageCount = 1, subject){
 
     $('#next').on('click',function(){
         pageCount += 1
-        if(subject.pagesCount >= pageCount)
+        if(subject.pages_count >= pageCount)
         {
             addPage(book, subject.name, pageCount)
         }
 
         pageCount += 1
-        if(subject.pagesCount >= pageCount)
+        if(subject.pages_count >= pageCount)
         {
             addPage(book, subject.name, pageCount)
         }

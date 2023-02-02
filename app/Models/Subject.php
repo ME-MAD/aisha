@@ -11,7 +11,7 @@ class Subject extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'avatar', 'book','pages_count'];
-    protected $appends = ['pagesCount'];
+    // protected $appends = ['pagesCount'];
     const AVATARS_PATH = 'images/subject/avatars/';
 
     protected function avatar(): Attribute
