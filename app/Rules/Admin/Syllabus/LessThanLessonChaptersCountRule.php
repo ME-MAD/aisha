@@ -8,19 +8,27 @@ use Illuminate\Contracts\Validation\Rule;
 class LessThanLessonChaptersCountRule implements Rule
 {
 
-    private $studentLesson;
     private $message = '';
-   
-    public function __construct(StudentLesson $studentLesson)
-    {
-        $this->studentLesson = $studentLesson;
-    }
 
     public function passes($attribute, $value)
     {
-        if($value > ($this->studentLesson->lesson->chapters_count ?? 0))
+        if(! request('group_id') || !request('lesson_id') || !request('student_id'))
         {
-            $this->message = "The $attribute Should Be Less Than " . $this->studentLesson->lesson->chapters_count;
+            $this->message = "the group or student or lesson not found";
+            return false;
+        }
+        
+        $studentLesson = StudentLesson::firstOrCreate([
+            'group_id' => request('group_id'),
+            'lesson_id' => request('lesson_id'),
+            'student_id' => request('student_id')
+        ],[
+            
+        ]);
+        
+        if($value > ($studentLesson->lesson->chapters_count ?? 0))
+        {
+            $this->message = "The $attribute Should Be Less Than " . $studentLesson->lesson->chapters_count;
             return false;
         }
         return true;

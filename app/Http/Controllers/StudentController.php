@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\DataTables\StudentDataTable;
 use App\Http\Requests\Student\StoreStudentRequest;
 use App\Http\Requests\Student\UpdateStudentRequest;
-use App\Http\Traits\ImageTrait;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Services\Student\StudentService;
@@ -15,8 +14,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentController extends Controller
 {
-    use ImageTrait;
-
     private $studentService;
     private $subjectService;
 

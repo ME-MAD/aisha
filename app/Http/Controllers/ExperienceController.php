@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use App\DataTables\ExperienceDataTable;
 use App\Http\Requests\Experience\StoreExperienceRequest;
 use App\Http\Requests\Experience\UpdateExperienceRequest;
+use App\Http\Traits\AuthTrait;
 use App\Models\Experience;
 use App\Services\Experience\ExperienceService;
 use App\Services\Teacher\TeacherService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExperienceController extends Controller
 {
+
+    use AuthTrait;
 
     private $experienceDataTable;
     private $teacherService;
@@ -26,8 +31,15 @@ class ExperienceController extends Controller
         $this->experienceDataTable = $experienceDataTable;
         $this->teacherService = $teacherService;
         $this->experienceService = $experienceService;
+
+        // $this->handlePermissions([
+        //     'index' => 'index-experience',
+        //     'store' => 'store-experience',
+        //     'update' => 'update-experience',
+        //     'delete' => 'delete-experience',
+        // ]);
     }
-    
+
     public function index()
     {
         $teachers  = $this->teacherService->getAllTeachers();

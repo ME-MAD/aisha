@@ -5,22 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Subject;
 use App\Http\Requests\Subject\StoreSubjectRequest;
 use App\Http\Requests\Subject\UpdateSubjectRequest;
-use App\Http\Traits\ImageTrait;
 use App\Jobs\BreakPDFIntoImagesJob;
+use App\Services\ImageService;
 use App\Services\PDFService;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SubjectController extends Controller
 {
-    use ImageTrait;
-
+    private $imageService;
     private $PDFService;
 
-    public function __construct(PDFService $PDFService)
+    public function __construct(
+        ImageService $imageService,
+        PDFService $PDFService
+    )
     {
+        $this->imageService = $imageService;
         $this->PDFService = $PDFService;
     }
     
+
     public function index()
     {
         $subjects = Subject::get();
@@ -37,7 +41,7 @@ class SubjectController extends Controller
 
     public function store(StoreSubjectRequest $request)
     {
-        $fileName = $this->uploadImage(
+        $fileName = $this->imageService->uploadImage(
             imageObject: $request->file('avatar'),
             path: Subject::AVATARS_PATH
         );
@@ -75,11 +79,11 @@ class SubjectController extends Controller
 
         if ($request->file('avatar')) {
 
-            $this->deleteImage(
+            $this->imageService->deleteImage(
                 path: $subject->getAvatarPath()
             );
 
-            $fileName = $this->uploadImage(
+            $fileName = $this->imageService->uploadImage(
                 imageObject: $request->file('avatar'),
                 path: Subject::AVATARS_PATH
             );
@@ -128,7 +132,7 @@ class SubjectController extends Controller
 
     public function delete(Subject $subject)
     {
-        $this->deleteImage(
+        $this->imageService->deleteImage(
             path: $subject->getAvatarPath()
         );
         $this->PDFService->deleteFile($subject->book);

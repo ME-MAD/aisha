@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Session;
+
 if (!function_exists('getStudentTypes')) {
     function getStudentTypes()
     {
@@ -7,6 +9,13 @@ if (!function_exists('getStudentTypes')) {
             'normal' => 'عادي',
             'dense' => 'مكثف',
         ];
+    }
+}
+
+if (!function_exists('getGuard')) {
+    function getGuard()
+    {
+        return Session::get('admin_guard');
     }
 }
 
