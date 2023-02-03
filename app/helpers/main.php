@@ -53,12 +53,13 @@ if (!function_exists('getPermissionKeys')) {
     function getPermissionKeys()
     {
         return [
-            'c' => 'create',
-            'u' => 'update',
-            'd' => 'delete',
-            'e' => 'edit',
-            's' => 'show',
-            'i' => 'index'
+            'create',
+            'update',
+            'delete',
+            'edit',
+            'show',
+            'index',
+            'store'
         ];
     }
 }
@@ -125,6 +126,26 @@ if (!function_exists('getPermissionsForSeeder')) {
             foreach($keys as $key => $value)
             {
                 $permissions [] ['name']= "$value-$table";
+            }
+        }
+        return $permissions;
+    }
+}
+
+
+if (!function_exists('getPermissionsArray')) {
+    function getPermissionsArray()
+    {
+        $keys = getPermissionKeys();
+        $tables = getPermissionTables();
+
+        $permissions = [];
+
+        foreach($tables as $table)
+        {
+            foreach($keys as $key => $value)
+            {
+                $permissions []= "$value-$table";
             }
         }
         return $permissions;

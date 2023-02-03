@@ -14,10 +14,6 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        $this->call(RoleSeeder::class);
-
-        $this->call(AdminSeeder::class);
-        
         GroupType::updateOrCreate([
             'name' => 'normal',
         ], [
@@ -45,6 +41,8 @@ class DatabaseSeeder extends Seeder
             TgweedSeeder::class,
             QaidaNooraniahSeeder::class,
             PermissionSeeder::class,
+            RoleSeeder::class,
+            AdminSeeder::class
         ]);
     }
 }
