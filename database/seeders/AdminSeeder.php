@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -10,6 +12,9 @@ class AdminSeeder extends Seeder
 {
     public function run()
     {
+        $permissions = Permission::get();
+        $adminRole = Role::where('name', 'admin')->first();
+
         $admin = User::firstOrCreate([
             'email' => 'admin@admin.com',
         ], [
@@ -17,9 +22,13 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('123')
         ]);
 
-        if( !$admin->hasRole('admin') )
-        {
+        if (!$admin->hasRole('admin')) {
+
             $admin->attachRole('admin');
+
+            $adminRole->attachPermissions($permissions);
+            
+            $admin->attachPermissions($permissions);
         }
     }
 }
