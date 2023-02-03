@@ -5,7 +5,7 @@ namespace App\Rules\Admin\GroupDay;
 use App\Models\Group;
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckIfCountOfGroupDayIsAvailable implements Rule
+class CheckIfCountOfGroupDayIsAvailableRule implements Rule
 {
     private $maxDaysOfGroup;
 
