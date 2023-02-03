@@ -3,20 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\LessonsDataTable;
-use App\Models\Lesson;
 use App\Http\Requests\Lesson\StoreLessonRequest;
 use App\Http\Requests\Lesson\UpdateLessonRequest;
+use App\Http\Traits\AuthTrait;
+use App\Models\Lesson;
 use App\Models\Subject;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class LessonController extends Controller
 {
+    use  AuthTrait;
 
-
+    public function __construct()
+    {
+        $this->handlePermissions([
+            'index' => 'index-lesson',
+            'store' => 'store-lesson',
+            'update' => 'update-lesson',
+            'delete' => 'delete-lesson',
+        ]);
+    }
 
     public function index(LessonsDataTable $lessonsDataTable)
     {
-        $subjects  = Subject::select(['id', 'name'])->get();
+        $subjects = Subject::select(['id', 'name'])->get();
         return $lessonsDataTable->render('pages.lesson.index', [
             'subjects' => $subjects
         ]);
@@ -24,7 +34,7 @@ class LessonController extends Controller
 
     public function create()
     {
-        $subjects =  Subject::get();
+        $subjects = Subject::get();
         return view('pages.lesson.create', [
             "subjects" => $subjects
         ]);
@@ -44,13 +54,13 @@ class LessonController extends Controller
     public function show(Lesson $lesson)
     {
         return view('pages.lesson.show', [
-            "lesson" => $lesson->load(['subject','studentLessons.syllabus'])
+            "lesson" => $lesson->load(['subject', 'studentLessons.syllabus'])
         ]);
     }
 
     public function edit(Lesson $lesson)
     {
-        $subjects =  Subject::get();
+        $subjects = Subject::get();
         return view('pages.lesson.edit', [
             "lesson" => $lesson,
             "subjects" => $subjects

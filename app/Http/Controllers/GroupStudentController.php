@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\GroupStudentDataTable;
-use App\Models\GroupStudent;
 use App\Http\Requests\GroupStudent\StoreGroupStudentRequest;
+use App\Http\Traits\AuthTrait;
+use App\Models\GroupStudent;
 use App\Services\Group\GroupService;
 use App\Services\GroupStudent\GroupStudentService;
 use App\Services\Student\StudentService;
@@ -13,19 +14,29 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupStudentController extends Controller
 {
+    use AuthTrait;
 
-    private $groupStudentService;
-    private $groupService;
-    private $StudentService;
+    private GroupStudentService $groupStudentService;
+    private GroupService $groupService;
+    private StudentService $StudentService;
 
     public function __construct(
         GroupStudentService $groupStudentService,
-        GroupService $groupService,
-        StudentService $StudentService,
-    ) {
+        GroupService        $groupService,
+        StudentService      $StudentService,
+    )
+    {
         $this->groupStudentService = $groupStudentService;
         $this->groupService = $groupService;
         $this->StudentService = $StudentService;
+
+
+        $this->handlePermissions([
+            'index' => 'index-groupDay',
+            'store' => 'store-groupDay',
+            'update' => 'update-groupDay',
+            'delete' => 'delete-groupDay',
+        ]);
     }
 
     public function index(GroupStudentDataTable $GroupStudentDataTable)
@@ -56,7 +67,7 @@ class GroupStudentController extends Controller
     public function getGroupStudents(Request $request)
     {
         return response()->json([
-            'groupStudents' =>  $this->groupStudentService->getGroupStudentsOfGroup($request->group_id)
+            'groupStudents' => $this->groupStudentService->getGroupStudentsOfGroup($request->group_id)
         ]);
     }
 }

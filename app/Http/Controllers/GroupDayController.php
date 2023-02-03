@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\GroupDayDataTable;
 use App\Http\Requests\GroupDay\StoreGroupDayRequest;
+use App\Http\Traits\AuthTrait;
 use App\Models\GroupDay;
 use App\Services\Group\GroupService;
 use App\Services\GroupDay\GroupDayService;
@@ -13,10 +14,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupDayController extends Controller
 {
+    use AuthTrait;
 
-    private $groupDayDataTable;
-    private $groupDayService;
-    private $groupService;
+    private GroupDayDataTable $groupDayDataTable;
+    private GroupDayService $groupDayService;
+    private GroupService $groupService;
 
     public function __construct(
         GroupDayDataTable $groupDayDataTable,
@@ -27,6 +29,14 @@ class GroupDayController extends Controller
         $this->groupDayDataTable = $groupDayDataTable;
         $this->groupDayService = $groupDayService;
         $this->groupService = $groupService;
+
+
+        $this->handlePermissions([
+            'index' => 'index-groupDay',
+            'store' => 'store-groupDay',
+            'update' => 'update-groupDay',
+            'delete' => 'delete-groupDay',
+        ]);
     }
 
     public function index()

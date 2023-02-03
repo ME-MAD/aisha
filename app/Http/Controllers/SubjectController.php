@@ -2,28 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Subject;
 use App\Http\Requests\Subject\StoreSubjectRequest;
 use App\Http\Requests\Subject\UpdateSubjectRequest;
+use App\Http\Traits\AuthTrait;
 use App\Jobs\BreakPDFIntoImagesJob;
+use App\Models\Subject;
 use App\Services\ImageService;
 use App\Services\PDFService;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SubjectController extends Controller
 {
-    private $imageService;
-    private $PDFService;
+    use  AuthTrait;
+
+    private ImageService $imageService;
+    private PDFService $PDFService;
 
     public function __construct(
         ImageService $imageService,
-        PDFService $PDFService
+        PDFService   $PDFService
     )
     {
         $this->imageService = $imageService;
         $this->PDFService = $PDFService;
+
+        $this->handlePermissions([
+            'index' => 'index-subject',
+            'store' => 'store-subject',
+            'update' => 'update-subject',
+            'delete' => 'delete-subject',
+        ]);
     }
-    
+
 
     public function index()
     {
@@ -57,7 +67,7 @@ class SubjectController extends Controller
         $subject = Subject::create([
             'name' => $request->name,
             'book' => $book_name,
-            'avatar' =>  $fileName,
+            'avatar' => $fileName,
         ]);
 
         BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
@@ -104,13 +114,12 @@ class SubjectController extends Controller
         } else {
             $book_name = $request->name . "_book" . "." . "pdf";
 
-            if(file_exists($subject->book))
-            {
+            if (file_exists($subject->book)) {
                 rename(
                     public_path($subject->book),
                     public_path('files/subjects/' . $book_name)
                 );
-    
+
                 rename(
                     public_path('files/subjects/' . $subject->name . "/"),
                     public_path('files/subjects/' . $request->name . "/")
@@ -121,7 +130,7 @@ class SubjectController extends Controller
         $subject->update([
             'name' => $request->name,
             'book' => $book_name,
-            'avatar' =>  $fileName,
+            'avatar' => $fileName,
         ]);
 
         BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);

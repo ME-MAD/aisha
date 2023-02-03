@@ -5,34 +5,43 @@ namespace App\Http\Controllers;
 use App\DataTables\GroupDataTable;
 use App\Http\Requests\Group\StoreGroupRequest;
 use App\Http\Requests\Group\UpdateGroupRequest;
+use App\Http\Traits\AuthTrait;
 use App\Models\Group;
-use App\Models\Payment;
 use App\Models\Student;
 use App\Services\Group\GroupService;
 use App\Services\GroupType\GroupTypeService;
 use App\Services\Payment\PaymentChartService;
 use App\Services\Teacher\TeacherService;
-use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupController extends Controller
 {
+    use  AuthTrait;
 
-    private $teacherService;
-    private $groupTypeService;
-    private $groupService;
-    private $paymentChartService;
+    private TeacherService $teacherService;
+    private GroupTypeService $groupTypeService;
+    private GroupService $groupService;
+    private PaymentChartService $paymentChartService;
 
     public function __construct(
-        TeacherService $teacherService,
-        GroupTypeService $groupTypeService,
-        GroupService $groupService,
+        TeacherService      $teacherService,
+        GroupTypeService    $groupTypeService,
+        GroupService        $groupService,
         PaymentChartService $paymentChartService,
-    ) {
+    )
+    {
         $this->teacherService = $teacherService;
         $this->groupTypeService = $groupTypeService;
         $this->groupService = $groupService;
         $this->paymentChartService = $paymentChartService;
+
+
+        $this->handlePermissions([
+            'index' => 'index-group',
+            'store' => 'store-group',
+            'update' => 'update-group',
+            'delete' => 'delete-group',
+        ]);
     }
 
     public function index(GroupDataTable $GroupDataTable)

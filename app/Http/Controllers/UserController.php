@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\UserDataTable;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
+use App\Http\Traits\AuthTrait;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -12,17 +13,29 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
+    use  AuthTrait;
+
+    public function __construct()
+    {
+        $this->handlePermissions([
+            'index' => 'index-user',
+            'store' => 'store-user',
+            'update' => 'update-user',
+            'delete' => 'delete-user',
+        ]);
+    }
+
     public function index(UserDataTable $userDataTable)
     {
-        $roles = Role::select(['id','name'])->get();
-        return $userDataTable->render('pages.user.index',[
+        $roles = Role::select(['id', 'name'])->get();
+        return $userDataTable->render('pages.user.index', [
             'roles' => $roles
         ]);
     }
 
     public function store(StoreUserRequest $request)
     {
-        $user =  User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)

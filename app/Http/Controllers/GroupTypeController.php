@@ -2,25 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GroupType;
 use App\DataTables\GroupTypeDataTable;
-use RealRashid\SweetAlert\Facades\Alert;
-use App\Services\GroupType\GroupTypeService;
 use App\Http\Requests\GroupType\StoreGroupTypeRequest;
 use App\Http\Requests\GroupType\UpdateGroupTypeRequest;
+use App\Http\Traits\AuthTrait;
+use App\Models\GroupType;
+use App\Services\GroupType\GroupTypeService;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupTypeController extends Controller
 {
+    use AuthTrait;
 
-    private $groupTypeDataTable;
-    private $groupTypeService;
+    private GroupTypeDataTable $groupTypeDataTable;
+    private GroupTypeService $groupTypeService;
 
     public function __construct(
         GroupTypeDataTable $groupTypeDataTable,
-        GroupTypeService $groupTypeService
-    ) {
+        GroupTypeService   $groupTypeService
+    )
+    {
         $this->groupTypeDataTable = $groupTypeDataTable;
-        $this->groupTypeService   = $groupTypeService;
+        $this->groupTypeService = $groupTypeService;
+
+
+        $this->handlePermissions([
+            'index' => 'index-groupStudent',
+            'store' => 'store-groupStudent',
+            'update' => 'update-groupStudent',
+            'delete' => 'delete-groupStudent',
+        ]);
     }
 
     public function index()
