@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\TeacherDataTable;
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
+use App\Models\Role;
 use App\Models\Teacher;
 use App\Services\Experience\ExperienceService;
 use App\Services\Teacher\TeacherService;
@@ -34,7 +35,10 @@ class TeacherController extends Controller
 
     public function index()
     {
-        return $this->teacherDataTable->render('pages.teacher.index');
+        $roles = Role::select(['id','name'])->get();
+        return $this->teacherDataTable->render('pages.teacher.index',[
+            'roles' => $roles
+        ]);
     }
 
     public function show(Teacher $teacher)
@@ -52,7 +56,9 @@ class TeacherController extends Controller
 
     public function store(StoreTeacherRequest $request)
     {
-        $this->teacherService->createTeacher($request);
+        $teacher = $this->teacherService->createTeacher($request);
+
+        $teacher->attachRole($request->role);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();

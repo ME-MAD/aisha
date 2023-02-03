@@ -85,7 +85,7 @@ class TeacherService
             );
         }
         
-        return $teacher->update([
+         $teacher->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password ? Hash::make($request->password) : $teacher->password,
@@ -94,6 +94,13 @@ class TeacherService
             'qualification' => $request->qualification,
             'avatar' => $fileName,
         ]);
+
+        $teacher->detachRole($teacher->role);
+
+        $teacher->attachRole($request->role);
+
+        return true;
+
     }
 
     public function deleteTeacher(Teacher $teacher): ?bool

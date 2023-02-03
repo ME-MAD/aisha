@@ -50,7 +50,7 @@ class TeacherDataTable extends DataTable
      */
     public function query(Teacher $model): QueryBuilder
     {
-        return $model->withCount(['groups', 'groupStudents']);
+        return $model->with('role:id,name')->withCount(['groups', 'groupStudents']);
     }
 
     /**
@@ -138,6 +138,13 @@ class TeacherDataTable extends DataTable
                 'name' => 'email',
                 'data' => 'email',
                 'title' => 'Email',
+                "className" => 'search--col'
+            ],
+
+            [
+                'name' => 'role.name',
+                'data' => 'role.name',
+                'title' => 'role',
                 "className" => 'search--col'
             ],
 
