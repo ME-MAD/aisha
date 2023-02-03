@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\RoleDataTable;
 use App\Http\Requests\Role\StoreRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
+use App\Http\Traits\AuthTrait;
 use App\Jobs\AttachPermissionsToRoleJob;
 use App\Models\PermissionRole;
 use App\Models\Role;
@@ -16,9 +17,18 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class RoleController extends Controller
 {
+    use AuthTrait;
+
     public function __construct()
     {
-
+        $this->handlePermissions([
+            'index' => 'index-role',
+            'store' => 'store-role',
+            'update' => 'update-role',
+            'delete' => 'delete-role',
+            'edit' => 'edit-role',
+            'create' => 'create-role',
+        ]);
     }
 
     public function index(RoleDataTable $roleDataTable)
@@ -67,7 +77,7 @@ class RoleController extends Controller
         $allPermissionsNames = $this->getAllPermissionNames($request->permissions);
 
         PermissionRole::where('role_id', $role->id)->delete();
-        
+
         AttachPermissionsToRoleJob::dispatch($allPermissionsNames, $role);
 
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -87,15 +97,14 @@ class RoleController extends Controller
     {
         $allPermissionsNames = [];
 
-        if( !is_null($requestPermissions) )
-        {
+        if (!is_null($requestPermissions)) {
             foreach ($requestPermissions as $table => $permissions) {
                 foreach ($permissions as $permission) {
                     $allPermissionsNames [] = $permission;
                 }
             }
         }
-        
+
         return $allPermissionsNames;
     }
 }

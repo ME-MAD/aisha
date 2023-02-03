@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\DataTables\StudentDataTable;
 use App\Http\Requests\Student\StoreStudentRequest;
 use App\Http\Requests\Student\UpdateStudentRequest;
+use App\Http\Traits\AuthTrait;
 use App\Models\Role;
 use App\Models\Student;
-use App\Models\Subject;
 use App\Services\Student\StudentService;
 use App\Services\Subject\SubjectService;
 use Illuminate\Http\RedirectResponse;
@@ -15,6 +15,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentController extends Controller
 {
+    use AuthTrait;
+
     private StudentService $studentService;
     private SubjectService $subjectService;
 
@@ -22,14 +24,22 @@ class StudentController extends Controller
     {
         $this->studentService = $studentService;
         $this->subjectService = $subjectService;
+
+        $this->handlePermissions([
+            'index' => 'index-student',
+            'store' => 'store-student',
+            'update' => 'update-student',
+            'delete' => 'delete-student',
+            'show' => 'show-student',
+        ]);
     }
 
     public function index(StudentDataTable $studentDataTable)
     {
-        $roles = Role::select(['id','name','display_name','description'])->get();
+        $roles = Role::select(['id', 'name', 'display_name', 'description'])->get();
 
-        return $studentDataTable->render('pages.student.index',[
-            'roles' =>$roles,
+        return $studentDataTable->render('pages.student.index', [
+            'roles' => $roles,
         ]);
     }
 

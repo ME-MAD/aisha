@@ -6,29 +6,37 @@ namespace App\Http\Controllers;
 use App\DataTables\PaymentDataTable;
 use App\Http\Requests\Payment\getPaymentCountOfGroupByMonth;
 use App\Http\Requests\Payment\getPaymentsOfGroupByMonth;
-use App\Models\Group;
-use App\Models\Payment;
-use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\Payment\StorePaymentRequest;
+use App\Http\Traits\AuthTrait;
 use App\Services\Group\GroupService;
 use App\Services\Payment\PaymentChartService;
 use App\Services\Payment\PaymentService;
+use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PaymentController extends Controller
 {
-    private $paymentChartService;
-    private $PaymentService;
-    private $groupService;
+    use AuthTrait;
+
+    private PaymentChartService $paymentChartService;
+    private PaymentService $PaymentService;
+    private GroupService $groupService;
 
     public function __construct(
         PaymentChartService $paymentChartService,
-        PaymentService $PaymentService,
-        GroupService $groupService
-    ) {
+        PaymentService      $PaymentService,
+        GroupService        $groupService
+    )
+    {
         $this->paymentChartService = $paymentChartService;
         $this->PaymentService = $PaymentService;
         $this->groupService = $groupService;
+
+        $this->handlePermissions([
+            'index' => 'index-payment',
+            'store' => 'store-payment',
+            'create' => 'create-payment',
+        ]);
     }
 
     public function index(PaymentDataTable $paymentDataTable)
@@ -44,7 +52,7 @@ class PaymentController extends Controller
         $this->groupService->appendAllStudentsPaidToGroups($groups);
 
         return view('pages.payment.create', [
-            'gorups' =>  $groups,
+            'gorups' => $groups,
             'currentMonth' => $currentMonth,
         ]);
     }
@@ -94,11 +102,11 @@ class PaymentController extends Controller
         $years = $this->paymentChartService->getAllPossibleYears();
 
         return response()->json([
-            'months'         => array_keys($data),
-            'values'         => array_values($data),
-            'years'          => $years,
-            'thisYear'       => $thisYear,
-            'totalPayments'  => array_sum(array_values($data)),
+            'months' => array_keys($data),
+            'values' => array_values($data),
+            'years' => $years,
+            'thisYear' => $thisYear,
+            'totalPayments' => array_sum(array_values($data)),
         ]);
     }
 }

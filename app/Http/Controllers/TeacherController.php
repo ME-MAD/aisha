@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\TeacherDataTable;
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
+use App\Http\Traits\AuthTrait;
 use App\Models\Teacher;
 use App\Services\Experience\ExperienceService;
 use App\Services\Teacher\TeacherService;
@@ -13,13 +14,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class TeacherController extends Controller
 {
+    use  AuthTrait;
 
-
-    // use GroupTrait;
-
-    private $teacherDataTable;
-    private $teacherService;
-    private $experienceService;
+    private TeacherDataTable $teacherDataTable;
+    private TeacherService $teacherService;
+    private ExperienceService $experienceService;
 
     public function __construct(
         TeacherDataTable  $teacherDataTable,
@@ -30,6 +29,14 @@ class TeacherController extends Controller
         $this->teacherDataTable = $teacherDataTable;
         $this->teacherService = $teacherService;
         $this->experienceService = $experienceService;
+
+        $this->handlePermissions([
+            'index' => 'index-teacher',
+            'store' => 'store-teacher',
+            'show' => 'show-teacher',
+            'update' => 'update-teacher',
+            'delete' => 'delete-teacher',
+        ]);
     }
 
     public function index()

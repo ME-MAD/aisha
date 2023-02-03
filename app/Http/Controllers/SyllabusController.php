@@ -3,33 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\syllabus\CreateNewLessonRequest;
+use App\Http\Traits\AuthTrait;
 use App\Models\syllabus;
 use App\Services\StudentLesson\StudentLessonService;
 use Illuminate\Http\Request;
 
 class SyllabusController extends Controller
 {
-    private $studentLessonService;
+    use AuthTrait;
+
+    private StudentLessonService $studentLessonService;
 
     public function __construct(StudentLessonService $studentLessonService)
     {
-        $this->studentLessonService = $studentLessonService;    
+        $this->studentLessonService = $studentLessonService;
     }
 
     public function createNewLesson(CreateNewLessonRequest $request)
     {
         $student_lesson_id = $request->student_lesson_id;
-        if( !$request->student_lesson_id )
-        {
+        if (!$request->student_lesson_id) {
             $studentLesson = $this->studentLessonService->firstOrCreateStudentLesson($request);
             $student_lesson_id = $studentLesson->id;
         }
 
-        if(syllabus::where([
-            ['student_lesson_id' , $student_lesson_id],
-            ['finished' , false]
-        ])->exists())
-        {
+        if (syllabus::where([
+            ['student_lesson_id', $student_lesson_id],
+            ['finished', false]
+        ])->exists()) {
             return response()->json([
                 'status' => 400,
             ]);
@@ -43,7 +44,7 @@ class SyllabusController extends Controller
             'to_page' => $request->to_page,
             'finished' => false
         ]);
-        
+
         return response()->json([
             'status' => 200,
             'syllabi' => $syllabi
@@ -52,15 +53,13 @@ class SyllabusController extends Controller
 
     public function finishNewLessonAjax(Request $request, syllabus $syllabus)
     {
-        if($syllabus->finished == true)
-        {
+        if ($syllabus->finished == true) {
             return response()->json([
                 'status' => 400,
             ]);
         }
 
-        if($request->rate == "fail")
-        {
+        if ($request->rate == "fail") {
             $syllabus->update([
                 'finished' => true,
                 'rate' => $request->rate
@@ -73,15 +72,13 @@ class SyllabusController extends Controller
                 'to_page' => $syllabus->to_page,
                 'finished' => false
             ]);
-        }
-        else
-        {
+        } else {
             $syllabus->update([
                 'finished' => true,
                 'rate' => $request->rate
             ]);
         }
-      
+
 
         $studentLesson = $syllabus->studentLesson;
         $lesson = $studentLesson->lesson;

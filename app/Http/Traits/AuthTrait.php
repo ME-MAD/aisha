@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 trait AuthTrait
 {
-    private function handlePermissions(array $arr)
+    private function handlePermissions(array $arr): void
     {
         foreach($arr as $method => $permission)
         {
