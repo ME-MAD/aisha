@@ -18,26 +18,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(AdminSeeder::class);
         
-        GroupType::updateOrCreate([
-            'name' => 'normal',
-        ], [
-            'price' => 80,
-            'days_num' => 2
-        ]);
-
-        GroupType::updateOrCreate([
-            'name' => 'dense',
-        ], [
-            'price' => 120,
-            'days_num' => 4
-        ]);
-
-        GroupType::updateOrCreate([
-            'name' => 'all week',
-        ], [
-            'price' => 200,
-            'days_num' => 6
-        ]);
+        $this->call(GroupTypeSeeder::class);
 
 
         $this->call([
