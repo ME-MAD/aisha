@@ -33,6 +33,7 @@ class TeacherController extends Controller
         $this->handlePermissions([
             'index' => 'index-teacher',
             'store' => 'store-teacher',
+            'show' => 'show-teacher',
             'update' => 'update-teacher',
             'delete' => 'delete-teacher',
         ]);

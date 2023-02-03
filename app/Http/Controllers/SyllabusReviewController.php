@@ -13,12 +13,7 @@ class SyllabusReviewController extends Controller
 {
     public function __construct()
     {
-        $this->handlePermissions([
-            'index' => 'index-syllabus',
-            'store' => 'store-syllabus',
-            'update' => 'update-syllabus',
-            'delete' => 'delete-syllabus',
-        ]);
+        
     }
 
     public function createNewLessonAjax(CreateNewLessonReviewRequest $request)

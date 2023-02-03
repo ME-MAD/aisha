@@ -35,8 +35,7 @@ class PaymentController extends Controller
         $this->handlePermissions([
             'index' => 'index-payment',
             'store' => 'store-payment',
-            'update' => 'update-payment',
-            'delete' => 'delete-payment',
+            'create' => 'create-payment',
         ]);
     }
 

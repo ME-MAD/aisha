@@ -17,13 +17,6 @@ class SyllabusController extends Controller
     public function __construct(StudentLessonService $studentLessonService)
     {
         $this->studentLessonService = $studentLessonService;
-
-        $this->handlePermissions([
-            'index' => 'index-syllabusReview',
-            'store' => 'store-syllabusReview',
-            'update' => 'update-syllabusReview',
-            'delete' => 'delete-syllabusReview',
-        ]);
     }
 
     public function createNewLesson(CreateNewLessonRequest $request)
