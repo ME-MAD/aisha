@@ -76,7 +76,6 @@ class RoleController extends Controller
 
         $allPermissionsNames = $this->permissionService->getAllPermissionNames($request->permissions);
 
-        $this->roleService->detachRolePermissions($role->id);
 
         AttachPermissionsToRoleJob::dispatch($allPermissionsNames, $role);
 
@@ -87,10 +86,8 @@ class RoleController extends Controller
     public function delete(Role $role): RedirectResponse
     {
         $this->roleService->deleteRole($role);
-        
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return back();
     }
-
-
 }

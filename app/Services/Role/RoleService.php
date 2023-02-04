@@ -40,7 +40,7 @@ class RoleService
             'display_name' => $request->display_name,
             'description' => $request->description
         ]);
-
+        $this->detachRolePermissions($role->id);
     }
 
     public function deleteRole($role): void
@@ -49,7 +49,7 @@ class RoleService
         $role->delete();
     }
 
-    public function detachRolePermissions($roleId)
+    public function detachRolePermissions($roleId): void
     {
         PermissionRole::where('role_id', $roleId)->delete();
     }
