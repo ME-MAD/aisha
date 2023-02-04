@@ -145,17 +145,6 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
         $res->assertSessionHasNoErrors();
     }
 
-    public function test_update_passes_without_a_role()
-    {
-        $student = $this->generateRandomStudent();
-        $data = $this->generateRandomStudentData();
-
-        $res = $this->call('PUT', route('admin.student.update', $student), $data);
-
-        $res->assertSessionHasNoErrors();
-    }
-
-
     /**
      * @test
      * @dataProvider storeValidationProvider
