@@ -87,7 +87,9 @@ class RoleController extends Controller
     {
         $this->roleService->deleteRole($role);
 
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return back();
     }
+
 }
