@@ -16,6 +16,24 @@
                     <x-text name="password" label="Password" :value="old('password')" />
 
                     <x-text name="password_confirmation" label="Confirm Password" />
+
+                    <div class="form-group">
+                        <label for="role" class="text-capitalize font-weight-bold text-muted">{{trans('user.role')}}</label>
+                        <select class="form-control basic"
+                                name="role"
+                                id="role">
+                            <option >{{trans('user.roles')}}</option>
+
+                            @foreach ($roles as $role)
+
+                                <option  class="active" value="{{$role->name}}">{{$role->name}}</option>
+
+                            @endforeach
+                        </select>
+                        @error('role')
+                        <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                    </div>
                     
                     <x-date name="birthday" label="{{ __('teacher.birthday') }}" :value="old('birthday')" />
 

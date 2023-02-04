@@ -27,6 +27,9 @@ class TeacherDataTable extends DataTable
             ->editColumn('groupStudents.count', function ($query) {
                 return $query->group_students_count ?? '';
             })
+            ->editColumn('role.name', function ($query) {
+                return $query->role->name ?? '';
+            })
             ->addColumn('edit', function ($query) {
                 return view('pages.teacher.datatable.edit', compact('query'));
             })
@@ -50,7 +53,7 @@ class TeacherDataTable extends DataTable
      */
     public function query(Teacher $model): QueryBuilder
     {
-        return $model->withCount(['groups', 'groupStudents']);
+        return $model->with('role:id,name')->withCount(['groups', 'groupStudents']);
     }
 
     /**
@@ -114,7 +117,7 @@ class TeacherDataTable extends DataTable
     {
         return [
             [
-                'name' => 'id',
+                'name' => 'teachers.id',
                 'data' => 'id',
                 'title' => __('teacher.id'),
                 "className" => 'search--col exact'
@@ -140,6 +143,14 @@ class TeacherDataTable extends DataTable
                 'title' => 'Email',
                 "className" => 'search--col'
             ],
+
+            [
+                'name' => 'role.name',
+                'data' => 'role.name',
+                'title' => 'role',
+                "className" => 'search--col'
+            ],
+
 
             [
                 'name' => 'birthday',

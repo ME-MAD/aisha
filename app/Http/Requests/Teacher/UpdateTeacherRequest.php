@@ -29,6 +29,7 @@ class UpdateTeacherRequest extends FormRequest
             'name' => 'required|max:255',
             'email' => ['required', Rule::unique('teachers', 'email')->ignore($this->teacher->id)],
             'password' => 'nullable|confirmed',
+            'role' => 'required|exists:roles,name',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'birthday' => 'nullable',
             'phone' => 'required',

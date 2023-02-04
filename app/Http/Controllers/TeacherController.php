@@ -6,6 +6,7 @@ use App\DataTables\TeacherDataTable;
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
 use App\Http\Traits\AuthTrait;
+use App\Models\Role;
 use App\Models\Teacher;
 use App\Services\Experience\ExperienceService;
 use App\Services\Teacher\TeacherService;
@@ -41,7 +42,11 @@ class TeacherController extends Controller
 
     public function index()
     {
-        return $this->teacherDataTable->render('pages.teacher.index');
+        $roles = Role::select(['id', 'name'])->get();
+
+        return $this->teacherDataTable->render('pages.teacher.index', [
+            'roles' => $roles
+        ]);
     }
 
     public function show(Teacher $teacher)
