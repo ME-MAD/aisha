@@ -2,30 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StudentLesson;
 use App\Http\Requests\StudentLesson\StoreStudentLessonRequest;
+use App\Http\Traits\AuthTrait;
+use App\Models\StudentLesson;
 use App\Services\StudentLesson\StudentLessonService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentLessonController extends Controller
 {
+    use AuthTrait;
 
-    private $studentLessonService;
+    private StudentLessonService $studentLessonService;
 
     public function __construct(StudentLessonService $studentLessonService)
     {
         $this->studentLessonService = $studentLessonService;
+
+        $this->handlePermissions([
+            'show' => 'show-studentLesson',
+            'store' => 'store-studentLesson',
+        ]);
     }
 
     public function store(StoreStudentLessonRequest $request)
     {
-        if ($this->studentLessonService->isChapterFinished($request))
-        {
-           $this->studentLessonService->finishStudentLesson($request);
-        }
-        else
-        {
+        if ($this->studentLessonService->isChapterFinished($request)) {
+            $this->studentLessonService->finishStudentLesson($request);
+        } else {
             $this->studentLessonService->store($request);
         }
 
@@ -35,12 +42,9 @@ class StudentLessonController extends Controller
 
     public function ajaxStudentLessonFinished(Request $request)
     {
-        if ($request->finished == "true")
-        {
+        if ($request->finished == "true") {
             $this->studentLessonService->finishStudentLesson($request);
-        }
-        else
-        {
+        } else {
             $this->studentLessonService->unFinishStudentLesson($request);
         }
 
@@ -49,7 +53,7 @@ class StudentLessonController extends Controller
         ]);
     }
 
-    public function show(StudentLesson $studentLesson): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function show(StudentLesson $studentLesson): Factory|View|Application
     {
         $studentLessonReview = $this->studentLessonService->getStudentLessonReview($studentLesson);
 
@@ -58,7 +62,6 @@ class StudentLessonController extends Controller
             'studentLessonReview' => $studentLessonReview
         ]);
     }
-
 
 
 }

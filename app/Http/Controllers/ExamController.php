@@ -3,34 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ExamDataTable;
-use App\Models\Exam;
 use App\Http\Requests\Exam\StoreExamRequest;
 use App\Http\Requests\Exam\UpdateExamRequest;
+use App\Http\Traits\AuthTrait;
+use App\Models\Exam;
 use App\Models\Group;
 use App\Models\Lesson;
 use App\Models\Student;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExamController extends Controller
 {
+    use  AuthTrait;
 
+    public function __construct()
+    {
+        $this->handlePermissions([
+            'index' => 'index-exam',
+            'store' => 'store-exam',
+            'update' => 'update-exam',
+            'delete' => 'delete-exam',
+        ]);
+    }
 
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(ExamDataTable $examDataTable)
     {
         return $examDataTable->render('pages.exam.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $students = Student::select(['id', 'name'])->get();
@@ -44,13 +48,7 @@ class ExamController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreExamRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreExamRequest $request)
+    public function store(StoreExamRequest $request): Redirector|Application|RedirectResponse
     {
         Exam::create([
             'student_id' => $request->student_id,
@@ -63,44 +61,27 @@ class ExamController extends Controller
         return redirect(route('admin.exam.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Exam  $exam
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Exam $exam)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Exam  $exam
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Exam $exam)
     {
-
         $students = Student::select(['id', 'name'])->get();
         $groups = Group::select(['id', 'from', 'to'])->get();
         $lessons = Lesson::select(['id', 'title'])->get();
 
         return view('pages.exam.edit', [
             'exam' => $exam,
-            'students'  => $students,
-            'groups'  => $groups,
-            'lessons'  => $lessons,
+            'students' => $students,
+            'groups' => $groups,
+            'lessons' => $lessons,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateExamRequest  $request
-     * @param  \App\Models\Exam  $exam
-     * @return \Illuminate\Http\Response
+     * @param \App\Http\Requests\UpdateExamRequest $request
+     * @param Exam $exam
+     * @return Response
      */
     public function update(UpdateExamRequest $request, Exam $exam)
     {
@@ -118,8 +99,8 @@ class ExamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Exam  $exam
-     * @return \Illuminate\Http\Response
+     * @param Exam $exam
+     * @return Response
      */
     public function delete(Exam $exam)
     {

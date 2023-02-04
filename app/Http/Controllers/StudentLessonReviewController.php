@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StudentLesson;
-use App\Models\StudentLessonReview;
 use App\Http\Requests\StudentLesson\StudentLessonReviewRequest;
+use App\Http\Traits\AuthTrait;
 use App\Services\StudentLesson\StudentLessonService;
 use App\Services\StudentLessonReview\StudentLessonReviewService;
 
 class StudentLessonReviewController extends Controller
 {
+    use AuthTrait;
 
-    public $studentLessonReviewService;
-    public $studentLessonService;
+    public StudentLessonReviewService $studentLessonReviewService;
+    public StudentLessonService $studentLessonService;
 
     public function __construct(StudentLessonReviewService $studentLessonReviewService, StudentLessonService $studentLessonService)
     {
@@ -28,13 +28,10 @@ class StudentLessonReviewController extends Controller
         $data = $request->all();
         $data['student_lesson_id'] = $studentLesson->id;
 
-        if ($request->finished == "true") 
-        {
-            $this->studentLessonReviewService->finished((object) $data);
-        } 
-        else
-        {
-            $this->studentLessonReviewService->notFinished((object) $data);
+        if ($request->finished == "true") {
+            $this->studentLessonReviewService->finished((object)$data);
+        } else {
+            $this->studentLessonReviewService->notFinished((object)$data);
         }
 
         return response()->json([

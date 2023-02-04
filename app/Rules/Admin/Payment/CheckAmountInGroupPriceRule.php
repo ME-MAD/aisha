@@ -7,7 +7,7 @@ use App\models\GroupType;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
-class CheckAmountInGroupPrice implements Rule
+class CheckAmountInGroupPriceRule implements Rule
 {
 
 

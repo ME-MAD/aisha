@@ -9,8 +9,6 @@ use App\Http\Traits\AuthTrait;
 use App\Models\Experience;
 use App\Services\Experience\ExperienceService;
 use App\Services\Teacher\TeacherService;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExperienceController extends Controller
@@ -18,31 +16,31 @@ class ExperienceController extends Controller
 
     use AuthTrait;
 
-    private $experienceDataTable;
-    private $teacherService;
-    private $experienceService;
+    private ExperienceDataTable $experienceDataTable;
+    private TeacherService $teacherService;
+    private ExperienceService $experienceService;
 
     public function __construct(
         ExperienceDataTable $experienceDataTable,
-        TeacherService $teacherService,
-        ExperienceService $experienceService
-     )
+        TeacherService      $teacherService,
+        ExperienceService   $experienceService)
     {
         $this->experienceDataTable = $experienceDataTable;
         $this->teacherService = $teacherService;
         $this->experienceService = $experienceService;
 
-        // $this->handlePermissions([
-        //     'index' => 'index-experience',
-        //     'store' => 'store-experience',
-        //     'update' => 'update-experience',
-        //     'delete' => 'delete-experience',
-        // ]);
+        $this->handlePermissions([
+            'index' => 'index-experience',
+            'store' => 'store-experience',
+            'update' => 'update-experience',
+            'delete' => 'delete-experience',
+        ]);
+
     }
 
     public function index()
     {
-        $teachers  = $this->teacherService->getAllTeachers();
+        $teachers = $this->teacherService->getAllTeachers();
 
         return $this->experienceDataTable->render('pages.experience.index', [
             'teachers' => $teachers,
@@ -60,7 +58,7 @@ class ExperienceController extends Controller
     public function update(UpdateExperienceRequest $request, Experience $experience)
     {
         $this->experienceService->updateExperience($experience, $request);
-        
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
@@ -68,7 +66,7 @@ class ExperienceController extends Controller
     public function delete(Experience $experience)
     {
         $this->experienceService->deleteExperience($experience);
-        
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }

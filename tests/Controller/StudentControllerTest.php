@@ -6,6 +6,7 @@ use Tests\TestCaseWithTransLationsSetUp;
 use Tests\Traits\TestGroupStudentTrait;
 use Tests\Traits\TestGroupTrait;
 use Tests\Traits\TestGroupTypeTrait;
+use Tests\Traits\TestRoleTrait;
 use Tests\Traits\TestStudentTrait;
 use Tests\Traits\TestTeacherTrait;
 
@@ -17,6 +18,7 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
     use TestGroupTrait;
     use TestTeacherTrait;
     use TestGroupTypeTrait;
+    use TestRoleTrait;
 
     public function setUp() : void
     {
@@ -35,6 +37,8 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
     public function test_store_passes_with_all_data()
     {
         $data = $this->generateRandomStudentData();
+
+        $data['role'] = "student";
 
         $res = $this->call('POST', route('admin.student.store'), $data);
 
@@ -56,6 +60,8 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
     {
         $this->refreshApplication();
 
+        $role = $this->generateRandomRole();
+
         return [
             "without data" => [
                 [],
@@ -66,6 +72,7 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday' => fake()->date,
                     'phone' => fake()->phoneNumber,
                     'qualification' => fake()->text,
+                    'role' => $role
                 ],
             ],
             "with a wrong date format" => [
@@ -74,6 +81,7 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday' => fake()->name,
                     'phone' => fake()->phoneNumber,
                     'qualification' => fake()->text,
+                    'role' => $role
                 ],
             ],
             "with a date that is greater than today" => [
@@ -82,6 +90,7 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday' => now()->addDay()->toDateString(),
                     'phone' => fake()->phoneNumber,
                     'qualification' => fake()->text,
+                    'role' => $role
                 ],
             ],
             "with a wrong phone format" => [
@@ -90,6 +99,25 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday' => fake()->date,
                     'phone' => fake()->name,
                     'qualification' => fake()->text,
+                    'role' => $role
+                ],
+            ],
+            "without a role" => [
+                [
+                    'name' => fake()->name,
+                    'birthday' => fake()->date,
+                    'phone' => fake()->phoneNumber,
+                    'qualification' => fake()->text,
+                    'role' => null
+                ],
+            ],
+            "with a wrong role" => [
+                [
+                    'name' => fake()->name,
+                    'birthday' => fake()->date,
+                    'phone' => fake()->phoneNumber,
+                    'qualification' => fake()->text,
+                    'role' => "this is a wrong role"
                 ],
             ],
         ];
@@ -106,7 +134,18 @@ class StudentControllerTest extends TestCaseWithTransLationsSetUp
     }
 
 
-    public function test_update_passes_with_all_data()
+    public function test_update_passes_with_a_role()
+    {
+        $student = $this->generateRandomStudent();
+        $data = $this->generateRandomStudentData();
+
+        $data['role'] = "student";
+        $res = $this->call('PUT', route('admin.student.update', $student), $data);
+
+        $res->assertSessionHasNoErrors();
+    }
+
+    public function test_update_passes_without_a_role()
     {
         $student = $this->generateRandomStudent();
         $data = $this->generateRandomStudentData();

@@ -11,23 +11,28 @@ use Illuminate\Support\Facades\DB;
 
 class SyllabusReviewController extends Controller
 {
+    public function __construct()
+    {
+        
+    }
+
     public function createNewLessonAjax(CreateNewLessonReviewRequest $request)
     {
-        $syllabusReview = DB::transaction(function() use ($request){
+        $syllabusReview = DB::transaction(function () use ($request) {
             $studentLesson = StudentLesson::firstOrCreate([
                 'group_id' => $request->group_id,
                 'lesson_id' => $request->lesson_id,
                 'student_id' => $request->student_id
-            ],[
-                
+            ], [
+
             ]);
-    
+
             $studentLessonReview = StudentLessonReview::firstOrCreate([
                 'student_lesson_id' => $studentLesson->id
-            ],[
-    
+            ], [
+
             ]);
-    
+
             return SyllabusReview::create([
                 'student_lesson_review_id' => $studentLessonReview->id,
                 'from_chapter' => $request->from_chapter,
@@ -54,8 +59,7 @@ class SyllabusReviewController extends Controller
         //     ]);
         // }
 
-        if($request->rate == "fail")
-        {
+        if ($request->rate == "fail") {
             $syllabusReview->update([
                 'finished' => false,
                 'rate' => $request->rate
@@ -68,8 +72,7 @@ class SyllabusReviewController extends Controller
                 'to_page' => $syllabusReview->to_page,
                 'finished' => false
             ]);
-        }else
-        {
+        } else {
             $syllabusReview->update([
                 'finished' => true,
                 'rate' => $request->rate

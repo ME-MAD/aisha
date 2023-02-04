@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Student;
 
-use App\Rules\Global\CheckIsFaieldString;
+use App\Rules\Global\CheckIsFaieldStringRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -19,7 +19,7 @@ class UpdateStudentRequest extends FormRequest
         return [
             "name" => ["required", "string",
                 Rule::unique('students', 'name')->ignore($this->student->id),
-                new CheckIsFaieldString(),
+                new CheckIsFaieldStringRule(),
             ],
             'email' => ['required','email',
                 Rule::unique('students', 'email')->ignore($this->student->id)

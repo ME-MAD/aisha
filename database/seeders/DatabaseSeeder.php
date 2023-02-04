@@ -14,18 +14,15 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        $this->call(RoleSeeder::class);
-
-        $this->call(AdminSeeder::class);
-        
         $this->call(GroupTypeSeeder::class);
-
 
         $this->call([
             QuraanSeeder::class,
             TgweedSeeder::class,
             QaidaNooraniahSeeder::class,
             PermissionSeeder::class,
+            RoleSeeder::class,
+            AdminSeeder::class
         ]);
     }
 }
