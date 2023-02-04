@@ -9,6 +9,7 @@ use App\Http\Traits\AuthTrait;
 use App\Jobs\AttachPermissionsToRoleJob;
 use App\Models\PermissionRole;
 use App\Models\Role;
+use App\Services\Role\RoleService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -19,7 +20,9 @@ class RoleController extends Controller
 {
     use AuthTrait;
 
-    public function __construct()
+    private RoleService $roleService;
+
+    public function __construct(RoleService $roleService)
     {
         $this->handlePermissions([
             'index' => 'index-role',
@@ -31,7 +34,7 @@ class RoleController extends Controller
 
     public function index(RoleDataTable $roleDataTable)
     {
-        return $roleDataTable->render('pages.role.index');
+        $this->roleService->getRoleDataTable($roleDataTable);
     }
 
     public function create()

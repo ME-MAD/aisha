@@ -6,17 +6,25 @@ use App\DataTables\UserDataTable;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Traits\AuthTrait;
-use App\Models\Role;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Services\Role\RoleService;
+use App\Services\User\UserService;
+use Illuminate\Http\RedirectResponse;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
     use  AuthTrait;
 
-    public function __construct()
+    private UserService $userService;
+    private RoleService $roleService;
+
+    public function __construct(UserService $userService, RoleService $roleService)
     {
+        $this->userService = $userService;
+
+        $this->roleService = $roleService;
+
         $this->handlePermissions([
             'index' => 'index-user',
             'store' => 'store-user',
@@ -27,47 +35,31 @@ class UserController extends Controller
 
     public function index(UserDataTable $userDataTable)
     {
-        $roles = Role::select(['id', 'name'])->get();
-        return $userDataTable->render('pages.user.index', [
-            'roles' => $roles
-        ]);
+        $roles = $this->roleService->getRolesWithSpecificColumn(['name']);
+
+        $this->userService->getUserDataTable($userDataTable, $roles);
     }
 
-    public function store(StoreUserRequest $request)
+    public function store(StoreUserRequest $request): RedirectResponse
     {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
-
-        $user->attachRole($request->role);
+        $this->userService->createUser($request);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password ? Hash::make($request->password) : $user->password
-        ]);
-
-        $user->detachRole($user->role);
-
-        $user->attachRole($request->role);
+        $this->userService->updateUser($request, $user);
 
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
 
-    public function delete(User $user)
+    public function delete(User $user): RedirectResponse
     {
-        $user->detachRole($user->role);
+        $this->userService->deleteUser($user);
 
-        $user->delete();
         Alert::success('نجاح', 'تمت العملية بنجاح');
         return redirect()->back();
     }
