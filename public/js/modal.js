@@ -92,6 +92,7 @@ function initEditeStudentModal() {
         $('#editStudentForm #birthday').val(student.birthday)
         $('#editStudentForm #phone').val(student.phone)
         $('#editStudentForm #qualification').val(student.qualification)
+        $('#editStudentForm #role').selectpicker('val', student.role.name);
 
         $('#editStudentForm').attr('action', href)
     })

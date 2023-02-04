@@ -17,9 +17,16 @@ class StudentService
         $this->imageService = $imageService;
     }
 
-    public function getAllStudent()
+    /**
+     * Get All Students
+     * Select Columns That You Want To Get
+     * ['id','name']
+     * @param array $selectColumns
+     * @return mixed
+     */
+    public function getAllStudents(array $selectColumns = ['*'])
     {
-        return Student::get();
+        return Student::select($selectColumns)->get();
     }
 
     public function createStudent($request): void
@@ -29,7 +36,7 @@ class StudentService
             path: Student::AVATARS_PATH
         );
 
-      $student = Student::create([
+        $student = Student::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -38,6 +45,8 @@ class StudentService
             'qualification' => $request->qualification,
             'avatar' => $fileName,
         ]);
+
+        $student->attachRole($request->role);
 
     }
 
@@ -55,6 +64,7 @@ class StudentService
                 path: Student::AVATARS_PATH
             );
         }
+
         $student->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -64,6 +74,9 @@ class StudentService
             'qualification' => $request->qualification,
             'avatar' => $fileName,
         ]);
+
+        $student->detachRole($student->role);
+        $student->attachRole($request->role);
     }
 
     public function getStudentWithGroupStudents($student)
@@ -78,6 +91,7 @@ class StudentService
     public function deleteStudent($student): void
     {
         $this->imageService->deleteImage(path: $student->getAvatarPath());
+        $student->detachRole($student->role);
         $student->delete();
     }
 }

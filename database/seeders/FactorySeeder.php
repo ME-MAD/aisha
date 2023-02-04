@@ -5,16 +5,12 @@ namespace Database\Seeders;
 use App\Models\Exam;
 use App\Models\Experience;
 use App\Models\Group;
-use App\Models\GroupDay;
 use App\Models\GroupStudent;
-use App\Models\GroupType;
 use App\Models\Lesson;
 use App\Models\Payment;
 use App\Models\Student;
-use App\Models\StudentExam;
 use App\Models\StudentLesson;
 use App\Models\Subject;
-use App\Models\syllabus;
 use App\Models\Teacher;
 use Illuminate\Database\Seeder;
 
@@ -40,8 +36,9 @@ class FactorySeeder extends Seeder
                 Subject::factory(1)->create()->each(function ($subject) use ($group) {
 
                     Student::factory(10)->create()->each(function ($student) use ($subject, $group) {
+                        $student->attachRole('student');
                         $lesson = Lesson::factory(1)->create([
-                            'subject_id' =>  $subject->id
+                            'subject_id' => $subject->id
                         ])->each(function ($lesson) use ($student, $group) {
                             StudentLesson::factory(1)->create([
                                 'lesson_id' => $lesson->id,

@@ -42,7 +42,7 @@ class GroupStudentController extends Controller
     {
         return $GroupStudentDataTable->render('pages.groupStudent.index', [
             'groups' => $this->groupService->getAllGroups(),
-            'students' => $this->StudentService->getAllStudent(),
+            'students' => $this->StudentService->getAllStudents(['id', 'name']),
         ]);
     }
 

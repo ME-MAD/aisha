@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use Illuminate\Support\Facades\Hash;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
+ * @extends Factory<Student>
  */
 class StudentFactory extends Factory
 {
@@ -19,12 +19,10 @@ class StudentFactory extends Factory
     {
         return [
             'name' => fake()->name,
-            'email' => fake()->safeEmail(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'birthday' => fake()->date(),
             'phone' => fake()->phoneNumber,
             'qualification' => fake()->text(),
-            'email' => fake()->email,
+            'email' => fake()->safeEmail,
             'password' => fake()->password,
         ];
     }

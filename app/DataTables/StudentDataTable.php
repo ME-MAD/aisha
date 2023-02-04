@@ -2,7 +2,6 @@
 
 namespace App\DataTables;
 
-use App\Models\GroupStudent;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -34,7 +33,7 @@ class StudentDataTable extends DataTable
 
     public function query(): QueryBuilder
     {
-        return Student::withCount('groupStudents');
+        return Student::with('role:id,name')->withCount('groupStudents');
     }
 
     public function html(): HtmlBuilder
@@ -44,9 +43,9 @@ class StudentDataTable extends DataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->parameters([
-                'dom'          => 'Blrtip',
-                'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
-                'buttons'      => [
+                'dom' => 'Blrtip',
+                'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
+                'buttons' => [
                     ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
                     ['extend' => 'excel', 'className' => 'btn btn-success ', 'text' => 'Export'],
                 ],
@@ -94,14 +93,11 @@ class StudentDataTable extends DataTable
 
             ['name' => 'name', 'data' => 'name', 'title' => ' الاسم', "className" => 'search--col'],
 
+            ['name' => 'role', 'data' => 'role.name', 'title' => ' role', "className" => 'search--col'],
+
             ['name' => 'avatar', 'data' => 'avatar', 'title' => ' الصور', "className" => 'search--col'],
 
-            [
-                'name' => 'email',
-                'data' => 'email',
-                'title' => 'Email',
-                "className" => 'search--col'
-            ],
+            ['name' => 'email', 'data' => 'email', 'title' => 'Email', "className" => 'search--col'],
 
             ['name' => 'birthday', 'data' => 'birthday', 'title' => ' تاريخ الميلاد', "className" => 'search--col'],
 
