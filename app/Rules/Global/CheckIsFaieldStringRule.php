@@ -4,7 +4,7 @@ namespace App\Rules\Global;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckIsFaieldString implements Rule
+class CheckIsFaieldStringRule implements Rule
 {
 
     public function __construct()

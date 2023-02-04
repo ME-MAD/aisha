@@ -5,7 +5,7 @@ namespace App\Rules\Admin\StudentLesson;
 use App\Models\Lesson;
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckChaptersCount implements Rule
+class CheckChaptersCountRule implements Rule
 {
     
     public function __construct()

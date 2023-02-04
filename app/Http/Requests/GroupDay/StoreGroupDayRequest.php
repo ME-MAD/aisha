@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\GroupDay;
 
-use App\Rules\Admin\GroupDay\CheckIfCountOfGroupDayIsAvailable;
+use App\Rules\Admin\GroupDay\CheckIfCountOfGroupDayIsAvailableRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreGroupDayRequest extends FormRequest
@@ -18,7 +18,7 @@ class StoreGroupDayRequest extends FormRequest
     {
         return [
             "group_id" => "required|exists:groups,id",
-            "day" => ["required", new CheckIfCountOfGroupDayIsAvailable()],
+            "day" => ["required", new CheckIfCountOfGroupDayIsAvailableRule()],
         ];
     }
 }

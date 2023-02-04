@@ -5,7 +5,7 @@ namespace App\Rules\Admin\StudentLesson;
 use App\Models\Lesson;
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckLastPageFinished implements Rule
+class CheckLastPageFinishedRule implements Rule
 {
     /**
      * Create a new rule instance.
