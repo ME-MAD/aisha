@@ -71,4 +71,18 @@ class Teacher extends Authenticatable
             'id'
         );
     }
+
+    public function role()
+    {
+        return $this->hasOneThrough(
+            Role::class,
+            RoleUser::class,
+            'user_id',
+            'id',
+            'id',
+            'role_id');
+
+    }
+
+
 }

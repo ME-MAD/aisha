@@ -61,7 +61,7 @@ class TeacherService
     {
         $fileName = $this->imageService->uploadImage(imageObject: $request->file('avatar'), path: Teacher::AVATARS_PATH);
 
-        return Teacher::create([
+        $teacher = Teacher::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -70,9 +70,11 @@ class TeacherService
             'qualification' => $request->qualification,
             'avatar' => $fileName,
         ]);
+
+       return $teacher->attachRole($request->role);
     }
 
-    public function updateTeacher(Teacher $teacher, object $request): bool
+    public function updateTeacher(Teacher $teacher, object $request)
     {
         $fileName = $teacher->getRawOriginal('avatar');
 
@@ -85,7 +87,7 @@ class TeacherService
             );
         }
         
-        return $teacher->update([
+         $teacher->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password ? Hash::make($request->password) : $teacher->password,
@@ -94,10 +96,15 @@ class TeacherService
             'qualification' => $request->qualification,
             'avatar' => $fileName,
         ]);
+
+        $teacher->detachRole($teacher->role);
+
+        return  $teacher->attachRole($request->role);
     }
 
     public function deleteTeacher(Teacher $teacher): ?bool
     {
+        $teacher->detachRole($teacher->role);
         $this->imageService->deleteImage(path: $teacher->getAvatarPath());
 
         return $teacher->delete();

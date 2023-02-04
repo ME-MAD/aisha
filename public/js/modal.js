@@ -52,6 +52,7 @@ function initEditeTeacherModal() {
         $('#editTeacherForm #birthday').val(teacher.birthday)
         $('#editTeacherForm #phone').val(teacher.phone)
         $('#editTeacherForm #qualification').val(teacher.qualification)
+        $('#editTeacherForm #role').val(teacher.role.name)
 
 
         $('#editTeacherForm').attr('action', href)
