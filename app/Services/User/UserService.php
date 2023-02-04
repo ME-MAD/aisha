@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
-    public function getUserDataTable($userDataTable, $dataWillRenderInDataTable = null)
-    {
-        return $userDataTable->render('pages.user.index', $dataWillRenderInDataTable);
-    }
-
     public function createUser($request): void
     {
         $user = User::create([

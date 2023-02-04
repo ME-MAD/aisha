@@ -15,7 +15,7 @@ class RoleService
      */
     public function getRoles(array $selectColumns = ['*'])
     {
-        return Role::select([$selectColumns])->get();
+        return Role::select($selectColumns)->get();
     }
 
     public function createRole($request): Role
