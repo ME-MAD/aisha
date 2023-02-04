@@ -7,8 +7,8 @@ use App\Http\Requests\Role\StoreRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
 use App\Http\Traits\AuthTrait;
 use App\Jobs\AttachPermissionsToRoleJob;
-use App\Models\PermissionRole;
 use App\Models\Role;
+use App\Services\Permission\PermissionService;
 use App\Services\Role\RoleService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -21,10 +21,12 @@ class RoleController extends Controller
     use AuthTrait;
 
     private RoleService $roleService;
+    private PermissionService $permissionService;
 
-    public function __construct(RoleService $roleService)
+    public function __construct(RoleService $roleService, PermissionService $permissionService)
     {
         $this->roleService = $roleService;
+        $this->permissionService = $permissionService;
 
         $this->handlePermissions([
             'index' => 'index-role',
@@ -46,13 +48,10 @@ class RoleController extends Controller
 
     public function store(StoreRoleRequest $request): RedirectResponse
     {
-        $role = Role::create([
-            'name' => $request->name,
-            'display_name' => $request->display_name,
-            'description' => $request->description
-        ]);
+        $role = $this->roleService->createRole($request);
 
-        $allPermissionsNames = $this->getAllPermissionNames($request->permissions);
+        $allPermissionsNames = $this->permissionService->getAllPermissionNames($request->permissions);
+
         AttachPermissionsToRoleJob::dispatch($allPermissionsNames, $role);
 
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -61,7 +60,7 @@ class RoleController extends Controller
 
     public function edit(Role $role): Factory|View|Application
     {
-        $rolePermissions = $role->permissions()->select('name')->get()->pluck('name');
+        $rolePermissions = $this->roleService->getRolePermissions($role);
 
         return view('pages.role.edit', [
             'role' => $role,
@@ -71,15 +70,11 @@ class RoleController extends Controller
 
     public function update(UpdateRoleRequest $request, Role $role): RedirectResponse
     {
-        $role->update([
-            'name' => $request->name,
-            'display_name' => $request->display_name,
-            'description' => $request->description
-        ]);
+        $this->roleService->updateRole($request, $role);
 
-        $allPermissionsNames = $this->getAllPermissionNames($request->permissions);
+        $allPermissionsNames = $this->permissionService->getAllPermissionNames($request->permissions);
 
-        PermissionRole::where('role_id', $role->id)->delete();
+        $this->roleService->detachRolePermissions($role->id);
 
         AttachPermissionsToRoleJob::dispatch($allPermissionsNames, $role);
 
@@ -89,25 +84,11 @@ class RoleController extends Controller
 
     public function delete(Role $role): RedirectResponse
     {
-        PermissionRole::where('role_id', $role->id)->delete();
-        $role->delete();
+        $this->roleService->deleteRole($role);
+        
         Alert::toast('تمت العملية بنجاح', 'success');
         return back();
     }
 
 
-    private function getAllPermissionNames($requestPermissions): array
-    {
-        $allPermissionsNames = [];
-
-        if (!is_null($requestPermissions)) {
-            foreach ($requestPermissions as $table => $permissions) {
-                foreach ($permissions as $permission) {
-                    $allPermissionsNames [] = $permission;
-                }
-            }
-        }
-
-        return $allPermissionsNames;
-    }
 }

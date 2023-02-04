@@ -2,6 +2,7 @@
 
 namespace App\Services\Role;
 
+use App\Models\PermissionRole;
 use App\Models\Role;
 
 class RoleService
@@ -16,4 +17,42 @@ class RoleService
     {
         return Role::select([$selectColumns])->get();
     }
+
+    public function createRole($request): Role
+    {
+        return Role::create([
+            'name' => $request->name,
+            'display_name' => $request->display_name,
+            'description' => $request->description
+        ]);
+    }
+
+
+    public function getRolePermissions($role)
+    {
+        return $role->permissions()->select('name')->get()->pluck('name');
+    }
+
+    public function updateRole($request, $role)
+    {
+        $role->update([
+            'name' => $request->name,
+            'display_name' => $request->display_name,
+            'description' => $request->description
+        ]);
+
+    }
+
+    public function deleteRole($role): void
+    {
+        $this->detachRolePermissions($role->id);
+        $role->delete();
+    }
+
+    public function detachRolePermissions($roleId)
+    {
+        PermissionRole::where('role_id', $roleId)->delete();
+    }
+
+
 }
