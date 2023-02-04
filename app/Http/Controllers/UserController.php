@@ -37,7 +37,9 @@ class UserController extends Controller
     {
         $roles = $this->roleService->getRoles(['name']);
 
-        $this->userService->getUserDataTable($userDataTable, $roles);
+        return $userDataTable->render('pages.user.index', [
+            'roles' => $roles
+        ]);
     }
 
     public function store(StoreUserRequest $request): RedirectResponse
