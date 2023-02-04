@@ -7,8 +7,9 @@
             <th>Update</th>
             <th>Delete</th>
             <th>Edit</th>
-            <th>show</th>
-            <th>index</th>
+            <th>Show</th>
+            <th>Index</th>
+            <th>Store</th>
         </tr>
         </thead>
         <tbody>

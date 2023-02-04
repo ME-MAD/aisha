@@ -14,8 +14,7 @@
 
         <ul class="list-unstyled menu-categories" id="topAccordion">
 
-            <li class="menu single-menu
-            {{
+            <li class="menu single-menu{{
                     request()->routeIs('admin.home') ||
                     request()->routeIs('admin.user.index') ||
                     request()->routeIs('admin.role.index') ||
@@ -55,6 +54,8 @@
                 </ul>
             </li>
 
+            {{-- Teacher --}}
+            {{-- @check_permission("index-teacher") --}}
             <li class="menu single-menu {{
                     request()->routeIs('admin.teacher.index') ||
                     request()->routeIs('admin.teacher.show')||
@@ -78,20 +79,28 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+                    @check_permission("index-teacher")
                     <li class="{{
                                     request()->routeIs('admin.teacher.index')  ? 'active' : ''
                                 }}">
-                        <a href="{{ route('admin.teacher.index') }}"> {{ __('global.Teachers') }} </a>
+                        <a href="{{ route('admin.teacher.index') }}"> 
+                            {{ __('global.Teachers') }} 
+                        </a>
                     </li>
+                   @endcheck_permission
+                   @check_permission("index-experience")
                     <li class="{{
                                     request()->routeIs('admin.experience.index')  ? 'active' : ''
                                 }}">
                         <a href="{{ route('admin.experience.index') }}">{{ __('global.Experiences') }}</a>
                     </li>
+                    @endcheck_permission
                 </ul>
             </li>
+            {{-- @endcheck_permission --}}
 
-
+              {{-- Student --}}
+            {{-- @check_permission("index-student") --}}
             <li class="menu single-menu {{
                                     request()->routeIs('admin.student.index') ||
                                     request()->routeIs('admin.student.show') ? 'active' : ''
@@ -122,8 +131,10 @@
                     </li>
                 </ul>
             </li>
+            {{-- @endcheck_permission --}}
 
-
+            {{-- Group --}}
+            {{-- @check_permission("index-group") --}}
             <li class="menu single-menu {{
                                     request()->routeIs('admin.group.index')||
                                     request()->routeIs('admin.group_day.index')||
@@ -153,26 +164,37 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+
+                    @check_permission("index-group")
                     <li class="{{ request()->routeIs('admin.group.index') ? 'active' : ''}}">
                         <a href="{{ route('admin.group.index') }}"> {{ __('global.groups') }} </a>
                     </li>
+                    @endcheck_permission
+
+                    @check_permission("index-groupDay")
                     <li class="{{ request()->routeIs('admin.group_day.index') ? 'active' : ''}}">
                         <a href="{{ route('admin.group_day.index') }}">{{ __('global.Group Days') }}</a>
                     </li>
+                    @endcheck_permission
+
+                    @check_permission("index-groupStudent")
                     <li class="{{ request()->routeIs('admin.group_students.index') ? 'active' : ''}}">
-
                         <a href="{{ route('admin.group_students.index') }}">{{ __('global.Group Students') }}</a>
-
                     </li>
-                    <li class="{{ request()->routeIs('admin.group_types.index') ? 'active' : ''}}">
+                    @endcheck_permission
 
+                    @check_permission("index-groupType")
+                    <li class="{{ request()->routeIs('admin.group_types.index') ? 'active' : ''}}">
                         <a href="{{ route('admin.group_types.index') }}">{{ __('global.Group Types') }}</a>
                     </li>
+                    @endcheck_permission
 
                 </ul>
             </li>
+            {{-- @endcheck_permission --}}
 
-
+            {{-- subject --}}
+            {{-- @check_permission("index-subject") --}}
             <li class="menu single-menu
                                 {{
                                     request()->routeIs('admin.subject.index')||
@@ -195,16 +217,23 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+                    @check_permission("index-subject")
                     <li class="{{request()->routeIs('admin.subject.index')? 'active' : ''}}">
                         <a href="{{ route('admin.subject.index') }}"> {{ __('global.Subjects') }} </a>
                     </li>
+                    @endcheck_permission
+
+                    @check_permission("index-lesson")
                     <li class="{{request()->routeIs('admin.lesson.index')? 'active' : ''}}">
                         <a href="{{ route('admin.lesson.index') }}"> {{ __('global.Lessons') }} </a>
                     </li>
+                    @endcheck_permission
                 </ul>
             </li>
+            {{-- @endcheck_permission --}}
 
-
+            {{-- payment --}}
+            {{-- @check_permission("index-payment") --}}
             <li class="menu single-menu
                               {{     request()->routeIs('admin.payment.index')||
                                      request()->routeIs('admin.payment.create')  ? 'active' : ''
@@ -227,15 +256,24 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+
+                    @check_permission("index-payment")
                     <li class="{{request()->routeIs('admin.payment.index')? 'active' : ''}}">
                         <a href="{{ route('admin.payment.index') }}">{{ __('global.Payment') }}</a>
                     </li>
+                    @endcheck_permission
+
+                    @check_permission("create-payment")
                     <li class="{{request()->routeIs('admin.payment.create')? 'active' : ''}}">
                         <a href="{{ route('admin.payment.create') }}">{{ __('global.Create payments') }}</a>
                     </li>
+                    @endcheck_permission
                 </ul>
             </li>
+            {{-- @endcheck_permission --}}
 
+            {{-- Exam --}}
+            {{-- @check_permission("create-payment") --}}
             <li class="menu single-menu {{
                                         request()->routeIs('admin.exam.index')||
                                      request()->routeIs('admin.exam.create')  ? 'active' : ''
@@ -263,14 +301,21 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+                    
+                    @check_permission("create-payment")
                     <li class="{{request()->routeIs('admin.exam.index')? 'active' : ''}}">
                         <a href="{{ route('admin.exam.index') }}">{{ __('global.Exams') }}</a>
                     </li>
+                    @endcheck_permission
+
+                    @check_permission("create-payment")
                     <li class="{{request()->routeIs('admin.exam.create')? 'active' : ''}}">
                         <a href="{{ route('admin.exam.create') }}">{{ __('global.Create Exam') }}</a>
                     </li>
+                    @endcheck_permission
                 </ul>
             </li>
+            {{-- @endcheck_permission --}}
 
 
         </ul>

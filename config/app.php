@@ -189,7 +189,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        App\Providers\BladeServiceProvider::class,
         /*
          * Application Service Providers...
          */
