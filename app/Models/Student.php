@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laratrust\Traits\LaratrustUserTrait;
 
 class Student extends Authenticatable
 {
     use HasFactory;
+    use LaratrustUserTrait;
 
-    protected $fillable = ['name','email', 'password', 'birthday', 'phone', 'qualification', 'avatar'];
+    protected $fillable = ['name', 'email', 'password', 'birthday', 'phone', 'qualification', 'avatar'];
 
 
     const AVATARS_PATH = 'images/student/avatars/';
@@ -71,5 +72,18 @@ class Student extends Authenticatable
             'id',
             'group_id'
         );
+    }
+
+
+    public function role()
+    {
+        return $this->hasOneThrough(
+            Role::class,
+            RoleUser::class,
+            'user_id',
+            'id',
+            'id',
+            'role_id');
+
     }
 }

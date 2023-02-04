@@ -65,7 +65,6 @@ class StudentController extends Controller
 
     public function update(UpdateStudentRequest $request, Student $student): RedirectResponse
     {
-
         $this->studentService->updateStudent($request, $student);
 
         Alert::toast('تمت العملية بنجاح', 'success');
