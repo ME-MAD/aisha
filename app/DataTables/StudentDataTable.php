@@ -27,13 +27,18 @@ class StudentDataTable extends DataTable
             ->editColumn('countGroups', function ($q) {
                 return $q->group_students_count;
             })
+            ->editColumn('role.name',function($q){
+                return $q->role->name ?? '';
+            })
             ->rawColumns(['edit', 'delete', 'name', 'show', 'avatar'])
             ->setRowId('id');
     }
 
     public function query(): QueryBuilder
     {
-        return Student::with('role:id,name')->withCount('groupStudents');
+        return Student::select([
+            'students.id', 'students.name', 'avatar', 'birthday','email','qualification','phone'
+        ])->with('role:id,name')->withCount('groupStudents');
     }
 
     public function html(): HtmlBuilder
@@ -89,11 +94,11 @@ class StudentDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            ['name' => 'id', 'data' => 'id', 'title' => 'رقم الهوية', "className" => 'search--col exact'],
+            ['name' => 'students.id', 'data' => 'id', 'title' => 'رقم الهوية', "className" => 'search--col exact'],
 
             ['name' => 'name', 'data' => 'name', 'title' => ' الاسم', "className" => 'search--col'],
 
-            ['name' => 'role', 'data' => 'role.name', 'title' => ' role', "className" => 'search--col'],
+            ['name' => 'role.name', 'data' => 'role.name', 'title' => ' role', "className" => 'search--col'],
 
             ['name' => 'avatar', 'data' => 'avatar', 'title' => ' الصور', "className" => 'search--col'],
 
@@ -105,7 +110,7 @@ class StudentDataTable extends DataTable
 
             ['name' => 'qualification', 'data' => 'qualification', 'title' => ' المؤهلات', "className" => 'search--col'],
 
-            ['name' => 'countGroups', 'data' => 'countGroups', 'title' => ' عدد الجروبات', "className" => 'search--col'],
+            ['name' => 'countGroups', 'data' => 'countGroups', 'title' => ' عدد الجروبات', 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
             ['name' => 'show', 'data' => 'show', 'title' => 'Show', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
 
