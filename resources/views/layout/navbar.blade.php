@@ -14,13 +14,13 @@
 
         <ul class="list-unstyled menu-categories" id="topAccordion">
 
+            @check_permission_in_permissions(['index-user','index-role'])
             <li class="menu single-menu{{
                     request()->routeIs('admin.home') ||
                     request()->routeIs('admin.user.index') ||
                     request()->routeIs('admin.role.index') ||
                     request()->routeIs('admin.role.edit') ? 'active' : ''
             }}">
-
                 <a href="{{route('admin.home')}}" data-toggle="collapse" aria-expanded="true"
                    class="dropdown-toggle autodroprown">
                     <div class="">
@@ -40,10 +40,15 @@
                     </svg>
                 </a>
                 <ul class="collapse submenu list-unstyled" id="dashboard" data-parent="#topAccordion">
+                    
+                    @check_permission("index-user")
                     <li class="{{request()->routeIs('admin.user.index') ? 'active' : '' }}">
                         <a href="{{route('admin.user.index')}}"
                            class="text-capitalize font-weight-bold">{{__('global.users')}} </a>
                     </li>
+                    @endcheck_permission
+
+                    @check_permission("index-role")
                     <li class="{{
                                 request()->routeIs('admin.role.index') ||
                                  request()->routeIs('admin.role.edit') ? 'active' : ''
@@ -51,7 +56,9 @@
                         <a href="{{route('admin.role.index')}}"
                            class="text-capitalize font-weight-bold">{{__('roles.roles')}} </a>
                     </li>
+                    @endcheck_permission
                 </ul>
+                @endcheck_permission_in_permissions
             </li>
 
             {{-- Teacher --}}
@@ -105,6 +112,7 @@
 
               {{-- Student --}}
             {{-- @check_permission("index-student") --}}
+            @check_permission_in_permissions(['index-student'])
             <li class="menu single-menu {{
                                     request()->routeIs('admin.student.index') ||
                                     request()->routeIs('admin.student.show') ? 'active' : ''
@@ -135,10 +143,12 @@
                     </li>
                 </ul>
             </li>
+            @endcheck_permission_in_permissions
             {{-- @endcheck_permission --}}
 
             {{-- Group --}}
             {{-- @check_permission("index-group") --}}
+            @check_permission_in_permissions(['index-group','index-groupDay','index-groupStudent','index-groupType'])
             <li class="menu single-menu {{
                                     request()->routeIs('admin.group.index')||
                                     request()->routeIs('admin.group_day.index')||
@@ -195,10 +205,12 @@
 
                 </ul>
             </li>
+            @endcheck_permission_in_permissions
             {{-- @endcheck_permission --}}
 
             {{-- subject --}}
             {{-- @check_permission("index-subject") --}}
+            @check_permission_in_permissions(['index-subject','index-lesson'])
             <li class="menu single-menu
                                 {{
                                     request()->routeIs('admin.subject.index')||
@@ -234,10 +246,12 @@
                     @endcheck_permission
                 </ul>
             </li>
+            @endcheck_permission_in_permissions
             {{-- @endcheck_permission --}}
 
             {{-- payment --}}
             {{-- @check_permission("index-payment") --}}
+            @check_permission_in_permissions(['index-payment','create-payment'])
             <li class="menu single-menu
                               {{     request()->routeIs('admin.payment.index')||
                                      request()->routeIs('admin.payment.create')  ? 'active' : ''
@@ -274,10 +288,12 @@
                     @endcheck_permission
                 </ul>
             </li>
+            @endcheck_permission_in_permissions
             {{-- @endcheck_permission --}}
 
             {{-- Exam --}}
             {{-- @check_permission("create-payment") --}}
+            @check_permission_in_permissions(['create-payment','create-payment'])
             <li class="menu single-menu {{
                                         request()->routeIs('admin.exam.index')||
                                      request()->routeIs('admin.exam.create')  ? 'active' : ''
@@ -319,6 +335,7 @@
                     @endcheck_permission
                 </ul>
             </li>
+            @endcheck_permission_in_permissions
             {{-- @endcheck_permission --}}
 
 
