@@ -74,8 +74,6 @@ class RoleController extends Controller
 
         $allPermissionsNames = $this->permissionService->getAllPermissionNames($request->permissions);
 
-        $this->roleService->detachRolePermissions($role->id);
-
         AttachPermissionsToRoleJob::dispatch($allPermissionsNames, $role);
 
         Alert::toast('تمت العملية بنجاح', 'success');

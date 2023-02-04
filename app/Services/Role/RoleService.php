@@ -41,6 +41,7 @@ class RoleService
             'description' => $request->description
         ]);
 
+        $this->detachRolePermissions($role->id);
     }
 
     public function deleteRole($role): void
