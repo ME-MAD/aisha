@@ -20,8 +20,7 @@ class UserService
             'password' => Hash::make($request->password)
         ]);
 
-        $this->attachRoleToUser($user, $request->role);
-
+        $user->attachRole($request->role);
     }
 
     public function updateUser($request, $user): void
@@ -32,24 +31,14 @@ class UserService
             'password' => $request->password ? Hash::make($request->password) : $user->password
         ]);
 
-        $this->detachRoleFromUser($user);
-        $this->attachRoleToUser($user, $request->role);
+        $user->detachRole($user->role);
+        $user->attachRole($request->role);
     }
 
 
     public function deleteUser($user): void
     {
-        $this->detachRoleFromUser($user);
-        $user->delete();
-    }
-
-    public function attachRoleToUser($user, $role): void
-    {
-        $user->attachRole($role);
-    }
-
-    public function detachRoleFromUser($user): void
-    {
         $user->detachRole($user->role);
+        $user->delete();
     }
 }

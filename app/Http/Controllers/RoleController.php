@@ -24,6 +24,8 @@ class RoleController extends Controller
 
     public function __construct(RoleService $roleService)
     {
+        $this->roleService = $roleService;
+
         $this->handlePermissions([
             'index' => 'index-role',
             'store' => 'store-role',
@@ -34,7 +36,7 @@ class RoleController extends Controller
 
     public function index(RoleDataTable $roleDataTable)
     {
-        $this->roleService->getRoleDataTable($roleDataTable);
+        return $roleDataTable->render('pages.role.index');
     }
 
     public function create()

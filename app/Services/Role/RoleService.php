@@ -6,13 +6,14 @@ use App\Models\Role;
 
 class RoleService
 {
-    public function getRolesWithSpecificColumn(array $selectColumns)
+    /**
+     * takes columns names and return roles
+     * return collection of roles
+     * @param array $selectColumns
+     * @return Collection
+     */
+    public function getRoles(array $selectColumns = ['*'])
     {
         return Role::select([$selectColumns])->get();
-    }
-
-    public function getRoleDataTable($roleDataTable)
-    {
-        return $roleDataTable->render('pages.role.index');
     }
 }

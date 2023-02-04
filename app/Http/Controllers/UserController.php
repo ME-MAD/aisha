@@ -35,7 +35,7 @@ class UserController extends Controller
 
     public function index(UserDataTable $userDataTable)
     {
-        $roles = $this->roleService->getRolesWithSpecificColumn(['name']);
+        $roles = $this->roleService->getRoles(['name']);
 
         $this->userService->getUserDataTable($userDataTable, $roles);
     }
