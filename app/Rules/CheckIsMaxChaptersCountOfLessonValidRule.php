@@ -5,7 +5,7 @@ namespace App\Rules;
 use App\Models\Lesson;
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckIsMaxChaptersCountOfLessonValid implements Rule
+class CheckIsMaxChaptersCountOfLessonValidRule implements Rule
 {
     /**
      * Create a new rule instance.

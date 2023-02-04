@@ -34,7 +34,6 @@ class GroupDayController extends Controller
         $this->handlePermissions([
             'index' => 'index-groupDay',
             'store' => 'store-groupDay',
-            'update' => 'update-groupDay',
             'delete' => 'delete-groupDay',
         ]);
     }

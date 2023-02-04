@@ -18,14 +18,6 @@ class StudentLessonReviewController extends Controller
     {
         $this->studentLessonReviewService = $studentLessonReviewService;
         $this->studentLessonService = $studentLessonService;
-
-
-        $this->handlePermissions([
-            'index' => 'index-studentLessonReview',
-            'store' => 'store-studentLessonReview',
-            'update' => 'update-studentLessonReview',
-            'delete' => 'delete-studentLessonReview',
-        ]);
     }
 
 

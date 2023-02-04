@@ -23,10 +23,8 @@ class StudentLessonController extends Controller
         $this->studentLessonService = $studentLessonService;
 
         $this->handlePermissions([
-            'index' => 'index-studentLesson',
+            'show' => 'show-studentLesson',
             'store' => 'store-studentLesson',
-            'update' => 'update-studentLesson',
-            'delete' => 'delete-studentLesson',
         ]);
     }
 

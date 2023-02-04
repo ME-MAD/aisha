@@ -33,6 +33,8 @@ class RoleController extends Controller
             'store' => 'store-role',
             'update' => 'update-role',
             'delete' => 'delete-role',
+            'edit' => 'edit-role',
+            'create' => 'create-role',
         ]);
     }
 

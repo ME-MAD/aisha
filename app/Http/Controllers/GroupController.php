@@ -40,6 +40,7 @@ class GroupController extends Controller
             'index' => 'index-group',
             'store' => 'store-group',
             'update' => 'update-group',
+            'show' => 'show-group',
             'delete' => 'delete-group',
         ]);
     }

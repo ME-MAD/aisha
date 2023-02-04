@@ -32,14 +32,6 @@ class LessonController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        $subjects = Subject::get();
-        return view('pages.lesson.create', [
-            "subjects" => $subjects
-        ]);
-    }
-
     public function store(StoreLessonRequest $request)
     {
         Lesson::create([
@@ -49,22 +41,6 @@ class LessonController extends Controller
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
-    }
-
-    public function show(Lesson $lesson)
-    {
-        return view('pages.lesson.show', [
-            "lesson" => $lesson->load(['subject', 'studentLessons.syllabus'])
-        ]);
-    }
-
-    public function edit(Lesson $lesson)
-    {
-        $subjects = Subject::get();
-        return view('pages.lesson.edit', [
-            "lesson" => $lesson,
-            "subjects" => $subjects
-        ]);
     }
 
     public function update(UpdateLessonRequest $request, Lesson $lesson)

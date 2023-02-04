@@ -28,7 +28,9 @@ class SubjectController extends Controller
 
         $this->handlePermissions([
             'index' => 'index-subject',
+            'create' => 'create-subject',
             'store' => 'store-subject',
+            'edit' => 'edit-subject',
             'update' => 'update-subject',
             'delete' => 'delete-subject',
         ]);

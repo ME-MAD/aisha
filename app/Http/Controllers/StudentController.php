@@ -30,6 +30,7 @@ class StudentController extends Controller
             'store' => 'store-student',
             'update' => 'update-student',
             'delete' => 'delete-student',
+            'show' => 'show-student',
         ]);
     }
 
