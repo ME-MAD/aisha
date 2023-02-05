@@ -45,7 +45,8 @@ Trait TestStudentTrait
             'birthday' => fake()->date(),
             'phone' => fake()->phoneNumber,
             'qualification' => fake()->text(),
-            'avatar' => UploadedFile::fake()->image('avatar.jpg')
+            'avatar' => UploadedFile::fake()->image('avatar.jpg'),
+            'role' => fake()->randomElement(getSeededRoles())['name']
         ];
     }
 }

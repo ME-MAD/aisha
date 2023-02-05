@@ -6,6 +6,6 @@ Trait TestRoleTrait
 {
     private function generateRandomRole()
     {
-        return fake()->randomElement(['admin','teacher','student']);
+        return fake()->randomElement(getSeededRoles())['name'];
     }
 }

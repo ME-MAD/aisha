@@ -11,6 +11,7 @@ use App\Models\Student;
 use App\Services\Group\GroupService;
 use App\Services\GroupType\GroupTypeService;
 use App\Services\Payment\PaymentChartService;
+use App\Services\Role\RoleService;
 use App\Services\Teacher\TeacherService;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -22,18 +23,21 @@ class GroupController extends Controller
     private GroupTypeService $groupTypeService;
     private GroupService $groupService;
     private PaymentChartService $paymentChartService;
+    private RoleService $roleService;
 
     public function __construct(
         TeacherService      $teacherService,
         GroupTypeService    $groupTypeService,
         GroupService        $groupService,
         PaymentChartService $paymentChartService,
+        RoleService $roleService
     )
     {
         $this->teacherService = $teacherService;
         $this->groupTypeService = $groupTypeService;
         $this->groupService = $groupService;
         $this->paymentChartService = $paymentChartService;
+        $this->roleService = $roleService;
 
 
         $this->handlePermissions([
@@ -74,6 +78,8 @@ class GroupController extends Controller
 
         $students = Student::get();
 
+        $roles = $this->roleService->getRoles(['name']);
+
         return view('pages.group.show', [
             'group' => $group,
             'countStudents' => $countStudents,
@@ -81,6 +87,7 @@ class GroupController extends Controller
             'groupTypeNumDays' => $groupTypeNumDays,
             'students' => $students,
             'currentMonth' => getCurrectMonthName(),
+            'roles' => $roles,
         ]);
     }
 

@@ -28,7 +28,8 @@ Trait TestTeacherTrait
             'birthday'      => fake()->date,
             'phone'         => fake()->phoneNumber,
             'avatar'        => UploadedFile::fake()->image('avatar.jpg'),
-            'qualification' => fake()->text
+            'qualification' => fake()->text,
+            'role' => fake()->randomElement(getSeededRoles())['name']
         ];
     }
 }
