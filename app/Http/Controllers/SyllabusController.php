@@ -6,6 +6,7 @@ use App\Http\Requests\syllabus\CreateNewLessonRequest;
 use App\Http\Traits\AuthTrait;
 use App\Models\syllabus;
 use App\Services\StudentLesson\StudentLessonService;
+use App\Services\Syllabus\SyllabusService;
 use Illuminate\Http\Request;
 
 class SyllabusController extends Controller
@@ -13,10 +14,15 @@ class SyllabusController extends Controller
     use AuthTrait;
 
     private StudentLessonService $studentLessonService;
+    private SyllabusService   $syllabusService;
 
-    public function __construct(StudentLessonService $studentLessonService)
+    public function __construct(
+        StudentLessonService $studentLessonService,
+        SyllabusService      $syllabusService
+    )
     {
         $this->studentLessonService = $studentLessonService;
+        $this->syllabusService      = $syllabusService;
     }
 
     public function createNewLesson(CreateNewLessonRequest $request)
@@ -26,24 +32,15 @@ class SyllabusController extends Controller
             $studentLesson = $this->studentLessonService->firstOrCreateStudentLesson($request);
             $student_lesson_id = $studentLesson->id;
         }
-
-        if (syllabus::where([
-            ['student_lesson_id', $student_lesson_id],
-            ['finished', false]
-        ])->exists()) {
+        
+        if ($this->syllabusService->checkIfLessonOfSyllabsNotFinished($student_lesson_id)) 
+        {
             return response()->json([
                 'status' => 400,
             ]);
         }
-
-        $syllabi = syllabus::create([
-            'student_lesson_id' => $student_lesson_id,
-            'from_chapter' => $request->from_chapter,
-            'to_chapter' => $request->to_chapter,
-            'from_page' => $request->from_page,
-            'to_page' => $request->to_page,
-            'finished' => false
-        ]);
+      
+        $syllabi = $this->syllabusService->createSyllabus($request, $student_lesson_id);
 
         return response()->json([
             'status' => 200,
@@ -60,37 +57,19 @@ class SyllabusController extends Controller
         }
 
         if ($request->rate == "fail") {
-            $syllabus->update([
-                'finished' => true,
-                'rate' => $request->rate
-            ]);
-            syllabus::create([
-                'student_lesson_id' => $syllabus->student_lesson_id,
-                'from_chapter' => $syllabus->from_chapter,
-                'to_chapter' => $syllabus->to_chapter,
-                'from_page' => $syllabus->from_page,
-                'to_page' => $syllabus->to_page,
-                'finished' => false
-            ]);
+           
+            $this->syllabusService
+                   ->updateSyllabusFinished($request, $syllabus);
+        
+            $this->syllabusService
+                   ->createSyllabus($request,$syllabus->student_lesson_id);
+
         } else {
-            $syllabus->update([
-                'finished' => true,
-                'rate' => $request->rate
-            ]);
+            $this->syllabusService
+                   ->updateSyllabusFinished($request, $syllabus);
         }
 
-
-        $studentLesson = $syllabus->studentLesson;
-        $lesson = $studentLesson->lesson;
-
-        $percentage = ($syllabus->to_chapter / $lesson->chapters_count) * 100;
-
-        $studentLesson->update([
-            'last_page_finished' => $syllabus->to_page,
-            'last_chapter_finished' => $syllabus->to_chapter,
-            'percentage' => round($percentage, 2),
-            'finished' => $syllabus->to_chapter == $lesson->chapters_count ? true : false
-        ]);
+        $studentLesson = $this->syllabusService->finishNewLesson($syllabus);
 
         return response()->json([
             'status' => 200,
