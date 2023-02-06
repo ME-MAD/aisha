@@ -9,6 +9,7 @@ use App\Jobs\BreakPDFIntoImagesJob;
 use App\Models\Subject;
 use App\Services\ImageService;
 use App\Services\PDFService;
+use App\Services\Subject\SubjectService;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SubjectController extends Controller
@@ -17,14 +18,18 @@ class SubjectController extends Controller
 
     private ImageService $imageService;
     private PDFService $PDFService;
+    private SubjectService $subjectService;
+    
 
     public function __construct(
         ImageService $imageService,
-        PDFService   $PDFService
+        PDFService   $PDFService,
+        SubjectService   $subjectService,
     )
     {
         $this->imageService = $imageService;
         $this->PDFService = $PDFService;
+        $this->subjectService = $subjectService;
 
         $this->handlePermissions([
             'index' => 'index-subject',
@@ -66,11 +71,12 @@ class SubjectController extends Controller
             'book'
         );
 
-        $subject = Subject::create([
-            'name' => $request->name,
-            'book' => $book_name,
-            'avatar' => $fileName,
-        ]);
+        // $subject = Subject::create([
+        //     'name' => $request->name,
+        //     'book' => $book_name,
+        //     'avatar' => $fileName,
+        // ]);
+        $subject = $this->subjectService->createSubject($request,$book_name,$fileName);
 
         BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
 
@@ -129,11 +135,7 @@ class SubjectController extends Controller
             }
         }
 
-        $subject->update([
-            'name' => $request->name,
-            'book' => $book_name,
-            'avatar' => $fileName,
-        ]);
+        $this->subjectService->updateSubject($subject,$request->name,$book_name,$fileName);
 
         BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
 

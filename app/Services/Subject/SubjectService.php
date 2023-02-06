@@ -17,4 +17,22 @@ class SubjectService
     {
         return Subject::with('lessons')->get();
     }
+
+    public function createSubject($request,$book_name,$fileName)
+    {
+        return  Subject::create([
+                'name' => $request->name,
+                'book' => $book_name,
+                'avatar' => $fileName,
+               ]);
+    }
+
+    public function updateSubject($subject,$request,$book_name,$fileName)
+    {
+        return   $subject->update([
+            'name' => $request->name,
+            'book' => $book_name,
+            'avatar' => $fileName,
+        ]);
+    }
 }
