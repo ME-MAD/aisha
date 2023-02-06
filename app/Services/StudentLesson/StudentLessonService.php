@@ -91,7 +91,7 @@ class StudentLessonService
 
     public function firstOrCreateStudentLesson(object $request)
     {
-        return StudentLesson::updateOrCreate([
+        return StudentLesson::firstOrCreate([
             'student_id' => $request->student_id,
             'lesson_id' => $request->lesson_id,
             'group_id' => $request->group_id,
