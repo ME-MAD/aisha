@@ -31,10 +31,18 @@
                 <div class="breadcrumb-four">
                     <ul class="breadcrumb">
                         <li>
-                            <a href="{{route('admin.role.index')}}"
+                            <a href="{{route('admin.home')}}"
                                class="d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-house mx-2 fa-2x"></i>
                                 <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.role.index')}}"
+                               class="d-flex justify-content-center align-items-center">
+
+                                <i class="fa-solid fa-circle-plus fa-2x mx-2"></i>
+                                <span class="font-weight-bold ">{{__('roles.index')}}</span>
                             </a>
                         </li>
                         <li class="active">
@@ -62,8 +70,8 @@
                     <form action="{{ route('admin.role.store') }}" method="post">
                         @csrf
 
-                        <div class="card-header">
-                            <h3 class="font-weight-bold text-capitalize">{{__('roles.create')}}</h3>
+                        <div class="card-header create__form__header">
+                            <h3 class="font-weight-bold text-capitalize text-light">{{__('roles.create')}}</h3>
                         </div>
                         <div class="card-body">
 
@@ -137,16 +145,7 @@
                             </div>
 
                         </div>
-                        <div class="card-footer">
-                            <button type="button"
-                                    class="btn btn-danger font-weight-bold text-white"
-                                    data-dismiss="modal">{{__('global.Close')}}
-                            </button>
-
-                            <button type="submit"
-                                    class="btn btn-primary font-weight-bold text-white">{{__('global.create')}}
-                            </button>
-                        </div>
+                       
                     </form>
 
                 </div>
@@ -159,35 +158,7 @@
 @endsection
 @push('js')
 
-    <script>
-        let allChecked = false;
-        
-        $('#giveAllPermissions').on('click', function (e) {
-            e.preventDefault();
-
-            if (!allChecked) 
-            {
-                $('.permissionCheckbox').prop('checked', true);
-                $('.checkAll').prop('checked', true);
-                $('#giveAllPermissions').css({
-                    color: '#515365',
-                });
-                allChecked = true;
-            } 
-            else 
-            {
-                $('.permissionCheckbox').prop('checked', false);
-                $('.checkAll').prop('checked', false);
-                $('#giveAllPermissions').css({
-                    color: '#e95f2b',
-                });
-                allChecked = false;
-            }
-        })
-
-    </script>
-
-  
+<script type="module" src="{{asset('js/role/createPage.js')}}"></script>
 
 @endpush
 

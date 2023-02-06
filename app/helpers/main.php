@@ -68,23 +68,23 @@ if (!function_exists('getPermissionTables')) {
     function getPermissionTables()
     {
         return [
-            'exam',
-            'experience',
-            'group',
-            'groupDay',
-            'groupStudent',
-            'groupType',
-            'lesson',
-            'payment',
-            'role',
-            'student',
-            'studentLesson',
-            'studentLessonReview',
-            'subject',
-            'syllabus',
-            'syllabusReview',
-            'teacher',
-            'user',
+            'exam' => "Exam",
+            'experience' => "Experience",
+            'group' => "Group",
+            'groupDay' => "Group Day",
+            'groupStudent' => "Group Student",
+            'groupType' => "Group Type",
+            'lesson' => "Lesson",
+            'payment' => "Payment",
+            'role' => "Role",
+            'student' => "Student",
+            'studentLesson' => "Student Lesson",
+            'studentLessonReview' => "Student Lesson Review",
+            'subject' => "Subject",
+            'syllabus' => "Syllabus",
+            'syllabusReview' => "Syllabus Review",
+            'teacher' => "Teacher",
+            'user' => "User",
         ];
     }
 }
@@ -98,13 +98,13 @@ if (!function_exists('getPermissionsForView')) {
 
         $permissions = [];
 
-        foreach($tables as $table)
+        foreach($tables as $table => $tableName)
         {
             foreach($keys as $key => $value)
             {
                 $permissions [$table] []= [
                     'key' => $value,
-                    'value' => "$value-$table"
+                    'value' => "$value-$table",
                 ];
             }
         }

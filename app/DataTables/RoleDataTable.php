@@ -48,7 +48,6 @@ class RoleDataTable extends DataTable
                 'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                 'buttons' => [
                     ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
-                    ['extend' => 'excel', 'className' => 'btn btn-success  my-3 ', 'text' => 'Export'],
                 ],
                 'order' => [
                     0, 'desc'

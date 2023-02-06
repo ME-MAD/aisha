@@ -8,7 +8,7 @@ $.get($('#paymentsThisMonthContainerGroup').data('href'), function (response) {
 
     const ctx = document.getElementById('paymentsThisMonthChartOnGroupShow');
     new Chart(ctx, {
-        type: 'polarArea',
+        type: 'pie',
         data: {
             labels: [
                 'Group Kids Count',

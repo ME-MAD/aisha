@@ -27,8 +27,8 @@
     <link rel="stylesheet" href="{{asset('adminAssets/assets/css/sweetalert.css')}}">
 
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
-    <link href="{{ asset('adminAssets/plugins/apex/apexcharts.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('adminAssets/assets/css/dashboard/dash_2.css') }}" rel="stylesheet" type="text/css"/>
+    {{-- <link href="{{ asset('adminAssets/plugins/apex/apexcharts.css') }}" rel="stylesheet" type="text/css"> --}}
+    {{-- <link href="{{ asset('adminAssets/assets/css/dashboard/dash_2.css') }}" rel="stylesheet" type="text/css"/> --}}
     <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     @stack('css')
     <link rel="stylesheet" href="{{ asset('css/myStyles.css') }}">

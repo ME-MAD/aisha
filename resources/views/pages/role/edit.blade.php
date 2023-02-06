@@ -27,18 +27,26 @@
                 <div class="breadcrumb-four">
                     <ul class="breadcrumb">
                         <li>
-                            <a href="{{route('admin.role.index')}}"
+                            <a href="{{route('admin.home')}}"
                                class="d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-house mx-2 fa-2x"></i>
                                 <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
                             </a>
                         </li>
-                        <li class="active">
-                            <a href="{{route('admin.role.edit' ,$role->id)}}"
+                        <li>
+                            <a href="{{route('admin.role.index')}}"
                                class="d-flex justify-content-center align-items-center">
 
-                                <i class="fa-solid fa-pen-to-square fa-2x mx-2"></i>
-                                <span class="font-weight-bold mx-1">{{__('global.update')}}</span>
+                                <i class="fa-solid fa-circle-plus fa-2x mx-2"></i>
+                                <span class="font-weight-bold ">{{__('roles.index')}}</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#"
+                               class="d-flex justify-content-center align-items-center">
+
+                                <i class="fa-solid fa-circle-plus fa-2x mx-2"></i>
+                                <span class="font-weight-bold ">{{__('roles.update')}}</span>
                             </a>
                         </li>
                     </ul>
@@ -55,8 +63,8 @@
             <div class="col-md-12">
 
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="font-weight-bold text-capitalize">{{__('roles.update')}}</h3>
+                    <div class="card-header create__form__header">
+                        <h3 class="font-weight-bold text-capitalize text-light">{{__('roles.update')}}</h3>
                     </div>
                     <form action="{{ route('admin.role.update' ,$role->id) }}" method="post">
                         @csrf
@@ -134,7 +142,7 @@
                                                     <tr>
                                                         <td>
                                                             <label class="control control-checkbox">
-                                                                {{$table}}
+                                                                {{getPermissionTables()[$table]}}
                                                                 <input type="checkbox"
                                                                        name="permissions[{{$table}}][]"
                                                                        id="{{$table}}"
@@ -169,22 +177,26 @@
                                                 @endforeach
                                                 </tbody>
                                             </table>
+
+                                            <div class="card-footer">
+                                                <button type="button"
+                                                        class="btn btn-danger font-weight-bold text-white"
+                                                        data-dismiss="modal">{{__('global.Close')}}
+                                                </button>
+                    
+                                                <button type="submit"
+                                                        class="btn btn-success font-weight-bold text-white">{{__('global.Update')}}
+                                                </button>
+                                            </div>
+
+
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <button type="button"
-                                    class="btn btn-danger font-weight-bold text-white"
-                                    data-dismiss="modal">{{__('global.Close')}}
-                            </button>
-
-                            <button type="submit"
-                                    class="btn btn-success font-weight-bold text-white">{{__('global.Update')}}
-                            </button>
-                        </div>
+                       
 
                     </form>
 
@@ -199,74 +211,7 @@
 
 @push('js')
 
-    <script>
-        let allChecked = false;
-        
-        $('#giveAllPermissions').on('click', function (e) {
-            e.preventDefault();
-
-            if (!allChecked) 
-            {
-                $('.permissionCheckbox').prop('checked', true);
-                $('.checkAll').prop('checked', true);
-                $('#giveAllPermissions').css({
-                    color: '#515365',
-                });
-                allChecked = true;
-            } 
-            else 
-            {
-                $('.permissionCheckbox').prop('checked', false);
-                $('.checkAll').prop('checked', false);
-                $('#giveAllPermissions').css({
-                    color: '#e95f2b',
-                });
-                allChecked = false;
-            }
-        })
-
-    </script>
-
-    <script>
-
-
-        // make all checkbox checked when click on checkAll
-        $('.checkAll').on('change', function () {
-
-            let table = $(this).data('table')
-
-            if (this.checked == true) {
-                $(`input[name='permissions[${table}][]']`).prop('checked', true)
-            } else {
-                $(`input[name='permissions[${table}][]']`).prop('checked', false)
-            }
-        })
-
-        // check if all checkbox is checked then make checkAll checked
-        $(".permissionCheckbox").change(function () {
-
-            let table = $(this).data('table')
-            let allCheckboxes = document.querySelectorAll(`input[name='permissions[${table}][]']:not([id="${table}"])`);
-            let checkboxChecked = document.querySelectorAll(`input[name='permissions[${table}][]']:not([id="${table}"]):checked`);
-
-            if (allCheckboxes.length == checkboxChecked.length) {
-                $(`input[name='permissions[${table}][]']`).prop('checked', true);
-
-                $('#giveAllPermissions').css({
-                    color: '#e95f2b',
-                });
-
-            } else {
-                $(`#${table}`).prop('checked', false);
-
-                $('#giveAllPermissions').css({
-                    color: '#515365',
-                });
-            }
-
-        });
-
-    </script>
+<script type="module" src="{{asset('js/role/editPage.js')}}"></script>
 
 @endpush
 
