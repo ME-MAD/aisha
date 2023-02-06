@@ -21,7 +21,7 @@
                     request()->routeIs('admin.role.index') ||
                     request()->routeIs('admin.role.edit') ? 'active' : ''
             }}">
-                <a href="{{route('admin.home')}}" data-toggle="collapse" aria-expanded="true"
+                <a href="#dashboard" data-toggle="collapse" aria-expanded="true"
                    class="dropdown-toggle autodroprown">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -39,7 +39,12 @@
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </a>
-                <ul class="collapse submenu list-unstyled" id="dashboard" data-parent="#topAccordion">
+                <ul class="collapse submenu list-unstyled {{
+                        request()->routeIs('admin.home') ||
+                        request()->routeIs('admin.user.index') ||
+                        request()->routeIs('admin.role.index') ||
+                        request()->routeIs('admin.role.edit') ? 'show' : ''
+                    }}" id="dashboard" data-parent="#topAccordion">
                     
                     @check_permission("index-user")
                     <li class="{{request()->routeIs('admin.user.index') ? 'active' : '' }}">
@@ -61,8 +66,6 @@
                 @endcheck_permission_in_permissions
             </li>
 
-            {{-- Teacher --}}
-            {{-- @check_permission("index-teacher") --}}
 
             @check_permission_in_permissions(['index-teacher','index-experience'])
                 <li class="menu single-menu {{
@@ -71,7 +74,7 @@
                     request()->routeIs('admin.experience.index')  ? 'active' : ''
                     }}
                 ">
-                    <a href="{{route('admin.teacher.index')}}" data-toggle="collapse" aria-expanded="false"
+                    <a href="#teacher" data-toggle="collapse" aria-expanded="false"
                     class="dropdown-toggle">
                         <div class="">
                             <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
@@ -87,7 +90,11 @@
                             <polyline points="6 9 12 15 18 9"></polyline>
                         </svg>
                     </a>
-                    <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+                    <ul class="collapse submenu list-unstyled {{
+                        request()->routeIs('admin.teacher.index') ||
+                        request()->routeIs('admin.teacher.show')||
+                        request()->routeIs('admin.experience.index')  ? 'show' : ''
+                        }}" id="teacher" data-parent="#topAccordion">
                         @check_permission("index-teacher")
                         <li class="{{
                                         request()->routeIs('admin.teacher.index')  ? 'active' : ''
@@ -108,16 +115,12 @@
                 </li>
             @endcheck_permission_in_permissions
             
-            {{-- @endcheck_permission --}}
-
-              {{-- Student --}}
-            {{-- @check_permission("index-student") --}}
             @check_permission_in_permissions(['index-student'])
             <li class="menu single-menu {{
                                     request()->routeIs('admin.student.index') ||
                                     request()->routeIs('admin.student.show') ? 'active' : ''
                                 }}">
-                <a href="{{route('admin.student.index')}}" data-toggle="collapse" aria-expanded="false"
+                <a href="#student" data-toggle="collapse" aria-expanded="false"
                    class="dropdown-toggle">
                     <div class="">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
@@ -135,7 +138,10 @@
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </a>
-                <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+                <ul class="collapse submenu list-unstyled {{
+                        request()->routeIs('admin.student.index') ||
+                        request()->routeIs('admin.student.show') ? 'show' : ''
+                    }}" id="student" data-parent="#topAccordion">
                     <li class="{{
                                     request()->routeIs('admin.student.index')  ? 'active' : ''
                                 }}">
@@ -144,10 +150,8 @@
                 </ul>
             </li>
             @endcheck_permission_in_permissions
-            {{-- @endcheck_permission --}}
 
-            {{-- Group --}}
-            {{-- @check_permission("index-group") --}}
+
             @check_permission_in_permissions(['index-group','index-groupDay','index-groupStudent','index-groupType'])
             <li class="menu single-menu {{
                                     request()->routeIs('admin.group.index')||
@@ -155,7 +159,7 @@
                                     request()->routeIs('admin.group_students.index')||
                                     request()->routeIs('admin.group_types.index')  ? 'active' : ''
                                 }}">
-                <a href="{{route('admin.group.index')}}"
+                <a href="#group"
                    data-toggle="collapse"
                    aria-expanded="false"
                    class="dropdown-toggle">
@@ -177,7 +181,12 @@
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </a>
-                <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+                <ul class="collapse submenu list-unstyled {{
+                        request()->routeIs('admin.group.index')||
+                        request()->routeIs('admin.group_day.index')||
+                        request()->routeIs('admin.group_students.index')||
+                        request()->routeIs('admin.group_types.index')  ? 'show' : ''
+                    }}" id="group" data-parent="#topAccordion">
 
                     @check_permission("index-group")
                     <li class="{{ request()->routeIs('admin.group.index') ? 'active' : ''}}">
@@ -206,17 +215,16 @@
                 </ul>
             </li>
             @endcheck_permission_in_permissions
-            {{-- @endcheck_permission --}}
 
-            {{-- subject --}}
-            {{-- @check_permission("index-subject") --}}
+
+
             @check_permission_in_permissions(['index-subject','index-lesson'])
             <li class="menu single-menu
                                 {{
                                     request()->routeIs('admin.subject.index')||
                                      request()->routeIs('admin.lesson.index')  ? 'active' : ''
                                 }}">
-                <a href="{{ route('admin.subject.index') }}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <a href="#subject" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                              stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -232,7 +240,10 @@
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </a>
-                <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+                <ul class="collapse submenu list-unstyled {{
+                        request()->routeIs('admin.subject.index')||
+                        request()->routeIs('admin.lesson.index')  ? 'show' : ''
+                    }}" id="subject" data-parent="#topAccordion">
                     @check_permission("index-subject")
                     <li class="{{request()->routeIs('admin.subject.index')? 'active' : ''}}">
                         <a href="{{ route('admin.subject.index') }}"> {{ __('global.Subjects') }} </a>
@@ -247,16 +258,15 @@
                 </ul>
             </li>
             @endcheck_permission_in_permissions
-            {{-- @endcheck_permission --}}
 
-            {{-- payment --}}
-            {{-- @check_permission("index-payment") --}}
+
+
             @check_permission_in_permissions(['index-payment','create-payment'])
             <li class="menu single-menu
-                              {{     request()->routeIs('admin.payment.index')||
-                                     request()->routeIs('admin.payment.create')  ? 'active' : ''
+                                {{  request()->routeIs('admin.payment.index')||
+                                    request()->routeIs('admin.payment.create')  ? 'active' : ''
                                 }}">
-                <a href="{{ route('admin.payment.index') }}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <a href="#payment" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <div class="">
                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                              stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -273,7 +283,10 @@
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </a>
-                <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+                <ul class="collapse submenu list-unstyled {{  
+                        request()->routeIs('admin.payment.index')||
+                        request()->routeIs('admin.payment.create')  ? 'show' : ''
+                    }}" id="payment" data-parent="#topAccordion">
 
                     @check_permission("index-payment")
                     <li class="{{request()->routeIs('admin.payment.index')? 'active' : ''}}">
@@ -289,16 +302,15 @@
                 </ul>
             </li>
             @endcheck_permission_in_permissions
-            {{-- @endcheck_permission --}}
 
-            {{-- Exam --}}
-            {{-- @check_permission("create-payment") --}}
-            @check_permission_in_permissions(['create-payment','create-payment'])
+
+
+            {{-- @check_permission_in_permissions(['create-payment','create-payment'])
             <li class="menu single-menu {{
                                         request()->routeIs('admin.exam.index')||
                                      request()->routeIs('admin.exam.create')  ? 'active' : ''
                                 }}">
-                <a href="{{ route('admin.exam.index') }}"
+                <a href="#exam"
                    data-toggle="collapse"
                    aria-expanded="false"
                    class="dropdown-toggle">
@@ -320,7 +332,7 @@
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                 </a>
-                <ul class="collapse submenu list-unstyled" id="app" data-parent="#topAccordion">
+                <ul class="collapse submenu list-unstyled" id="exam" data-parent="#topAccordion">
                     
                     @check_permission("create-payment")
                     <li class="{{request()->routeIs('admin.exam.index')? 'active' : ''}}">
@@ -335,8 +347,7 @@
                     @endcheck_permission
                 </ul>
             </li>
-            @endcheck_permission_in_permissions
-            {{-- @endcheck_permission --}}
+            @endcheck_permission_in_permissions --}}
 
 
         </ul>

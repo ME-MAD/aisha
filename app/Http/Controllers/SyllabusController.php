@@ -8,6 +8,7 @@ use App\Models\syllabus;
 use App\Services\StudentLesson\StudentLessonService;
 use App\Services\Syllabus\SyllabusService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SyllabusController extends Controller
 {
@@ -28,12 +29,14 @@ class SyllabusController extends Controller
     public function createNewLesson(CreateNewLessonRequest $request)
     {
         $student_lesson_id = $request->student_lesson_id;
+
+
         if (!$request->student_lesson_id) {
             $studentLesson = $this->studentLessonService->firstOrCreateStudentLesson($request);
             $student_lesson_id = $studentLesson->id;
         }
         
-        if ($this->syllabusService->checkIfLessonOfSyllabsNotFinished($student_lesson_id)) 
+        if ($this->syllabusService->checkIfStudentLessonNotFinished($student_lesson_id)) 
         {
             return response()->json([
                 'status' => 400,
@@ -58,11 +61,21 @@ class SyllabusController extends Controller
 
         if ($request->rate == "fail") {
            
-            $this->syllabusService
-                   ->updateSyllabusFinished($request, $syllabus);
-        
-            $this->syllabusService
-                   ->createSyllabus($request,$syllabus->student_lesson_id);
+            DB::transaction(function() use($request, $syllabus) {
+                $this->syllabusService
+                    ->updateSyllabusFinished($request, $syllabus);
+     
+                $this->syllabusService
+                    ->createSyllabus( (object)[
+                        'from_chapter' => $syllabus->from_chapter,
+                        'to_chapter' => $syllabus->to_chapter,
+                        'from_page' => $syllabus->from_page,
+                        'to_page' => $syllabus->to_page,
+                    ],
+                    $syllabus->student_lesson_id
+                );
+
+            });
 
         } else {
             $this->syllabusService

@@ -18,7 +18,7 @@ class SyllabusService
         ]);
     }
 
-    public function checkIfLessonOfSyllabsNotFinished ($student_lesson_id)
+    public function checkIfStudentLessonNotFinished($student_lesson_id)
     {
         return  syllabus::where([
             ['student_lesson_id', $student_lesson_id],
