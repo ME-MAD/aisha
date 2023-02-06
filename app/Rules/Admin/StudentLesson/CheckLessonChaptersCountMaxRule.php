@@ -5,7 +5,7 @@ namespace App\Rules\Admin\StudentLesson;
 use App\Models\Lesson;
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckChaptersCountRule implements Rule
+class CheckLessonChaptersCountMaxRule implements Rule
 {
     
     public function __construct()
@@ -15,9 +15,15 @@ class CheckChaptersCountRule implements Rule
 
     public function passes($attribute, $value)
     {
-        $lesson = Lesson::find(request('lesson_id'));
-       
-        return $value == $lesson->chapters_count;
+        if(request('lesson_id'))
+        {
+            $lesson = Lesson::find(request('lesson_id'));
+            if($lesson)
+            {
+                return $value == $lesson->chapters_count;
+            }
+        }
+        return false;
     }
     
     public function message()

@@ -5,7 +5,7 @@ namespace App\Rules\Admin\StudentLesson;
 use App\Models\Lesson;
 use Illuminate\Contracts\Validation\Rule;
 
-class CheckLastPageFinishedRule implements Rule
+class CheckLastPageFinishedMaxRule implements Rule
 {
     /**
      * Create a new rule instance.
@@ -26,9 +26,16 @@ class CheckLastPageFinishedRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $lesson = Lesson::find(request('lesson_id'));
-        
-        return $value == $lesson->to_page;
+        if(request('lesson_id'))
+        {
+            $lesson = Lesson::find(request('lesson_id'));
+            
+            if($lesson)
+            {
+                return $value == $lesson->to_page;
+            }
+        }
+        return false;
     }
 
     /**

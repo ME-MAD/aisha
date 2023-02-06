@@ -118,7 +118,8 @@ class TeacherControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday'      => fake()->date(),
                     'phone'         => fake()->phoneNumber(),
                     'avatar'        => fake()->name(),
-                    'qualification' => fake()->text()
+                    'qualification' => fake()->text(),
+                    'role' => fake()->randomElement(getSeededRoles())['name']
                 ],
             ],
             "without a birthday" => [
@@ -127,7 +128,8 @@ class TeacherControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday'      => null,
                     'phone'         => fake()->phoneNumber(),
                     'avatar'        => fake()->name(),
-                    'qualification' => fake()->text()
+                    'qualification' => fake()->text(),
+                    'role' => fake()->randomElement(getSeededRoles())['name']
                 ],
             ],
             "without a phone" => [
@@ -136,7 +138,8 @@ class TeacherControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday'      => fake()->date(),
                     'phone'         => null,
                     'avatar'        => fake()->name(),
-                    'qualification' => fake()->text()
+                    'qualification' => fake()->text(),
+                    'role' => fake()->randomElement(getSeededRoles())['name']
                 ],
             ],
             "If (avatar) its type is a number" => [
@@ -145,7 +148,8 @@ class TeacherControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday'      => fake()->date(),
                     'phone'         => fake()->phoneNumber(),
                     'avatar'        => 0,
-                    'qualification' => fake()->text()
+                    'qualification' => fake()->text(),
+                    'role' => fake()->randomElement(getSeededRoles())['name']
                 ],
             ],
             "if (avatar) its type is not [jpeg, png, jpg, gif, svg, or webp]" => [
@@ -154,7 +158,8 @@ class TeacherControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday'      => fake()->date(),
                     'phone'         => fake()->phoneNumber(),
                     'avatar'        => 'string',
-                    'qualification' => fake()->text()
+                    'qualification' => fake()->text(),
+                    'role' => fake()->randomElement(getSeededRoles())['name']
                 ],
             ],
             "without qualification" => [
@@ -163,9 +168,31 @@ class TeacherControllerTest extends TestCaseWithTransLationsSetUp
                     'birthday'      => fake()->date(),
                     'phone'         => fake()->phoneNumber(),
                     'avatar'        => fake()->name(),
-                    'qualification' => null
+                    'qualification' => null,
+                    'role' => fake()->randomElement(getSeededRoles())['name']
                 ],
-            ]
+            ],
+            "without a role" => [
+                [
+                    'name'          => fake()->name,
+                    'birthday'      => fake()->date(),
+                    'phone'         => fake()->phoneNumber(),
+                    'avatar'        => fake()->name(),
+                    'qualification' => null,
+                    'role' => null
+                ],
+            ],
+
+            "with a wrong role" => [
+                [
+                    'name'          => fake()->name,
+                    'birthday'      => fake()->date(),
+                    'phone'         => fake()->phoneNumber(),
+                    'avatar'        => fake()->name(),
+                    'qualification' => null,
+                    'role' => "this is a wrong role"
+                ],
+            ],
 
         ];
     }

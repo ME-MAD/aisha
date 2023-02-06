@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\StudentLesson;
 
-use App\Rules\Admin\StudentLesson\CheckChaptersCountRule;
-use App\Rules\Admin\StudentLesson\CheckLastPageFinishedRule;
+use App\Rules\Admin\StudentLesson\CheckLessonChaptersCountMaxRule;
+use App\Rules\Admin\StudentLesson\CheckLastPageFinishedMaxRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StudentLessonReviewRequest extends FormRequest
@@ -29,8 +29,8 @@ class StudentLessonReviewRequest extends FormRequest
             'lesson_id'          => 'required|exists:lessons,id',
             'student_id'         => 'required|exists:students,id',
             'finished'           => 'required',
-            'chapters_count'     => ['required','integer', new CheckChaptersCountRule],
-            'last_page_finished' => ['required','integer',new CheckLastPageFinishedRule()],
+            'chapters_count'     => ['required','integer', new CheckLessonChaptersCountMaxRule],
+            'last_page_finished' => ['required','integer',new CheckLastPageFinishedMaxRule()],
         ];
     }
 
