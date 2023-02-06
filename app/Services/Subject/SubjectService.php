@@ -35,4 +35,20 @@ class SubjectService
             'avatar' => $fileName,
         ]);
     }
+
+    public function convertedSubjectBookToBookName($subject,$book_name)
+    {
+        return   rename(
+                    public_path($subject->book),
+                    public_path('files/subjects/' . $book_name)
+                );
+    }
+
+    public function switchSubjectNameToRequetName($subject,$request)
+    {
+        return    rename(
+                    public_path('files/subjects/' . $subject->name . "/"),
+                    public_path('files/subjects/' . $request->name . "/")
+                );
+    }
 }

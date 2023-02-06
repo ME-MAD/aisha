@@ -71,11 +71,6 @@ class SubjectController extends Controller
             'book'
         );
 
-        // $subject = Subject::create([
-        //     'name' => $request->name,
-        //     'book' => $book_name,
-        //     'avatar' => $fileName,
-        // ]);
         $subject = $this->subjectService->createSubject($request,$book_name,$fileName);
 
         BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
@@ -123,15 +118,10 @@ class SubjectController extends Controller
             $book_name = $request->name . "_book" . "." . "pdf";
 
             if (file_exists($subject->book)) {
-                rename(
-                    public_path($subject->book),
-                    public_path('files/subjects/' . $book_name)
-                );
-
-                rename(
-                    public_path('files/subjects/' . $subject->name . "/"),
-                    public_path('files/subjects/' . $request->name . "/")
-                );
+               
+                $this->subjectService->convertedSubjectBookToBookName($subject->book,$book_name);
+                
+                $this->subjectService->switchSubjectNameToRequetName($subject->name,$request->name);
             }
         }
 
