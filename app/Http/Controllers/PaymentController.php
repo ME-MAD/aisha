@@ -83,29 +83,15 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function getPaymentPerMonthThisYear(Request $request)
+    public function totalPaymentsChartData(Request $request)
     {
-
-        $thisYear = $request->year ?? date('Y');
-
-        $query = $this->paymentChartService->sumOfAmountAndMonth()
+        $data = $this->paymentChartService->sumOfAmountAndMonth()
             ->paid()
-            ->from($request->start_time ?? null)
-            ->to($request->end_time ?? null);
-
-        if (!($request->start_time || $request->end_time)) {
-            $query->year($thisYear);
-        }
-
-        $data = $query->getForChart();
-
-        $years = $this->paymentChartService->getAllPossibleYears();
+            ->getForChart();
 
         return response()->json([
             'months' => array_keys($data),
             'values' => array_values($data),
-            'years' => $years,
-            'thisYear' => $thisYear,
             'totalPayments' => array_sum(array_values($data)),
         ]);
     }

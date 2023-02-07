@@ -53,12 +53,15 @@ class TeacherController extends Controller
     {
         $this->teacherService->setAllDataAboutTeacher($teacher);
 
+        $roles = Role::select(['id', 'name'])->get();
+
         return view('pages.teacher.show', [
             'teacher' => $teacher,
             'experiences' => $this->teacherService->getTeacherExperiences($teacher),
             'groups' => $this->teacherService->getAllTeacherGroups($teacher),
             'countGroups' => $this->teacherService->getCountOfGroups($teacher),
-            'countStudent' => $this->teacherService->getCountOfStudents($teacher)
+            'countStudent' => $this->teacherService->getCountOfStudents($teacher),
+            'roles' => $roles
         ]);
     }
 

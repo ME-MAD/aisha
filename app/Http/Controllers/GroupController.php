@@ -10,6 +10,7 @@ use App\Models\Group;
 use App\Models\Student;
 use App\Services\Group\GroupService;
 use App\Services\GroupType\GroupTypeService;
+use App\Services\HomeService;
 use App\Services\Payment\PaymentChartService;
 use App\Services\Role\RoleService;
 use App\Services\Teacher\TeacherService;
@@ -24,13 +25,15 @@ class GroupController extends Controller
     private GroupService $groupService;
     private PaymentChartService $paymentChartService;
     private RoleService $roleService;
+    private HomeService $homeService;
 
     public function __construct(
         TeacherService      $teacherService,
         GroupTypeService    $groupTypeService,
         GroupService        $groupService,
         PaymentChartService $paymentChartService,
-        RoleService $roleService
+        RoleService $roleService,
+        HomeService $homeService
     )
     {
         $this->teacherService = $teacherService;
@@ -38,6 +41,7 @@ class GroupController extends Controller
         $this->groupService = $groupService;
         $this->paymentChartService = $paymentChartService;
         $this->roleService = $roleService;
+        $this->homeService = $homeService;
 
 
         $this->handlePermissions([
@@ -118,6 +122,30 @@ class GroupController extends Controller
         return response()->json([
             'months' => array_keys($this->paymentChartService->getForChart()),
             'values' => array_values($this->paymentChartService->getForChart()),
+        ]);
+    }
+
+    public function groupAgesChartData()
+    {
+        $groupsCountsData = $this->homeService->getGroupsCountsData();
+
+        return response()->json([
+            'data' => [
+                [
+                    'name' => 'kids',
+                    'value' => $groupsCountsData['groupKidsCount']
+                ],
+                [
+                    'name' => 'adults',
+                    'value' => $groupsCountsData['groupAdultCount']
+                ],
+            ],
+            'allGroupsCount' => $groupsCountsData['allGroupsCount'],
+            'words' => [
+                'groups' => __('home.Groups'),
+                "group_kids_count" => "Group Kids Count" . " " . $groupsCountsData['groupKidsCount'],
+                "group_adult_count" => "Group Adults Count"  . " " . $groupsCountsData['groupAdultCount'],
+            ]
         ]);
     }
 }

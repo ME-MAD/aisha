@@ -60,7 +60,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
 
     Route::group(['prefix' => 'home'], function () {
         Route::get('', [HomeController::class, 'index'])->name('home');
-        Route::get('getDataAjax', [HomeController::class, 'getDataAjax'])->name('getDataAjax');
     });
 
 
@@ -95,6 +94,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
         Route::put('update/{group}', [GroupController::class, 'update'])->name('update');
         Route::get('delete/{group}', [GroupController::class, 'delete'])->name('delete');
         Route::get('getPaymentPerMonth/{group}', [GroupController::class, 'getPaymentPerMonth'])->name('getPaymentPerMonth');
+        Route::get('groupAgesChartData', [GroupController::class, 'groupAgesChartData'])->name('groupAgesChartData');
     });
 
     Route::group(['prefix' => 'student', 'as' => 'student.'], function () {
@@ -180,7 +180,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
         Route::get('edit/{payment}', [PaymentController::class, 'edit'])->name('edit');
         Route::put('update/{payment}', [PaymentController::class, 'update'])->name('update');
         Route::get('delete/{payment}', [PaymentController::class, 'delete'])->name('delete');
-        Route::post('getPaymentPerMonthThisYear', [PaymentController::class, 'getPaymentPerMonthThisYear'])->name('getPaymentPerMonthThisYear');
+        Route::post('totalPaymentsChartData', [PaymentController::class, 'totalPaymentsChartData'])->name('totalPaymentsChartData');
     });
 
     Route::group(['prefix' => 'group_students', 'as' => 'group_students.'], function () {

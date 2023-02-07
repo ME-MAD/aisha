@@ -19,7 +19,7 @@ class StoreRoleRequest extends FormRequest
         return
             [
                 'name' => ['required', 'string', Rule::unique('roles', 'name')],
-                'display_name' => ['nullable', 'string', Rule::unique('roles', 'name')],
+                'display_name' => ['nullable', 'string'],
                 'description' => ['nullable', 'string']
             ];
     }
