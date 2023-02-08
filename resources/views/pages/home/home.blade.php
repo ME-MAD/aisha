@@ -9,7 +9,7 @@
     <link href="{{asset('adminAssets/plugins/fullcalendar/custom-fullcalendar.advance.css')}}" rel="stylesheet" type="text/css" />
 
     <link href="{{asset('adminAssets/plugins/flatpickr/flatpickr.css')}}" rel="stylesheet" type="text/css">
-    <link href="{{asset('adminAssets/plugins/flatpickr/custom-flatpickr')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('adminAssets/plugins/flatpickr/custom-flatpickr.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('adminAssets/assets/css/forms/theme-checkbox-radio.css')}}" rel="stylesheet" type="text/css" />
     <!-- END THEME GLOBAL STYLES -->
 @endpush
@@ -45,6 +45,14 @@
 
 @section('content')
     <div class="text-center w-100">
+
+        <div class="row mb-5">
+            <div class="col-12">
+                @include('pages.home.partials.calendar')
+            </div>
+        </div>
+
+
         <div class="row">
             <div class="col-lg-4 col-md-12">
                 <div class="card" style="min-height: 550px">
@@ -78,11 +86,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12">
-                @include('pages.home.partials.calendar')
-            </div>
-        </div>
+        
         {{-- <div class="px-3" id="paymentsThisMonthContainer"
             data-href="{{ route('admin.payment.getPaymentPerMonthThisYear') }}">
 
@@ -117,9 +121,9 @@
 
     <script src="{{asset('adminAssets/plugins/fullcalendar/moment.min.js')}}"></script>
 
-    {{-- <script src="{{ asset('adminAssets/plugins/flatpickr/flatpickr.js') }}"></script> --}}
+    <script src="{{ asset('adminAssets/plugins/flatpickr/flatpickr.js') }}"></script>
 
     <script src="{{asset('adminAssets/plugins/fullcalendar/fullcalendar.min.js')}}"></script>
 
-    <script src="{{asset('adminAssets/plugins/fullcalendar/custom-fullcalendar.advance.js')}}"></script>
+    <script type="module" src="{{asset('js/home/home.js')}}"></script>
 @endpush

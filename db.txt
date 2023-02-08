@@ -30,9 +30,8 @@ Student:
 [CRUD]
 Group:
     id
-    from : time
-    to : time
     teacher_id
+    group_type_id
     age_type ('kid','adult') : enum
 
 
@@ -40,6 +39,8 @@ Group:
 GroupDay:
         id
         group_id
+        from : time
+        to : time
         day ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday') : enum
 
 
