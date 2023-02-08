@@ -71,7 +71,6 @@ class PaymentDataTable extends DataTable
                 'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                 'buttons'      => [
                     ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
-                    ['extend' => 'excel', 'className' => 'btn btn-success ', 'text' => 'Export'],
                 ],
                 'order' => [
                     0, 'desc'
