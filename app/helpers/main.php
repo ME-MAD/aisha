@@ -121,7 +121,7 @@ if (!function_exists('getPermissionsForSeeder')) {
 
         $permissions = [];
 
-        foreach($tables as $table)
+        foreach($tables as $table => $tableName)
         {
             foreach($keys as $key => $value)
             {
@@ -141,7 +141,7 @@ if (!function_exists('getPermissionsArray')) {
 
         $permissions = [];
 
-        foreach($tables as $table)
+        foreach($tables as $table => $tableName)
         {
             foreach($keys as $key => $value)
             {
