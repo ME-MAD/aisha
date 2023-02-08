@@ -15,7 +15,7 @@
         <ul class="list-unstyled menu-categories" id="topAccordion">
 
             @check_permission_in_permissions(['index-user','index-role'])
-            <li class="menu single-menu{{
+            <li class="menu single-menu {{
                     request()->routeIs('admin.home') ||
                     request()->routeIs('admin.user.index') ||
                     request()->routeIs('admin.role.index') ||
