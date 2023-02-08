@@ -8,39 +8,51 @@
               type="text/css"
               href="{{ asset('adminRtl/plugins/file-upload/file-upload-with-preview.min.css') }}"
         />
+        <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
     @else
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
+              <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
     @endif
 
 @endpush
 
 @section('breadcrumb')
-    <div class="page-header">
-        <div class="page-title">
-            <h3>Create Subject</h3>
-        </div>
-        <div class="dropdown filter custom-dropdown-icon">
-            <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false"><span class="text"><span>Show</span> : Daily Analytics</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="feather feather-chevron-down">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-            </a>
+<div class="row my-3 ">
+    <div class="col-md-12">
+        <div class="breadcrumb bg-transparent">
 
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown">
-                <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                   href="{{ route('admin.home') }}">Home</a>
-                <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                   href="{{ route('admin.subject.index') }}">Subjects</a>
-                <a class="dropdown-item" data-value="<span>Show</span> : Weekly Analytics"
-                   href="{{ route('admin.subject.create') }}">Create Subject</a>
+            <div class="breadcrumb-four">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{{route('admin.home')}}"
+                           class="d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-house mx-2 fa-2x"></i>
+                            <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{{route('admin.subject.index')}}"
+                           class="d-flex justify-content-center align-items-center">
+                            
+                           <i class="fa-solid fa-book fa-2x mx-2"></i>
+                           <span class="font-weight-bold ">المناهج المقررة</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{route('admin.subject.create')}}"
+                           class="d-flex justify-content-center align-items-center">
+
+                            <i class="fa-solid fa-book-open fa-2x mx-2"></i>
+                            <span class="font-weight-bold ">إضافة منهج جديد</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('content')

@@ -34,8 +34,8 @@
                             <a href="{{route('admin.role.index')}}"
                                class="d-flex justify-content-center align-items-center">
 
-                                <i class="fa-solid fa-circle-plus fa-2x mx-2"></i>
-                                <span class="font-weight-bold ">{{__('roles.index')}}</span>
+                                <i class="fa-solid fa-fingerprint fa-2x mx-2"></i>
+                                <span class="font-weight-bold ">الوظائف</span>
                             </a>
                         </li>
                     </ul>

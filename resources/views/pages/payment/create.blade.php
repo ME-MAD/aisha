@@ -12,7 +12,49 @@
     <link href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
     <link rel="{{ asset('adminAssets/stylesheet" type="text/css') }}" href="plugins/select2/select2.min.css">
     <!--  END CUSTOM STYLE FILE  -->
+    @if (LaravelLocalization::getCurrentLocale() == 'ar')
+       <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
+    @else
+       <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
+    @endif
 @endpush
+
+@section('breadcrumb')
+<div class="row my-3 ">
+    <div class="col-md-12">
+        <div class="breadcrumb bg-transparent">
+
+            <div class="breadcrumb-four">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="{{route('admin.home')}}"
+                           class="d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-house mx-2 fa-2x"></i>
+                            <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{{route('admin.payment.index')}}"
+                           class="d-flex justify-content-center align-items-center">
+
+                           <i class="fa-solid fa-file-invoice-dollar fa-2x mx-2"></i>
+                            <span class="font-weight-bold ">كشف المدفوعات</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{{route('admin.payment.create')}}"
+                           class="d-flex justify-content-center align-items-center">
+
+                            <i class="fa-solid fa-circle-dollar-to-slot fa-2x mx-2"></i>
+                            <span class="font-weight-bold ">تسجيل المدفوعات</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> 
+@endsection
 
 @section('content')
     <div id="content" class="main-content">
