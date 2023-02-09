@@ -1,7 +1,3 @@
-import {groupAgesChartRun} from "./partials/groupAgesChart.js"
-import {totalPaymentsChartRun} from "./partials/paymentChart.js"
+import {calendarRun} from "./partials/calendar.js"
 
-
-
-groupAgesChartRun()
-totalPaymentsChartRun()
+calendarRun()

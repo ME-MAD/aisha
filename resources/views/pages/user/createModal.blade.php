@@ -1,6 +1,6 @@
 <div class="modal fade" id="creatUserModal" tabindex="-1" role="dialog" aria-labelledby="creatUserModal"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-capitalize font-weight-bold text-muted" id="creatUserModalTitle">{{trans('user.add user')}}</h5>
@@ -9,9 +9,15 @@
                 <form action="{{ route('admin.user.store') }}" method="post">
                     @csrf
 
-                    <x-text name="name" label="{{trans('user.name')}}" :value="old('name')"/>
+                    <div class="row">
+                        <div class="col-6">
+                            <x-text name="name" label="{{trans('user.name')}}" :value="old('name')"/>
+                        </div>
+                        <div class="col-6">
+                            <x-text name="email" label="{{trans('user.email')}}" :value="old('email')" />
+                        </div>
+                    </div>
 
-                    <x-text name="email" label="{{trans('user.email')}}" :value="old('email')" />
 
                     <div class="form-group">
                         <label for="role" class="text-capitalize font-weight-bold text-muted">{{trans('user.role')}}</label>
