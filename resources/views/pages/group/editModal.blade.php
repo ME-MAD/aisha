@@ -11,11 +11,7 @@
                     @method('PUT')
 
                     <x-text name="name" label="{{ __('group.name') }}" id="name"/>
-
-                    <x-text name="from" label="{{ __('group.from') }}" id="frome"/>
-
-                    <x-text name="to" label="{{ __('group.to') }}" id="to"/>
-
+                    
                     <div class="form-group row mb-4">
                         <label for="teacherId"
                                class="col-xl-12 col-md-6 col-form-label text-muted font-weight-bold text-capitalize">{{ __('group.Choose teacher') }}

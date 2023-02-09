@@ -4,35 +4,37 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+return new class extends Migration {
+
+    public function up(): void
     {
         Schema::create('group_days', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('group_id');
-            $table->string('day');
-            $table->timestamps();
+            $table->enum('day',
+                [
+                    'Monday',
+                    'Tuesday',
+                    'Wednesday',
+                    'Thursday',
+                    'Friday',
+                    'Saturday',
+                    'Sunday'
+                ]);
 
+            $table->time('from_time');
+            $table->time('to_time');
+            $table->timestamps();
             $table->foreign('group_id')
-            ->references('id')
-            ->on('groups')
-            ->onDelete('CASCADE');
+                ->references('id')
+                ->on('groups')
+                ->onDelete('CASCADE');
 
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+
+    public function down(): void
     {
         Schema::dropIfExists('group_days');
     }

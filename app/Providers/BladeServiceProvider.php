@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\ServiceProvider;
 
 class BladeServiceProvider extends ServiceProvider
 {
@@ -26,18 +26,15 @@ class BladeServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::if('check_permission', function ($permission) {
-            if(Auth::guard(getGuard())->user()->isAbleTo($permission))
-            {
+            if (Auth::guard(getGuard())->user()->isAbleTo($permission)) {
                 return true;
             }
             return false;
         });
 
         Blade::if('check_permission_in_permissions', function (array $permissions) {
-            foreach($permissions as $permission)
-            {
-                if(Auth::guard(getGuard())->user()->isAbleTo($permission))
-                {
+            foreach ($permissions as $permission) {
+                if (Auth::guard(getGuard())->user()->isAbleTo($permission)) {
                     return true;
                 }
             }

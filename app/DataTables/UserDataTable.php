@@ -95,14 +95,14 @@ class UserDataTable extends DataTable
     {
         return [
             [
-                'name' => 'users.id',
+                'name' => 'id',
                 'data' => 'id',
                 'title' => '#',
                 "className" => 'search--col exact'
             ],
 
             [
-                'name' => 'users.name',
+                'name' => 'name',
                 'data' => 'name',
                 'title' => 'Name',
                 "className" => 'search--col'

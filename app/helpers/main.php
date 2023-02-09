@@ -172,7 +172,7 @@ if (!function_exists('getSeededRoles')) {
                 'display_name' => 'student',
                 'description' => 'Have Accessibility on Student Actions',
             ],
-        
+
         ];
     }
 }

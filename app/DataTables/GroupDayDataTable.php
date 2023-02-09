@@ -15,17 +15,16 @@ class GroupDayDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('delete', 'pages.groupDays.datatable.delete')
-            ->editColumn('group.from', function ($q) {
-                return $q->group->from ?? "";
+            ->editColumn('from_time', function ($q) {
+                return date("h:i a", strtotime($q->group->from_time)) ?? "";
             })
-            ->editColumn('group.to', function ($q) {
-                return $q->group->to ?? "";
+            ->editColumn('to_time', function ($q) {
+                return date("h:i a", strtotime($q->group->to_time)) ?? "";
             })
-            ->editColumn('day' ,function ($query)
-            {
+            ->editColumn('day', function ($query) {
                 return view('pages.groupDays.datatable.day', compact('query'));
             })
-            ->rawColumns(['delete','day'])
+            ->rawColumns(['delete', 'day'])
             ->setRowId('id');
     }
 
@@ -36,13 +35,13 @@ class GroupDayDataTable extends DataTable
             'group_days.id',
             'group_id',
             'day',
+            'from_time',
+            'to_time'
         ])->with([
             'group' => function ($q) {
                 return $q->select([
                     'groups.id',
                     'groups.name',
-                    'groups.from',
-                    'groups.to'
                 ]);
             },
         ]);
@@ -91,7 +90,7 @@ class GroupDayDataTable extends DataTable
                 }",
                 "fnDrawCallback" => "function( oSettings ) {
                     refreshAllTableLinks()
-                  
+
                 }",
 
             ]);
@@ -105,9 +104,9 @@ class GroupDayDataTable extends DataTable
 
             ['name' => 'group_days.name', 'data' => 'group.name', 'title' => __('group.name'), "className" => 'search--col exact'],
 
-            ['name' => 'group.from', 'data' => 'group.from', 'title' => __('group.from'), "className" => 'search--col'],
+            ['name' => 'from_time', 'data' => 'from_time', 'title' => __('group.from_time'), "className" => 'search--col'],
 
-            ['name' => 'group.to', 'data' => 'group.to', 'title' => __('group.to'), "className" => 'search--col'],
+            ['name' => 'to_time', 'data' => 'to_time', 'title' => __('group.to_time'), "className" => 'search--col'],
 
             ['name' => 'day', 'data' => 'day', 'title' => __('group.day'), "className" => 'search--col'],
 

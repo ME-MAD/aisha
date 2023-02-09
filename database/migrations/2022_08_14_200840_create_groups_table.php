@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,8 +14,6 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->time('from');
-            $table->time('to');
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('group_type_id');
             $table->enum('age_type', ['kid', 'adult']);

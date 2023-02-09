@@ -12,11 +12,6 @@
 
                     <x-text name="name" id="from_create" label="{{ __('group.name') }}" :value="old('name')"/>
 
-
-                    <x-time name="from" id="from_create" label="{{ __('group.from') }}" :value="old('from')"/>
-
-                    <x-time name="to" id="to_create" label="{{ __('group.to') }}" :value="old('to')"/>
-
                     <div class="form-group row mb-4">
                         <label for="age_type"
                                class="col-xl-12 col-md-6  col-form-label text-muted font-weight-bold text-capitalize">
@@ -27,7 +22,7 @@
                                 <option value="">{{ __('group.Choose teacher') }}</option>
                                 @foreach ($teachers as $item)
                                     <option value="{{ $item->id }}"
-                                            {{ old('teacher_id') == $item->id ? 'selected' : '' }}>
+                                        {{ old('teacher_id') == $item->id ? 'selected' : '' }}>
                                         {{ $item->name }}</option>
                                 @endforeach
                             </select>
@@ -47,7 +42,7 @@
 
                                 @foreach ($groupTypes as $item)
                                     <option value="{{ $item->id }}"
-                                            {{ old('group_type_id') == $item->id ? 'selected' : '' }}>
+                                        {{ old('group_type_id') == $item->id ? 'selected' : '' }}>
                                         {{ $item->name }}</option>
                                 @endforeach
                             </select>

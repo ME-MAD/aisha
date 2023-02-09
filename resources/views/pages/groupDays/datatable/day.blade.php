@@ -1,3 +1,2 @@
-@foreach($query->day as $day)
-    <span class="badge badge-dark">{{$day}}</span>
-@endforeach
+<span class="badge badge-dark">{{$query->day}}</span>
+
