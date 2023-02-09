@@ -11,18 +11,19 @@ return new class extends Migration {
         Schema::create('group_days', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('group_id');
-            $table->enum('day',
-                [
-                    'Monday',
-                    'Tuesday',
-                    'Wednesday',
-                    'Thursday',
-                    'Friday',
-                    'Saturday',
-                    'Sunday'
-                ]);
-            $table->date('from_time');
-            $table->date('to_time');
+//            $table->enum('day',
+//                [
+//                    'Monday',
+//                    'Tuesday',
+//                    'Wednesday',
+//                    'Thursday',
+//                    'Friday',
+//                    'Saturday',
+//                    'Sunday'
+//                ]);
+            $table->
+            $table->time('from_time');
+            $table->time('to_time');
             $table->timestamps();
             $table->foreign('group_id')
                 ->references('id')
