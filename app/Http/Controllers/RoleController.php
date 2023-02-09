@@ -92,4 +92,12 @@ class RoleController extends Controller
         return back();
     }
 
+    public function getRoleUsers(Role $role)
+    {
+        return response()->json([
+            'users' => $role->users()->select('id','name','email')->get(), 
+            'teachers' => $role->teachers()->select('id','name','email')->get(), 
+            'students' => $role->students()->select('id','name','email')->get(), 
+        ]);
+    }
 }

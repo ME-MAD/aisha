@@ -3,6 +3,7 @@
 @push('css')
 
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
+    <link href="{{asset('adminAssets/assets/css/tables/table-basic.css')}}" rel="stylesheet" type="text/css" />
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}"> --}}
 
     @if (LaravelLocalization::getCurrentLocale() == 'ar')
@@ -83,5 +84,9 @@
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('/vendor/datatables/buttons.server-side.js')}}"></script>
 
+
     {!! $dataTable->scripts() !!}
+
+    <script src="{{asset('js/role/indexPage.js')}}"></script>
+
 @endpush

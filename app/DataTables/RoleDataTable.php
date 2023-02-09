@@ -17,8 +17,8 @@ class RoleDataTable extends DataTable
             ->addColumn('actions', function ($query) {
                 return view('pages.role.datatable.actions', compact('query'));
             })
-            ->addColumn('show', function ($query) {
-                return view('pages.role.datatable.edit', compact('query'));
+            ->addColumn('showUsers', function ($query) {
+                return view('pages.role.datatable.showUsers', compact('query'));
             })
             ->editColumn('countUsers', function ($q) {
                 return($q->role_users_count);
@@ -26,14 +26,13 @@ class RoleDataTable extends DataTable
             ->editColumn('countPermissions', function ($q) {
                 return($q->role_permissions_count);
             })
-            ->rawColumns(['actions','show'])
+            ->rawColumns(['actions','showUsers'])
             ->setRowId('id');
     }
 
 
     public function query(Role $model): QueryBuilder
     {
-
         return $model::select(
             [
                 'roles.id',
@@ -44,12 +43,7 @@ class RoleDataTable extends DataTable
         )->withCount([
             'roleUsers',
             'rolePermissions'
-        ])->with([
-            'teachers',
-            'students',
-            'Users'
         ]);
-
     }
 
 
@@ -147,8 +141,8 @@ class RoleDataTable extends DataTable
                 "className" => 'search--col exact'
             ],
             [
-                'name' => 'show',
-                'data' => 'show',
+                'name' => 'showUsers',
+                'data' => 'showUsers',
                 'title' => "إظهار",
                 'printable' => false,
                 'exportable' => false,
