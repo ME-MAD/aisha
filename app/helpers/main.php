@@ -98,11 +98,9 @@ if (!function_exists('getPermissionsForView')) {
 
         $permissions = [];
 
-        foreach($tables as $table => $tableName)
-        {
-            foreach($keys as $key => $value)
-            {
-                $permissions [$table] []= [
+        foreach ($tables as $table => $tableName) {
+            foreach ($keys as $key => $value) {
+                $permissions [$table] [] = [
                     'key' => $value,
                     'value' => "$value-$table",
                 ];
@@ -121,11 +119,9 @@ if (!function_exists('getPermissionsForSeeder')) {
 
         $permissions = [];
 
-        foreach($tables as $table)
-        {
-            foreach($keys as $key => $value)
-            {
-                $permissions [] ['name']= "$value-$table";
+        foreach ($tables as $table) {
+            foreach ($keys as $key => $value) {
+                $permissions [] ['name'] = "$value-$table";
             }
         }
         return $permissions;
@@ -141,11 +137,9 @@ if (!function_exists('getPermissionsArray')) {
 
         $permissions = [];
 
-        foreach($tables as $table)
-        {
-            foreach($keys as $key => $value)
-            {
-                $permissions []= "$value-$table";
+        foreach ($tables as $table => $tableName) {
+            foreach ($keys as $key => $value) {
+                $permissions [] = "$value-$table";
             }
         }
         return $permissions;
@@ -172,7 +166,7 @@ if (!function_exists('getSeededRoles')) {
                 'display_name' => 'student',
                 'description' => 'Have Accessibility on Student Actions',
             ],
-        
+
         ];
     }
 }

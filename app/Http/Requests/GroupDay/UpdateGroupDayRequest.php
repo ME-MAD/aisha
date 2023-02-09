@@ -17,7 +17,9 @@ class UpdateGroupDayRequest extends FormRequest
     {
         return [
             "group_id" => "required|exists:groups,id",
-            "day" => "required"
+            'from_time' => ['required', ' date_form:H:i'],
+            'to_time' => ['required', ' date_form:H:i', 'after:from_date'],
+            "day" => ["required"]
         ];
     }
 }

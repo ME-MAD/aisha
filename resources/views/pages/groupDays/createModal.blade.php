@@ -39,13 +39,18 @@
                         <input type="hidden" name="group_id" id="group_id" value="{{ $group->id }}"
                                data-groupid="{{ $group->id }}">
                     @endif
+
+                    <x-time name="from" id="from_create" label="{{ __('group.from') }}" :value="old('from')"/>
+
+                    <x-time name="to" id="to_create" label="{{ __('group.to') }}" :value="old('to')"/>
+                    
                     <div class="form-group row mb-4">
                         <label for="day" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
                             {{ __('group.day') }}</label>
                         <div class="col-xl-12 col-md-6  ">
                             <select class="form-control selectpicker" style="width: 100%;" name="day[]"
                                     id="day" multiple>
-                                
+
                                 <option value="Monday">
                                     {{ __('group.Monday') }}
                                 </option>
