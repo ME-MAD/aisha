@@ -11,14 +11,10 @@ class GroupDay extends Model
     use HasFactory;
 
     protected $fillable = ['group_id', 'day', 'from_time', 'to_time'];
-
-    protected $casts = [
-        'day' => "object"
-    ];
-
-
+    
     public function group()
     {
         return $this->belongsTo(Group::class, 'group_id');
     }
+
 }

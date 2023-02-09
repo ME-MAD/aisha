@@ -15,12 +15,12 @@ class GroupDayDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('delete', 'pages.groupDays.datatable.delete')
-            ->editColumn('group.from_time', function ($q) {
-                return $q->group->from ?? "";
-            })
-            ->editColumn('group.to_time', function ($q) {
-                return $q->group->to ?? "";
-            })
+//            ->editColumn('group.from_time', function ($q) {
+//                return date('H:i A', mktime($q->from_time));
+//            })
+//            ->editColumn('group.to_time', function ($q) {
+//                return date('H:i A', strtotime($q->to_time));
+//            })
             ->editColumn('day', function ($query) {
                 return view('pages.groupDays.datatable.day', compact('query'));
             })

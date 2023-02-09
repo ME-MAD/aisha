@@ -2,9 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Models\Exam;
 use App\Models\Experience;
 use App\Models\Group;
 use App\Models\GroupDay;
+use App\Models\GroupStudent;
+use App\Models\Lesson;
+use App\Models\Payment;
+use App\Models\Student;
+use App\Models\StudentLesson;
+use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Database\Seeder;
 
@@ -26,49 +33,48 @@ class GroupsSeeder extends Seeder
 
             ])->each(function ($group) {
 
-                $time = fake()->unique()->date('H:i');
-//                dd(fake()->dayOfWeek());
+                $time = fake()->unique()->date('H:i ');
 
                 GroupDay::factory()->create([
                     'group_id' => $group->id,
-                    'day' => 'Thursday',
+                    'day' => fake()->dayOfWeek,
 
                     'from_time' => $time,
-                    'to_time' => date('H:i', strtotime("$time +1 hours")),
+                    'to_time' => date('H:i ', strtotime("$time +1 hours")),
 
                 ]);
 
 
-//                Subject::factory(1)->create()->each(function ($subject) use ($group) {
-//                    Student::factory(5)->create()->each(function ($student) use ($subject, $group) {
-//                        $student->attachRole('student');
-//                        $lesson = Lesson::factory(1)->create([
-//                            'subject_id' => $subject->id
-//                        ])->each(function ($lesson) use ($student, $group) {
-//                            StudentLesson::factory(1)->create([
-//                                'lesson_id' => $lesson->id,
-//                                'student_id' => $student->id,
-//                                'group_id' => $group->id
-//                            ]);
-//                            Exam::factory(1)->create([
-//                                'student_id' => $student->id,
-//                                'group_id' => $group->id,
-//                                'lesson_from' => $lesson->id,
-//                                'lesson_to' => $lesson->id
-//                            ]);
-//                        });
-//
-//                        GroupStudent::factory(1)->create([
-//                            'student_id' => $student->id,
-//                            'group_id' => $group->id
-//                        ]);
-//
-//                        Payment::factory(3)->create([
-//                            'student_id' => $student->id,
-//                            'group_id' => $group->id,
-//                        ]);
-//                    });
-//                });
+                Subject::factory(1)->create()->each(function ($subject) use ($group) {
+                    Student::factory(5)->create()->each(function ($student) use ($subject, $group) {
+                        $student->attachRole('student');
+                        $lesson = Lesson::factory(1)->create([
+                            'subject_id' => $subject->id
+                        ])->each(function ($lesson) use ($student, $group) {
+                            StudentLesson::factory(1)->create([
+                                'lesson_id' => $lesson->id,
+                                'student_id' => $student->id,
+                                'group_id' => $group->id
+                            ]);
+                            Exam::factory(1)->create([
+                                'student_id' => $student->id,
+                                'group_id' => $group->id,
+                                'lesson_from' => $lesson->id,
+                                'lesson_to' => $lesson->id
+                            ]);
+                        });
+
+                        GroupStudent::factory(1)->create([
+                            'student_id' => $student->id,
+                            'group_id' => $group->id
+                        ]);
+
+                        Payment::factory(3)->create([
+                            'student_id' => $student->id,
+                            'group_id' => $group->id,
+                        ]);
+                    });
+                });
             });
         });
     }
