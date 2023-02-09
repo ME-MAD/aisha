@@ -17,7 +17,16 @@ class RoleDataTable extends DataTable
             ->addColumn('actions', function ($query) {
                 return view('pages.role.datatable.actions', compact('query'));
             })
-            ->rawColumns(['actions'])
+            ->addColumn('show', function ($query) {
+                return view('pages.role.datatable.edit', compact('query'));
+            })
+            ->editColumn('countUsers', function ($q) {
+                return($q->role_users_count);
+            })
+            ->editColumn('countPermissions', function ($q) {
+                return($q->role_permissions_count);
+            })
+            ->rawColumns(['actions','show'])
             ->setRowId('id');
     }
 
@@ -27,12 +36,19 @@ class RoleDataTable extends DataTable
 
         return $model::select(
             [
-                'id',
+                'roles.id',
                 'name',
                 'display_name',
                 'description'
             ]
-        );
+        )->withCount([
+            'roleUsers',
+            'rolePermissions'
+        ])->with([
+            'teachers',
+            'students',
+            'Users'
+        ]);
 
     }
 
@@ -80,6 +96,7 @@ class RoleDataTable extends DataTable
             }",
                 "fnDrawCallback" => "function( oSettings ) {
                 refreshAllTableLinks()
+                initShowRoleUsersModal()
             }",
 
             ]);
@@ -118,6 +135,29 @@ class RoleDataTable extends DataTable
             ],
 
             [
+                'name' => 'countUsers',
+                'data' => 'countUsers',
+                'title' => 'عدد المستخدمين',
+                "className" => 'search--col exact'
+            ],
+            [
+                'name' => 'countPermissions',
+                'data' => 'countPermissions',
+                'title' => 'عدد الصلاحيات',
+                "className" => 'search--col exact'
+            ],
+            [
+                'name' => 'show',
+                'data' => 'show',
+                'title' => "إظهار",
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
+
+            [
                 'actions' => 'actions',
                 'data' => 'actions',
                 'title' => __('roles.actions'),
@@ -127,6 +167,9 @@ class RoleDataTable extends DataTable
                 'searchable' => false,
                 "className" => 'not--search--col'
             ],
+
+           
+
 
 
         ];

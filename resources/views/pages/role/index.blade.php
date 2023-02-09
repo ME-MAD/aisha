@@ -73,7 +73,7 @@
             </div>
         </div>
     </div>
-    
+    @include('pages.role.showModal')
 @endsection
 
 

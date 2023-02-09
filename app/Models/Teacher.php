@@ -83,6 +83,4 @@ class Teacher extends Authenticatable
             'role_id');
 
     }
-
-
 }

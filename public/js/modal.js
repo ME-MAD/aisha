@@ -150,3 +150,17 @@ function initEditeUserModal() {
         $('#editUserForm').attr('action', href)
     })
 }
+
+
+
+function initShowRoleUsersModal() {
+    $('.showRoleButton').on('click', function () {
+        let role = $(this).data('role')
+
+        console.log(role);
+
+
+        $('#editTeacherForm').attr('action', href)
+
+    })
+}
