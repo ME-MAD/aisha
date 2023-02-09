@@ -74,6 +74,8 @@ return [
     */
     'user_models' => [
         'users' => \App\Models\User::class,
+        'teachers' => \App\Models\Teacher::class,
+        'students' => \App\Models\Student::class,
     ],
 
     /*

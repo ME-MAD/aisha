@@ -9,4 +9,12 @@ class RoleUser extends Model
 {
     use HasFactory;
     protected  $table = 'role_user';
+
+
+    public function RoleUser()
+    {
+       return $this->morphTo();
+    }
+
+    
 }
