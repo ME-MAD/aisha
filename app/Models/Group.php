@@ -12,23 +12,8 @@ class Group extends Model
 
     protected $fillable = ['name', 'from', 'to', 'teacher_id', 'group_type_id', 'age_type'];
 
-    protected $appends = ['fto', 'ffrom'];
 
     const GROUP_TYPES = ['kid', 'adult'];
-
-    protected function from(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => date('h:i', strtotime($value)),
-        );
-    }
-
-    protected function to(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => date('h:i', strtotime($value)),
-        );
-    }
 
     public function teacher()
     {
@@ -68,16 +53,6 @@ class Group extends Model
     public function getRemainingGroupDaysCount()
     {
         return $this->groupType->days_num - $this->groupDays->count();
-    }
-
-    public function getFfromAttribute()
-    {
-        return date('h:i a', strtotime($this->from));
-    }
-
-    public function getFtoAttribute()
-    {
-        return date('h:i a', strtotime($this->to));
     }
 
     public function students()

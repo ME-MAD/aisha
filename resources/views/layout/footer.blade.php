@@ -21,15 +21,14 @@
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/modal.js') }}"></script>
 
-{{-- 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.js">
-</script> --}}
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.js">
+</script>
+
+@include('sweetalert::alert')
 
 @stack('js')
 
-
-@include('sweetalert::alert')
 
 </body>
 

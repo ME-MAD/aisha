@@ -16,10 +16,10 @@ class GroupDayDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('delete', 'pages.groupDays.datatable.delete')
             ->editColumn('from_time', function ($q) {
-                return date("h:i a", strtotime($q->group->from_time)) ?? "";
+                return date("h:i a", strtotime($q->from_time)) ?? "";
             })
             ->editColumn('to_time', function ($q) {
-                return date("h:i a", strtotime($q->group->to_time)) ?? "";
+                return date("h:i a", strtotime($q->to_time)) ?? "";
             })
             ->editColumn('day', function ($query) {
                 return view('pages.groupDays.datatable.day', compact('query'));

@@ -18,6 +18,8 @@ class GroupDayService
             'group_id' => $request->group_id,
         ], [
             'day' => $request->day,
+            'from_time' => $request->from_time,
+            'to_time' => $request->to_time 
         ]);
     }
 
