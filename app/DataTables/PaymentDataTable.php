@@ -51,7 +51,7 @@ class PaymentDataTable extends DataTable
             'paid',
         ])->with([
             'student:id,name',
-            'group:id,from,to'
+            'group:id,name'
         ]);
     }
 
@@ -157,9 +157,27 @@ class PaymentDataTable extends DataTable
                 "className" => 'search--col'
             ],
 
-            ['name' => 'show', 'data' => 'show', 'title' => 'show', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'show',
+                'data' => 'show',
+                'title' => 'show',
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
 
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => 'Delete',
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
         ];
     }
 

@@ -45,7 +45,7 @@ class GroupStudentDataTable extends DataTable
             'group_id'
         ])->with([
             'student:id,name',
-            'group:id,from,to'
+            'group:id,name'
         ]);
     }
 
@@ -125,22 +125,11 @@ class GroupStudentDataTable extends DataTable
             ],
 
             [
-                'name' => 'group.from',
-                'data' => 'group.from',
+                'name' => 'group.name',
+                'data' => 'group.name',
                 'title' =>  __('group.Groups'),
                 "className" => 'search--col'
             ],
-
-            // [
-            //     'name' => 'edit',
-            //     'data' => 'edit',
-            //     'title' => 'Edit',
-            //     'printable' => false,
-            //     'exportable' => false,
-            //     'orderable' => false,
-            //     'searchable' => false,
-            //     "className" => 'not--search--col'
-            // ],
 
             [
                 'name' => 'delete',

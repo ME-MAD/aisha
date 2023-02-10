@@ -93,31 +93,102 @@ class StudentDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            ['name' => 'students.id', 'data' => 'id', 'title' => 'رقم الهوية', "className" => 'search--col exact'],
+            [
+                'name' => 'students.id',
+                'data' => 'id',
+                'title' => 'رقم الهوية',
+                "className" => 'search--col exact'
+                ],
 
-            ['name' => 'name', 'data' => 'name', 'title' => ' الاسم', "className" => 'search--col'],
+            [
+                'name' => 'name',
+                'data' => 'name',
+                'title' => ' الاسم',
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'role.name', 'data' => 'role.name', 'title' => ' role', "className" => 'search--col'],
+            [
+                'name' => 'role.name', 
+                'data' => 'role.name',
+                'title' => ' role', "className" => 'search--col'],
 
-            ['name' => 'avatar', 'data' => 'avatar', 'title' => ' الصور', "className" => 'search--col'],
+            [
+                'name' => 'avatar', 
+                'data' => 'avatar',
+                'title' => ' الصور',
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'email', 'data' => 'email', 'title' => 'Email', "className" => 'search--col'],
+            [
+                'name' => 'email',
+                'data' => 'email',
+                'title' => 'Email',
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'birthday', 'data' => 'birthday', 'title' => ' تاريخ الميلاد', "className" => 'search--col'],
+            [
+                'name' => 'birthday',
+                'data' => 'birthday',
+                'title' => ' تاريخ الميلاد',
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'phone', 'data' => 'phone', 'title' => ' الهاتف', "className" => 'search--col'],
+            [
+                'name' => 'phone',
+                'data' => 'phone',
+                'title' => ' الهاتف',
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'qualification', 'data' => 'qualification', 'title' => ' المؤهلات', "className" => 'search--col'],
+            [
+                'name' => 'qualification',
+                'data' => 'qualification',
+                'title' => ' المؤهلات',
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'countGroups', 'data' => 'countGroups', 'title' => ' عدد الجروبات', 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'countGroups',
+                'data' => 'countGroups',
+                'title' => ' عدد الجروبات',
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'],
 
-            ['name' => 'show', 'data' => 'show', 'title' => 'Show', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'show',
+                 'data' => 'show',
+                  'title' => 'Show',
+                   'printable' => false,
+                    'exportable' => false, 
+                    'orderable' => false,
+                     'searchable' => false, 
+                     "className" => 'not--search--col'
+            ],
 
 
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'edit',
+                'data' => 'edit',
+                'title' => 'Edit',
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false, 
+                "className" => 'not--search--col'
+            ],
 
 
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => 'Delete',
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
         ];
     }
 

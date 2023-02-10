@@ -125,18 +125,62 @@ class ExperienceDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            ['name' => 'experiences.id', 'data' => 'id', 'title' => 'رقم الهوية', "className" => 'search--col exact'],
+            [
+                'name' => 'experiences.id',
+                'data' => 'id',
+                'title' => 'رقم الهوية',
+                "className" => 'search--col exact'
+            ],
 
-            ['name' => 'title', 'data' => 'title', 'title' => 'الخبرة', "className" => 'search--col'],
+            [
+                'name' => 'title',
+                'data' => 'title',
+                'title' => 'الخبرة',
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'from', 'data' => 'from', 'title' => 'من ', "className" => 'search--col'],
+            [
+                'name' => 'from',
+                'data' => 'from',
+                'title' => 'من ',
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'to', 'data' => 'to', 'title' => 'الى', "className" => 'search--col'],
+            [
+                'name' => 'to',
+                'data' => 'to',
+                'title' => 'الى',
+                "className" => 'search--col'
+                ],
 
-            ['name' => 'teacher.name', 'data' => 'teacher.name', 'title' => ' المعلم', "className" => 'search--col'],
+            [
+                'name' => 'teacher.name',
+                'data' => 'teacher.name',
+                'title' => ' المعلم',
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'edit',
+                'data' => 'edit',
+                'title' => 'Edit',
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
+
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => 'Delete',
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
         ];
     }
 

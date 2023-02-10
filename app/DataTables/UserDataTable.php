@@ -95,7 +95,7 @@ class UserDataTable extends DataTable
     {
         return [
             [
-                'name' => 'id',
+                'name' => 'users.id',
                 'data' => 'id',
                 'title' => '#',
                 "className" => 'search--col exact'
@@ -107,12 +107,14 @@ class UserDataTable extends DataTable
                 'title' => 'Name',
                 "className" => 'search--col'
             ],
+
             [
                 'name' => 'email',
                 'data' => 'email',
                 'title' => 'Email',
                 "className" => 'search--col'
             ],
+
             [
                 'name' => 'role.name',
                 'data' => 'role.name',
@@ -120,9 +122,27 @@ class UserDataTable extends DataTable
                 "className" => 'search--col'
             ],
 
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'edit',
+                'data' => 'edit',
+                'title' => 'Edit',
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
 
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => 'Delete',
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
         ];
     }
 

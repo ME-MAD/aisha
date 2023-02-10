@@ -103,7 +103,7 @@ class RoleDataTable extends DataTable
         return [
 
             [
-                'name' => 'id',
+                'name' => 'roles.id',
                 'data' => 'id',
                 'title' => '#',
                 "className" => 'search--col exact'

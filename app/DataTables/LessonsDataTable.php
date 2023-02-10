@@ -158,9 +158,27 @@ class LessonsDataTable extends DataTable
                 "className" => 'search--col'
             ],
 
-            ['name' => 'edit', 'data' => 'edit', 'title' => 'Edit', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'edit',
+                'data' => 'edit',
+                'title' => 'Edit',
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
 
-            ['name' => 'delete', 'data' => 'delete', 'title' => 'Delete', 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => 'Delete',
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
         ];
     }
 
