@@ -14,9 +14,10 @@ class RoleDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('actions', function ($query) {
-                return view('pages.role.datatable.actions', compact('query'));
+            ->addColumn('edit', function ($query) {
+                return view('pages.role.datatable.edit', compact('query'));
             })
+            ->addColumn('delete', 'pages.role.datatable.delete')
             ->addColumn('showUsers', function ($query) {
                 return view('pages.role.datatable.showUsers', compact('query'));
             })
@@ -26,7 +27,7 @@ class RoleDataTable extends DataTable
             ->editColumn('countPermissions', function ($q) {
                 return($q->role_permissions_count);
             })
-            ->rawColumns(['actions','showUsers'])
+            ->rawColumns(['showUsers','edit', 'delete',])
             ->setRowId('id');
     }
 
@@ -152,10 +153,21 @@ class RoleDataTable extends DataTable
             ],
 
             [
-                'actions' => 'actions',
-                'data' => 'actions',
-                'title' => __('roles.actions'),
-                'printable' => false,
+                'name' => 'edit',
+                'data' => 'edit', 
+                'title' => __('teacher.Edit'),
+                'printable' => false, 
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
+
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => __('teacher.Delete'),
+                'printable' => false, 
                 'exportable' => false,
                 'orderable' => false,
                 'searchable' => false,
