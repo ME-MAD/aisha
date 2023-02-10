@@ -133,13 +133,18 @@ class RoleDataTable extends DataTable
                 'name' => 'countUsers',
                 'data' => 'countUsers',
                 'title' => 'عدد المستخدمين',
-                "className" => 'search--col exact'
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
             ],
             [
                 'name' => 'countPermissions',
                 'data' => 'countPermissions',
                 'title' => 'عدد الصلاحيات',
-                "className" => 'search--col exact'
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+                
             ],
             [
                 'name' => 'showUsers',

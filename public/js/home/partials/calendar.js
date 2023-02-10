@@ -54,10 +54,10 @@ export function calendarRun()
         // }
     
         // Clear Data and close the modal when the user clicks on Discard button
-        discardModal.onclick = function() {
-            modalResetData(modal);
-            document.getElementsByTagName('body')[0].removeAttribute('style');
-        }
+        // discardModal.onclick = function() {
+        //     modalResetData(modal);
+        //     document.getElementsByTagName('body')[0].removeAttribute('style');
+        // }
     
         // Clear Data and close the modal when the user clicks on <span> (x).
         span.onclick = function() {
@@ -116,8 +116,8 @@ export function calendarRun()
             },
             eventClick: function(info) {
     
-                addEvent.style.display = 'none';
-                editEvent.style.display = 'block';
+                // addEvent.style.display = 'none';
+                // editEvent.style.display = 'block';
     
                 addEventTitle.style.display = 'none';
                 editEventTitle.style.display = 'block';
@@ -284,8 +284,8 @@ function modalResetData(modal) {
     }
     clearRadioGroup("marker");
     // Get Modal Backdrop
-    var getModalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
-    document.body.removeChild(getModalBackdrop)
+    // var getModalBackdrop = document.getElementsByClassName('modal-backdrop')[0];
+    // document.body.removeChild(getModalBackdrop)
 }
 
 function getDynamicMonth( monthOrder ) {

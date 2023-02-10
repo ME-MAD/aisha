@@ -71,16 +71,16 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-12">
                                     <label for="start-date" class="">Event Description:</label>
                                     <div class="d-flex event-description">
                                         <textarea id="taskdescription" placeholder="Enter Description" rows="3" class="form-control" name="taskdescription"></textarea>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-12">
                                     <div class="event-badge">
                                         <p class="">Badge:</p>
@@ -117,7 +117,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </form>
                     </div>
@@ -125,11 +125,11 @@
 
             </div>
 
-            <div class="modal-footer">
+            {{-- <div class="modal-footer">
                 <button id="discard" class="btn" data-dismiss="modal">Discard</button>
                 <button id="add-e" class="btn">Add Task</button>
                 <button id="edit-event" class="btn">Save</button>
-            </div>
+            </div> --}}
 
         </div>
 
