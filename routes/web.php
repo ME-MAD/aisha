@@ -235,7 +235,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
         Route::post('store', [RoleController::class, 'store'])->name('store');
         Route::get('edit/{role}', [RoleController::class, 'edit'])->name('edit');
         Route::put('update/{role}', [RoleController::class, 'update'])->name('update');
-        Route::delete('delete/{role}', [RoleController::class, 'delete'])->name('delete');
+        Route::get('delete/{role}', [RoleController::class, 'delete'])->name('delete');
         Route::get('getRoleUsers/{role}', [RoleController::class, 'getRoleUsers'])->name('getRoleUsers');
     });
 

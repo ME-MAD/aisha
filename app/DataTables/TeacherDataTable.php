@@ -164,6 +164,7 @@ class TeacherDataTable extends DataTable
                 'title' => __('teacher.phone'),
                 "className" => 'search--col'
             ],
+
             [
                 'name' => 'qualification',
                 'data' => 'qualification',
@@ -171,17 +172,58 @@ class TeacherDataTable extends DataTable
                 "className" => 'search--col'
             ],
 
+            [
+                'name' => 'groups.count',
+                'data' => 'groups.count',
+                'title' => __('teacher.group count'),
+                "className" => 'search--col',
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
 
-            ['name' => 'groups.count', 'data' => 'groups.count', 'title' => __('teacher.group count'), "className" => 'search--col', 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'groupStudents.count',
+                'data' => 'groupStudents.count',
+                'title' => __('teacher.student count'),
+                "className" => 'search--col',
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
 
-            ['name' => 'groupStudents.count', 'data' => 'groupStudents.count', 'title' => __('teacher.student count'), "className" => 'search--col', 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'show',
+                'data' => 'show',
+                'title' => __('teacher.Show'),
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
 
+            [
+                'name' => 'edit',
+                'data' => 'edit',
+                'title' => __('teacher.Edit'),
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
 
-            ['name' => 'show', 'data' => 'show', 'title' => __('teacher.Show'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
-
-            ['name' => 'edit', 'data' => 'edit', 'title' => __('teacher.Edit'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
-
-            ['name' => 'delete', 'data' => 'delete', 'title' => __('teacher.Delete'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => __('teacher.Delete'),
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
         ];
     }
 

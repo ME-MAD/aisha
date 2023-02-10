@@ -100,18 +100,52 @@ class GroupDayDataTable extends DataTable
     protected function getColumns(): array
     {
         return [
-            ['name' => 'group_days.id', 'data' => 'id', 'title' => __('group.id'), "className" => 'search--col exact'],
+            [
+                'name' => 'group_days.id',
+                'data' => 'id',
+                'title' => __('group.id'),
+                "className" => 'search--col exact'
+                ],
 
-            ['name' => 'group_days.name', 'data' => 'group.name', 'title' => __('group.name'), "className" => 'search--col exact'],
+            [
+                'name' => 'group.name',
+                'data' => 'group.name',
+                'title' => __('group.name'),
+                "className" => 'search--col exact'
+            ],
 
-            ['name' => 'from_time', 'data' => 'from_time', 'title' => __('group.from_time'), "className" => 'search--col'],
+            [
+                'name' => 'from_time',
+                'data' => 'from_time',
+                'title' => __('group.from_time'),
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'to_time', 'data' => 'to_time', 'title' => __('group.to_time'), "className" => 'search--col'],
+            [
+                'name' => 'to_time',
+                'data' => 'to_time',
+                'title' => __('group.to_time'),
+                "className" => 'search--col'
+            ],
 
-            ['name' => 'day', 'data' => 'day', 'title' => __('group.day'), "className" => 'search--col'],
+            [
+                'name' => 'day',
+                'data' => 'day',
+                'title' => __('group.day'),
+                "className" => 'search--col'
+            ],
 
 
-            ['name' => 'delete', 'data' => 'delete', 'title' => __('global.Delete'), 'printable' => false, 'exportable' => false, 'orderable' => false, 'searchable' => false, "className" => 'not--search--col'],
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => __('global.Delete'),
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
         ];
     }
 
