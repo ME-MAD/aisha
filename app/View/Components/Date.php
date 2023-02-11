@@ -15,6 +15,7 @@ class Date extends Component
     public function __construct(
         public $name,
         public $label,
+        public $required = false,
         public $value = null,
         public $class = null,
         public $id = null

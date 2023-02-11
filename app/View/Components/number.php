@@ -15,9 +15,11 @@ class number extends Component
      * @return void
      */
     public function __construct( public $name,
-    public $label,
-    public $value = null,
-    public $id = null)
+        public $label,
+        public $required = false,
+        public $value = null,
+        public $id = null
+    )
     {
        
     }

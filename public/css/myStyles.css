@@ -103,3 +103,8 @@ table tr th {
 background: -webkit-linear-gradient(189deg, #25d5e48a 10%, hsl(169deg 33% 46% / 57%) 80%);
 
 }
+
+
+.required-star{
+    color:rgba(246, 14, 14, 0.866)
+}

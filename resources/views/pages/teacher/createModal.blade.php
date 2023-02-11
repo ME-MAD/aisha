@@ -10,25 +10,26 @@
                     @csrf
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="name" placeholder="أدخل أسم المعلم" label="{{ __('teacher.name') }}" :value="old('name')" />
+                            <x-text name="name" placeholder="أدخل أسم المعلم" label="{{ __('teacher.name') }}" :value="old('name')" :required="true" />
                         </div>
                         <div class="col-6">
-                            <x-text name="email" placeholder="أدخل بريد الإلكتروني بالمعلم" label="Email" :value="old('email')" />
+                            <x-text name="email" placeholder="أدخل بريد الإلكتروني بالمعلم" label="Email" :value="old('email')" :required="true" />
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="password" placeholder="أدخل كلمة المرور"  label="Password" :value="old('password')" />
+                            <x-text name="password" placeholder="أدخل كلمة المرور"  label="Password" :value="old('password')" :required="true" />
                         </div>
                         <div class="col-6">
-                            <x-text name="password_confirmation" placeholder="تأكيد كلمة المرور 
+                            <x-text name="password_confirmation" label="Confirm Password" placeholder="تأكيد كلمة المرور" :required="true" />
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="role" class="text-capitalize font-weight-bold text-muted">
                             {{trans('user.role')}}
-                            <i class="fa-solid fa-star-of-life" style="color:red"></i>
+                            <i class="fa-solid fa-star-of-life required-star"></i>
                         </label>
                         <select class="form-control basic"
                                 name="role"

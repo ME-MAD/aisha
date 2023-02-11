@@ -18,7 +18,7 @@
 
 @section('breadcrumb')
 <div class="col-md-12">
-    <div class="breadcrumb bg-transparent card-header home">
+    <div class="breadcrumb bg-transparent">
 
         <div class="breadcrumb-four">
             <ul class="breadcrumb">
@@ -48,7 +48,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-12">
                 <div class="card" style="min-height: 550px">
-                    <div class="card-header">
+                    <div class="card-header home">
                         <h3>Group Ages</h3>
                     </div>
                     <div class="card-body">
@@ -63,7 +63,7 @@
 
             <div class="col-lg-8 col-md-12">
                 <div class="card" style="min-height: 550px">
-                    <div class="card-header">
+                    <div class="card-header home">
                         <h3>Total Payments</h3>
                     </div>
                     <div class="card-body">
