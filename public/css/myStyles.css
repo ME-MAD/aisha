@@ -97,3 +97,9 @@ table tr th {
     background: rgb(54,115,142);
     background: linear-gradient(90deg, rgba(54,115,142,0.7063200280112045) 0%, rgba(25,58,32,1) 100%);
 }
+.card-header.home{
+
+/* background: -webkit-linear-gradient(189deg, hsl(229deg 57% 71%) 10%, hsl(231deg 18% 86%) 80%); */
+background: -webkit-linear-gradient(189deg, #25d5e48a 10%, hsl(169deg 33% 46% / 57%) 80%);
+
+}
