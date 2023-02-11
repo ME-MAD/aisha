@@ -1,24 +1,37 @@
 <div class="modal fade" id="editTeacher" tabindex="-1" role="dialog" aria-labelledby="editTeacher" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header p-3 mb-2 bg-dark  ">
-                <h5 class="modal-title text-white font-weight-bold"  id="editTeacher">{{ __('teacher.edite teacher') }}</h5>
+            <div class="modal-header card-header create__form__header">
+                <h5 class="modal-title font-weight-bold text-capitalize text-light"  id="editTeacher">{{ __('teacher.edite teacher') }}</h5>
             </div>
             <div class="modal-body">
                 <form id="editTeacherForm" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
-                    <x-text name="name" label="{{ __('teacher.name') }}" id="name" />
-                    
-                    <x-text name="email" label="Email" :value="old('email')" id="email" />
+                    <div class="row">
+                        <div class="col-6">
+                           <x-text name="name" label="{{ __('teacher.name') }}" id="name" />
+                        </div>
+                        <div class="col-6">
+                           <x-text name="email" label="Email" :value="old('email')" id="email" />
+                        </div>
+                    </div>
 
-                    <x-text name="password" label="Password" :value="old('password')" />
-
-                    <x-text name="password_confirmation" label="Confirm Password" />
+                    <div class="row">
+                        <div class="col-6">
+                          <x-text name="password" label="Password" :value="old('password')" />
+                        </div>
+                        <div class="col-6">
+                          <x-text name="password_confirmation" label="Confirm Password" />
+                        </div>
+                    </div>
 
                     <div class="form-group">
-                        <label for="role" class="text-capitalize font-weight-bold text-muted">{{trans('user.role')}}</label>
+                        <label for="role" class="text-capitalize font-weight-bold text-muted">
+                            {{trans('user.role')}}
+                            <i class="fa-solid fa-star-of-life" style="color:red"></i>
+                        </label>
                         <select class="form-control basic"
                                 name="role"
                                 id="role">
@@ -36,11 +49,17 @@
                         @enderror
                     </div>
 
-                    <x-date name="birthday" label="{{ __('teacher.birthday') }}" id="birthday" />
-
-                    <x-text name="phone" label="{{ __('teacher.phone') }}" id="phone" />
-
-                    <x-text name="qualification" label="{{ __('teacher.qualification') }}" id="qualification" />
+                    <div class="row">
+                        <div class="col-6">
+                            <x-date name="birthday" label="{{ __('teacher.birthday') }}" id="birthday" />
+                        </div>
+                        <div class="col-6">
+                           <x-text name="phone" label="{{ __('teacher.phone') }}" id="phone" />
+                        </div>
+                        <div class="col-6">
+                          <x-text name="qualification" label="{{ __('teacher.qualification') }}" id="qualification" />
+                        </div>
+                    </div>
 
                     <div class="custom-file-container" data-upload-id="mySecondImage">
                         <label>{{ __('teacher.avatar') }}<a href="javascript:void(0)"

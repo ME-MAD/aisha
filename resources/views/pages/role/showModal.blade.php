@@ -1,8 +1,8 @@
 <div class="modal fade" id="showRoleModal" tabindex="-1" role="dialog" aria-labelledby="showRoleModal" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header p-3 mb-2 bg-dark  ">
-                <h5 class="modal-title text-white font-weight-bold" >Users</h5>
+            <div class="modal-header card-header create__form__header">
+                <h5 class="modal-title text-white font-weight-bold" >المستخدمين</h5>
             </div>
             <div class="modal-body">
                 <div class="table-responsive">

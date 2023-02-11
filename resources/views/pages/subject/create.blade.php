@@ -62,8 +62,8 @@
                 <div class="statbox widget box box-shadow">
                     <div class="widget-header">
                         <div class="row">
-                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4 class="text-center text-primary">Create Subject</h4>
+                            <div class="col-xl-12 col-md-12 col-sm-12 col-12 card-header create__form__header">
+                                <h4 class="text-center font-weight-bold text-capitalize text-light">أضافة مادة جديدة</h4>
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,10 @@
 
                             <div class="form-group row mb-4">
                                 <label for="book"
-                                       class="col-xl-12 col-md-6 col-form-label text-dark text-capitalize font-weight-bold">Book</label>
+                                       class="col-xl-12 col-md-6 col-form-label text-dark text-capitalize font-weight-bold">
+                                       الكتاب (PDF)
+                                       <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.778)"></i>
+                                    </label>
                                 <div class="col-xl-12 col-md-6">
                                     <div class="custom-file-container" data-upload-id="myFirstImage1">
                                         <label>Upload <a href="javascript:void(0)"

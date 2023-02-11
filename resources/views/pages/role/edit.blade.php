@@ -37,15 +37,15 @@
                             <a href="{{route('admin.role.index')}}"
                                class="d-flex justify-content-center align-items-center">
 
-                                <i class="fa-solid fa-circle-plus fa-2x mx-2"></i>
-                                <span class="font-weight-bold ">{{__('roles.index')}}</span>
+                               <i class="fa-solid fa-fingerprint fa-2x mx-2"></i>
+                                <span class="font-weight-bold ">الوظائف</span>
                             </a>
                         </li>
                         <li class="active">
                             <a href="#"
                                class="d-flex justify-content-center align-items-center">
 
-                                <i class="fa-solid fa-circle-plus fa-2x mx-2"></i>
+                                <i class="fa-solid fa-users-gear fa-2x mx-2"></i>
                                 <span class="font-weight-bold ">{{__('roles.update')}}</span>
                             </a>
                         </li>

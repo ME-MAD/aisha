@@ -1,8 +1,8 @@
 <div class="modal fade" id="editStudent" tabindex="-1" role="dialog" aria-labelledby="editStudent" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header p-3 mb-2 bg-success  ">
-                <h5 class="modal-title text-white font-weight-bold" id="editStudent">
+            <div class="modal-header card-header create__form__header">
+                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="editStudent">
                     {{trans('student.update student')}}
                 </h5>
             </div>
@@ -11,25 +11,35 @@
                     @csrf
                     @method('PUT')
 
-                    <x-text name="name"
+                    <div class="row">
+                        <div class="col-6">
+                            <x-text name="name"
                             label="{{trans('student.name')}}"
                             placeholder="{{trans('student.name')}}"
                             :value="old('name')"/>
-
-                    <x-text name="email"
+                        </div>
+                        <div class="col-6">
+                            <x-text name="email"
                             label="{{trans('student.email')}}"
                             placeholder="{{trans('student.email')}}"
                             :value="old('email')"/>
+                        </div>
+                    </div>
 
-                    <x-text name="password"
+                    <div class="row">
+                        <div class="col-6">
+                            <x-text name="password"
                             label="{{trans('student.password')}}"
                             placeholder="{{trans('student.password')}}"
                             :value="old('password')"/>
-
-                    <x-text name="password_confirmation"
+                        </div>
+                        <div class="col-6">
+                            <x-text name="password_confirmation"
                             label="{{trans('student.confirm password')}}"
                             placeholder="{{trans('student.confirm password')}}"/>
-
+                        </div>
+                    </div>
+                   
                     <div class="form-group my-2">
                         <label
                             class="font-weight-bold text-capitalize text-muted"> {{__('student.choose role')}} </label>
@@ -53,20 +63,26 @@
                         @enderror
                     </div>
 
-                    <x-date name="birthday"
+                    <div class="row">
+                        <div class="col-4">
+                            <x-date name="birthday"
                             label="{{__('student.birthday')}}"
                             placeholder="{{__('student.birthday')}}"
                             :value="old('birthday')"/>
-
-                    <x-text name="phone"
+                        </div>
+                        <div class="col-4">
+                            <x-text name="phone"
                             label="{{__('student.phone')}}"
                             placeholder="{{__('student.phone')}}"
                             :value="old('phone')"/>
-
-                    <x-text name="qualification"
+                        </div>
+                        <div class="col-4">
+                            <x-text name="qualification"
                             label="{{__('student.qualification')}}"
                             placeholder="{{__('student.qualification')}}"
-                            :value="old('qualification')"/>
+                            :value="old('qualification')"/> 
+                        </div>
+                    </div>
 
                     <div class="custom-file-container" data-upload-id="mySecondImage">
                         <label>

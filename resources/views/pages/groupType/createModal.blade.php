@@ -1,21 +1,25 @@
 <div class="modal fade" id="creatGroupTypeModal" tabindex="-1" role="dialog" aria-labelledby="creatGroupTypeModal"
      aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header p-3 mb-2 bg-primary">
-                <h5 class="modal-title text-white font-weight-bold text-capitalize"
+            <div class="modal-header card-header create__form__header">
+                <h5 class="modal-title font-weight-bold text-capitalize text-light"
                     id="creatGroupTypeModal">{{ __('group.Create Group Type') }}</h5>
             </div>
             <div class="modal-body px-6">
                 <form action="{{ route('admin.group_types.store') }}" method="post">
                     @csrf
 
+                    <x-text name="name" placeholder="أدخل اسم نوع المجموعة" label="{{ __('group.name') }}" :value="old('name')"/>
 
-                    <x-text name="name" label="{{ __('group.name') }}" :value="old('name')"/>
-
-                    <x-text name="days_num" label="{{ __('group.days_num') }}" :value="old('days_num')"/>
-
-                    <x-text name="price" label="{{ __('group.price') }}" :value="old('price')"/>
+                    <div class="row">
+                        <div class="col-6">
+                            <x-text name="days_num" placeholder="أدخل عدد أيام المجموعة" label="{{ __('group.days_num') }}" :value="old('days_num')"/>
+                        </div>
+                        <div class="col-6">
+                            <x-text name="price" placeholder="أدخل سعر المجموة" label="{{ __('group.price') }}" :value="old('price')"/>
+                        </div>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="submit"

@@ -1,8 +1,8 @@
 <div class="modal fade" id="editexperience" tabindex="-1" role="dialog" aria-labelledby="editexperience"
      aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header p-3 mb-2 bg-warning text-dark">
+            <div class="modal-header card-header create__form__header">
                 <h5 class="modal-title text-white" id="editexperience">تعديل بيانات المعلم</h5>
             </div>
             <div class="modal-body">
@@ -10,18 +10,25 @@
                     @csrf
                     @method('PUT')
 
-                    <x-text name="title" label="العنوان" id="title"/>
+                    <x-text name="title" label="الخبرة" id="title"/>
 
-                    <x-date name="from" label="من" id="from"/>
-
-                    <x-date name="to" label="الى" id="to"/>
+                    <div class="row">
+                        <div class="col-6">
+                            <x-date name="from" label="من" id="from"/>
+                        </div>
+                        <div class="col-6">
+                            <x-date name="to" label="الى" id="to"/>
+                        </div>
+                    </div>
 
                     @if (!isset($teacher))
                         <div class="form-group row mb-4">
                             <label for="age_type"
                                    class="col-xl-12 col-md-6  col-form-label text-muted font-weight-bold text-capitalize">
                                 اختر
-                                المعلم</label>
+                                المعلم
+                                <i class="fa-solid fa-star-of-life" style="color:rgba(246, 14, 14, 0.866)"></i>
+                        </label>
                             <div class="col-xl-12 col-md-6 ">
                                 <select id="teacherId" class="form-control basic" style="width: 100%;" name="teacher_id"
                                         id="teacher_id">

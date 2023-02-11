@@ -1,24 +1,35 @@
 <div class="modal fade" id="creatTeacherModal" tabindex="-1" role="dialog" aria-labelledby="creatTeacherModal"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header p-3 mb-2 bg-primary">
-                <h5 class="modal-title text-white" id="creatTeacherModal">{{ __('teacher.create teacher') }}</h5>
+            <div class="modal-header card-header create__form__header">
+                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="creatTeacherModal">{{ __('teacher.create teacher') }}</h5>
             </div>
             <div class="modal-body">
                 <form action="{{ route('admin.teacher.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    <div class="row">
+                        <div class="col-6">
+                            <x-text name="name" placeholder="أدخل أسم المعلم" label="{{ __('teacher.name') }}" :value="old('name')" />
+                        </div>
+                        <div class="col-6">
+                            <x-text name="email" placeholder="أدخل بريد الإلكتروني بالمعلم" label="Email" :value="old('email')" />
+                        </div>
+                    </div>
 
-                    <x-text name="name" label="{{ __('teacher.name') }}" :value="old('name')" />
-
-                    <x-text name="email" label="Email" :value="old('email')" />
-
-                    <x-text name="password" label="Password" :value="old('password')" />
-
-                    <x-text name="password_confirmation" label="Confirm Password" />
+                    <div class="row">
+                        <div class="col-6">
+                            <x-text name="password" placeholder="أدخل كلمة المرور"  label="Password" :value="old('password')" />
+                        </div>
+                        <div class="col-6">
+                            <x-text name="password_confirmation" placeholder="تأكيد كلمة المرور 
+                    </div>
 
                     <div class="form-group">
-                        <label for="role" class="text-capitalize font-weight-bold text-muted">{{trans('user.role')}}</label>
+                        <label for="role" class="text-capitalize font-weight-bold text-muted">
+                            {{trans('user.role')}}
+                            <i class="fa-solid fa-star-of-life" style="color:red"></i>
+                        </label>
                         <select class="form-control basic"
                                 name="role"
                                 id="role">
@@ -34,15 +45,20 @@
                         <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-                    
-                    <x-date name="birthday" label="{{ __('teacher.birthday') }}" :value="old('birthday')" />
 
-                    <x-text name="phone" label="{{ __('teacher.phone') }}" :value="old('phone')" />
-
-                    <x-text name="qualification" label="{{ __('teacher.qualification') }}" :value="old('qualification')" />
+                    <div class="row">
+                        <div class="col-4">
+                            <x-date name="birthday" label="{{ __('teacher.birthday') }}" :value="old('birthday')" />
+                        </div>
+                        <div class="col-4">
+                            <x-text name="phone" placeholder="أدخل هاتف المعلم" label="{{ __('teacher.phone') }}" :value="old('phone')" />
+                        </div>
+                        <div class="col-4">
+                            <x-text name="qualification" placeholder="أدخل مؤهل المعلم" label="{{ __('teacher.qualification') }}" :value="old('qualification')" />
+                        </div>
+                    </div>
 
                     <div class="custom-file-container" data-upload-id="myFirstImage">
-
                         <label>{{ __('teacher.avatar') }}
                             <a href="javascript:void(0)"
                                 class="custom-file-container__image-clear"
