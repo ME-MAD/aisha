@@ -1,9 +1,9 @@
 <div class="modal fade" id="editGroupType" tabindex="-1" role="dialog" aria-labelledby="editGroupType"
      aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header p-3 mb-2 bg-dark text-capitalize font-weight-bold ">
-                <h5 class="modal-title text-white" id="editGroupType">{{ __('group.edite Group Types') }}</h5>
+            <div class="modal-header card-header create__form__header">
+                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="editGroupType">{{ __('group.edite Group Types') }}</h5>
             </div>
             <div class="modal-body ">
                 <form id="editGroupTypeForm" method="post">
@@ -12,9 +12,14 @@
 
                     <x-text name="name" label="{{ __('group.name') }}" id="name"/>
 
-                    <x-text name="days_num" label="{{ __('group.days_num') }}" id="days_num"/>
-
-                    <x-text name="price" label="{{ __('group.price') }}" id="price"/>
+                    <div class="row">
+                        <div class="col-6">
+                            <x-text name="days_num" label="{{ __('group.days_num') }}" id="days_num"/>
+                        </div>
+                        <div class="col-6">
+                            <x-text name="price" label="{{ __('group.price') }}" id="price"/>
+                        </div>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="submit"

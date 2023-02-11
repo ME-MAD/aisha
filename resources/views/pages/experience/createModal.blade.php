@@ -1,26 +1,31 @@
 <div class="modal fade" id="creatExperienceModal" tabindex="-1" role="dialog" aria-labelledby="creatExperienceModal"
      aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header p-3 mb-2 bg-primary text-capitalize font-weight-bold">
+            <div class="modal-header card-header create__form__header">
                 <h5 class="modal-title text-white" id="creatExperienceModal">إضافة خبرة مدرس</h5>
             </div>
             <div class="modal-body">
                 <form action="{{ route('admin.experience.store') }}" method="post">
                     @csrf
 
-                    <x-text name="title" label="العنوان" :value="old('title')"/>
+                    <x-text name="title" placeholder="أدخل خبرة المعلم" label="الخبرة"  :value="old('title')"/>
 
-                    <x-date name="from" id="from" label="من" :value="old('from')"/>
-
-                    <x-date name="to" id="to" label="الى" :value="old('to')"/>
+                    <div class="row">
+                        <div class="col-6">
+                           <x-date name="from" id="from" label="من" :value="old('from')"/>
+                        </div>
+                        <div class="col-6">
+                            <x-date name="to" id="to" label="الى" :value="old('to')"/>
+                        </div>
+                    </div>
 
                     @if (!isset($teacher))
                         <div class="form-group row mb-4">
-                            <label for="age_type"
-                                   class="col-xl-12 col-md-6  col-form-label text-muted font-weight-bold text-capitalize">
-                                اختر
-                                المعلم</label>
+                            <label for="age_type" class="col-xl-12 col-md-6  col-form-label text-muted font-weight-bold text-capitalize">
+                                  اختر المعلم
+                                 <i class="fa-solid fa-star-of-life" style="color:rgba(246, 14, 14, 0.866)"></i>
+                                </label>
                             <div class="col-xl-12 col-md-6 ">
                                 <select class="form-control basic" style="width: 100%;" name="teacher_id"
                                         id="teacher_id">
