@@ -18,12 +18,9 @@ class AuthController extends Controller
     }
 
 
-    public function loginForm($type){
+    public function loginPage(){
 
-        return view('pages.auth.login',
-        [
-            'type' => $type
-        ]);
+        return view('pages.auth.login');
     }
 
     public function index()
@@ -39,6 +36,7 @@ class AuthController extends Controller
         {
             Session::put('admin_guard', $request->type);
             Alert::success('تم الدخول بنجاح');
+
             return redirect(route('admin.home'));
         }
         else
@@ -53,6 +51,6 @@ class AuthController extends Controller
         $guard = Session::get('admin_guard');
 
         Auth::guard($guard)->logout();
-        return redirect(route('selectionloginPage'));
+        return redirect(route('loginPage'));
     }
 }

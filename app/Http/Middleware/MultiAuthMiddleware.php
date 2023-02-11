@@ -31,6 +31,6 @@ class MultiAuthMiddleware
                 return $next($request);
             }
         }
-        return redirect(route('selectionloginPage'));
+        return redirect(route('loginPage'));
     }
 }

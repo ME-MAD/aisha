@@ -73,6 +73,23 @@
 
 @section('content')
         <div class="container-fluid">
+
+
+            @if($errors->any())
+                @push('js')
+                    <script>
+                        setTimeout(() => {
+                            Swal.fire(
+                                'Error!',
+                                `There was an Error Check the form`,
+                                'error'
+                            )
+                        }, 500);
+                    </script>    
+                @endpush
+            @endif
+
+
             <div class="row layout-spacing">
                 <div class="col-lg-12">
                     <div class="card ">

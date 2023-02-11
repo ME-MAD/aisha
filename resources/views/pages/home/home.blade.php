@@ -48,8 +48,8 @@
         <div class="row">
             <div class="col-lg-4 col-md-12">
                 <div class="card" style="min-height: 550px">
-                    <div class="card-header home">
-                        <h3>Group Ages</h3>
+                    <div class="card-header card__header__for_tables">
+                        <h3 class="text-white">Group Ages</h3>
                     </div>
                     <div class="card-body">
                         <div class="" id="groupAgesChart" data-href="{{ route('admin.group.groupAgesChartData') }}">
@@ -63,8 +63,8 @@
 
             <div class="col-lg-8 col-md-12">
                 <div class="card" style="min-height: 550px">
-                    <div class="card-header home">
-                        <h3>Total Payments</h3>
+                    <div class="card-header card__header__for_tables">
+                        <h3 class="text-white">Total Payments</h3>
                     </div>
                     <div class="card-body">
                         <div class="" id="totalPaymentsChart" data-href="{{ route('admin.payment.totalPaymentsChartData') }}">

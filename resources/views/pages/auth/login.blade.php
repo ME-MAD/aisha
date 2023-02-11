@@ -65,16 +65,6 @@
                 </li>
                 <div class="form-container">
                     <div class="form-content">
-                        <h1 class="">{{ __('global.Log In to') }}
-                            @if($type == 'student')
-                            <span class="brand-name">طالب</span>
-                            @elseif($type == 'teacher')
-                            <span class="brand-name">معلم</span>
-                            @else
-                            <span class="brand-name">ادمن</span>
-                            @endif
-                        </h1>
-                                    
                         <p class="signup-link"><a href="auth_register.html"></a></p>
                         <form class="text-left" method="POST" action="{{ route('login') }}">
                             <div class="form">
@@ -89,7 +79,6 @@
                                     </svg>
                                     <input id="email" name="email" type="text" value=""
                                         placeholder="{{ __('global.Email') }}">
-                                    <input type="hidden" value="{{$type}}" name="type">
                                 </div>
                                 <div id="password-field" class="field-wrapper input mb-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -102,6 +91,23 @@
                                     <input id="password" name="password" type="password" class="form-control"
                                         placeholder="{{ __('global.Password') }}">
                                 </div>
+
+
+                                
+                                <div id="password-field" class="field-wrapper input mb-2">
+                                    <label for="">
+                                        حدد طريقة الدخول
+                                    </label>
+                                    <select name="type" id="typeOfLogin" class="form-control">
+                                        <option value="admin">Admin</option>
+                                        <option value="teacher">Teacher</option>
+                                        <option value="student">Student</option>
+                                    </select>
+
+                                </div>
+
+
+
                                 <div class="d-sm-flex justify-content-between">
                                     <div class="field-wrapper toggle-pass">
                                         <p class="d-inline-block">{{ __('global.Show Password') }}</p>

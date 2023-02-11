@@ -19,7 +19,7 @@ class Authenticate extends Middleware
             !Auth::guard('teacher')->check() ||
             !Auth::guard('student')->check() 
         ) {
-            return route('selectionloginPage');
+            return route('loginPage');
         }
     }
 }
