@@ -81,32 +81,13 @@
                                     </div>
                                     <ul class="nav nav-pills inv-list-container d-block ps ps--active-y groupsContainer" id="pills-tab"
                                         role="tablist" data-href="{{route('admin.group.getAllGroupsForPayment')}}">
-                                        {{-- @foreach ($gorups as $group)
-                                            <li class="nav-item">
-                                                <div class="nav-link list-actions" id="group-{{ $group->id }}">
-                                                    <div class="f-m-body">
-                                                        <div class="f-head">
+                                        
 
-                                                        </div>
-                                                        <div class="f-body">
-                                                            <p
-                                                                class="alert {{ $group->allStudentsPaid ? 'alert-success' : 'alert-danger' }}">
-                                                                Group {{ $group->id }}
-                                                                {{ $group->allStudentsPaid ? 'All paid this month' : 'Not All Paid this month' }}
-                                                            </p>
-                                                            <p class="invoice-customer-name badge bg-primary text-light">
-                                                                <span class="text-light">From:</span>{{ $group->from }}
-                                                            </p>
-                                                            <p class="invoice-customer-name badge bg-warning text-light">
-                                                                <span class="text-light">To:</span>
-                                                                {{ $group->to }}
-                                                            </p>
 
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endforeach --}}
+                                        
+
+
+
 
 
                                         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
@@ -124,114 +105,23 @@
                         <div class="invoice-container">
                             <div class="invoice-inbox ps ps--active-y" style="height: calc(100vh - 215px);">
 
+
+
+
+
                                 <div id="ct" class="" style="display: block;">
-                                    {{-- @foreach ($gorups as $group)
-                                        <div class="group-{{ $group->id }}" style="display: none;">
-                                            <div class="content-section  animated animatedFadeInUp fadeInUp">
-                                                <div class="row inv--head-section">
+                                    
 
-                                                    <div class="col-sm-6 col-12">
-                                                        <h3 class="in-heading">STUDNTS</h3>
-                                                    </div>
-                                                    <div class="col-sm-6 col-12 align-self-center text-sm-right">
-                                                        <div class="company-info">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewBox="0 0 24 24" fill="none"
-                                                                stroke="currentColor" stroke-width="2"
-                                                                stroke-linecap="round" stroke-linejoin="round"
-                                                                class="feather feather-hexagon">
-                                                                <path
-                                                                    d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                                                                </path>
-                                                            </svg>
-                                                            <h5 class="inv-brand-name">Payment</h5>
-                                                        </div>
-                                                    </div>
 
-                                                </div>
-                                                <div class="row inv--product-table-section">
-                                                    <div class="col-6">
-                                                        <div class="table-responsive">
-                                                            <table class="table">
-                                                                <thead class="">
-                                                                    <tr>
-                                                                        <th scope="col">S.No</th>
-                                                                        <th scope="col">Name</th>
-                                                                        <th scope="col">paid</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    @foreach ($group->students as $student)
-                                                                        <tr>
-                                                                            <td>{{ $student->id }}</td>
-                                                                            <td>{{ $student->name }}</td>
 
-                                                                            <td id="checkbok">
-                                                                                <input type="checkbox"
-                                                                                    class="paidCheckbox big-checkbox"
-                                                                                    id="paid_finished_checkbox_{{ $student->id }}_{{ $group->id }}"
-                                                                                    data-href="{{ route('admin.payment.store') }}"
-                                                                                    data-student-id="{{ $student->id }}"
-                                                                                    data-group-id="{{ $group->id }}"
-                                                                                    data-amount="{{ $group->groupType->price }}"
-                                                                                    {{ $student->checkPaid($group->id, $currentMonth) ? 'checked' : '' }}>
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endforeach
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <select class="form-control basic month" name="month"
-                                                            id="month" data-group="{{ $group->id }}"
-                                                            data-href="{{ route('admin.payment.getPaymentsOfGroupByMonth') }}">
-                                                            <option value="" selected="selected">
-                                                                choose the month
-                                                            </option>
-                                                            <option value="January" selected="selected"
-                                                                {{ $currentMonth ? 'selected' : '' }}>January
-                                                            </option>
-                                                            <option value="February" selected="selected"
-                                                                {{ $currentMonth ? 'selected' : '' }}>February
-                                                            </option>
-                                                            <option value="March" selected="selected"
-                                                                {{ $currentMonth ? 'selected' : '' }}>March
-                                                            </option>
-                                                            <option value="April" selected="selected"
-                                                                {{ $currentMonth ? 'selected' : '' }}>April
-                                                            </option>
-                                                            <option value="May" selected="selected"
-                                                                {{ $currentMonth ? 'selected' : '' }}>May
-                                                            </option>
-                                                            <option value="June" selected="selected"
-                                                                {{ $currentMonth ? 'selected' : '' }}>June
-                                                            </option>
-                                                            <option value="July" selected="selected"
-                                                                {{ $currentMonth ? 'selected' : '' }}>July
-                                                            </option>
-                                                            <option value="August" selected="selected"
-                                                                {{ $currentMonth ? 'selected' : '' }}>August
-                                                            </option>
-                                                            <option value="September" selected="selected"
-                                                                {{ $currentMonth ? 'selected' : '' }}>September
-                                                            </option>
-                                                            <option value="October" selected="selected"
-                                                                {{ $currentMonth ? 'selected' : '' }}>October
-                                                            </option>
-                                                            <option value="November" selected="selected"
-                                                                {{ $currentMonth ? 'selected' : '' }}>November
-                                                            </option>
-                                                            <option value="December" selected="selected"
-                                                                {{ $currentMonth ? 'selected' : '' }}>December
-                                                            </option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach --}}
+
+
                                 </div>
+
+
+
+
+
 
                                 <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
                                     <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
@@ -281,6 +171,4 @@
 
 @push('js')
     <script type="module" src="{{ asset('js/payment/payment.js') }}"></script>
-
-    {{-- <script src="{{ asset('adminAssets/assets/js/apps/invoice.js') }}"></script> --}}
 @endpush

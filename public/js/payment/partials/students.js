@@ -117,10 +117,6 @@ function getAllStudentsTableRowsHtml(group)
         ` 
     });
 
-
-
-    
-
     return studentsTableRowsHtml;
 }
 
@@ -134,7 +130,7 @@ function getGroupStudentsHtml(group, currentMonth)
                 <div class="row inv--head-section">
 
                     <div class="col-sm-6 col-12">
-                        <h3 class="in-heading">STUDNTS</h3>
+                        <h3 class="in-heading">Students</h3>
                     </div>
 
                 </div>
