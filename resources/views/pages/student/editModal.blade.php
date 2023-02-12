@@ -14,12 +14,14 @@
                     <div class="row">
                         <div class="col-6">
                             <x-text name="name"
+                            :required="true"
                             label="{{trans('student.name')}}"
                             placeholder="{{trans('student.name')}}"
                             :value="old('name')"/>
                         </div>
                         <div class="col-6">
                             <x-text name="email"
+                            :required="true"
                             label="{{trans('student.email')}}"
                             placeholder="{{trans('student.email')}}"
                             :value="old('email')"/>
@@ -29,12 +31,14 @@
                     <div class="row">
                         <div class="col-6">
                             <x-text name="password"
+                            :required="true"
                             label="{{trans('student.password')}}"
                             placeholder="{{trans('student.password')}}"
                             :value="old('password')"/>
                         </div>
                         <div class="col-6">
                             <x-text name="password_confirmation"
+                            :required="true"
                             label="{{trans('student.confirm password')}}"
                             placeholder="{{trans('student.confirm password')}}"/>
                         </div>
@@ -43,7 +47,7 @@
                     <div class="form-group my-2">
                         <label
                             class="font-weight-bold text-capitalize text-muted"> {{__('student.choose role')}} </label>
-
+                            <i class="fa-solid fa-star-of-life required-star"></i>
                         <select class="form-control selectpicker my-2" style="width: 100%;"
                                 name="role"
                                 id="role">
@@ -72,6 +76,7 @@
                         </div>
                         <div class="col-4">
                             <x-text name="phone"
+                            :required="true"
                             label="{{__('student.phone')}}"
                             placeholder="{{__('student.phone')}}"
                             :value="old('phone')"/>

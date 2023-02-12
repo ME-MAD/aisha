@@ -71,13 +71,13 @@
                         <form action="{{ route('admin.subject.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
-                            <x-text name="name" label="إسم المادة" :value="old('name')"/>
+                            <x-text name="name" :required="true" label="إسم المادة" :value="old('name')"/>
 
                             <div class="form-group row mb-4">
                                 <label for="book"
                                        class="col-xl-12 col-md-6 col-form-label text-dark text-capitalize font-weight-bold">
                                        الكتاب (PDF)
-                                       <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.778)"></i>
+                                       <i class="fa-solid fa-star-of-life required-star"></i>
                                     </label>
                                 <div class="col-xl-12 col-md-6">
                                     <div class="custom-file-container" data-upload-id="myFirstImage1">

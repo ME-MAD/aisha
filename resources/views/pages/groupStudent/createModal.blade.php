@@ -16,7 +16,7 @@
                                 <label for="age_type"
                                        class="col-xl-12 col-md-6  col-form-label text-dark text-capitalize font-weight-bold">
                                     {{ __('group.Choose group') }}
-                                    <i class="fa-solid fa-star-of-life" style="color:red"></i>
+                                    <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6">
                                     <select class="form-control basic" style="width: 100%;" name="group_id" id="group_id"
@@ -45,7 +45,7 @@
                                 <label for="age_type"
                                        class="col-xl-12 col-md-6  col-form-label text-dark text-capitalize font-weight-bold">
                                     {{ __('group.Choose student') }}
-                                    <i class="fa-solid fa-star-of-life" style="color:red"></i>
+                                    <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6">
                                     <select class="form-control basic" style="width: 100%;" name="student_id" id="student_id">

@@ -11,18 +11,18 @@
 
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="name" placeholder="أدخل أسم المستخدم" label="{{trans('user.name')}}" :value="old('name')"/>
+                            <x-text name="name" :required="true" placeholder="أدخل أسم المستخدم" label="{{trans('user.name')}}" :value="old('name')"/>
                            
                         </div>
                         <div class="col-6">
-                            <x-text name="email" placeholder="أدخل البريد الألكتروني" label="{{trans('user.email')}}" :value="old('email')" />
+                            <x-text name="email" :required="true" placeholder="أدخل البريد الألكتروني" label="{{trans('user.email')}}" :value="old('email')" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="role" class="text-capitalize font-weight-bold text-muted">
                             {{trans('user.role')}}
-                            <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.778)"></i>
+                            <i class="fa-solid fa-star-of-life required-star"></i>
                         </label>
                         <select class="form-control basic"
                                 name="role"
@@ -42,10 +42,10 @@
 
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="password" placeholder="أدخل كلمة المرور" label="{{trans('user.password')}}" :value="old('password')" />
+                            <x-text name="password" :required="true" placeholder="أدخل كلمة المرور" label="{{trans('user.password')}}" :value="old('password')" />
                         </div>
                         <div class="col-6">
-                            <x-text name="password_confirmation" placeholder="تأكيد كلمة المرور " label="{{trans('user.confirm password')}}" />
+                            <x-text name="password_confirmation" :required="true" placeholder="تأكيد كلمة المرور " label="{{trans('user.confirm password')}}" />
                         </div>
                     </div>
                    
@@ -53,10 +53,8 @@
                         <button type="submit" class="btn btn-primary text-capitalize font-weight-bold ">{{trans('user.save')}}</button>
                         <button class="btn btn-light-default  text-capitalize font-weight-bold " data-dismiss="modal"><i class="flaticon-cancel-12"></i>{{trans('user.discard')}}</button>
                     </div>
-
                 </form>
             </div>
-
         </div>
     </div>
 </div>

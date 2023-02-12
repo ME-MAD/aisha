@@ -10,14 +10,14 @@
                     @csrf
                     @method('PUT')
 
-                    <x-text name="name" label="{{ __('group.name') }}" id="name"/>
+                    <x-text name="name" :required="true" label="{{ __('group.name') }}" id="name"/>
 
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="days_num" label="{{ __('group.days_num') }}" id="days_num"/>
+                            <x-text name="days_num" :required="true" label="{{ __('group.days_num') }}" id="days_num"/>
                         </div>
                         <div class="col-6">
-                            <x-text name="price" label="{{ __('group.price') }}" id="price"/>
+                            <x-text name="price" :required="true" label="{{ __('group.price') }}" id="price"/>
                         </div>
                     </div>
 

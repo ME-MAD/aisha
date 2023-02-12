@@ -10,7 +10,7 @@
                 <form action="{{ route('admin.group.store') }}" method="post">
                     @csrf
 
-                    <x-text name="name" id="from_create" placeholder="أدخل اسم المجموعة" label="أسم المجموعة" :value="old('name')"/>
+                    <x-text name="name" id="from_create" :required="true" placeholder="أدخل اسم المجموعة" label="أسم المجموعة" :value="old('name')"/>
 
                     <div class="row">
                         <div class="col-4">
@@ -18,7 +18,7 @@
                                 <label for="age_type"
                                        class="col-xl-12 col-md-6  col-form-label text-muted font-weight-bold text-capitalize">
                                     {{ __('group.Choose teacher') }}
-                                    <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.779)"></i>
+                                    <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6 ">
                                     <select class="form-control basic" style="width: 100%;" name="teacher_id" id="teacher_id">
@@ -40,7 +40,7 @@
                                 <label for="age_type"
                                        class="col-xl-12 col-md-6  col-form-label text-muted font-weight-bold text-capitalize">
                                        {{ __('group.Choose type of group') }}
-                                    <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.779)"></i>
+                                       <i class="fa-solid fa-star-of-life required-star"></i>
                                     </label>
                                 <div class="col-xl-12 col-md-6">
                                     <select class="form-control basic" style="width: 100%;" name="group_type_id"
@@ -64,7 +64,7 @@
                                 <label for="age_type"
                                        class="col-xl-12 col-md-6  col-form-label text-muted font-weight-bold text-capitalize">
                                        {{ __('group.age type') }}
-                                       <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.779)"></i>
+                                       <i class="fa-solid fa-star-of-life required-star"></i>
                                     </label>
         
                                 <div class="col-xl-12 col-md-6">

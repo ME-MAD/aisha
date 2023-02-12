@@ -11,17 +11,17 @@
 
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="name" label="{{trans('user.name')}}" />
+                            <x-text name="name" :required="true" label="{{trans('user.name')}}" />
                         </div>
                         <div class="col-6">
-                            <x-text name="email" label="{{trans('user.email')}}" />
+                            <x-text name="email" :required="true" label="{{trans('user.email')}}" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="role" class="text-capitalize font-weight-bold text-muted">
                             {{trans('user.role')}}
-                            <i class="fa-solid fa-star-of-life" style="color:red"></i>
+                           <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.778)"></i>
                         </label>
                         <select class="form-control basic"
                                 name="role"
@@ -41,10 +41,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="password" label="{{trans('user.password')}}"/>
+                            <x-text name="password" :required="true" label="{{trans('user.password')}}"/>
                         </div>
                         <div class="col-6">
-                            <x-text name="password_confirmation" label="{{trans('user.confirm password')}}" />
+                            <x-text name="password_confirmation" :required="true" label="{{trans('user.confirm password')}}" />
                         </div>
                     </div>
 

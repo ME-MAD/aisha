@@ -16,7 +16,7 @@
                                        class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
                                     اختر
                                     المادة
-                                 <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.778)"></i>
+                                    <i class="fa-solid fa-star-of-life required-star"></i>
                             </label>
                                 <div class="col-xl-12 col-md-6">
                                     <select class="form-control basic" style="width: 100%;" name="subject_id" id="subject_id">
@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <x-text name="title" label="عنوان الدرس" id="title"/>
+                            <x-text name="title" :required="true" label="عنوان الدرس" id="title"/>
                         </div>
                     </div>
 
@@ -72,7 +72,7 @@
                                 <label for="name"
                                     class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">عدد
                                     الايات
-                                 <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.778)"></i>
+                                    <i class="fa-solid fa-star-of-life required-star"></i>
                             </label>
                                 <div class="col-xl-12 col-md-6">
                                     <input type="number" class="form-control" placeholder="" name="chapters_count"
