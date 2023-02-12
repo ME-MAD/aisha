@@ -8,6 +8,15 @@ class StudentLessonReviewService
 {
     public  $studentLesson;
 
+    public function firstOrCreateStudentLessonReview($student_lesson_id)
+    {
+        return StudentLessonReview::firstOrCreate([
+                'student_lesson_id' => $student_lesson_id
+            ], [
+
+            ]);
+    }
+
     public function finished(object $request)
     {
         StudentLessonReview::updateOrCreate([
@@ -27,6 +36,22 @@ class StudentLessonReviewService
         ], [
             'finished' => false,
             'percentage'  => 0,
+        ]);
+    }
+
+    public function update($syllabusReview)
+    {
+        $studentLessonReview = $syllabusReview->studentLessonReview;
+
+        $lesson = $studentLessonReview->studentLesson->lesson;
+
+        $percentage = $lesson->chapters_count > 0 ? (($syllabusReview->to_chapter / $lesson->chapters_count) * 100) : 0;
+
+        return $studentLessonReview->update([
+            'last_page_finished' => $syllabusReview->to_page,
+            'last_chapter_finished' => $syllabusReview->to_chapter,
+            'percentage' => round($percentage, 2),
+            'finished' => $syllabusReview->to_chapter == $lesson->chapters_count ? true : false
         ]);
     }
 }
