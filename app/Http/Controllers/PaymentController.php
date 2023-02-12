@@ -46,15 +46,7 @@ class PaymentController extends Controller
 
     public function create()
     {
-        $currentMonth = getCurrectMonthName();
-
-        $groups = $this->groupService->getGruopsWithPaymentsByMonth($currentMonth);
-        $this->groupService->appendAllStudentsPaidToGroups($groups);
-
-        return view('pages.payment.create', [
-            'gorups' => $groups,
-            'currentMonth' => $currentMonth,
-        ]);
+        return view('pages.payment.create');
     }
 
     public function store(StorePaymentRequest $request)
@@ -65,8 +57,9 @@ class PaymentController extends Controller
             $this->PaymentService->updateOrCreateNotPaid($request);
         }
 
-        Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect()->back();
+        return response()->json([
+            'status' => 200
+        ]);
     }
 
     public function getPaymentsOfGroupByMonth(getPaymentsOfGroupByMonth $request)

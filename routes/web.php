@@ -87,6 +87,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
         Route::get('delete/{group}', [GroupController::class, 'delete'])->name('delete');
         Route::get('getPaymentPerMonth/{group}', [GroupController::class, 'getPaymentPerMonth'])->name('getPaymentPerMonth');
         Route::get('groupAgesChartData', [GroupController::class, 'groupAgesChartData'])->name('groupAgesChartData');
+        Route::get('getAllGroupsForPayment', [GroupController::class, 'getAllGroupsForPayment'])->name('getAllGroupsForPayment');
     });
 
     Route::group(['prefix' => 'student', 'as' => 'student.'], function () {

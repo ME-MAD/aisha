@@ -22,10 +22,10 @@ class PaymentService
         Payment::updateOrCreate([
             'student_id' => $request->student_id,
             'group_id' => $request->group_id,
-            'amount' => $request->amount,
             'month' => $request->month,
         ], [
             'paid' => $paid,
+            'amount' => $request->amount,
         ]);
     }
 

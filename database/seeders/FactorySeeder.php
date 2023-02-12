@@ -53,7 +53,7 @@ class FactorySeeder extends Seeder
 
                Subject::factory(1)->create()->each(function ($subject) use ($group) {
 
-                   Student::factory(2)->create()->each(function ($student) use ($subject, $group) {
+                   Student::factory(5)->create()->each(function ($student) use ($subject, $group) {
                        $student->attachRole('student');
                        $lesson = Lesson::factory(1)->create([
                            'subject_id' => $subject->id

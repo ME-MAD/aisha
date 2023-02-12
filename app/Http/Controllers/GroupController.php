@@ -125,6 +125,36 @@ class GroupController extends Controller
         ]);
     }
 
+    public function getAllGroupsForPayment()
+    {
+        $groups = Group::with([
+            'students' => function($q){
+                return $q->select(['students.id','students.name'])->with('payments:id,student_id,group_id,month,paid');
+            },
+            'groupType:id,price',
+            'payments:id,group_id,paid,month'
+        ])->select([
+            'id','name','group_type_id'
+        ])->get();
+
+
+        $this->groupService->appendAllStudentsPaidToGroups($groups);
+
+        foreach($groups as $group)
+        {
+            foreach($group->students as $student)
+            {
+                $student->paidThisMonth = $student->checkPaid($group->id, getCurrectMonthName());
+            }
+        }
+
+        return response()->json([
+            'status' => 200,
+            'groups' => $groups,
+            'currentMonth' => getCurrectMonthName()
+        ]);
+    }
+
     public function groupAgesChartData()
     {
         $groupsCountsData = $this->homeService->getGroupsCountsData();

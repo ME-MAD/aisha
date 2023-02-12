@@ -78,7 +78,7 @@ class GroupService
     function appendAllStudentsPaidToGroups($gorups)
     {
         $gorups->map(function ($group) {
-            $group->allStudentsPaid = $group->students->count() == $group->payments->where('paid', true)->count();
+            $group->allStudentsPaid = $group->students->count() == $group->payments->where('paid', true)->where('month', getCurrectMonthName())->count();
         });
     }
 }

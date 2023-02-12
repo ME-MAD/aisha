@@ -79,18 +79,16 @@
                                     <div class="search">
                                         <input type="text" class="form-control" placeholder="Search">
                                     </div>
-                                    <ul class="nav nav-pills inv-list-container d-block ps ps--active-y" id="pills-tab"
-                                        role="tablist">
-                                        @foreach ($gorups as $group)
+                                    <ul class="nav nav-pills inv-list-container d-block ps ps--active-y groupsContainer" id="pills-tab"
+                                        role="tablist" data-href="{{route('admin.group.getAllGroupsForPayment')}}">
+                                        {{-- @foreach ($gorups as $group)
                                             <li class="nav-item">
-                                                <div class="nav-link list-actions" id="invoice-{{ $group->id }}"
-                                                    data-invoice-id="00001">
+                                                <div class="nav-link list-actions" id="group-{{ $group->id }}">
                                                     <div class="f-m-body">
                                                         <div class="f-head">
 
                                                         </div>
                                                         <div class="f-body">
-                                                            <p class="invoice-number"></p>
                                                             <p
                                                                 class="alert {{ $group->allStudentsPaid ? 'alert-success' : 'alert-danger' }}">
                                                                 Group {{ $group->id }}
@@ -108,7 +106,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                        @endforeach
+                                        @endforeach --}}
 
 
                                         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
@@ -127,8 +125,8 @@
                             <div class="invoice-inbox ps ps--active-y" style="height: calc(100vh - 215px);">
 
                                 <div id="ct" class="" style="display: block;">
-                                    @foreach ($gorups as $group)
-                                        <div class="invoice-{{ $group->id }}" style="display: none;">
+                                    {{-- @foreach ($gorups as $group)
+                                        <div class="group-{{ $group->id }}" style="display: none;">
                                             <div class="content-section  animated animatedFadeInUp fadeInUp">
                                                 <div class="row inv--head-section">
 
@@ -170,11 +168,11 @@
 
                                                                             <td id="checkbok">
                                                                                 <input type="checkbox"
-                                                                                    class="paid_finished_checkbox big-checkbox"
+                                                                                    class="paidCheckbox big-checkbox"
                                                                                     id="paid_finished_checkbox_{{ $student->id }}_{{ $group->id }}"
                                                                                     data-href="{{ route('admin.payment.store') }}"
-                                                                                    data-student="{{ $student->id }}"
-                                                                                    data-group="{{ $group->id }}"
+                                                                                    data-student-id="{{ $student->id }}"
+                                                                                    data-group-id="{{ $group->id }}"
                                                                                     data-amount="{{ $group->groupType->price }}"
                                                                                     {{ $student->checkPaid($group->id, $currentMonth) ? 'checked' : '' }}>
                                                                             </td>
@@ -232,7 +230,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach
+                                    @endforeach --}}
                                 </div>
 
                                 <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
@@ -282,7 +280,7 @@
 @endsection
 
 @push('js')
-    <script src="{{ asset('adminAssets/assets/js/apps/invoice.js') }}"></script>
-    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
-    <script src="{{ asset('js/payment.js') }}"></script>
+    <script type="module" src="{{ asset('js/payment/payment.js') }}"></script>
+
+    {{-- <script src="{{ asset('adminAssets/assets/js/apps/invoice.js') }}"></script> --}}
 @endpush
