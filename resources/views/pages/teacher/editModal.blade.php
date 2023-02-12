@@ -20,10 +20,10 @@
 
                     <div class="row">
                         <div class="col-6">
-                          <x-text name="password" :required="true" label="Password" :value="old('password')" />
+                          <x-text name="password"  label="Password" :value="old('password')" />
                         </div>
                         <div class="col-6">
-                          <x-text name="password_confirmation" :required="true" label="Confirm Password" />
+                          <x-text name="password_confirmation"  label="Confirm Password" />
                         </div>
                     </div>
 
