@@ -15,7 +15,7 @@
                                 <label for="age_type"
                                        class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
                                        أختر المادة
-                                   <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.778)"></i>
+                                       <i class="fa-solid fa-star-of-life required-star"></i>
                                     </label>
                                 <div class="col-xl-12 col-md6">
                                     <select class="form-control basic" style="width: 100%;" name="subject_id" id="subject_id">
@@ -34,7 +34,7 @@
         
                         </div>
                         <div class="col-6">
-                            <x-text name="title" placeholder="أدخل أسم عنوان الدرس" label="عنوان الدرس" :value="old('title')"/>
+                            <x-text name="title" :required="true" placeholder="أدخل أسم عنوان الدرس" label="عنوان الدرس" :value="old('title')"/>
                         </div>
                     </div>
                   
@@ -72,7 +72,7 @@
                                 <label for="name"
                                        class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">عدد
                                     الايات
-                                 <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.778)"></i>
+                                    <i class="fa-solid fa-star-of-life required-star"></i>
                             </label>
                                 <div class="col-xl-12 col-md-6">
         

@@ -10,19 +10,19 @@
                     @csrf
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="name" placeholder="أدخل أسم المعلم" label="{{ __('teacher.name') }}" :value="old('name')" :required="true" />
+                            <x-text name="name" :required="true" placeholder="أدخل أسم المعلم" label="{{ __('teacher.name') }}" :value="old('name')" :required="true" />
                         </div>
                         <div class="col-6">
-                            <x-text name="email" placeholder="أدخل بريد الإلكتروني بالمعلم" label="Email" :value="old('email')" :required="true" />
+                            <x-text name="email" :required="true" placeholder="أدخل بريد الإلكتروني بالمعلم" label="Email" :value="old('email')" :required="true" />
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="password" placeholder="أدخل كلمة المرور"  label="Password" :value="old('password')" :required="true" />
+                            <x-text name="password" :required="true" placeholder="أدخل كلمة المرور"  label="Password" :value="old('password')" :required="true" />
                         </div>
                         <div class="col-6">
-                            <x-text name="password_confirmation" label="Confirm Password" placeholder="تأكيد كلمة المرور" :required="true" />
+                            <x-text name="password_confirmation" :required="true" label="Confirm Password" placeholder="تأكيد كلمة المرور" :required="true" />
                         </div>
                     </div>
 
@@ -52,10 +52,10 @@
                             <x-date name="birthday" label="{{ __('teacher.birthday') }}" :value="old('birthday')" />
                         </div>
                         <div class="col-4">
-                            <x-text name="phone" placeholder="أدخل هاتف المعلم" label="{{ __('teacher.phone') }}" :value="old('phone')" />
+                            <x-text name="phone" :required="true" placeholder="أدخل هاتف المعلم" label="{{ __('teacher.phone') }}" :value="old('phone')" />
                         </div>
                         <div class="col-4">
-                            <x-text name="qualification" placeholder="أدخل مؤهل المعلم" label="{{ __('teacher.qualification') }}" :value="old('qualification')" />
+                            <x-text name="qualification" :required="true"  placeholder="أدخل مؤهل المعلم" label="{{ __('teacher.qualification') }}" :value="old('qualification')" />
                         </div>
                     </div>
 

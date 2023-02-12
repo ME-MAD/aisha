@@ -11,26 +11,26 @@
 
                     <div class="row">
                         <div class="col-6">
-                           <x-text name="name" label="{{ __('teacher.name') }}" id="name" />
+                           <x-text name="name" :required="true" label="{{ __('teacher.name') }}" id="name" />
                         </div>
                         <div class="col-6">
-                           <x-text name="email" label="Email" :value="old('email')" id="email" />
+                           <x-text name="email" :required="true" label="Email" :value="old('email')" id="email" />
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-                          <x-text name="password" label="Password" :value="old('password')" />
+                          <x-text name="password" :required="true" label="Password" :value="old('password')" />
                         </div>
                         <div class="col-6">
-                          <x-text name="password_confirmation" label="Confirm Password" />
+                          <x-text name="password_confirmation" :required="true" label="Confirm Password" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="role" class="text-capitalize font-weight-bold text-muted">
                             {{trans('user.role')}}
-                            <i class="fa-solid fa-star-of-life" style="color:red"></i>
+                            <i class="fa-solid fa-star-of-life required-star"></i>
                         </label>
                         <select class="form-control basic"
                                 name="role"
@@ -50,14 +50,14 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
-                            <x-date name="birthday" label="{{ __('teacher.birthday') }}" id="birthday" />
+                        <div class="col-4">
+                            <x-date name="birthday" :required="true" label="{{ __('teacher.birthday') }}" id="birthday" />
                         </div>
-                        <div class="col-6">
-                           <x-text name="phone" label="{{ __('teacher.phone') }}" id="phone" />
+                        <div class="col-4">
+                           <x-text name="phone" :required="true" label="{{ __('teacher.phone') }}" id="phone" />
                         </div>
-                        <div class="col-6">
-                          <x-text name="qualification" label="{{ __('teacher.qualification') }}" id="qualification" />
+                        <div class="col-4">
+                          <x-text name="qualification" :required="true" label="{{ __('teacher.qualification') }}" id="qualification" />
                         </div>
                     </div>
 

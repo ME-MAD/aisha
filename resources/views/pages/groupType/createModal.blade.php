@@ -10,14 +10,14 @@
                 <form action="{{ route('admin.group_types.store') }}" method="post">
                     @csrf
 
-                    <x-text name="name" placeholder="أدخل اسم نوع المجموعة" label="{{ __('group.name') }}" :value="old('name')"/>
+                    <x-text name="name" :required="true" placeholder="أدخل اسم نوع المجموعة" label="{{ __('group.name') }}" :value="old('name')"/>
 
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="days_num" placeholder="أدخل عدد أيام المجموعة" label="{{ __('group.days_num') }}" :value="old('days_num')"/>
+                            <x-text name="days_num" :required="true" placeholder="أدخل عدد أيام المجموعة" label="{{ __('group.days_num') }}" :value="old('days_num')"/>
                         </div>
                         <div class="col-6">
-                            <x-text name="price" placeholder="أدخل سعر المجموة" label="{{ __('group.price') }}" :value="old('price')"/>
+                            <x-text name="price" :required="true" placeholder="أدخل سعر المجموة" label="{{ __('group.price') }}" :value="old('price')"/>
                         </div>
                     </div>
 

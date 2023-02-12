@@ -17,7 +17,7 @@
                             <div class="form-group row mb-4">
                                 <label for="age_type" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
                                     {{ __('group.Choose group') }}
-                                    <i class="fa-solid fa-star-of-life" style="color:red"></i>
+                                    <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6  ">
                                     <select class="form-control basic" style="width: 100%;" name="group_id"
@@ -48,7 +48,7 @@
                             <div class="form-group row mb-4">
                                 <label for="day" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
                                     {{ __('group.day') }}
-                                    <i class="fa-solid fa-star-of-life" style="color:red"></i>
+                                    <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6  ">
                                     <select class="form-control selectpicker" style="width: 100%;" name="day"
@@ -92,10 +92,10 @@
 
                     <div class="row">
                         <div class="col-6">
-                            <x-time name="from_time" id="from_time" label="{{ __('group.from') }}" :value="old('from_time')"/>
+                            <x-time name="from_time" :required="true" id="from_time" label="{{ __('group.from') }}" :value="old('from_time')"/>
                         </div>
                         <div class="col-6">
-                            <x-time name="to_time" id="to_time" label="{{ __('group.to') }}" :value="old('to_time')"/>
+                            <x-time name="to_time" :required="true" id="to_time" label="{{ __('group.to') }}" :value="old('to_time')"/>
                         </div>
                     </div>
                    

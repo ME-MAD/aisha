@@ -62,6 +62,9 @@
 
 @section('content')
     <div class="container-fluid">
+
+        @include('pages.errorCreate')
+
         <div class="row layout-spacing">
             <div class="col-lg-12">
                 <div class="card ">
