@@ -9,44 +9,33 @@ use App\Models\SyllabusReview;
 
 class SyllabusReviewService
 {
-    public function firstOrCreateStudentLesson(object $request)
-    {
-       return StudentLesson::firstOrCreate([
-            'group_id' => $request->group_id,
-            'lesson_id' => $request->lesson_id,
-            'student_id' => $request->student_id
-        ], [
-
-        ]);
-    }
-
-    public function firstOrCreateStudentLessonReview($student_lesson_id)
-    {
-        return StudentLessonReview::firstOrCreate([
-                'student_lesson_id' => $student_lesson_id
-            ], [
-
-            ]);
-    }
-    
-
-    public function updateSyllabusReviewIfRateFalse($syllabusReview,$request,$trueOrfalse)
+   
+    public function studentHasFaild($syllabusReview)
     {
        return $syllabusReview->update([
-            'finished' => $trueOrfalse,
-            'rate' => $request->rate
+            'finished' => true,
+            'rate' => "fail"
+        ]);
+    }
+    
+    public function studentHasPassed($syllabusReview, $rate)
+    {
+       return $syllabusReview->update([
+            'finished' => true,
+            'rate' => $rate
         ]);
     }
 
-    public function createSyllabusReview($syllabusReview)
+    public function createSyllabusReview(object $request, $student_lesson_review_id)
     {
        return SyllabusReview::create([
-                'student_lesson_review_id' => $syllabusReview->student_lesson_review_id,
-                'from_chapter' => $syllabusReview->from_chapter,
-                'to_chapter' => $syllabusReview->to_chapter,
-                'from_page' => $syllabusReview->from_page,
-                'to_page' => $syllabusReview->to_page,
-                'finished' => false
+                'student_lesson_review_id' => $student_lesson_review_id,
+                'from_chapter' => $request->from_chapter,
+                'to_chapter' => $request->to_chapter,
+                'from_page' => $request->from_page,
+                'to_page' => $request->to_page,
+                'finished' => false,
+                'rate' => null,
             ]);
     }
 
