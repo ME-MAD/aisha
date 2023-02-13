@@ -57,6 +57,7 @@ export function handleClickOnPaidCheckbox()
 }
 
 
+
 export function handleChangeMonth()
 {
     $('.month').change(function(){
@@ -93,6 +94,114 @@ export function handleChangeMonth()
     })
 }
 
+
+
+
+export function handleClickOnPaidCheckboxForGroupShow()
+{
+    $('.paidCheckbox').click(function(){
+        let studentId = $(this).data('student-id');
+        let groupId = $(this).data('group-id');
+        let amount = $(this).data('amount');
+
+        let month = $(`select[name="month${groupId}"]`).val()
+
+        let checked = this.checked;
+
+        $.ajax({
+            url: "/admin/payment/store",
+            type: "POST",
+            data:{
+                student_id: studentId,
+                group_id: groupId,
+                amount: amount,
+                month: month,
+                paid: this.checked,
+            },
+            success: function (response) {
+                if(response.status == 200)
+                {
+                    Swal.fire(
+                        'Success!',
+                        `The month has been paid successfully !`,
+                        'success'
+                    )
+
+                    let paymentsCount = parseInt($('#paymentsCount').html())
+
+                    if(checked)
+                    {
+                        $('#paymentsCount').html(paymentsCount + 1)
+                    }
+                    else
+                    {
+                        $('#paymentsCount').html(paymentsCount - 1)
+                    }
+                }
+                else
+                {
+                    Swal.fire(
+                        'Error!',
+                        `There was an error sorry`,
+                        'error'
+                    )
+                }
+                
+            },  
+            error: function (response) { 
+                month == null ? $(`.paidCheckbox`).prop('checked', false) : '';
+                Swal.fire(
+                    'Error!',
+                    `${response.responseJSON.message}`,
+                    'error'
+                )
+            }
+        })
+
+    })
+}
+
+
+
+
+export function handleChangeMonthForGroupShow()
+{
+    $('.month').change(function(){
+
+        let month = $(this).val();
+        let groupId = $(this).data('group-id');
+
+        $('#paymentsCount').html('0')
+
+        $(`input[id^="paidCheckbox-${groupId}"]`).prop('checked', false);
+
+        if(month)
+        {
+            $.ajax({
+                url: "/admin/payment/getPaymentsOfGroupByMonth",
+                data: {
+                    month: month,
+                    group_id: groupId,
+                },
+                success: function (response) {
+                    
+                    $('#paymentsCount').html(response.paidCount)
+
+                    response.payments.forEach(payment => {
+                        if (payment.paid == 1) {
+                            $(`#paidCheckbox-${payment.group_id}-${payment.student_id}`).prop('checked', true);
+                        }
+                        else {
+                            $(`#paidCheckbox-${payment.group_id}-${payment.student_id}`).prop('checked', false);
+                        }
+                    });
+                },
+                error: function () { }
+            })
+        }
+
+    })
+}
 
 function getAllStudentsTableRowsHtml(group)
 {

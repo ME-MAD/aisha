@@ -39,7 +39,18 @@ class GroupService
 
     public function setGroupWithAllData(Group $group)
     {
-        $this->groupWithAllData = $group->load('groupStudents.student', 'groupType', 'payments.student');
+        $this->groupWithAllData = $group->load([
+            'groupStudents.student',
+            'payments' => function($q){
+                return $q->select('id','group_id','paid','month')
+                    ->where('paid',true)
+                    ->where('month',getCurrectMonthName());
+            },
+            'students.payments' => function($q) use ($group){
+                return $q->where('group_id', $group->id);
+            },
+            'groupType'
+        ]);
     }
 
     public function getGroupWithAllData()
@@ -60,6 +71,11 @@ class GroupService
     public function getGroupDaysCount()
     {
         return $this->groupWithAllData->groupDays->count();
+    }
+
+    public function getGroupPaymentsCount()
+    {
+        return $this->groupWithAllData->payments->count();
     }
 
     public function getGruopsWithPaymentsByMonth($currentMonth)

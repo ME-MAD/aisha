@@ -64,11 +64,11 @@
                     </li>
                     @endcheck_permission
                 </ul>
-                @endcheck_permission_in_permissions
             </li>
+            @endcheck_permission_in_permissions
 
 
-            @check_permission_in_permissions(['index-teacher','index-experience'])
+            @check_permission_in_permissions(['index-teacher','index-experience','show-teacher'])
             <li class="menu single-menu {{
                     request()->routeIs('admin.teacher.index') ||
                     request()->routeIs('admin.teacher.show')||
@@ -116,7 +116,7 @@
             </li>
             @endcheck_permission_in_permissions
 
-            @check_permission_in_permissions(['index-student'])
+            @check_permission_in_permissions(['index-student','show-student'])
             <li class="menu single-menu {{
                                     request()->routeIs('admin.student.index') ||
                                     request()->routeIs('admin.student.show') ? 'active' : ''
@@ -153,9 +153,10 @@
             @endcheck_permission_in_permissions
 
 
-            @check_permission_in_permissions(['index-group','index-groupDay','index-groupStudent','index-groupType'])
+            @check_permission_in_permissions(['index-group','index-groupDay','index-groupStudent','index-groupType','show-group'])
             <li class="menu single-menu {{
                                     request()->routeIs('admin.group.index')||
+                                    request()->routeIs('admin.group.show')||
                                     request()->routeIs('admin.group_day.index')||
                                     request()->routeIs('admin.group_students.index')||
                                     request()->routeIs('admin.group_types.index')  ? 'active' : ''
@@ -184,6 +185,7 @@
                 </a>
                 <ul class="collapse submenu list-unstyled {{
                         request()->routeIs('admin.group.index')||
+                        request()->routeIs('admin.group.show')||
                         request()->routeIs('admin.group_day.index')||
                         request()->routeIs('admin.group_students.index')||
                         request()->routeIs('admin.group_types.index')  ? 'show' : ''

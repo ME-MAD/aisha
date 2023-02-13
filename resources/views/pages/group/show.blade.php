@@ -1,7 +1,11 @@
-@php use Mcamara\LaravelLocalization\Facades\LaravelLocalization; @endphp
 @extends('master')
 
 @push('css')
+
+
+    <link href="{{asset('adminAssets/assets/css/tables/table-basic.css')}}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('adminRtl/assets/css/forms/theme-checkbox-radio.css') }}">
 
     @if(LaravelLocalization::getCurrentLocale() =='ar')
         <link rel="stylesheet"
@@ -15,27 +19,6 @@
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminRtl/assets/css/components/cards/card.css') }}"/>
-
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/assets/css/scrollspyNav.css') }}"/>
-
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
-
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}">
-
-
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/assets/css/forms/theme-checkbox-radio.css') }}">
-
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/assets/css/tables/table-basic.css') }}"/>
     @else
         <link rel="stylesheet"
               type="text/css"
@@ -48,27 +31,6 @@
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminAssets/assets/css/components/cards/card.css') }}"/>
-
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/assets/css/scrollspyNav.css') }}"/>
-
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
-
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
-
-
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
-
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/assets/css/tables/table-basic.css') }}"/>
     @endif
 @endpush
 
@@ -155,7 +117,7 @@
                         <a class="nav-link" id="justify-pills-payment-tab" data-toggle="pill"
                            href="#justify-pills-payment" role="tab" aria-controls="justify-pills-payment"
                            aria-selected="false"> {{ __('group.Payment') }}
-                            <span id="paymentsCount" class="badge badge-secondary float-right">0</span>
+                            <span id="paymentsCount" class="badge badge-secondary float-right">{{$groupPaymentsCount}}</span>
                         </a>
                     </li>
                 </ul>
@@ -190,68 +152,15 @@
 @endsection
 
 @push('js')
-    <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
-    <script src="{{ asset('js/payment.js') }}"></script>
+    <script type="module" src="{{ asset('js/payment/groupShow.js') }}"></script>
     <script src="{{ asset('js/teacher.js') }}"></script>
     <script src="{{ asset('adminAssets/assets/shared/chart.js') }}"></script>
     <script src="{{ asset('js/group_chart.js') }}"></script>
+    
     <script>
         initEditeTeacherModal()
     </script>
-    <script>
-        $('#zero-config').DataTable({
-            "oLanguage": {
-                "oPaginate": {
-                    "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
-                    "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
-                },
-                "sInfo": "Showing page _PAGE_ of _PAGES_",
-                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
-                "sLengthMenu": "Results :  _MENU_",
-            },
-            "stripeClasses": [],
-            "lengthMenu": [7, 10, 20, 50],
-            "pageLength": 7
-        });
-    </script>
-    <script>
-        $('#zero-config2').DataTable({
-            "oLanguage": {
-                "oPaginate": {
-                    "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
-                    "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
-                },
-                "sInfo": "Showing page _PAGE_ of _PAGES_",
-                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
-                "sLengthMenu": "Results :  _MENU_",
-            },
-            "stripeClasses": [],
-            "lengthMenu": [7, 10, 20, 50],
-            "pageLength": 7
-        });
-    </script>
-    <script>
-        $('#zero-config3').DataTable({
-            "oLanguage": {
-                "oPaginate": {
-                    "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
-                    "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
-                },
-                "sInfo": "Showing page _PAGE_ of _PAGES_",
-                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
-                "sLengthMenu": "Results :  _MENU_",
-            },
-            "stripeClasses": [],
-            "lengthMenu": [7, 10, 20, 50],
-            "pageLength": 7,
-            "fnDrawCallback": function () {
-                whenMonthChangeHandlePaymentCheckBox()
-            }
-        });
-    </script>
+
     <script>
         $('#creatGroupDayModal').on('shown.bs.modal', function (e) {
             let href = $(this).data('href');
