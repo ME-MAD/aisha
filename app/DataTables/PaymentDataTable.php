@@ -160,7 +160,7 @@ class PaymentDataTable extends DataTable
             [
                 'name' => 'show',
                 'data' => 'show',
-                'title' => 'show',
+                'title' => 'المزيد',
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,

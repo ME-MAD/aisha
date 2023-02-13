@@ -7,7 +7,7 @@ return [
     'Dashboard' => 'لوحة التحكم',
     'Analytics' => 'تحليلات',
     'Sales' => 'مبيعات',
-    'Show' => 'إظهار',
+    'Show' => 'المزيد',
     'Dail Analytics' => 'التفصيل',
     'Teachers' => 'المعلمون',
     'Experiences' => 'الخبرات',
