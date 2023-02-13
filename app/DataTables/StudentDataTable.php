@@ -29,7 +29,7 @@ class StudentDataTable extends DataTable
             ->editColumn('role.name',function($q){
                 return $q->role->name ?? '';
             })
-            ->rawColumns(['edit', 'delete', 'name', 'avatar'])
+            ->rawColumns(['edit', 'delete', 'name','show'])
             ->setRowId('id');
     }
 

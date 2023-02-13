@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 if (!function_exists('getStudentTypes')) {
@@ -16,6 +17,16 @@ if (!function_exists('getGuard')) {
     function getGuard()
     {
         return Session::get('admin_guard');
+    }
+}
+
+if (!function_exists('userCan')) {
+    function userCan($permission)
+    {
+        if (Auth::guard(getGuard())->user()->isAbleTo($permission)) {
+            return true;
+        }
+        return false;
     }
 }
 

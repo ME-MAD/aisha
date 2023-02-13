@@ -26,9 +26,6 @@
                <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
     @endif
 
-    <link rel="stylesheet"
-          type="text/css"
-          href="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.css')}}">
 @endpush
 
 
@@ -108,7 +105,6 @@
 
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
     <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
-    <script src="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.js')}}"></script>
 
     <script src="{{asset('js/student.js')}}"></script>
 @endpush
