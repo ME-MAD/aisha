@@ -10,14 +10,14 @@
                     @csrf
                     @method('PUT')
 
-                    <x-text name="title" label="الخبرة" id="title"/>
+                    <x-text name="title" :required="true" label="الخبرة" id="title"/>
 
                     <div class="row">
                         <div class="col-6">
-                            <x-date name="from" label="من" id="from"/>
+                            <x-date :required="true" name="from" label="من" id="from"/>
                         </div>
                         <div class="col-6">
-                            <x-date name="to" label="الى" id="to"/>
+                            <x-date :required="true" name="to" label="الى" id="to"/>
                         </div>
                     </div>
 
@@ -35,7 +35,8 @@
                                     <option value="">اختر المعلم</option>
                                     @foreach ($teachers as $teacher)
                                         <option value="{{ $teacher->id }}">
-                                            {{ $teacher->name }}</option>
+                                            {{ $teacher->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('teacher_id')
