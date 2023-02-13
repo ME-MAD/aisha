@@ -17,7 +17,6 @@ class StudentDataTable extends DataTable
                 return view('pages.student.datatable.edit', compact('query'));
             })
             ->addColumn('delete', 'pages.student.datatable.delete')
-            ->editColumn('avatar', 'pages.student.datatable.avatar')
             ->editColumn('name', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' >" . $q->name . "</a>";
             })
@@ -30,7 +29,7 @@ class StudentDataTable extends DataTable
             ->editColumn('role.name',function($q){
                 return $q->role->name ?? '';
             })
-            ->rawColumns(['edit', 'delete', 'name', 'show', 'avatar'])
+            ->rawColumns(['edit', 'delete', 'name', 'avatar'])
             ->setRowId('id');
     }
 
@@ -108,22 +107,17 @@ class StudentDataTable extends DataTable
             ],
 
             [
-                'name' => 'role.name', 
-                'data' => 'role.name',
-                'title' => ' role', "className" => 'search--col'],
-
-            [
-                'name' => 'avatar', 
-                'data' => 'avatar',
-                'title' => ' الصور',
+                'name' => 'email',
+                'data' => 'email',
+                'title' => 'البريد الإلكتروني',
                 "className" => 'search--col'
             ],
 
             [
-                'name' => 'email',
-                'data' => 'email',
-                'title' => 'Email',
-                "className" => 'search--col'
+                'name' => 'role.name', 
+                'data' => 'role.name',
+                'title' => 'الوظيفة',
+                 "className" => 'search--col'
             ],
 
             [
@@ -137,13 +131,6 @@ class StudentDataTable extends DataTable
                 'name' => 'phone',
                 'data' => 'phone',
                 'title' => ' الهاتف',
-                "className" => 'search--col'
-            ],
-
-            [
-                'name' => 'qualification',
-                'data' => 'qualification',
-                'title' => ' المؤهلات',
                 "className" => 'search--col'
             ],
 

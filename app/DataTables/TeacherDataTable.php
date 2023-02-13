@@ -37,11 +37,10 @@ class TeacherDataTable extends DataTable
             ->editColumn('name', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.teacher.show', $q->id) . " title='Enter Page show Teacher' >" . $q->name . "</a>";
             })
-            ->editColumn('avatar', 'pages.teacher.datatable.avatar')
             ->editColumn('show', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.teacher.show', $q->id) . " title='Enter Page show Teacher' ><i class='fa-solid fa-eye'></i></a>";
             })
-            ->rawColumns(['edit', 'delete', 'name', 'show', 'avatar'])
+            ->rawColumns(['edit', 'delete', 'name', 'show'])
             ->setRowId('id');
     }
 
@@ -128,25 +127,18 @@ class TeacherDataTable extends DataTable
                 'title' => __('teacher.name'),
                 "className" => 'search--col'
             ],
-
-            [
-                'name' => 'avatar',
-                'data' => 'avatar',
-                'title' => __('teacher.avatar'),
-                "className" => 'search--col'
-            ],
             
             [
                 'name' => 'email',
                 'data' => 'email',
-                'title' => 'Email',
+                'title' => 'البريد الألكتروني',
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'role.name',
                 'data' => 'role.name',
-                'title' => 'role',
+                'title' => 'الوظيفة',
                 "className" => 'search--col'
             ],
 
@@ -162,13 +154,6 @@ class TeacherDataTable extends DataTable
                 'name' => 'phone',
                 'data' => 'phone',
                 'title' => __('teacher.phone'),
-                "className" => 'search--col'
-            ],
-
-            [
-                'name' => 'qualification',
-                'data' => 'qualification',
-                'title' => __('teacher.qualification'),
                 "className" => 'search--col'
             ],
 
