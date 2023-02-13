@@ -105,13 +105,13 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary text-capitalize font-weight-bold">
-                            {{__('student.save')}}
+                        <button type="submit"
+                                class="btn btn-outline-dark">
+                            {{ __('global.Save') }}
                         </button>
 
-                        <button class="btn text-capitalize font-weight-bold" data-dismiss="modal">
-                            <i class="flaticon-cancel-12"></i>
-                            {{__('student.discard')}}
+                        <button class="btn btn-outline-danger" data-dismiss="modal">
+                            <i class="flaticon-cancel-12"></i>{{ __('global.Discard') }}
                         </button>
                     </div>
                 </form>

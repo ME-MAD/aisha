@@ -107,11 +107,11 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success text-capitalize font-weight-bold">
+                        <button type="submit" class="btn btn-outline-info">
                             {{__('student.update')}}
                         </button>
 
-                        <button class="btn btn-light-default text-capitalize font-weight-bold"
+                        <button class="btn btn-outline-danger"
                                 data-dismiss="modal">
                             <i class="flaticon-cancel-12"></i>
                             {{__('student.discard')}}

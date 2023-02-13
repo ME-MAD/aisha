@@ -38,7 +38,7 @@ class TeacherDataTable extends DataTable
                 return "<a class='text-primary' href=" . route('admin.teacher.show', $q->id) . " title='Enter Page show Teacher' >" . $q->name . "</a>";
             })
             ->editColumn('show', function ($q) {
-                return "<a class='text-primary' href=" . route('admin.teacher.show', $q->id) . " title='Enter Page show Teacher' ><i class='fa-solid fa-eye'></i></a>";
+                return "<a class='text-info' href=" . route('admin.teacher.show', $q->id) . " title='Enter Page show Teacher' ><i class='fa-solid fa-eye'></i></a>";
             })
             ->rawColumns(['edit', 'delete', 'name', 'show'])
             ->setRowId('id');

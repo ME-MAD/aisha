@@ -78,8 +78,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">{{ __('teacher.Update') }}</button>
-                        <button class="btn" data-dismiss="modal"><i
+                        <button type="submit" class="btn btn-outline-info">{{ __('teacher.Update') }}</button>
+                        <button class="btn btn-outline-danger" data-dismiss="modal"><i
                                 class="flaticon-cancel-12"></i>{{ __('teacher.Discard') }}</button>
                     </div>
                 </form>

@@ -180,12 +180,12 @@
 
                                             <div class="card-footer">
                                                 <button type="button"
-                                                        class="btn btn-danger font-weight-bold text-white"
+                                                        class="btn btn-outline-danger"
                                                         data-dismiss="modal">{{__('global.Close')}}
                                                 </button>
                     
                                                 <button type="submit"
-                                                        class="btn btn-success font-weight-bold text-white">{{__('global.Update')}}
+                                                        class="btn btn-outline-success">{{__('global.Update')}}
                                                 </button>
                                             </div>
 

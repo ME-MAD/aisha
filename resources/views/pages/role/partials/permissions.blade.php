@@ -43,12 +43,12 @@
 
 <div class="card-footer">
     <button type="button"
-            class="btn btn-danger font-weight-bold text-white"
+            class="btn btn-outline-danger"
             data-dismiss="modal">{{__('global.Close')}}
     </button>
 
     <button type="submit"
-            class="btn btn-primary font-weight-bold text-white">{{__('global.create')}}
+            class="btn btn-outline-primary">{{__('global.create')}}
     </button>
 </div>
 

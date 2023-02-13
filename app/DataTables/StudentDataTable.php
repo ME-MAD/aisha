@@ -21,7 +21,7 @@ class StudentDataTable extends DataTable
                 return "<a class='text-primary' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' >" . $q->name . "</a>";
             })
             ->editColumn('show', function ($q) {
-                return "<a class='text-primary' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' ><i class='fa-solid fa-eye'></i></a>";
+                return "<a class='text-info' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' ><i class='fa-solid fa-eye'></i></a>";
             })
             ->editColumn('countGroups', function ($q) {
                 return $q->group_students_count;

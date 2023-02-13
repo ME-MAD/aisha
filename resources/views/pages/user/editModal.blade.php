@@ -51,8 +51,8 @@
 
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success text-capitalize font-weight-bold">{{trans('user.update')}}</button>
-                        <button class="btn btn-light-default text-capitalize font-weight-bold" data-dismiss="modal"><i class="flaticon-cancel-12"></i>{{trans('user.discard')}}</button>
+                        <button type="submit" class="btn btn-outline-success">{{trans('user.save')}}</button>
+                        <button class="btn btn-outline-danger" data-dismiss="modal"><i class="flaticon-cancel-12"></i>{{trans('user.discard')}}</button>
                     </div>
                 </form>
             </div>
