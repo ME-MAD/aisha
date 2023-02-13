@@ -180,7 +180,7 @@ class TeacherDataTable extends DataTable
             [
                 'name' => 'show',
                 'data' => 'show',
-                'title' => __('teacher.Show'),
+                'title' => "المزيد",
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,

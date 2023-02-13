@@ -144,20 +144,20 @@ class StudentDataTable extends DataTable
 
             [
                 'name' => 'show',
-                 'data' => 'show',
-                  'title' => 'Show',
-                   'printable' => false,
-                    'exportable' => false, 
-                    'orderable' => false,
-                     'searchable' => false, 
-                     "className" => 'not--search--col'
+                'data' => 'show',
+                'title' => 'المزيد',
+                'printable' => false,
+                'exportable' => false, 
+                'orderable' => false,
+                'searchable' => false, 
+                "className" => 'not--search--col'
             ],
 
 
             [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => 'Edit',
+                'title' => 'تعديل',
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
@@ -169,7 +169,7 @@ class StudentDataTable extends DataTable
             [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => 'Delete',
+                'title' => 'حذف',
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,

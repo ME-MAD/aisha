@@ -149,7 +149,7 @@ class RoleDataTable extends DataTable
             [
                 'name' => 'showUsers',
                 'data' => 'showUsers',
-                'title' => "إظهار",
+                'title' => "إظهار المستخدمين",
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,

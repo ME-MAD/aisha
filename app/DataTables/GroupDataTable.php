@@ -157,7 +157,7 @@ class GroupDataTable extends DataTable
             [
                 'name' => 'show',
                 'data' => 'show',
-                'title' => __('global.Show'),
+                'title' => "المزيد",
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
