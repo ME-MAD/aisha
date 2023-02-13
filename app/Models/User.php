@@ -56,4 +56,9 @@ class User extends Authenticatable
             'role_id');
 
     }
+
+    public function rolePermissions()
+    {
+        return $this->hasMany(PermissionRole::class, 'role_id');
+    }
 }
