@@ -32,7 +32,7 @@ class GroupDataTable extends DataTable
             // ->rawColumns(['edit', 'delete'])
 
             ->editColumn('show', function ($q) {
-                return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' ><i class='fa-solid fa-eye'></i></a>";
+                return "<a class='text-info' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' ><i class='fa-solid fa-eye'></i></a>";
             })
             ->editColumn('id', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' >" . $q->id . "</a>";
