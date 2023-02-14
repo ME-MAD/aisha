@@ -17,6 +17,9 @@ class UserDataTable extends DataTable
             ->addColumn('edit', function ($query) {
                 return view('pages.user.datatable.edit', compact('query'));
             })
+            ->editColumn('countPermissions', function ($q) {
+                return($q->role_permissions_count);
+            })
             ->addColumn('delete', 'pages.user.datatable.delete')
             ->rawColumns(['edit', 'delete'])
             ->setRowId('id');
@@ -29,9 +32,9 @@ class UserDataTable extends DataTable
             'users.id',
             'users.name',
             'users.email',
-        ])->with('role:id,name');
+        ])->with('role:id,name')->withCount(['rolePermissions']);
     }
-
+    
     /**
      * Optional method if you want to use html builder.
      *
@@ -121,6 +124,17 @@ class UserDataTable extends DataTable
                 'title' => 'role',
                 "className" => 'search--col'
             ],
+
+            [
+                'name' => 'countPermissions',
+                'data' => 'countPermissions',
+                'title' => 'عدد الصلاحيات',
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+                
+            ],
+
         ];
 
 
