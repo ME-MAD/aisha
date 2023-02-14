@@ -1,7 +1,7 @@
 <div id="content" class="main-content">
     <div class="layout-px-spacing">
         <div class="row invoice layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="col-12 p-0">
                 <div class="app-hamburger-container">
                     <div class="hamburger">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -78,3 +78,4 @@
             </div>
         </div>
     </div>
+</div>

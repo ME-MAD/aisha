@@ -16,6 +16,8 @@
 
     @endif
 
+    <link href="{{asset('adminAssets/assets/css/tables/table-basic.css')}}" rel="stylesheet" type="text/css" />
+
 @endpush
 @section('breadcrumb')
     <div class="page-header">
@@ -62,10 +64,11 @@
 
         @include('pages.teacher.partials.statistics')
 
-        @include('pages.teacher.partials.experience')
+       
 
     </div>
 
+    @include('pages.teacher.partials.experience')
 
     @include('pages.teacher.partials.students')
 

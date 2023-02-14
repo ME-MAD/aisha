@@ -33,7 +33,7 @@
             @include('layout.partials.payment')
 
 
-            @include('layout.partials.report')
+            {{-- @include('layout.partials.report') --}}
 
 
 
