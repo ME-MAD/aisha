@@ -101,11 +101,26 @@ if (!function_exists('getPermissionTables')) {
 }
 
 
+
+if (!function_exists('getAdditionalPermissions')) {
+    function getAdditionalPermissions()
+    {
+        return [
+            'report' => [
+                'report-payment'
+            ],
+        ];
+    }
+}
+
+
 if (!function_exists('getPermissionsForView')) {
     function getPermissionsForView()
     {
         $keys = getPermissionKeys();
         $tables = getPermissionTables();
+        $additionalPermissions = getAdditionalPermissions();
+
 
         $permissions = [];
 
@@ -119,6 +134,7 @@ if (!function_exists('getPermissionsForView')) {
                 ];
             }
         }
+
         return $permissions;
     }
 }
@@ -130,6 +146,8 @@ if (!function_exists('getPermissionsForSeeder')) {
         $keys = getPermissionKeys();
         $tables = getPermissionTables();
 
+        $additionalPermissions = getAdditionalPermissions();
+
         $permissions = [];
 
         foreach($tables as $table => $tableName)
@@ -139,6 +157,15 @@ if (!function_exists('getPermissionsForSeeder')) {
                 $permissions [] ['name']= "$value-$table";
             }
         }
+
+        foreach($additionalPermissions as $items)
+        {
+            foreach($items as $permission)
+            {
+                $permissions [] ['name'] = $permission;
+            }
+        }
+
         return $permissions;
     }
 }
@@ -150,6 +177,8 @@ if (!function_exists('getPermissionsArray')) {
         $keys = getPermissionKeys();
         $tables = getPermissionTables();
 
+        $additionalPermissions = getAdditionalPermissions();
+
         $permissions = [];
 
         foreach($tables as $table => $tableName)
@@ -159,6 +188,15 @@ if (!function_exists('getPermissionsArray')) {
                 $permissions []= "$value-$table";
             }
         }
+
+        foreach($additionalPermissions as $items)
+        {
+            foreach($items as $permission)
+            {
+                $permissions [] = $permission;
+            }
+        }
+
         return $permissions;
     }
 }

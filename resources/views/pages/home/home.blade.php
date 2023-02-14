@@ -107,10 +107,6 @@
 
 @push('js')
     
-    <script src="{{asset('adminAssets/plugins/chartjs/main.js')}}"></script>
-
-    {{-- <script type="module" src="{{ asset('js/home/home.js') }}"></script> --}}
-
     <script src="{{asset('adminAssets/plugins/fullcalendar/moment.min.js')}}"></script>
 
     <script src="{{ asset('adminAssets/plugins/flatpickr/flatpickr.js') }}"></script>
