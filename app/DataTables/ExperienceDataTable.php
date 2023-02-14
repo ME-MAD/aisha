@@ -124,7 +124,7 @@ class ExperienceDataTable extends DataTable
      */
     protected function getColumns(): array
     {
-        return [
+        $columns =  [
             [
                 'name' => 'experiences.id',
                 'data' => 'id',
@@ -159,8 +159,11 @@ class ExperienceDataTable extends DataTable
                 'title' => ' المعلم',
                 "className" => 'search--col'
             ],
+        ];
 
-            [
+        if(userCan('update-experience'))
+        {
+            $columns [] = [
                 'name' => 'edit',
                 'data' => 'edit',
                 'title' => 'Edit',
@@ -169,9 +172,12 @@ class ExperienceDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-            [
+        if(userCan('delete-experience'))
+        {
+            $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
                 'title' => 'Delete',
@@ -180,8 +186,11 @@ class ExperienceDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
-        ];
+            ];
+        }
+
+        return $columns;
+
     }
 
     /**

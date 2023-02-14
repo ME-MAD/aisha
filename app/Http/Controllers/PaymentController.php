@@ -36,6 +36,7 @@ class PaymentController extends Controller
             'index' => 'index-payment',
             'store' => 'store-payment',
             'create' => 'create-payment',
+            'delete' => 'delete-payment',
         ]);
     }
 

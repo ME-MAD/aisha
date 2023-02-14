@@ -74,9 +74,11 @@
                         <h3 class="text-capitalize text-white">
                             المدفوعات
                         </h3>
+                        @check_permission('store-payment')
                         <a class="icon text-white" href="{{ route('admin.payment.create') }}">
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
+                        @endcheck_permission
                     </div>
                     <div class="card-body">
                         {!! $dataTable->table

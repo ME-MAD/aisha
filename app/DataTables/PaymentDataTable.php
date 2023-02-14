@@ -115,7 +115,7 @@ class PaymentDataTable extends DataTable
      */
     protected function getColumns(): array
     {
-        return [
+        $columns = [
             [
                 'name' => 'payments.id',
                 'data' => 'id',
@@ -150,25 +150,18 @@ class PaymentDataTable extends DataTable
                 'title' => 'month',
                 "className" => 'search--col'
             ],
+
             [
                 'name' => 'paid',
                 'data' => 'paid',
                 'title' => 'paid',
                 "className" => 'search--col'
             ],
+        ];
 
-            [
-                'name' => 'show',
-                'data' => 'show',
-                'title' => 'المزيد',
-                'printable' => false,
-                'exportable' => false,
-                'orderable' => false,
-                'searchable' => false,
-                "className" => 'not--search--col'
-            ],
-
-            [
+        if(userCan('delete-payment'))
+        {
+            $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
                 'title' => 'Delete',
@@ -177,8 +170,10 @@ class PaymentDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
-        ];
+            ];
+        }
+
+        return $columns;
     }
 
     /**

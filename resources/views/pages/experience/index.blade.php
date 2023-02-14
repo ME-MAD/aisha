@@ -93,9 +93,11 @@
                         <h3 class="text-capitalize text-white">
                             الخبرات
                         </h3>
+                        @check_permission('store-experience')
                         <a class="icon text-white" data-target='#creatExperienceModal' data-toggle='modal'>
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
+                        @endcheck_permission
                     </div>
                     <div class="card-body">
                         {!! $dataTable->table
