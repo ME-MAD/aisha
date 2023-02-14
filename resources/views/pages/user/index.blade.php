@@ -84,9 +84,11 @@
                             <h3 class="text-capitalize text-white">
                                 المستخدمين
                             </h3>
+                            @check_permission('store-user')
                             <a data-toggle='modal' data-target='#creatUserModal' class="icon text-white">
                                 <i class="fa-solid fa-plus fa-2xl"></i>
                             </a>
+                            @endcheck_permission
                         </div>
                         <div class="card-body">
                             {!! $dataTable->table

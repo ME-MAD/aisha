@@ -72,10 +72,12 @@
                         <h3 class="text-capitalize text-white">
                             الطلاب
                         </h3>
+                        @check_permission('store-student')
                         <a class="icon text-white" data-toggle="modal"
                         data-target="#creatStudentModal">
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
+                        @endcheck_permission
                     </div>
                     <div class="card-body">
                         {!! $dataTable->table

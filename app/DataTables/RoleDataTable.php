@@ -147,20 +147,6 @@ class RoleDataTable extends DataTable
             ],
         ];
 
-        if(userCan('update-role'))
-        {
-            $columns [] = [
-                'name' => 'edit',
-                'data' => 'edit', 
-                'title' => __('teacher.Edit'),
-                'printable' => false, 
-                'exportable' => false,
-                'orderable' => false,
-                'searchable' => false,
-                "className" => 'not--search--col'
-            ];
-        }
-
         if(userCan('show-role'))
         {
             $columns [] = [
@@ -168,6 +154,20 @@ class RoleDataTable extends DataTable
                 'data' => 'showUsers',
                 'title' => "إظهار المستخدمين",
                 'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ];
+        }
+
+        if(userCan('update-role'))
+        {
+            $columns [] = [
+                'name' => 'edit',
+                'data' => 'edit', 
+                'title' => __('teacher.Edit'),
+                'printable' => false, 
                 'exportable' => false,
                 'orderable' => false,
                 'searchable' => false,

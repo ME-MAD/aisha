@@ -99,7 +99,7 @@ class GroupDayDataTable extends DataTable
 
     protected function getColumns(): array
     {
-        return [
+        $columns = [
             [
                 'name' => 'group_days.id',
                 'data' => 'id',
@@ -134,9 +134,11 @@ class GroupDayDataTable extends DataTable
                 'title' => __('group.day'),
                 "className" => 'search--col'
             ],
+        ];
 
-
-            [
+        if(userCan('delete-groupDay'))
+        {
+            $columns [] =  [
                 'name' => 'delete',
                 'data' => 'delete',
                 'title' => __('global.Delete'),
@@ -145,8 +147,10 @@ class GroupDayDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
-        ];
+            ];
+        }
+
+        return $columns;
     }
 
 

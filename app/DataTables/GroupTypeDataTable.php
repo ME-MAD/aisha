@@ -104,7 +104,7 @@ class GroupTypeDataTable extends DataTable
      */
     protected function getColumns(): array
     {
-        return [
+        $columns = [
             [
                 'name' => 'id',
                 'data' => 'id',
@@ -132,8 +132,11 @@ class GroupTypeDataTable extends DataTable
                 'title' =>  __('group.days_num'),
                 "className" => 'search--col'
             ],
+        ];
 
-            [
+        if(userCan('update-groupStudent'))
+        {
+            $columns [] = [
                 'name' => 'edit',
                 'data' => 'edit',
                 'title' =>  __('global.Edit'),
@@ -142,10 +145,12 @@ class GroupTypeDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-
-            [
+        if(userCan('delete-groupStudent'))
+        {
+            $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
                 'title' =>  __('global.Delete'),
@@ -154,8 +159,10 @@ class GroupTypeDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
-        ];
+            ];
+        }
+        
+        return $columns;
     }
 
     /**

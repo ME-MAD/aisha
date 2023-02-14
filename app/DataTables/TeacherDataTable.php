@@ -113,7 +113,7 @@ class TeacherDataTable extends DataTable
 
     protected function getColumns(): array
     {
-        return [
+        $columns = [
             [
                 'name' => 'teachers.id',
                 'data' => 'id',
@@ -176,8 +176,11 @@ class TeacherDataTable extends DataTable
                 'searchable' => false,
                 "className" => 'not--search--col'
             ],
+        ];
 
-            [
+        if(userCan('show-teacher'))
+        {
+            $columns [] = [
                 'name' => 'show',
                 'data' => 'show',
                 'title' => "المزيد",
@@ -186,9 +189,12 @@ class TeacherDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-            [
+        if(userCan('update-teacher'))
+        {
+            $columns [] = [
                 'name' => 'edit',
                 'data' => 'edit',
                 'title' => __('teacher.Edit'),
@@ -197,9 +203,12 @@ class TeacherDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-            [
+        if(userCan('delete-teacher'))
+        {
+            $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
                 'title' => __('teacher.Delete'),
@@ -208,8 +217,10 @@ class TeacherDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
-        ];
+            ];
+        }
+
+        return $columns;
     }
 
 

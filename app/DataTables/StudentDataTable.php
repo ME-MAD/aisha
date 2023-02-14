@@ -91,7 +91,7 @@ class StudentDataTable extends DataTable
 
     protected function getColumns(): array
     {
-        return [
+        $columns = [
             [
                 'name' => 'students.id',
                 'data' => 'id',
@@ -140,9 +140,13 @@ class StudentDataTable extends DataTable
                 'title' => ' عدد الجروبات',
                 'orderable' => false,
                 'searchable' => false,
-                "className" => 'not--search--col'],
+                "className" => 'not--search--col'
+            ],
+        ];
 
-            [
+        if(userCan('show-student'))
+        {
+            $columns [] = [
                 'name' => 'show',
                 'data' => 'show',
                 'title' => 'المزيد',
@@ -151,10 +155,12 @@ class StudentDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false, 
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-
-            [
+        if(userCan('update-student'))
+        {
+            $columns [] = [
                 'name' => 'edit',
                 'data' => 'edit',
                 'title' => 'تعديل',
@@ -163,10 +169,12 @@ class StudentDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false, 
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-
-            [
+        if(userCan('delete-student'))
+        {
+            $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
                 'title' => 'حذف',
@@ -175,8 +183,10 @@ class StudentDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
-        ];
+            ];
+        }
+
+        return $columns;
     }
 
     protected function filename(): string

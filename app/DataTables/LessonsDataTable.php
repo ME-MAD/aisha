@@ -117,7 +117,7 @@ class LessonsDataTable extends DataTable
      */
     protected function getColumns(): array
     {
-        return [
+        $columns = [
             [
                 'name' => 'id',
                 'data' => 'id',
@@ -157,8 +157,11 @@ class LessonsDataTable extends DataTable
                 'title' => 'chapters_count',
                 "className" => 'search--col'
             ],
+        ];
 
-            [
+        if(userCan('update-lesson'))
+        {
+            $columns [] =  [
                 'name' => 'edit',
                 'data' => 'edit',
                 'title' => 'Edit',
@@ -167,9 +170,12 @@ class LessonsDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-            [
+        if(userCan('delete-lesson'))
+        {
+            $columns [] =  [
                 'name' => 'delete',
                 'data' => 'delete',
                 'title' => 'Delete',
@@ -178,8 +184,10 @@ class LessonsDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
-        ];
+            ];
+        }
+
+        return $columns;
     }
 
     /**

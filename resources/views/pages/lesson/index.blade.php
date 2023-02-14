@@ -80,9 +80,11 @@
                         <h3 class="text-capitalize text-white">
                             Lessons
                         </h3>
+                        @check_permission('store-lesson')
                         <a class="icon text-white" data-toggle='modal' data-target='#creatLessonModal'>
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
+                        @endcheck_permission
                     </div>
                     <div class="card-body">
                         {!! $dataTable->table

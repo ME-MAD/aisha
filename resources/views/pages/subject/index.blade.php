@@ -72,9 +72,11 @@
                         <h3 class="text-capitalize text-white">
                             المواد
                         </h3>
+                        @check_permission('store-subject')
                         <a class="icon text-white" href="{{ route('admin.subject.create') }}">
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
+                        @endcheck_permission
                     </div>
                     <div class="card-body">
                         <table id="style-3" class="table table-striped dt-table-hover dataTabl" style="width:100%">
@@ -85,9 +87,17 @@
                                 <th class="text-center">Name</th>
                                 <th class="text-center">Pages Count</th>
                                 <th class="text-center">Book</th>
+                                
+                                @check_permission('update-subject')
                                 <th class="text-center">Edit</th>
+                                @endcheck_permission
+
+                                @check_permission('delete-subject')
                                 <th class="text-center">Delete</th>
+                                @endcheck_permission
+
                             </tr>
+
                             </thead>
                             <tbody>
                             @foreach ($subjects as $subject)
@@ -114,18 +124,26 @@
                                             </svg>
                                         </a>
                                     </td>
+
+                                    @check_permission('update-subject')
                                     <td class="text-center">
                                         <div class="links--ul text-center">
                                             <x-edit-link
                                                     :route="route('admin.subject.edit', $subject->id)"/>
                                         </div>
                                     </td>
+                                    @endcheck_permission
+
+
+                                    @check_permission('delete-subject')
                                     <td class="text-center">
                                         <div class="links--ul text-center">
                                             <x-delete-link
                                                     :route="route('admin.subject.delete', $subject->id)"/>
                                         </div>
                                     </td>
+                                    @endcheck_permission
+
                                 </tr>
                             @endforeach
                             </tbody>
