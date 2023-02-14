@@ -79,10 +79,12 @@
                         <h3 class="text-capitalize text-white">
                             {{ __('group.Group Types') }}
                         </h3>
+                        @check_permission('store-groupStudent')
                         <a class="icon text-white" data-toggle="modal"
                         data-target="#creatGroupTypeModal">
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
+                        @endcheck_permission
                     </div>
                     <div class="card-body">
                         {!! $dataTable->table

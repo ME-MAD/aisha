@@ -96,7 +96,7 @@ class UserDataTable extends DataTable
      */
     protected function getColumns(): array
     {
-        return [
+        $columns =  [
             [
                 'name' => 'users.id',
                 'data' => 'id',
@@ -124,6 +124,7 @@ class UserDataTable extends DataTable
                 'title' => 'role',
                 "className" => 'search--col'
             ],
+
             [
                 'name' => 'countPermissions',
                 'data' => 'countPermissions',
@@ -134,6 +135,11 @@ class UserDataTable extends DataTable
                 
             ],
 
+        ];
+
+
+        if (userCan('update-user')) {
+            $columns [] =
             [
                 'name' => 'edit',
                 'data' => 'edit',
@@ -143,8 +149,12 @@ class UserDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
+
+        if (userCan('delete-user')) {
+            $colums [] =
             [
                 'name' => 'delete',
                 'data' => 'delete',
@@ -154,8 +164,10 @@ class UserDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
-        ];
+            ];
+        }
+
+        return $columns;
     }
 
     /**

@@ -100,8 +100,7 @@ class RoleDataTable extends DataTable
 
     public function getColumns(): array
     {
-        return [
-
+        $columns = [
             [
                 'name' => 'roles.id',
                 'data' => 'id',
@@ -146,18 +145,25 @@ class RoleDataTable extends DataTable
                 "className" => 'not--search--col'
                 
             ],
-            [
+        ];
+
+        if(userCan('show-role'))
+        {
+            $columns [] = [
                 'name' => 'showUsers',
                 'data' => 'showUsers',
-                'title' => "إظهار",
+                'title' => "إظهار المستخدمين",
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-            [
+        if(userCan('update-role'))
+        {
+            $columns [] = [
                 'name' => 'edit',
                 'data' => 'edit', 
                 'title' => __('teacher.Edit'),
@@ -166,9 +172,12 @@ class RoleDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-            [
+        if(userCan('delete-role'))
+        {
+            $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
                 'title' => __('teacher.Delete'),
@@ -177,13 +186,10 @@ class RoleDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-           
-
-
-
-        ];
+        return $columns;
     }
 
 

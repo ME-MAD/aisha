@@ -9,14 +9,14 @@
                 <form action="{{ route('admin.experience.store') }}" method="post">
                     @csrf
 
-                    <x-text name="title" placeholder="أدخل خبرة المعلم" label="الخبرة"  :value="old('title')"/>
+                    <x-text name="title" :required="true" placeholder="أدخل خبرة المعلم" label="الخبرة"  :value="old('title')"/>
 
                     <div class="row">
                         <div class="col-6">
-                           <x-date name="from" id="from" label="من" :value="old('from')"/>
+                           <x-date name="from" :required="true" id="from" label="من" :value="old('from')"/>
                         </div>
                         <div class="col-6">
-                            <x-date name="to" id="to" label="الى" :value="old('to')"/>
+                            <x-date name="to" :required="true" id="to" label="الى" :value="old('to')"/>
                         </div>
                     </div>
 
@@ -48,11 +48,11 @@
 
                     <div class="modal-footer">
                         <button type="submit"
-                                class="btn btn-primary font-weight-bold text-capitalize">
+                                class="btn btn-outline-dark">
                             {{ __('global.Save') }}
                         </button>
 
-                        <button class="btn btn-light-default font-weight-bold text-capitalize" data-dismiss="modal">
+                        <button class="btn btn-outline-danger" data-dismiss="modal">
                             <i class="flaticon-cancel-12"></i>{{ __('global.Discard') }}
                         </button>
                     </div>

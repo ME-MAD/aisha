@@ -10,6 +10,7 @@ use App\Http\Controllers\GroupTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentLessonController;
@@ -232,4 +233,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
         Route::get('getRoleUsers/{role}', [RoleController::class, 'getRoleUsers'])->name('getRoleUsers');
     });
 
+    Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
+        Route::get('payment', [ReportController::class, 'payment'])->name('payment');
+    });
 });

@@ -57,9 +57,11 @@
                         <h3 class="text-capitalize text-white">
                             {{__('roles.roles')}}
                         </h3>
+                        @check_permission('store-role')
                         <a class="icon text-white" href="{{route('admin.role.create')}}">
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
+                        @endcheck_permission
                     </div>
                     <div class="card-body">
                         {!! $dataTable->table

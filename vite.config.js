@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/home/home.js',
+                'resources/js/report/payment.js',
             ],
             refresh: true,
         }),

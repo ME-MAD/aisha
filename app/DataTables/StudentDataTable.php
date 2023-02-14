@@ -17,12 +17,11 @@ class StudentDataTable extends DataTable
                 return view('pages.student.datatable.edit', compact('query'));
             })
             ->addColumn('delete', 'pages.student.datatable.delete')
-            ->editColumn('avatar', 'pages.student.datatable.avatar')
             ->editColumn('name', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' >" . $q->name . "</a>";
             })
             ->editColumn('show', function ($q) {
-                return "<a class='text-primary' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' ><i class='fa-solid fa-eye'></i></a>";
+                return "<a class='text-info' href=" . route('admin.student.show', $q->id) . " title='Enter Page show Student' ><i class='fa-solid fa-eye'></i></a>";
             })
             ->editColumn('countGroups', function ($q) {
                 return $q->group_students_count;
@@ -30,7 +29,7 @@ class StudentDataTable extends DataTable
             ->editColumn('role.name',function($q){
                 return $q->role->name ?? '';
             })
-            ->rawColumns(['edit', 'delete', 'name', 'show', 'avatar'])
+            ->rawColumns(['edit', 'delete', 'name','show'])
             ->setRowId('id');
     }
 
@@ -92,7 +91,7 @@ class StudentDataTable extends DataTable
 
     protected function getColumns(): array
     {
-        return [
+        $columns = [
             [
                 'name' => 'students.id',
                 'data' => 'id',
@@ -108,22 +107,17 @@ class StudentDataTable extends DataTable
             ],
 
             [
-                'name' => 'role.name', 
-                'data' => 'role.name',
-                'title' => ' role', "className" => 'search--col'],
-
-            [
-                'name' => 'avatar', 
-                'data' => 'avatar',
-                'title' => ' الصور',
+                'name' => 'email',
+                'data' => 'email',
+                'title' => 'البريد الإلكتروني',
                 "className" => 'search--col'
             ],
 
             [
-                'name' => 'email',
-                'data' => 'email',
-                'title' => 'Email',
-                "className" => 'search--col'
+                'name' => 'role.name', 
+                'data' => 'role.name',
+                'title' => 'الوظيفة',
+                 "className" => 'search--col'
             ],
 
             [
@@ -141,55 +135,58 @@ class StudentDataTable extends DataTable
             ],
 
             [
-                'name' => 'qualification',
-                'data' => 'qualification',
-                'title' => ' المؤهلات',
-                "className" => 'search--col'
-            ],
-
-            [
                 'name' => 'countGroups',
                 'data' => 'countGroups',
                 'title' => ' عدد الجروبات',
                 'orderable' => false,
                 'searchable' => false,
-                "className" => 'not--search--col'],
-
-            [
-                'name' => 'show',
-                 'data' => 'show',
-                  'title' => 'Show',
-                   'printable' => false,
-                    'exportable' => false, 
-                    'orderable' => false,
-                     'searchable' => false, 
-                     "className" => 'not--search--col'
+                "className" => 'not--search--col'
             ],
+        ];
 
+        if(userCan('show-student'))
+        {
+            $columns [] = [
+                'name' => 'show',
+                'data' => 'show',
+                'title' => 'المزيد',
+                'printable' => false,
+                'exportable' => false, 
+                'orderable' => false,
+                'searchable' => false, 
+                "className" => 'not--search--col'
+            ];
+        }
 
-            [
+        if(userCan('update-student'))
+        {
+            $columns [] = [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => 'Edit',
+                'title' => 'تعديل',
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
                 'searchable' => false, 
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-
-            [
+        if(userCan('delete-student'))
+        {
+            $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => 'Delete',
+                'title' => 'حذف',
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
-        ];
+            ];
+        }
+
+        return $columns;
     }
 
     protected function filename(): string

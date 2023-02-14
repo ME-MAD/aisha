@@ -77,6 +77,7 @@ class GroupController extends Controller
         $this->groupService->setGroupWithAllData($group);
 
         $countStudents = $this->groupService->getGroupStudentsCount();
+        $groupPaymentsCount = $this->groupService->getGroupPaymentsCount();
         $groupDaysCount = $this->groupService->getGroupDaysCount();
         $groupTypeNumDays = $this->groupService->getGroupDaysNum();
 
@@ -89,6 +90,7 @@ class GroupController extends Controller
             'countStudents' => $countStudents,
             'groupDaysCount' => $groupDaysCount,
             'groupTypeNumDays' => $groupTypeNumDays,
+            'groupPaymentsCount' => $groupPaymentsCount,
             'students' => $students,
             'currentMonth' => getCurrectMonthName(),
             'roles' => $roles,

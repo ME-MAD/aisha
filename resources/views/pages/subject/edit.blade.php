@@ -128,7 +128,7 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-success mt-3">Lets Go</button>
+                                    <button type="submit" class="btn btn-outline-info">Lets Go</button>
                                 </div>
                             </div>
                         </form>

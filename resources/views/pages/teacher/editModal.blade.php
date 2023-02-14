@@ -20,10 +20,10 @@
 
                     <div class="row">
                         <div class="col-6">
-                          <x-text name="password" :required="true" label="Password" :value="old('password')" />
+                          <x-text name="password"  label="Password" :value="old('password')" />
                         </div>
                         <div class="col-6">
-                          <x-text name="password_confirmation" :required="true" label="Confirm Password" />
+                          <x-text name="password_confirmation"  label="Confirm Password" />
                         </div>
                     </div>
 
@@ -78,8 +78,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">{{ __('teacher.Update') }}</button>
-                        <button class="btn" data-dismiss="modal"><i
+                        <button type="submit" class="btn btn-outline-info">{{ __('teacher.Update') }}</button>
+                        <button class="btn btn-outline-danger" data-dismiss="modal"><i
                                 class="flaticon-cancel-12"></i>{{ __('teacher.Discard') }}</button>
                     </div>
                 </form>

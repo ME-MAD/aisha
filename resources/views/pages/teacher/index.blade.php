@@ -82,10 +82,12 @@
                         <h3 class="text-capitalize text-white">
                             {{ __('teacher.Teachers') }}
                         </h3>
+                        @check_permission('store-teacher')
                         <a class="icon text-white" data-toggle="modal" 
                         data-target="#creatTeacherModal">
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
+                        @endcheck_permission
                     </div>
                     <div class="card-body">
                         {!! $dataTable->table

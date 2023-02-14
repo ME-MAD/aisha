@@ -46,7 +46,7 @@
                         <label
                             class="font-weight-bold text-capitalize text-muted"> {{__('student.choose role')}} </label>
                             <i class="fa-solid fa-star-of-life required-star"></i>
-                        <select class="form-control selectpicker my-2" style="width: 100%;"
+                        <select class="form-control my-2" style="width: 100%;"
                                 name="role"
                                 id="role">
                             <option value="">{{__('student.choose role')}}</option>
@@ -105,13 +105,13 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary text-capitalize font-weight-bold">
-                            {{__('student.save')}}
+                        <button type="submit"
+                                class="btn btn-outline-dark">
+                            {{ __('global.Save') }}
                         </button>
 
-                        <button class="btn text-capitalize font-weight-bold" data-dismiss="modal">
-                            <i class="flaticon-cancel-12"></i>
-                            {{__('student.discard')}}
+                        <button class="btn btn-outline-danger" data-dismiss="modal">
+                            <i class="flaticon-cancel-12"></i>{{ __('global.Discard') }}
                         </button>
                     </div>
                 </form>

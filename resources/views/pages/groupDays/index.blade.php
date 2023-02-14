@@ -83,9 +83,11 @@
                         <h3 class="text-capitalize text-white">
                             {{ __('group.Group Days') }}
                         </h3>
+                        @check_permission('store-groupDay')
                         <a class="icon text-white" data-toggle='modal' data-target='#creatGroupDayModal'>
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
+                        @endcheck_permission
                     </div>
                     <div class="card-body">
                         {!! $dataTable->table

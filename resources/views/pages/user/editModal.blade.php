@@ -25,14 +25,14 @@
                         </label>
                         <select class="form-control basic"
                                 name="role"
-                                id="editRole">
+                                id="role">
 
-                            <option >{{trans('user.roles')}}</option>
+                            <option value="" >اختر وظيفة</option>
 
                             @foreach ($roles as $role)
-
-                                <option  class="active" value="{{$role->name}}">{{$role->name}}</option>
-
+                                <option  class="active" value="{{$role->name}}">
+                                    {{$role->name}}
+                                </option>
                             @endforeach
                         </select>
                         @error('role')
@@ -41,18 +41,18 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="password" :required="true" label="{{trans('user.password')}}"/>
+                            <x-text name="password"  label="{{trans('user.password')}}"/>
                         </div>
                         <div class="col-6">
-                            <x-text name="password_confirmation" :required="true" label="{{trans('user.confirm password')}}" />
+                            <x-text name="password_confirmation"  label="{{trans('user.confirm password')}}" />
                         </div>
                     </div>
 
 
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success text-capitalize font-weight-bold">{{trans('user.update')}}</button>
-                        <button class="btn btn-light-default text-capitalize font-weight-bold" data-dismiss="modal"><i class="flaticon-cancel-12"></i>{{trans('user.discard')}}</button>
+                        <button type="submit" class="btn btn-outline-success">{{trans('user.save')}}</button>
+                        <button class="btn btn-outline-danger" data-dismiss="modal"><i class="flaticon-cancel-12"></i>{{trans('user.discard')}}</button>
                     </div>
                 </form>
             </div>

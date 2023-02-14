@@ -26,10 +26,7 @@ class BladeServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::if('check_permission', function ($permission) {
-            if (Auth::guard(getGuard())->user()->isAbleTo($permission)) {
-                return true;
-            }
-            return false;
+            return userCan($permission);
         });
 
         Blade::if('check_permission_in_permissions', function (array $permissions) {

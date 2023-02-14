@@ -36,6 +36,7 @@ class PaymentController extends Controller
             'index' => 'index-payment',
             'store' => 'store-payment',
             'create' => 'create-payment',
+            'delete' => 'delete-payment',
         ]);
     }
 
@@ -64,8 +65,10 @@ class PaymentController extends Controller
 
     public function getPaymentsOfGroupByMonth(getPaymentsOfGroupByMonth $request)
     {
+        $payments = $this->PaymentService->getPaymentsOfGroupByMonth($request->group_id, $request->month);
         return response()->json([
-            'payments' => $this->PaymentService->getPaymentsOfGroupByMonth($request->group_id, $request->month)
+            'payments' => $payments,
+            'paidCount' => $payments->where('paid',true)->count()
         ]);
     }
 

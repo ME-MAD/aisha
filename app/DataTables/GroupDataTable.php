@@ -32,7 +32,7 @@ class GroupDataTable extends DataTable
             // ->rawColumns(['edit', 'delete'])
 
             ->editColumn('show', function ($q) {
-                return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' ><i class='fa-solid fa-eye'></i></a>";
+                return "<a class='text-info' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' ><i class='fa-solid fa-eye'></i></a>";
             })
             ->editColumn('id', function ($q) {
                 return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' >" . $q->id . "</a>";
@@ -112,7 +112,7 @@ class GroupDataTable extends DataTable
 
     protected function getColumns(): array
     {
-        return [
+        $columns = [
             [
                 'name' => 'groups.id',
                 'data' => 'id',
@@ -153,19 +153,25 @@ class GroupDataTable extends DataTable
                 'title' => __('group.count Student'),
                 "className" => 'not--search--col'
             ],
+        ];
 
-            [
+        if(userCan('show-group'))
+        {
+            $columns [] =  [
                 'name' => 'show',
                 'data' => 'show',
-                'title' => __('global.Show'),
+                'title' => "المزيد",
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-            [
+        if(userCan('update-group'))
+        {
+            $columns [] =  [
                 'name' => 'edit',
                 'data' => 'edit',
                 'title' => __('global.Edit'),
@@ -174,9 +180,12 @@ class GroupDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
+            ];
+        }
 
-            [
+        if(userCan('delete-group'))
+        {
+            $columns [] =   [
                 'name' => 'delete',
                 'data' => 'delete',
                 'title' => __('global.Delete'),
@@ -185,8 +194,10 @@ class GroupDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
-            ],
-        ];
+            ];
+        }
+
+        return $columns;
     }
 
     /**

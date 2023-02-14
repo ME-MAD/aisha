@@ -48,7 +48,6 @@
                     <li class="active">
                         <a href="{{route('admin.group.index')}}"
                            class="d-flex justify-content-center align-items-center">
-
                             <i class="fa-solid fa-users-rays fa-2x mx-2"></i>
                             <span class="font-weight-bold ">المجموعات</span>
                         </a>
@@ -72,10 +71,12 @@
                         <h3 class="text-capitalize text-white">
                             {{ __('group.Groups') }}
                         </h3>
+                        @check_permission('store-group')
                         <a class="icon text-white"  data-toggle="modal"
                         data-target="#creatGroupModal">
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
+                        @endcheck_permission
                     </div>
                     <div class="card-body">
                         {!! $dataTable->table

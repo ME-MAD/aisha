@@ -146,6 +146,7 @@ function initEditeUserModal() {
 
         $('#editUserForm #name').val(user.name)
         $('#editUserForm #email').val(user.email)
+        $('#editUserForm #role').val(user.role.name)
 
         $('#editUserForm').attr('action', href)
     })

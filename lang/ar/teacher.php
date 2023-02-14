@@ -3,7 +3,7 @@
 return [
 
     'Teachers Table' => 'جدول المدرسين',
-    'Show' => 'إظهار',
+    'Show' => 'المزيد',
     'Dail Analytics' => 'التفصيل',
     'Adult' => 'Adult',
     'Home' => 'الصفحة الرئيسية',

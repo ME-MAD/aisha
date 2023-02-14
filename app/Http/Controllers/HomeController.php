@@ -19,6 +19,7 @@ class HomeController extends Controller
 
     public function index()
     {
+
         $groupsCountsData = $this->homeService->getGroupsCountsData();
 
 

@@ -26,9 +26,6 @@
                <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
     @endif
 
-    <link rel="stylesheet"
-          type="text/css"
-          href="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.css')}}">
 @endpush
 
 
@@ -75,10 +72,12 @@
                         <h3 class="text-capitalize text-white">
                             الطلاب
                         </h3>
+                        @check_permission('store-student')
                         <a class="icon text-white" data-toggle="modal"
                         data-target="#creatStudentModal">
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
+                        @endcheck_permission
                     </div>
                     <div class="card-body">
                         {!! $dataTable->table
@@ -108,7 +107,6 @@
 
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
     <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
-    <script src="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.js')}}"></script>
 
     <script src="{{asset('js/student.js')}}"></script>
 @endpush

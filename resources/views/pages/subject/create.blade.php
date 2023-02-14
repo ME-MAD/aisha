@@ -124,11 +124,10 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary mt-3">Lets Go</button>
+                                    <button type="submit" class="btn btn-outline-dark">Lets Go</button>
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

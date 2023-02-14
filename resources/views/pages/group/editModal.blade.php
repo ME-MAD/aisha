@@ -80,8 +80,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit"
-                                class="btn btn-success font-weight-bold text-capitalize">{{ __('global.Update') }}</button>
-                        <button class="btn btn-default font-weight-bold text-capitalize" data-dismiss="modal">
+                                class="btn btn-outline-info">{{ __('global.Update') }}</button>
+                        <button class="btn btn-outline-danger" data-dismiss="modal">
                             <i class="flaticon-cancel-12"></i>{{ __('global.discard') }}
                         </button>
                     </div>
