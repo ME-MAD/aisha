@@ -114,15 +114,7 @@
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
     {!! $dataTable->scripts() !!}
     {{--End Data_Table--}}
-
-    {{--Begin File_Upload--}}
-    <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
-    <script>
-        var firstUpload = new FileUploadWithPreview('myFirstImage')
-        var secondUpload = new FileUploadWithPreview('mySecondImage')
-    </script>
-    {{--End File_Upload--}}
-
+    
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
 
 @endpush

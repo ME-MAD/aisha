@@ -33,7 +33,8 @@ class TeacherService
             'groups.groupDays',
             'groups.groupType',
             'groups.students',
-            'experiences'
+            'experiences',
+            'role:id,name'
         ]);
     }
 

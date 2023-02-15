@@ -1,47 +1,62 @@
-<div class="user-profile layout-spacing">
-    <div class="widget-content widget-content-area">
-        <div class="d-flex justify-content-between">
-            <h3 class="">{{ __('teacher.Info') }}</h3>
-            <a class="mt-2 editTeacherButton" data-toggle='modal' data-target='#editTeacher'
-               data-teacher="{{ $teacher }}" data-href="{{ route('admin.teacher.update', $teacher->id) }}">
-                <i class="fa-solid fa-user-pen text-primary fa-2x"></i>
-            </a>
-
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
+    <div class="card ">
+        <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables_show_teacher">
+            <h3 class="text-capitalize text-white">
+                {{ __('teacher.Info') }}
+            </h3>
+            <a class="icon text-white mt-2 editTeacherButton" data-toggle='modal' data-target='#editTeacher'
+            data-teacher="{{ $teacher }}" data-href="{{ route('admin.teacher.update', $teacher->id) }}">
+            <i class="fa-solid fa-pen-to-square fa-2xl"></i>
+         </a>
         </div>
-        <div class="text-center user-info">
-            @if ($teacher->avatar)
-                <img src="{{ $teacher->avatar }}" alt="" class="avatar-image">
-            @else
-                <img src="{{ asset('images/Spare.jpg') }}" alt="" class="avatar-image">
-            @endif
-            <p class="">{{ $teacher->name }}</p>
-        </div>
-
-
-        <div class="user-info-list">
-
-            <div class="">
-                <ul class="contacts-block list-unstyled">
-                    <li class=" mb-2 d-flex justify-content-start align-items-center">
-                        <i class="fa-solid fa-cake-candles text-dark icon mr-2"></i>
-                        {{ $teacher->birthday }}
-                    </li>
-                    <li class=" mb-2 d-flex justify-content-start align-items-center">
-                        <i class="fa-solid fa-phone-flip text-dark font-weight-bold  mr-2"></i>
-                        {{  $teacher->phone }}
-
-                    </li>
-                    <li class=" mb-2 d-flex justify-content-start align-items-center">
-                        <i class="fa-solid fa-paperclip text-dark  mr-2 "></i>
-                        {{ $teacher->qualification }}
-                    </li>
-                    <li class=" mb-2 d-flex justify-content-start align-items-center">
-                        <i class="fa-solid fa-paperclip text-dark  mr-2 "></i>
-                        {{ $teacher->email }}
-                    </li>
-
-                </ul>
+        <div class="card-body"  >
+            <div class="text-center user-info">
+                @if ($teacher->avatar)
+                    <img src="{{ $teacher->avatar }}" alt="" class="avatar-image">
+                @else
+                    <img src="{{ asset('images/Spare.jpg') }}" alt="" class="avatar-image">
+                @endif
+                <h3 class="">{{ $teacher->name }}</h3>
+            </div>
+            <div class="user-info-list">
+                <table class="table">
+                    <tbody>
+                      <tr>
+                        <th scope="row">
+                            <i class="fa-solid fa-user-graduate fa-xl"></i>
+                        </th>
+                        <td>
+                            {{ $teacher->qualification }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                            <i class="fa-regular fa-envelope fa-xl"></i>
+                        </th>
+                        <td> 
+                            {{ $teacher->email }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                             <i class="fa-solid fa-phone fa-xl"></i>
+                        </th>
+                        <td> 
+                            {{  $teacher->phone }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                            <i class="fa-regular fa-calendar fa-xl"></i>
+                        </th>
+                        <td> 
+                             {{ $teacher->birthday }}
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+

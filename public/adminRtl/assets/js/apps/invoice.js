@@ -18,7 +18,7 @@ var $btns = $('.list-actions').click(function() {
 
   var $el = $('.' + this.id).show();
   $('#ct > div').not($el).hide();
-  var setInvoiceNumber = getParentDiv.find('.invoice-inbox .inv-number').text('#'+ getDataInvoiceAttr);
+  var setInvoiceNumber = getParentDiv.find('.invoice-inbox .inv-number').text(getDataInvoiceAttr);
   var showInvHeaderSection = getParentDiv.find('.invoice-inbox .invoice-header-section').css('display', 'flex');
   var showInvContentSection = getParentDiv.find('.invoice-inbox #ct').css('display', 'block');
   var showInvContentSection = getParentDiv.find('.invoice-inbox').css('height', 'calc(100vh - 215px)');

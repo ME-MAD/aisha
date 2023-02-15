@@ -1,42 +1,34 @@
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
     <div class="card ">
-        <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables">
+        <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables_show_teacher">
             <h3 class="text-capitalize text-white">
-                {{ __('teacher.Experiences') }}
+                {{ __('teacher.Work Experiences') }}
             </h3>
-            <a class="icon text-white" data-toggle="modal" 
-            data-target="#creatTeacherModal">
+            <a class="icon text-white creatTeacherExperienceButton"  type="button"
+            data-toggle="modal"
+            data-target='#creatExperienceModal'>
                 <i class="fa-solid fa-plus fa-2xl"></i>
             </a>
         </div>
-        <div class="card-body">
+        <div class="card-body"  >
             <div class="table-responsive">
                 <table class="table table-light table-bordered table-hover mb-4">
                     <thead>
-                        <tr class="bg-dark">
-                            <th class="text-light">Id</th>
-                            <th class="text-light">Title</th>
-                            <th class="text-light">From</th>
-                            <th class="text-center text-light">To</th>
-                            <th class="text-center text-light">
+                        <tr>
+                            <th class="text-primary">Id</th>
+                            <th class="text-primary">Title</th>
+                            <th class="text-primary">From</th>
+                            <th class="text-primary">To</th>
+                            <th class="text-center text-success">
                                 Edit
                             </th>
-                            <th class="text-center text-light">
+                            <th class="text-center text-danger">
                                 Delte
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($experiences as $experience)
-                            <tr>
-                                <td>{{$experience->id}}</td>
-                                <td>{{$experience->title}}</td>
-                                <td>{{$experience->from}}</td>
-                                <td>{{$experience->to}}</td>
-                                <td>10/08/2021</td>
-                                <td>320</td>
-                            </tr>
-                        @endforeach
+                    <tbody id="experience_Content">
+
                     </tbody>
                 </table>
             </div>
