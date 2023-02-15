@@ -92,6 +92,11 @@ table tr th {
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
+.card-header.card__header__for_tables_show_teacher{
+    background: linear-gradient(220deg, #432472 50%, #322c3c 100%);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
 
 .card-header.create__form__header{
     background: rgb(54,115,142);
