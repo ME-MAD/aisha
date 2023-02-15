@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\Student;
 use App\Models\Teacher;
-use Illuminate\Http\Request;
+use App\Models\User;
 use App\Services\Note\NoteService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Http\Requests\Note\StoreNoteRequest;
-use App\Http\Requests\Note\UpdateNoteRequest;
 
 class NoteController extends Controller
 {
@@ -21,102 +20,133 @@ class NoteController extends Controller
         $this->noteService = $noteService;
     }
 
-
-
-    public function index()
+    public function studentIndex()
     {
-        return view('pages.student.notes');
-    }
+        $students = null;
+        $notes = [];
 
-    public function getStaffDetails()
-    {
-        $data = Student::select(['id', 'name'])->get();
+        $authenticatedUser = Auth::guard(getGuard())->user();
 
-        return response()->json([
-            'students' => $data,
-            'types'    => Note::TYPE
+        if(getGuard() == "admin")
+        {
+            $notes = Note::orderBy('id','desc')->with('noteby')->get();
+
+            $students = Student::select(['id','name'])->get(); 
+        }
+        else if(getGuard() == 'teacher')
+        {
+            $notes = Note::orderBy('id','desc')
+                ->where('noteby_type', Teacher::class)
+                ->where('noteby_id', $authenticatedUser->id)
+                ->where('notable_type', Student::class)
+                ->with('noteby')
+                ->get();
+
+            $students = $authenticatedUser->students()->select(['students.id','students.name'])->get();
+        }
+        else if(getGuard() == 'student')
+        {
+            $notes = Note::orderBy('id','desc')
+                ->where('notable_type', Student::class)
+                ->where('notable_id', $authenticatedUser->id)
+                ->with('noteby')
+                ->get();
+        }
+
+
+        foreach($notes as $note)
+        {
+            $type = explode("\\", $note->noteby_type);
+            $type = end($type);
+
+           
+            if($type == "User")
+            {
+                $type = "Admin";
+            }
+
+            $note->byText = $type . " " . $note->noteby->name;
+        }
+
+        return view('pages.student.note', [
+            'students' => $students,
+            'notes' => $notes
         ]);
     }
 
-    public function getNotesStaffDetails(Request $request)
+    public function studentStore(Request $request)
     {
-        $perPage    = $request->number_products; // 6
-        $pageNumber = $request->page_number; // 1
-
-        $query = $this->noteService->getNotesByType($request->type);
-
-        $pagesCount = ceil($query->count() / $perPage);
-
-        $data = $query->offset(($pageNumber - 1) * $perPage)
-            ->limit($perPage)
-            ->orderBy('id', 'DESC')
-            ->get();
-
-
-        return response()->json([
-            'data'       => $data,
-            'pagesCount' => $pagesCount
-        ]);
-    }
-
-    //-------------------------------------------------------------
-
-
-
-
-
-
-
-    public function store(StoreNoteRequest $request)
-    {
-
-        Note::create([
-            'note' => $request->note,
-            'type' => $request->type,
-
-            'notby_type' => Auth::user()::class,
-            'notby_id'   => Auth::id(),
-
-            'notable_type' => Student::class,
-            'notable_id'   => $request->notable_id, //Student id
-        ]);
-
-
-        return response()->json([
-            'alert'    => 'success',
-            'title'    => 'نجحت',
-            'message'  => 'تمت العملية بنجاح'
-        ]);
-    }
-
-    public function show(Note $note)
-    {
-        // $post = Student::find(2);
-        // $post->notes;
-
-        // dd($post);
-    }
-
-    public function update(UpdateNoteRequest $request, Note $note)
-    {
-        $note->update([
-            'note' => $request->note,
-            'type' => $request->type
-        ]);
+        $authenticatedUser = Auth::guard(getGuard())->user();
+        if(getGuard() == 'admin')
+        {
+            Note::create([
+                'notable_type' => Student::class,
+                'notable_id' => $request->student_id,
+                'noteby_type' => User::class,
+                'noteby_id' => $authenticatedUser->id,
+                'title' => $request->title,
+                'note' => $request->note,
+            ]);
+        }
+        else if(getGuard() == 'teacher')
+        {
+            Note::create([
+                'notable_type' => Student::class,
+                'notable_id' => $request->student_id,
+                'noteby_type' => Teacher::class,
+                'noteby_id' => $authenticatedUser->id,
+                'title' => $request->title,
+                'note' => $request->note,
+            ]);
+        }
+        else if(getGuard() == 'student')
+        {
+            Note::create([
+                'notable_type' => Student::class,
+                'notable_id' => $authenticatedUser->id,
+                'noteby_type' => Student::class,
+                'noteby_id' => $authenticatedUser->id,
+                'title' => $request->title,
+                'note' => $request->note,
+            ]);
+        }
 
         Alert::toast('تمت العملية بنجاح', 'success');
-        return redirect(route('admin.note_students.index'));
+        return redirect()->back();
     }
 
     public function delete(Note $note)
     {
-
         $note->delete();
+        
+        Alert::toast('تمت العملية بنجاح', 'success');
+        return redirect()->back();
+    }
 
-        return response()->json([
-            'alert'    => 'success',
-            'title'    => 'نجحت',
-            'message'  => 'تمت العملية بنجاح'
+
+    public function toggleFavorite(Note $note)
+    {
+        $note->update([
+            'is_favorite' => ! $note->is_favorite
+        ]);
+
+       return response()->json([
+            'status' => 200,
+            'new_is_favorite' => $note->is_favorite
+        ]);
+    }
+
+
+    public function updateNoteType(Request $request, Note $note)
+    {
+        $type = explode('-',$request->type);
+
+        $note->update([
+            'type' => $request->type ? end($type) : null
+        ]);
+
+       return response()->json([
+            'status' => 200,
         ]);
     }
 }

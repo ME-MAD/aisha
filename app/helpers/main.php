@@ -109,6 +109,9 @@ if (!function_exists('getAdditionalPermissions')) {
             'report' => [
                 'report-payment'
             ],
+            'note' => [
+                'note-studentIndex'
+            ]
         ];
     }
 }

@@ -11,6 +11,7 @@ class Teacher extends Authenticatable
 {
     use HasFactory;
     use LaratrustUserTrait;
+    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
     protected $fillable = ['name','email', 'password', 'phone', 'birthday', 'avatar', 'qualification'];
 
@@ -82,5 +83,37 @@ class Teacher extends Authenticatable
             'id',
             'role_id');
 
+    }
+
+    public function students()
+    {
+        return $this->hasManyDeep(
+            Student::class,
+            [Group::class, GroupStudent::class], // Intermediate models, beginning at the far parent (Country).
+            [
+               'teacher_id', // Foreign key on the "users" table.
+               'group_id',    // Foreign key on the "posts" table.
+               'id'     // Foreign key on the "comments" table.
+            ],
+            [
+              'id', // Local key on the "countries" table.
+              'id', // Local key on the "users" table.
+              'student_id'  // Local key on the "posts" table.
+            ]
+        );
+        // return $this->hasManyDeep(
+        //     Comment::class,
+        //     [User::class, Post::class], // Intermediate models, beginning at the far parent (Country).
+        //     [
+        //        'country_id', // Foreign key on the "users" table.
+        //        'user_id',    // Foreign key on the "posts" table.
+        //        'post_id'     // Foreign key on the "comments" table.
+        //     ],
+        //     [
+        //       'id', // Local key on the "countries" table.
+        //       'id', // Local key on the "users" table.
+        //       'id'  // Local key on the "posts" table.
+        //     ]
+        // );
     }
 }

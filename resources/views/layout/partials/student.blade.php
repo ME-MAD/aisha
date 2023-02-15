@@ -1,6 +1,7 @@
-@check_permission_in_permissions(['index-student','show-student'])
+@check_permission_in_permissions(['index-student', 'show-student', 'note-studentIndex'])
     <li class="menu single-menu {{
         request()->routeIs('admin.student.index') ||
+        request()->routeIs('admin.note.studentIndex') ||
         request()->routeIs('admin.student.show') ? 'active' : ''
         }}">
         <a href="#student" data-toggle="collapse" aria-expanded="false"
@@ -23,13 +24,33 @@
         </a>
         <ul class="collapse submenu list-unstyled {{
                 request()->routeIs('admin.student.index') ||
+                request()->routeIs('admin.note.studentIndex') ||
                 request()->routeIs('admin.student.show') ? 'show' : ''
             }}" id="student" data-parent="#topAccordion">
+
+
+
+
             <li class="{{
-                            request()->routeIs('admin.student.index')  ? 'active' : ''
-                        }}">
+                    request()->routeIs('admin.student.index')  ? 'active' : ''
+                }}">
+
                 <a href="{{ route('admin.student.index') }}"> {{ __('global.Students') }} </a>
             </li>
+
+
+
+
+
+            <li class="{{
+                    request()->routeIs('admin.note.studentIndex')  ? 'active' : ''
+                }}">
+
+                <a href="{{ route('admin.note.studentIndex') }}"> {{ __('global.Notes') }} </a>
+            </li>
+
+
+
         </ul>
     </li>
 @endcheck_permission_in_permissions

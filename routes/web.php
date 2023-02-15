@@ -9,6 +9,7 @@ use App\Http\Controllers\GroupStudentController;
 use App\Http\Controllers\GroupTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
@@ -235,5 +236,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
 
     Route::group(['prefix' => 'report', 'as' => 'report.'], function () {
         Route::get('payment', [ReportController::class, 'payment'])->name('payment');
+    });
+
+    Route::group(['prefix' => 'note', 'as' => 'note.'], function () {
+        Route::get('studentIndex', [NoteController::class, 'studentIndex'])->name('studentIndex');
+        Route::post('studentStore', [NoteController::class, 'studentStore'])->name('studentStore');
+        Route::get('delete/{note}', [NoteController::class, 'delete'])->name('delete');
+        Route::get('toggleFavorite/{note}', [NoteController::class, 'toggleFavorite'])->name('toggleFavorite');
+        Route::post('updateNoteType/{note}', [NoteController::class, 'updateNoteType'])->name('updateNoteType');
     });
 });

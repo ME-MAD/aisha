@@ -29,8 +29,6 @@ class GroupService
     {
         return $group->update([
             'name' => $request->name,
-            'from' => $request->from,
-            'to' => $request->to,
             'group_type_id' => $request->group_type_id,
             'teacher_id' => $request->teacher_id,
             'age_type' => $request->age_type,

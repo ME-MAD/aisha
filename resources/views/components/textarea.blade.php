@@ -2,7 +2,10 @@
 
     <label for="note"
            class="col-xl-12 col-md-6 col-form-label  font-weight-bold text-capitalize {{$labelClass ?? 'text-muted'}}  ">
-        {{ $label }}
+           {{ $label }}
+           @if ($required)
+            <i class="fa-solid fa-star-of-life required-star"></i>
+           @endif
     </label>
 
     <div class="col-md-12">
