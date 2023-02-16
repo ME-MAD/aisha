@@ -31,14 +31,12 @@
                     <div class="row">
                         <div class="col-6">
                             <x-text name="password"
-                            :required="true"
                             label="{{trans('student.password')}}"
                             placeholder="{{trans('student.password')}}"
                             :value="old('password')"/>
                         </div>
                         <div class="col-6">
                             <x-text name="password_confirmation"
-                            :required="true"
                             label="{{trans('student.confirm password')}}"
                             placeholder="{{trans('student.confirm password')}}"/>
                         </div>
