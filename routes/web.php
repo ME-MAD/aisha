@@ -67,6 +67,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
         Route::get('/delete/{teacher}', [TeacherController::class, 'delete'])->name('delete');
         Route::get('/getTeacherShowDataAjax/{teacher}', [TeacherController::class, 'getTeacherShowDataAjax'])->name('getTeacherShowDataAjax');
         Route::get('/studentsSearchAjax', [TeacherController::class, 'studentsSearchAjax'])->name('studentsSearchAjax');
+        Route::get('/getExpereincesDataForChart/{teacher}', [TeacherController::class, 'getExpereincesDataForChart'])->name('getExpereincesDataForChart');
     });
 
     Route::group(['prefix' => 'experience', 'as' => 'experience.'], function () {

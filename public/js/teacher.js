@@ -8,12 +8,11 @@ function getDataShow() {
 
             response.statistics.forEach(statistic => {
                 $('#experiences_Container').append(`
-                    <div class="col-4">
+                    <div class="col-xl-6 col-lg-6 mb-3">
                         <div class="card border-secondary">
                             <div class="card-body">
                                 <h5 class="card-title text-primary text-center">
                                     ${statistic.name}
-                                    <i class="fa-solid fa-users-rays text-secondary"></i>
                                 </h5>
                                 <p class="card-text text-primary text-center">
                                 ${statistic.value}
@@ -26,28 +25,28 @@ function getDataShow() {
 
             response.experiences.forEach(experience => {
                 $('#experience_Content').append(`
-                            <tr>
-                                <td>${experience.id}</td>
-                                <td>${experience.title}</td>
-                                <td>${experience.from}</td>
-                                <td>${experience.to}</td>
-                                <td>
-                                    <a class="editExperienceButton title " data-title="${experience.title}"
-                                        data-from="${experience.from}"
-                                        data-to="${experience.to}"
-                                        data-teacherid="${experience.teacher_id}"
-                                        data-toggle="modal"
-                                        data-target="#editexperience"
-                                        data-href="/admin/experience/update/${experience.id}">
-                                        <i class="icon fa-solid fa-pen-to-square fa-xl"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                   <a class="deleteButton" href="/admin/experience/delete/${experience.id}">
-                                       <i class="icon fa-solid fa-trash-can fa-xl"></i>
-                                   </a>
-                                </td>
-                            </tr>
+                    <tr>
+                        <td>${experience.id}</td>
+                        <td>${experience.title}</td>
+                        <td>${experience.from}</td>
+                        <td>${experience.to}</td>
+                        <td>
+                            <a class="editExperienceButton title " data-title="${experience.title}"
+                                data-from="${experience.from}"
+                                data-to="${experience.to}"
+                                data-teacherid="${experience.teacher_id}"
+                                data-toggle="modal"
+                                data-target="#editexperience"
+                                data-href="/admin/experience/update/${experience.id}">
+                                <i class="icon fa-solid fa-pen-to-square fa-xl"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="deleteButton" href="/admin/experience/delete/${experience.id}">
+                                <i class="icon fa-solid fa-trash-can fa-xl"></i>
+                            </a>
+                        </td>
+                    </tr>
                 `
                 )
             });
@@ -56,7 +55,7 @@ function getDataShow() {
                 $('#pills-tab').append(`
                     <li class="nav-item">
                         <div class="nav-link list-actions" id="group-${group.id}"
-                            data-invoice-id="group : ${group.id}">
+                            data-invoice-id="group : ${group.name}">
                             <div class="f-m-body">
                                 <div class="f-head">
                                   

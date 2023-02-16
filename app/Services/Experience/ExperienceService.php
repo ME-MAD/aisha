@@ -33,7 +33,7 @@ class ExperienceService
         return $experience->delete();
     }
 
-    public function getCountOfExperienceYears(Collection|array $experiences) : int
+    public function getCountOfExperienceYears(Collection|array $experiences)
     {
         $years = 0;
         $months = 0;
@@ -50,15 +50,15 @@ class ExperienceService
             $days += $diff->d;
         }
 
-        while ($days > 30) {
-            $months += 1;
-            $days -= 30;
-        }
-        while ($months > 11) {
-            $months -= 12;
-            $years += 1;
-        }
+        // while ($days > 30) {
+        //     $months += 1;
+        //     $days -= 30;
+        // }
+        // while ($months > 11) {
+        //     $months -= 12;
+        //     $years += 1;
+        // }
         
-        return $years;
+        return $years + floatval( ( $months / 12 ) ) + floatval( ( $days / ( 12 * 24 ) ) );
     }
 }

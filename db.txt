@@ -1,3 +1,8 @@
+Settings:
+    id: unsignedInteger
+    key: string
+    value: text
+
 [CRUD]
 Teacher:
     id

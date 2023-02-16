@@ -107,10 +107,6 @@ class TeacherController extends Controller
                     'name' => 'Student Count',
                     'value' => $this->teacherService->getCountOfStudents($teacher)
                 ],
-                [
-                    'name' => 'Total Experience',
-                    'value' => $yearsOfExperience . " Years"
-                ],
             ],
             'teacher' => $teacher,
 
@@ -120,5 +116,23 @@ class TeacherController extends Controller
         ]);
     }
 
+    public function getExpereincesDataForChart(Teacher $teacher)
+    {
+        $data = [];
+        
+        foreach($teacher->experiences as $experience)
+        {
+            $data []= [
+                'name' => ellipsis($experience->title, 50),
+                'value' => round($this->experienceService->getCountOfExperienceYears([
+                    $experience
+                ]),2)
+            ];
+        }
 
+        return response()->json([
+            'status' => 200,
+            'data' => $data
+        ]);
+    }
 }

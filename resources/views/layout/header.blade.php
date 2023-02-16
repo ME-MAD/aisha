@@ -38,7 +38,7 @@
                 <div class="dropdown custom-dropdown-icon">
                     <a class="dropdown-toggle btn" href="#" role="button" id="customDropdown"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                            src="{{ asset('adminAssets/assets/img/ca.png') }}" class="flag-width" alt="flag"><svg
+                            src="{{ asset('adminAssets/assets/img/' . getFlag(LaravelLocalization::getCurrentLocale())) }}" class="flag-width" alt="flag"><svg
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" class="feather feather-chevron-down">
@@ -47,9 +47,10 @@
 
                     <div class="dropdown-menu dropdown-menu-right animated fadeInUp" aria-labelledby="customDropdown">
                         @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        
                             <a class="dropdown-item" data-img-value="ca" data-value="en"
                                 href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"><img
-                                    src="{{ asset('adminAssets/assets/img/ca.png') }}" class="flag-width"
+                                    src="{{ asset('adminAssets/assets/img/'. getFlag($localeCode)) }}" class="flag-width"
                                     alt="flag alternate" hreflang="{{ $localeCode }}">
                                 {{ $properties['native'] }}</a>
                         @endforeach

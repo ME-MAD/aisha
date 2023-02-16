@@ -13,6 +13,28 @@ if (!function_exists('getStudentTypes')) {
     }
 }
 
+if (!function_exists('ellipsis')) {
+    function ellipsis($str,int $max)
+    {
+        return strlen($str) > $max ? substr($str,0, $max) . "..." : $str;
+    }
+}
+
+
+if (!function_exists('getFlag')) {
+    function getFlag($localeCode)
+    {
+        $countries = [
+            'ar' => 'eg.png',
+            'en' => 'usa.png',
+        ];
+
+        return $countries[$localeCode];
+    }
+}
+
+
+
 if (!function_exists('getGuard')) {
     function getGuard()
     {
