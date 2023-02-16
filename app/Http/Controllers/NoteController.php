@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Notes\storeNoteRequest;
 use App\Models\Note;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -74,7 +75,7 @@ class NoteController extends Controller
         ]);
     }
 
-    public function studentStore(Request $request)
+    public function studentStore(storeNoteRequest $request)
     {
         $authenticatedUser = Auth::guard(getGuard())->user();
         if(getGuard() == 'admin')
