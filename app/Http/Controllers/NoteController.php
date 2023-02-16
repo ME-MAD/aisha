@@ -77,14 +77,13 @@ class NoteController extends Controller
 
     public function studentStore(storeNoteRequest $request)
     {
-        $authenticatedUser = Auth::guard(getGuard())->user();
         if(getGuard() == 'admin')
         {
             Note::create([
                 'notable_type' => Student::class,
                 'notable_id' => $request->student_id,
                 'noteby_type' => User::class,
-                'noteby_id' => $authenticatedUser->id,
+                'noteby_id' => $request->noteby_id,
                 'title' => $request->title,
                 'note' => $request->note,
             ]);
@@ -95,18 +94,19 @@ class NoteController extends Controller
                 'notable_type' => Student::class,
                 'notable_id' => $request->student_id,
                 'noteby_type' => Teacher::class,
-                'noteby_id' => $authenticatedUser->id,
+                'noteby_id' => $request->noteby_id,
                 'title' => $request->title,
                 'note' => $request->note,
             ]);
         }
         else if(getGuard() == 'student')
         {
+            $authenticatedUser = Auth::guard(getGuard())->user();
             Note::create([
                 'notable_type' => Student::class,
                 'notable_id' => $authenticatedUser->id,
                 'noteby_type' => Student::class,
-                'noteby_id' => $authenticatedUser->id,
+                'noteby_id' => $request->noteby_id,
                 'title' => $request->title,
                 'note' => $request->note,
             ]);

@@ -443,6 +443,8 @@
                         <form action="{{ route('admin.note.studentStore') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
+                            <input type="hidden" name="noteby_id" value="{{auth()->guard(getGuard())->user()}}">
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <x-text name="title"
