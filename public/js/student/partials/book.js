@@ -1,3 +1,6 @@
+import {PAGE_NUMBER_ELEMENTS} from "./config.js"
+
+
 export function handleShowingOfTheBook(pageCount = 1, subject){
     let book = null;
     $('#show-lesson-con').remove('')
@@ -99,4 +102,23 @@ function addPage(book, subjectName, pageCount){
         </div>
     `)
     book.turn('pages', pageCount)
+}
+
+function openPageFromTheBook(subject, className = '')
+{
+    $(`.${className}`).click(function(){
+        let lastPageFinished = $(this).data('last-page-finished') || 1
+        let bookElement = document.getElementById('show-lesson-con')
+        bookElement.scrollIntoView({
+            behavior: 'smooth'
+        })
+        handleShowingOfTheBook(lastPageFinished , subject)
+    })
+}
+
+export function handleOpenPageClick(subject)
+{
+    PAGE_NUMBER_ELEMENTS.forEach(className => {
+        openPageFromTheBook(subject, className)
+    });
 }
