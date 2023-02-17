@@ -55,11 +55,14 @@ class StudentController extends Controller
     {
         $subjects = $this->subjectService->getSubjectsWtihLessons();
 
+        $roles = Role::select(['id', 'name'])->get();
+
         $this->studentService->getStudentWithGroupStudents($student);
 
         return view('pages.student.show', [
             'student' => $student,
             'subjects' => $subjects,
+            'roles' => $roles
         ]);
     }
 
