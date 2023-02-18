@@ -17,8 +17,6 @@ class GroupService
     {
         return Group::create([
             'name' => $request->name,
-            'from' => $request->from,
-            'to' => $request->to,
             'teacher_id' => $request->teacher_id,
             'group_type_id' => $request->group_type_id,
             'age_type' => $request->age_type,
