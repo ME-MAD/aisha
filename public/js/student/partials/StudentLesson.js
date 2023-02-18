@@ -183,68 +183,6 @@ export class StudentLesson
         })
 
 
-        $('.finishNewLessonButton').on('click',function(){
-            let syllabi_id = $(this).data('syllabi-id')
-            let mainParent = $(this).parent().parent().parent().parent()
-            let rate = mainParent.find('.newLessonRate').val()
-
-            $.ajax({
-                url: "/admin/syllabus/finishNewLessonAjax/" + syllabi_id,
-                type: "POST",
-                data: {
-                rate: rate
-                },
-                success: function(response) {
-                    if(response.status == 200)
-                    {
-                        if(rate == "fail")
-                        {
-                            location.reload();
-                            return;
-                        }
-                        mainParent.find('.newLessonContainerElement').addClass('d-none')
-
-                        mainParent.find('.newLessonButton').removeClass('d-none')
-                        mainParent.find('.finishNewLessonButton').addClass('d-none')
-
-                        mainParent.find('.studentLessonLastPageFinishedElement').html(response.studentLesson.last_page_finished)
-
-                        mainParent.find('.studentFinishedChaptersCountElement').html(response.studentLesson.last_chapter_finished)
-
-                        mainParent.find('.lesson_finished_checkbox').prop('checked', response.studentLesson.finished)
-
-                        mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',response.studentLesson.last_page_finished)
-
-                        mainParent.find('.newLessonRate').addClass('d-none')
-                        changePercentageBar(mainParent, response.studentLesson.percentage)
-
-
-                        Swal.fire(
-                            'Success!6',
-                            `Finished Successfully !`,
-                            'success',
-                        )
-
-                        
-                    }
-                    else if(response.status == 400)
-                    {
-                        Swal.fire(
-                            'Warning!',
-                            `Student Has Finished That Lesson`,
-                            'warning',
-                        )
-                    }
-                },
-                error: function(res) {
-                    Swal.fire(
-                        'Error!',
-                        `There Was an Error !`,
-                        'error',
-                    )
-                    console.log(res);
-                }
-            })
-        })
+        
     }
 }

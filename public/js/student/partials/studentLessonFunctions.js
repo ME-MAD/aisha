@@ -1,3 +1,5 @@
+import { LessonElement } from "./LessonElement.js";
+
 export function handleLessonFinishedCheckbox()
 {
     $('.lesson_finished_checkbox').on('change',function(){
@@ -21,12 +23,21 @@ export function handleLessonFinishedCheckbox()
             success: function(response) {
                 let mainParent = $(lesson_finished_checkbox).parent().parent().parent()
 
-                changePercentageBar(mainParent, lesson_finished_checkbox.checked ? 100 : 0)
+                let lessonElement = new LessonElement()
 
-                mainParent.find('.studentFinishedChaptersCountElement').html(lesson_finished_checkbox.checked ? chapters_count : 0)
-                mainParent.find('.studentLessonLastPageFinishedElement').html(lesson_finished_checkbox.checked ? last_page_finished : 0)
+                lessonElement.changePercentageBar(mainParent, lesson_finished_checkbox.checked ? 100 : 0)
 
-                mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',lesson_finished_checkbox.checked ? last_page_finished : 0)
+                lessonElement.setLessonUI(mainParent, {
+                    "studentFinishedChaptersCountElement" : lesson_finished_checkbox.checked ? chapters_count : 0,
+                    "studentLessonLastPageFinishedElement" : lesson_finished_checkbox.checked ? last_page_finished : 0
+                })
+
+                lessonElement.setLessonUIData(mainParent, {
+                    "openStudentLastPageFinishedElement" : {
+                        "last-page-finished" : lesson_finished_checkbox.checked ? last_page_finished : 0
+                    }
+                })
+
 
                 Swal.fire(
                     'Success!1',
@@ -47,24 +58,12 @@ export function handleLessonFinishedCheckbox()
 }
 
 
-function changePercentageBar(mainParent, percentage)
-{
-    mainParent.find(
-    '.progressOfSubjectLink .progress-bar').css({
-        'width': `${percentage}%`,
-        'transision': '1.5s'
-    }).find(".progress-bar-percentage").html(`${percentage}%`)
-}
-
-
-
-function addNewLessonHandler()
+export function addNewLessonHandler(studentId)
 {
     let student_lesson_id = null;
     let group_id = null;
     let lesson_id = null;
     let mainParent = null;
-
     
 
     $('.newLessonButton').on('click',function(){
@@ -158,6 +157,87 @@ function addNewLessonHandler()
                     `${errors}`,
                     'error',
                 )
+            }
+        })
+    })
+}
+
+
+function emptyNewLessonModal()
+{
+    $('#newLessonForm #from_chapter').val('')
+    $('#newLessonForm #to_chapter').val('')
+    $('#newLessonForm #from_page').val('')
+    $('#newLessonForm #to_page').val('')
+}
+
+
+export function handleFinishNewLesson()
+{
+    $('.finishNewLessonButton').on('click',function(){
+        let syllabi_id = $(this).data('syllabi-id')
+        let mainParent = $(this).parent().parent().parent().parent()
+        let rate = mainParent.find('.newLessonRate').val()
+
+        $.ajax({
+            url: "/admin/syllabus/finishNewLessonAjax/" + syllabi_id,
+            type: "POST",
+            data: {
+            rate: rate
+            },
+            success: function(response) {
+                if(response.status == 200)
+                {
+                    if(rate == "fail")
+                    {
+                        location.reload();
+                        return;
+                    }
+
+                    let lessonElement = new LessonElement()
+
+                    lessonElement.changePercentageBar(mainParent, response.studentLesson.percentage)
+
+                    mainParent.find('.newLessonContainerElement').addClass('d-none')
+
+                    mainParent.find('.newLessonButton').removeClass('d-none')
+                    mainParent.find('.finishNewLessonButton').addClass('d-none')
+
+                    mainParent.find('.studentLessonLastPageFinishedElement').html(response.studentLesson.last_page_finished)
+
+                    mainParent.find('.studentFinishedChaptersCountElement').html(response.studentLesson.last_chapter_finished)
+
+                    mainParent.find('.lesson_finished_checkbox').prop('checked', response.studentLesson.finished)
+
+                    mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',response.studentLesson.last_page_finished)
+
+                    mainParent.find('.newLessonRate').addClass('d-none')
+
+
+                    Swal.fire(
+                        'Success!6',
+                        `Finished Successfully !`,
+                        'success',
+                    )
+
+                    
+                }
+                else if(response.status == 400)
+                {
+                    Swal.fire(
+                        'Warning!',
+                        `Student Has Finished That Lesson`,
+                        'warning',
+                    )
+                }
+            },
+            error: function(res) {
+                Swal.fire(
+                    'Error!',
+                    `There Was an Error !`,
+                    'error',
+                )
+                console.log(res);
             }
         })
     })

@@ -27,7 +27,7 @@
     border-radius: 70px;
     box-sizing: border-box;
     transition: all 0.5s;
-    height: 600px;
+    height: 700px;
     perspective: 1000px;
     overflow: hidden;
 }

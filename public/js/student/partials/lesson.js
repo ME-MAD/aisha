@@ -1,6 +1,6 @@
 import {StudentLesson} from "./StudentLesson.js"
-import {handleLessonFinishedCheckbox} from "./studentLessonFunctions.js"
-import {handleLessonReviewFinishedCheckbox} from "./studentLessonReviewFunctions.js"
+import {handleLessonFinishedCheckbox, addNewLessonHandler, handleFinishNewLesson} from "./studentLessonFunctions.js"
+import {handleLessonReviewFinishedCheckbox,addNewLessonReviewHandler} from "./studentLessonReviewFunctions.js"
 
 export function getStudentLesson(lesson, groupId, studentId) {
     return lesson.student_lessons.filter(studentLesson => {
@@ -84,6 +84,9 @@ export function renderLessonsHtml(subject, groupId, studentId, groupStudent)
     handleLessonFinishedCheckbox()
     handleLessonReviewFinishedCheckbox()
     
+    addNewLessonHandler(studentId)
+    addNewLessonReviewHandler(studentId)
+    handleFinishNewLesson()
 }
 
 function getLessonHtml(lesson , nlData, groupId, studentId, studentLesson)

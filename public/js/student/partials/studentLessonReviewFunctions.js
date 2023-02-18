@@ -58,7 +58,7 @@ function changePercentageBar(mainParent, percentage)
     }).find(".progress-bar-percentage").html(`${percentage}%`)
 }
 
-function addNewLessonReviewHandler()
+export function addNewLessonReviewHandler()
 {
     let student_lesson_review_id = null;
     let group_review_id = null;
@@ -160,4 +160,12 @@ function addNewLessonReviewHandler()
             }
         })
     })
+}
+
+function emptyNewLessonModalReview()
+{
+    $('#newLessonFromReview #from_chapter').val('')
+    $('#newLessonFromReview #to_chapter').val('')
+    $('#newLessonFromReview #from_page').val('')
+    $('#newLessonFromReview #to_page').val('')
 }
