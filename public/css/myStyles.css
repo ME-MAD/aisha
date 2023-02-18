@@ -113,3 +113,13 @@ background: -webkit-linear-gradient(189deg, #25d5e48a 10%, hsl(169deg 33% 46% / 
 .required-star{
     color:rgba(246, 14, 14, 0.866)
 }
+
+
+
+
+
+
+.group_show_card_scroll{
+    height: 500px;
+    overflow-y: scroll;
+}

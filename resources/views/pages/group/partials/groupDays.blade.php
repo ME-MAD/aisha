@@ -15,8 +15,8 @@
             </h3>
             @if (!$group->checkIfGroupExceededGroupDaysLimit())
                     <a 
-                    class="icon text-white mt-2 editTeacherButton" 
-                    data-toggle='modal' data-target='#creatGroupDayModal'>
+                    class="icon text-white mt-2"
+                    data-toggle='modal' data-target='#creatGroupDayModal' data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
                     <i class="fa-solid fa-pen-to-square fa-2xl"></i>
                 </a>
             @endif

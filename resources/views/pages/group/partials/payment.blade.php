@@ -6,7 +6,7 @@
                 <span id="paymentsCount" class="badge badge-pill badge-light">{{$groupPaymentsCount}}</span>
             </h3>
         </div>
-        <div class="card-body"  >
+        <div class="card-body">
             <div class="user-info-list">
                 <div class="table-responsive mb-4 mt-4 ">
                     <div id="zero-config_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
@@ -58,7 +58,7 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="table-responsive">
+                                <div class="table-responsive group_show_card_scroll">
                                     <table class="table table-bordered table-hover table-striped mb-4">
                                         <thead>
                                             <tr>

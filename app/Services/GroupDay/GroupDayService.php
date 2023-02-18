@@ -16,8 +16,8 @@ class GroupDayService
     {
         return GroupDay::updateOrCreate([
             'group_id' => $request->group_id,
-        ], [
             'day' => $request->day,
+        ], [
             'from_time' => $request->from_time,
             'to_time' => $request->to_time 
         ]);
@@ -30,6 +30,6 @@ class GroupDayService
 
     public function getGroupDaysOfGroup($group_id)
     {
-        return GroupDay::where('group_id', $group_id)->select(['group_id', 'day'])->first();
+        return GroupDay::where('group_id', $group_id)->select(['group_id', 'day'])->get();
     }
 }

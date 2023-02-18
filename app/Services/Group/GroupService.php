@@ -45,7 +45,10 @@ class GroupService
             'students.payments' => function($q) use ($group){
                 return $q->where('group_id', $group->id);
             },
-            'groupType'
+            'groupType',
+            'teacher:id,name,email,birthday,phone,qualification' => [
+                "role:id,name"
+            ],
         ]);
     }
 

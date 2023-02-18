@@ -13,38 +13,6 @@
 
                     <div class="row">
                         <div class="col-6">
-                            @if (!isset($group))
-                            <div class="form-group row mb-4">
-                                <label for="age_type" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
-                                    {{ __('group.Choose group') }}
-                                    <i class="fa-solid fa-star-of-life required-star"></i>
-                                </label>
-                                <div class="col-xl-12 col-md-6  ">
-                                    <select class="form-control basic" style="width: 100%;" name="group_id"
-                                            id="group_id" data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
-                                        <option value=""> {{ __('group.Choose group') }}</option>
-                                        @foreach ($groups as $group)
-                                            @if (!$group->checkIfGroupExceededGroupDaysLimit())
-    
-                                                <option
-                                                    value="{{ $group->id }}" {{ old('group_id') == $group->id ? 'selected' : '' }}>
-                                                    {{ $group->name }}
-                                                </option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                    @error('group_id')
-                                    <p class="text-danger" data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
-                                        {{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        @else
-                            <input type="hidden" name="group_id" id="group_id" value="{{ $group->id }}"
-                                   data-groupid="{{ $group->id }}">
-                        @endif
-                        </div>
-                        <div class="col-6">
                             <div class="form-group row mb-4">
                                 <label for="day" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
                                     {{ __('group.day') }}
@@ -88,6 +56,43 @@
                                 </div>
                             </div>
                         </div>
+
+
+
+                        
+                        <div class="col-6">
+                            @if (!isset($group))
+                            <div class="form-group row mb-4">
+                                <label for="age_type" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
+                                    {{ __('group.Choose group') }}
+                                    <i class="fa-solid fa-star-of-life required-star"></i>
+                                </label>
+                                <div class="col-xl-12 col-md-6  ">
+                                    <select class="form-control basic" style="width: 100%;" name="group_id"
+                                            id="group_id" data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
+                                        <option value=""> {{ __('group.Choose group') }}</option>
+                                        @foreach ($groups as $group)
+                                            @if (!$group->checkIfGroupExceededGroupDaysLimit())
+    
+                                                <option
+                                                    value="{{ $group->id }}" {{ old('group_id') == $group->id ? 'selected' : '' }}>
+                                                    {{ $group->name }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    @error('group_id')
+                                    <p class="text-danger" data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
+                                        {{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        @else
+                            <input type="hidden" name="group_id" id="group_id" value="{{ $group->id }}"
+                                   data-groupid="{{ $group->id }}">
+                        @endif
+                        </div>
+                        
                     </div>
 
                     <div class="row">

@@ -76,25 +76,21 @@
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
 
-                    <div class="row">
-                        <div class="col-xl-6 col-sm-12">
-                            @include('pages.group.partials.teacher')
-                            @include('pages.teacher.editModal')
-                        </div>
-                        <div class="col-xl-6 col-sm-12">
-                            @include('pages.group.partials.groupDays')
-                            @include('pages.groupDays.createModal')
-                        </div>
-                    </div>
-
                 <div class="row">
                     <div class="col-xl-6 col-sm-12">
-                        @include('pages.group.partials.students')
-                        @include('pages.groupStudent.createModal')
+                        @include('pages.group.partials.teacher')
+                        @include('pages.teacher.editModal')
                     </div>
                     <div class="col-xl-6 col-sm-12">
-                        @include('pages.group.partials.payment')
+                        @include('pages.group.partials.groupDays')
+                        @include('pages.groupDays.createModal')
                     </div>
+                </div>
+
+                <div class="row">
+                    @include('pages.group.partials.students')
+                    @include('pages.group.partials.payment')
+                </div>
 
                 <div class="card component-card_4 col-sm-12">
                     <div class="row" id="paymentsThisMonthContainerGroup"
@@ -109,11 +105,15 @@
             </div>
         </div>
     </div>
+
+
+
+    @include('pages.groupStudent.createModal')
+
 @endsection
 
 @push('js')
     <script type="module" src="{{ asset('js/payment/groupShow.js') }}"></script>
-    <script src="{{ asset('js/teacher.js') }}"></script>
     <script src="{{ asset('adminAssets/assets/shared/chart.js') }}"></script>
     <script src="{{ asset('js/group_chart.js') }}"></script>
     
@@ -128,6 +128,8 @@
             $(`option`).removeAttr('disabled').css({
                 'color': 'black'
             });
+
+            console.log(href);
             $.ajax({
                 url: href,
                 data: {
@@ -135,6 +137,7 @@
                 },
                 success: function (response) {
                     let groupDays = response.groupDays
+                    console.log(groupDays);
                     groupDays.forEach(element => {
                         let groupDay = element.day
                         $(`option[value=${groupDay}]`).attr('disabled', true).css({

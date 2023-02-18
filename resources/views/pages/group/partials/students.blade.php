@@ -15,9 +15,9 @@
                     <i class="fa-solid fa-pen-to-square fa-2xl"></i>
                 </a>
         </div>
-        <div class="card-body"  >
+        <div class="card-body">
             <div class="user-info-list">
-                <div class="table-responsive">
+                <div class="table-responsive group_show_card_scroll">
                     <table class="table table-bordered table-hover table-striped mb-4">
                         <thead>
                             <tr>
