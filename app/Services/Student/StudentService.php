@@ -84,7 +84,8 @@ class StudentService
         $student->load([
             'groupStudents' => function ($q) {
                 $q->with('group.studentLessons');
-            }
+            },
+            'role:id,name'
         ]);
     }
 

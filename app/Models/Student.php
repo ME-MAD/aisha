@@ -84,6 +84,5 @@ class Student extends Authenticatable
             'id',
             'id',
             'role_id');
-
     }
 }
