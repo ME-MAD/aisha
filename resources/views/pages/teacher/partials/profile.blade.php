@@ -23,7 +23,8 @@
                     <tbody>
                       <tr>
                         <th scope="row">
-                            <i class="fa-solid fa-user-graduate fa-xl"></i>
+                            {{-- <i class="fa-solid fa-user-graduate fa-xl"></i> --}}
+                            <h6 class="text-secondary">المؤهل</h6>
                         </th>
                         <td>
                             {{ $teacher->qualification }}
@@ -31,7 +32,8 @@
                       </tr>
                       <tr>
                         <th scope="row">
-                            <i class="fa-regular fa-envelope fa-xl"></i>
+                            {{-- <i class="fa-regular fa-envelope fa-xl"></i> --}}
+                            <h6 class="text-secondary">البريد الإلكتروني</h6>
                         </th>
                         <td> 
                             {{ $teacher->email }}
@@ -39,7 +41,8 @@
                       </tr>
                       <tr>
                         <th scope="row">
-                             <i class="fa-solid fa-phone fa-xl"></i>
+                             {{-- <i class="fa-solid fa-phone fa-xl"></i> --}}
+                             <h6 class="text-secondary">الهاتف</h6>
                         </th>
                         <td> 
                             {{  $teacher->phone }}
@@ -47,7 +50,8 @@
                       </tr>
                       <tr>
                         <th scope="row">
-                            <i class="fa-regular fa-calendar fa-xl"></i>
+                            {{-- <i class="fa-regular fa-calendar fa-xl"></i> --}}
+                            <h6 class="text-secondary">تاريخ الميلاد</h6>
                         </th>
                         <td> 
                              {{ $teacher->birthday }}
