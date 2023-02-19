@@ -2,7 +2,6 @@
 
 @push('css')
 
-
     <link href="{{asset('adminAssets/assets/css/tables/table-basic.css')}}" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" type="text/css" href="{{ asset('adminRtl/assets/css/forms/theme-checkbox-radio.css') }}">
@@ -19,7 +18,7 @@
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminRtl/assets/css/components/cards/card.css') }}"/>
-     <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
+       <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
         
     @else
         <link rel="stylesheet"
@@ -88,7 +87,13 @@
                 </div>
 
                 <div class="row">
+
                     @include('pages.group.partials.paymentChart')
+
+                    @include('pages.group.partials.students')
+                    @include('pages.groupStudent.createModal')
+
+
                     @include('pages.group.partials.payment')
                     @include('pages.group.partials.students')
                 </div>
@@ -96,11 +101,6 @@
             </div>
         </div>
     </div>
-
-
-
-    @include('pages.groupStudent.createModal')
-
 @endsection
 
 @vite(['resources/js/group/payment.js'])
