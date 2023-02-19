@@ -51,7 +51,7 @@ export function handleLessonReviewFinishedCheckbox()
 }
 
 
-export function addNewLessonReviewHandler()
+export function addNewLessonReviewHandler(studentId , subject)
 {
     let student_lesson_review_id = null;
     let group_review_id = null;
@@ -67,7 +67,7 @@ export function addNewLessonReviewHandler()
         lesson_review_id = $(this).data('lesson-id')
 
         $('#newLessonFromReview #from_page').val(last_page_finished_review || '')
-        $('#newLessonFromReview #from_chapter').val(last_chapter_finished_review || '')
+        $('#newLessonFromReview #from_chapter').val(last_chapter_finished_review || 0)
 
         mainParent_review = $(this).parent().parent().parent().parent()
     })
@@ -161,4 +161,74 @@ function emptyNewLessonModalReview()
     $('#newLessonFromReview #to_chapter').val('')
     $('#newLessonFromReview #from_page').val('')
     $('#newLessonFromReview #to_page').val('')
+}
+
+export function handleFinishNewLessonReview()
+{
+    $('.finishNewLessonButtonReview').on('click',function(){
+        let syllabi_review_id = $(this).data('syllabi-review-id')
+        let mainParent = $(this).parent().parent().parent().parent()
+        let rate = mainParent.find('.newLessonRateReview').val()
+
+        $.ajax({
+            url: "/admin/syllabus-review/finishNewLessonReviewAjax/" + syllabi_review_id,
+            type: "POST",
+            data: {
+            rate: rate
+            },
+            success: function(response) {
+                if(response.status == 200)
+                {
+                    if(rate == "fail")
+                    {
+                        location.reload();
+                        return;
+                    }
+                    mainParent.find('.newLessonContainerElementReview').addClass('d-none')
+
+                    mainParent.find('.newLessonButtonReview').removeClass('d-none')
+                    mainParent.find('.finishNewLessonButtonReview').addClass('d-none')
+
+                    mainParent.find('.studentLessonLastPageFinishedElementReview').html(response.studentLessonReview.last_page_finished)
+
+                    mainParent.find('.StudentFinishedChaptersCountElementReview').html(response.studentLessonReview.last_chapter_finished)
+
+                    mainParent.find('.lesson_finished_checkbox_review').prop('checked', response.studentLessonReview.finished)
+
+                    mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',response.studentLessonReview.last_page_finished)
+
+                    mainParent.find('.newLessonRateReview').addClass('d-none')
+
+                    console.log(mainParent);
+                    console.log(response);
+                    console.log(response.studentLessonReview);
+                    console.log(response.studentLessonReview.percentage);
+                    
+                    changePercentageBar(mainParent, response.studentLessonReview.percentage)
+
+                    Swal.fire(
+                        'Success!5',
+                        `Finished Successfully !`,
+                        'success',
+                    )
+                }
+                else if(response.status == 400)
+                {
+                    Swal.fire(
+                        'Warning!',
+                        `The Student Did't F`,
+                        'warning',
+                    )
+                }
+            },
+            error: function(res) {
+                Swal.fire(
+                    'Error!',
+                    `There Was an Error !`,
+                    'error',
+                )
+                console.log(res);
+            }
+        })
+    })
 }

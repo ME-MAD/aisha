@@ -1,10 +1,7 @@
 <?php
 
-namespace App\Services\Syllabus;
+namespace App\Services\SyllabusReview;
 
-use App\Models\StudentLesson;
-use App\Models\StudentLessonReview;
-use App\Models\syllabus;
 use App\Models\SyllabusReview;
 
 class SyllabusReviewService

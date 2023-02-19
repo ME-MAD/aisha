@@ -47,11 +47,13 @@ class StudentLessonReviewService
 
         $percentage = $lesson->chapters_count > 0 ? (($syllabusReview->to_chapter / $lesson->chapters_count) * 100) : 0;
 
-        return $studentLessonReview->update([
+        $studentLessonReview->update([
             'last_page_finished' => $syllabusReview->to_page,
             'last_chapter_finished' => $syllabusReview->to_chapter,
             'percentage' => round($percentage, 2),
             'finished' => $syllabusReview->to_chapter == $lesson->chapters_count ? true : false
         ]);
+
+        return $studentLessonReview;
     }
 }

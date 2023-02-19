@@ -1,6 +1,6 @@
 import {StudentLesson} from "./StudentLesson.js"
 import {handleLessonFinishedCheckbox, addNewLessonHandler, handleFinishNewLesson} from "./studentLessonFunctions.js"
-import {handleLessonReviewFinishedCheckbox,addNewLessonReviewHandler} from "./studentLessonReviewFunctions.js"
+import {handleLessonReviewFinishedCheckbox,addNewLessonReviewHandler,handleFinishNewLessonReview} from "./studentLessonReviewFunctions.js"
 
 export function getStudentLesson(lesson, groupId, studentId) {
     return lesson.student_lessons.filter(studentLesson => {
@@ -85,14 +85,14 @@ export function renderLessonsHtml(subject, groupId, studentId, groupStudent)
     handleLessonReviewFinishedCheckbox()
     
     addNewLessonHandler(studentId, subject)
-    addNewLessonReviewHandler(studentId)
+    addNewLessonReviewHandler(studentId, subject)
 
     handleFinishNewLesson()
+    handleFinishNewLessonReview()
 }
 
 function getLessonHtml(lesson , nlData, groupId, studentId, studentLesson)
 {
-    console.log(nlData);
     return `
         <div class="studentLessonContainer">
             <button class="btn btn-success goToReviewButton">
@@ -278,12 +278,12 @@ function getLessonReviewHtml(lesson, nlData, nlrData,groupId, studentId, student
                 data-studentid="${studentId}">
                 <div class="progress br-30">
                     <div class="progress-bar bg-primary" role="progressbar"
-                        aria-valuenow="${nlrData.percentage}"
-                        style="width:${nlrData.percentage}%"
+                        aria-valuenow="${nlrData.finishPercentage}"
+                        style="width:${nlrData.finishPercentage}%"
                         aria-valuemin="0" aria-valuemax="100">
                         <div class="progress-title">
                             <span class="progress-bar-percentage">
-                                ${nlrData.percentage}%
+                                ${nlrData.finishPercentage}%
                             </span>
                         </div>
                     </div>

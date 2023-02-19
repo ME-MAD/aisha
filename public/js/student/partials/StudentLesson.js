@@ -28,21 +28,20 @@ export class StudentLesson
 
     getNextLessonData()
     {
-        console.log(this.studentLesson);
-        if(this.studentLesson && this.getNextLesson())
+        if(this.studentLesson || this.getNextLesson())
         {
             return {
                 showUrl: `/admin/student_lesson/show/${this.studentLesson.id}`,
-                nextLesson: this.studentLesson.syllabus.filter(syllabi => syllabi.finished == 0)[0],
-                fromChapter: this.getNextLesson().from_chapter,
-                toChapter: this.getNextLesson().to_chapter,
-                fromPage: this.getNextLesson().from_page,
-                toPage: this.getNextLesson().to_page,
-                id: this.getNextLesson().id,
-                lastChapter: this.studentLesson.last_chapter_finished,
-                finishPercentage: this.studentLesson.percentage,
-                finished: this.studentLesson.finished,
-                lastPage: this.studentLesson.last_page_finished
+                nextLesson: this.studentLesson.syllabus.filter(syllabi => syllabi.finished == 0)[0] || null,
+                fromChapter: this.getNextLesson()?.from_chapter || 0,
+                toChapter: this.getNextLesson()?.to_chapter || 0,
+                fromPage: this.getNextLesson()?.from_page || null,
+                toPage: this.getNextLesson()?.to_page || null,
+                id: this.getNextLesson()?.id || null,
+                lastChapter: this.studentLesson.last_chapter_finished || 0,
+                finishPercentage: this.studentLesson.percentage || 0,
+                finished: this.studentLesson.finished ||false,
+                lastPage: this.studentLesson.last_page_finished || 0
             }
         }
 
@@ -88,19 +87,19 @@ export class StudentLesson
 
     getNextLessonReviewData()
     {
-        if(this.getStudentLessonReview() && this.getNextLessonReview())
+        if(this.getStudentLessonReview() || this.getNextLessonReview())
         {
             return {
-                nextLesson: this.getNextLessonReview(),
-                fromChapter: this.getNextLessonReview().from_chapter,
-                toChapter: this.getNextLessonReview().to_chapter,
-                fromPage: this.getNextLessonReview().from_page,
-                toPage: this.getNextLessonReview().to_page,
-                id: this.getNextLessonReview().id,
-                lastChapter: this.getStudentLessonReview().last_chapter_finished,
-                finishPercentage: this.getStudentLessonReview().percentage,
-                finished: this.getStudentLessonReview().finished,
-                lastPage: this.getStudentLessonReview().last_page_finished
+                nextLesson: this.getNextLessonReview() || null,
+                fromChapter: this.getNextLessonReview()?.from_chapter || 0,
+                toChapter: this.getNextLessonReview()?.to_chapter || 0,
+                fromPage: this.getNextLessonReview()?.from_page || null,
+                toPage: this.getNextLessonReview()?.to_page || null,
+                id: this.getNextLessonReview()?.id || null,
+                lastChapter: this.getStudentLessonReview()?.last_chapter_finished || 0,
+                finishPercentage: this.getStudentLessonReview()?.percentage || 0,
+                finished: this.getStudentLessonReview()?.finished || false,
+                lastPage: this.getStudentLessonReview()?.last_page_finished || 0
             }
         }
 
@@ -116,74 +115,5 @@ export class StudentLesson
             finished: false,
             lastPage: 0
         }
-    }
-
-    
-
-    studentLessonFinishedAjax()
-    {
-        $('.finishNewLessonButtonReview').on('click',function(){
-            let syllabi_review_id = $(this).data('syllabi-review-id')
-            let mainParent = $(this).parent().parent().parent().parent()
-            let rate = mainParent.find('.newLessonRateReview').val()
-
-            $.ajax({
-                url: "/admin/syllabus-review/finishNewLessonReviewAjax/" + syllabi_review_id,
-                type: "POST",
-                data: {
-                rate: rate
-                },
-                success: function(response) {
-                    if(response.status == 200)
-                    {
-                        if(rate == "fail")
-                        {
-                            location.reload();
-                            return;
-                        }
-                        mainParent.find('.newLessonContainerElementReview').addClass('d-none')
-
-                        mainParent.find('.newLessonButtonReview').removeClass('d-none')
-                        mainParent.find('.finishNewLessonButtonReview').addClass('d-none')
-
-                        mainParent.find('.studentLessonLastPageFinishedElementReview').html(response.studentLessonReview.last_page_finished)
-
-                        mainParent.find('.StudentFinishedChaptersCountElementReview').html(response.studentLessonReview.last_chapter_finished)
-
-                        mainParent.find('.lesson_finished_checkbox_review').prop('checked', response.studentLessonReview.finished)
-
-                        mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished',response.studentLessonReview.last_page_finished)
-
-                        mainParent.find('.newLessonRateReview').addClass('d-none')
-                        changePercentageBar(mainParent, response.studentLessonReview.percentage)
-
-                        Swal.fire(
-                            'Success!5',
-                            `Finished Successfully !`,
-                            'success',
-                        )
-                    }
-                    else if(response.status == 400)
-                    {
-                        Swal.fire(
-                            'Warning!',
-                            `The Student Did't F`,
-                            'warning',
-                        )
-                    }
-                },
-                error: function(res) {
-                    Swal.fire(
-                        'Error!',
-                        `There Was an Error !`,
-                        'error',
-                    )
-                    console.log(res);
-                }
-            })
-        })
-
-
-        
     }
 }

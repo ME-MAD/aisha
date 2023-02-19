@@ -8,7 +8,7 @@ use App\Models\StudentLessonReview;
 use App\Models\SyllabusReview;
 use App\Services\StudentLesson\StudentLessonService;
 use App\Services\StudentLessonReview\StudentLessonReviewService;
-use App\Services\Syllabus\SyllabusReviewService;
+use App\Services\SyllabusReview\SyllabusReviewService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
