@@ -1,4 +1,4 @@
-<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4 my-4">
     <div class="card ">
         <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables_show_teacher">
             <h3 class="text-capitalize text-white">

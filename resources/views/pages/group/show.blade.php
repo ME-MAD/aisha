@@ -87,31 +87,27 @@
                 </div>
 
                 <div class="row">
+
+                    @include('pages.group.partials.paymentChart')
+
                     @include('pages.group.partials.students')
                     @include('pages.groupStudent.createModal')
 
+
                     @include('pages.group.partials.payment')
+                    @include('pages.group.partials.students')
                 </div>
-
-                <div class="card component-card_4 col-sm-12">
-                    <div class="row" id="paymentsThisMonthContainerGroup"
-                         data-href="{{ route('admin.group.getPaymentPerMonth', $group->id) }}">
-
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing" id="canvas">
-                            <canvas id="paymentsThisMonthChartOnGroupShow"></canvas>
-                        </div>
-                    </div>
-                </div>
-
+               
             </div>
         </div>
     </div>
 @endsection
 
+@vite(['resources/js/group/payment.js'])
+
 @push('js')
     <script type="module" src="{{ asset('js/payment/groupShow.js') }}"></script>
     <script src="{{ asset('adminAssets/assets/shared/chart.js') }}"></script>
-    <script src="{{ asset('js/group_chart.js') }}"></script>
     
     <script>
         initEditeTeacherModal()
