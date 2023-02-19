@@ -6,7 +6,7 @@
                 <span class="badge badge-pill badge-light">{{ $countStudents }}</span>
             </h3>
                     <a 
-                    class="icon text-white mt-2 editTeacherButton" 
+                    class="icon text-white mt-2" 
                     data-toggle='modal' 
                     data-target='#creatGroupStudentModal'
                     data-href="{{ route('admin.group_students.getGroupStudents') }}"

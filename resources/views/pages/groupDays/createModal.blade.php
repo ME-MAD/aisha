@@ -12,7 +12,11 @@
                     @csrf
 
                     <div class="row">
-                        <div class="col-6">
+                        @if (!isset($group))
+                            <div class="col-6">
+                        @else
+                            <div class="col-12">
+                        @endif
                             <div class="form-group row mb-4">
                                 <label for="day" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
                                     {{ __('group.day') }}

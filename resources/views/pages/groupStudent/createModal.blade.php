@@ -10,6 +10,33 @@
                 <form action="{{ route('admin.group_students.store') }}" method="post">
                     @csrf
                     <div class="row">
+                        @if (!isset($group))
+                            <div class="col-6">
+                        @else
+                            <div class="col-12">
+                        @endif
+                            <div class="form-group row mb-4">
+                                <label for="age_type"
+                                       class="col-xl-12 col-md-6  col-form-label text-dark text-capitalize font-weight-bold">
+                                    {{ __('group.Choose student') }}
+                                    <i class="fa-solid fa-star-of-life required-star"></i>
+                                </label>
+                                <div class="col-xl-12 col-md-6">
+                                    <select class="form-control basic" style="width: 100%;" name="student_id" id="student_id">
+                                        <option value=""> {{ __('group.Choose student') }}</option>
+                                        @foreach ($students as $student)
+                                            <option value="{{ $student->id }}"
+                                                    {{ old('student_id') == $student->id ? 'selected' : '' }}>
+                                                {{ $student->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('student_id')
+                                    <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-6">
                             @if (!isset($group))
                             <div class="form-group row mb-4">
@@ -40,28 +67,7 @@
                                    data-groupid="{{ $group->id }}">
                         @endif
                         </div>
-                        <div class="col-6">
-                            <div class="form-group row mb-4">
-                                <label for="age_type"
-                                       class="col-xl-12 col-md-6  col-form-label text-dark text-capitalize font-weight-bold">
-                                    {{ __('group.Choose student') }}
-                                    <i class="fa-solid fa-star-of-life required-star"></i>
-                                </label>
-                                <div class="col-xl-12 col-md-6">
-                                    <select class="form-control basic" style="width: 100%;" name="student_id" id="student_id">
-                                        <option value=""> {{ __('group.Choose student') }}</option>
-                                        @foreach ($students as $student)
-                                            <option value="{{ $student->id }}"
-                                                    {{ old('student_id') == $student->id ? 'selected' : '' }}>
-                                                {{ $student->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('student_id')
-                                    <p class="text-danger">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
+                       
                     </div>
 
                     <div class="modal-footer">
