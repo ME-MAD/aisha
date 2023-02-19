@@ -77,30 +77,47 @@
 
                 <div class="row">
                     <div class="col-xl-6 col-sm-12">
+
+
+
                         @include('pages.group.partials.teacher')
-                        @include('pages.teacher.editModal')
+
+
+
+                        
                     </div>
                     <div class="col-xl-6 col-sm-12">
+
+
+
                         @include('pages.group.partials.groupDays')
-                        @include('pages.groupDays.createModal')
+
+
+
+
                     </div>
                 </div>
 
                 <div class="row">
 
+
+
                     @include('pages.group.partials.paymentChart')
-
-                    @include('pages.group.partials.students')
-                    @include('pages.groupStudent.createModal')
-
-
                     @include('pages.group.partials.payment')
                     @include('pages.group.partials.students')
+
+
+
                 </div>
                
             </div>
         </div>
     </div>
+
+    @include('pages.groupStudent.createModal')
+    @include('pages.groupDays.createModal')
+    @include('pages.teacher.editModal')
+
 @endsection
 
 @vite(['resources/js/group/payment.js'])
