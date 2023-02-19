@@ -37,16 +37,18 @@ class SyllabusService
 
     public function finishNewLesson($syllabus)
     {
-         $studentLesson = $syllabus->studentLesson;
+        $studentLesson = $syllabus->studentLesson;
         $lesson = $studentLesson->lesson;
 
         $percentage = ($syllabus->to_chapter / $lesson->chapters_count) * 100;
 
-        return  $studentLesson->update([
+        $studentLesson->update([
             'last_page_finished' => $syllabus->to_page,
             'last_chapter_finished' => $syllabus->to_chapter,
             'percentage' => round($percentage, 2),
             'finished' => $syllabus->to_chapter == $lesson->chapters_count ? true : false
         ]);
+
+        return $studentLesson;
     }
 }

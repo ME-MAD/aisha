@@ -28,6 +28,7 @@ export class StudentLesson
 
     getNextLessonData()
     {
+        console.log(this.studentLesson);
         if(this.studentLesson && this.getNextLesson())
         {
             return {

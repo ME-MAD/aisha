@@ -1,4 +1,4 @@
-import { LessonElement } from "./LessonElement.js";
+import { changePercentageBar, getLesson } from "./shared.js";
 
 export function handleLessonFinishedCheckbox()
 {
@@ -23,21 +23,16 @@ export function handleLessonFinishedCheckbox()
             success: function(response) {
                 let mainParent = $(lesson_finished_checkbox).parent().parent().parent()
 
-                let lessonElement = new LessonElement()
+                
+                changePercentageBar(mainParent, lesson_finished_checkbox.checked ? 100 : 0)
 
-                lessonElement.changePercentageBar(mainParent, lesson_finished_checkbox.checked ? 100 : 0)
 
-                lessonElement.setLessonUI(mainParent, {
-                    "studentFinishedChaptersCountElement" : lesson_finished_checkbox.checked ? chapters_count : 0,
-                    "studentLessonLastPageFinishedElement" : lesson_finished_checkbox.checked ? last_page_finished : 0
-                })
+                mainParent.find('.studentFinishedChaptersCountElement').html(lesson_finished_checkbox.checked ? chapters_count : 0)
+                mainParent.find('.studentLessonLastPageFinishedElement').html(lesson_finished_checkbox.checked ? last_page_finished : 0)
 
-                lessonElement.setLessonUIData(mainParent, {
-                    "openStudentLastPageFinishedElement" : {
-                        "last-page-finished" : lesson_finished_checkbox.checked ? last_page_finished : 0
-                    }
-                })
 
+
+                mainParent.find('.openStudentLastPageFinishedElement').data('last-page-finished', lesson_finished_checkbox.checked ? last_page_finished : 0)
 
                 Swal.fire(
                     'Success!1',
@@ -58,12 +53,13 @@ export function handleLessonFinishedCheckbox()
 }
 
 
-export function addNewLessonHandler(studentId)
+export function addNewLessonHandler(studentId, subject)
 {
     let student_lesson_id = null;
     let group_id = null;
     let lesson_id = null;
     let mainParent = null;
+    let lesson = null; 
     
 
     $('.newLessonButton').on('click',function(){
@@ -74,8 +70,10 @@ export function addNewLessonHandler(studentId)
         group_id = $(this).data('group-id')
         lesson_id = $(this).data('lesson-id')
 
-        $('#newLessonForm #from_page').val(last_page_finished || '')
-        $('#newLessonForm #from_chapter').val(last_chapter_finished || '')
+        lesson = getLesson(subject.lessons, lesson_id)
+
+        $('#newLessonForm #from_page').val(last_page_finished || lesson.from_page)
+        $('#newLessonForm #from_chapter').val(last_chapter_finished || '0')
 
         mainParent = $(this).parent().parent().parent().parent()
     })
@@ -112,6 +110,8 @@ export function addNewLessonHandler(studentId)
                         `Finished Successfully !`,
                         'success',
                     )
+
+
                     mainParent.find('.newLessonContainerElement').removeClass('d-none')
                     mainParent.find('.nextLessonFromChapter').html(from_chapter)
                     mainParent.find('.nextLessonToChapter').html(to_chapter)
@@ -186,6 +186,7 @@ export function handleFinishNewLesson()
             rate: rate
             },
             success: function(response) {
+                console.log(response);
                 if(response.status == 200)
                 {
                     if(rate == "fail")
@@ -194,9 +195,7 @@ export function handleFinishNewLesson()
                         return;
                     }
 
-                    let lessonElement = new LessonElement()
-
-                    lessonElement.changePercentageBar(mainParent, response.studentLesson.percentage)
+                    changePercentageBar(mainParent, response.studentLesson.percentage)
 
                     mainParent.find('.newLessonContainerElement').addClass('d-none')
 

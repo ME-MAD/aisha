@@ -1,3 +1,5 @@
+import { changePercentageBar } from "./shared.js";
+
 export function handleLessonReviewFinishedCheckbox()
 {
     $('.lesson_finished_checkbox_review').on('change',function(){
@@ -48,15 +50,6 @@ export function handleLessonReviewFinishedCheckbox()
     })
 }
 
-
-function changePercentageBar(mainParent, percentage)
-{
-    mainParent.find(
-    '.progressOfSubjectLink .progress-bar').css({
-        'width': `${percentage}%`,
-        'transision': '1.5s'
-    }).find(".progress-bar-percentage").html(`${percentage}%`)
-}
 
 export function addNewLessonReviewHandler()
 {

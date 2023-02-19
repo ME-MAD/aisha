@@ -84,13 +84,15 @@ export function renderLessonsHtml(subject, groupId, studentId, groupStudent)
     handleLessonFinishedCheckbox()
     handleLessonReviewFinishedCheckbox()
     
-    addNewLessonHandler(studentId)
+    addNewLessonHandler(studentId, subject)
     addNewLessonReviewHandler(studentId)
+
     handleFinishNewLesson()
 }
 
 function getLessonHtml(lesson , nlData, groupId, studentId, studentLesson)
 {
+    console.log(nlData);
     return `
         <div class="studentLessonContainer">
             <button class="btn btn-success goToReviewButton">
