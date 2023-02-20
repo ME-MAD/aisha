@@ -18,7 +18,7 @@ class StoreGroupDayRequest extends FormRequest
         return [
             "group_id" => "required|exists:groups,id",
             'from_time' => 'required|date_format:H:i',
-            'to_time' => 'required|date_format:H:i|after:from_date',
+            'to_time' => 'required|date_format:H:i|after:from_time',
             "day" => ["required"],
         ];
     }
