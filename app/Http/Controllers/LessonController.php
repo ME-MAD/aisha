@@ -37,6 +37,8 @@ class LessonController extends Controller
         Lesson::create([
             'subject_id' => $request->subject_id,
             'title' => $request->title,
+            'from_page' => $request->from_page,
+            'to_page' => $request->to_page,
             'chapters_count' => $request->chapters_count,
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');
@@ -48,6 +50,8 @@ class LessonController extends Controller
         $lesson->update([
             'subject_id' => $request->subject_id,
             'title' => $request->title,
+            'from_page' => $request->from_page,
+            'to_page' => $request->to_page,
             'chapters_count' => $request->chapters_count,
         ]);
         Alert::toast('تمت العملية بنجاح', 'success');

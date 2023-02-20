@@ -75,7 +75,7 @@ function initEditeLessonModal() {
         $('#editLessonForm #from_page').val(lesson.from_page)
         $('#editLessonForm #to_page').val(lesson.to_page)
 
-        $('#editExperienceForm').attr('action', href)
+        $('#editLessonForm').attr('action', href)
     })
 }
 

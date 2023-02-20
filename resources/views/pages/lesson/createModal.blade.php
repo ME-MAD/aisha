@@ -71,7 +71,7 @@
                             <div class="form-group row mb-4">
                                 <label for="name"
                                        class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">عدد
-                                    الايات
+                                    الدرس
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                             </label>
                                 <div class="col-xl-12 col-md-6">
