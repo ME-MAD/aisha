@@ -8,6 +8,7 @@ use App\Http\Requests\Payment\getPaymentCountOfGroupByMonth;
 use App\Http\Requests\Payment\getPaymentsOfGroupByMonth;
 use App\Http\Requests\Payment\StorePaymentRequest;
 use App\Http\Traits\AuthTrait;
+use App\Models\Payment;
 use App\Services\Group\GroupService;
 use App\Services\Payment\PaymentChartService;
 use App\Services\Payment\PaymentService;
@@ -61,6 +62,13 @@ class PaymentController extends Controller
         return response()->json([
             'status' => 200
         ]);
+    }
+
+    public function delete(Payment $payment)
+    {
+         $payment->delete();
+         Alert::toast('تمت العملية بنجاح', 'success');
+         return redirect()->back();
     }
 
     public function getPaymentsOfGroupByMonth(getPaymentsOfGroupByMonth $request)
