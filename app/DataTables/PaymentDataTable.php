@@ -19,7 +19,7 @@ class PaymentDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('delete', 'pages.groupStudent.datatable.delete')
+            ->addColumn('delete', 'pages.payment.datatable.delete')
             ->editColumn('student.name', function ($q) {
                 return $q->student->name ?? "";
             })
@@ -125,36 +125,36 @@ class PaymentDataTable extends DataTable
 
             [
                 'name' => 'student_id',
-                'data' => 'student_id',
-                'title' => 'student_id',
+                'data' => 'student.name',
+                'title' => 'الطلاب',
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'group_id',
-                'data' => 'group_id',
-                'title' => 'group_id',
+                'data' => 'group.name',
+                'title' => 'المجموعات',
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'amount',
                 'data' => 'amount',
-                'title' => 'amount',
+                'title' => 'القيمة',
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'month',
                 'data' => 'month',
-                'title' => 'month',
+                'title' => 'الشهر',
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'paid',
                 'data' => 'paid',
-                'title' => 'paid',
+                'title' => 'دفع',
                 "className" => 'search--col'
             ],
         ];
@@ -164,7 +164,7 @@ class PaymentDataTable extends DataTable
             $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => 'Delete',
+                'title' => 'حذف',
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
