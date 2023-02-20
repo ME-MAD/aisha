@@ -27,6 +27,8 @@ class StoreLessonRequest extends FormRequest
             'subject_id' => "required",
             'title' => "required",
             'chapters_count' => "required",
+            'from_page' => 'required|integer|lte:to_page',
+            'to_page' => 'required|integer',
         ];
     }
 }
