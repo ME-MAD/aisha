@@ -1,4 +1,4 @@
-<div class="skills layout-spacing ">
+{{-- <div class="skills layout-spacing ">
     <div class="widget-content widget-content-area">
         <h3 class="">Quran Surah</h3>
         <div class="zoom-view-port" id="zoom-view-port">
@@ -17,4 +17,13 @@
     </div>
 </div>
 
-<div id="fullpage" onclick="this.style.display='none';"></div>
+<div id="fullpage" onclick="this.style.display='none';"></div> --}}
+
+
+{{-- <embed id="embed" src="" type="application/pdf" width="100%" height="600px" /> --}}
+
+{{-- <object id="embed" type="application/pdf" data="" width="995" height="841" ></object>
+
+<a href="http://127.0.0.1:8000/files/subjects/%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7%D8%A7_book.pdf#page=8">Jump to page 9</a> --}}
+
+<canvas id="the-canvas" width="100%" height="600px"></canvas>

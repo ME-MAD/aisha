@@ -1,6 +1,7 @@
 import {renderGroupDays} from "./groups.js"
 import {handleShowingOfTheBook, handleOpenPageClick} from "./book.js"
 import {renderLessonsHtml} from "./lesson.js"
+import { setBook } from "./shared.js"
 
 // let groupStudentsContainer = $('#groupStudentsContainer')
 // let studentId = $('#studentProfileContainer').data('student-id')
@@ -54,13 +55,48 @@ function handleOnClickSubject(groupStudent, subjects)
         let groupId = groupStudent.group_id
 
 
+        console.log(subject);
+
+        // $('#embed').attr('data',subject.book + "#page=" + 1);
+        // $('#embed').attr('src',subject.book + "#page=" + 1);
+
+        var loadingTask = pdfjsLib.getDocument(subject.book);
+        
+        loadingTask.promise.then(function(pdf) {
+            pdf.getPage(1).then(function(page) {
+                var scale = 1.5;
+                var viewport = page.getViewport({ scale: scale, });
+                // Support HiDPI-screens.
+                var outputScale = window.devicePixelRatio || 1;
+
+                var canvas = document.getElementById('the-canvas');
+                var context = canvas.getContext('2d');
+
+                canvas.width = Math.floor(viewport.width * outputScale);
+                canvas.height = Math.floor(viewport.height * outputScale);
+                canvas.style.width = Math.floor(viewport.width) + "px";
+                canvas.style.height =  Math.floor(viewport.height) + "px";
+
+                var transform = outputScale !== 1
+                ? [outputScale, 0, 0, outputScale, 0, 0]
+                : null;
+
+                var renderContext = {
+                canvasContext: context,
+                transform: transform,
+                viewport: viewport
+                };
+                page.render(renderContext);
+            });
+        });
+
         renderLessonsHtml(subject, groupId, studentId, groupStudent)
 
 
-        handleShowingOfTheBook(1 , subject)
+        // handleShowingOfTheBook(1 , subject)
 
 
-        handleOpenPageClick(subject)
+        // handleOpenPageClick(subject)
 
 
         $(`#backToSubjects${groupStudent.id}`).on('click',function(){

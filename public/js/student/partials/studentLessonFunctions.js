@@ -1,5 +1,5 @@
 import { changePercentageBar, getLesson } from "./shared.js";
-
+import { setBook } from "./shared.js";
 export function handleLessonFinishedCheckbox()
 {
     $('.lesson_finished_checkbox').on('change',function(){
@@ -60,9 +60,13 @@ export function addNewLessonHandler(studentId, subject)
     let lesson_id = null;
     let mainParent = null;
     let lesson = null; 
+
+
     
 
     $('.newLessonButton').on('click',function(){
+        setBook(subject, 7)
+
         $('#newLessonModal').modal('show')
         student_lesson_id = $(this).data('student-lesson-id')
         let last_page_finished = $(this).data('last-page-finished')
