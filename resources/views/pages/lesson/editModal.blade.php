@@ -43,7 +43,9 @@
                             <div class="form-group row mb-4">
                                 <label for="name"
                                     class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">بداية
-                                    الصفحة</label>
+                                    الصفحة
+                                    <i class="fa-solid fa-star-of-life required-star"></i>
+                                </label>
                                 <div class="col-xl-12 col-md-6">
                                     <input type="number" class="form-control" placeholder="" name="from_page" id="from_page"
                                         min="0" max="">
@@ -57,7 +59,9 @@
                             <div class="form-group row mb-4">
                                 <label for="name"
                                     class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">نهاية
-                                    الصفحة</label>
+                                    الصفحة
+                                    <i class="fa-solid fa-star-of-life required-star"></i>
+                                </label>
                                 <div class="col-xl-12 col-md-6">
                                     <input type="number" class="form-control" placeholder="" name="to_page" id="to_page"
                                         min="0" max="">
