@@ -12,3 +12,8 @@ export function getLesson(lessons,lesson_id) {
         return( lesson.id == lesson_id)
     })[0]
 }
+
+export function setBook(subject, page = 3)
+{
+    $('#embed').attr('src',subject.book + "#page=" + page);
+}

@@ -87,14 +87,15 @@ export class StudentLesson
 
     getNextLessonReviewData()
     {
+        console.log(this.getNextLessonReview());
         if(this.getStudentLessonReview() || this.getNextLessonReview())
         {
             return {
                 nextLesson: this.getNextLessonReview() || null,
                 fromChapter: this.getNextLessonReview()?.from_chapter || 0,
                 toChapter: this.getNextLessonReview()?.to_chapter || 0,
-                fromPage: this.getNextLessonReview()?.from_page || null,
-                toPage: this.getNextLessonReview()?.to_page || null,
+                fromPage: this.getNextLessonReview()?.from_page == null ? null : 0,
+                toPage: this.getNextLessonReview()?.to_page == null ? null : 0,
                 id: this.getNextLessonReview()?.id || null,
                 lastChapter: this.getStudentLessonReview()?.last_chapter_finished || 0,
                 finishPercentage: this.getStudentLessonReview()?.percentage || 0,

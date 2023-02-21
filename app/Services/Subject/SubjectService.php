@@ -21,25 +21,25 @@ class SubjectService
     public function createSubject($request,$book_name,$fileName)
     {
         return  Subject::create([
-                'name' => $request->name,
-                'book' => $book_name,
-                'avatar' => $fileName,
-               ]);
-    }
-
-    public function updateSubject($subject,$request,$book_name,$fileName)
-    {
-        return   $subject->update([
             'name' => $request->name,
             'book' => $book_name,
             'avatar' => $fileName,
         ]);
     }
 
-    public function convertedSubjectBookToBookName($subject,$book_name)
+    public function updateSubject($subject,$request,$book_name,$fileName)
+    {
+        return $subject->update([
+            'name' => $request->name,
+            'book' => $book_name,
+            'avatar' => $fileName,
+        ]);
+    }
+
+    public function convertedSubjectBookToBookName($old_name,$book_name)
     {
         return   rename(
-                    public_path($subject->book),
+                    public_path($old_name),
                     public_path('files/subjects/' . $book_name)
                 );
     }

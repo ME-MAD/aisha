@@ -18,6 +18,7 @@
 
     <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
     <!--  END CUSTOM STYLE FILE  -->
+
 @endpush
 
 @section('breadcrumb')
@@ -100,15 +101,16 @@
 
 
 @push('js')
-    <script src="{{ asset('adminAssets/plugins/turn/turn.min.js') }}"></script>
-    {{-- <script src="{{ asset('js/subject.js') }}"></script> --}}
+
+    <script src="{{asset('adminAssets/plugins/pdf/pdf.js')}}"></script>
+
+
     <script type="module" src="{{ asset('js/student/show.js') }}"></script>
+
+
     <script>
-
-        // renderSubjectsInStudentsShow()
         initEditeStudentModal()
-
-</script>
+    </script>
 
 @endpush
 

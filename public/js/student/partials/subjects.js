@@ -1,6 +1,8 @@
 import {renderGroupDays} from "./groups.js"
-import {handleShowingOfTheBook, handleOpenPageClick} from "./book.js"
+// import {handleShowingOfTheBook, handleOpenPageClick} from "./book.js"
+import {Book, handleOpenPageClick} from "./book.js"
 import {renderLessonsHtml} from "./lesson.js"
+import { setBook } from "./shared.js"
 
 // let groupStudentsContainer = $('#groupStudentsContainer')
 // let studentId = $('#studentProfileContainer').data('student-id')
@@ -54,13 +56,27 @@ function handleOnClickSubject(groupStudent, subjects)
         let groupId = groupStudent.group_id
 
 
+        let book = new Book(subject.book)
+
+        book.renderPage()
+
+        $('#next').click(function(){
+            book.onNextPage()
+        })
+        $('#prev').click(function(){
+            book.onPrevPage()
+        })
+
+
+        $('#showBookBtn').click(function(){
+            $('#showBookModal').modal('show')
+        })
+
+
         renderLessonsHtml(subject, groupId, studentId, groupStudent)
 
 
-        handleShowingOfTheBook(1 , subject)
-
-
-        handleOpenPageClick(subject)
+        handleOpenPageClick(book)
 
 
         $(`#backToSubjects${groupStudent.id}`).on('click',function(){

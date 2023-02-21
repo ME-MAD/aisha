@@ -5,6 +5,6 @@ export const PAGE_NUMBER_ELEMENTS = [
         'nextLessonFromPageReview',
         'nextLessonToPage',
         'nextLessonToPageReview',
-        // 'nextReviewLessonFromPage',
-        // 'nextReviewLessonToPage',
+        'nextReviewLessonFromPage',
+        'nextReviewLessonToPage',
 ]

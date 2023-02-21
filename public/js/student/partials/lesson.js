@@ -224,6 +224,8 @@ function getLessonHtml(lesson , nlData, groupId, studentId, studentLesson)
 
 function getLessonReviewHtml(lesson, nlData, nlrData,groupId, studentId, studentLessonReview)
 {
+
+    console.log(nlrData);
     return `
         <div class="studentLessonContainerReview">
 
