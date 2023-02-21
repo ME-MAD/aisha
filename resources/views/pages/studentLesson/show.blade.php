@@ -23,6 +23,8 @@
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminRtl/assets/css/components/timeline/custom-timeline.css') }}"/>
+
+              <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
     @else
 
         <link rel="stylesheet"
@@ -44,60 +46,84 @@
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminAssets/assets/css/components/timeline/custom-timeline.css') }}"/>
+
+      <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
+        
     @endif
 
 @endpush
 
 @section('breadcrumb')
-    <div class="page-header">
-        <div class="page-title">
-            <h3>Lesson {{ $studentLesson->lesson->title ?? '' }}</h3>
-        </div>
-        <div class="dropdown filter custom-dropdown-icon">
-            <a class="dropdown-toggle btn" href="#" role="button" id="filterDropdown" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false"><span class="text"><span>Show</span> : Daily
-                    Analytics</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                     class="feather feather-chevron-down">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="filterDropdown">
-                <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                   href="{{ route('admin.home') }}">Home</a>
-                <a class="dropdown-item" data-value="<span>Show</span> : Daily Analytics"
-                   href="{{ route('admin.student.show', $studentLesson->student_id) }}">
-                    Student {{ $studentLesson->student->name ?? '' }}
-                </a>
+    <div class="row my-3 ">
+        <div class="col-md-12">
+            <div class="breadcrumb bg-transparent">
+    
+                <div class="breadcrumb-four">
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{{route('admin.home')}}"
+                               class="d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-house mx-2 fa-2x"></i>
+                                <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{{route('admin.group.index')}}"
+                               class="d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-users-rays fa-2x mx-2"></i>
+                                <span class="font-weight-bold ">المجموعات</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{{route('admin.group.index')}}"
+                               class="d-flex justify-content-center align-items-center">
+                                <i class="fa-regular fa-folder-open fa-2x mx-2"></i>
+                                <span class="font-weight-bold ">{{$studentLesson->student->name}}</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="{{ route('admin.student.show', $studentLesson->student_id) }}"
+                               class="d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-file-circle-check fa-2x mx-2"></i>
+                                <span class="font-weight-bold ">
+                                    {{ $studentLesson->lesson->title ?? '' }}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 @endsection
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row layout-spacing">
-            <div class="col-lg-12">
-                <div class="statbox widget box box-shadow">
-                    <div class="bio layout-spacing ">
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+                <div class="row">
+                    <div class="col-xl-6 col-sm-12">
+
+
                         @include('pages.studentLesson.partials.sectionOne')
+
                     </div>
-                    <div class="bio layout-spacing ">
+                    <div class="col-xl-6 col-sm-12">
+
+
                         @include('pages.studentLesson.partials.sectionTwo')
+
                     </div>
-                    <div class="bio layout-spacing ">
-                        @include('pages.studentLesson.partials.sectionThird')
-                    </div>
-                    <div class="widget-content widget-content-area br-6">
-                        @include('pages.studentLesson.partials.newLessons')
-                    </div>
-                    <div class="bio layout-spacing ">
-                        @if ($studentLessonReview)
-                            @include('pages.studentLesson.partials.studentLessonReview')
-                        @endif
-                    </div>
+                </div>
+                <div class="row">
+
+                    
+                    @include('pages.studentLesson.partials.sectionThird')
+                    @include('pages.studentLesson.partials.newLessons')
+                    @if ($studentLessonReview)
+                    @include('pages.studentLesson.partials.studentLessonReview')
+                    @endif
+
+
                 </div>
             </div>
         </div>
@@ -113,36 +139,29 @@
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/buttons.print.min.js') }}"></script>
     <script>
-        $('#html5-extension').DataTable({
+        $('#html5-extension_1').DataTable({
             dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
             buttons: {
-                buttons: [{
-                    extend: 'copy',
-                    className: 'btn'
-                },
-                    {
-                        extend: 'csv',
-                        className: 'btn'
-                    },
-                    {
-                        extend: 'excel',
-                        className: 'btn'
-                    },
+                buttons: [
                     {
                         extend: 'print',
-                        className: 'btn'
+                        className: 'btn btn-secondary'
                     }
                 ]
             },
-            "oLanguage": {
-                "oPaginate": {
-                    "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
-                    "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>'
-                },
-                "sInfo": "Showing page _PAGE_ of _PAGES_",
-                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
-                "sSearchPlaceholder": "Search...",
-                "sLengthMenu": "Results :  _MENU_",
+            "stripeClasses": [],
+            "lengthMenu": [7, 10, 20, 50],
+            "pageLength": 7
+        });
+        $('#html5-extension_2').DataTable({
+            dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
+            buttons: {
+                buttons: [
+                    {
+                        extend: 'print',
+                        className: 'btn btn-secondary'
+                    }
+                ]
             },
             "stripeClasses": [],
             "lengthMenu": [7, 10, 20, 50],
