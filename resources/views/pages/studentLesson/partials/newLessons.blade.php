@@ -7,8 +7,8 @@
             </h3>
         </div>
         <div class="card-body">
-            <div class="user-info-list">
-                    <table class="table table-bordered table-hover table-responsive table-striped mb-4">
+            <div class="user-info-list table-responsive ">
+                    <table class="table table-bordered table-hover table-striped mb-4">
                         <thead>
                             <tr>
                                 <th class="text-secondary">From Chapter</th>

@@ -6,8 +6,8 @@
             </h3>
         </div>
         <div class="card-body">
-            <div class="user-info-list">
-                    <table class="table table-responsive mb-4">
+            <div class="user-info-list table-responsive">
+                    <table class="table mb-4">
                         <thead>
                             <tr>
                                 <th class="text-secondary">Id</th>
