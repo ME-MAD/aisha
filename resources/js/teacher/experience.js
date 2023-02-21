@@ -10,7 +10,6 @@ export function groupAgesChartRun()
         var chartDom = document.getElementById('experiencesChartCanva');
         var myChart = echarts.init(chartDom);
         var option;
-        console.log(data);
         
         option = {
             title: {
@@ -20,6 +19,7 @@ export function groupAgesChartRun()
             },
             tooltip: {
                 trigger: 'item',
+                formatter: "{c}"
             },
             legend: {
                 orient: 'vertical',

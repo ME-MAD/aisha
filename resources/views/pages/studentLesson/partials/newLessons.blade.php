@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
             <div class="user-info-list">
-                    <table class="table table-bordered table-hover table-striped mb-4">
+                    <table class="table table-bordered table-hover table-responsive table-striped mb-4">
                         <thead>
                             <tr>
                                 <th class="text-secondary">From Chapter</th>
@@ -27,7 +27,7 @@
                                         <td>{{ $syllab->to_chapter }}</td>
                                         <td>{{ $syllab->from_page }}</td>
                                         <td>{{ $syllab->to_page }}</td>
-                                        @if ($syllab->finished == 1)
+                                    @if ($syllab->finished == 1)
                                         <td>
                                             <span class="badge badge-success"> 
                                                 Completed

@@ -10,10 +10,6 @@
 
         <link rel="stylesheet"
               type="text/css"
-              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}">
-
-        <link rel="stylesheet"
-              type="text/css"
               href="{{ asset('adminRtl/assets/css/users/user-profile.css') }}"/>
 
         <link rel="stylesheet"
@@ -33,10 +29,6 @@
 
         <link rel="stylesheet"
               type="text/css"
-              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}">
-
-        <link rel="stylesheet"
-              type="text/css"
               href="{{ asset('adminAssets/assets/css/users/user-profile.css') }}"/>
 
         <link rel="stylesheet"
@@ -48,7 +40,6 @@
               href="{{ asset('adminAssets/assets/css/components/timeline/custom-timeline.css') }}"/>
 
       <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
-        
     @endif
 
 @endpush

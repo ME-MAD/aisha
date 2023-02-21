@@ -1,5 +1,5 @@
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4 my-4">
-    <div class="card ">
+    <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables_show_teacher">
             <h3 class="text-capitalize text-white">
                 مراجعة الدرس
@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
             <div class="user-info-list">
-                    <table class="table table-bordered table-hover table-striped mb-4">
+                    <table class="table table-responsive mb-4">
                         <thead>
                             <tr>
                                 <th class="text-secondary">Id</th>
@@ -17,7 +17,7 @@
                                 <th class="text-secondary">To Page</th>
                                 <th class="text-secondary">Finished</th>
                                 <th class="text-secondary">Rate</th>
-                                 <th class="text-secondary">Date</th>
+                                <th class="text-secondary">Date</th>
                             </tr>
                         </thead>
                         <tbody>

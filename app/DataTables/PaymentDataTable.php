@@ -125,14 +125,14 @@ class PaymentDataTable extends DataTable
             ],
 
             [
-                'name' => 'student_id',
+                'name' => 'student.name',
                 'data' => 'student.name',
                 'title' => 'الطلاب',
                 "className" => 'search--col'
             ],
 
             [
-                'name' => 'group_id',
+                'name' => 'group.name',
                 'data' => 'group.name',
                 'title' => 'المجموعات',
                 "className" => 'search--col'
