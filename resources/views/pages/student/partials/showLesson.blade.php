@@ -9,7 +9,7 @@
 
 
                 
-                <canvas id="book-canvas" width="800px" height="800px"></canvas>
+                <canvas id="book-canvas" width="600px" height="800px"></canvas>
 
 
                 @if (LaravelLocalization::getCurrentLocale() == 'ar')

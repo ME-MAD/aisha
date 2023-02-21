@@ -113,3 +113,9 @@
 .nextLessonToPageReview{
     cursor: pointer;
 }
+
+
+
+#book-canvas{
+    width: 100%;
+}

@@ -25,6 +25,13 @@ export class Book
       pdf.getPage(this.pageNum).then((page) => {
 
         var viewport = page.getViewport({scale: this.scale});
+        console.log(viewport);
+        console.log($(window).width());
+        console.log($(window).height());
+        // this.canvas.height = $(window).height();
+        // this.canvas.width = $(window).width() - 100;
+        // viewport.height = $(window).height()
+        // viewport.width = $(window).width();
         // this.canvas.height = viewport.height;
         // this.canvas.width = viewport.width;
   
