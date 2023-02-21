@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
+use App\Services\Permission\PermissionService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class BladeServiceProvider extends ServiceProvider
 {
+
     /**
      * Register services.
      *
@@ -15,7 +17,7 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
@@ -23,15 +25,15 @@ class BladeServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(PermissionService $permissionService)
     {
-        Blade::if('check_permission', function ($permission) {
-            return userCan($permission);
+        Blade::if('check_permission', function ($permission) use($permissionService) {
+            return in_array($permission, $permissionService->getPermissionsRedis());
         });
 
-        Blade::if('check_permission_in_permissions', function (array $permissions) {
+        Blade::if('check_permission_in_permissions', function (array $permissions) use($permissionService) {
             foreach ($permissions as $permission) {
-                if (Auth::guard(getGuard())->user()->isAbleTo($permission)) {
+                if (in_array($permission, $permissionService->getPermissionsRedis())) {
                     return true;
                 }
             }

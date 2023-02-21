@@ -12,6 +12,7 @@ use App\Services\Group\GroupService;
 use App\Services\GroupType\GroupTypeService;
 use App\Services\HomeService;
 use App\Services\Payment\PaymentChartService;
+use App\Services\Permission\PermissionService;
 use App\Services\Role\RoleService;
 use App\Services\Teacher\TeacherService;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -26,6 +27,7 @@ class GroupController extends Controller
     private PaymentChartService $paymentChartService;
     private RoleService $roleService;
     private HomeService $homeService;
+    private PermissionService $permissionService;
 
     public function __construct(
         TeacherService      $teacherService,
@@ -33,7 +35,8 @@ class GroupController extends Controller
         GroupService        $groupService,
         PaymentChartService $paymentChartService,
         RoleService $roleService,
-        HomeService $homeService
+        HomeService $homeService,
+        PermissionService $permissionService
     )
     {
         $this->teacherService = $teacherService;
@@ -42,9 +45,10 @@ class GroupController extends Controller
         $this->paymentChartService = $paymentChartService;
         $this->roleService = $roleService;
         $this->homeService = $homeService;
+        $this->permissionService = $permissionService;
 
 
-        $this->handlePermissions([
+        $this->permissionService->handlePermissions($this,[
             'index' => 'index-group',
             'store' => 'store-group',
             'update' => 'update-group',

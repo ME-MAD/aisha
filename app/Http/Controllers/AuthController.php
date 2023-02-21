@@ -4,17 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use App\Services\Permission\PermissionService;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
 
-    public function __construct()
+    private $permissionService;
+
+    public function __construct(PermissionService $permissionService)
     {
         $this->middleware('guest')->except('logout');
+
+        $this->permissionService = $permissionService;
     }
 
 
@@ -34,6 +40,10 @@ class AuthController extends Controller
         $dataLoginPage = $request->only(['email', 'password']);
         if (Auth::guard($request->type)->attempt($dataLoginPage)) 
         {
+            $permissions = Auth::guard(getGuard())->user()->allPermissions()->pluck('name');
+
+            $this->permissionService->setPermissionsRedis($permissions);
+
             Session::put('admin_guard', $request->type);
             Alert::success('تم الدخول بنجاح');
 

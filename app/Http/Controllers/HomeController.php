@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
 use App\Services\HomeService;
-use DateTime;
 
 class HomeController extends Controller
 {
@@ -19,9 +17,7 @@ class HomeController extends Controller
 
     public function index()
     {
-
         $groupsCountsData = $this->homeService->getGroupsCountsData();
-
 
         return view('pages.home.home', $groupsCountsData);
     }

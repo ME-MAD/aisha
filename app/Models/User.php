@@ -54,7 +54,6 @@ class User extends Authenticatable
             'id',
             'id',
             'role_id');
-
     }
 
     public function rolePermissions()
