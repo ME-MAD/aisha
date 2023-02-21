@@ -100,12 +100,11 @@ export function handleOpenPageClick(book)
     PAGE_NUMBER_ELEMENTS.forEach(className => {
       $(`.${className}`).click(function(){
           let lastPageFinished = $(this).data('last-page-finished') || 1
-
+          
           $('#showBookModal').modal('show')
 
-          book.pageNum = lastPageFinished
+          book.pageNum = Number(lastPageFinished)
           book.renderPage()
-         
       })
     });
 }
