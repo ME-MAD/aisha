@@ -19,10 +19,6 @@
     <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
     <!--  END CUSTOM STYLE FILE  -->
 
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.3.122/web/pdf_viewer.min.css">
-
-
 @endpush
 
 @section('breadcrumb')
@@ -106,18 +102,15 @@
 
 @push('js')
 
-<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.3.122/build/pdf.min.js"></script>
+    <script src="{{asset('adminAssets/plugins/pdf/pdf.js')}}"></script>
 
 
-    <script src="{{ asset('adminAssets/plugins/turn/turn.min.js') }}"></script>
-    {{-- <script src="{{ asset('js/subject.js') }}"></script> --}}
     <script type="module" src="{{ asset('js/student/show.js') }}"></script>
+
+
     <script>
-
-        // renderSubjectsInStudentsShow()
         initEditeStudentModal()
-
-</script>
+    </script>
 
 @endpush
 
