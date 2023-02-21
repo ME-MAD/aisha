@@ -99,11 +99,17 @@
 .nextLessonFromPage,
 .nextLessonToPage,
 .nextLessonToChapter,
-.nextLessonFromChapter{
+.nextLessonFromChapter,
+.nextLessonFromPageReview,
+.nextLessonToPageReview,
+.nextLessonToChapterReview,
+.nextLessonFromChapterReview{
     font-size: 1.5rem;
 }
 
 .nextLessonFromPage,
-.nextLessonToPage{
+.nextLessonToPage,
+.nextLessonFromPageReview,
+.nextLessonToPageReview{
     cursor: pointer;
 }

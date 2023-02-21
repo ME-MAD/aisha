@@ -73,9 +73,9 @@ class SubjectController extends Controller
 
         $subject = $this->subjectService->createSubject($request,$book_name,$fileName);
 
-        BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
+        // BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
 
-        Alert::toast('قد تاخذ عملية تجهيز الكتاب بعض الوقت', 'warning');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.subject.index'));
     }
 
@@ -105,7 +105,7 @@ class SubjectController extends Controller
         if ($book = $request->file('book')) {
             $this->PDFService->deleteFile($subject->book);
 
-            $this->PDFService->deleteDirectory($subject->directoryName());
+            // $this->PDFService->deleteDirectory($subject->directoryName());
 
             $book_name = $this->PDFService->uploadPdfFile(
                 $book,
@@ -117,19 +117,18 @@ class SubjectController extends Controller
         } else {
             $book_name = $request->name . "_book" . "." . "pdf";
 
-            if (file_exists($subject->book)) {
+            if (file_exists(public_path($subject->book))) {
                
                 $this->subjectService->convertedSubjectBookToBookName($subject->book,$book_name);
-                
-                $this->subjectService->switchSubjectNameToRequetName($subject->name,$request->name);
+                // $this->subjectService->switchSubjectNameToRequetName($subject->name,$request->name);
             }
         }
 
-        $this->subjectService->updateSubject($subject,$request->name,$book_name,$fileName);
+        $this->subjectService->updateSubject($subject,$request,$book_name,$fileName);
 
-        BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
+        // BreakPDFIntoImagesJob::dispatch($this->PDFService, $subject);
 
-        Alert::toast('قد تاخذ عملية تجهيز الكتاب بعض الوقت', 'warning');
+        Alert::toast('تمت العملية بنجاح', 'success');
         return redirect(route('admin.subject.index'));
     }
 
@@ -139,7 +138,7 @@ class SubjectController extends Controller
             path: $subject->getAvatarPath()
         );
         $this->PDFService->deleteFile($subject->book);
-        $this->PDFService->deleteDirectory($subject->directoryName());
+        // $this->PDFService->deleteDirectory($subject->directoryName());
 
         $subject->delete();
 

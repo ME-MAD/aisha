@@ -68,10 +68,12 @@ function handleOnClickSubject(groupStudent, subjects)
         })
 
 
+        $('#showBookBtn').click(function(){
+            $('#showBookModal').modal('show')
+        })
+
+
         renderLessonsHtml(subject, groupId, studentId, groupStudent)
-
-
-        // handleShowingOfTheBook(1 , subject)
 
 
         handleOpenPageClick(book)
