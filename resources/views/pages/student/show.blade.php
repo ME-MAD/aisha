@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <li class="active">
-                        <a href="{{route('admin.teacher.index')}}"
+                        <a href="{{route('admin.student.show', $student->id)}}"
                            class="d-flex justify-content-center align-items-center">
 
                              <i class="fa-solid fa-user-check fa-2x mx-2"></i>
