@@ -28,7 +28,7 @@ class RoleController extends Controller
         $this->roleService = $roleService;
         $this->permissionService = $permissionService;
 
-        $this->handlePermissions([
+        $this->permissionService->handlePermissions($this,[
             'index' => 'index-role',
             'store' => 'store-role',
             'update' => 'update-role',

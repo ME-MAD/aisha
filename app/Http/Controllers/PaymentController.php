@@ -12,6 +12,7 @@ use App\Models\Payment;
 use App\Services\Group\GroupService;
 use App\Services\Payment\PaymentChartService;
 use App\Services\Payment\PaymentService;
+use App\Services\Permission\PermissionService;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -22,18 +23,21 @@ class PaymentController extends Controller
     private PaymentChartService $paymentChartService;
     private PaymentService $PaymentService;
     private GroupService $groupService;
+    private PermissionService $permissionService;
 
     public function __construct(
         PaymentChartService $paymentChartService,
         PaymentService      $PaymentService,
-        GroupService        $groupService
+        GroupService        $groupService,
+        PermissionService $permissionService
     )
     {
         $this->paymentChartService = $paymentChartService;
         $this->PaymentService = $PaymentService;
         $this->groupService = $groupService;
+        $this->permissionService = $permissionService;
 
-        $this->handlePermissions([
+        $this->permissionService->handlePermissions($this,[
             'index' => 'index-payment',
             'store' => 'store-payment',
             'create' => 'create-payment',

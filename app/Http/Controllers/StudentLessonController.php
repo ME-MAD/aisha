@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StudentLesson\StoreStudentLessonRequest;
 use App\Http\Traits\AuthTrait;
 use App\Models\StudentLesson;
+use App\Services\Permission\PermissionService;
 use App\Services\StudentLesson\StudentLessonService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -17,12 +18,17 @@ class StudentLessonController extends Controller
     use AuthTrait;
 
     private StudentLessonService $studentLessonService;
+    private PermissionService $permissionService;
 
-    public function __construct(StudentLessonService $studentLessonService)
+    public function __construct(
+        StudentLessonService $studentLessonService,
+        PermissionService $permissionService
+        )
     {
         $this->studentLessonService = $studentLessonService;
+        $this->permissionService = $permissionService;
 
-        $this->handlePermissions([
+       $this->permissionService->handlePermissions($this,[
             'show' => 'show-studentLesson',
             'store' => 'store-studentLesson',
         ]);
