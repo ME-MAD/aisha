@@ -9,6 +9,7 @@ use App\Jobs\BreakPDFIntoImagesJob;
 use App\Models\Subject;
 use App\Services\ImageService;
 use App\Services\PDFService;
+use App\Services\Permission\PermissionService;
 use App\Services\Subject\SubjectService;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -19,19 +20,23 @@ class SubjectController extends Controller
     private ImageService $imageService;
     private PDFService $PDFService;
     private SubjectService $subjectService;
+    private PermissionService $permissionService;
     
 
     public function __construct(
         ImageService $imageService,
         PDFService   $PDFService,
         SubjectService   $subjectService,
+        PermissionService $permissionService
     )
     {
         $this->imageService = $imageService;
         $this->PDFService = $PDFService;
         $this->subjectService = $subjectService;
+        $this->permissionService = $permissionService;
 
-        $this->handlePermissions([
+
+        $this->permissionService->handlePermissions($this,[
             'index' => 'index-subject',
             'create' => 'create-subject',
             'store' => 'store-subject',

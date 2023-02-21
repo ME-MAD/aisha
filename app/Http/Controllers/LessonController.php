@@ -8,15 +8,20 @@ use App\Http\Requests\Lesson\UpdateLessonRequest;
 use App\Http\Traits\AuthTrait;
 use App\Models\Lesson;
 use App\Models\Subject;
+use App\Services\Permission\PermissionService;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class LessonController extends Controller
 {
     use  AuthTrait;
 
-    public function __construct()
+    private PermissionService $permissionService;
+
+    public function __construct(PermissionService $permissionService)
     {
-        $this->handlePermissions([
+        $this->permissionService = $permissionService;
+
+        $this->permissionService->handlePermissions($this,[
             'index' => 'index-lesson',
             'store' => 'store-lesson',
             'update' => 'update-lesson',

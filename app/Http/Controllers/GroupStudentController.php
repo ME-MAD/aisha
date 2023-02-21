@@ -8,6 +8,7 @@ use App\Http\Traits\AuthTrait;
 use App\Models\GroupStudent;
 use App\Services\Group\GroupService;
 use App\Services\GroupStudent\GroupStudentService;
+use App\Services\Permission\PermissionService;
 use App\Services\Student\StudentService;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -19,19 +20,22 @@ class GroupStudentController extends Controller
     private GroupStudentService $groupStudentService;
     private GroupService $groupService;
     private StudentService $StudentService;
+    private PermissionService $permissionService;
 
     public function __construct(
         GroupStudentService $groupStudentService,
         GroupService        $groupService,
         StudentService      $StudentService,
+        PermissionService $permissionService
     )
     {
         $this->groupStudentService = $groupStudentService;
         $this->groupService = $groupService;
         $this->StudentService = $StudentService;
+        $this->permissionService = $permissionService;
 
 
-        $this->handlePermissions([
+        $this->permissionService->handlePermissions($this,[
             'index' => 'index-groupDay',
             'store' => 'store-groupDay',
             'delete' => 'delete-groupDay',

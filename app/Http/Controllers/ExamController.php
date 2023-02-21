@@ -10,6 +10,7 @@ use App\Models\Exam;
 use App\Models\Group;
 use App\Models\Lesson;
 use App\Models\Student;
+use App\Services\Permission\PermissionService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -19,10 +20,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 class ExamController extends Controller
 {
     use  AuthTrait;
+    private PermissionService $permissionService;
 
-    public function __construct()
+    public function __construct(PermissionService $permissionService)
     {
-        $this->handlePermissions([
+        $this->permissionService = $permissionService;
+
+        $this->permissionService->handlePermissions($this,[
             'index' => 'index-exam',
             'store' => 'store-exam',
             'update' => 'update-exam',

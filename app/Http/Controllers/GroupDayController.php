@@ -9,11 +9,11 @@ use App\Models\Group;
 use App\Models\GroupDay;
 use App\Services\Group\GroupService;
 use App\Services\GroupDay\GroupDayService;
+use App\Services\Permission\PermissionService;
 use DateTime;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupDayController extends Controller
@@ -23,19 +23,22 @@ class GroupDayController extends Controller
     private GroupDayDataTable $groupDayDataTable;
     private GroupDayService $groupDayService;
     private GroupService $groupService;
+    private PermissionService $permissionService;
 
     public function __construct(
         GroupDayDataTable $groupDayDataTable,
         GroupDayService   $groupDayService,
-        GroupService      $groupService
+        GroupService      $groupService,
+        PermissionService $permissionService
     )
     {
         $this->groupDayDataTable = $groupDayDataTable;
         $this->groupDayService = $groupDayService;
         $this->groupService = $groupService;
+        $this->permissionService = $permissionService;
 
 
-        $this->handlePermissions([
+        $this->permissionService->handlePermissions($this,[
             'index' => 'index-groupDay',
             'store' => 'store-groupDay',
             'delete' => 'delete-groupDay',

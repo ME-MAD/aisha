@@ -9,6 +9,7 @@ use App\Http\Traits\AuthTrait;
 use App\Models\Role;
 use App\Models\Teacher;
 use App\Services\Experience\ExperienceService;
+use App\Services\Permission\PermissionService;
 use App\Services\Teacher\TeacherService;
 use Illuminate\Http\JsonResponse;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -20,18 +21,22 @@ class TeacherController extends Controller
     private TeacherDataTable $teacherDataTable;
     private TeacherService $teacherService;
     private ExperienceService $experienceService;
+    private PermissionService $permissionService;
 
     public function __construct(
         TeacherDataTable  $teacherDataTable,
         TeacherService    $teacherService,
-        ExperienceService $experienceService
+        ExperienceService $experienceService,
+        PermissionService $permissionService
     )
     {
         $this->teacherDataTable = $teacherDataTable;
         $this->teacherService = $teacherService;
         $this->experienceService = $experienceService;
+        $this->permissionService = $permissionService;
 
-        $this->handlePermissions([
+
+        $this->permissionService->handlePermissions($this,[
             'index' => 'index-teacher',
             'store' => 'store-teacher',
             'show' => 'show-teacher',

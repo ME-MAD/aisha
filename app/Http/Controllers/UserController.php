@@ -7,6 +7,7 @@ use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Traits\AuthTrait;
 use App\Models\User;
+use App\Services\Permission\PermissionService;
 use App\Services\Role\RoleService;
 use App\Services\User\UserService;
 use Illuminate\Http\RedirectResponse;
@@ -18,14 +19,20 @@ class UserController extends Controller
 
     private UserService $userService;
     private RoleService $roleService;
+    private PermissionService $permissionService;
 
-    public function __construct(UserService $userService, RoleService $roleService)
+    public function __construct(
+        UserService $userService,
+         RoleService $roleService,
+         PermissionService $permissionService
+     )
     {
         $this->userService = $userService;
 
         $this->roleService = $roleService;
+        $this->permissionService = $permissionService;
 
-        $this->handlePermissions([
+        $this->permissionService->handlePermissions($this,[
             'index' => 'index-user',
             'store' => 'store-user',
             'update' => 'update-user',

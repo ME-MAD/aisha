@@ -8,6 +8,7 @@ use App\Http\Requests\Student\UpdateStudentRequest;
 use App\Http\Traits\AuthTrait;
 use App\Models\Role;
 use App\Models\Student;
+use App\Services\Permission\PermissionService;
 use App\Services\Student\StudentService;
 use App\Services\Subject\SubjectService;
 use Illuminate\Http\RedirectResponse;
@@ -19,13 +20,19 @@ class StudentController extends Controller
 
     private StudentService $studentService;
     private SubjectService $subjectService;
+    private PermissionService $permissionService;
 
-    public function __construct(StudentService $studentService, SubjectService $subjectService)
+    public function __construct(
+        StudentService $studentService,
+         SubjectService $subjectService,
+         PermissionService $permissionService
+    )
     {
         $this->studentService = $studentService;
         $this->subjectService = $subjectService;
+        $this->permissionService = $permissionService;
 
-        $this->handlePermissions([
+        $this->permissionService->handlePermissions($this,[
             'index' => 'index-student',
             'store' => 'store-student',
             'update' => 'update-student',
