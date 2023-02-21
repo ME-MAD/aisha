@@ -20,17 +20,18 @@ class PaymentDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('delete', 'pages.payment.datatable.delete')
+          
+            ->addColumn('paid', function ($query) {
+                return view('pages.payment.datatable.paid', compact('query'));
+            })
             ->editColumn('student.name', function ($q) {
                 return $q->student->name ?? "";
             })
-            ->editColumn('group.from', function ($q) {
-                return $q->group->from ? $q->group->from . " - " . $q->group->to : '';
+            ->editColumn('group.name', function ($q) {
+                return $q->group->name ?? "";
             })
-
-            ->editColumn('show', function ($q) {
-                return "<a class='text-primary' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' ><i class='fa-solid fa-eye'></i></a>";
-            })
-            ->rawColumns(['delete', 'id', 'show'])
+           
+            ->rawColumns(['delete', 'id'])
             ->setRowId('id');
     }
 

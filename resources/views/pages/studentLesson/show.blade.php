@@ -75,7 +75,7 @@
                             </a>
                         </li>
                         <li class="">
-                            <a href="{{route('admin.group.index')}}"
+                            <a href="{{ route('admin.student.show', $studentLesson->student_id) }}"
                                class="d-flex justify-content-center align-items-center">
                                 <i class="fa-regular fa-folder-open fa-2x mx-2"></i>
                                 <span class="font-weight-bold ">{{$studentLesson->student->name}}</span>
@@ -131,42 +131,5 @@
 @endsection
 
 
-@push('js')
 
-    <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script>
-    <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/jszip.min.js') }}"></script>
-    <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/buttons.print.min.js') }}"></script>
-    <script>
-        $('#html5-extension_1').DataTable({
-            dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
-            buttons: {
-                buttons: [
-                    {
-                        extend: 'print',
-                        className: 'btn btn-secondary'
-                    }
-                ]
-            },
-            "stripeClasses": [],
-            "lengthMenu": [7, 10, 20, 50],
-            "pageLength": 7
-        });
-        $('#html5-extension_2').DataTable({
-            dom: '<"row"<"col-md-12"<"row"<"col-md-6"B><"col-md-6"f> > ><"col-md-12"rt> <"col-md-12"<"row"<"col-md-5"i><"col-md-7"p>>> >',
-            buttons: {
-                buttons: [
-                    {
-                        extend: 'print',
-                        className: 'btn btn-secondary'
-                    }
-                ]
-            },
-            "stripeClasses": [],
-            "lengthMenu": [7, 10, 20, 50],
-            "pageLength": 7
-        });
-    </script>
-
-@endpush
+    {{-- <script src="{{ asset('adminAssets/plugins/table/datatable/datatables.js') }}"></script> --}}
