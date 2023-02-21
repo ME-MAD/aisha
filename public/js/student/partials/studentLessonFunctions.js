@@ -190,7 +190,6 @@ export function handleFinishNewLesson()
             rate: rate
             },
             success: function(response) {
-                console.log(response);
                 if(response.status == 200)
                 {
                     if(rate == "fail")

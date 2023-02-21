@@ -87,7 +87,6 @@ export class StudentLesson
 
     getNextLessonReviewData()
     {
-        console.log(this.getNextLessonReview());
         if(this.getStudentLessonReview() || this.getNextLessonReview())
         {
             return {

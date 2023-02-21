@@ -199,11 +199,6 @@ export function handleFinishNewLessonReview()
 
                     mainParent.find('.newLessonRateReview').addClass('d-none')
 
-                    console.log(mainParent);
-                    console.log(response);
-                    console.log(response.studentLessonReview);
-                    console.log(response.studentLessonReview.percentage);
-                    
                     changePercentageBar(mainParent, response.studentLessonReview.percentage)
 
                     Swal.fire(
