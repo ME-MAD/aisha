@@ -21,7 +21,7 @@ class Subject extends Model
                 if ($avatar && file_exists($this->getAvatarPath())) {
                     return asset(Subject::AVATARS_PATH . $avatar);
                 }
-                return asset('images/bookCover.webp');
+                return asset('images/bookCover.jpg');
             },
         );
     }
