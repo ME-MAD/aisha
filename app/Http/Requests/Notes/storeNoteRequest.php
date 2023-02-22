@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Notes;
 
-use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class storeNoteRequest extends FormRequest
 {
@@ -25,7 +25,7 @@ class storeNoteRequest extends FormRequest
     public function rules()
     {
         return [
-            'student_id' => ['required' , Role::exists('students','id')],
+            'student_id' => ['required' , Rule::exists('students','id')],
             'title'      => ["required", "string"],
             'note'       => ["required", "string"],
         ];
