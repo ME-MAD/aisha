@@ -19,7 +19,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ExamController extends Controller
 {
-    use  AuthTrait;
     private PermissionService $permissionService;
 
     public function __construct(PermissionService $permissionService)

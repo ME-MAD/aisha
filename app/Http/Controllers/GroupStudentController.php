@@ -15,8 +15,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupStudentController extends Controller
 {
-    use AuthTrait;
-
     private GroupStudentService $groupStudentService;
     private GroupService $groupService;
     private StudentService $StudentService;

@@ -15,8 +15,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class SubjectController extends Controller
 {
-    use  AuthTrait;
-
     private ImageService $imageService;
     private PDFService $PDFService;
     private SubjectService $subjectService;

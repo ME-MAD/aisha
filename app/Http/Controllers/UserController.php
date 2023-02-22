@@ -15,7 +15,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
-    use  AuthTrait;
 
     private UserService $userService;
     private RoleService $roleService;

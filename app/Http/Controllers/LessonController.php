@@ -13,8 +13,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class LessonController extends Controller
 {
-    use  AuthTrait;
-
     private PermissionService $permissionService;
 
     public function __construct(PermissionService $permissionService)

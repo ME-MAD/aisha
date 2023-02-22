@@ -15,8 +15,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentLessonController extends Controller
 {
-    use AuthTrait;
-
     private StudentLessonService $studentLessonService;
     private PermissionService $permissionService;
 

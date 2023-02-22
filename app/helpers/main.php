@@ -42,10 +42,17 @@ if (!function_exists('getGuard')) {
     }
 }
 
+if (!function_exists('getPermissions')) {
+    function getPermissions()
+    {
+        return json_decode(Session::get('permissions'));
+    }
+}
+
 if (!function_exists('userCan')) {
     function userCan($permission)
     {
-        if (Auth::guard(getGuard())->user()->isAbleTo($permission)) {
+        if (in_array($permission, getPermissions())) {
             return true;
         }
         return false;

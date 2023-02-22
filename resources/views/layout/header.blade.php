@@ -19,7 +19,7 @@
 
         <ul class="navbar-item flex-row mr-auto">
             <li class="nav-item align-self-center search-animated">
-                <form class="form-inline search-full form-inline search" role="search">
+                {{-- <form class="form-inline search-full form-inline search" role="search">
                     <div class="search-bar">
                         <input type="text" class="form-control search-form-control  ml-lg-auto"
                             placeholder="Search...">
@@ -30,7 +30,7 @@
                     class="feather feather-search toggle-search">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
+                </svg> --}}
             </li>
         </ul>
         <ul class="navbar-item flex-row nav-dropdowns">
@@ -59,7 +59,7 @@
             </li>
 
 
-            <li class="nav-item dropdown message-dropdown">
+            {{-- <li class="nav-item dropdown message-dropdown">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="messageDropdown"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -237,7 +237,7 @@
                         </div>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
             <li class="nav-item dropdown user-profile-dropdown order-lg-0 order-1">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="user-profile-dropdown"

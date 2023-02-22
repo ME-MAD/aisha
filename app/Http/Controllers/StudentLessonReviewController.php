@@ -9,8 +9,6 @@ use App\Services\StudentLessonReview\StudentLessonReviewService;
 
 class StudentLessonReviewController extends Controller
 {
-    use AuthTrait;
-
     public StudentLessonReviewService $studentLessonReviewService;
     public StudentLessonService $studentLessonService;
 

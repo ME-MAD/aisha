@@ -18,8 +18,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class RoleController extends Controller
 {
-    use AuthTrait;
-
     private RoleService $roleService;
     private PermissionService $permissionService;
 

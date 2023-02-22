@@ -25,15 +25,15 @@ class BladeServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(PermissionService $permissionService)
+    public function boot()
     {
-        Blade::if('check_permission', function ($permission) use($permissionService) {
-            return in_array($permission, $permissionService->getPermissionsRedis());
+        Blade::if('check_permission', function ($permission) {
+            return in_array($permission, getPermissions());
         });
 
-        Blade::if('check_permission_in_permissions', function (array $permissions) use($permissionService) {
+        Blade::if('check_permission_in_permissions', function (array $permissions) {
             foreach ($permissions as $permission) {
-                if (in_array($permission, $permissionService->getPermissionsRedis())) {
+                if (in_array($permission, getPermissions())) {
                     return true;
                 }
             }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\DataTables\ExperienceDataTable;
 use App\Http\Requests\Experience\StoreExperienceRequest;
 use App\Http\Requests\Experience\UpdateExperienceRequest;
-use App\Http\Traits\AuthTrait;
 use App\Models\Experience;
 use App\Services\Experience\ExperienceService;
 use App\Services\Permission\PermissionService;
@@ -15,8 +14,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ExperienceController extends Controller
 {
-
-    use AuthTrait;
 
     private ExperienceDataTable $experienceDataTable;
     private TeacherService $teacherService;

@@ -18,8 +18,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PaymentController extends Controller
 {
-    use AuthTrait;
-
     private PaymentChartService $paymentChartService;
     private PaymentService $PaymentService;
     private GroupService $groupService;

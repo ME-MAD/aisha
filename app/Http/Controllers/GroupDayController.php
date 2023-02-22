@@ -18,8 +18,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupDayController extends Controller
 {
-    use AuthTrait;
-
     private GroupDayDataTable $groupDayDataTable;
     private GroupDayService $groupDayService;
     private GroupService $groupService;

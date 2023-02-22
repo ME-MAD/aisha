@@ -16,8 +16,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class TeacherController extends Controller
 {
-    use  AuthTrait;
-
     private TeacherDataTable $teacherDataTable;
     private TeacherService $teacherService;
     private ExperienceService $experienceService;

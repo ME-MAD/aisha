@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class SyllabusController extends Controller
 {
-    use AuthTrait;
 
     private StudentLessonService $studentLessonService;
     private SyllabusService   $syllabusService;

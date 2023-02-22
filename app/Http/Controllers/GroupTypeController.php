@@ -13,8 +13,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupTypeController extends Controller
 {
-    use AuthTrait;
-
     private GroupTypeDataTable $groupTypeDataTable;
     private GroupTypeService $groupTypeService;
     private PermissionService $permissionService;

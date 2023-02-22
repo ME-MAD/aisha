@@ -99,18 +99,18 @@ export function calendarRun()
 
             editable: true,
             eventLimit: true,
-            eventMouseover: function(event, jsEvent, view) {
-                $(this).attr('id', event.id);
+            // eventMouseover: function(event, jsEvent, view) {
+            //     $(this).attr('id', event.id);
     
-                $('#'+event.id).popover({
-                    template: '<div class="popover popover-primary" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
-                    title: event.title,
-                    content: event.description,
-                    placement: 'top',
-                });
+            //     $('#'+event.id).popover({
+            //         template: '<div class="popover popover-primary" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
+            //         title: event.title,
+            //         content: event.description,
+            //         placement: 'top',
+            //     });
     
-                $('#'+event.id).popover('show');
-            },
+            //     $('#'+event.id).popover('show');
+            // },
             eventMouseout: function(event, jsEvent, view) {
                 $('#'+event.id).popover('hide');
             },

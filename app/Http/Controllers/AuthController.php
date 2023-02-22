@@ -40,7 +40,7 @@ class AuthController extends Controller
         $dataLoginPage = $request->only(['email', 'password']);
         if (Auth::guard($request->type)->attempt($dataLoginPage)) 
         {
-            $permissions = Auth::guard(getGuard())->user()->allPermissions()->pluck('name');
+            $permissions = Auth::guard($request->type)->user()->allPermissions()->pluck('name');
 
             $this->permissionService->setPermissionsRedis($permissions);
 
