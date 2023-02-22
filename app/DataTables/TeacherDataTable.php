@@ -161,7 +161,6 @@ class TeacherDataTable extends DataTable
                 'name' => 'groups.count',
                 'data' => 'groups.count',
                 'title' => __('teacher.group count'),
-                "className" => 'search--col',
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
@@ -171,7 +170,6 @@ class TeacherDataTable extends DataTable
                 'name' => 'groupStudents.count',
                 'data' => 'groupStudents.count',
                 'title' => __('teacher.student count'),
-                "className" => 'search--col',
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
