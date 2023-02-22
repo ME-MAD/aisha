@@ -95,21 +95,24 @@ function renderSubjects(groupStudent,subjects)
 
     subjects.forEach(subject => {
         subjectsElements += `
-            <div class="col-4 mb-4 subjectContainer${groupStudent.id}" data-subject-id="${subject.id}">
-                <div class="card component-card_1" style="height:280px">
-                    <div class="d-flex flex-column card-body justify-content-between">
-                        <h5 class="card-title text-center">
-                                ${subject.name}
-                        </h5>
-                        <img src="${subject.avatar}" alt=""
-                            class="avatar-image rounded mx-auto d-block">
-                        <div class="btn btn-primary rounded mx-auto d-block mt-2">
-                            Lessson Count <span
-                                class="badge badge-light">${subject.lessons.length}</span>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12 col-12 mb-4">
+        <div class="card subjectContainer${groupStudent.id}" data-subject-id="${subject.id} ">
+            <div class="card-header d-flex justify-content-around align-items-center card__header__for_tables_show_teacher">
+                <h3 class="text-capitalize text-white">
+                     ${subject.name}
+                </h3>
             </div>
+            <div class="card-body d-flex flex-column card-body justify-content-around "  >
+                            <img src="${subject.avatar}" 
+                                alt=""
+                                class="avatar-image rounded mx-auto d-block">
+                            <div class="btn btn-outline-secondary rounded mx-auto d-block mt-4 mb-0">
+                                Lessson Count <span
+                                    class="badge badge-light">${subject.lessons.length}</span>
+                            </div>
+            </div>
+        </div>
+    </div>
         `
     });
 
@@ -125,3 +128,8 @@ function getSubjectById(subjects, subject_id)
 {
     return subjects.filter( subject => subject.id == subject_id)[0]
 }
+
+
+
+
+
