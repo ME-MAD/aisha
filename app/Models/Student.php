@@ -12,6 +12,7 @@ class Student extends Authenticatable
 {
     use HasFactory;
     use LaratrustUserTrait;
+    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
     protected $fillable = ['name', 'email', 'password', 'birthday', 'phone', 'qualification', 'avatar'];
 
@@ -85,6 +86,26 @@ class Student extends Authenticatable
             'id',
             'id',
             'role_id');
+    }
+
+    public function subjects()
+    {
+        return $this->hasManyDeep(
+            Subject::class,
+            [GroupStudent::class, Group::class, GroupSubject::class], 
+            [
+               'student_id', 
+               'id',    
+               'group_id',     
+               'id',     
+            ],
+            [
+              'id', 
+              'group_id', 
+              'id',
+              'subject_id',
+            ]
+        );
     }
 
     public function scopeStudents($query)
