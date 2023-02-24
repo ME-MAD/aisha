@@ -113,6 +113,7 @@ if (!function_exists('getPermissionTables')) {
             'group' => "Group",
             'groupDay' => "Group Day",
             'groupStudent' => "Group Student",
+            'groupSubject' => "Group Subject",
             'groupType' => "Group Type",
             'lesson' => "Lesson",
             'payment' => "Payment",

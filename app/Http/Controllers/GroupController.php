@@ -8,6 +8,7 @@ use App\Http\Requests\Group\UpdateGroupRequest;
 use App\Http\Traits\AuthTrait;
 use App\Models\Group;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Services\Group\GroupService;
 use App\Services\GroupType\GroupTypeService;
 use App\Services\HomeService;
@@ -79,21 +80,25 @@ class GroupController extends Controller
         $this->groupService->setGroupWithAllData($group);
 
         $countStudents = $this->groupService->getGroupStudentsCount();
+        $countSubjects = $this->groupService->getGroupSubjectsCount();
         $groupPaymentsCount = $this->groupService->getGroupPaymentsCount();
         $groupDaysCount = $this->groupService->getGroupDaysCount();
         $groupTypeNumDays = $this->groupService->getGroupDaysNum();
 
         $students = Student::get();
+        $subjects = Subject::get();
 
         $roles = $this->roleService->getRoles(['name']);
 
         return view('pages.group.show', [
             'group' => $group,
             'countStudents' => $countStudents,
+            'countSubjects' => $countSubjects,
             'groupDaysCount' => $groupDaysCount,
             'groupTypeNumDays' => $groupTypeNumDays,
             'groupPaymentsCount' => $groupPaymentsCount,
             'students' => $students,
+            'subjects' => $subjects,
             'currentMonth' => getCurrectMonthName(),
             'roles' => $roles,
         ]);

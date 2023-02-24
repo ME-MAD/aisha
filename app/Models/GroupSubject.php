@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class GroupSubject extends Model
 {
     use HasFactory;
+    protected $fillable = ['subject_id', 'group_id'];
+
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id');
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class, 'group_id');
+    }
 }

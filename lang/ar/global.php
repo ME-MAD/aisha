@@ -15,6 +15,7 @@ return [
     'groups' => 'المجموعات',
     'Group Days' => 'أيام المجموعات',
     'Group Students' => 'طلاب المجموعة',
+    'Group Subject' => 'المواد الدرسية للمجموعة',
     'Group Types' => 'أنواع المجموعات',
     'Subjects' => 'المواد الدراسية',
     'Lessons' => 'الدروس المقررة',

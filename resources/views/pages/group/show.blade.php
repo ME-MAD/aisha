@@ -105,6 +105,7 @@
                     @include('pages.group.partials.paymentChart')
                     @include('pages.group.partials.payment')
                     @include('pages.group.partials.students')
+                    @include('pages.group.partials.subjects')
 
 
 
@@ -115,6 +116,7 @@
     </div>
 
     @include('pages.groupStudent.createModal')
+    @include('pages.groupSubject.createModal')
     @include('pages.groupDays.createModal')
     @include('pages.teacher.editModal')
 
@@ -190,5 +192,37 @@
                 }
             })
         })
+    </script>
+    <script>
+        $('#creatGroupSubjectModalInGroupShow').on('click', function () {
+
+            let href = $(this).data('href');
+            let group_id = $(this).data('group_id');
+
+            $(`option`).removeAttr('disabled').css({
+                'color': 'black'
+            });
+            $.ajax({
+                url: href,
+                data: {
+                    group_id
+                },
+                success: function (response) {
+                  
+                    let groupSubjects = response.groupSubjects
+
+                    groupSubjects.forEach(element => {
+                        let subject = element.subject_id
+
+                        $(`#subject_id option[value=${subject}]`).attr('disabled', true).css({
+                            'color': 'red'
+                        })
+                    });
+                },
+                error: function () {
+                }
+            })
+        })
+
     </script>
 @endpush

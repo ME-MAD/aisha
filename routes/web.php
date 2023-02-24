@@ -6,6 +6,7 @@ use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GroupDayController;
 use App\Http\Controllers\GroupStudentController;
+use App\Http\Controllers\GroupSubjectController;
 use App\Http\Controllers\GroupTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LessonController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\SyllabusController;
 use App\Http\Controllers\SyllabusReviewController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
+use App\Models\GroupSubject;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -188,9 +190,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
         Route::get('edit/{groupStudent}', [GroupStudentController::class, 'edit'])->name('edit');
         Route::put('update/{groupStudent}', [GroupStudentController::class, 'update'])->name('update');
         Route::get('delete/{groupStudent}', [GroupStudentController::class, 'delete'])->name('delete');
-
-
         Route::get('getGroupStudents', [GroupStudentController::class, 'getGroupStudents'])->name('getGroupStudents');
+    });
+
+    Route::group(['prefix' => 'group_subjects', 'as' => 'group_subjects.'], function () {
+        Route::get('', [GroupSubjectController::class, 'index'])->name('index');
+        Route::get('create', [GroupSubjectController::class, 'create'])->name('create');
+        Route::post('store', [GroupSubjectController::class, 'store'])->name('store');
+        Route::get('edit/{groupSubject}', [GroupSubjectController::class, 'edit'])->name('edit');
+        Route::put('update/{groupSubject}', [GroupSubjectController::class, 'update'])->name('update');
+        Route::get('delete/{groupSubject}', [GroupSubjectController::class, 'delete'])->name('delete');
+        Route::get('getGroupSubjects', [GroupSubjectController::class, 'getGroupSubjects'])->name('getGroupSubjects');
     });
 
     Route::group(['prefix' => 'syllabus', 'as' => 'syllabus.'], function () {

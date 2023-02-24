@@ -34,9 +34,9 @@ class GroupStudentController extends Controller
 
 
         $this->permissionService->handlePermissions($this,[
-            'index' => 'index-groupDay',
-            'store' => 'store-groupDay',
-            'delete' => 'delete-groupDay',
+            'index' => 'index-groupStudent',
+            'store' => 'store-groupStudent',
+            'delete' => 'delete-groupStudent',
         ]);
     }
 

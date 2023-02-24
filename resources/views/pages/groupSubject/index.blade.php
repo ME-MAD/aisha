@@ -52,11 +52,11 @@
                         </a>
                     </li>
                     <li class="active">
-                        <a href="{{route('admin.group_students.index')}}"
+                        <a href="{{route('admin.group_subjects.index')}}"
                            class="d-flex justify-content-center align-items-center">
 
                             <i class="fa-solid fa-users-viewfinder fa-2x mx-2"></i>
-                            <span class="font-weight-bold ">طلاب المجموعة</span>
+                            <span class="font-weight-bold ">المواد الدرسية للمجموعة</span>
                         </a>
                     </li>
                 </ul>
@@ -78,11 +78,11 @@
                 <div class="card ">
                     <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables">
                         <h3 class="text-capitalize text-white">
-                            {{ __('group.Group Students') }}
+                           المواد الدراسية للمجموعات
                         </h3>
-                        @check_permission('store-groupStudent')
+                        @check_permission('store-groupSubject')
                         <a class="icon text-white" data-toggle="modal"
-                        data-target="#creatGroupStudentModal">
+                        data-target="#creatGroupSubjectModal">
                             <i class="fa-solid fa-plus fa-2xl"></i>
                         </a>
                         @endcheck_permission
@@ -100,7 +100,7 @@
             </div>
         </div>
     </div>
-    @include('pages.groupStudent.createModal')
+    @include('pages.groupSubject.createModal')
 @endsection
 
 
@@ -126,12 +126,13 @@
                     group_id
                 },
                 success: function (response) {
-                    let groupStudents = response.groupStudents
 
-                    groupStudents.forEach(element => {
-                        let student = element.student_id
+                    let groupSubjects = response.groupSubjects
 
-                        $(`#student_id option[value=${student}]`).attr('disabled', true).css({
+                    groupSubjects.forEach(element => {
+                        let subject = element.subject_id
+
+                        $(`#subject_id option[value=${subject}]`).attr('disabled', true).css({
                             'color': 'red'
                         })
                     });
