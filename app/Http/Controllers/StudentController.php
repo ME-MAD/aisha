@@ -58,13 +58,10 @@ class StudentController extends Controller
 
     public function show(Student $student)
     {
-        $subjects = $this->subjectService->getSubjectsWtihLessons();
         $roles = Role::select(['id', 'name'])->get();
-        $this->studentService->getStudentWithGroupStudents($student);
 
         return view('pages.student.show', [
             'student' => $student,
-            'subjects' => $subjects,
             'roles' => $roles
         ]);
     }
@@ -87,7 +84,7 @@ class StudentController extends Controller
 
     public function getGroupStudents(Student $student)
     {
-        $subjects = $this->subjectService->getSubjectsWithLessonsWithReviews();
+        $subjects = $this->subjectService->getSubjectsWithLessonsWithReviewsOfStudent($student);
 
         return response()->json([
             'groupStudents' => $student->groupStudents->load(['group.groupDays']),

@@ -5,9 +5,9 @@ use App\Models\Subject;
 
 class SubjectService
 {
-    public function getSubjectsWithLessonsWithReviews()
+    public function getSubjectsWithLessonsWithReviewsOfStudent($student)
     {
-        return Subject::with([
+        return $student->subjects()->with([
             'lessons.studentLessons.syllabus',
             'lessons.studentLessons.studentLessonReview.syllabusReviews',
         ])->get();
