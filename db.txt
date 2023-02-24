@@ -39,6 +39,10 @@ Group:
     group_type_id
     age_type ('kid','adult') : enum
 
+GroupSubject:
+    id
+    group_id:
+    subject_id:
 
 [ToDo CRUD in group show]
 GroupDay:

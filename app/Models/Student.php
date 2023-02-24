@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Laratrust\Traits\LaratrustUserTrait;
 
 class Student extends Authenticatable
@@ -84,5 +85,25 @@ class Student extends Authenticatable
             'id',
             'id',
             'role_id');
+    }
+
+    public function scopeStudents($query)
+    {
+        if(getGuard() == 'admin')
+        {
+            return $query->select([
+                'students.id', 'students.name', 'avatar', 'birthday','email','qualification','phone'
+            ]);
+        }
+        else if(getGuard() == 'teacher')
+        {
+            return Auth::guard(getGuard())->user()->students()->select([
+                'students.id', 'students.name', 'avatar', 'birthday','email','qualification','phone'
+            ])->getQuery();
+        }
+        else if(getGuard() == "student")
+        {
+            return $query->where('id', Auth::guard(getGuard())->user()->id);
+        }
     }
 }

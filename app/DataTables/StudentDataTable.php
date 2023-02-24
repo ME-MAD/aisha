@@ -35,9 +35,7 @@ class StudentDataTable extends DataTable
 
     public function query(): QueryBuilder
     {
-        return Student::select([
-            'students.id', 'students.name', 'avatar', 'birthday','email','qualification','phone'
-        ])->with('role:id,name')->withCount('groupStudents');
+        return Student::students()->with('role:id,name')->withCount('groupStudents');
     }
 
     public function html(): HtmlBuilder
