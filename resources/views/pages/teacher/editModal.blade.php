@@ -61,7 +61,7 @@
                         </div>
                     </div>
 
-                    <div class="custom-file-container" data-upload-id="mySecondImage">
+                    <div class="custom-file-container" data-upload-id="image_edit">
                         <label>{{ __('teacher.avatar') }}<a href="javascript:void(0)"
                                 class="custom-file-container__image-clear" title="Clear Image"></a></label>
                         <label class="custom-file-container__custom-file">

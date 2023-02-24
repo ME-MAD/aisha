@@ -23,9 +23,9 @@
                             {{trans('user.role')}}
                            <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.778)"></i>
                         </label>
-                        <select class="form-control basic"
+                        <select class="form-control basic role_edit"
                                 name="role"
-                                id="role">
+                                id="role" data-select2-id="role_edit">
 
                             <option value="" >اختر وظيفة</option>
 

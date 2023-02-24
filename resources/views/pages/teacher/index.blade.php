@@ -8,9 +8,6 @@
               type="text/css"
               href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}"> --}}
               <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet"
@@ -26,9 +23,6 @@
               type="text/css"
               href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}"> --}}
               <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet"
@@ -114,7 +108,15 @@
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
     {!! $dataTable->scripts() !!}
     {{--End Data_Table--}}
-    
+
+
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
+
+    <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
+
+    <script>
+        var image_create = new FileUploadWithPreview('image_create')
+        var image_edit = new FileUploadWithPreview('image_edit')
+    </script>
 
 @endpush

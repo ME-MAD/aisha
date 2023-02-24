@@ -59,7 +59,7 @@
                         </div>
                     </div>
 
-                    <div class="custom-file-container" data-upload-id="myFirstImage">
+                    <div class="custom-file-container" data-upload-id="image_create">
                         <label>{{ __('teacher.avatar') }}
                             <a href="javascript:void(0)"
                                 class="custom-file-container__image-clear"

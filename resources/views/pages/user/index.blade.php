@@ -8,10 +8,6 @@
               type="text/css"
               href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}"> --}}
-
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminRtl/assets/css/forms/theme-checkbox-radio.css') }}">
@@ -25,10 +21,6 @@
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
-
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}"> --}}
 
         <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
 
@@ -117,25 +109,20 @@
     {!! $dataTable->scripts() !!}
     {{--End Data_Table--}}
 
-    {{--Begin Select 2 --}}
+    
     <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
 
     <script>
-        $('#role').select2({
+        $('.role_create').select2({
             theme: "basic",
             dropdownParent: $('#creatUserModal'),
         });
-    </script>
-    <script>
-        $('#editRole').select2({
+        $('.role_edit').select2({
             theme: "basic",
             dropdownParent: $('#editUser'),
         });
     </script>
 
-
-
-    {{--End Select 2 --}}
 
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
 @endpush

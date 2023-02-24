@@ -8,13 +8,18 @@
         <link href="{{ asset('adminRtl/assets/css/apps/invoice.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('adminRtl/assets/css/myStylesAr.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet"
+        type="text/css"
+        href="{{ asset('adminRtl/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
     @else
         <link href="{{ asset('adminAssets/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{ asset('adminAssets/assets/css/components/custom-modal.css') }}" rel="stylesheet"
               type="text/css"/>
         <link href="{{ asset('adminAssets/assets/css/apps/invoice.css') }}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
     @endif
     <link href="{{asset('adminAssets/assets/css/tables/table-basic.css')}}" rel="stylesheet" type="text/css" />
 @endpush
@@ -91,6 +96,11 @@
     <script>
         initEditeTeacherModal()
         initEditeExperienceModal()
+    </script>
+
+    <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
+    <script>
+        var image_edit = new FileUploadWithPreview('image_edit')
     </script>
 @endpush
 
