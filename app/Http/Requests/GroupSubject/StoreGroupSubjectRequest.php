@@ -24,8 +24,8 @@ class StoreGroupSubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'subject_id' => "required",
-            'group_id' => "required",
+            'subject_id' => "required|exists:group_subjects,id",
+            'group_id' => "required|exists:group_subjects,id",
         ];
     }
 }

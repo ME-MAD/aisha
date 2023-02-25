@@ -24,8 +24,8 @@ class GroupSubjectDataTable extends DataTable
             ->editColumn('subject.name', function ($q) {
                 return $q->subject->name ?? "";
             })
-            ->editColumn('group.from', function ($q) {
-                return $q->group->from ? $q->group->from . " - " . $q->group->to : '';
+            ->editColumn('group.name', function ($q) {
+                return $q->group->name ?? "";
             })
             ->rawColumns(['delete'])
             ->setRowId('id');

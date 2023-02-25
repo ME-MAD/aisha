@@ -37,6 +37,7 @@ class GroupService
     {
         $this->groupWithAllData = $group->load([
             'groupStudents.student',
+            'groupSubjects.subject',
             'payments' => function($q){
                 return $q->select('id','group_id','paid','month')
                     ->where('paid',true)
