@@ -24,8 +24,8 @@ class StoreGroupStudentRequest extends FormRequest
     public function rules()
     {
         return [
-            'student_id' => "required",
-            'group_id' => "required",
+            'student_id' => "required|exists:students,id",
+            'group_id' => "required|exists:students,id",
         ];
     }
 }
