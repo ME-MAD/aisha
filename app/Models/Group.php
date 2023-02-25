@@ -25,6 +25,11 @@ class Group extends Model
         return $this->hasMany(GroupStudent::class, 'group_id');
     }
 
+    public function groupSubjects()
+    {
+        return $this->hasMany(GroupSubject::class, 'group_id');
+    }
+
     public function groupType()
     {
         return $this->belongsTo(GroupType::class, 'group_type_id');

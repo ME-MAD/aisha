@@ -5,6 +5,11 @@ use App\Models\Subject;
 
 class SubjectService
 {
+    public function getAllSubjects(array $selectColumns = ['*'])
+    {
+        return Subject::select($selectColumns)->get();
+    }
+
     public function getSubjectsWithLessonsWithReviewsOfStudent($student)
     {
         return $student->subjects()->with([

@@ -39,6 +39,11 @@ class Subject extends Model
         return $this->hasMany(Lesson::class, 'subject_id');
     }
 
+    public function groupSubjects()
+    {
+        return $this->hasMany(GroupSubject::class, 'subject_id');
+    }
+
     protected function book(): Attribute
     {
         return Attribute::make(

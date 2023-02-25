@@ -13,6 +13,7 @@ return [
     'groups' => 'Groups',
     'Group Days' => 'Group Days',
     'Group Students' => 'Group Students',
+    'Group Subject' => 'Group Subjects',
     'Group Types' => 'Group Types',
     'Subjects' => 'Subjects',
     'Lessons' => 'Lessons',

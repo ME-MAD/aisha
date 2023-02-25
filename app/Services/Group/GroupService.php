@@ -67,6 +67,11 @@ class GroupService
         return $this->groupWithAllData->groupStudents->count();
     }
 
+    public function getGroupSubjectsCount()
+    {
+        return $this->groupWithAllData->groupSubjects->count();
+    }
+
     public function getGroupDaysCount()
     {
         return $this->groupWithAllData->groupDays->count();

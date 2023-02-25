@@ -2,13 +2,13 @@
 
 namespace App\DataTables;
 
-use App\Models\GroupStudent;
+use App\Models\GroupSubject;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
 
-class GroupStudentDataTable extends DataTable
+class GroupSubjectDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -20,9 +20,9 @@ class GroupStudentDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
 
-            ->addColumn('delete', 'pages.groupStudent.datatable.delete')
-            ->editColumn('student.name', function ($q) {
-                return $q->student->name ?? "";
+            ->addColumn('delete', 'pages.groupSubject.datatable.delete')
+            ->editColumn('subject.name', function ($q) {
+                return $q->subject->name ?? "";
             })
             ->editColumn('group.from', function ($q) {
                 return $q->group->from ? $q->group->from . " - " . $q->group->to : '';
@@ -34,17 +34,17 @@ class GroupStudentDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\GroupStudent $model
+     * @param \App\Models\GroupSubject $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(GroupStudent $model): QueryBuilder
+    public function query(GroupSubject $model): QueryBuilder
     {
         return $model->select([
-            'group_students.id',
-            'student_id',
+            'group_subjects.id',
+            'subject_id',
             'group_id'
         ])->with([
-            'student:id,name',
+            'subject:id,name',
             'group:id,name'
         ]);
     }
@@ -111,16 +111,16 @@ class GroupStudentDataTable extends DataTable
     {
         $columns = [
             [
-                'name' => 'group_students.id',
+                'name' => 'group_subjects.id',
                 'data' => 'id',
                 'title' => __('group.id'),
                 "className" => 'search--col exact'
             ],
 
             [
-                'name' => 'student.name',
-                'data' => 'student.name',
-                'title' =>  __('group.student_id'),
+                'name' => 'subject.name',
+                'data' => 'subject.name',
+                'title' =>  'مواد الطالب',
                 "className" => 'search--col'
             ],
 
@@ -132,7 +132,7 @@ class GroupStudentDataTable extends DataTable
             ],
         ];
 
-        if(userCan('delete-groupStudent'))
+        if(userCan('delete-groupSubject'))
         {
             $columns [] = [
                 'name' => 'delete',
@@ -156,6 +156,6 @@ class GroupStudentDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'GroupStudent_' . date('YmdHis');
+        return 'GroupSubject_' . date('YmdHis');
     }
 }

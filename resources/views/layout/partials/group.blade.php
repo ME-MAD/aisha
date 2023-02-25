@@ -4,6 +4,7 @@
             request()->routeIs('admin.group.show')||
             request()->routeIs('admin.group_day.index')||
             request()->routeIs('admin.group_students.index')||
+            request()->routeIs('admin.group_subjects.index')||
             request()->routeIs('admin.group_types.index')  ? 'active' : ''
         }}">
         <a href="#group"
@@ -32,6 +33,7 @@
                 request()->routeIs('admin.group.index')||
                 request()->routeIs('admin.group.show')||
                 request()->routeIs('admin.group_day.index')||
+                request()->routeIs('admin.group_subjects.index')||
                 request()->routeIs('admin.group_students.index')||
                 request()->routeIs('admin.group_types.index')  ? 'show' : ''
             }}" id="group" data-parent="#topAccordion">
@@ -57,6 +59,12 @@
             @check_permission("index-groupType")
             <li class="{{ request()->routeIs('admin.group_types.index') ? 'active' : ''}}">
                 <a href="{{ route('admin.group_types.index') }}">{{ __('global.Group Types') }}</a>
+            </li>
+            @endcheck_permission
+
+            @check_permission("index-groupSubject")
+            <li class="{{ request()->routeIs('admin.group_subjects.index') ? 'active' : ''}}">
+                <a href="{{ route('admin.group_subjects.index') }}">{{ __('global.Group Subject') }}</a>
             </li>
             @endcheck_permission
 
