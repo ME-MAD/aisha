@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header card-header create__form__header">
-                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="creatGroupDayModal">
+                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="creatGroupDayModalTitle">
                     {{ __('group.Create Group Days') }}
                 </h5>
             </div>
@@ -71,9 +71,8 @@
                                     {{ __('group.Choose group') }}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
-                                <div class="col-xl-12 col-md-6  ">
-                                    <select class="form-control group_days_create" 
-                                            style="width: 100%;" 
+                                <div class="col-xl-12 col-md-6">
+                                    <select class="form-control basic group_days_create" 
                                             name="group_id"
                                             id="group_id" data-select2-id="group_days_create"
                                             data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">

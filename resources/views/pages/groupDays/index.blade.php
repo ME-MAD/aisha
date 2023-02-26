@@ -7,9 +7,6 @@
               type="text/css"
               href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}"> --}}
               <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet"
@@ -23,22 +20,12 @@
               href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
 
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}"> --}}
               <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
     @endif
-        <link rel="stylesheet"
-            type="text/css"
-            href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
-
-        <link rel="stylesheet"
-            type="text/css"
-            href="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.css')}}">
 
         <link rel="stylesheet"
         type="text/css"
@@ -120,14 +107,11 @@
     {!! $dataTable->scripts() !!}
 
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
-
+    
     <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
-
-    <script src="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.js')}}"></script>
 
     <script src="{{asset('js/groupDays.js')}}"></script>
 
-    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
 
     
 @endpush

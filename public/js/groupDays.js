@@ -2,9 +2,7 @@ $(document).ready(function () {
     let href, group_id, groupDays;
 
     $('#group_id').select2({
-        theme: "basic",
         dropdownParent: $('#creatGroupDayModal'),
-
     });
 
 
@@ -22,11 +20,11 @@ $(document).ready(function () {
                 
                 if(groupDays)
                 {
-                    $('#day').selectpicker('val', groupDays.day);
+                    
                 }
                 else
                 {
-                    $('#day').selectpicker('val', []);
+                    
                 }
             },
             error: function () {
