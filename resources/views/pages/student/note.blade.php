@@ -12,6 +12,10 @@
     <link href="{{asset('adminAssets/assets/css/apps/notes.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('adminAssets/assets/css/forms/theme-checkbox-radio.css')}}" rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet"
+    type="text/css"
+    href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
+
 @endpush
 
 
@@ -246,6 +250,15 @@
     {{-- <script src="{{asset('adminAssets/assets/js/apps/notes.js')}}"></script> --}}
 
     <script src="{{asset('js/note/studentNote.js')}}"></script>
+
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+
+    <script>
+         $('#student_id').select2({
+            theme: "basic",
+            dropdownParent: $('#createNoteModal'),
+        });
+    </script>
 
 @endpush
 

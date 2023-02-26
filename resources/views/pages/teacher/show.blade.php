@@ -22,6 +22,10 @@
               href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
     @endif
     <link href="{{asset('adminAssets/assets/css/tables/table-basic.css')}}" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet"
+    type="text/css"
+    href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endpush
 @section('breadcrumb')
     <div class="row my-3 ">
@@ -96,6 +100,15 @@
     <script>
         initEditeTeacherModal()
         initEditeExperienceModal()
+    </script>
+
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+
+    <script>
+         $('.role_edit').select2({
+            theme: "basic",
+            dropdownParent: $('#editTeacher'),
+        });
     </script>
 
     <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
