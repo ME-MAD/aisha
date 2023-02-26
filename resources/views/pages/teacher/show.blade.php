@@ -106,7 +106,6 @@
 
     <script>
          $('.role_edit').select2({
-            theme: "basic",
             dropdownParent: $('#editTeacher'),
         });
     </script>

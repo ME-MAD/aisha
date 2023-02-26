@@ -117,19 +117,15 @@
 
     <script>
         $('.teacher_create').select2({
-            theme: "basic",
             dropdownParent: $('#creatGroupModal'),
         });
         $('.group_type_create').select2({
-            theme: "basic",
             dropdownParent: $('#creatGroupModal'),
         });
         $('.teacher_edit').select2({
-            theme: "basic",
             dropdownParent: $('#editGroup'),
         });
         $('.group_type_edit').select2({
-            theme: "basic",
             dropdownParent: $('#editGroup'),
         });
     </script>

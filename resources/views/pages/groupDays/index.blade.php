@@ -32,13 +32,17 @@
               type="text/css"
               href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
     @endif
-    <link rel="stylesheet"
-          type="text/css"
-          href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
+        <link rel="stylesheet"
+            type="text/css"
+            href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 
-          <link rel="stylesheet"
-                type="text/css"
-                href="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.css')}}">
+        <link rel="stylesheet"
+            type="text/css"
+            href="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.css')}}">
+
+        <link rel="stylesheet"
+        type="text/css"
+        href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endpush
 
 @section('breadcrumb')
@@ -122,4 +126,8 @@
     <script src="{{asset('adminAssets/plugins/bootstrap-select/bootstrap-select.min.js')}}"></script>
 
     <script src="{{asset('js/groupDays.js')}}"></script>
+
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+
+    
 @endpush

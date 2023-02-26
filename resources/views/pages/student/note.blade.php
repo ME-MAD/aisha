@@ -255,7 +255,6 @@
 
     <script>
          $('#student_id').select2({
-            theme: "basic",
             dropdownParent: $('#createNoteModal'),
         });
     </script>

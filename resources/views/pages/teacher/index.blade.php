@@ -127,11 +127,9 @@
 
     <script>
         $('.role_create').select2({
-            theme: "basic",
             dropdownParent: $('#creatTeacherModal'),
         });
         $('.role_edit').select2({
-            theme: "basic",
             dropdownParent: $('#editTeacher'),
         });
     </script>

@@ -148,11 +148,9 @@
 
     <script>
         $('.group_create').select2({
-            theme: "basic",
             dropdownParent: $('#creatGroupSubjectModal'),
         });
         $('.group_subject_create').select2({
-            theme: "basic",
             dropdownParent: $('#creatGroupSubjectModal'),
         });
        

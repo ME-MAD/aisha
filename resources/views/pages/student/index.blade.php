@@ -118,11 +118,9 @@
 
     <script>
         $('.role_create').select2({
-            theme: "basic",
             dropdownParent: $('#creatStudentModal'),
         });
         $('.role_edite').select2({
-            theme: "basic",
             dropdownParent: $('#editStudent'),
         });
     </script>
