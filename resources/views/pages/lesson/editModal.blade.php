@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header card-header create__form__header">
-                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="editLesson">تعديل الدرس</h5>
+                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="editLessonTitle">تعديل الدرس</h5>
             </div>
             <div class="modal-body">
                 <form id="editLessonForm" method="post">
@@ -19,7 +19,7 @@
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                             </label>
                                 <div class="col-xl-12 col-md-6">
-                                    <select class="form-control basic" style="width: 100%;" name="subject_id" id="subject_id">
+                                    <select class="form-control basic subject_edit" data-select2-id="subject_edit" style="width: 100%;" name="subject_id" id="subject_id">
                                         <option value="">اختر المادة</option>
                                         @foreach ($subjects as $subject)
                                             <option value="{{ $subject->id }}">

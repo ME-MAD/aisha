@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered " role="document">
         <div class="modal-content ">
             <div class="modal-header card-header create__form__header">
-                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="creatLessonModal">إضافة درس</h5>
+                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="creatLessonModalTitle">إضافة درس</h5>
             </div>
             <div class="modal-body">
                 <form action="{{ route('admin.lesson.store') }}" method="post">
@@ -18,7 +18,7 @@
                                        <i class="fa-solid fa-star-of-life required-star"></i>
                                     </label>
                                 <div class="col-xl-12 col-md6">
-                                    <select class="form-control basic" style="width: 100%;" name="subject_id" id="subject_id">
+                                    <select class="form-control basic subject_create" style="width: 100%;" name="subject_id" id="subject_id" data-select2-id="subject_create">
                                         <option value="">اختر المادة</option>
                                         @foreach ($subjects as $subject)
                                             <option value="{{ $subject->id }}">

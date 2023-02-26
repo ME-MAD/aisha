@@ -9,9 +9,6 @@
               type="text/css"
               href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}"> --}}
               <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
         <link rel="stylesheet"
               type="text/css"
@@ -24,15 +21,16 @@
               href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
 
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}"> --}}
               <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
     @endif
+
+    <link rel="stylesheet"
+    type="text/css"
+    href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 
 @endpush
 
@@ -112,6 +110,19 @@
     {{--End Data_Table--}}
 
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
+
+
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+
+    <script>
+        $('#group_id').select2({
+            dropdownParent: $('#creatGroupStudentModal'),
+        });
+        $('#student_id').select2({
+            dropdownParent: $('#creatGroupStudentModal'),
+        });
+    </script>
+
 
     <script>
         $('#group_id').on('change', function () {

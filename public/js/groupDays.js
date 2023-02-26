@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    let href, group_id, groupDays;
 
     $('#group_id').select2({
         dropdownParent: $('#creatGroupDayModal'),

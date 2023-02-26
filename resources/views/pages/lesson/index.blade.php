@@ -34,6 +34,11 @@
               <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
 
     @endif
+
+
+    <link rel="stylesheet"
+    type="text/css"
+    href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endpush
 
 
@@ -112,6 +117,18 @@
     <script src="{{ asset('adminAssets/plugins/table/datatable/button-ext/dataTables.buttons.min.js') }}"></script>
     {!! $dataTable->scripts() !!}
     {{--End Data_Table--}}
+
+
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+
+    <script>
+        $('.subject_create').select2({
+            dropdownParent: $('#creatLessonModal'),
+        });
+        $('.subject_edit').select2({
+            dropdownParent: $('#editLesson'),
+        });
+    </script>
 
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
 @endpush

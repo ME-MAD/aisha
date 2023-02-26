@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header card-header create__form__header">
-                <h5 class="modal-titlefont-weight-bold text-capitalize text-light" id="creatGroupStudentModal">{{ __('group.Create Group Student') }}
+                <h5 class="modal-titlefont-weight-bold text-capitalize text-light" id="creatGroupStudentModalTitle">{{ __('group.Create Group Student') }}
                 </h5>
             </div>
             <div class="modal-body">
