@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Laratrust\Traits\LaratrustUserTrait;
 
 class Teacher extends Authenticatable
@@ -89,31 +90,39 @@ class Teacher extends Authenticatable
     {
         return $this->hasManyDeep(
             Student::class,
-            [Group::class, GroupStudent::class], // Intermediate models, beginning at the far parent (Country).
+            [Group::class, GroupStudent::class], 
             [
-               'teacher_id', // Foreign key on the "users" table.
-               'group_id',    // Foreign key on the "posts" table.
-               'id'     // Foreign key on the "comments" table.
+               'teacher_id', 
+               'group_id',    
+               'id'     
             ],
             [
-              'id', // Local key on the "countries" table.
-              'id', // Local key on the "users" table.
-              'student_id'  // Local key on the "posts" table.
+              'id',
+              'id', 
+              'student_id' 
             ]
         );
-        // return $this->hasManyDeep(
-        //     Comment::class,
-        //     [User::class, Post::class], // Intermediate models, beginning at the far parent (Country).
-        //     [
-        //        'country_id', // Foreign key on the "users" table.
-        //        'user_id',    // Foreign key on the "posts" table.
-        //        'post_id'     // Foreign key on the "comments" table.
-        //     ],
-        //     [
-        //       'id', // Local key on the "countries" table.
-        //       'id', // Local key on the "users" table.
-        //       'id'  // Local key on the "posts" table.
-        //     ]
-        // );
+    }
+
+
+    public function scopeTeachers($query)
+    {
+        if(getGuard() == 'admin')
+        {
+            return $query->select([
+                'teachers.id', 'teachers.name', 'avatar', 'birthday','email','qualification','phone'
+            ]);
+        }
+        else if(getGuard() == 'teacher')
+        {
+           
+            return $query->where('id', Auth::guard(getGuard())->user()->id);
+        }
+        else if(getGuard() == "student")
+        {
+            return Auth::guard(getGuard())->user()->teachers()->select([
+                'teachers.id', 'teachers.name', 'avatar', 'birthday','email','qualification','phone'
+            ])->getQuery();
+        }
     }
 }

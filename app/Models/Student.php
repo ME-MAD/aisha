@@ -127,4 +127,23 @@ class Student extends Authenticatable
             return $query->where('id', Auth::guard(getGuard())->user()->id);
         }
     }
+
+   //this -> groupStudent -> group -> teacher
+    public function teachers()
+    {
+        return $this->hasManyDeep(
+            Teacher::class,
+            [GroupStudent::class, Group::class], 
+            [
+               'student_id', 
+               'id',    
+               'id'   
+            ],
+            [
+              'id', 
+              'group_id', 
+              'teacher_id'  
+            ]
+        );
+    }
 }
