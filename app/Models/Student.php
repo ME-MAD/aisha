@@ -146,4 +146,25 @@ class Student extends Authenticatable
             ]
         );
     }
+
+   //this -> groupStudent -> group -> teacher -> experiences
+    public function teacherExperiences()
+    {
+        return $this->hasManyDeep(
+            Experience::class,
+            [GroupStudent::class, Group::class,Teacher::class], 
+            [
+               'student_id', 
+               'id',    
+               'id',
+               'teacher_id'   
+            ],
+            [
+              'id', 
+              'group_id', 
+              'teacher_id',
+              'id'  
+            ]
+        );
+    }
 }
