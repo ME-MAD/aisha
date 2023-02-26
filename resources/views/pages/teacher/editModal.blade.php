@@ -32,9 +32,9 @@
                             {{trans('user.role')}}
                             <i class="fa-solid fa-star-of-life required-star"></i>
                         </label>
-                        <select class="form-control basic"
+                        <select class="form-control basic role_edit"
                                 name="role"
-                                id="role">
+                                id="role" data-select2-id="role_edit">
 
                             <option >{{trans('user.roles')}}</option>
 

@@ -19,6 +19,14 @@
     <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
     <!--  END CUSTOM STYLE FILE  -->
 
+    <link rel="stylesheet"
+    type="text/css"
+    href="{{ asset('adminRtl/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
+
+    <link rel="stylesheet"
+    type="text/css"
+    href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
+
 @endpush
 
 @section('breadcrumb')
@@ -103,13 +111,23 @@
 @push('js')
 
     <script src="{{asset('adminAssets/plugins/pdf/pdf.js')}}"></script>
-
-
     <script type="module" src="{{ asset('js/student/show.js') }}"></script>
-
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
 
     <script>
         initEditeStudentModal()
+    </script>
+
+    <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
+    <script>
+        var image_edit = new FileUploadWithPreview('image_edit')
+    </script>
+
+    <script>
+        $('.role_edite').select2({
+            theme: "basic",
+            dropdownParent: $('#editStudent'),
+        });
     </script>
 
 @endpush

@@ -21,7 +21,10 @@
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6 ">
-                                    <select class="form-control basic" style="width: 100%;" name="teacher_id" id="teacher_id">
+                                    <select class="form-control basic teacher_create" 
+                                            style="width: 100%;" 
+                                            name="teacher_id" 
+                                            id="teacher_id" data-select2-id="teacher_create">
                                         <option value="">{{ __('group.Choose teacher') }}</option>
                                         @foreach ($teachers as $item)
                                             <option value="{{ $item->id }}"
@@ -43,8 +46,10 @@
                                        <i class="fa-solid fa-star-of-life required-star"></i>
                                     </label>
                                 <div class="col-xl-12 col-md-6">
-                                    <select class="form-control basic" style="width: 100%;" name="group_type_id"
-                                            id="groupTypeId">
+                                    <select class="form-control basic group_type_create" 
+                                            style="width: 100%;" 
+                                            name="group_type_id"
+                                            id="groupTypeId" data-select2-id="group_type_create">
                                         <option value="">{{ __('group.Choose type of group') }}</option>
         
                                         @foreach ($groupTypes as $item)
@@ -68,7 +73,10 @@
                                     </label>
         
                                 <div class="col-xl-12 col-md-6">
-                                    <select class="form-control basic" style="width: 100%;" name="age_type" id="ageType">
+                                    <select class="form-control basic group_age_create" 
+                                            style="width: 100%;" 
+                                            name="age_type" 
+                                            id="ageType" data-select2-id="group_age_create">
                                         <option value="">{{ __('group.age type') }}</option>
                                         <option value="Kid" {{ old('age_type') == 'Kid' ? 'selected' : '' }}>
                                             {{ __('group.kid') }} </option>

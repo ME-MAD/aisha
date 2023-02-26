@@ -46,9 +46,9 @@
                         <label
                             class="font-weight-bold text-capitalize text-muted"> {{__('student.choose role')}} </label>
                             <i class="fa-solid fa-star-of-life required-star"></i>
-                        <select class="form-control selectpicker my-2" style="width: 100%;"
+                        <select class="form-control selectpicker my-2 role_edite" style="width: 100%;"
                                 name="role"
-                                id="role">
+                                id="role" data-select2-id="role_edite">
                             <option value="">{{__('student.choose role')}}</option>
                             @forelse($roles as $role)
                                 <option value="{{$role->name}}">
@@ -87,7 +87,7 @@
                         </div>
                     </div>
 
-                    <div class="custom-file-container" data-upload-id="mySecondImage">
+                    <div class="custom-file-container" data-upload-id="image_edit">
                         <label>
                             {{trans('student.choose photo')}}
                             <a href="javascript:void(0)"

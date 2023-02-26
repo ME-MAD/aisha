@@ -33,6 +33,10 @@
               type="text/css"
               href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
     @endif
+
+    <link rel="stylesheet"
+    type="text/css"
+    href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endpush
 
 @section('breadcrumb')
@@ -117,6 +121,19 @@
     <script>
         var image_create = new FileUploadWithPreview('image_create')
         var image_edit = new FileUploadWithPreview('image_edit')
+    </script>
+
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+
+    <script>
+        $('.role_create').select2({
+            theme: "basic",
+            dropdownParent: $('#creatTeacherModal'),
+        });
+        $('.role_edit').select2({
+            theme: "basic",
+            dropdownParent: $('#editTeacher'),
+        });
     </script>
 
 @endpush

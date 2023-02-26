@@ -31,9 +31,9 @@
                             {{trans('user.role')}}
                             <i class="fa-solid fa-star-of-life required-star"></i>
                         </label>
-                        <select class="form-control basic"
+                        <select class="form-control basic role_create"
                                 name="role"
-                                id="role">
+                                id="role" data-select2-id="role_create">
                             <option >{{trans('user.roles')}}</option>
 
                             @foreach ($roles as $role)

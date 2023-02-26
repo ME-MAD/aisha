@@ -28,6 +28,10 @@
               type="text/css"
               href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
     @endif
+
+    <link rel="stylesheet"
+    type="text/css"
+    href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endpush
 
 
@@ -109,4 +113,24 @@
 
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
 
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+
+    <script>
+        $('.teacher_create').select2({
+            theme: "basic",
+            dropdownParent: $('#creatGroupModal'),
+        });
+        $('.group_type_create').select2({
+            theme: "basic",
+            dropdownParent: $('#creatGroupModal'),
+        });
+        $('.teacher_edit').select2({
+            theme: "basic",
+            dropdownParent: $('#editGroup'),
+        });
+        $('.group_type_edit').select2({
+            theme: "basic",
+            dropdownParent: $('#editGroup'),
+        });
+    </script>
 @endpush

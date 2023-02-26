@@ -21,7 +21,10 @@
                                        <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6 ">
-                                    <select id="teacherId" class="form-control basic" style="width: 100%;" name="teacher_id">
+                                    <select id="teacherId" 
+                                            class="form-control basic teacher_edit" 
+                                            style="width: 100%;" 
+                                            name="teacher_id" data-select2-id="teacher_edit">
                                         <option value="">{{ __('group.Choose teacher') }}</option>
                                         @foreach ($teachers as $teacher)
                                             <option value="{{ $teacher->id }}">
@@ -42,8 +45,10 @@
                                        <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6">
-                                    <select class="form-control basic" style="width: 100%;" name="group_type_id"
-                                            id="groupTypeId">
+                                    <select class="form-control basic group_type_edit" 
+                                            style="width: 100%;" 
+                                            name="group_type_id"
+                                            id="groupTypeId" data-select2-id="group_type_edit">
                                         <option value="">{{ __('group.Choose type of group') }}
                                         </option>
                                         @foreach ($groupTypes as $groupType)

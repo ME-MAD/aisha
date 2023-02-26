@@ -26,6 +26,10 @@
                <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
     @endif
 
+    <link rel="stylesheet"
+    type="text/css"
+    href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
+
 @endpush
 
 
@@ -109,5 +113,22 @@
     <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
 
     <script src="{{asset('js/student.js')}}"></script>
+
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+
+    <script>
+        $('.role_create').select2({
+            theme: "basic",
+            dropdownParent: $('#creatStudentModal'),
+        });
+        $('.role_edite').select2({
+            theme: "basic",
+            dropdownParent: $('#editStudent'),
+        });
+    </script>
+
+    <script>
+        var image_edit = new FileUploadWithPreview('image_edit')
+    </script>
 @endpush
 

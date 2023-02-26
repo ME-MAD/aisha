@@ -19,6 +19,10 @@
               type="text/css"
               href="{{ asset('adminRtl/assets/css/components/cards/card.css') }}"/>
        <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
+
+       <link rel="stylesheet"
+        type="text/css"
+        href="{{ asset('adminRtl/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
         
     @else
         <link rel="stylesheet"
@@ -33,7 +37,15 @@
               type="text/css"
               href="{{ asset('adminAssets/assets/css/components/cards/card.css') }}"/>
       <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
+
+      <link rel="stylesheet"
+            type="text/css"
+            href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
     @endif
+
+      <link rel="stylesheet"
+          type="text/css"
+          href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endpush
 
 @section('breadcrumb')
@@ -127,6 +139,8 @@
 @push('js')
     <script type="module" src="{{ asset('js/payment/groupShow.js') }}"></script>
     <script src="{{ asset('adminAssets/assets/shared/chart.js') }}"></script>
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
     
     <script>
         initEditeTeacherModal()
@@ -224,5 +238,24 @@
             })
         })
 
+    </script>
+
+     <script>
+        $('.student_create').select2({
+            theme: "basic",
+            dropdownParent: $('#creatGroupStudentModal'),
+        });
+        $('.role_edit').select2({
+            theme: "basic",
+            dropdownParent: $('#editTeacher'),
+        });
+        $('.group_subject_create').select2({
+            theme: "basic",
+            dropdownParent: $('#creatGroupSubjectModal'),
+        });
+    </script>
+
+    <script>
+        var image_edit = new FileUploadWithPreview('image_edit')
     </script>
 @endpush
