@@ -125,7 +125,6 @@
 
     <script>
         $('.role_edite').select2({
-            theme: "basic",
             dropdownParent: $('#editStudent'),
         });
     </script>

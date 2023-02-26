@@ -72,8 +72,11 @@
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6  ">
-                                    <select class="form-control basic" style="width: 100%;" name="group_id"
-                                            id="group_id" data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
+                                    <select class="form-control group_days_create" 
+                                            style="width: 100%;" 
+                                            name="group_id"
+                                            id="group_id" data-select2-id="group_days_create"
+                                            data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
                                         <option value=""> {{ __('group.Choose group') }}</option>
                                         @foreach ($groups as $group)
                                             @if (!$group->checkIfGroupExceededGroupDaysLimit())

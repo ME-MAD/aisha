@@ -242,15 +242,12 @@
 
      <script>
         $('.student_create').select2({
-            theme: "basic",
             dropdownParent: $('#creatGroupStudentModal'),
         });
         $('.role_edit').select2({
-            theme: "basic",
             dropdownParent: $('#editTeacher'),
         });
         $('.group_subject_create').select2({
-            theme: "basic",
             dropdownParent: $('#creatGroupSubjectModal'),
         });
     </script>
