@@ -5,30 +5,32 @@ $(document).ready(function () {
         dropdownParent: $('#creatGroupDayModal'),
     });
 
-
     $('#group_id').on('change', function () {
 
-        href = $(this).data('href');
-        group_id = $(this).val();
+        let href = $(this).data('href');
+        let group_id = $(this).val();
+        $(`option`).removeAttr('disabled').css({
+            'color': 'black'
+        });
 
         $.ajax({
             url: href,
-            data: {group_id},
-
+            data: {
+                group_id
+            },
             success: function (response) {
-                groupDays = response.groupDays;
-                
-                if(groupDays)
-                {
-                    
-                }
-                else
-                {
-                    
-                }
+                let groupDays = response.groupDays
+
+                groupDays.forEach(element => {
+                    let day = element.day
+
+                    $(`#day option[value=${day}]`).attr('disabled', true).css({
+                        'color': 'red'
+                    })
+                });
             },
             error: function () {
             }
-        });
-    });
+        })
+    })
 })
