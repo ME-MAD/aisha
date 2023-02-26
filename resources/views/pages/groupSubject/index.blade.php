@@ -34,6 +34,9 @@
               href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
     @endif
 
+        <link rel="stylesheet"
+        type="text/css"
+        href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endpush
 
 
@@ -112,7 +115,7 @@
     {{--End Data_Table--}}
 
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
-
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
     <script>
         $('#group_id').on('change', function () {
             let href = $(this).data('href');
@@ -141,5 +144,17 @@
                 }
             })
         })
+    </script>
+
+    <script>
+        $('.group_create').select2({
+            theme: "basic",
+            dropdownParent: $('#creatGroupSubjectModal'),
+        });
+        $('.group_subject_create').select2({
+            theme: "basic",
+            dropdownParent: $('#creatGroupSubjectModal'),
+        });
+       
     </script>
 @endpush
