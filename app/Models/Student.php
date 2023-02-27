@@ -44,9 +44,21 @@ class Student extends Authenticatable
         return $this->hasMany(GroupStudent::class, 'student_id');
     }
 
+    //$this -> studentLesson -> syllabus
     public function syllabus()
     {
-        return $this->hasMany(syllabus::class, 'student_id');
+        return $this->hasManyDeep(
+            syllabus::class,
+            [StudentLesson::class], 
+            [
+               'student_id',
+               'student_lesson_id'
+            ],
+            [
+              'id', 
+              'id'
+            ]
+        );
     }
 
     public function studentLessons()
@@ -166,5 +178,11 @@ class Student extends Authenticatable
               'id'  
             ]
         );
+    }
+
+
+    public function scopeUnFinishedSyllabus($query)
+    {
+        return $this->syllabus()->where('syllabi.finished',false);
     }
 }

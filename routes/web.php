@@ -56,6 +56,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
 
     Route::group(['prefix' => 'home'], function () {
         Route::get('', [HomeController::class, 'index'])->name('home');
+        Route::get('getHomeStatistics', [HomeController::class, 'getHomeStatistics'])->name('home.getHomeStatistics');
     });
 
 

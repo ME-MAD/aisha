@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Group extends Model
 {
@@ -70,5 +71,21 @@ class Group extends Model
             'id',
             'student_id'
         );
+    }
+
+    public function scopeGroups($query)
+    {
+        if(getGuard() == 'admin')
+        {
+            return $query;
+        }
+        else if(getGuard() == 'teacher')
+        {
+            return Auth::guard(getGuard())->user()->groups()->getQuery();
+        }
+        else if(getGuard() == "student")
+        {
+            return Auth::guard(getGuard())->user()->groups()->getQuery();
+        }
     }
 }
