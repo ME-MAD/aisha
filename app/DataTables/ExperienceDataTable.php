@@ -45,15 +45,11 @@ class ExperienceDataTable extends DataTable
      * @param \App\Models\Experience $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Experience $model): QueryBuilder
+    public function query(): QueryBuilder
     {
-        return $model->select([
-            'experiences.id',
-            'title',
-            'from',
-            'to',
-            'teacher_id',
-        ])->with([
+        // return Teacher::Teachers()->with('role:id,name')->withCount(['groups', 'groupStudents']);
+        
+        return Experience::Experiences()->with([
             'teacher' => function ($q) {
                 return $q->select([
                     'teachers.id',
