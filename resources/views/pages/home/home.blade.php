@@ -13,6 +13,10 @@
     <link href="{{asset('adminAssets/assets/css/forms/theme-checkbox-radio.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
 
+    <link href="{{asset('adminAssets/assets/css/components/custom-counter.css')}}" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="{{asset('css/home.css')}}">
+
     <!-- END THEME GLOBAL STYLES -->
 @endpush
 
@@ -37,6 +41,18 @@
 
 @section('content')
     <div class="text-center w-100">
+
+
+
+        <div class="row mb-5">
+            <div class="col-12">
+
+                @include('pages.home.partials.statistics')
+            
+            </div>
+        </div>
+
+
 
         <div class="row mb-5">
             <div class="col-12">
@@ -112,6 +128,8 @@
     <script src="{{ asset('adminAssets/plugins/flatpickr/flatpickr.js') }}"></script>
 
     <script src="{{asset('adminAssets/plugins/fullcalendar/fullcalendar.min.js')}}"></script>
+
+    <script src="{{asset('adminAssets/plugins/counter/jquery.countTo.js')}}"></script>
 
     <script type="module" src="{{asset('js/home/home.js')}}"></script>
 @endpush
