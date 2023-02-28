@@ -211,10 +211,9 @@ class Student extends Authenticatable
       {
           return $this->hasManyDeep(
               Lesson::class,
-              [GroupStudent::class , Group::class , GroupSubject::class , Subject::class], 
+              [GroupStudent::class , GroupSubject::class , Subject::class], 
               [
                  'student_id', 
-                 'id', 
                  'group_id', 
                  'id', 
                  'subject_id', 
@@ -222,7 +221,6 @@ class Student extends Authenticatable
               [
                 'id',
                 'group_id',
-                'id',
                 'subject_id',
                 'id',
               ]

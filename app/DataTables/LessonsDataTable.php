@@ -28,8 +28,8 @@ class LessonsDataTable extends DataTable
                 return view('pages.lesson.datatable.edit', compact('query'));
             })
             ->addColumn('delete', 'pages.lesson.datatable.delete')
-            ->editColumn('Subject.name', function ($q) {
-                return $q->Subject->name ?? "";
+            ->editColumn('subject.name', function ($q) {
+                return $q->subject->name ?? "";
             })
 
             ->rawColumns(['edit', 'delete'])
@@ -42,7 +42,7 @@ class LessonsDataTable extends DataTable
      * @param \App\Models\Lesson $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Lesson $model): QueryBuilder
+    public function query(): QueryBuilder
     {
         return Lesson::Lessons()->with([
             'subject:id,name',
@@ -120,7 +120,7 @@ class LessonsDataTable extends DataTable
 
             [
                 'name' => 'subject_id',
-                'data' => 'Subject.name',
+                'data' => 'subject.name',
                 'title' => 'subject_id',
                 "className" => 'search--col'
             ],
