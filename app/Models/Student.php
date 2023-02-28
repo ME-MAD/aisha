@@ -167,4 +167,25 @@ class Student extends Authenticatable
             ]
         );
     }
+
+     //this -> groupStudent -> group -> groupDays
+     public function groupDays()
+     {
+         return $this->hasManyDeep(
+             GroupDay::class,
+             [GroupStudent::class, Group::class], 
+             [
+                'student_id', 
+                'id',    
+                'group_id'   
+             ],
+             [
+               'id', 
+               'group_id', 
+               'id'  
+             ]
+         );
+     }
+
+
 }

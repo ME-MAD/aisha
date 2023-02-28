@@ -29,15 +29,9 @@ class GroupDayDataTable extends DataTable
     }
 
 
-    public function query(GroupDay $model): QueryBuilder
+    public function query(): QueryBuilder
     {
-        return $model->select([
-            'group_days.id',
-            'group_id',
-            'day',
-            'from_time',
-            'to_time'
-        ])->with([
+        return GroupDay::GroupDays()->with([
             'group' => function ($q) {
                 return $q->select([
                     'groups.id',
@@ -45,6 +39,20 @@ class GroupDayDataTable extends DataTable
                 ]);
             },
         ]);
+        // return $model->select([
+        //     'group_days.id',
+        //     'group_id',
+        //     'day',
+        //     'from_time',
+        //     'to_time'
+        // ])->with([
+        //     'group' => function ($q) {
+        //         return $q->select([
+        //             'groups.id',
+        //             'groups.name',
+        //         ]);
+        //     },
+        // ]);
     }
 
     public function html(): HtmlBuilder

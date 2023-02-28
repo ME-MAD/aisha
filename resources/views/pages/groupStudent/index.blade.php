@@ -152,4 +152,34 @@
             })
         })
     </script>
+    <script>
+        $('#student_id').on('change', function () {
+            let href = $(this).data('href');
+            let student_id = $(this).val();
+            $(`option`).removeAttr('disabled').css({
+                'color': 'black'
+            });
+            $.ajax({
+                url: href,
+                data: {
+                    student_id
+                },
+                success: function (response) {
+                console.log(response.studentGroups);
+                 
+                    let studentGroups = response.studentGroups
+
+                    studentGroups.forEach(element => {
+                        let group = element.group_id
+
+                        $(`#group_id option[value=${group}]`).attr('disabled', true).css({
+                            'color': 'red'
+                        })
+                    });
+                },
+                error: function () {
+                }
+            })
+        })
+    </script>
 @endpush
