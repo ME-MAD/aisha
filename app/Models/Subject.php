@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Subject extends Model
 {
@@ -66,4 +67,38 @@ class Subject extends Model
     // {
     //     return count(glob($this->directoryPath() . "*"));
     // }
+    public function scopeSubjects($query)
+    {
+        if(getGuard() == 'admin')
+        {
+            return $query->select([
+                    'subjects.id',
+                    'book',
+                    'subjects.name',
+                    'pages_count',
+                    'avatar'
+                ]);
+        }
+        else if(getGuard() == 'teacher')
+        {
+            return Auth::guard(getGuard())->user()->subjects()->select([
+                'subjects.id',
+                'book',
+                'subjects.name',
+                'pages_count',
+                'avatar'
+            ])->getQuery();
+        }
+        else if(getGuard() == "student")
+        {
+            return Auth::guard(getGuard())->user()->subjects()->select([
+                'subjects.id',
+                'book',
+                'subjects.name',
+                'pages_count',
+                'avatar'
+            ])->getQuery();
+
+        }
+    }
 }

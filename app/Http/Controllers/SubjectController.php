@@ -47,7 +47,7 @@ class SubjectController extends Controller
 
     public function index()
     {
-        $subjects = Subject::get();
+        $subjects = Subject::Subjects()->get();
 
         return view('pages.subject.index', [
             'subjects' => $subjects
