@@ -123,7 +123,6 @@ class Teacher extends Authenticatable
         );
     }
 
-
     public function scopeTeachers($query)
     {
         if(getGuard() == 'admin')
@@ -148,5 +147,17 @@ class Teacher extends Authenticatable
     public function scopeUnFinishedSyllabus()
     {
         return $this->syllabus()->where('syllabi.finished',false);
+    }
+
+    public function groupSubjects()
+    {
+        return $this->hasManyThrough(
+            groupSubjects::class,
+            Group::class,
+            'teacher_id',
+            'group_id',
+            'id',
+            'id'
+        );
     }
 }
