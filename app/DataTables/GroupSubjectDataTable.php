@@ -37,16 +37,20 @@ class GroupSubjectDataTable extends DataTable
      * @param \App\Models\GroupSubject $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(GroupSubject $model): QueryBuilder
+    public function query(): QueryBuilder
     {
-        return $model->select([
-            'group_subjects.id',
-            'subject_id',
-            'group_id'
-        ])->with([
+        return GroupSubject::GroupSubjects()->with([
             'subject:id,name',
             'group:id,name'
         ]);
+        // return $model->select([
+        //     'group_subjects.id',
+        //     'subject_id',
+        //     'group_id'
+        // ])->with([
+        //     'subject:id,name',
+        //     'group:id,name'
+        // ]);
     }
 
     /**

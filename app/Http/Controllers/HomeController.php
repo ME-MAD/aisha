@@ -52,7 +52,7 @@ class HomeController extends Controller
             $data ['statistics'][]= [
                 'count' => Teacher::teachers()->count(),
                 'icon' => '<i class="fa-solid fa-chalkboard-user"></i>',
-                'title' => "Teachers"
+                'title' => "المعلمون"
             ];
         }
 
@@ -60,7 +60,7 @@ class HomeController extends Controller
         {
             $data ['statistics'][]= [
                 'count' => Auth::guard(getGuard())->user()->unFinishedSyllabus()->count(),
-                'icon' => '<i class="fa-solid fa-graduation-cap"></i>',
+                'icon' => '<i class="fa-solid fa-clock-rotate-left"></i>',
                 'title' => "Un finished Lessons"
             ];
         }
@@ -69,7 +69,7 @@ class HomeController extends Controller
             $data ['statistics'][]= [
                 'count' => Student::students()->count(),
                 'icon' => '<i class="fa-solid fa-graduation-cap"></i>',
-                'title' => "Students"
+                'title' => "الطلاب"
             ];
         }
 
