@@ -206,6 +206,31 @@ class Student extends Authenticatable
     }
 
 
+    //$this -> groupStudent -> Group -> GroupSubject -> Subject -> lesson
+      public function lessons()
+      {
+          return $this->hasManyDeep(
+              Lesson::class,
+              [GroupStudent::class , Group::class , GroupSubject::class , subjects::class], 
+              [
+                 'student_id', 
+                 'id', 
+                 'group_id', 
+                 'id', 
+                 'subject_id', 
+              ],
+              [
+                'id',
+                'group_id',
+                'id',
+                'subject_id',
+                'id',
+              ]
+          );
+      }
+  
+
+
      //this -> groupStudent -> group -> GroupSubject
     public function groupSubjects()
     {
@@ -224,4 +249,5 @@ class Student extends Authenticatable
             ]
         );
     }
+
 }
