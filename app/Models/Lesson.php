@@ -27,7 +27,7 @@ class Lesson extends Model
         {
             return $query->select([
                 'lessons.id',
-                'subject_id',
+                'lessons.subject_id',
                 'title',
                 'from_page',
                 'to_page',
@@ -49,7 +49,7 @@ class Lesson extends Model
         {
             return Auth::guard(getGuard())->user()->lessons()->select([
                 'lessons.id',
-                'subject_id',
+                'lessons.subject_id',
                 'title',
                 'from_page',
                 'to_page',

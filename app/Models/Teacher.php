@@ -175,7 +175,7 @@ class Teacher extends Authenticatable
     public function groupSubjects()
     {
         return $this->hasManyThrough(
-            groupSubjects::class,
+            GroupSubject::class,
             Group::class,
             'teacher_id',
             'group_id',
