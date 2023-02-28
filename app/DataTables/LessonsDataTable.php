@@ -44,14 +44,7 @@ class LessonsDataTable extends DataTable
      */
     public function query(Lesson $model): QueryBuilder
     {
-        return $model->select([
-            'lessons.id',
-            'subject_id',
-            'title',
-            'from_page',
-            'to_page',
-            'chapters_count',
-        ])->with([
+        return Lesson::Lessons()->with([
             'subject:id,name',
         ]);
     }

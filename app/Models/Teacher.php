@@ -123,6 +123,27 @@ class Teacher extends Authenticatable
         );
     }
 
+    //$this -> group -> groupSubject -> subject -> lesson
+    public function lessons()
+    {
+        return $this->hasManyDeep(
+            Lesson::class,
+            [Group::class, GroupSubject::class , Subject::class], 
+            [
+               'teacher_id', 
+               'group_id',
+               'id',
+               'subject_id',
+            ],
+            [
+              'id',
+              'id', 
+              'subject_id',
+              'id',
+            ]
+        );
+    }
+
 
     public function scopeTeachers($query)
     {

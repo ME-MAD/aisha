@@ -204,4 +204,28 @@ class Student extends Authenticatable
     {
         return $this->syllabus()->where('syllabi.finished',false);
     }
+
+    //$this -> groupStudent -> Group -> GroupSubject -> Subject -> lesson
+      public function lessons()
+      {
+          return $this->hasManyDeep(
+              Lesson::class,
+              [GroupStudent::class , Group::class , GroupSubject::class , subjects::class], 
+              [
+                 'student_id', 
+                 'id', 
+                 'group_id', 
+                 'id', 
+                 'subject_id', 
+              ],
+              [
+                'id',
+                'group_id',
+                'id',
+                'subject_id',
+                'id',
+              ]
+          );
+      }
+  
 }
