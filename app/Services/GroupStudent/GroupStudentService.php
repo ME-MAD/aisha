@@ -37,4 +37,9 @@ class GroupStudentService
     {
         return  GroupStudent::where('group_id', $group_id)->select(['group_id', 'student_id'])->get();
     }
+    
+    public function getGroupStudentsOfStudent(int $student_id)
+    {
+        return  GroupStudent::where('student_id', $student_id)->select(['group_id', 'student_id'])->get();
+    }
 }

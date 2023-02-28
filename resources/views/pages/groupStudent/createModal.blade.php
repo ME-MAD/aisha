@@ -24,7 +24,7 @@
                                 <div class="col-xl-12 col-md-6">
                                     <select class="form-control basic student_create" 
                                             style="width: 100%;" 
-                                            name="student_id" 
+                                            name="student_id"  data-href="{{ route('admin.group_students.getStudentGroups') }}"
                                             id="student_id" data-select2-id="student_create">
                                         <option value=""> {{ __('group.Choose student') }}</option>
                                         @foreach ($students as $student)

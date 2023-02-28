@@ -77,15 +77,26 @@ class Group extends Model
     {
         if(getGuard() == 'admin')
         {
-            return $query;
+            return $query->select([
+                    'groups.id',
+                    'teacher_id',
+                    'groups.name',
+                    'age_type',
+                    'group_type_id'
+                ]);
         }
         else if(getGuard() == 'teacher')
         {
-            return Auth::guard(getGuard())->user()->groups()->getQuery();
+            return Auth::guard(getGuard())->user()->groups()->select([
+                'groups.id', 'groups.name','teacher_id','group_type_id','age_type'
+            ])->getQuery();
         }
         else if(getGuard() == "student")
         {
-            return Auth::guard(getGuard())->user()->groups()->getQuery();
+            return Auth::guard(getGuard())->user()->groups()->select([
+                'groups.id', 'groups.name','teacher_id','group_type_id','age_type'
+            ])->getQuery();
+
         }
     }
 }

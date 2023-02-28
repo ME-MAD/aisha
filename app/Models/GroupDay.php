@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Auth;
 
 class GroupDay extends Model
 {
@@ -41,6 +41,40 @@ class GroupDay extends Model
     public function group()
     {
         return $this->belongsTo(Group::class, 'group_id');
+    }
+
+    public function scopeGroupDays($query)
+    {
+        if(getGuard() == 'admin')
+        {
+            return $query->select([
+                    'group_days.id',
+                    'group_id',
+                    'day',
+                    'from_time',
+                    'to_time'
+                ]);
+        }
+        else if(getGuard() == 'teacher')
+        {
+            return Auth::guard(getGuard())->user()->groupDays()->select([
+                'group_days.id',
+                'group_id',
+                'day',
+                'from_time',
+                'to_time'
+            ])->getQuery();
+        }
+        else if(getGuard() == "student")
+        {
+            return Auth::guard(getGuard())->user()->groupDays()->select([
+                'group_days.id',
+                'group_days.group_id',
+                'day',
+                'from_time',
+                'to_time'
+            ])->getQuery();
+        }
     }
 
 }

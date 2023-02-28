@@ -41,22 +41,14 @@ class GroupDataTable extends DataTable
             ->setRowId('id');
     }
 
-    public function query(Group $model): QueryBuilder
+    public function query(): QueryBuilder
     {
-
-        return $model->select([
-            'groups.id',
-            'teacher_id',
-            'groups.name',
-            'age_type',
-            'group_type_id'
-        ])->withCount([
+        return Group::Groups()->withCount([
             'groupStudents'
         ])->with([
             'teacher:id,name',
             'groupType:id,name'
         ]);
-
 
     }
 
