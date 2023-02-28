@@ -104,6 +104,25 @@ class Teacher extends Authenticatable
         );
     }
 
+    //$this -> group -> studentLesson -> syllabus
+    public function syllabus()
+    {
+        return $this->hasManyDeep(
+            syllabus::class,
+            [Group::class, StudentLesson::class], 
+            [
+               'teacher_id', 
+               'group_id',
+               'student_lesson_id'
+            ],
+            [
+              'id',
+              'id', 
+              'id'
+            ]
+        );
+    }
+
 
     public function scopeTeachers($query)
     {
@@ -124,5 +143,10 @@ class Teacher extends Authenticatable
                 'teachers.id', 'teachers.name', 'avatar', 'birthday','email','qualification','phone'
             ])->getQuery();
         }
+    }
+
+    public function scopeUnFinishedSyllabus()
+    {
+        return $this->syllabus()->where('syllabi.finished',false);
     }
 }

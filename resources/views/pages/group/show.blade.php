@@ -197,9 +197,7 @@
                     groupStudents.forEach(element => {
                         let student = element.student_id
 
-                        $(`#student_id option[value=${student}]`).attr('disabled', true).css({
-                            'color': 'red'
-                        })
+                        $(`#student_id option[value=${student}]`).attr('disabled', true).addClass('text-danger')
                     });
                 },
                 error: function () {

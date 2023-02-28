@@ -1,4 +1,4 @@
-import * as echarts from 'echarts';
+import {init} from 'echarts';
 
 export function totalPaymentsChartRun()
 {
@@ -17,7 +17,7 @@ export function totalPaymentsChartRun()
             const totalPayments = response.totalPayments;
 
             var chartDom = document.getElementById('totalPaymentsChartCanvaParent');
-            var myChart = echarts.init(chartDom);
+            var myChart = init(chartDom);
             var option;
         
             option = {

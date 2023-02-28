@@ -1,4 +1,4 @@
-import * as echarts from 'echarts';
+import {init} from 'echarts';
 
 export function groupAgesChartRun()
 {
@@ -8,7 +8,7 @@ export function groupAgesChartRun()
         const data = response.data;
         
         var chartDom = document.getElementById('groupAgesChartCanvaParent');
-        var myChart = echarts.init(chartDom);
+        var myChart = init(chartDom);
         var option;
         
         option = {

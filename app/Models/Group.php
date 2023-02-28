@@ -96,6 +96,7 @@ class Group extends Model
             return Auth::guard(getGuard())->user()->groups()->select([
                 'groups.id', 'groups.name','teacher_id','group_type_id','age_type'
             ])->getQuery();
+
         }
     }
 }
