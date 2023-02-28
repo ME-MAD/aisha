@@ -88,6 +88,8 @@
 
     @include('pages.teacher.editModal')
 
+    @include('pages.teacher.partials.studentLessonsModal')
+
 @endsection
 
 
@@ -95,11 +97,12 @@
 
 @push('js')
     <script src="{{ asset('js/invoice-list.js') }}"></script>
-    <script src="{{ asset('js/teacher.js') }}"></script>
     <script src="{{ asset('js/experience.js') }}"></script>
+
+    <script type="module" src="{{ asset('js/teacher/show.js') }}"></script>
+
     <script>
         initEditeTeacherModal()
-        initEditeExperienceModal()
     </script>
 
     <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>

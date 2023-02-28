@@ -32,7 +32,7 @@ class TeacherService
             'groupStudents',
             'groups.groupDays',
             'groups.groupType',
-            'groups.students',
+            'groups.students.syllabus.studentLesson.lesson',
             'experiences',
             'role:id,name'
         ]);
