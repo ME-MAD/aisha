@@ -41,16 +41,9 @@ class PaymentDataTable extends DataTable
      * @param \App\Models\Payment $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Payment $model): QueryBuilder
+    public function query(): QueryBuilder
     {
-        return $model->select([
-            'payments.id',
-            'student_id',
-            'group_id',
-            'amount',
-            'month',
-            'paid',
-        ])->with([
+        return Payment::Payments()->with([
             'student:id,name',
             'group:id,name'
         ]);
