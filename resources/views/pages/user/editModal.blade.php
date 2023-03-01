@@ -5,7 +5,7 @@
                 <h5 class="modal-title font-weight-bold text-capitalize text-light" id="editUserTitle">{{trans('user.edit user')}}</h5>
             </div>
             <div class="modal-body">
-                <form id="editUserForm" method="post">
+                <form id="editUserForm" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -27,7 +27,7 @@
                                 name="role"
                                 id="role" data-select2-id="role_edit">
 
-                            <option value="" >اختر وظيفة</option>
+                            <option>اختر وظيفة</option>
 
                             @foreach ($roles as $role)
                                 <option  class="active" value="{{$role->name}}">
@@ -48,7 +48,21 @@
                         </div>
                     </div>
 
-
+                    <div class="custom-file-container" data-upload-id="image_edit">
+                        <label>{{ __('teacher.avatar') }}<a href="javascript:void(0)"
+                                class="custom-file-container__image-clear" title="Clear Image"></a></label>
+                        <label class="custom-file-container__custom-file">
+                            <input type="file" class="custom-file-container__custom-file__custom-file-input"
+                                accept="image/*" name="avatar">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                            <span class="custom-file-container__custom-file__custom-file-control">
+                                {{-- here is center  html js but not work --}}
+                            </span>
+                        </label>
+                        <div class="custom-file-container__image-preview">
+                            {{-- here is center tag img but not work --}}
+                        </div>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-outline-success">{{trans('user.save')}}</button>

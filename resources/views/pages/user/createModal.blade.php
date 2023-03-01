@@ -6,7 +6,7 @@
                 <h5 class="modal-title font-weight-bold text-capitalize text-light" id="creatUserModalTitle">{{trans('user.add user')}}</h5>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.user.store') }}" method="post">
+                <form action="{{ route('admin.user.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
@@ -47,6 +47,32 @@
                         <div class="col-6">
                             <x-text name="password_confirmation" :required="true" placeholder="تأكيد كلمة المرور " label="{{trans('user.confirm password')}}" />
                         </div>
+                    </div>
+
+                    <div class="custom-file-container" data-upload-id="image_create">
+                        <label>{{ __('teacher.avatar') }}
+                            <a href="javascript:void(0)"
+                                class="custom-file-container__image-clear"
+                               title="Clear Image">
+
+                            </a>
+                        </label>
+                        <label class="custom-file-container__custom-file">
+
+                            <input type="file"
+                                   class="custom-file-container__custom-file__custom-file-input"
+                                accept="image/*"
+                                   name="avatar">
+
+                            <input type="hidden"
+                                   name="MAX_FILE_SIZE"
+                                   value="10485760" />
+
+                            <span class="custom-file-container__custom-file__custom-file-control"></span>
+
+                        </label>
+
+                        <div class="custom-file-container__image-preview"></div>
                     </div>
                    
                     <div class="modal-footer">

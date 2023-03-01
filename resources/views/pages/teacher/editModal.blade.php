@@ -40,7 +40,9 @@
 
                             @foreach ($roles as $role)
 
-                                <option  class="active" value="{{$role->name}}">{{$role->name}}</option>
+                                <option class="active" value="{{$role->name}}">
+                                    {{$role->name}}
+                                </option>
 
                             @endforeach
                         </select>
