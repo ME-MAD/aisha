@@ -1,4 +1,4 @@
-import { getStudentsTableHtml,handleStudentLessonModal } from "./student.js";
+import { getStudentsTableHtml,handleStudentLessonModal,handleAddStudentLessonModal } from "./student.js";
 
 export function renderTeacherGroups(groups)
 {
@@ -52,6 +52,7 @@ export function renderTeacherGroups(groups)
                                             <th scope="col">Name</th>
                                             <th scope="col">Phone</th>
                                             <th scope="col">Show Lessons</th>
+                                            <th scope="col">Add Lessons</th>
                                         </tr>
                                     </thead>
                                     <tbody id="student">
@@ -72,4 +73,5 @@ export function renderTeacherGroups(groups)
 
 
    handleStudentLessonModal(groups)
+   handleAddStudentLessonModal(groups)
 }

@@ -90,6 +90,8 @@
 
     @include('pages.teacher.partials.studentLessonsModal')
 
+    @include('pages.teacher.partials.addStudentLessonsModal')
+
 @endsection
 
 
@@ -108,7 +110,7 @@
     <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
 
     <script>
-         $('.role_edit').select2({
+        $('.role_edit').select2({
             dropdownParent: $('#editTeacher'),
         });
     </script>
