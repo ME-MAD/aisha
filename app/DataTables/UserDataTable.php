@@ -21,7 +21,8 @@ class UserDataTable extends DataTable
                 return($q->role_permissions_count);
             })
             ->addColumn('delete', 'pages.user.datatable.delete')
-            ->rawColumns(['edit', 'delete'])
+            ->addColumn('avatar', 'pages.user.datatable.avatar')
+            ->rawColumns(['edit', 'delete','avatar'])
             ->setRowId('id');
     }
 
@@ -32,6 +33,7 @@ class UserDataTable extends DataTable
             'users.id',
             'users.name',
             'users.email',
+            'users.avatar',
         ])->with('role:id,name')->withCount(['rolePermissions']);
     }
     
@@ -98,6 +100,14 @@ class UserDataTable extends DataTable
     {
         $columns =  [
             [
+                'name' => 'avatar',
+                'data' => 'avatar',
+                'title' => 'avatar',
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
+            [
                 'name' => 'users.id',
                 'data' => 'id',
                 'title' => '#',
@@ -134,7 +144,16 @@ class UserDataTable extends DataTable
                 "className" => 'not--search--col'
                 
             ],
-
+            [
+                'name' => 'delete',
+                'data' => 'delete',
+                'title' => 'Delete',
+                'printable' => false,
+                'exportable' => false,
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ]
         ];
 
 

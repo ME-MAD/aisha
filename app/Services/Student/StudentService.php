@@ -89,10 +89,10 @@ class StudentService
         ]);
     }
 
-    public function deleteStudent($student): void
+    public function deleteStudent($student): ?bool
     {
         $this->imageService->deleteImage(path: $student->getAvatarPath());
         $student->detachRole($student->role);
-        $student->delete();
+        return $student->delete();
     }
 }
