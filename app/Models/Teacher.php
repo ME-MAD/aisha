@@ -183,4 +183,16 @@ class Teacher extends Authenticatable
             'id'
         );
     }
+
+    public function Payments()
+    {
+        return $this->hasManyThrough(
+            Payment::class,
+            Group::class,
+            'teacher_id',
+            'group_id',
+            'id',
+            'id'
+        );
+    }
 }
