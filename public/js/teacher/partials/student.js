@@ -1,8 +1,8 @@
-export function getStudentsTableHtml(students)
-{
+export function getStudentsTableHtml(group) {
+
     let studentsGroupStudentsHtml = '';
 
-    students.forEach(student => {
+    group.students.forEach(student => {
         studentsGroupStudentsHtml += `
             <tr>
                 <td>${student.id}</td>
@@ -14,7 +14,7 @@ export function getStudentsTableHtml(students)
                 </td>
                 <td>
                     ${student.phone}</td>
-                <td class="text-primary showStudentLessonButton" data-student-id="${student.id}">
+                <td class="text-primary showStudentLessonButton" data-student-id="${student.id}" data-group-id="${group.id}">
                     <i class='fa-solid fa-eye' role="button"></i>
                 </td>
                 <td class="text-success addStudentLessonButton" data-student-id="${student.id}">
@@ -24,56 +24,57 @@ export function getStudentsTableHtml(students)
         `
     });
 
-    
+
 
     return studentsGroupStudentsHtml;
 }
 
-export function handleStudentLessonModal(groups)
-{
-    $('.showStudentLessonButton').click(function(){
+export function handleStudentLessonModal(groups) {
+    $('.showStudentLessonButton').click(function () {
 
         let studentId = $(this).data('student-id')
 
         let student = getStudentFromGroups(groups, studentId);
 
-        $('#studentLessonTableBody').html('')
-        student.syllabus.forEach(syllabi => {
-            $('#studentLessonTableBody').append(`
-                <tr>
-                    <td>${syllabi.student_lesson.lesson.title}</td>
-                    <td>${syllabi.from_chapter}</td>
-                    <td>${syllabi.to_chapter}</td>
-                    <td>${syllabi.from_page}</td>
-                    <td>${syllabi.to_page}</td>
-                    <td style="width:200px">
-                        <select class="form-control" name="rate" id="rate">
-                            <option value="">اختر التقييم</option>
-                        </select>
-                    </td>
-                    <td>${syllabi.to_page}</td>
-                </tr>
-            `)
-        });
+        let group_id = $(this).data('group-id')
 
-        $('#studentLessonModal').modal('show')
+
+
+        $.ajax({
+            url: "/admin/syllabus/getStudentUnfinishedSyllabus/" + studentId + "/" + group_id,
+            type: "get",
+            success: function (response) {
+                if (response.status == 200) {
+
+                    $('#studentLessonTableBody').html('')
+
+                    response.syllabus.forEach(syllabi => {
+                        appendSyllabi(syllabi)
+                    });
+
+                    $('#studentLessonModal').modal('show')
+
+                    handleFinishNewLesson()
+                }
+            },
+            error: function (res) {
+                Swal.fire(
+                    'Error!',
+                    `There Was an Error !`,
+                    'error',
+                )
+                console.log(res);
+            }
+        })
 
     })
+
 }
 
-// "from_chapter" => "0"
-// "to_chapter" => "10"
-// "from_page" => "19"
-// "to_page" => "20"
-// "student_lesson_id" => null
-// "student_id" => "21"
-// "group_id" => "4"
-// "lesson_id" => "206"
 
 
-export function handleAddStudentLessonModal(groups)
-{
-    $('.addStudentLessonButton').click(function(){
+export function handleAddStudentLessonModal(groups) {
+    $('.addStudentLessonButton').click(function () {
 
         let studentId = $(this).data('student-id')
         let group = getStudentGroupFromGroups(groups, studentId);
@@ -91,22 +92,21 @@ export function handleAddStudentLessonModal(groups)
             dropdownParent: $('#addStudentLessonModal'),
         });
 
-        
-        addNewLessonHandler(group, studentId)
+        $('#addStudentLessonModal #group_id').val(group.id)
+        $('#addStudentLessonModal #student_id').val(studentId)
 
 
         $('#addStudentLessonModal').modal('show')
 
     })
+
 }
 
-function getStudentFromGroups(groups, studentId)
-{
+function getStudentFromGroups(groups, studentId) {
     let myStudent = null;
     groups.forEach(group => {
         group.students.forEach(student => {
-            if(student.id == studentId)
-            {
+            if (student.id == studentId) {
                 myStudent = student;
             }
         });
@@ -115,12 +115,10 @@ function getStudentFromGroups(groups, studentId)
     return myStudent;
 }
 
-function getSubjectFromGroup(group,subject_id)
-{
+function getSubjectFromGroup(group, subject_id) {
     let mySubject = null;
     group.subjects.forEach(subject => {
-        if(subject.id == subject_id)
-        {
+        if (subject.id == subject_id) {
             mySubject = subject;
         }
     });
@@ -129,12 +127,10 @@ function getSubjectFromGroup(group,subject_id)
 }
 
 
-function getLessonFromSubject(subject,lesson_id)
-{
+function getLessonFromSubject(subject, lesson_id) {
     let myLesson = null;
     subject.lessons.forEach(lesson => {
-        if(lesson.id == lesson_id)
-        {
+        if (lesson.id == lesson_id) {
             myLesson = lesson;
         }
     });
@@ -143,13 +139,11 @@ function getLessonFromSubject(subject,lesson_id)
 }
 
 
-function getStudentGroupFromGroups(groups, studentId)
-{
+function getStudentGroupFromGroups(groups, studentId) {
     let myGroup = null;
     groups.forEach(group => {
         group.students.forEach(student => {
-            if(student.id == studentId)
-            {
+            if (student.id == studentId) {
                 myGroup = group;
             }
         });
@@ -158,8 +152,7 @@ function getStudentGroupFromGroups(groups, studentId)
     return myGroup;
 }
 
-function renderSubjectsInSelect(group) 
-{
+function renderSubjectsInSelect(group) {
     group.subjects.forEach(subject => {
         $('#addStudentLessonModal #subject_id').append(`
             <option value="${subject.id}">${subject.name}</option>
@@ -167,20 +160,17 @@ function renderSubjectsInSelect(group)
     });
 }
 
-function handleSubjectSelectChange(group)
-{
-    $('#addStudentLessonModal #lesson_id').change(function(){
-        let subject  = getSubjectFromGroup(group, $('#addStudentLessonModal #subject_id').val() )
-        let lesson  = getLessonFromSubject(subject, $(this).val() )
+function handleSubjectSelectChange(group) {
+    $('#addStudentLessonModal #lesson_id').change(function () {
+        let subject = getSubjectFromGroup(group, $('#addStudentLessonModal #subject_id').val())
+        let lesson = getLessonFromSubject(subject, $(this).val())
 
-        if(lesson)
-        {
+        if (lesson) {
             $('#addStudentLessonModal #lesson_from_page').html(lesson.from_page)
             $('#addStudentLessonModal #lesson_to_page').html(lesson.to_page)
             $('#addStudentLessonModal #lesson_chapters_count').html(lesson.chapters_count)
         }
-        else
-        {
+        else {
             $('#addStudentLessonModal #lesson_id').html(
                 `<option val=''>اختر الدرس</option>`
             )
@@ -188,60 +178,57 @@ function handleSubjectSelectChange(group)
             $('#addStudentLessonModal #lesson_to_page').html(0)
             $('#addStudentLessonModal #lesson_chapters_count').html(0)
         }
-       
+
     })
 }
 
 
-function handleLessonSelectChange(group)
-{
-    $('#addStudentLessonModal #subject_id').change(function(){
-        let subject  = getSubjectFromGroup(group, $(this).val() )
+function handleLessonSelectChange(group) {
+    $('#addStudentLessonModal #subject_id').change(function () {
+        let subject = getSubjectFromGroup(group, $(this).val())
 
-        if(subject)
-        {
+        if (subject) {
             subject.lessons.forEach(lesson => {
                 $('#addStudentLessonModal #lesson_id').append(`
                     <option value="${lesson.id}">${lesson.title}</option>
                 `)
             });
         }
-        else
-        {
+        else {
             $('#addStudentLessonModal #lesson_id').html(
                 `<option val=''>اختر الدرس</option>`
             )
         }
-       
+
     })
 }
 
-function addNewLessonHandler(group, studentId)
-{
-    $('#addStudentLessonModalForm').submit(function(e){
+export function addNewLessonHandler() {
+    $('#addStudentLessonModalForm').submit(function (e) {
         e.preventDefault();
         let from_chapter = $('#addStudentLessonModalForm #from_chapter').val()
         let to_chapter = $('#addStudentLessonModalForm #to_chapter').val()
         let from_page = $('#addStudentLessonModalForm #from_page').val()
         let to_page = $('#addStudentLessonModalForm #to_page').val()
         let lesson_id = $('#addStudentLessonModalForm #lesson_id').val()
+        let group_id = $('#addStudentLessonModal #group_id').val()
+        let student_id = $('#addStudentLessonModal #student_id').val()
 
         $.ajax({
             url: $(this).data('href'),
             type: "POST",
             data: {
-               from_chapter,
-               to_chapter,
-               from_page,
-               to_page,
-               student_id: studentId,
-               group_id: group.id,
-               lesson_id
+                from_chapter,
+                to_chapter,
+                from_page,
+                to_page,
+                student_id: student_id,
+                group_id: group_id,
+                lesson_id
             },
-            success: function(response) {
+            success: function (response) {
                 $('#addStudentLessonModal').modal('hide')
-                if(response.status == 200)
-                {
+                if (response.status == 200) {
                     Swal.fire(
                         'Success!7',
                         `Finished Successfully !`,
@@ -250,8 +237,7 @@ function addNewLessonHandler(group, studentId)
 
                     emptyNewLessonModal()
                 }
-                else if(response.status == 400)
-                {
+                else if (response.status == 400) {
                     Swal.fire(
                         'Warning!',
                         `Student Didn't Finish The Last Lesson!`,
@@ -261,7 +247,7 @@ function addNewLessonHandler(group, studentId)
                     emptyNewLessonModal()
                 }
             },
-            error: function(res) {
+            error: function (res) {
                 let errors = '';
 
                 res.responseJSON.errors.forEach(errorArray => {
@@ -280,8 +266,56 @@ function addNewLessonHandler(group, studentId)
     })
 }
 
-function emptyNewLessonModal()
-{
+
+function handleFinishNewLesson() {
+    $('.finishNewLessonBtn').click(function () {
+        let rate = $(this).parent().parent().find('#rate').val()
+        let syllabi_id = $(this).data('syllabi-id');
+
+        $.ajax({
+            url: "/admin/syllabus/finishNewLessonAjax/" + $(this).data('syllabi-id'),
+            type: "POST",
+            data: {
+                rate: rate
+            },
+            success: function (response) {
+                if (response.status == 200) {
+                    if (rate == "fail") {
+                        location.reload();
+                        return;
+                    }
+
+                    $(`#syllabi-tr-${syllabi_id}`).remove()
+
+                    Swal.fire(
+                        'Success!6',
+                        `Finished Successfully !`,
+                        'success',
+                    )
+
+
+                }
+                else if (response.status == 400) {
+                    Swal.fire(
+                        'Warning!',
+                        `Student Has Finished That Lesson`,
+                        'warning',
+                    )
+                }
+            },
+            error: function (res) {
+                Swal.fire(
+                    'Error!',
+                    `There Was an Error !`,
+                    'error',
+                )
+                console.log(res);
+            }
+        })
+    })
+}
+
+function emptyNewLessonModal() {
     $('#addStudentLessonModal #from_chapter').val('')
     $('#addStudentLessonModal #to_chapter').val('')
     $('#addStudentLessonModal #from_page').val('')
@@ -292,4 +326,28 @@ function emptyNewLessonModal()
     $('#addStudentLessonModal #subject_id').html(
         `<option val=''>اختر المادة</option>`
     )
+}
+
+function appendSyllabi(syllabi) {
+    $('#studentLessonTableBody').append(`
+        <tr id="syllabi-tr-${syllabi.id}">
+            <td>${syllabi.student_lesson.lesson.title}</td>
+            <td>${syllabi.from_chapter}</td>
+            <td>${syllabi.to_chapter}</td>
+            <td>${syllabi.from_page}</td>
+            <td>${syllabi.to_page}</td>
+            <td style="width:200px">
+                <select class="form-control" name="rate" id="rate">
+                    <option value="">اختر التقييم</option>
+                    <option value="excellent"> excellent </option>
+                    <option value="very good"> very good </option>
+                    <option value="good"> good </option>
+                    <option value="fail"> fail </option>
+                </select>
+            </td>
+            <td>
+                <button class="btn btn-success finishNewLessonBtn" data-syllabi-id="${syllabi.id}">تأكيد</button>
+            </td>
+        </tr>
+    `)
 }

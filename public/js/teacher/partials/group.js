@@ -1,7 +1,6 @@
-import { getStudentsTableHtml,handleStudentLessonModal,handleAddStudentLessonModal } from "./student.js";
+import { getStudentsTableHtml, handleStudentLessonModal, handleAddStudentLessonModal, addNewLessonHandler } from "./student.js";
 
-export function renderTeacherGroups(groups)
-{
+export function renderTeacherGroups(groups) {
     groups.forEach(group => {
         $('#pills-tab').append(`
             <li class="nav-item">
@@ -19,7 +18,7 @@ export function renderTeacherGroups(groups)
             </li>
         `)
 
-        let studentsGroupStudentsHtml = getStudentsTableHtml(group.students);
+        let studentsGroupStudentsHtml = getStudentsTableHtml(group);
 
 
         $('#ct').append(`
@@ -72,6 +71,8 @@ export function renderTeacherGroups(groups)
     });
 
 
-   handleStudentLessonModal(groups)
-   handleAddStudentLessonModal(groups)
+    handleStudentLessonModal(groups)
+    handleAddStudentLessonModal(groups)
+
+    addNewLessonHandler()
 }

@@ -38,12 +38,12 @@ class GroupService
         $this->groupWithAllData = $group->load([
             'groupStudents.student',
             'groupSubjects.subject',
-            'payments' => function($q){
-                return $q->select('id','group_id','paid','month')
-                    ->where('paid',true)
-                    ->where('month',getCurrectMonthName());
+            'payments' => function ($q) {
+                return $q->select('id', 'group_id', 'paid', 'month')
+                    ->where('paid', true)
+                    ->where('month', getCurrectMonthName());
             },
-            'students.payments' => function($q) use ($group){
+            'students.payments' => function ($q) use ($group) {
                 return $q->where('group_id', $group->id);
             },
             'groupType',
@@ -92,7 +92,7 @@ class GroupService
                 return $query->where('month', $currentMonth);
             }
         ])->get();
-        
+
         return $gorups;
     }
 

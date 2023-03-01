@@ -13,8 +13,7 @@ class TeacherService
 
     public function __construct(
         ImageService $imageService
-    )
-    {
+    ) {
         $this->imageService = $imageService;
     }
 
@@ -33,7 +32,10 @@ class TeacherService
             'groups.groupDays',
             'groups.groupType',
             'groups.subjects.lessons',
-            'groups.students.syllabus.studentLesson.lesson',
+            // 'groups.students.syllabus.studentLesson.lesson',
+            'groups.students.syllabus' => function ($q) {
+                return $q->where('syllabi.finished', false)->with(['studentLesson.lesson']);
+            },
             'experiences',
             'role:id,name'
         ]);
@@ -73,7 +75,7 @@ class TeacherService
             'avatar' => $fileName,
         ]);
 
-       return $teacher->attachRole($request->role);
+        return $teacher->attachRole($request->role);
     }
 
     public function updateTeacher(Teacher $teacher, object $request)
@@ -88,8 +90,8 @@ class TeacherService
                 path: Teacher::AVATARS_PATH
             );
         }
-        
-         $teacher->update([
+
+        $teacher->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password ? Hash::make($request->password) : $teacher->password,
