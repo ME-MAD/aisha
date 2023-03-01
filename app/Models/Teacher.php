@@ -27,7 +27,7 @@ class Teacher extends Authenticatable
                 {
                     return asset(Teacher::AVATARS_PATH . $avatar);
                 }
-                return '';
+                return asset("images/teacher.png");
             },
         );
     }

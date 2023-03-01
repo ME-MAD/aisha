@@ -26,7 +26,7 @@ class Student extends Authenticatable
                 if ($avatar && file_exists($this->getAvatarPath())) {
                     return asset(Student::AVATARS_PATH . $avatar);
                 }
-                return '';
+                return asset("images/student.png");
             },
         );
     }
