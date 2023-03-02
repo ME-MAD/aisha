@@ -1,10 +1,14 @@
 <div class="modal fade" id="addStudentLessonModal" tabindex="-1" role="dialog" aria-labelledby="addStudentLessonModal"
-      aria-hidden="true">
+      aria-hidden="true" data-book="">
       <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
             <div class="modal-content">
                   <div class="modal-header card-header create__form__header">
                         <h5 class="modal-title font-weight-bold text-capitalize text-light"
                               id="addStudentLessonModalTitle">{{ __('teacher.create teacher') }}</h5>
+                        <a class="icon text-white showBookBtn" id="showBookBtn">
+                              <i class="fa-solid fa-book-open fa-2xl"></i>
+                              <h6 class="text-capitalize text-white d-inline">إظهار الكتاب</h6>
+                        </a>
                   </div>
                   <div class="modal-body">
                         <form id="addStudentLessonModalForm" method="post"

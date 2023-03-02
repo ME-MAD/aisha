@@ -1,3 +1,5 @@
+import { Book } from "../../student/partials/book.js";
+
 export function getStudentsTableHtml(group) {
 
     let studentsGroupStudentsHtml = '';
@@ -96,9 +98,13 @@ export function handleAddStudentLessonModal(groups) {
         $('#addStudentLessonModal #student_id').val(studentId)
 
 
+
         $('#addStudentLessonModal').modal('show')
 
+
     })
+
+
 
 }
 
@@ -160,10 +166,11 @@ function renderSubjectsInSelect(group) {
     });
 }
 
-function handleSubjectSelectChange(group) {
+function handleLessonSelectChange(group) {
     $('#addStudentLessonModal #lesson_id').change(function () {
         let subject = getSubjectFromGroup(group, $('#addStudentLessonModal #subject_id').val())
         let lesson = getLessonFromSubject(subject, $(this).val())
+
 
         if (lesson) {
             $('#addStudentLessonModal #lesson_from_page').html(lesson.from_page)
@@ -182,12 +189,16 @@ function handleSubjectSelectChange(group) {
     })
 }
 
-
-function handleLessonSelectChange(group) {
+function handleSubjectSelectChange(group) {
     $('#addStudentLessonModal #subject_id').change(function () {
         let subject = getSubjectFromGroup(group, $(this).val())
 
+
         if (subject) {
+
+            handleShowingOfBook(subject.book)
+
+
             subject.lessons.forEach(lesson => {
                 $('#addStudentLessonModal #lesson_id').append(`
                     <option value="${lesson.id}">${lesson.title}</option>
@@ -195,6 +206,7 @@ function handleLessonSelectChange(group) {
             });
         }
         else {
+            $('#addStudentLessonModal').data('book', '');
             $('#addStudentLessonModal #lesson_id').html(
                 `<option val=''>اختر الدرس</option>`
             )
@@ -326,6 +338,10 @@ function emptyNewLessonModal() {
     $('#addStudentLessonModal #subject_id').html(
         `<option val=''>اختر المادة</option>`
     )
+
+    $('#addStudentLessonModal #lesson_from_page').html(0)
+    $('#addStudentLessonModal #lesson_to_page').html(0)
+    $('#addStudentLessonModal #lesson_chapters_count').html(0)
 }
 
 function appendSyllabi(syllabi) {
@@ -350,4 +366,38 @@ function appendSyllabi(syllabi) {
             </td>
         </tr>
     `)
+}
+
+function handleShowingOfBook(subjectHref) {
+    let book = new Book(subjectHref)
+
+    $('.showBookBtn').off('click')
+    $('.showBookBtn').on('click', function () {
+        book.renderPage()
+        $('#showBookModal').modal('show')
+    })
+
+    $('#next').off('click')
+    $('#prev').off('click')
+    $('#next').on('click', function () {
+        book.onNextPage()
+    })
+    $('#prev').on('click', function () {
+        book.onPrevPage()
+    })
+
+
+    $('#addStudentLessonModal #lesson_from_page').off('click')
+    $('#addStudentLessonModal #lesson_from_page').on('click', function () {
+        book.pageNum = Number($('#addStudentLessonModal #lesson_from_page').html())
+        book.renderPage()
+        $('#showBookModal').modal('show')
+    })
+
+    $('#addStudentLessonModal #lesson_to_page').off('click')
+    $('#addStudentLessonModal #lesson_to_page').on('click', function () {
+        book.pageNum = Number($('#addStudentLessonModal #lesson_to_page').html())
+        book.renderPage()
+        $('#showBookModal').modal('show')
+    })
 }

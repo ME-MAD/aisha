@@ -1,5 +1,7 @@
 import { getStudentsTableHtml, handleStudentLessonModal, handleAddStudentLessonModal, addNewLessonHandler } from "./student.js";
 
+import { Book } from "../../student/partials/book.js";
+
 export function renderTeacherGroups(groups) {
     groups.forEach(group => {
         $('#pills-tab').append(`
@@ -69,6 +71,52 @@ export function renderTeacherGroups(groups) {
             </div>
         `)
     });
+
+
+
+
+    // $('#addStudentLessonModal').on('shown.bs.modal', function () {
+    //     $('.showBookBtn').off('click')
+
+    //     console.log($(this).data('book'));
+
+    //     let book = new Book($(this).data('book'))
+
+    //     $('.showBookBtn').on('click', function () {
+    //         book.renderPage()
+    //         $('#showBookModal').modal('show')
+    //     })
+
+
+    //     $('#next').off('click')
+    //     $('#prev').off('click')
+    //     $('#next').on('click', function () {
+    //         book.onNextPage()
+    //     })
+    //     $('#prev').on('click', function () {
+    //         book.onPrevPage()
+    //     })
+
+
+
+    //     $('#addStudentLessonModal #lesson_from_page').off('click')
+    //     $('#addStudentLessonModal #lesson_from_page').on('click', function () {
+    //         book.pageNum = Number($('#addStudentLessonModal #lesson_from_page').html())
+    //         book.renderPage()
+    //         $('#showBookModal').modal('show')
+    //     })
+
+    //     $('#addStudentLessonModal #lesson_to_page').off('click')
+    //     $('#addStudentLessonModal #lesson_to_page').on('click', function () {
+    //         book.pageNum = Number($('#addStudentLessonModal #lesson_to_page').html())
+    //         book.renderPage()
+    //         $('#showBookModal').modal('show')
+    //     })
+    // })
+
+
+
+
 
 
     handleStudentLessonModal(groups)
