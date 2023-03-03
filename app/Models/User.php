@@ -56,7 +56,7 @@ class User extends Authenticatable
                 {
                     return asset(User::AVATARS_PATH . $avatar);
                 }
-                return '';
+                return asset("images/teacher.png");
             },
         );
     }

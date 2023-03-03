@@ -26,6 +26,19 @@
 
     <link rel="stylesheet" href="{{asset('adminAssets/assets/css/sweetalert.css')}}">
 
+    <!--Start Font STYLES -->   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&family=Harmattan:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body{
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
     {{-- <link href="{{ asset('adminAssets/plugins/apex/apexcharts.css') }}" rel="stylesheet" type="text/css"> --}}
     {{-- <link href="{{ asset('adminAssets/assets/css/dashboard/dash_2.css') }}" rel="stylesheet" type="text/css"/> --}}
