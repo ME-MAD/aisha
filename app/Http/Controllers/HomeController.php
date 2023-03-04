@@ -16,7 +16,6 @@ class HomeController extends Controller
     public function __construct(HomeService $homeService)
     {
         $this->homeService = $homeService;
-
     }
 
     public function index()
@@ -39,34 +38,28 @@ class HomeController extends Controller
             ]
         ];
 
-        if(getGuard() == 'teacher')
-        {
-            $data ['statistics'][]= [
+        if (getGuard() == 'teacher') {
+            $data['statistics'][] = [
                 'count' => Auth::guard(getGuard())->user()->unFinishedSyllabus()->count(),
                 'icon' => '<i class="fa-solid fa-clock"></i>',
                 'title' => "Students With Lessons"
             ];
-        }
-        else
-        {
-            $data ['statistics'][]= [
+        } else {
+            $data['statistics'][] = [
                 'count' => Teacher::teachers()->count(),
                 'icon' => '<i class="fa-solid fa-chalkboard-user"></i>',
                 'title' => "المعلمون"
             ];
         }
 
-        if(getGuard() == "student")
-        {
-            $data ['statistics'][]= [
+        if (getGuard() == "student") {
+            $data['statistics'][] = [
                 'count' => Auth::guard(getGuard())->user()->unFinishedSyllabus()->count(),
                 'icon' => '<i class="fa-solid fa-clock-rotate-left"></i>',
                 'title' => "Un finished Lessons"
             ];
-        }
-        else
-        {
-            $data ['statistics'][]= [
+        } else {
+            $data['statistics'][] = [
                 'count' => Student::students()->count(),
                 'icon' => '<i class="fa-solid fa-graduation-cap"></i>',
                 'title' => "الطلاب"

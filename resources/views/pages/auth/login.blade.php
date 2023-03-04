@@ -38,20 +38,15 @@
             <link rel="stylesheet" type="text/css" href="{{ asset('adminRtl/assets/css/forms/switches.css') }}">
             <link href="{{ asset('adminAssets/plugins/font-icons/fontawesome/css/all.css') }}" rel="stylesheet"
                   type="text/css" />
+            <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+            <style>
+                  body {
+                        font-family: 'Cairo', sans-serif;
+                  }
+            </style>
       @endif
       <!--Start Font STYLES -->
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Cairo&family=Harmattan:wght@400;700&display=swap"
-            rel="stylesheet">
-      <style>
-            body {
-                  font-family: 'Cairo', sans-serif;
-            }
-      </style>
+
 </head>
 
 <body class="form">
@@ -75,8 +70,7 @@
                                     <a class="dropdown-item" data-img-value="ca" data-value="en"
                                           href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"><img
                                                 src="{{ asset('adminAssets/assets/img/' . getFlag($localeCode)) }}"
-                                                class="flag-width" alt="flag alternate"
-                                                hreflang="{{ $localeCode }}">
+                                                class="flag-width" alt="flag alternate" hreflang="{{ $localeCode }}">
                                           {{ $properties['native'] }}</a>
                               @endforeach
                         </div>

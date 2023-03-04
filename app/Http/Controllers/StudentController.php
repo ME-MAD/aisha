@@ -22,15 +22,14 @@ class StudentController extends Controller
 
     public function __construct(
         StudentService $studentService,
-         SubjectService $subjectService,
-         PermissionService $permissionService
-    )
-    {
+        SubjectService $subjectService,
+        PermissionService $permissionService
+    ) {
         $this->studentService = $studentService;
         $this->subjectService = $subjectService;
         $this->permissionService = $permissionService;
 
-        $this->permissionService->handlePermissions($this,[
+        $this->permissionService->handlePermissions($this, [
             'index' => 'index-student',
             'store' => 'store-student',
             'update' => 'update-student',
@@ -61,7 +60,7 @@ class StudentController extends Controller
         $roles = Role::select(['id', 'name'])->get();
 
         return view('pages.student.show', [
-            'student' => $student,
+            'student' => $student->load('role:id,name'),
             'roles' => $roles
         ]);
     }

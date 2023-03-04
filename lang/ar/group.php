@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Groups Table' => 'جدول المجموعات',
+    'groups_table' => 'جدول المجموعات',
     'Groups' => 'المجموعات',
     'Create Group' => 'إضافة مجموعة جديدة',
     'Create Group Type' => 'إضافة نوع مجموعة ',
