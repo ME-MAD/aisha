@@ -144,16 +144,6 @@ class UserDataTable extends DataTable
                 "className" => 'not--search--col'
                 
             ],
-            [
-                'name' => 'delete',
-                'data' => 'delete',
-                'title' => 'Delete',
-                'printable' => false,
-                'exportable' => false,
-                'orderable' => false,
-                'searchable' => false,
-                "className" => 'not--search--col'
-            ]
         ];
 
 
@@ -171,13 +161,12 @@ class UserDataTable extends DataTable
             ];
         }
 
-
-        if (userCan('delete-user')) {
-            $colums [] =
-            [
+        if(userCan('delete-user'))
+        {
+            $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => 'Delete',
+                'title' => __('teacher.Delete'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
