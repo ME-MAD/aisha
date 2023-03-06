@@ -18,7 +18,9 @@
                               <line x1="12" y1="11" x2="12" y2="17"></line>
                               <line x1="9" y1="14" x2="15" y2="14"></line>
                         </svg>
-                        <span>{{ __('main.groups') }}</span>
+                        <span>
+                             {{trans('main.groups')}}
+                        </span>
                   </div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -38,31 +40,45 @@
 
                   @check_permission('index-group')
                         <li class="{{ request()->routeIs('admin.group.index') ? 'active' : '' }}">
-                              <a href="{{ route('admin.group.index') }}"> {{ __('global.groups') }} </a>
+                              <a href="{{ route('admin.group.index') }}">
+                                    {{trans('main.groups')}}
+                              </a>
                         </li>
                   @endcheck_permission
 
                   @check_permission('index-groupDay')
                         <li class="{{ request()->routeIs('admin.group_day.index') ? 'active' : '' }}">
-                              <a href="{{ route('admin.group_day.index') }}">{{ __('global.Group Days') }}</a>
+                              <a href="{{ route('admin.group_day.index') }}">
+                                   
+                                    {{trans('group.groups_days')}}
+                              </a>
                         </li>
                   @endcheck_permission
 
                   @check_permission('index-groupStudent')
                         <li class="{{ request()->routeIs('admin.group_students.index') ? 'active' : '' }}">
-                              <a href="{{ route('admin.group_students.index') }}">{{ __('global.Group Students') }}</a>
+                              <a href="{{ route('admin.group_students.index') }}">
+                                 
+                                    {{trans('group.groups_students')}}
+                              </a>
                         </li>
                   @endcheck_permission
 
                   @check_permission('index-groupType')
                         <li class="{{ request()->routeIs('admin.group_types.index') ? 'active' : '' }}">
-                              <a href="{{ route('admin.group_types.index') }}">{{ __('global.Group Types') }}</a>
+                              <a href="{{ route('admin.group_types.index') }}">
+
+                                    {{trans('group.groups_types')}}
+                              </a>
                         </li>
                   @endcheck_permission
 
                   @check_permission('index-groupSubject')
                         <li class="{{ request()->routeIs('admin.group_subjects.index') ? 'active' : '' }}">
-                              <a href="{{ route('admin.group_subjects.index') }}">{{ __('global.Group Subject') }}</a>
+                              <a href="{{ route('admin.group_subjects.index') }}">
+                                  
+                                    {{trans('group.groups_subject')}}
+                              </a>
                         </li>
                   @endcheck_permission
 

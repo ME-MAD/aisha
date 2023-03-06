@@ -2,17 +2,19 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header card-header create__form__header">
-                <h5 class="modal-title text-white font-weight-bold" >المستخدمين</h5>
+                <h5 class="modal-title text-white font-weight-bold" >
+                    {{trans('main.users')}}
+                </h5>
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
                     <table class="table table-bordered mb-4">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Type</th>
+                                <th>{{trans('main.num')}}</th>
+                                <th>{{trans('main.name')}}</th>
+                                <th>{{trans('main.email')}}</th>
+                                <th>{{trans('main.role')}}</th>
                             </tr>
                         </thead>
                         <tbody>

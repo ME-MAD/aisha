@@ -3,7 +3,6 @@ export function statisticsRun()
     $.ajax({
         url: $('#homeTopStatisticsCon').data('href'),
         success: function (response) {
-            console.log(response);
             response.statistics.forEach(function(statistic, index){
                 $('#homeTopStatisticsCon').append(`
                     <div class="counter-container">

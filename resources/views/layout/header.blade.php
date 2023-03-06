@@ -13,8 +13,11 @@
 
         <div class="nav-logo align-self-center">
             <a class="navbar-brand" href="{{ route('admin.home') }}"><img alt="logo"
-                    src="{{ asset('images/home.jpg') }}"> <span
-                    class="navbar-brand-name">{{ __('global.HOME') }}</span></a>
+                    src="{{ asset('images/home.jpg') }}"> 
+                    <span  class="navbar-brand-name">
+                   {{trans('main.home')}}
+                   </span>
+            </a>
         </div>
 
         <ul class="navbar-item flex-row mr-auto">
@@ -246,7 +249,7 @@
                             alt="admin-profile">
                         <div class="media-body align-self-center">
                             <h6>
-                                <span> مرحبا بك: </span>
+                                <span>{{trans('main.welcome')}} : </span>
                                 {{Auth::guard(getGuard())->user()->name}}
                             </h6>
                         </div>
@@ -298,7 +301,7 @@
                                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                     <polyline points="16 17 21 12 16 7"></polyline>
                                     <line x1="21" y1="12" x2="9" y2="12"></line>
-                                </svg>{{ __('global.Sign Out') }}</a>
+                                </svg>{{trans('auth.sign_out')}}</a>
                         </div>
                     </div>
                 </div>

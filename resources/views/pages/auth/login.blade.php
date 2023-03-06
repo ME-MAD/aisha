@@ -6,7 +6,7 @@
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-            <title>{{ __('global.AISHA Admin - Login Page') }}</title>
+            <title>{{trans('auth.AISHA Admin - Login Page')}}</title>
             <link rel="icon" type="image/x-icon" href="{{ asset('adminAssets/assets/img/favicon.ico') }}" />
             <link href="{{ asset('fonts/fonts_en.css') }}" rel="stylesheet">
             <link href="{{ asset('adminAssets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -24,7 +24,7 @@
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-            <title>{{ __('global.AISHA Admin - Login Page') }}</title>
+            <title>{{trans('auth.AISHA Admin - Login Page')}}</title>
             <link rel="icon" type="image/x-icon" href="{{ asset('adminRtl/assets/img/favicon.ico') }}" />
             <!-- BEGIN GLOBAL MANDATORY STYLES -->
             <link href="{{ asset('fonts/fonts_ar.css') }}" rel="stylesheet">
@@ -77,8 +77,8 @@
                         <div class="form-container">
                               <div class="form-content">
 
-                                    <h1 class="">الدخول الى :<a href="index.html"><span
-                                                      class="brand-name">المنصة التعليمية</span></a></h1>
+                                    <h1 class="">{{ trans('auth.login_to') }}:<a href="index.html"><span
+                                                      class="brand-name">{{ trans('auth.educational_platform') }}</span></a></h1>
                                     <form class="text-left" method="POST" action="{{ route('login') }}">
                                           <div class="form">
                                                 @csrf
@@ -94,7 +94,7 @@
                                                       </svg>
                                                       <input id="email" name="email" type="text"
                                                             class="form-control"
-                                                            placeholder="{{ __('global.Email') }}">
+                                                            placeholder="{{ trans('auth.email') }}">
                                                 </div>
                                                 <div id="password-field" class="field-wrapper input mb-2">
                                                       <svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -109,7 +109,7 @@
                                                       </svg>
                                                       <input id="password" name="password" type="password"
                                                             class="form-control"
-                                                            placeholder="{{ __('global.Password') }}">
+                                                            placeholder="{{ trans('auth.password') }}">
                                                 </div>
                                                 <div class="field-wrapper terms_condition">
                                                       <div class="n-chk">
@@ -117,21 +117,21 @@
                                                                   {{-- <input type="checkbox" class="new-control-input"> --}}
                                                                   <span class="new-control-indicator">
                                                                   </span><span>
-                                                                        <a href="javascript:void(0);">اختر طريقة
-                                                                              الدخول</a></span>
+                                                                        <a href="javascript:void(0);">{{ trans('auth.choose_the_login_method') }}
+                                                                              </a></span>
                                                             </label>
                                                             <select name="type" id="typeOfLogin"
                                                                   class="form-control p-0">
 
-                                                                  <option value="admin">Admin</option>
-                                                                  <option value="teacher">Teacher</option>
-                                                                  <option value="student">Student</option>
+                                                                  <option value="admin">{{ trans('main.admin') }}</option>
+                                                                  <option value="teacher">{{ trans('main.teacher') }}</option>
+                                                                  <option value="student">{{ trans('main.student') }}</option>
                                                             </select>
                                                       </div>
                                                 </div>
                                                 <div class="d-sm-flex justify-content-between">
                                                       <div class="field-wrapper toggle-pass">
-                                                            <p class="d-inline-block">{{ __('global.Show Password') }}
+                                                            <p class="d-inline-block">{{ trans('auth.show_password') }}
                                                             </p>
                                                             <label class="switch s-primary">
                                                                   <input type="checkbox" id="toggle-password"
@@ -141,17 +141,17 @@
                                                       </div>
                                                       <div class="field-wrapper">
                                                             <button type="submit" class="btn btn-primary"
-                                                                  value="">{{ __('global.Log In') }}</button>
+                                                                  value="">{{ trans('auth.log_in') }}</button>
                                                       </div>
                                                 </div>
 
                                           </div>
                                     </form>
-                                    <p class="terms-conditions">© 2023 All Rights Reserved. <a
-                                                href="index.html">Educational Platform</a> is a product of E-MAD. <a
-                                                href="javascript:void(0);">Cookie Preferences</a>, <a
-                                                href="javascript:void(0);">Privacy</a>, and <a
-                                                href="javascript:void(0);">Terms</a>.</p>
+                                    <p class="terms-conditions">© {{ trans('auth.2023_all_rights_reserved') }}. <a
+                                                href="index.html">{{ trans('auth.educational_platform') }}</a> {{ trans('auth.is_a_product_of') }} <a
+                                                href="javascript:void(0);">{{ trans('auth.educational_platform') }}</a>, <a
+                                                href="javascript:void(0);">{{ trans('auth.privacy') }}</a>, {{ trans('auth.and') }} <a
+                                                href="javascript:void(0);"> {{ trans('auth.terms') }}</a>.</p>
 
                               </div>
                         </div>

@@ -33,7 +33,7 @@ class HomeController extends Controller
                 [
                     'count' => Group::groups()->count(),
                     'icon' => '<i class="fa-solid fa-users-rays"></i>',
-                    'title' => "Groups"
+                    'title' => trans('main.groups')
                 ],
             ]
         ];
@@ -42,13 +42,13 @@ class HomeController extends Controller
             $data['statistics'][] = [
                 'count' => Auth::guard(getGuard())->user()->unFinishedSyllabus()->count(),
                 'icon' => '<i class="fa-solid fa-clock"></i>',
-                'title' => "Students With Lessons"
+                'title' => trans('main.students_with_lessons')
             ];
         } else {
             $data['statistics'][] = [
                 'count' => Teacher::teachers()->count(),
                 'icon' => '<i class="fa-solid fa-chalkboard-user"></i>',
-                'title' => "المعلمون"
+                'title' => trans('main.teachers')
             ];
         }
 
@@ -56,13 +56,13 @@ class HomeController extends Controller
             $data['statistics'][] = [
                 'count' => Auth::guard(getGuard())->user()->unFinishedSyllabus()->count(),
                 'icon' => '<i class="fa-solid fa-clock-rotate-left"></i>',
-                'title' => "Un finished Lessons"
+                'title' => trans('main.un_finished_lessons')
             ];
         } else {
             $data['statistics'][] = [
                 'count' => Student::students()->count(),
                 'icon' => '<i class="fa-solid fa-graduation-cap"></i>',
-                'title' => "الطلاب"
+                'title' => trans('main.students')
             ];
         }
 

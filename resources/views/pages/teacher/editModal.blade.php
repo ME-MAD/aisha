@@ -2,7 +2,9 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header card-header create__form__header">
-                <h5 class="modal-title font-weight-bold text-capitalize text-light"  id="editTeacher">{{ __('teacher.edite teacher') }}</h5>
+                <h5 class="modal-title font-weight-bold text-capitalize text-light"  id="editTeacher">
+                    {{trans('teacher.edite_teacher')}}
+                </h5>
             </div>
             <div class="modal-body">
                 <form id="editTeacherForm" method="post" enctype="multipart/form-data">
@@ -11,32 +13,44 @@
 
                     <div class="row">
                         <div class="col-6">
-                           <x-text name="name" :required="true" label="{{ __('teacher.name') }}" id="name" />
+                           <x-text name="name" 
+                                :required="true" 
+                                label="{{trans('main.name')}}" 
+                                id="name" />
                         </div>
                         <div class="col-6">
-                           <x-text name="email" :required="true" label="Email" :value="old('email')" id="email" />
+                           <x-text name="email" 
+                                :required="true" 
+                                label="{{trans('main.email')}}" 
+                                :value="old('email')" 
+                                id="email" />
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-                          <x-text name="password"  label="Password" :value="old('password')" />
-                        </div>
+                          <x-text name="password"  
+                                 label="{{trans('main.password')}}" 
+                                 :value="old('password')" />
+                        </div> 
                         <div class="col-6">
-                          <x-text name="password_confirmation"  label="Confirm Password" />
+                          <x-text name="password_confirmation"  
+                                 label="{{trans('teacher.confirm_password')}}"  />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="role" class="text-capitalize font-weight-bold text-muted">
-                            {{trans('user.role')}}
+                            {{trans('user.choose_roles')}}
                             <i class="fa-solid fa-star-of-life required-star"></i>
                         </label>
                         <select class="form-control basic role_edit"
                                 name="role"
                                 id="role" data-select2-id="role_edit">
 
-                            <option >{{trans('user.roles')}}</option>
+                            <option >
+                                {{trans('main.roles')}}
+                            </option>
 
                             @foreach ($roles as $role)
 
@@ -53,18 +67,29 @@
 
                     <div class="row">
                         <div class="col-4">
-                            <x-date name="birthday" :required="true" label="{{ __('teacher.birthday') }}" id="birthday" />
+                            <x-date name="birthday" 
+                                    :required="true" 
+                                    label="{{trans('main.birthday')}}" 
+                                    id="birthday" />
                         </div>
                         <div class="col-4">
-                           <x-text name="phone" :required="true" label="{{ __('teacher.phone') }}" id="phone" />
+                           <x-text name="phone" 
+                                :required="true" 
+                                label="{{trans('main.phone')}}"  
+                                id="phone" />
                         </div>
                         <div class="col-4">
-                          <x-text name="qualification" :required="true" label="{{ __('teacher.qualification') }}" id="qualification" />
+                          <x-text name="qualification" 
+                                :required="true" 
+                                label="{{trans('main.qualification')}}" 
+                                id="qualification" />
                         </div>
                     </div>
 
                     <div class="custom-file-container" data-upload-id="image_edit">
-                        <label>{{ __('teacher.avatar') }}<a href="javascript:void(0)"
+                        <label>
+                             {{trans('main.avatar')}}
+                            <a href="javascript:void(0)"
                                 class="custom-file-container__image-clear" title="Clear Image"></a></label>
                         <label class="custom-file-container__custom-file">
                             <input type="file" class="custom-file-container__custom-file__custom-file-input"
@@ -80,9 +105,13 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-outline-info">{{ __('teacher.Update') }}</button>
+                        <button type="submit" class="btn btn-outline-info">
+                            {{trans('main.update')}}
+                        </button>
                         <button class="btn btn-outline-danger" data-dismiss="modal"><i
-                                class="flaticon-cancel-12"></i>{{ __('teacher.Discard') }}</button>
+                                class="flaticon-cancel-12"></i>
+                                {{trans('main.discard')}}
+                        </button>
                     </div>
                 </form>
             </div>

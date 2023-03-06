@@ -30,7 +30,9 @@
                     <a href="{{route('admin.home')}}"
                        class="d-flex justify-content-center align-items-center">
                         <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                        <span class="font-weight-bold mt-1">الصفحة الرئيسية</span>
+                        <span class="font-weight-bold mt-1">
+                            {{trans('main.home_page')}}
+                        </span>
                     </a>
                 </li>
             </ul>
@@ -65,7 +67,7 @@
             <div class="col-lg-4 col-md-12">
                 <div class="card" style="min-height: 550px">
                     <div class="card-header card__header__for_tables">
-                        <h3 class="text-white">Group Ages</h3>
+                        <h3 class="text-white">{{trans('group.group_ages')}}</h3>
                     </div>
                     <div class="card-body">
                         <div class="" id="groupAgesChart" data-href="{{ route('admin.group.groupAgesChartData') }}">
@@ -80,7 +82,7 @@
             <div class="col-lg-8 col-md-12">
                 <div class="card" style="min-height: 550px">
                     <div class="card-header card__header__for_tables">
-                        <h3 class="text-white">Total Payments</h3>
+                        <h3 class="text-white"> {{trans('payment.total_payments')}}</h3>
                     </div>
                     <div class="card-body">
                         <div class="" id="totalPaymentsChart" data-href="{{ route('admin.payment.totalPaymentsChartData') }}">

@@ -2,23 +2,11 @@
 
 
 return [
-
-    'roles' => 'اختر وظيفه',
-    'add user' => 'اضافة مستخدم ',
-    'edit user' => 'تعديل المستخدم ',
-
-    'name' => 'الاسم',
-    'email' => 'البريد الالكتروني',
-    'role' => 'الوظيفه',
-    'password' => 'كلمة المرور',
-    'confirm password' => 'تأكيد كلمة المرور',
-
-
-
-    'save' => 'حفظ',
-    'discard' => 'تجاهل',
-    'edit' => 'تعديل',
-    'update' => 'تحديث',
-    'delete' => 'حذف',
-
+    'count_permissions' => 'عدد الصلاحيات',
+    'enter_the_username' => 'أدخل أسم المستخدم',
+    'enter_the_e-mail' => 'أدخل البريد الألكتروني',
+    'choose_roles' => 'اختر الدور',
+    'confirm_password' => 'تأكيد كلمة المرور',
+    'enter_password' => 'أدخل كلمة المرور',
+    'add_user' => 'إضافة مستخدم',
 ];

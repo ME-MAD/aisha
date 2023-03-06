@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="nav-item theme-text">
-                <a href="index.html" class="nav-link"> {{ __('global.HOME') }} </a>
+                <a href="index.html" class="nav-link"> {{trans('main.home')}} </a>
             </li>
         </ul>
 

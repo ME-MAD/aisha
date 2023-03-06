@@ -102,7 +102,7 @@ class UserDataTable extends DataTable
             [
                 'name' => 'avatar',
                 'data' => 'avatar',
-                'title' => 'avatar',
+                'title' => trans('main.avatar'),
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
@@ -110,35 +110,35 @@ class UserDataTable extends DataTable
             [
                 'name' => 'users.id',
                 'data' => 'id',
-                'title' => '#',
+                'title' => trans('main.num'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'name',
                 'data' => 'name',
-                'title' => 'Name',
+                'title' => trans('main.name'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'email',
                 'data' => 'email',
-                'title' => 'Email',
+                'title' => trans('main.email'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'role.name',
                 'data' => 'role.name',
-                'title' => 'role',
+                'title' => trans('main.role'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'countPermissions',
                 'data' => 'countPermissions',
-                'title' => 'عدد الصلاحيات',
+                'title' => trans('user.count_permissions'),
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
@@ -152,7 +152,7 @@ class UserDataTable extends DataTable
             [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => 'Edit',
+                'title' => trans('main.edit'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
@@ -166,7 +166,7 @@ class UserDataTable extends DataTable
             $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => __('teacher.Delete'),
+                'title' => trans('main.delete'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,

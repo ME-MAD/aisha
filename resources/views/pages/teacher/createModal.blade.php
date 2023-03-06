@@ -3,38 +3,61 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header card-header create__form__header">
-                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="creatTeacherModal">{{ __('teacher.create teacher') }}</h5>
+                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="creatTeacherModal">
+                    {{trans('teacher.create_teacher')}}
+                </h5>
             </div>
             <div class="modal-body">
                 <form action="{{ route('admin.teacher.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="name" :required="true" placeholder="أدخل أسم المعلم" label="{{ __('teacher.name') }}" :value="old('name')" :required="true" />
+                            <x-text name="name" 
+                                    :required="true" 
+                                    placeholder="{{trans('teacher.enter_the_teachername')}}" 
+                                    label="{{trans('main.name')}}" 
+                                    :value="old('name')" 
+                                    :required="true" />
                         </div>
                         <div class="col-6">
-                            <x-text name="email" :required="true" placeholder="أدخل بريد الإلكتروني بالمعلم" label="Email" :value="old('email')" :required="true" />
+                            <x-text name="email" 
+                                    :required="true" 
+                                    placeholder="{{trans('teacher.enter_the_e-mail')}}" 
+                                    label="{{trans('main.email')}}" 
+                                    :value="old('email')" 
+                                    :required="true" />
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="password" :required="true" placeholder="أدخل كلمة المرور"  label="Password" :value="old('password')" :required="true" />
+                            <x-text name="password" 
+                                    :required="true" 
+                                    placeholder="{{trans('teacher.enter_password')}}"  
+                                    label="{{trans('main.password')}}" 
+                                    :value="old('password')" 
+                                    :required="true" />
                         </div>
                         <div class="col-6">
-                            <x-text name="password_confirmation" :required="true" label="Confirm Password" placeholder="تأكيد كلمة المرور" :required="true" />
+                            <x-text name="password_confirmation" 
+                                    :required="true" 
+                                    label="{{trans('teacher.confirm_password')}}" 
+                                    placeholder="{{trans('teacher.confirm_password')}}"
+                                    :required="true" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="role" class="text-capitalize font-weight-bold text-muted">
-                            {{trans('user.role')}}
+                            {{trans('user.choose_roles')}}
                             <i class="fa-solid fa-star-of-life required-star"></i>
                         </label>
                         <select class="form-control basic role_create"
                                 name="role"
                                 id="role" data-select2-id="role_create">
-                            <option >{{trans('user.roles')}}</option>
+                            <option >
+                                {{trans('main.roles')}}
+                            </option>
 
                             @foreach ($roles as $role)
 
@@ -49,18 +72,30 @@
 
                     <div class="row">
                         <div class="col-4">
-                            <x-date name="birthday" label="{{ __('teacher.birthday') }}" :value="old('birthday')" />
+                            <x-date name="birthday" 
+                                    label="{{trans('main.birthday')}}" 
+                                    :value=" old('birthday')" />
+                                   
                         </div>
                         <div class="col-4">
-                            <x-text name="phone" :required="true" placeholder="أدخل هاتف المعلم" label="{{ __('teacher.phone') }}" :value="old('phone')" />
+                            <x-text name="phone" 
+                                    :required="true" 
+                                    placeholder="{{trans('teacher.enter_the_teacher\'s_phone')}}" 
+                                    label="{{trans('main.phone')}}" 
+                                    :value="old('phone')" />
                         </div>
                         <div class="col-4">
-                            <x-text name="qualification" :required="true"  placeholder="أدخل مؤهل المعلم" label="{{ __('teacher.qualification') }}" :value="old('qualification')" />
+                            <x-text name="qualification" 
+                                    :required="true"  
+                                    placeholder="{{trans('teacher.Enter_teacher_qualification')}}" 
+                                    label="{{trans('main.qualification')}}" 
+                                    :value="old('qualification')" />
                         </div>
                     </div>
 
                     <div class="custom-file-container" data-upload-id="image_create">
-                        <label>{{ __('teacher.avatar') }}
+                        <label>
+                            {{trans('main.avatar')}}
                             <a href="javascript:void(0)"
                                 class="custom-file-container__image-clear"
                                title="Clear Image">
@@ -86,9 +121,13 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-outline-dark">{{ __('teacher.Save') }}</button>
+                        <button type="submit" class="btn btn-outline-dark">
+                            {{trans('main.save')}}
+                        </button>
                         <button class="btn btn-outline-danger" data-dismiss="modal"><i
-                                class="flaticon-cancel-12"></i>{{ __('teacher.Discard') }}</button>
+                                class="flaticon-cancel-12"></i>
+                            {{trans('main.discard')}}
+                        </button>
                     </div>
 
                 </form>
