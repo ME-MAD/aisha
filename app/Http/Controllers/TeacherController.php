@@ -26,15 +26,14 @@ class TeacherController extends Controller
         TeacherService    $teacherService,
         ExperienceService $experienceService,
         PermissionService $permissionService
-    )
-    {
+    ) {
         $this->teacherDataTable = $teacherDataTable;
         $this->teacherService = $teacherService;
         $this->experienceService = $experienceService;
         $this->permissionService = $permissionService;
 
 
-        $this->permissionService->handlePermissions($this,[
+        $this->permissionService->handlePermissions($this, [
             'index' => 'index-teacher',
             'store' => 'store-teacher',
             'show' => 'show-teacher',
@@ -54,16 +53,10 @@ class TeacherController extends Controller
 
     public function show(Teacher $teacher)
     {
-        $this->teacherService->setAllDataAboutTeacher($teacher);
-
         $roles = Role::select(['id', 'name'])->get();
 
         return view('pages.teacher.show', [
             'teacher' => $teacher,
-            'experiences' => $this->teacherService->getTeacherExperiences($teacher),
-            'groups' => $this->teacherService->getAllTeacherGroups($teacher),
-            'countGroups' => $this->teacherService->getCountOfGroups($teacher),
-            'countStudent' => $this->teacherService->getCountOfStudents($teacher),
             'roles' => $roles
         ]);
     }
@@ -96,10 +89,6 @@ class TeacherController extends Controller
     {
         $this->teacherService->setAllDataAboutTeacher($teacher);
 
-        $experiences = $this->teacherService->getTeacherExperiences();
-
-        $yearsOfExperience = $this->experienceService->getCountOfExperienceYears($experiences);
-
         return response()->json([
             'statistics' => [
                 [
@@ -122,14 +111,13 @@ class TeacherController extends Controller
     public function getExpereincesDataForChart(Teacher $teacher)
     {
         $data = [];
-        
-        foreach($teacher->experiences as $experience)
-        {
-            $data []= [
+
+        foreach ($teacher->experiences as $experience) {
+            $data[] = [
                 'name' => ellipsis($experience->title, 50),
                 'value' => round($this->experienceService->getCountOfExperienceYears([
                     $experience
-                ]),2)
+                ]), 2)
             ];
         }
 

@@ -6,7 +6,7 @@ use App\Models\syllabus;
 
 class SyllabusService
 {
-    public function createSyllabus(object $request , $student_lesson_id)
+    public function createSyllabus(object $request, $student_lesson_id)
     {
         return syllabus::create([
             'student_lesson_id' => $student_lesson_id,
@@ -25,13 +25,13 @@ class SyllabusService
             ['finished', false]
         ])->exists();
     }
-    
-    public function updateSyllabusFinished($request ,$syllabus)
+
+    public function updateSyllabusFinished($request, $syllabus)
     {
         return $syllabus->update([
-                'finished' => true,
-                'rate' => $request->rate
-            ]);
+            'finished' => true,
+            'rate' => $request->rate
+        ]);
     }
 
 

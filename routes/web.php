@@ -38,10 +38,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Auth'], function () {
 
-    Route::get('/loginPage',[AuthController::class, 'loginPage'])->name('loginPage');
+    Route::get('/loginPage', [AuthController::class, 'loginPage'])->name('loginPage');
 
-    Route::post('/login',[AuthController::class, 'login'])->name('login');
-
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
 });
 
 Route::get('/admin', function () {
@@ -49,7 +48,7 @@ Route::get('/admin', function () {
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth'], function () {
-   
+
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -216,6 +215,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
         Route::get('delete/{syllabus}', [SyllabusController::class, 'delete'])->name('delete');
         Route::post('createNewLesson/', [SyllabusController::class, 'createNewLesson'])->name('createNewLesson');
         Route::post('finishNewLessonAjax/{syllabus}', [SyllabusController::class, 'finishNewLessonAjax'])->name('finishNewLessonAjax');
+        Route::get('getStudentUnfinishedSyllabus/{student}/{group}', [SyllabusController::class, 'getStudentUnfinishedSyllabus'])->name('getStudentUnfinishedSyllabus');
     });
 
 

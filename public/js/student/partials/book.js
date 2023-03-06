@@ -1,7 +1,6 @@
-import {PAGE_NUMBER_ELEMENTS} from "./config.js"
+import { PAGE_NUMBER_ELEMENTS } from "./config.js"
 
-export class Book
-{
+export class Book {
   pdfDoc = null
   canvas = null
   ctx = null
@@ -10,31 +9,30 @@ export class Book
   pageRendering = false
   pageNum = 1;
 
-  constructor(url){
+  constructor(url) {
     this.canvas = document.getElementById('book-canvas')
     this.ctx = this.canvas.getContext('2d');
     this.pdfDoc = pdfjsLib.getDocument(url)
   }
 
-  renderPage()
-  {
+  renderPage() {
     this.pageRendering = true;
 
-    
+
     this.pdfDoc.promise.then((pdf) => {
       pdf.getPage(this.pageNum).then((page) => {
 
-        var viewport = page.getViewport({scale: this.scale});
+        var viewport = page.getViewport({ scale: this.scale });
         // this.canvas.height = viewport.height;
         // this.canvas.width = viewport.width;
-  
+
         // Render PDF page into canvas context
         var renderContext = {
           canvasContext: this.ctx,
           viewport: viewport
         };
         var renderTask = page.render(renderContext);
-  
+
         // Wait for rendering to finish
         renderTask.promise.then(() => {
           this.pageRendering = false;
@@ -53,25 +51,20 @@ export class Book
 
 
 
-  queueRenderPage(num)
-  {
-    if (this.pageRendering) 
-    {
+  queueRenderPage(num) {
+    if (this.pageRendering) {
       this.pageNumPending = num;
-    } 
-    else 
-    {
+    }
+    else {
       this.renderPage(num);
     }
   }
-  
 
 
 
-  onPrevPage()
-  {
-    if (this.pageNum <= 1) 
-    {
+
+  onPrevPage() {
+    if (this.pageNum <= 1) {
       return;
     }
     this.pageNum--;
@@ -80,10 +73,8 @@ export class Book
 
 
 
-  onNextPage()
-  {
-    if (this.pageNum >= this.pdfDoc.numPages) 
-    {
+  onNextPage() {
+    if (this.pageNum >= this.pdfDoc.numPages) {
       return;
     }
     this.pageNum++;
@@ -95,17 +86,16 @@ export class Book
 
 
 
-export function handleOpenPageClick(book)
-{
-    PAGE_NUMBER_ELEMENTS.forEach(className => {
-      $(`.${className}`).click(function(){
-          let lastPageFinished = $(this).data('last-page-finished') || 1
-          
-          $('#showBookModal').modal('show')
+export function handleOpenPageClick(book) {
+  PAGE_NUMBER_ELEMENTS.forEach(className => {
+    $(`.${className}`).click(function () {
+      let lastPageFinished = $(this).data('last-page-finished') || 1
 
-          book.pageNum = Number(lastPageFinished)
-          book.renderPage()
-      })
-    });
+      $('#showBookModal').modal('show')
+
+      book.pageNum = Number(lastPageFinished)
+      book.renderPage()
+    })
+  });
 }
 

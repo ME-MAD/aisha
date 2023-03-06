@@ -73,6 +73,18 @@ class Group extends Model
         );
     }
 
+    public function subjects()
+    {
+        return $this->hasManyThrough(
+            Subject::class,
+            GroupSubject::class,
+            'group_id',
+            'id',
+            'id',
+            'subject_id'
+        );
+    }
+
     public function scopeGroups($query)
     {
         if(getGuard() == 'admin')
