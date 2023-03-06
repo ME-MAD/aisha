@@ -28,7 +28,9 @@
                             <a href="{{route('admin.home')}}"
                                class="d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                                <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                                <span class="font-weight-bold mt-1">
+                                    {{trans('main.home_page')}}
+                                </span>
                             </a>
                         </li>
                         <li class="active">
@@ -36,7 +38,10 @@
                                class="d-flex justify-content-center align-items-center">
 
                                 <i class="fa-solid fa-fingerprint fa-2x mx-2"></i>
-                                <span class="font-weight-bold ">الوظائف</span>
+                                <span class="font-weight-bold ">
+                                    {{trans('main.roles')}}
+                                </span>
+
                             </a>
                         </li>
                     </ul>
@@ -55,7 +60,7 @@
                 <div class="card ">
                     <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables">
                         <h3 class="text-capitalize text-white">
-                            {{__('roles.roles')}}
+                            {{trans('main.roles')}}
                         </h3>
                         @check_permission('store-role')
                         <a class="icon text-white" href="{{route('admin.role.create')}}">

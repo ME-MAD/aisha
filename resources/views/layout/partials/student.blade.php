@@ -14,7 +14,9 @@
                     <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                 </svg>
-                <span>{{ __('global.Students') }}</span>
+                <span>
+                    {{trans('main.students')}}
+                </span>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -35,7 +37,9 @@
                     request()->routeIs('admin.student.index')  ? 'active' : ''
                 }}">
 
-                <a href="{{ route('admin.student.index') }}"> {{ __('global.Students') }} </a>
+                <a href="{{ route('admin.student.index') }}"> 
+                    {{trans('main.students')}}
+                </a>
             </li>
 
 
@@ -46,7 +50,9 @@
                     request()->routeIs('admin.note.studentIndex')  ? 'active' : ''
                 }}">
 
-                <a href="{{ route('admin.note.studentIndex') }}"> {{ __('global.Notes') }} </a>
+                <a href="{{ route('admin.note.studentIndex') }}">
+                     {{trans('main.notes')}}
+                 </a>
             </li>
 
 

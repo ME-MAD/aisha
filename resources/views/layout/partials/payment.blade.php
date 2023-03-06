@@ -12,7 +12,9 @@
                             ry="2"></rect>
                     <line x1="1" y1="10" x2="23" y2="10"></line>
                 </svg>
-                <span>{{ __('global.Payment') }}</span>
+                <span>
+                    {{trans('main.payment')}}
+                </span>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -27,13 +29,17 @@
 
             @check_permission("index-payment")
             <li class="{{request()->routeIs('admin.payment.index')? 'active' : ''}}">
-                <a href="{{ route('admin.payment.index') }}">{{ __('global.Payment') }}</a>
+                <a href="{{ route('admin.payment.index') }}">
+                    {{trans('main.payment')}}
+                </a>
             </li>
             @endcheck_permission
 
             @check_permission("create-payment")
             <li class="{{request()->routeIs('admin.payment.create')? 'active' : ''}}">
-                <a href="{{ route('admin.payment.create') }}">{{ __('global.Create payments') }}</a>
+                <a href="{{ route('admin.payment.create') }}">
+                    {{trans('payment.create_payments')}}
+                </a>
             </li>
             @endcheck_permission
         </ul>

@@ -103,11 +103,11 @@ class TeacherController extends Controller
         return response()->json([
             'statistics' => [
                 [
-                    'name' => 'Groups Count',
+                    'name' => trans('group.groups_count'),
                     'value' => $this->teacherService->getCountOfGroups($teacher)
                 ],
                 [
-                    'name' => 'Student Count',
+                    'name' => trans('student.student_count'),
                     'value' => $this->teacherService->getCountOfStudents($teacher)
                 ],
             ],

@@ -16,7 +16,8 @@
                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                 </svg>
                 <span class="font-weight-bold text-capitalize">
-                    {{__('global.settings')}}</span>
+                  {{trans('main.settings')}}
+                </span>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -34,7 +35,9 @@
             @check_permission("index-user")
             <li class="{{request()->routeIs('admin.user.index') ? 'active' : '' }}">
                 <a href="{{route('admin.user.index')}}"
-                    class="text-capitalize font-weight-bold">{{__('global.users')}} </a>
+                    class="text-capitalize font-weight-bold">
+                    {{trans('main.users')}}
+                </a>
             </li>
             @endcheck_permission
 
@@ -44,7 +47,9 @@
                             request()->routeIs('admin.role.edit') ? 'active' : ''
                     }}">
                 <a href="{{route('admin.role.index')}}"
-                    class="text-capitalize font-weight-bold">{{__('roles.roles')}} </a>
+                    class="text-capitalize font-weight-bold">
+                    {{trans('main.roles')}}
+                </a>
             </li>
             @endcheck_permission
         </ul>

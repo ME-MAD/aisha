@@ -171,20 +171,22 @@ class GroupController extends Controller
         return response()->json([
             'data' => [
                 [
-                    'name' => 'kids',
+                    'name' => trans('main.kids'),
                     'value' => $groupsCountsData['groupKidsCount']
                 ],
                 [
-                    'name' => 'adults',
+                    'name' => trans('main.adults'),
                     'value' => $groupsCountsData['groupAdultCount']
                 ],
             ],
             'allGroupsCount' => $groupsCountsData['allGroupsCount'],
-            'words' => [
-                'groups' => __('home.Groups'),
-                "group_kids_count" => "Group Kids Count" . " " . $groupsCountsData['groupKidsCount'],
-                "group_adult_count" => "Group Adults Count"  . " " . $groupsCountsData['groupAdultCount'],
-            ]
+            'total_count' => trans('main.adults'),
+
+            // 'words' => [
+            //     'groups' => __('home.Groups'),
+            //     "group_kids_count" => "Group Kids Count" . " " . $groupsCountsData['groupKidsCount'],
+            //     "group_adult_count" => "Group Adults Count"  . " " . $groupsCountsData['groupAdultCount'],
+            // ]
         ]);
     }
 }

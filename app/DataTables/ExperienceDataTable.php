@@ -124,35 +124,35 @@ class ExperienceDataTable extends DataTable
             [
                 'name' => 'experiences.id',
                 'data' => 'id',
-                'title' => 'رقم الهوية',
+                'title' => trans('main.num'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'title',
                 'data' => 'title',
-                'title' => 'الخبرة',
+                'title' => trans('main.experience'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'from',
                 'data' => 'from',
-                'title' => 'من ',
+                'title' => trans('main.from'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'to',
                 'data' => 'to',
-                'title' => 'الى',
+                'title' => trans('main.to'),
                 "className" => 'search--col'
                 ],
 
             [
                 'name' => 'teacher.name',
                 'data' => 'teacher.name',
-                'title' => ' المعلم',
+                'title' => trans('main.teacher'),
                 "className" => 'search--col'
             ],
         ];
@@ -162,7 +162,7 @@ class ExperienceDataTable extends DataTable
             $columns [] = [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => 'Edit',
+                'title' => trans('main.edit'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
@@ -176,7 +176,7 @@ class ExperienceDataTable extends DataTable
             $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => 'Delete',
+                'title' => trans('main.delete'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,

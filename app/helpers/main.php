@@ -88,18 +88,17 @@ if (!function_exists('getCurrectMonthName')) {
     }
 }
 
-
 if (!function_exists('getPermissionKeys')) {
     function getPermissionKeys()
     {
         return [
+            'index',
             'create',
+            'edit',
+            'store',
             'update',
             'delete',
-            'edit',
             'show',
-            'index',
-            'store'
         ];
     }
 }

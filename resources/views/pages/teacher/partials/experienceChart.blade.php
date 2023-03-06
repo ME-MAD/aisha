@@ -2,7 +2,7 @@
     <div class="card ">
         <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables_show_teacher">
             <h3 class="text-capitalize text-white">
-               احصائية بالخبرات
+              {{trans('teacher.statistics_of_experience')}}
             </h3>
         </div>
         <div class="card-body"  >

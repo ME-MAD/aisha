@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables_show_teacher">
             <h3 class="text-capitalize text-white">
-              المجموعات 
+              {{trans('main.groups')}} 
             </h3>
         </div>
         <div class="card-body"  >
@@ -48,7 +48,7 @@
                                 <div class="invoice-container">
                                     <div class="invoice-inbox ps ps--active-y" style="height: calc(100vh - 215px);">
                                         <div class="invoice-header-section" style="display: flex;">
-                                            <h4 class="inv-number text-secondary">اختر مجموعه</h4>
+                                            <h4 class="inv-number text-secondary">{{trans('group.select_the_group')}}</h4>
                                             <div class="invoice-action">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

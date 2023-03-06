@@ -2,27 +2,28 @@
 
 
 return [
+   
+    'student_count' => 'عدد الطلاب',
+    // 'choose role' => 'اختر وظيفه',
 
-    'choose role' => 'اختر وظيفه',
+    // 'create student' => 'انشاء طالب ',
+    // 'update student' => 'تحديث طالب',
 
-    'create student' => 'انشاء طالب ',
-    'update student' => 'تحديث طالب',
+    // 'name' => 'الاسم',
+    // 'email' => 'البريد الالكتروني',
+    // 'role' => 'الوظيفه',
+    // 'password' => 'كلمة المرور',
+    // 'confirm password' => 'تأكيد كلمة المرور',
 
-    'name' => 'الاسم',
-    'email' => 'البريد الالكتروني',
-    'role' => 'الوظيفه',
-    'password' => 'كلمة المرور',
-    'confirm password' => 'تأكيد كلمة المرور',
+    // 'birthday' => 'تاريخ الميلاد',
+    // 'qualification' => 'المؤهل',
+    // 'phone' => 'الهاتف',
+    // 'choose photo'=> 'اختر صوره',
 
-    'birthday' => 'تاريخ الميلاد',
-    'qualification' => 'المؤهل',
-    'phone' => 'الهاتف',
-    'choose photo'=> 'اختر صوره',
-
-    'save' => 'حفظ',
-    'discard' => 'تجاهل',
-    'edit' => 'تعديل',
-    'update' => 'تحديث',
-    'delete' => 'حذف',
+    // 'save' => 'حفظ',
+    // 'discard' => 'تجاهل',
+    // 'edit' => 'تعديل',
+    // 'update' => 'تحديث',
+    // 'delete' => 'حذف',
 
 ];
