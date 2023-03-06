@@ -16,7 +16,6 @@ class HomeController extends Controller
     public function __construct(HomeService $homeService)
     {
         $this->homeService = $homeService;
-
     }
 
     public function index()
@@ -34,42 +33,36 @@ class HomeController extends Controller
                 [
                     'count' => Group::groups()->count(),
                     'icon' => '<i class="fa-solid fa-users-rays"></i>',
-                    'title' => "Groups"
+                    'title' => trans('main.groups')
                 ],
             ]
         ];
 
-        if(getGuard() == 'teacher')
-        {
-            $data ['statistics'][]= [
+        if (getGuard() == 'teacher') {
+            $data['statistics'][] = [
                 'count' => Auth::guard(getGuard())->user()->unFinishedSyllabus()->count(),
                 'icon' => '<i class="fa-solid fa-clock"></i>',
-                'title' => "Students With Lessons"
+                'title' => trans('main.students_with_lessons')
             ];
-        }
-        else
-        {
-            $data ['statistics'][]= [
+        } else {
+            $data['statistics'][] = [
                 'count' => Teacher::teachers()->count(),
                 'icon' => '<i class="fa-solid fa-chalkboard-user"></i>',
-                'title' => "Teachers"
+                'title' => trans('main.teachers')
             ];
         }
 
-        if(getGuard() == "student")
-        {
-            $data ['statistics'][]= [
+        if (getGuard() == "student") {
+            $data['statistics'][] = [
                 'count' => Auth::guard(getGuard())->user()->unFinishedSyllabus()->count(),
-                'icon' => '<i class="fa-solid fa-graduation-cap"></i>',
-                'title' => "Un finished Lessons"
+                'icon' => '<i class="fa-solid fa-clock-rotate-left"></i>',
+                'title' => trans('main.un_finished_lessons')
             ];
-        }
-        else
-        {
-            $data ['statistics'][]= [
+        } else {
+            $data['statistics'][] = [
                 'count' => Student::students()->count(),
                 'icon' => '<i class="fa-solid fa-graduation-cap"></i>',
-                'title' => "Students"
+                'title' => trans('main.students')
             ];
         }
 

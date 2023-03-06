@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             QaidaNooraniahSeeder::class,
             PermissionSeeder::class,
             RoleSeeder::class,
-            AdminSeeder::class
+            AdminSeeder::class,
         ]);
     }
 }

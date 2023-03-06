@@ -26,7 +26,7 @@ class Student extends Authenticatable
                 if ($avatar && file_exists($this->getAvatarPath())) {
                     return asset(Student::AVATARS_PATH . $avatar);
                 }
-                return '';
+                return asset("images/student.png");
             },
         );
     }
@@ -181,8 +181,71 @@ class Student extends Authenticatable
     }
 
 
+     //this -> groupStudent -> group -> groupDays
+     public function groupDays()
+     {
+         return $this->hasManyDeep(
+             GroupDay::class,
+             [GroupStudent::class, Group::class], 
+             [
+                'student_id', 
+                'id',    
+                'group_id'   
+             ],
+             [
+               'id', 
+               'group_id', 
+               'id'  
+             ]
+         );
+     }
+
     public function scopeUnFinishedSyllabus($query)
     {
         return $this->syllabus()->where('syllabi.finished',false);
     }
+
+
+    //$this -> groupStudent -> Group -> GroupSubject -> Subject -> lesson
+      public function lessons()
+      {
+          return $this->hasManyDeep(
+              Lesson::class,
+              [GroupStudent::class , GroupSubject::class , Subject::class], 
+              [
+                 'student_id', 
+                 'group_id', 
+                 'id', 
+                 'subject_id', 
+              ],
+              [
+                'id',
+                'group_id',
+                'subject_id',
+                'id',
+              ]
+          );
+      }
+  
+
+
+     //this -> groupStudent -> group -> GroupSubject
+    public function groupSubjects()
+    {
+        return $this->hasManyDeep(
+            GroupSubject::class,
+            [GroupStudent::class, Group::class], 
+            [
+               'student_id', 
+               'id',    
+               'group_id',     
+            ],
+            [
+              'id', 
+              'group_id', 
+              'id',
+            ]
+        );
+    }
+
 }

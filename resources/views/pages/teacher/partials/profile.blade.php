@@ -2,7 +2,8 @@
     <div class="card ">
         <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables_show_teacher">
             <h3 class="text-capitalize text-white">
-                {{ __('teacher.Info') }}
+                {{ trans('main.info') }}
+
             </h3>
             <a class="icon text-white mt-2 editTeacherButton" data-toggle='modal' data-target='#editTeacher'
             data-teacher="{{ $teacher }}" data-href="{{ route('admin.teacher.update', $teacher->id) }}">
@@ -24,7 +25,7 @@
                       <tr>
                         <th scope="row">
                             {{-- <i class="fa-solid fa-user-graduate fa-xl"></i> --}}
-                            <h6 class="text-secondary">المؤهل</h6>
+                            <h6 class="text-secondary">{{trans('main.qualification')}}</h6>
                         </th>
                         <td>
                             {{ $teacher->qualification }}
@@ -33,7 +34,7 @@
                       <tr>
                         <th scope="row">
                             {{-- <i class="fa-regular fa-envelope fa-xl"></i> --}}
-                            <h6 class="text-secondary">البريد الإلكتروني</h6>
+                            <h6 class="text-secondary">{{trans('main.email')}}</h6>
                         </th>
                         <td> 
                             {{ $teacher->email }}
@@ -42,7 +43,7 @@
                       <tr>
                         <th scope="row">
                              {{-- <i class="fa-solid fa-phone fa-xl"></i> --}}
-                             <h6 class="text-secondary">الهاتف</h6>
+                             <h6 class="text-secondary">{{trans('main.phone')}}</h6>
                         </th>
                         <td> 
                             {{  $teacher->phone }}
@@ -51,7 +52,7 @@
                       <tr>
                         <th scope="row">
                             {{-- <i class="fa-regular fa-calendar fa-xl"></i> --}}
-                            <h6 class="text-secondary">تاريخ الميلاد</h6>
+                            <h6 class="text-secondary">{{trans('main.birthday')}}</h6>
                         </th>
                         <td> 
                              {{ $teacher->birthday }}

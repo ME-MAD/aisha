@@ -13,7 +13,7 @@ export function groupAgesChartRun()
         
         option = {
             title: {
-                text: 'Total Count ' + response.allGroupsCount,
+                text:response.allGroupsCount,
                 // subtext: 'Fake Data',
                 left: 'center'
             },

@@ -34,7 +34,9 @@
                             <a href="{{route('admin.home')}}"
                                class="d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                                <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                                <span class="font-weight-bold mt-1">
+                                    {{trans('main.home_page')}}
+                                </span>
                             </a>
                         </li>
                         <li>
@@ -42,7 +44,9 @@
                                class="d-flex justify-content-center align-items-center">
 
                                <i class="fa-solid fa-fingerprint fa-2x mx-2"></i>
-                               <span class="font-weight-bold ">الوظائف</span>
+                               <span class="font-weight-bold ">
+                                   {{trans('main.roles')}}
+                               </span>
                             </a>
                         </li>
                         <li class="active">
@@ -50,7 +54,9 @@
                                class="d-flex justify-content-center align-items-center">
 
                                 <i class="fa-solid fa-users-gear fa-2x mx-2"></i>
-                                <span class="font-weight-bold ">إضافة الصلاحيات</span>
+                                <span class="font-weight-bold ">
+                                    {{trans('roles.add_permissions')}}
+                                </span>
                             </a>
                         </li>
                     </ul>
@@ -71,7 +77,9 @@
                         @csrf
 
                         <div class="card-header create__form__header">
-                            <h3 class="font-weight-bold text-capitalize text-light">{{__('roles.create')}}</h3>
+                            <h3 class="font-weight-bold text-capitalize text-light">
+                                {{trans('roles.create_role')}}
+                            </h3>
                         </div>
                         <div class="card-body">
 
@@ -87,7 +95,9 @@
                                        aria-selected="true">
                                         <i class="fa-solid fa-user-gear fa-2x"></i>
 
-                                        <span class="font-weight-bold text-capitalize">{{__('roles.info')}}</span>
+                                        <span class="font-weight-bold text-capitalize">
+                                            {{trans('roles.role_info')}}
+                                        </span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -102,7 +112,9 @@
                                         <i class="fa-solid fa-gears fa-2x"></i>
 
                                         <span
-                                            class="font-weight-bold text-capitalize">{{__('roles.permissions')}}</span>
+                                            class="font-weight-bold text-capitalize">
+                                            {{trans('roles.role_permissions')}}
+                                        </span>
 
                                     </a>
                                 </li>
@@ -130,7 +142,9 @@
                                      <div
                                      class="d-flex justify-content-between align-items-center mx-2 my-3 p-3 rounded bg-light">
                                      <h4 class="font-weight-bold text-capitalize
-                                  text-dark">{{__('roles.give this role all permissions')}}</h4>
+                                  text-dark">
+                                    {{trans('roles.give_this_role_all_permissions')}}
+                                </h4>
                                      <a> <i class="far fa-check-circle fa-2x" id="giveAllPermissions"></i></a>
 
                                  </div>

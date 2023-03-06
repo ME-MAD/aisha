@@ -46,7 +46,7 @@
               type="text/css"
               href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
     @endif
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endpush
 
 
@@ -61,7 +61,9 @@
                             <a href="{{route('admin.home')}}"
                             class="d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                                <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                                <span class="font-weight-bold mt-1">
+                                    {{trans('main.home_page')}}
+                                </span>
                             </a>
                         </li>
                         <li class="active">
@@ -69,7 +71,9 @@
                             class="d-flex justify-content-center align-items-center">
 
                                 <i class="fa-solid fa-folder-open fa-2x mx-2"></i>
-                                <span class="font-weight-bold ">خبرات المعلمين</span>
+                                <span class="font-weight-bold ">
+                                    {{trans('experience.teacher_experiences')}}
+                                </span>
                             </a>
                         </li>
                     </ul>
@@ -91,7 +95,7 @@
                 <div class="card ">
                     <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables">
                         <h3 class="text-capitalize text-white">
-                            الخبرات
+                            {{trans('experience.teacher_experiences')}}
                         </h3>
                         @check_permission('store-experience')
                         <a class="icon text-white" data-target='#creatExperienceModal' data-toggle='modal'>
@@ -131,5 +135,15 @@
     <script src="{{asset('/vendor/datatables/buttons.server-side.js')}}"></script>
     
     <script src="{{ asset('js/experience.js') }}"></script>
+    <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
+
+    <script>
+          $('.experience_create').select2({
+                dropdownParent: $('#creatExperienceModal'),
+          });
+          $('.experience_edit').select2({
+                dropdownParent: $('#editexperience'),
+          });
+    </script>
 
 @endpush

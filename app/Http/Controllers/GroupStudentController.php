@@ -71,4 +71,11 @@ class GroupStudentController extends Controller
             'groupStudents' => $this->groupStudentService->getGroupStudentsOfGroup($request->group_id)
         ]);
     }
+
+    public function getStudentGroups(Request $request)
+    {
+        return response()->json([
+            'studentGroups' => $this->groupStudentService->getGroupStudentsOfStudent($request->student_id)
+        ]);
+    }
 }

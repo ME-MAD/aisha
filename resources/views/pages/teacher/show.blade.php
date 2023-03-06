@@ -24,37 +24,41 @@
       <link rel="stylesheet" href="{{ asset('css/student.css') }}">
 @endpush
 @section('breadcrumb')
-      <div class="row my-3 ">
-            <div class="col-md-12">
-                  <div class="breadcrumb bg-transparent">
-                        <div class="breadcrumb-four">
-                              <ul class="breadcrumb">
-                                    <li>
-                                          <a href="{{ route('admin.home') }}"
-                                                class="d-flex justify-content-center align-items-center">
-                                                <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                                                <span class="font-weight-bold mt-1">{{ __('global.home') }}</span>
-                                          </a>
-                                    </li>
-                                    <li class="">
-                                          <a href="{{ route('admin.teacher.index') }}"
-                                                class="d-flex justify-content-center align-items-center">
 
-                                                <i class="fa-solid fa-users fa-2x mx-2"></i>
-                                                <span class="font-weight-bold ">أعضاء التدريس</span>
-                                          </a>
-                                    </li>
-                                    <li class="active">
-                                          <a href="{{ route('admin.teacher.index') }}"
-                                                class="d-flex justify-content-center align-items-center">
-
-                                                <i class="fa-solid fa-user-check fa-2x mx-2"></i>
-                                                <span class="font-weight-bold ">{{ $teacher->name }}</span>
-                                          </a>
-                                    </li>
-                              </ul>
-                        </div>
-                  </div>
+    <div class="row my-3 ">
+        <div class="col-md-12">
+            <div class="breadcrumb bg-transparent">
+                <div class="breadcrumb-four">
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="{{route('admin.home')}}"
+                               class="d-flex justify-content-center align-items-center">
+                                <i class="fa-solid fa-house mx-2 fa-2x"></i>
+                                <span class="font-weight-bold mt-1">
+                                    {{trans('main.home_page')}} 
+                                </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{{route('admin.teacher.index')}}"
+                               class="d-flex justify-content-center align-items-center">
+    
+                                <i class="fa-solid fa-users fa-2x mx-2"></i>
+                                <span class="font-weight-bold ">
+                                    {{trans('teacher.teaching_staff')}}                                
+                                </span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="{{route('admin.teacher.index')}}"
+                               class="d-flex justify-content-center align-items-center">
+    
+                                 <i class="fa-solid fa-user-check fa-2x mx-2"></i>
+                                <span class="font-weight-bold ">{{ $teacher->name }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
       </div>
 @endsection

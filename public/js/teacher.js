@@ -15,7 +15,7 @@ function getDataShow() {
                                     ${statistic.name}
                                 </h5>
                                 <p class="card-text text-primary text-center">
-                                ${statistic.value}
+                                   ${statistic.value}
                                 </p>
                             </div>
                         </div>

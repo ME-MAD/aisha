@@ -117,28 +117,28 @@ class TeacherDataTable extends DataTable
             [
                 'name' => 'teachers.id',
                 'data' => 'id',
-                'title' => __('teacher.id'),
+                'title' => trans('main.num'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'name',
                 'data' => 'name',
-                'title' => __('teacher.name'),
+                'title' => trans('main.name'),
                 "className" => 'search--col'
             ],
             
             [
                 'name' => 'email',
                 'data' => 'email',
-                'title' => 'البريد الألكتروني',
+                'title' => trans('main.email'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'role.name',
                 'data' => 'role.name',
-                'title' => 'الوظيفة',
+                'title' => trans('main.role'),
                 "className" => 'search--col'
             ],
 
@@ -146,21 +146,21 @@ class TeacherDataTable extends DataTable
             [
                 'name' => 'birthday',
                 'data' => 'birthday',
-                'title' => __('teacher.birthday'),
+                'title' => trans('main.birthday'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'phone',
                 'data' => 'phone',
-                'title' => __('teacher.phone'),
+                'title' => trans('main.phone'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'groups.count',
                 'data' => 'groups.count',
-                'title' => __('teacher.group count'),
+                'title' => trans('group.groups_count'),
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
@@ -169,7 +169,7 @@ class TeacherDataTable extends DataTable
             [
                 'name' => 'groupStudents.count',
                 'data' => 'groupStudents.count',
-                'title' => __('teacher.student count'),
+                'title' => trans('group.groups_students'),
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
@@ -181,7 +181,7 @@ class TeacherDataTable extends DataTable
             $columns [] = [
                 'name' => 'show',
                 'data' => 'show',
-                'title' => "المزيد",
+                'title' => trans('main.show'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
@@ -195,7 +195,7 @@ class TeacherDataTable extends DataTable
             $columns [] = [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => __('teacher.Edit'),
+                'title' => trans('main.edit'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
@@ -209,7 +209,7 @@ class TeacherDataTable extends DataTable
             $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => __('teacher.Delete'),
+                'title' => trans('main.delete'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,

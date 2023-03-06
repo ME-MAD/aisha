@@ -27,7 +27,7 @@ class Teacher extends Authenticatable
                 {
                     return asset(Teacher::AVATARS_PATH . $avatar);
                 }
-                return '';
+                return asset("images/teacher.png");
             },
         );
     }
@@ -124,6 +124,28 @@ class Teacher extends Authenticatable
     }
 
 
+    //$this -> group -> groupSubject -> subject -> lesson
+    public function lessons()
+    {
+        return $this->hasManyDeep(
+            Lesson::class,
+            [Group::class, GroupSubject::class , Subject::class], 
+            [
+               'teacher_id', 
+               'group_id',
+               'id',
+               'subject_id',
+            ],
+            [
+              'id',
+              'id', 
+              'subject_id',
+              'id',
+            ]
+        );
+    }
+
+
     public function scopeTeachers($query)
     {
         if(getGuard() == 'admin')
@@ -148,5 +170,29 @@ class Teacher extends Authenticatable
     public function scopeUnFinishedSyllabus()
     {
         return $this->syllabus()->where('syllabi.finished',false);
+    }
+
+    public function groupSubjects()
+    {
+        return $this->hasManyThrough(
+            GroupSubject::class,
+            Group::class,
+            'teacher_id',
+            'group_id',
+            'id',
+            'id'
+        );
+    }
+
+    public function Payments()
+    {
+        return $this->hasManyThrough(
+            Payment::class,
+            Group::class,
+            'teacher_id',
+            'group_id',
+            'id',
+            'id'
+        );
     }
 }

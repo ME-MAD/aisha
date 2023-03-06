@@ -21,7 +21,8 @@ class UserDataTable extends DataTable
                 return($q->role_permissions_count);
             })
             ->addColumn('delete', 'pages.user.datatable.delete')
-            ->rawColumns(['edit', 'delete'])
+            ->addColumn('avatar', 'pages.user.datatable.avatar')
+            ->rawColumns(['edit', 'delete','avatar'])
             ->setRowId('id');
     }
 
@@ -32,6 +33,7 @@ class UserDataTable extends DataTable
             'users.id',
             'users.name',
             'users.email',
+            'users.avatar',
         ])->with('role:id,name')->withCount(['rolePermissions']);
     }
     
@@ -98,43 +100,50 @@ class UserDataTable extends DataTable
     {
         $columns =  [
             [
+                'name' => 'avatar',
+                'data' => 'avatar',
+                'title' => trans('main.avatar'),
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
+            ],
+            [
                 'name' => 'users.id',
                 'data' => 'id',
-                'title' => '#',
+                'title' => trans('main.num'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'name',
                 'data' => 'name',
-                'title' => 'Name',
+                'title' => trans('main.name'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'email',
                 'data' => 'email',
-                'title' => 'Email',
+                'title' => trans('main.email'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'role.name',
                 'data' => 'role.name',
-                'title' => 'role',
+                'title' => trans('main.role'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'countPermissions',
                 'data' => 'countPermissions',
-                'title' => 'عدد الصلاحيات',
+                'title' => trans('user.count_permissions'),
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
                 
             ],
-
         ];
 
 
@@ -143,7 +152,7 @@ class UserDataTable extends DataTable
             [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => 'Edit',
+                'title' => trans('main.edit'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
@@ -152,13 +161,12 @@ class UserDataTable extends DataTable
             ];
         }
 
-
-        if (userCan('delete-user')) {
-            $colums [] =
-            [
+        if(userCan('delete-user'))
+        {
+            $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => 'Delete',
+                'title' => trans('main.delete'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,

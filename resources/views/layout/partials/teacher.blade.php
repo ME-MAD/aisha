@@ -13,7 +13,9 @@
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
-                <span>{{ __('global.Teachers') }}</span>
+                <span>
+                    {{ trans('main.teachers') }}
+                </span>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -31,7 +33,7 @@
                                 request()->routeIs('admin.teacher.index')  ? 'active' : ''
                             }}">
                 <a href="{{ route('admin.teacher.index') }}">
-                    {{ __('global.Teachers') }}
+                    {{ trans('main.teachers') }}
                 </a>
             </li>
             @endcheck_permission
@@ -39,7 +41,9 @@
             <li class="{{
                                 request()->routeIs('admin.experience.index')  ? 'active' : ''
                             }}">
-                <a href="{{ route('admin.experience.index') }}">{{ __('global.Experiences') }}</a>
+                <a href="{{ route('admin.experience.index') }}">
+                    {{ trans('main.experiences') }}
+                </a>
             </li>
             @endcheck_permission
         </ul>

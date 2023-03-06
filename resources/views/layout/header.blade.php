@@ -13,8 +13,11 @@
 
         <div class="nav-logo align-self-center">
             <a class="navbar-brand" href="{{ route('admin.home') }}"><img alt="logo"
-                    src="{{ asset('images/home.jpg') }}"> <span
-                    class="navbar-brand-name">{{ __('global.HOME') }}</span></a>
+                    src="{{ asset('images/home.jpg') }}"> 
+                    <span  class="navbar-brand-name">
+                   {{trans('main.home')}}
+                   </span>
+            </a>
         </div>
 
         <ul class="navbar-item flex-row mr-auto">
@@ -238,15 +241,17 @@
                     </div>
                 </div>
             </li> --}}
-
             <li class="nav-item dropdown user-profile-dropdown order-lg-0 order-1">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="user-profile-dropdown"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="media">
-                        <img src="{{ asset('adminAssets/assets/img/90x90.jpg') }}" class="img-fluid"
+                        <img src="{{Auth::guard(getGuard())->user()->avatar}}" class="img-fluid"
                             alt="admin-profile">
                         <div class="media-body align-self-center">
-                            <h6><span>{{ __('global.Click') }} : </span>AISHA</h6>
+                            <h6>
+                                <span>{{trans('main.welcome')}} : </span>
+                                {{Auth::guard(getGuard())->user()->name}}
+                            </h6>
                         </div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -296,7 +301,7 @@
                                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                     <polyline points="16 17 21 12 16 7"></polyline>
                                     <line x1="21" y1="12" x2="9" y2="12"></line>
-                                </svg>{{ __('global.Sign Out') }}</a>
+                                </svg>{{trans('auth.sign_out')}}</a>
                         </div>
                     </div>
                 </div>

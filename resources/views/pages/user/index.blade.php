@@ -16,6 +16,10 @@
               rel="stylesheet" 
               type="text/css">
 
+        <link rel="stylesheet"
+        type="text/css"
+        href="{{ asset('adminRtl/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
+
     @else
 
         <link rel="stylesheet"
@@ -27,6 +31,10 @@
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminAssets/assets/css/forms/theme-checkbox-radio.css') }}">
+
+        <link rel="stylesheet"
+        type="text/css"
+        href="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.css') }}"/>
     @endif
     <link rel="stylesheet"
           type="text/css"
@@ -44,7 +52,9 @@
                             <a href="{{route('admin.home')}}"
                                class="d-flex justify-content-center align-items-center">
                                 <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                                <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                                <span class="font-weight-bold mt-1">
+                                    {{trans('main.home_page')}}
+                                </span>
                             </a>
                         </li>
                         <li class="active">
@@ -52,7 +62,9 @@
                                class="d-flex justify-content-center align-items-center">
 
                                 <i class="fa-solid fa-user-lock fa-2x mx-2"></i>
-                                <span class="font-weight-bold ">المستخدمين</span>
+                                <span class="font-weight-bold ">
+                                    {{trans('main.users')}}
+                                </span>
                             </a>
                         </li>
                     </ul>
@@ -74,7 +86,7 @@
                     <div class="card ">
                         <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables">
                             <h3 class="text-capitalize text-white">
-                                المستخدمين
+                                {{trans('main.users')}}
                             </h3>
                             @check_permission('store-user')
                             <a data-toggle='modal' data-target='#creatUserModal' class="icon text-white">
@@ -109,16 +121,21 @@
     {!! $dataTable->scripts() !!}
     {{--End Data_Table--}}
 
+    <script src="{{ asset('adminAssets/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
+
+    <script>
+        var image_create = new FileUploadWithPreview('image_create')
+        var image_edit = new FileUploadWithPreview('image_edit')
+    </script>
+
     
     <script src="{{ asset('adminAssets/plugins/select2/select2.min.js') }}"></script>
 
     <script>
         $('.role_create').select2({
-            theme: "basic",
             dropdownParent: $('#creatUserModal'),
         });
         $('.role_edit').select2({
-            theme: "basic",
             dropdownParent: $('#editUser'),
         });
     </script>

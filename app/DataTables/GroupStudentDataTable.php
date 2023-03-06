@@ -37,13 +37,9 @@ class GroupStudentDataTable extends DataTable
      * @param \App\Models\GroupStudent $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(GroupStudent $model): QueryBuilder
+    public function query(): QueryBuilder
     {
-        return $model->select([
-            'group_students.id',
-            'student_id',
-            'group_id'
-        ])->with([
+        return GroupStudent::GroupStudents()->with([
             'student:id,name',
             'group:id,name'
         ]);

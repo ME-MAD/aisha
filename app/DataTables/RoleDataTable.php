@@ -104,46 +104,47 @@ class RoleDataTable extends DataTable
             [
                 'name' => 'roles.id',
                 'data' => 'id',
-                'title' => '#',
+                'title' => trans('main.num'),
                 "className" => 'search--col exact'
             ],
             [
                 'name' => 'name',
                 'data' => 'name',
-                'title' => __('roles.name'),
+                'title' => trans('roles.role_name'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'display_name',
                 'data' => 'display_name',
-                'title' => __('roles.display_name'),
+                'title' => trans('roles.display_name'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'description',
                 'data' => 'description',
-                'title' => __('roles.description'),
+                'title' => trans('roles.role_description'),
                 "className" => 'search--col exact'
             ],
-
-            [
-                'name' => 'countUsers',
-                'data' => 'countUsers',
-                'title' => 'عدد المستخدمين',
-                'orderable' => false,
-                'searchable' => false,
-                "className" => 'not--search--col'
-            ],
+           
             [
                 'name' => 'countPermissions',
                 'data' => 'countPermissions',
-                'title' => 'عدد الصلاحيات',
+                'title' => trans('roles.count_permissions'),
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
                 
+            ],
+            
+            [
+                'name' => 'countUsers',
+                'data' => 'countUsers',
+                'title' => trans('roles.count_users'),
+                'orderable' => false,
+                'searchable' => false,
+                "className" => 'not--search--col'
             ],
         ];
 
@@ -152,7 +153,7 @@ class RoleDataTable extends DataTable
             $columns [] = [
                 'name' => 'showUsers',
                 'data' => 'showUsers',
-                'title' => "إظهار المستخدمين",
+                'title' => trans('roles.show_users'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
@@ -166,7 +167,7 @@ class RoleDataTable extends DataTable
             $columns [] = [
                 'name' => 'edit',
                 'data' => 'edit', 
-                'title' => __('teacher.Edit'),
+                'title' => trans('main.edit'),
                 'printable' => false, 
                 'exportable' => false,
                 'orderable' => false,
@@ -180,7 +181,7 @@ class RoleDataTable extends DataTable
             $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => __('teacher.Delete'),
+                'title' => trans('main.delete'),
                 'printable' => false, 
                 'exportable' => false,
                 'orderable' => false,

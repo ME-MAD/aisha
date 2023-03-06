@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class GroupStudent extends Model
 {
@@ -39,6 +40,35 @@ class GroupStudent extends Model
     public function getStudentLessonPercentage($lesson_id)
     {
         return $this->getStudentLessonFromLesson($lesson_id)->percentage ?? 0;
+    }
+
+    public function scopeGroupStudents($query)
+    {
+        if(getGuard() == 'admin')
+        {
+            return $query->select([
+                    'group_students.id',
+                    'student_id',
+                    'group_id'
+                ]);
+        }
+        else if(getGuard() == 'teacher')
+        {
+            return Auth::guard(getGuard())->user()->groupStudents()->select([
+                'group_students.id',
+                'student_id',
+                'group_id'
+            ])->getQuery();
+        }
+        else if(getGuard() == "student")
+        {
+            return Auth::guard(getGuard())->user()->groupStudents()->select([
+                'group_students.id',
+                'student_id',
+                'group_id'
+            ])->getQuery();
+
+        }
     }
 }
 

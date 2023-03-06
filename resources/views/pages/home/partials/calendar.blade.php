@@ -4,17 +4,17 @@
             <div class="row">
                 <div class="col-md-8 col-12">
                     <div class="labels">
-                        <p class="label label-primary">Upcoming</p>
+                        <p class="label label-primary">{{trans('group.upcoming')}}</p>
                         {{-- <p class="label label-warning">Travel</p> --}}
-                        <p class="label label-success">On going</p>
-                        <p class="label label-danger">Finished</p>
+                        <p class="label label-success">{{trans('group.on_going')}}</p>
+                        <p class="label label-danger">{{trans('group.finished')}}</p>
                     </div>
                 </div>                                                
-                {{-- <div class="col-md-4 col-12">
-                    <form action="javascript:void(0);" class="form-horizontal mt-md-0 mt-3 text-md-right text-center">
+                <div class="col-md-4 col-12">
+                    {{-- <form action="javascript:void(0);" class="form-horizontal mt-md-0 mt-3 text-md-right text-center">
                         <button id="myBtn" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar mr-2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Add Event</button>
-                    </form>
-                </div> --}}
+                    </form> --}}
+                </div>
             </div>
         </div>
         <div id="calendar"></div>

@@ -191,6 +191,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
         Route::put('update/{groupStudent}', [GroupStudentController::class, 'update'])->name('update');
         Route::get('delete/{groupStudent}', [GroupStudentController::class, 'delete'])->name('delete');
         Route::get('getGroupStudents', [GroupStudentController::class, 'getGroupStudents'])->name('getGroupStudents');
+        Route::get('getStudentGroups', [GroupStudentController::class, 'getStudentGroups'])->name('getStudentGroups');
     });
 
     Route::group(['prefix' => 'group_subjects', 'as' => 'group_subjects.'], function () {
