@@ -3,17 +3,18 @@
 namespace Tests;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Mcamara\LaravelLocalization\LaravelLocalization;
 
 class TestCaseWithTransLationsSetUp extends TestCase
 {
-    protected function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
-        $admin = User::where('email','admin@admin.com')->first();
-        
-        $this->actingAs($admin,'admin');
+        $admin = User::where('email', 'admin@admin.com')->first();
+        $permissions = collect(getPermissionsForSeeder())->pluck('name');
+        Session::put('permissions', json_encode($permissions));
+        $this->actingAs($admin, 'admin');
     }
 
     protected function refreshApplicationWithLocale($locale)
@@ -23,7 +24,7 @@ class TestCaseWithTransLationsSetUp extends TestCase
         self::setUp();
     }
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         putenv(LaravelLocalization::ENV_ROUTE_KEY);
         parent::tearDown();

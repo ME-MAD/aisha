@@ -5,23 +5,20 @@ namespace App\Http\Controllers;
 use App\DataTables\GroupDataTable;
 use App\Http\Requests\Group\StoreGroupRequest;
 use App\Http\Requests\Group\UpdateGroupRequest;
-use App\Http\Traits\AuthTrait;
 use App\Models\Group;
+use App\Models\GroupType;
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\Teacher;
 use App\Services\Group\GroupService;
-use App\Services\GroupType\GroupTypeService;
 use App\Services\HomeService;
 use App\Services\Payment\PaymentChartService;
 use App\Services\Permission\PermissionService;
 use App\Services\Role\RoleService;
-use App\Services\Teacher\TeacherService;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupController extends Controller
 {
-    private TeacherService $teacherService;
-    private GroupTypeService $groupTypeService;
     private GroupService $groupService;
     private PaymentChartService $paymentChartService;
     private RoleService $roleService;
@@ -29,17 +26,12 @@ class GroupController extends Controller
     private PermissionService $permissionService;
 
     public function __construct(
-        TeacherService      $teacherService,
-        GroupTypeService    $groupTypeService,
         GroupService        $groupService,
         PaymentChartService $paymentChartService,
         RoleService $roleService,
         HomeService $homeService,
         PermissionService $permissionService
-    )
-    {
-        $this->teacherService = $teacherService;
-        $this->groupTypeService = $groupTypeService;
+    ) {
         $this->groupService = $groupService;
         $this->paymentChartService = $paymentChartService;
         $this->roleService = $roleService;
@@ -47,7 +39,7 @@ class GroupController extends Controller
         $this->permissionService = $permissionService;
 
 
-        $this->permissionService->handlePermissions($this,[
+        $this->permissionService->handlePermissions($this, [
             'index' => 'index-group',
             'store' => 'store-group',
             'update' => 'update-group',
@@ -58,11 +50,13 @@ class GroupController extends Controller
 
     public function index(GroupDataTable $GroupDataTable)
     {
-        $teaches = $this->teacherService->getAllTeachers();
-        $groupTypes = $this->groupTypeService->getAllGroupTypes();
+        $teachers = Teacher::teachers()->select([
+            'id', 'name'
+        ])->get();
+        $groupTypes = GroupType::select(['id', 'name'])->get();
 
         return $GroupDataTable->render('pages.group.index', [
-            'teachers' => $teaches,
+            'teachers' => $teachers,
             'groupTypes' => $groupTypes,
         ]);
     }
@@ -137,22 +131,20 @@ class GroupController extends Controller
     public function getAllGroupsForPayment()
     {
         $groups = Group::with([
-            'students' => function($q){
-                return $q->select(['students.id','students.name'])->with('payments:id,student_id,group_id,month,paid');
+            'students' => function ($q) {
+                return $q->select(['students.id', 'students.name'])->with('payments:id,student_id,group_id,month,paid');
             },
             'groupType:id,price',
             'payments:id,group_id,paid,month'
         ])->select([
-            'id','name','group_type_id'
+            'id', 'name', 'group_type_id'
         ])->get();
 
 
         $this->groupService->appendAllStudentsPaidToGroups($groups);
 
-        foreach($groups as $group)
-        {
-            foreach($group->students as $student)
-            {
+        foreach ($groups as $group) {
+            foreach ($group->students as $student) {
                 $student->paidThisMonth = $student->checkPaid($group->id, getCurrectMonthName());
             }
         }

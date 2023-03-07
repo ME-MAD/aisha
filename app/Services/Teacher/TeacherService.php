@@ -17,14 +17,6 @@ class TeacherService
         $this->imageService = $imageService;
     }
 
-
-
-    public function getAllTeachers(array $columns = ['id', 'name'])
-    {
-        return Teacher::select($columns)->get();
-    }
-
-
     public function setAllDataAboutTeacher(Teacher $teacher)
     {
         $this->allDataAboutTeacher = $teacher->load([
