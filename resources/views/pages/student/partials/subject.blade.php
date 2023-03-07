@@ -3,7 +3,9 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newLessonModal">إضافة درس جديد</h5>
+                <h5 class="modal-title" id="newLessonModal">
+                    {{trans('student.add_a_new_lesson')}}
+                </h5>
             </div>
             <div class="modal-body">
                 <form method="post" id="newLessonForm">
@@ -28,8 +30,12 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>Discard</button>
+                        <button type="submit" class="btn btn-primary">
+                            {{trans('main.save')}}
+                        </button>
+                        <button class="btn" data-dismiss="modal"><i class="flaticon-cancel-12"></i>
+                            {{trans('main.discard')}}
+                        </button>
                     </div>
 
                 </form>

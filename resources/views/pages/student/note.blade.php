@@ -30,7 +30,9 @@
                         <a href="{{route('admin.home')}}"
                            class="d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                            <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                            <span class="font-weight-bold mt-1">
+                                {{trans('main.home_page')}}
+                            </span>
                         </a>
                     </li>
                     <li class="active">
@@ -38,7 +40,9 @@
                            class="d-flex justify-content-center align-items-center">
 
                             <i class="fa-solid fa-note-sticky mx-2 fa-2x"></i>
-                            <span class="font-weight-bold "> ملحوظات الطلاب </span>
+                            <span class="font-weight-bold ">
+                                {{trans('student.student_notes')}}
+                            </span>
                         </a>
                     </li>
                 </ul>
@@ -66,34 +70,65 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-12 text-center">
                             <a id="btn-add-notes" data-toggle="modal"
-                            data-target="#createNoteModal" class="btn btn-primary">Add</a>
+                            data-target="#createNoteModal" class="btn btn-primary">
+                                {{trans('main.add')}}
+                            </a>
                         </div>
                         <div class="col-md-12 col-sm-12 col-12 mt-5">
                             <ul class="nav nav-pills d-block" id="pills-tab3" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link list-actions active" id="all-notes"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg> All Notes</a>
+                                    <a class="nav-link list-actions active" id="all-notes">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                </path>
+                                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                            </path>
+                                        </svg> 
+                                            {{trans('student.all_notes')}}
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link list-actions" id="note-fav"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Favourites</a>
+                                    <a class="nav-link list-actions" id="note-fav">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                </polygon>
+                                        </svg> 
+                                        {{trans('main.favourites')}}
+                                    </a>
                                 </li>
                             </ul>
 
                             <hr/>
 
-                            <p class="group-section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg> Tags</p>
+                            <p class="group-section">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag">
+                                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z">
+                                        </path>
+                                        <line x1="7" y1="7" x2="7" y2="7"></line>
+                                </svg>
+                                         {{trans('main.tags')}}
+                            </p>
 
                             <ul class="nav nav-pills d-block group-list" id="pills-tab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link list-actions g-dot-primary" id="note-personal">Personal</a>
+                                    <a class="nav-link list-actions g-dot-primary" id="note-personal">
+                                        {{trans('main.personal')}}
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link list-actions g-dot-warning" id="note-work">Work</a>
+                                    <a class="nav-link list-actions g-dot-warning" id="note-work">
+                                        {{trans('main.work')}}
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link list-actions g-dot-success" id="note-social">Social</a>
+                                    <a class="nav-link list-actions g-dot-success" id="note-social">
+                                        {{trans('main.social')}}
+                                    </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link list-actions g-dot-danger" id="note-important">Important</a>
+                                    <a class="nav-link list-actions g-dot-danger" id="note-important">
+                                        {{trans('main.important')}}
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -111,7 +146,7 @@
                                         <span>{{$note->title}}</span> 
                                     </p>
                                     <p class="note-title"> 
-                                        من: 
+                                        {{trans('main.from')}}: 
                                         <span class="badge bg-secondary">{{$note->byText}}</span> 
                                     </p>
                                     <p class="meta-time">{{$note->created_at->diffForHumans()}}</p>
@@ -137,10 +172,18 @@
                                             </div>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right d-icon-menu" data-href="{{route('admin.note.updateNoteType',$note->id)}}">
-                                            <a class="note-personal label-group-item label-personal dropdown-item position-relative g-dot-personal" href="javascript:void(0);"> Personal</a>
-                                            <a class="note-work label-group-item label-work dropdown-item position-relative g-dot-work" href="javascript:void(0);"> Work</a>
-                                            <a class="note-social label-group-item label-social dropdown-item position-relative g-dot-social" href="javascript:void(0);"> Social</a>
-                                            <a class="note-important label-group-item label-important dropdown-item position-relative g-dot-important" href="javascript:void(0);"> Important</a>
+                                            <a class="note-personal label-group-item label-personal dropdown-item position-relative g-dot-personal" href="javascript:void(0);"> 
+                                                 {{trans('main.personal')}}
+                                            </a>
+                                            <a class="note-work label-group-item label-work dropdown-item position-relative g-dot-work" href="javascript:void(0);">
+                                                  {{trans('main.work')}}
+                                            </a>
+                                            <a class="note-social label-group-item label-social dropdown-item position-relative g-dot-social" href="javascript:void(0);"> 
+                                                 {{trans('main.social')}}
+                                            </a>
+                                            <a class="note-important label-group-item label-important dropdown-item position-relative g-dot-important" href="javascript:void(0);"> 
+                                                 {{trans('main.important')}}
+                                            </a> 
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +204,7 @@
             <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header card-header create__form__header">
-                        <h5 class="modal-title font-weight-bold text-capitalize text-light" id="createNoteModalTitle">إضافة ملحوظة</h5>
+                        <h5 class="modal-title font-weight-bold text-capitalize text-light" id="createNoteModalTitle">{{trans('student.notable_addition')}}</h5>
                     </div>
                     <div class="modal-body ">
                         <form action="{{ route('admin.note.studentStore') }}" method="post" enctype="multipart/form-data">
@@ -173,16 +216,16 @@
                                 <div class="col-md-12">
                                     <x-text name="title"
                                     :required="true"
-                                    label="Title"
-                                    placeholder="Title..."
+                                    label="{{trans('main.title')}}"
+                                    placeholder="{{trans('student.title_notes')}} ...."
                                     :value="old('title')" />
                                 </div>
 
                                 <div class="col-md-12">
                                     <x-textarea name="note"
                                     :required="true"
-                                    label="Note"
-                                    placeholder="Note..."
+                                    label="{{trans('main.note')}}"
+                                    placeholder="{{trans('main.note')}} ...."
                                     :value="old('note')" />
                                 </div>
                             </div>
@@ -190,7 +233,7 @@
                             @if ($students)
                                 <div class="form-group my-2">
                                     <label
-                                        class="font-weight-bold text-capitalize text-muted"> Choose Student </label>
+                                        class="font-weight-bold text-capitalize text-muted">{{trans('student.choose_student')}}</label>
                                         <i class="fa-solid fa-star-of-life required-star"></i>
 
 
@@ -202,7 +245,7 @@
                                                 name="student_id"
                                                 id="student_id"
                                             >
-                                            <option value="">اختر الطالب</option>
+                                            <option value="">{{trans('student.choose_student')}}</option>
                                             @foreach($students as $student)
                                                 <option value="{{$student->id}}">
                                                     {{$student->name}}
@@ -224,11 +267,12 @@
                             <div class="modal-footer">
                                 <button type="submit"
                                         class="btn btn-outline-dark">
-                                    {{ __('global.Save') }}
+                                        {{trans('main.save')}}
                                 </button>
 
                                 <button class="btn btn-outline-danger" data-dismiss="modal">
-                                    <i class="flaticon-cancel-12"></i>{{ __('global.Discard') }}
+                                    <i class="flaticon-cancel-12"></i>
+                                    {{trans('main.discard')}}
                                 </button>
                             </div>
                         </form>

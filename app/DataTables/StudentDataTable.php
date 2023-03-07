@@ -100,42 +100,42 @@ class StudentDataTable extends DataTable
             [
                 'name' => 'name',
                 'data' => 'name',
-                'title' => ' الاسم',
+                'title' => trans('main.name'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'email',
                 'data' => 'email',
-                'title' => 'البريد الإلكتروني',
+                'title' => trans('main.email'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'role.name', 
                 'data' => 'role.name',
-                'title' => 'الوظيفة',
+                'title' => trans('main.role'),
                  "className" => 'search--col'
             ],
 
             [
                 'name' => 'birthday',
                 'data' => 'birthday',
-                'title' => ' تاريخ الميلاد',
+                'title' => trans('main.birthday'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'phone',
                 'data' => 'phone',
-                'title' => ' الهاتف',
+                'title' => trans('main.phone'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'countGroups',
                 'data' => 'countGroups',
-                'title' => ' عدد الجروبات',
+                'title' => trans('group.groups_count'),
                 'orderable' => false,
                 'searchable' => false,
                 "className" => 'not--search--col'
@@ -147,7 +147,7 @@ class StudentDataTable extends DataTable
             $columns [] = [
                 'name' => 'show',
                 'data' => 'show',
-                'title' => 'المزيد',
+                'title' => trans('main.show'),
                 'printable' => false,
                 'exportable' => false, 
                 'orderable' => false,
@@ -161,7 +161,7 @@ class StudentDataTable extends DataTable
             $columns [] = [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => 'تعديل',
+                'title' => trans('main.edit'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
@@ -175,7 +175,7 @@ class StudentDataTable extends DataTable
             $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => 'حذف',
+                'title' => trans('main.delete'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,

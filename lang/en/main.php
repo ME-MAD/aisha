@@ -15,6 +15,7 @@ return [
     'experience' => 'Experience',
     'students' => 'Students',
     'notes' => 'Notes',
+    'note' => 'Note',
     'groups' => 'Groups',
     'subjects' => 'Subjects',
     'lessons' => 'Lessons',
@@ -47,4 +48,13 @@ return [
     'title' => 'Title',
     'from' => 'From',
     'to' => 'To',
+    'add' => 'Add',
+    'favourites' => 'Favourites',
+    'tags' => 'Tags',
+    'personal' => 'Personal',
+    'work' => 'Work',
+    'social' => 'Social',
+    'important' => 'Important',
+    'book' => 'Book',
+
 ];
