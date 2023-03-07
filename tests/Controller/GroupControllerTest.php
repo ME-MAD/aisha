@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Controller;
 
 use App\Models\Group;
@@ -20,7 +21,7 @@ class GroupControllerTest extends TestCaseWithTransLationsSetUp
     use TestPaymentTrait;
     use TestGroupTypeTrait;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->refreshApplicationWithLocale('en');
@@ -28,7 +29,7 @@ class GroupControllerTest extends TestCaseWithTransLationsSetUp
 
     public function test_index_opens_without_errors()
     {
-        $res = $this->call('get',route('admin.group.index'));
+        $res = $this->call('get', route('admin.group.index'));
 
         $res->assertOk();
     }
@@ -38,18 +39,18 @@ class GroupControllerTest extends TestCaseWithTransLationsSetUp
     {
         $group = $this->generateRandomGroup();
 
-        $res = $this->call('get',route('admin.group.show', $group));
+        $res = $this->call('get', route('admin.group.show', $group));
 
         $res->assertOk();
     }
 
-     /**
+    /**
      * @test
      * @dataProvider storeValidationProvider
      */
     public function test_store_validations($data)
     {
-        $res = $this->call('POST',route('admin.group.store'), $data);
+        $res = $this->call('POST', route('admin.group.store'), $data);
 
         $res->assertSessionHasErrors();
     }
@@ -58,13 +59,10 @@ class GroupControllerTest extends TestCaseWithTransLationsSetUp
     {
         $data = $this->generateRandomGroupData();
 
-        $this->mock(GroupService::class, function(MockInterface $mock){
-            $mock->shouldReceive('createGroup')->once();
-        });
-
-        $res = $this->call('POST',route('admin.group.store'),$data);
+        $res = $this->call('POST', route('admin.group.store'), $data);
 
         $res->assertSessionHasNoErrors();
+        $this->assertDatabaseHas('groups', $data);
     }
 
     /**
@@ -73,8 +71,8 @@ class GroupControllerTest extends TestCaseWithTransLationsSetUp
     public function test_update_validations($data)
     {
         $group = $this->generateRandomGroup();
-        
-        $res = $this->call('PUT',route('admin.group.update',$group->id),$data);
+
+        $res = $this->call('PUT', route('admin.group.update', $group->id), $data);
 
         $res->assertSessionHasErrors();
     }
@@ -84,22 +82,22 @@ class GroupControllerTest extends TestCaseWithTransLationsSetUp
         $group = $this->generateRandomGroup();
         $data = $this->generateRandomGroupData();
 
-        $this->mock(GroupService::class, function(MockInterface $mock){
-            $mock->shouldReceive('updateGroup')->once();
-        });
-
-        $res = $this->call('PUT',route('admin.group.update',$group->id), $data);
+        $res = $this->call('PUT', route('admin.group.update', $group->id), $data);
 
         $res->assertSessionHasNoErrors();
+        $this->assertDatabaseHas('groups', $data);
     }
 
-    public function test_experience_get_deleted_without_errors()
+    public function test_deleted_works_without_errors()
     {
         $group = $this->generateRandomGroup();
 
-        $res = $this->call('get',route('admin.group.delete',$group->id));
+        $res = $this->call('get', route('admin.group.delete', $group->id));
 
         $res->assertSessionHasNoErrors();
+        $this->assertDatabaseMissing('groups', [
+            'id' => $group->id
+        ]);
     }
 
     public function test_getPaymentPerMonth()
@@ -120,7 +118,7 @@ class GroupControllerTest extends TestCaseWithTransLationsSetUp
         }
 
 
-        $res = $this->call('get',route('admin.group.getPaymentPerMonth',$group->id));
+        $res = $this->call('get', route('admin.group.getPaymentPerMonth', $group->id));
 
 
         $res->assertJson([
@@ -129,17 +127,15 @@ class GroupControllerTest extends TestCaseWithTransLationsSetUp
     }
 
 
-    public function storeValidationProvider() : array
+    public function storeValidationProvider(): array
     {
         $this->refreshApplication();
         $teacher = $this->generateRandomTeacher();
         $groupType = GroupType::inRandomOrder()->first();
-        
+
         return [
             "without data" => [
-                [
-                    
-                ],
+                [],
             ],
             "without a from" => [
                 [
@@ -149,7 +145,7 @@ class GroupControllerTest extends TestCaseWithTransLationsSetUp
                     'group_type_id' => $groupType->id
                 ],
             ],
-            "without a To" =>[
+            "without a To" => [
                 [
                     'from' => fake()->time(),
                     'age_type' => Group::GROUP_TYPES[rand(0, 1)],
@@ -165,7 +161,7 @@ class GroupControllerTest extends TestCaseWithTransLationsSetUp
                     'group_type_id' => $groupType->id
                 ],
             ],
-            "without teacher_id" => [ 
+            "without teacher_id" => [
                 [
                     'from' => "10:00",
                     'to' => "11:00",

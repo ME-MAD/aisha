@@ -6,43 +6,40 @@ use App\DataTables\ExperienceDataTable;
 use App\Http\Requests\Experience\StoreExperienceRequest;
 use App\Http\Requests\Experience\UpdateExperienceRequest;
 use App\Models\Experience;
+use App\Models\Teacher;
 use App\Services\Experience\ExperienceService;
 use App\Services\Permission\PermissionService;
-use App\Services\Teacher\TeacherService;
-use Illuminate\Support\Benchmark;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExperienceController extends Controller
 {
 
     private ExperienceDataTable $experienceDataTable;
-    private TeacherService $teacherService;
     private ExperienceService $experienceService;
     private PermissionService $permissionService;
 
     public function __construct(
         ExperienceDataTable $experienceDataTable,
-        TeacherService      $teacherService,
         ExperienceService   $experienceService,
-        PermissionService $permissionService)
-    {
+        PermissionService $permissionService
+    ) {
         $this->experienceDataTable = $experienceDataTable;
-        $this->teacherService = $teacherService;
         $this->experienceService = $experienceService;
         $this->permissionService = $permissionService;
 
-        $this->permissionService->handlePermissions($this,[
+        $this->permissionService->handlePermissions($this, [
             'index' => 'index-experience',
             'store' => 'store-experience',
             'update' => 'update-experience',
             'delete' => 'delete-experience',
         ]);
-
     }
 
     public function index()
     {
-        $teachers = $this->teacherService->getAllTeachers();
+        $teachers = Teacher::teachers()->select([
+            'id', 'name'
+        ])->get();
 
         return $this->experienceDataTable->render('pages.experience.index', [
             'teachers' => $teachers,

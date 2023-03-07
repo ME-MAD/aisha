@@ -6,8 +6,6 @@ use App\Models\Group;
 
 class GroupService
 {
-    private $groupWithAllData;
-
     public function getAllGroups()
     {
         return  Group::get();
@@ -33,54 +31,31 @@ class GroupService
         ]);
     }
 
-    public function setGroupWithAllData(Group $group)
+    public function getGroupWithAllData(Group $group)
     {
-        $this->groupWithAllData = $group->load([
-            'groupStudents.student',
-            'groupSubjects.subject',
-            'payments' => function ($q) {
-                return $q->select('id', 'group_id', 'paid', 'month')
-                    ->where('paid', true)
-                    ->where('month', getCurrectMonthName());
+        return $group->load([
+            'groupStudents' => function ($q) use ($group) {
+                return $q->select(['id', 'group_id', 'student_id'])
+                    ->with([
+                        'student' => function ($q) use ($group) {
+                            return $q->select(['id', 'name', 'avatar', 'birthday', 'phone'])
+                                ->with([
+                                    'payments' => function ($q) use ($group) {
+                                        return $q->select(['id', 'group_id', 'student_id', 'paid', 'month'])->where('group_id', $group->id);
+                                    }
+                                ]);
+                        }
+                    ]);
             },
-            'students.payments' => function ($q) use ($group) {
-                return $q->where('group_id', $group->id);
+            'groupSubjects' => function ($q) {
+                return $q->select(['id', 'group_id', 'subject_id'])
+                    ->with('subject:id,name,pages_count');
             },
-            'groupType',
+            'groupType:id,name,price',
             'teacher:id,name,email,birthday,phone,qualification' => [
                 "role:id,name"
             ],
         ]);
-    }
-
-    public function getGroupWithAllData()
-    {
-        return $this->groupWithAllData;
-    }
-
-    public function getGroupDaysNum()
-    {
-        return $this->groupWithAllData->groupType->days_num ?? 0;
-    }
-
-    public function getGroupStudentsCount()
-    {
-        return $this->groupWithAllData->groupStudents->count();
-    }
-
-    public function getGroupSubjectsCount()
-    {
-        return $this->groupWithAllData->groupSubjects->count();
-    }
-
-    public function getGroupDaysCount()
-    {
-        return $this->groupWithAllData->groupDays->count();
-    }
-
-    public function getGroupPaymentsCount()
-    {
-        return $this->groupWithAllData->payments->count();
     }
 
     public function getGruopsWithPaymentsByMonth($currentMonth)

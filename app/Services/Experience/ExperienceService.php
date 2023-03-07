@@ -44,21 +44,12 @@ class ExperienceService
             $to = new DateTime($experience->to);
 
             $diff = $from->diff($to);
-            
+
             $years += $diff->y;
             $months += $diff->m;
             $days += $diff->d;
         }
 
-        // while ($days > 30) {
-        //     $months += 1;
-        //     $days -= 30;
-        // }
-        // while ($months > 11) {
-        //     $months -= 12;
-        //     $years += 1;
-        // }
-        
-        return $years + floatval( ( $months / 12 ) ) + floatval( ( $days / ( 12 * 24 ) ) );
+        return $years + floatval(($months / 12)) + floatval(($days / (12 * 24)));
     }
 }
