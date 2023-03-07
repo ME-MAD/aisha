@@ -3,7 +3,9 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header card-header create__form__header">
-                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="creatStudentModal">إضافة طالب</h5>
+                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="creatStudentModal">
+                   {{trans('student.add_a_student')}}
+                </h5>
             </div>
             <div class="modal-body ">
                 <form action="{{ route('admin.student.store') }}" method="post" enctype="multipart/form-data">
@@ -13,15 +15,15 @@
                         <div class="col-6">
                             <x-text name="name"
                             :required="true"
-                            label="{{trans('student.name')}}"
-                            placeholder="{{trans('student.name')}}"
+                            label="{{trans('main.name')}}"
+                            placeholder="{{trans('student.add_a_student')}}"
                             :value="old('name')"/>
                         </div>
                         <div class="col-6">
                             <x-text name="email"
                             :required="true"
-                            label="{{trans('student.email')}}"
-                            placeholder="{{trans('student.email')}}"
+                            label="{{trans('main.email')}}"
+                            placeholder="{{trans('student.enter_the_e-mail')}}"
                             :value="old('email')"/>
                         </div>
                     </div>
@@ -30,15 +32,15 @@
                         <div class="col-6">
                             <x-text name="password"
                             :required="true"
-                            label="{{trans('student.password')}}"
-                            placeholder="{{trans('student.password')}}"
+                            label="{{trans('main.password')}}"
+                            placeholder="{{trans('student.enter_password')}}"
                             :value="old('password')"/>
                         </div>
                         <div class="col-6">
                             <x-text name="password_confirmation"
                             :required="true"
-                            label="{{trans('student.confirm password')}}"
-                            placeholder="{{trans('student.confirm password')}}" />
+                            label="{{trans('student.confirm_password')}}"
+                            placeholder="{{trans('student.confirm_password')}}" />
                         </div>
                     </div>
                    
@@ -49,7 +51,9 @@
                         <select class="form-control my-2 role_create" style="width: 100%;"
                                 name="role"
                                 id="role" data-select2-id="role_create">
-                            <option value="">{{__('student.choose role')}}</option>
+                            <option value="">
+                                {{trans('student.choose_roles')}}
+                            </option>
                             @forelse($roles as $role)
                                 <option value="{{$role->name}}">
                                     {{$role->name}}
@@ -68,28 +72,27 @@
                     <div class="row">
                         <div class="col-4">
                             <x-date name="birthday"
-                            label="{{__('student.birthday')}}"
-                            placeholder="{{__('student.birthday')}}"
+                            label="{{trans('main.birthday')}}"
                             :value="old('birthday')"/>
                         </div>
                         <div class="col-4">
                             <x-text name="phone"
                             :required="true"
-                            label="{{__('student.phone')}}"
-                            placeholder="{{__('student.phone')}}"
+                            label="{{trans('main.phone')}}"
+                            placeholder="{{trans('student.enter_the_student\'s_phone')}}"
                             :value="old('phone')"/>
                         </div>
                         <div class="col-4">
                             <x-text name="qualification"
-                            label="{{__('student.qualification')}}"
-                            placeholder="{{__('student.qualification')}}"
+                            label="{{trans('main.qualification')}}"
+                            placeholder="{{trans('student.enter_student_qualification')}}"
                             :value="old('qualification')"/>
                         </div>
                     </div>
 
                     <div class="custom-file-container" data-upload-id="myFirstImage">
                         <label>
-                            {{trans('student.choose photo')}}
+                            {{trans('main.avatar')}}
                             <a href="javascript:void(0)"
                                class="custom-file-container__image-clear"
                                title="Clear Image">
@@ -107,11 +110,12 @@
                     <div class="modal-footer">
                         <button type="submit"
                                 class="btn btn-outline-dark">
-                            {{ __('global.Save') }}
+                            {{trans('main.save')}}
                         </button>
 
                         <button class="btn btn-outline-danger" data-dismiss="modal">
-                            <i class="flaticon-cancel-12"></i>{{ __('global.Discard') }}
+                            <i class="flaticon-cancel-12"></i>
+                            {{trans('main.discard')}}
                         </button>
                     </div>
                 </form>

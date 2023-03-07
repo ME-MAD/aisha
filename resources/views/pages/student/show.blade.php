@@ -39,7 +39,9 @@
                         <a href="{{route('admin.home')}}"
                            class="d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                            <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                            <span class="font-weight-bold mt-1">
+                               {{trans('main.home_page')}}
+                            </span>
                         </a>
                     </li>
                     <li class="">
@@ -47,7 +49,9 @@
                            class="d-flex justify-content-center align-items-center">
 
                             <i class="fa-solid fa-users-gear fa-2x mx-2"></i>
-                            <span class="font-weight-bold ">كشف الطلاب</span>
+                            <span class="font-weight-bold ">
+                              {{trans('student.students_revealed')}}
+                            </span>
                         </a>
                     </li>
                     <li class="active">

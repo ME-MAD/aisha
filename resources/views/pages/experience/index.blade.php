@@ -7,9 +7,6 @@
               type="text/css"
               href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}"> --}}
               <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet"
@@ -20,18 +17,12 @@
               type="text/css"
               href="{{ asset('adminRtl/plugins/flatpickr/flatpickr.css') }}">
 
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/plugins/select2/select2.min.css') }}">
     @else
 
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}"> --}}
               <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet"
@@ -41,10 +32,6 @@
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminAssets/plugins/flatpickr/flatpickr.css') }}">
-
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
     @endif
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
 @endpush
