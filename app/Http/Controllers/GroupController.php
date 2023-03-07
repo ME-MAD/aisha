@@ -7,6 +7,7 @@ use App\Http\Requests\Group\StoreGroupRequest;
 use App\Http\Requests\Group\UpdateGroupRequest;
 use App\Models\Group;
 use App\Models\GroupType;
+use App\Models\Role;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
@@ -71,25 +72,23 @@ class GroupController extends Controller
 
     public function show(Group $group)
     {
-        $this->groupService->setGroupWithAllData($group);
+        $this->groupService->getGroupWithAllData($group);
 
-        $countStudents = $this->groupService->getGroupStudentsCount();
-        $countSubjects = $this->groupService->getGroupSubjectsCount();
-        $groupPaymentsCount = $this->groupService->getGroupPaymentsCount();
-        $groupDaysCount = $this->groupService->getGroupDaysCount();
-        $groupTypeNumDays = $this->groupService->getGroupDaysNum();
+        $groupPaymentsCount = $group->payments()
+            ->where('paid', true)
+            ->where('month', getCurrectMonthName())->count();
 
-        $students = Student::get();
-        $subjects = Subject::get();
+        $students = Student::students()->select(['id', 'name'])->get();
+        $subjects = Subject::select(['id', 'name'])->get();
 
-        $roles = $this->roleService->getRoles(['name']);
+        $roles = Role::select(['name'])->get();
 
         return view('pages.group.show', [
             'group' => $group,
-            'countStudents' => $countStudents,
-            'countSubjects' => $countSubjects,
-            'groupDaysCount' => $groupDaysCount,
-            'groupTypeNumDays' => $groupTypeNumDays,
+            'countStudents' => $group->groupStudents->count(),
+            'countSubjects' => $group->groupSubjects->count(),
+            'groupDaysCount' => $group->groupDays->count(),
+            'groupTypeNumDays' => $group->groupType->days_num ?? 0,
             'groupPaymentsCount' => $groupPaymentsCount,
             'students' => $students,
             'subjects' => $subjects,
