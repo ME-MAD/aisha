@@ -1,7 +1,7 @@
-import {renderGroupDays} from "./groups.js"
+import { renderGroupDays } from "./groups.js"
 // import {handleShowingOfTheBook, handleOpenPageClick} from "./book.js"
-import {Book, handleOpenPageClick} from "./book.js"
-import {renderLessonsHtml} from "./lesson.js"
+import { Book, handleOpenPageClick } from "./book.js"
+import { renderLessonsHtml } from "./lesson.js"
 import { setBook } from "./shared.js"
 
 // let groupStudentsContainer = $('#groupStudentsContainer')
@@ -10,8 +10,8 @@ import { setBook } from "./shared.js"
 // let subjects = null
 
 
-export function mainStudentShowRun(){
-    
+export function mainStudentShowRun() {
+
     let groupStudentsContainer = $('#groupStudentsContainer')
     $.ajax({
         url: groupStudentsContainer.data('href'),
@@ -24,7 +24,7 @@ export function mainStudentShowRun(){
                 groupStudentsContainer.append(`
                     <div id="groupStudentContainer${groupStudent.id}"></div>
                 `)
-                renderSubjectsForEachGroup(groupStudent, subjects)
+                renderSubjectsForEachGroup(groupStudent, subjects, response.words)
 
             });
         },
@@ -33,26 +33,24 @@ export function mainStudentShowRun(){
 }
 
 
-function renderSubjectsForEachGroup(groupStudent, subjects)
-{
+function renderSubjectsForEachGroup(groupStudent, subjects, words) {
     $(`#groupStudentContainer${groupStudent.id}`).html('')
-    
-    renderGroupDays(groupStudent)
 
-    renderSubjects(groupStudent,subjects)
+    renderGroupDays(groupStudent, words)
+
+    renderSubjects(groupStudent, subjects)
 
     handleOnClickSubject(groupStudent, subjects)
 }
 
 
-function handleOnClickSubject(groupStudent, subjects)
-{
+function handleOnClickSubject(groupStudent, subjects) {
 
     let studentId = $('#studentProfileContainer').data('student-id')
-    $(`.subjectContainer${groupStudent.id}`).on('click',function(){
+    $(`.subjectContainer${groupStudent.id}`).on('click', function () {
 
 
-        let subject = getSubjectById(subjects ,$(this).data('subject-id'))
+        let subject = getSubjectById(subjects, $(this).data('subject-id'))
         let groupId = groupStudent.group_id
 
 
@@ -60,15 +58,15 @@ function handleOnClickSubject(groupStudent, subjects)
 
         book.renderPage()
 
-        $('#next').click(function(){
+        $('#next').click(function () {
             book.onNextPage()
         })
-        $('#prev').click(function(){
+        $('#prev').click(function () {
             book.onPrevPage()
         })
 
 
-        $('#showBookBtn').click(function(){
+        $('#showBookBtn').click(function () {
             $('#showBookModal').modal('show')
         })
 
@@ -79,7 +77,7 @@ function handleOnClickSubject(groupStudent, subjects)
         handleOpenPageClick(book)
 
 
-        $(`#backToSubjects${groupStudent.id}`).on('click',function(){
+        $(`#backToSubjects${groupStudent.id}`).on('click', function () {
 
             mainStudentShowRun()
 
@@ -89,8 +87,7 @@ function handleOnClickSubject(groupStudent, subjects)
 
 
 
-function renderSubjects(groupStudent,subjects)
-{
+function renderSubjects(groupStudent, subjects) {
     let subjectsElements = ''
 
     subjects.forEach(subject => {
@@ -103,9 +100,7 @@ function renderSubjects(groupStudent,subjects)
                 </h3>
             </div>
             <div class="card-body d-flex flex-column card-body justify-content-around "  >
-                            <img src="${subject.avatar}" 
-                                alt=""
-                                class="avatar-image rounded mx-auto d-block">
+                            <img src="${subject.avatar}" alt="" class="avatar-image rounded mx-auto d-block">
                             <div class="btn btn-outline-secondary rounded mx-auto d-block mt-4 mb-0">
                                 Lessson Count <span
                                     class="badge badge-light">${subject.lessons.length}</span>
@@ -124,9 +119,8 @@ function renderSubjects(groupStudent,subjects)
 }
 
 
-function getSubjectById(subjects, subject_id)
-{
-    return subjects.filter( subject => subject.id == subject_id)[0]
+function getSubjectById(subjects, subject_id) {
+    return subjects.filter(subject => subject.id == subject_id)[0]
 }
 
 

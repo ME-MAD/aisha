@@ -1,13 +1,12 @@
-export function renderGroupDays(groupStudent)
-{
+export function renderGroupDays(groupStudent, words) {
     let groupDaysElements = `
         <div class="table-responsive">
         <table class="table table-hover table-bordered mb-4">
             <thead>
                 <tr class="table-secondary">
-                    <th class="text-secondary">ألايام</th>
-                    <th class="text-secondary">من الساعه</th>
-                    <th class="text-secondary">إلى الساعة</th>
+                    <th class="text-secondary">${words.day}</th>
+                    <th class="text-secondary">${words.from}</th>
+                    <th class="text-secondary">${words.to}</th>
                 </tr>
             </thead>
             <tbody>

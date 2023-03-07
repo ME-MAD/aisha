@@ -56,5 +56,5 @@ return [
     'social' => 'Social',
     'important' => 'Important',
     'book' => 'Book',
-
+    'day' => 'Day'
 ];

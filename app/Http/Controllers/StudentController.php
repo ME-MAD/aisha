@@ -88,6 +88,11 @@ class StudentController extends Controller
         return response()->json([
             'groupStudents' => $student->groupStudents->load(['group.groupDays']),
             'subjects' => $subjects,
+            'words' => [
+                'day' => trans('main.day'),
+                'from' => trans('main.from'),
+                'to' => trans('main.to'),
+            ]
         ]);
     }
 }
