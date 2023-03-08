@@ -3,29 +3,35 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header card-header create__form__header">
-                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="editGroupType">{{ __('group.edite Group Types') }}</h5>
+                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="editGroupType">
+                  {{trans('group.edite_group_types')}}
+                </h5>
             </div>
             <div class="modal-body ">
                 <form id="editGroupTypeForm" method="post">
                     @csrf
                     @method('PUT')
 
-                    <x-text name="name" :required="true" label="{{ __('group.name') }}" id="name"/>
+                    <x-text name="name" :required="true" label="{{trans('group.group_name')}}"  id="name"/>
 
                     <div class="row">
                         <div class="col-6">
-                            <x-text name="days_num" :required="true" label="{{ __('group.days_num') }}" id="days_num"/>
+                            <x-text name="days_num" :required="true" label="{{trans('group.days_num') }}"  id="days_num"/>
                         </div>
                         <div class="col-6">
-                            <x-text name="price" :required="true" label="{{ __('group.price') }}" id="price"/>
+                            <x-text name="price" :required="true"  label="{{ trans('main.price') }}" id="price"/>
                         </div>
                     </div>
 
                     <div class="modal-footer">
                         <button type="submit"
-                                class="btn btn-outline-info">{{ __('global.Update') }}</button>
+                                class="btn btn-outline-dark">
+                                {{ trans('main.update') }}
+                        </button>
+
                         <button class="btn btn-outline-danger" data-dismiss="modal">
-                            <i class="flaticon-cancel-12"></i>{{ __('global.discard') }}
+                            <i class="flaticon-cancel-12"></i>
+                              {{ trans('main.discard') }}
                         </button>
                     </div>
                 </form>

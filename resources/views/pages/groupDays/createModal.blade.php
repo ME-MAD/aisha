@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header card-header create__form__header">
                 <h5 class="modal-title font-weight-bold text-capitalize text-light" id="creatGroupDayModalTitle">
-                    {{ __('group.Create Group Days') }}
+                   {{trans('group.create_group_days')}}
                 </h5>
             </div>
             <div class="modal-body">
@@ -19,38 +19,38 @@
                         @endif
                             <div class="form-group row mb-4">
                                 <label for="day" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
-                                    {{ __('group.day') }}
+                                    {{trans('group.groups_days')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6  ">
                                     <select class="form-control selectpicker" style="width: 100%;" name="day"
                                             id="day">
                                         <option value="Monday">
-                                            {{ __('group.Monday') }}
+                                            {{trans('main.monday')}}
                                         </option>
         
                                         <option value="Tuesday">
-                                            {{ __('group.Tuesday') }}
+                                            {{trans('main.tuesday')}}
                                         </option>
         
                                         <option value="Wednesday">
-                                            {{ __('group.Wednesday') }}
+                                            {{trans('main.wednesday')}}
                                         </option>
         
                                         <option value="Thursday">
-                                            {{ __('group.Thursday') }}
+                                            {{trans('main.thursday')}}
                                         </option>
         
                                         <option value="Friday">
-                                            {{ __('group.Friday') }}
+                                            {{trans('main.friday')}}
                                         </option>
         
                                         <option value="Saturday">
-                                            {{ __('group.Saturday') }}
+                                            {{trans('main.saturday')}}
                                         </option>
         
                                         <option value="Sunday">
-                                            {{ __('group.Sunday') }}
+                                            {{trans('main.sunday')}}
                                         </option>
         
                                     </select>
@@ -68,7 +68,7 @@
                             @if (!isset($group))
                             <div class="form-group row mb-4">
                                 <label for="age_type" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
-                                    {{ __('group.Choose group') }}
+                                   {{trans('group.choose_group')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6">
@@ -76,7 +76,9 @@
                                             name="group_id"
                                             id="group_id" data-select2-id="group_days_create"
                                             data-href="{{ route('admin.group_day.getGroupDaysOfGroup') }}">
-                                        <option value=""> {{ __('group.Choose group') }}</option>
+                                        <option value="">
+                                            {{trans('group.choose_group')}}
+                                            </option>
                                         @foreach ($groups as $group)
                                             @if (!$group->checkIfGroupExceededGroupDaysLimit())
     
@@ -103,22 +105,30 @@
 
                     <div class="row">
                         <div class="col-6">
-                            <x-time name="from_time" :required="true" id="from_time" label="{{ __('group.from') }}" :value="old('from_time')"/>
+                            <x-time name="from_time" 
+                            :required="true" 
+                            id="from_time" 
+                            label="{{trans('main.from')}}" 
+                            :value="old('from_time')"/>
                         </div>
                         <div class="col-6">
-                            <x-time name="to_time" :required="true" id="to_time" label="{{ __('group.to') }}" :value="old('to_time')"/>
+                            <x-time name="to_time" 
+                            :required="true" 
+                            id="to_time" 
+                            label="{{trans('main.to')}}" 
+                            :value="old('to_time')"/>
                         </div>
                     </div>
                    
                     <div class="modal-footer">
                         <button type="submit"
                                 class="btn btn-outline-dark">
-                            {{ __('global.Save') }}
+                                {{trans('main.save')}}
                         </button>
 
                         <button class="btn btn-outline-danger" data-dismiss="modal">
                             <i class="flaticon-cancel-12"></i>
-                            {{ __('global.Discard') }}
+                            {{trans('main.discard')}}
                         </button>
                     </div>
                 </form>

@@ -28,4 +28,5 @@ return [
     'from_page' => 'من صفحة',
     'to_page' => 'إلى صفحة',
     'add_a_new_review' => 'أضف مراجعة جديدة',
+    'student_name' => 'إسم الطالب',
 ];

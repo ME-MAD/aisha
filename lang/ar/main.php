@@ -56,5 +56,14 @@ return [
     'social' => 'إجتماعي',
     'important' => 'مهم',
     'book' => 'الكتاب',
-    'day' => 'اليوم'
+    'day' => 'اليوم',
+    'monday' => 'الإثنين',
+    'tuesday' => 'الثلاثاء',
+    'wednesday' => 'الأربعاء',
+    'thursday' => 'الخميس',
+    'friday' => 'الجمعة',
+    'saturday' => 'السبت',
+    'sunday' => 'الأحد',
+    'price' => 'السعر',
+
 ];

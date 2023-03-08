@@ -56,5 +56,15 @@ return [
     'social' => 'Social',
     'important' => 'Important',
     'book' => 'Book',
-    'day' => 'Day'
+    'day' => 'Day',
+    'monday' => 'Monday',
+    'tuesday' => 'Tuesday',
+    'wednesday' => 'Wednesday',
+    'thursday' => 'Thursday',
+    'friday' => 'Friday',
+    'saturday' => 'Saturday',
+    'sunday' => 'Sunday',
+    'price' => 'Price',
+
+    
 ];

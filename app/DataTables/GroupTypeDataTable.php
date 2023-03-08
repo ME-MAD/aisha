@@ -108,28 +108,28 @@ class GroupTypeDataTable extends DataTable
             [
                 'name' => 'id',
                 'data' => 'id',
-                'title' => __('group.id'),
+                'title' => trans('main.num'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'name',
                 'data' => 'name',
-                'title' =>  __('group.name'),
+                'title' =>  trans('group.group_name'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'price',
                 'data' => 'price',
-                'title' => __('group.price'),
+                'title' => trans('main.price'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'days_num',
                 'data' => 'days_num',
-                'title' =>  __('group.days_num'),
+                'title' =>  trans('group.days_num'),
                 "className" => 'search--col'
             ],
         ];
@@ -139,7 +139,7 @@ class GroupTypeDataTable extends DataTable
             $columns [] = [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' =>  __('global.Edit'),
+                'title' =>  trans('main.edit'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
@@ -153,7 +153,7 @@ class GroupTypeDataTable extends DataTable
             $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' =>  __('global.Delete'),
+                'title' =>  trans('main.delete'),
                 'printable' => false,
                 'exportable' => false, 
                 'orderable' => false,

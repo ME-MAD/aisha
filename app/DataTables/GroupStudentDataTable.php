@@ -109,21 +109,21 @@ class GroupStudentDataTable extends DataTable
             [
                 'name' => 'group_students.id',
                 'data' => 'id',
-                'title' => __('group.id'),
+                'title' => trans('main.num'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'student.name',
                 'data' => 'student.name',
-                'title' =>  __('group.student_id'),
+                'title' =>  trans('student.student_name'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'group.name',
                 'data' => 'group.name',
-                'title' =>  __('group.Groups'),
+                'title' =>  trans('group.group_name'),
                 "className" => 'search--col'
             ],
         ];
@@ -133,7 +133,7 @@ class GroupStudentDataTable extends DataTable
             $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => __('global.Delete'),
+                'title' => trans('main.delete'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
