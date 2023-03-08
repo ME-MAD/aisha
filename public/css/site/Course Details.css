@@ -90,3 +90,14 @@
     font-weight: 700;
     margin-left: 1em;
 }
+@media only screen and (max-width: 965px) {
+ 
+    .course-details  {
+        flex-direction: column-reverse;
+        gap: 4em;
+    }
+    .course-details .right {
+        width: 51%;
+    }
+    
+}
