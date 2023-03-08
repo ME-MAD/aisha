@@ -1,10 +1,10 @@
 <?php
 
 return [
-
     'groups_days' => 'أيام المجموعات',
     'groups_students' => 'طلاب المجموعات',
     'groups_types' => 'أنواع المجموعات',
+    'group_type' => 'نوع المجموعة',
     'groups_subject' => 'المواد الدراسية للمجموعات',
     'group_ages' => 'إحصائيات بأعمار المجموعات',
     'upcoming' => 'المجموعات التالية',
@@ -13,98 +13,25 @@ return [
     'groups_count' => 'عدد المجموعات',
     'students_count' => 'عدد الطلاب',
     'select_the_group' => 'حدد المجموعة',
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // 'groups_table' => 'جدول المجموعات',
-    // 'Groups' => 'المجموعات',
-    // 'Create Group' => 'إضافة مجموعة جديدة',
-    // 'Create Group Type' => 'إضافة نوع مجموعة ',
-    // 'from' => 'من',
-    // 'to' => 'إلى',
-    // 'Choose type of group' => 'إختر نوع المجموعة',
-    // 'age type' => 'الفئة العمرية',
-    // 'Choose teacher' => 'اختر المعلم',
-    // 'Choose group' => 'اختر المجموعة',
-    // 'Choose student' => 'اختر الطالب',
-    // 'kid' => 'أطفال',
-    // 'adult' => 'كبار',
-    // 'edite group' => 'تعديل بيانات المجموعة',
-    // 'edite Group Types' => 'تعديل بيانات نوع المجموعة',
-    // 'id' => 'الرقم الهوية',
-    // 'teacher_id' => 'المعلم',
-    // 'group_type_id' => 'نوع المجموعة',
-    // 'count Student' => 'عدد طلاب المجموعة',
-    'groups_days' => 'أيام المجموعة',
-    // 'Create Group Days' => 'إضافة أيام للمجموعة',
-    // 'Group Days Table' => 'جدول أيام المجموعة',
-    // 'day' => 'اليوم',
-    // 'Monday' => 'الإثنين',
-    // 'Tuesday' => 'الثلاثاء',
-    // 'Wednesday' => 'الأربعاء',
-    // 'Thursday' => 'الخميس',
-    // 'Friday' => 'الجمعة',
-    // 'Saturday' => 'السبت',
-    // 'Sunday' => 'الأحد',
-    // 'Group Students Table' => 'جدول طلاب المجموعة',
-    // 'Group Students' => 'طلاب المجموعة',
-    // 'Create Group Student' => 'إضافة طلاب للمجموعة',
-    // 'student_id' => 'إسم الطالب',
-    // 'name' => 'إسم النوع',
-    // 'days_num' => 'عدد الإيام',
-    // 'price' => 'السعر',
-    // 'Group Types Table' => 'جدول أنواع المجموعات',
-    // 'Group Types' => 'أنواع المجموعات',
-    // 'This is Group :' => 'هذه مجموعة :',
-    // 'Teacher' => 'المدرس',
-    // 'Students' => 'الطلاب',
-    // 'Payment' => 'المدفوعات',
-    // 'Teacher Name' => 'إسم المدرس',
-    // 'Birthday' => 'عيدالميلاد',
-    // 'Age Type' => 'نوع العمر للمجموعة',
-    // 'Teacher phone' => 'تلفون المدرس',
-    // 'Qualification' => 'المؤهل',
-    // 'Name' => 'اسم الطالب',
-    // 'Phone' => 'تلفون الطالب',
-    // 'choose the month' => '',
-    // 'January' => 'يناير ',
-    // 'February' => 'فبراير ',
-    // 'March' => 'مارس ',
-    // 'April' => 'أبريل ',
-    // 'May' => 'مايو ',
-    // 'June' => 'يونيو',
-    // 'July' => 'يوليو ',
-    // 'August' => 'أغسطس ',
-    // 'September' => 'سبتمبر ',
-    // 'October' => 'أكتوبر ',
-    // 'November' => 'نوفمبر ',
-    // 'December' => 'ديسمبر ',
-    // 'S.No' => 'الرقم التسلسلي',
-    // 'Paid' => 'مدفوع',
-    // 'choose days' => 'اختر الايام',
-    // '' => '',
-   
+    'create_group' => 'إضافة مجموعة جديدة',
+    'enter_the_group_name' => 'أدخل أسم المجموعة',
+    'group_name' => 'إسم المجموعة',   
+    'choose_teacher' => 'اختر المعلم',
+    'choose_type_of_group' => 'إختر نوع المجموعة',
+    'age_type' => 'الفئة العمرية',
+    'edite_group' => 'تعديل بيانات المجموعة',
+    'create_group_days' => 'إضافة أيام للمجموعة',
+    'choose_group' => 'اختر المجموعة',
+    'group_students' => 'طلاب المجموعة',
+    'create_group_student' => 'إضافة طلاب للمجموعة',
+    'group_study_materials' => 'المواد الدراسية للمجموعات',
+    'add_study_material_to_the_group' => 'إضافة مواد دراسية للمجموعة',
+    'choose_the_material_for_the_group' => 'اختر الماده للمجموعة',
+    'study_materials_for_a_student' => 'المواد الدراسية لطالب',
+    'create_group_type' => 'إضافة نوع مجموعة ',
+    'days_num' => 'عدد الإيام',
+    'enter_the_group_type_name' => 'أدخل اسم نوع المجموعة',
+    'enter_the_number_of_group_days' => 'أدخل عدد أيام المجموعة',
+    'enter_the_group_price'=> 'أدخل سعر المجموعة',
+    'edite_group_types' => 'تعديل بيانات نوع المجموعة',
 ];

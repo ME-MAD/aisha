@@ -111,35 +111,35 @@ class GroupDayDataTable extends DataTable
             [
                 'name' => 'group_days.id',
                 'data' => 'id',
-                'title' => __('group.id'),
+                'title' => trans('main.num'),
                 "className" => 'search--col exact'
                 ],
 
             [
                 'name' => 'group.name',
                 'data' => 'group.name',
-                'title' => __('group.name'),
+                'title' => trans('group.group_name'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'from_time',
                 'data' => 'from_time',
-                'title' => __('group.from_time'),
+                'title' =>trans('main.from'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'to_time',
                 'data' => 'to_time',
-                'title' => __('group.to_time'),
+                'title' => trans('main.to'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'day',
                 'data' => 'day',
-                'title' => __('group.day'),
+                'title' =>trans('main.day'),
                 "className" => 'search--col'
             ],
         ];
@@ -149,7 +149,7 @@ class GroupDayDataTable extends DataTable
             $columns [] =  [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => __('global.Delete'),
+                'title' => trans('main.delete'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,

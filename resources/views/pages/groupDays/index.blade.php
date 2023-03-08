@@ -43,7 +43,9 @@
                         <a href="{{route('admin.home')}}"
                            class="d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                            <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                            <span class="font-weight-bold mt-1">
+                               {{trans('main.home_page')}}
+                            </span>
                         </a>
                     </li>
                     <li class="active">
@@ -51,7 +53,9 @@
                            class="d-flex justify-content-center align-items-center">
 
                             <i class="fa-solid fa-calendar-days fa-2x mx-2"></i>
-                            <span class="font-weight-bold ">أيام المجموعة</span>
+                            <span class="font-weight-bold ">
+                                {{trans('group.groups_days')}}
+                            </span>
                         </a>
                     </li>
                 </ul>
@@ -72,7 +76,7 @@
                 <div class="card ">
                     <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables">
                         <h3 class="text-capitalize text-white">
-                            {{ __('group.Group Days') }}
+                            {{trans('group.groups_days')}}
                         </h3>
                         @check_permission('store-groupDay')
                         <a class="icon text-white" data-toggle='modal' data-target='#creatGroupDayModal'>

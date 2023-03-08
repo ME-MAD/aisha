@@ -108,41 +108,41 @@ class GroupDataTable extends DataTable
             [
                 'name' => 'groups.id',
                 'data' => 'id',
-                'title' => __('group.id'),
+                'title' => trans('main.num'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'groups.name',
                 'data' => 'name',
-                'title' => __('group.name'),
+                'title' =>trans('group.group_name'),
                 "className" => 'search--col '
             ],
 
             [
                 'name' => 'teacher.name',
                 'data' => 'teacher.name',
-                'title' => __('group.teacher_id'),
+                'title' => trans('main.teacher'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'groupType.name',
                 'data' => 'groupType.name',
-                'title' => __('group.group_type_id'),
+                'title' => trans('group.group_type'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'age_type',
                 'data' => 'age_type',
-                'title' => __('group.age type'),
+                'title' => trans('group.age_type'),
                 "className" => 'search--col'
             ],
             [
                 'name' => 'countStudent',
                 'data' => 'countStudent',
-                'title' => __('group.count Student'),
+                'title' => trans('student.student_count'),
                 "className" => 'not--search--col'
             ],
         ];
@@ -152,7 +152,7 @@ class GroupDataTable extends DataTable
             $columns [] =  [
                 'name' => 'show',
                 'data' => 'show',
-                'title' => "المزيد",
+                'title' => trans('main.show'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
@@ -166,7 +166,7 @@ class GroupDataTable extends DataTable
             $columns [] =  [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => __('global.Edit'),
+                'title' => trans('main.edit'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
@@ -180,7 +180,7 @@ class GroupDataTable extends DataTable
             $columns [] =   [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => __('global.Delete'),
+                'title' => trans('main.delete'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,

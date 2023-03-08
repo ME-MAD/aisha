@@ -28,4 +28,6 @@ return [
     'from_page' => 'From Page',
     'to_page' => 'To Page',
     'add_a_new_review' => 'Add a New Review',
+    'student_name' => 'Student Name',
+
 ];

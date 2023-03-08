@@ -6,9 +6,6 @@
               type="text/css"
               href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}"> --}}
      <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
         <link rel="stylesheet"
               type="text/css"
@@ -18,10 +15,7 @@
         <link rel="stylesheet"
               type="text/css"
               href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
-{{-- 
-        <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}"> --}}
+
       <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet"
@@ -46,14 +40,18 @@
                         <a href="{{route('admin.home')}}"
                            class="d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                            <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                            <span class="font-weight-bold mt-1">
+                                {{trans('main.home_page')}}
+                            </span>
                         </a>
                     </li>
                     <li class="active">
                         <a href="{{route('admin.group.index')}}"
                            class="d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-users-rays fa-2x mx-2"></i>
-                            <span class="font-weight-bold ">المجموعات</span>
+                            <span class="font-weight-bold ">
+                                {{trans('main.groups')}}
+                            </span>
                         </a>
                     </li>
                 </ul>
@@ -73,7 +71,7 @@
                 <div class="card ">
                     <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables">
                         <h3 class="text-capitalize text-white">
-                            {{ __('group.Groups') }}
+                           {{trans('main.groups')}}
                         </h3>
                         @check_permission('store-group')
                         <a class="icon text-white"  data-toggle="modal"
