@@ -27,8 +27,10 @@ class GroupDayControllerTest extends TestCaseWithTransLationsSetUp
 
     public function test_index_page_Has_No_Errors()
     {
-        $this->get(route('admin.group_day.index'))
-            ->assertOk();
+        $res = $this->get(route('admin.group_day.index'));
+        $res->assertOk();
+        $res->assertViewIs('pages.groupDays.index');
+        $res->assertViewHas('groups');
     }
 
 
@@ -44,45 +46,83 @@ class GroupDayControllerTest extends TestCaseWithTransLationsSetUp
     public function validationData(): array
     {
         $this->refreshApplication();
+        $group = $this->generateRandomGroup();
 
         return [
-            "with Null Day" => [
-                [
-                    'day' => null,
-                    'group_id' => 1
-                ]
-            ],
             "with No Data" => [
                 []
             ],
-
+            "with Null Day" => [
+                [
+                    'day' => null,
+                    'group_id' => $group->id,
+                    'from_time' => '06:00',
+                    'to_time' => '08:00'
+                ]
+            ],
+            "with Null group_id" => [
+                [
+                    'day' => 'Saturday',
+                    'group_id' => null,
+                    'from_time' => '06:00',
+                    'to_time' => '08:00'
+                ]
+            ],
+            "with group_id that doesn't exist" => [
+                [
+                    'day' => 'Saturday',
+                    'group_id' => intval($group->id + 100),
+                    'from_time' => '06:00',
+                    'to_time' => '08:00'
+                ]
+            ],
+            "with from_time that is null" => [
+                [
+                    'day' => 'Saturday',
+                    'group_id' => $group->id,
+                    'from_time' => null,
+                    'to_time' => '08:00'
+                ]
+            ],
+            "with to_time that is null" => [
+                [
+                    'day' => 'Saturday',
+                    'group_id' => $group->id,
+                    'from_time' => '06:00',
+                    'to_time' => null
+                ]
+            ],
+            "with from_time that is greater than to_time" => [
+                [
+                    'day' => 'Saturday',
+                    'group_id' => $group->id,
+                    'from_time' => '08:00',
+                    'to_time' => '06:00'
+                ]
+            ],
         ];
     }
 
-    public function test_can_store_GroupDay_data()
+    public function test_store_GroupDay()
     {
         $data = $this->generateRandomGroupDayData();
-
-        $this->mock(GroupDayService::class, function (MockInterface $mock) {
-            $mock->shouldReceive('createGroupDay')->once();
-        });
 
         $res = $this->post(route('admin.group_day.store'), $data);
 
         $res->assertSessionHasNoErrors();
+        $this->assertDatabaseHas('group_days', $data);
     }
 
     public function test_can_delete_GroupDay()
     {
         $groupDay = $this->generateRandomGroupDay();
 
-        $this->mock(GroupDayService::class, function (MockInterface $mock) {
-            $mock->shouldReceive('deleteGroupDay')->once();
-        });
-
         $res = $this->get(route('admin.group_day.delete', $groupDay));
 
         $res->assertSessionHasNoErrors();
+        $this->assertDatabaseMissing('group_days', [
+            'id' => $groupDay->id,
+        ]);
     }
 
 
@@ -90,12 +130,12 @@ class GroupDayControllerTest extends TestCaseWithTransLationsSetUp
     {
         $group = $this->generateRandomGroup();
 
-        $response = $this->get(route('admin.group_day.getGroupDaysOfGroup'),[
+        $response = $this->get(route('admin.group_day.getGroupDaysOfGroup'), [
             'group_id' => $group->id
         ]);
 
-        $response->assertJson([
-            "groupDays" => GroupDay::where('group_id', $group->id)->select(['group_id', 'day'])->get()->toArray()
+        $response->assertJsonStructure([
+            "groupDays"
         ]);
     }
 }

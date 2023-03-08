@@ -15,27 +15,23 @@ use App\Services\Group\GroupService;
 use App\Services\HomeService;
 use App\Services\Payment\PaymentChartService;
 use App\Services\Permission\PermissionService;
-use App\Services\Role\RoleService;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupController extends Controller
 {
     private GroupService $groupService;
     private PaymentChartService $paymentChartService;
-    private RoleService $roleService;
     private HomeService $homeService;
     private PermissionService $permissionService;
 
     public function __construct(
         GroupService        $groupService,
         PaymentChartService $paymentChartService,
-        RoleService $roleService,
         HomeService $homeService,
         PermissionService $permissionService
     ) {
         $this->groupService = $groupService;
         $this->paymentChartService = $paymentChartService;
-        $this->roleService = $roleService;
         $this->homeService = $homeService;
         $this->permissionService = $permissionService;
 
@@ -119,6 +115,7 @@ class GroupController extends Controller
         $this->paymentChartService->sumOfAmountAndMonth()
             ->fromGroup($group->id)
             ->year(date('Y'))
+            ->paid()
             ->getForChart();
 
         return response()->json([
@@ -172,12 +169,6 @@ class GroupController extends Controller
             ],
             'allGroupsCount' => $groupsCountsData['allGroupsCount'],
             'total_count' => trans('main.adults'),
-
-            // 'words' => [
-            //     'groups' => __('home.Groups'),
-            //     "group_kids_count" => "Group Kids Count" . " " . $groupsCountsData['groupKidsCount'],
-            //     "group_adult_count" => "Group Adults Count"  . " " . $groupsCountsData['groupAdultCount'],
-            // ]
         ]);
     }
 }

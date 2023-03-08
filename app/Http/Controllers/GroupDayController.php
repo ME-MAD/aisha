@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\DataTables\GroupDayDataTable;
 use App\Http\Requests\GroupDay\StoreGroupDayRequest;
-use App\Http\Traits\AuthTrait;
 use App\Models\Group;
 use App\Models\GroupDay;
-use App\Services\Group\GroupService;
 use App\Services\GroupDay\GroupDayService;
 use App\Services\Permission\PermissionService;
 use DateTime;
@@ -20,23 +18,19 @@ class GroupDayController extends Controller
 {
     private GroupDayDataTable $groupDayDataTable;
     private GroupDayService $groupDayService;
-    private GroupService $groupService;
     private PermissionService $permissionService;
 
     public function __construct(
         GroupDayDataTable $groupDayDataTable,
         GroupDayService   $groupDayService,
-        GroupService      $groupService,
         PermissionService $permissionService
-    )
-    {
+    ) {
         $this->groupDayDataTable = $groupDayDataTable;
         $this->groupDayService = $groupDayService;
-        $this->groupService = $groupService;
         $this->permissionService = $permissionService;
 
 
-        $this->permissionService->handlePermissions($this,[
+        $this->permissionService->handlePermissions($this, [
             'index' => 'index-groupDay',
             'store' => 'store-groupDay',
             'delete' => 'delete-groupDay',
@@ -45,14 +39,23 @@ class GroupDayController extends Controller
 
     public function index()
     {
+        $groups = Group::groups()
+            ->select(['id', 'name', 'group_type_id'])
+            ->with([
+                'groupType:id,days_num',
+                'groupDays:id,group_id'
+            ])
+            ->get();
+
         return $this->groupDayDataTable->render('pages.groupDays.index', [
-            'groups' => $this->groupService->getAllGroups(),
+            'groups' => $groups,
         ]);
     }
 
     public function store(StoreGroupDayRequest $request)
     {
         $this->groupDayService->createGroupDay($request);
+
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
@@ -74,16 +77,11 @@ class GroupDayController extends Controller
 
     public function getGroupDaysForCalendar()
     {
-        if(getGuard() == "admin")
-        {
+        if (getGuard() == "admin") {
             $groups = Group::with('groupDays')->get();
-        }
-        else if(getGuard() == "teacher")
-        {
+        } else if (getGuard() == "teacher") {
             $groups = Auth::guard(getGuard())->user()->groups()->with('groupDays')->get();
-        }
-        else if(getGuard() == "student")
-        {
+        } else if (getGuard() == "student") {
             $groups = Auth::guard(getGuard())->user()->groups()->with('groupDays')->get();
         }
 
@@ -95,14 +93,10 @@ class GroupDayController extends Controller
 
         $result = [];
 
-        foreach($groups as $group)
-        {
-            foreach($group->groupDays as $groupDay)
-            {
-                while ($begin <= $end)
-                {
-                    if($begin->format("l") == $groupDay->day)
-                    {
+        foreach ($groups as $group) {
+            foreach ($group->groupDays as $groupDay) {
+                while ($begin <= $end) {
+                    if ($begin->format("l") == $groupDay->day) {
                         $fromDateTimeString = $begin->format("Y-m-d") . " " . $groupDay->from_time;
                         $toDateTimeString = $begin->format("Y-m-d") . " " . $groupDay->to_time;
                         $nowDateTimeString = date("Y-m-d H:i:s");
@@ -110,23 +104,18 @@ class GroupDayController extends Controller
                         $fromDateTime = new DateTime($fromDateTimeString);
                         $toDateTime = new DateTime($toDateTimeString);
                         $nowDateTime = new DateTime($nowDateTimeString);
-                        
+
                         $className = "";
 
-                        if($nowDateTime < $fromDateTime)
-                        {
+                        if ($nowDateTime < $fromDateTime) {
                             $className = "bg-primary";
-                        }
-                        else if($nowDateTime >= $fromDateTime && $nowDateTime <= $toDateTime)
-                        {
+                        } else if ($nowDateTime >= $fromDateTime && $nowDateTime <= $toDateTime) {
                             $className = "bg-success";
-                        }
-                        else
-                        {
+                        } else {
                             $className = "bg-danger";
                         }
 
-                        $result []=[
+                        $result[] = [
                             "id" => 'group-' . $group->id . "-" . $groupDay->id,
                             "title" => "Class in the group " . $group->name,
                             "start" => $begin->format("Y-m-d") . "T" . $groupDay->from_time,
@@ -135,7 +124,7 @@ class GroupDayController extends Controller
                             "description" => 'Aenean fermentum quam vel sapien rutrum cursus. Vestibulum imperdiet finibus odio, nec tincidunt felis facilisis eu. '
                         ];
                     }
-        
+
                     $begin->modify('+1 day');
                 }
 

@@ -2,11 +2,7 @@
 
 namespace Tests\Controller;
 
-use App\Models\Experience;
-use App\Services\Experience\ExperienceService;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Mockery\MockInterface;
 use Tests\TestCaseWithTransLationsSetUp;
 use Tests\Traits\TestExperienceTrait;
 use Tests\Traits\TestTeacherTrait;
@@ -15,7 +11,6 @@ class ExperienceControllerTest extends TestCaseWithTransLationsSetUp
 {
     use TestTeacherTrait;
     use TestExperienceTrait;
-    // use RefreshDatabase;
 
     protected function setUp(): void
     {
@@ -27,7 +22,10 @@ class ExperienceControllerTest extends TestCaseWithTransLationsSetUp
     public function test_index_opens_without_errors()
     {
         $res = $this->call('get', route('admin.experience.index'));
+
         $res->assertOk();
+        $res->assertViewIs('pages.experience.index');
+        $res->assertViewHas('teachers');
     }
 
     /**

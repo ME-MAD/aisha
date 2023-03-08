@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 if (!function_exists('getStudentTypes')) {
@@ -14,9 +13,9 @@ if (!function_exists('getStudentTypes')) {
 }
 
 if (!function_exists('ellipsis')) {
-    function ellipsis($str,int $max)
+    function ellipsis($str, int $max)
     {
-        return strlen($str) > $max ? substr($str,0, $max) . "..." : $str;
+        return strlen($str) > $max ? substr($str, 0, $max) . "..." : $str;
     }
 }
 
@@ -156,11 +155,9 @@ if (!function_exists('getPermissionsForView')) {
 
         $permissions = [];
 
-        foreach($tables as $table => $tableName)
-        {
-            foreach($keys as $key => $value)
-            {
-                $permissions [$table] []= [
+        foreach ($tables as $table => $tableName) {
+            foreach ($keys as $key => $value) {
+                $permissions[$table][] = [
                     'key' => $value,
                     'value' => "$value-$table",
                 ];
@@ -182,19 +179,15 @@ if (!function_exists('getPermissionsForSeeder')) {
 
         $permissions = [];
 
-        foreach($tables as $table => $tableName)
-        {
-            foreach($keys as $key => $value)
-            {
-                $permissions [] ['name']= "$value-$table";
+        foreach ($tables as $table => $tableName) {
+            foreach ($keys as $key => $value) {
+                $permissions[]['name'] = "$value-$table";
             }
         }
 
-        foreach($additionalPermissions as $items)
-        {
-            foreach($items as $permission)
-            {
-                $permissions [] ['name'] = $permission;
+        foreach ($additionalPermissions as $items) {
+            foreach ($items as $permission) {
+                $permissions[]['name'] = $permission;
             }
         }
 
@@ -213,19 +206,15 @@ if (!function_exists('getPermissionsArray')) {
 
         $permissions = [];
 
-        foreach($tables as $table => $tableName)
-        {
-            foreach($keys as $key => $value)
-            {
-                $permissions []= "$value-$table";
+        foreach ($tables as $table => $tableName) {
+            foreach ($keys as $key => $value) {
+                $permissions[] = "$value-$table";
             }
         }
 
-        foreach($additionalPermissions as $items)
-        {
-            foreach($items as $permission)
-            {
-                $permissions [] = $permission;
+        foreach ($additionalPermissions as $items) {
+            foreach ($items as $permission) {
+                $permissions[] = $permission;
             }
         }
 
@@ -257,4 +246,3 @@ if (!function_exists('getSeededRoles')) {
         ];
     }
 }
-

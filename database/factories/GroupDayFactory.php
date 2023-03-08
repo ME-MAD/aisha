@@ -17,9 +17,10 @@ class GroupDayFactory extends Factory
      */
     public function definition()
     {
-
-
         return [
+            'from_time' => '06:00',
+            'to_time' => '08:00',
+            'day' => fake()->dayOfWeek()
         ];
     }
 }

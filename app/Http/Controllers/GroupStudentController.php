@@ -4,36 +4,28 @@ namespace App\Http\Controllers;
 
 use App\DataTables\GroupStudentDataTable;
 use App\Http\Requests\GroupStudent\StoreGroupStudentRequest;
-use App\Http\Traits\AuthTrait;
+use App\Models\Group;
 use App\Models\GroupStudent;
-use App\Services\Group\GroupService;
+use App\Models\Student;
 use App\Services\GroupStudent\GroupStudentService;
 use App\Services\Permission\PermissionService;
-use App\Services\Student\StudentService;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GroupStudentController extends Controller
 {
     private GroupStudentService $groupStudentService;
-    private GroupService $groupService;
-    private StudentService $StudentService;
     private PermissionService $permissionService;
 
     public function __construct(
         GroupStudentService $groupStudentService,
-        GroupService        $groupService,
-        StudentService      $StudentService,
         PermissionService $permissionService
-    )
-    {
+    ) {
         $this->groupStudentService = $groupStudentService;
-        $this->groupService = $groupService;
-        $this->StudentService = $StudentService;
         $this->permissionService = $permissionService;
 
 
-        $this->permissionService->handlePermissions($this,[
+        $this->permissionService->handlePermissions($this, [
             'index' => 'index-groupStudent',
             'store' => 'store-groupStudent',
             'delete' => 'delete-groupStudent',
@@ -42,9 +34,11 @@ class GroupStudentController extends Controller
 
     public function index(GroupStudentDataTable $GroupStudentDataTable)
     {
+        $groups = Group::groups()->select(['id', 'name'])->get();
+        $students = Student::students()->select(['id', 'name'])->get();
         return $GroupStudentDataTable->render('pages.groupStudent.index', [
-            'groups' => $this->groupService->getAllGroups(),
-            'students' => $this->StudentService->getAllStudents(['id', 'name']),
+            'groups' => $groups,
+            'students' => $students,
         ]);
     }
 
@@ -63,7 +57,6 @@ class GroupStudentController extends Controller
         Alert::toast('تمت العملية بنجاح', 'success');
         return redirect()->back();
     }
-
 
     public function getGroupStudents(Request $request)
     {

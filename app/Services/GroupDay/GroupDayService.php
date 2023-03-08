@@ -19,7 +19,7 @@ class GroupDayService
             'day' => $request->day,
         ], [
             'from_time' => $request->from_time,
-            'to_time' => $request->to_time 
+            'to_time' => $request->to_time
         ]);
     }
 

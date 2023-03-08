@@ -25,7 +25,7 @@ class StoreGroupStudentRequest extends FormRequest
     {
         return [
             'student_id' => "required|exists:students,id",
-            'group_id' => "required|exists:students,id",
+            'group_id' => "required|exists:groups,id",
         ];
     }
 }

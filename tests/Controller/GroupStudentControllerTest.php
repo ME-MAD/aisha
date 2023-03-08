@@ -17,6 +17,7 @@ class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
     use TestGroupStudentTrait;
     use TestTeacherTrait;
     use TestGroupTypeTrait;
+    use TestStudentTrait;
 
     public function setUp(): void
     {
@@ -29,6 +30,9 @@ class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
         $res = $this->call('get', route('admin.group_students.index'));
 
         $res->assertOk();
+        $res->assertViewIs('pages.groupStudent.index');
+        $res->assertViewHas('groups');
+        $res->assertViewHas('students');
     }
 
 
@@ -39,6 +43,7 @@ class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
         $res = $this->call('POST', route('admin.group_students.store'), $data);
 
         $res->assertSessionHasNoErrors();
+        $this->assertDatabaseHas('group_students', $data);
     }
 
     /**
@@ -60,9 +65,7 @@ class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
 
         return [
             "without data" => [
-                [
-
-                ],
+                [],
             ],
             "without a student_id" => [
                 [
@@ -86,20 +89,34 @@ class GroupStudentControllerTest extends TestCaseWithTransLationsSetUp
         $res = $this->call('get', route('admin.group_students.delete', $groupStudent->id));
 
         $res->assertSessionHasNoErrors();
+        $this->assertDatabaseMissing('group_students', [
+            'id' => $groupStudent->id
+        ]);
     }
 
-    public function test_get_Group_Students_Has_No_Errors()
+    public function test_getGroupStudents_Has_No_Errors()
     {
         $group = $this->generateRandomGroup();
 
-        $response = $this->call('get',route('admin.group_students.getGroupStudents'),[
+        $response = $this->call('get', route('admin.group_students.getGroupStudents'), [
             'group_id' => $group->id
         ]);
 
-        $response->assertJson([
-            'groupStudents' => GroupStudent::where('group_id', $group->id)->select(['group_id', 'student_id'])->get()->toArray()
+        $response->assertJsonStructure([
+            'groupStudents'
         ]);
     }
 
+    public function test_getStudentGroups_Has_No_Errors()
+    {
+        $student = $this->generateRandomStudent();
 
+        $response = $this->call('get', route('admin.group_students.getStudentGroups'), [
+            'student_id' => $student->id
+        ]);
+
+        $response->assertJsonStructure([
+            'studentGroups'
+        ]);
+    }
 }

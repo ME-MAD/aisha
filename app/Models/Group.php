@@ -87,28 +87,22 @@ class Group extends Model
 
     public function scopeGroups($query)
     {
-        if(getGuard() == 'admin')
-        {
+        if (getGuard() == 'admin') {
             return $query->select([
-                    'groups.id',
-                    'teacher_id',
-                    'groups.name',
-                    'age_type',
-                    'group_type_id'
-                ]);
-        }
-        else if(getGuard() == 'teacher')
-        {
+                'groups.id',
+                'teacher_id',
+                'groups.name',
+                'age_type',
+                'group_type_id'
+            ]);
+        } else if (getGuard() == 'teacher') {
             return Auth::guard(getGuard())->user()->groups()->select([
-                'groups.id', 'groups.name','teacher_id','group_type_id','age_type'
+                'groups.id', 'groups.name', 'teacher_id', 'group_type_id', 'age_type'
             ])->getQuery();
-        }
-        else if(getGuard() == "student")
-        {
+        } else if (getGuard() == "student") {
             return Auth::guard(getGuard())->user()->groups()->select([
-                'groups.id', 'groups.name','teacher_id','group_type_id','age_type'
+                'groups.id', 'groups.name', 'teacher_id', 'group_type_id', 'age_type'
             ])->getQuery();
-
         }
     }
 }
