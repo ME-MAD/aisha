@@ -7,9 +7,7 @@ use App\DataTables\PaymentDataTable;
 use App\Http\Requests\Payment\getPaymentCountOfGroupByMonth;
 use App\Http\Requests\Payment\getPaymentsOfGroupByMonth;
 use App\Http\Requests\Payment\StorePaymentRequest;
-use App\Http\Traits\AuthTrait;
 use App\Models\Payment;
-use App\Services\Group\GroupService;
 use App\Services\Payment\PaymentChartService;
 use App\Services\Payment\PaymentService;
 use App\Services\Permission\PermissionService;
@@ -20,19 +18,16 @@ class PaymentController extends Controller
 {
     private PaymentChartService $paymentChartService;
     private PaymentService $PaymentService;
-    private GroupService $groupService;
     private PermissionService $permissionService;
 
     public function __construct(
         PaymentChartService $paymentChartService,
         PaymentService      $PaymentService,
-        GroupService        $groupService,
         PermissionService $permissionService
     )
     {
         $this->paymentChartService = $paymentChartService;
         $this->PaymentService = $PaymentService;
-        $this->groupService = $groupService;
         $this->permissionService = $permissionService;
 
         $this->permissionService->handlePermissions($this,[

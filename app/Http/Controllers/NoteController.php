@@ -23,7 +23,7 @@ class NoteController extends Controller
 
     public function studentIndex()
     {
-        $students = null;
+        $students = Student::students()->select(['id','name'])->get();
         $notes = [];
 
         $authenticatedUser = Auth::guard(getGuard())->user();
@@ -31,8 +31,6 @@ class NoteController extends Controller
         if(getGuard() == "admin")
         {
             $notes = Note::orderBy('id','desc')->with('noteby')->get();
-
-            $students = Student::select(['id','name'])->get(); 
         }
         else if(getGuard() == 'teacher')
         {
@@ -42,8 +40,6 @@ class NoteController extends Controller
                 ->where('notable_type', Student::class)
                 ->with('noteby')
                 ->get();
-
-            $students = $authenticatedUser->students()->select(['students.id','students.name'])->get();
         }
         else if(getGuard() == 'student')
         {
@@ -101,10 +97,9 @@ class NoteController extends Controller
         }
         else if(getGuard() == 'student')
         {
-            $authenticatedUser = Auth::guard(getGuard())->user();
             Note::create([
                 'notable_type' => Student::class,
-                'notable_id' => $authenticatedUser->id,
+                'notable_id' => $request->student_id,
                 'noteby_type' => Student::class,
                 'noteby_id' => $request->noteby_id,
                 'title' => $request->title,

@@ -230,7 +230,7 @@
                                 </div>
                             </div>
 
-                            @if ($students)
+                            @if (getGuard() != 'student')
                                 <div class="form-group my-2">
                                     <label
                                         class="font-weight-bold text-capitalize text-muted">{{trans('student.choose_student')}}</label>
@@ -260,6 +260,9 @@
                                     <p class="text-danger">{{ $message }}</p>
                                     @enderror
                                 </div>
+
+                            @else
+                                <input type="hidden" name="student_id" value="{{auth()->guard(getGuard())->user()->id}}">
                             @endif
 
 

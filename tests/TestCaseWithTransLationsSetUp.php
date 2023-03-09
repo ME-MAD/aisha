@@ -13,6 +13,7 @@ class TestCaseWithTransLationsSetUp extends TestCase
         parent::setUp();
         $admin = User::where('email', 'admin@admin.com')->first();
         $permissions = collect(getPermissionsForSeeder())->pluck('name');
+        Session::put('admin_guard', 'admin');
         Session::put('permissions', json_encode($permissions));
         $this->actingAs($admin, 'admin');
     }
