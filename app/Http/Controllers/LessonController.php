@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\DataTables\LessonsDataTable;
 use App\Http\Requests\Lesson\StoreLessonRequest;
 use App\Http\Requests\Lesson\UpdateLessonRequest;
-use App\Http\Traits\AuthTrait;
 use App\Models\Lesson;
 use App\Models\Subject;
 use App\Services\Permission\PermissionService;
@@ -19,7 +18,7 @@ class LessonController extends Controller
     {
         $this->permissionService = $permissionService;
 
-        $this->permissionService->handlePermissions($this,[
+        $this->permissionService->handlePermissions($this, [
             'index' => 'index-lesson',
             'store' => 'store-lesson',
             'update' => 'update-lesson',

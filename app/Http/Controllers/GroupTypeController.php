@@ -21,15 +21,14 @@ class GroupTypeController extends Controller
         GroupTypeDataTable $groupTypeDataTable,
         GroupTypeService   $groupTypeService,
         PermissionService $permissionService
-    )
-    {
+    ) {
         $this->groupTypeDataTable = $groupTypeDataTable;
         $this->groupTypeService = $groupTypeService;
         $this->permissionService = $permissionService;
 
 
 
-        $this->permissionService->handlePermissions($this,[
+        $this->permissionService->handlePermissions($this, [
             'index' => 'index-groupStudent',
             'store' => 'store-groupStudent',
             'update' => 'update-groupStudent',

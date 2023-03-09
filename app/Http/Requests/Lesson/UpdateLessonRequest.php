@@ -24,7 +24,7 @@ class UpdateLessonRequest extends FormRequest
     public function rules()
     {
         return [
-            'subject_id' => "required",
+            'subject_id' => "required|exists:subjects,id",
             'title' => "required",
             'chapters_count' => "required",
             'from_page' => 'required|integer|lte:to_page',

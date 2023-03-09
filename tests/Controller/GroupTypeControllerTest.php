@@ -12,7 +12,7 @@ class GroupTypeControllerTest extends TestCaseWithTransLationsSetUp
     use TestGroupTypeTrait;
 
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
         $this->refreshApplicationWithLocale('en');
@@ -24,6 +24,7 @@ class GroupTypeControllerTest extends TestCaseWithTransLationsSetUp
         $res = $this->call('get', route('admin.group_types.index'));
 
         $res->assertOk();
+        $res->assertViewIs('pages.groupType.index');
     }
 
     /**
@@ -39,15 +40,12 @@ class GroupTypeControllerTest extends TestCaseWithTransLationsSetUp
 
     public function test_store_pass_with_all_data()
     {
-        $this->mock(GroupTypeService::class, function (MockInterface $mock) {
-            $mock->shouldReceive('createGroupType')->once();
-        });
-
         $data = $this->generateRandomGroupTypeData();
 
         $res = $this->call('POST', route('admin.group_types.store'), $data);
 
         $res->assertSessionHasNoErrors();
+        $this->assertDatabaseHas('group_types', $data);
     }
 
     /**
@@ -65,29 +63,29 @@ class GroupTypeControllerTest extends TestCaseWithTransLationsSetUp
     public function test_update_works_with_all_data()
     {
         $groupType = $this->generateRandomGroupType();
-
-        $this->mock(GroupTypeService::class, function (MockInterface $mock) {
-            $mock->shouldReceive('updateGroupType')->once();
-        });
-
-        $data = $this->generateRandomGroupTypeData(); 
+        $data = $this->generateRandomGroupTypeData();
 
         $res = $this->call('PUT', route('admin.group_types.update', $groupType->id), $data);
-        
+
         $res->assertSessionHasNoErrors();
+        $this->assertDatabaseHas('group_types', $data);
+        $this->assertDatabaseMissing('group_types', [
+            'name'     => $groupType->name,
+            'days_num' => $groupType->days_num,
+            'price'    => $groupType->price,
+        ]);
     }
 
     public function test_group_type_get_deleted_without_errors()
     {
         $groupType = $this->generateRandomGroupType();
 
-        $this->mock(GroupTypeService::class, function (MockInterface $mock) {
-            $mock->shouldReceive('deleteGroupType')->once();
-        });
-
         $res = $this->call('get', route('admin.group_types.delete', $groupType->id));
 
         $res->assertSessionHasNoErrors();
+        $this->assertDatabaseMissing('group_types', [
+            'id' => $groupType->id
+        ]);
     }
 
 
