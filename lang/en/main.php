@@ -18,6 +18,7 @@ return [
     'note' => 'Note',
     'groups' => 'Groups',
     'subjects' => 'Subjects',
+    'subject' => 'Subject',
     'lessons' => 'Lessons',
     'payment' => 'Payments',
     'home_page' => 'Homepage',

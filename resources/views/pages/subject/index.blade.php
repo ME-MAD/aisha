@@ -7,9 +7,6 @@
               type="text/css"
               href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}"> --}}
               <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
         <link rel="stylesheet"
               type="text/css"
@@ -21,10 +18,6 @@
               type="text/css"
               href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
 
-
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}"> --}}
               <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
         <link rel="stylesheet"
               type="text/css"
@@ -43,7 +36,9 @@
                         <a href="{{route('admin.home')}}"
                            class="d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                            <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                            <span class="font-weight-bold mt-1">
+                               {{trans('main.home_page')}}
+                            </span>
                         </a>
                     </li>
                     <li class="active">
@@ -51,7 +46,9 @@
                            class="d-flex justify-content-center align-items-center">
 
                             <i class="fa-solid fa-book fa-2x mx-2"></i>
-                            <span class="font-weight-bold ">المناهج المقررة</span>
+                            <span class="font-weight-bold ">
+                                {{trans('subject.prescribed_curriculum')}}
+                            </span>
                         </a>
                     </li>
                 </ul>
@@ -70,7 +67,7 @@
                 <div class="card ">
                     <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables">
                         <h3 class="text-capitalize text-white">
-                            المواد
+                            {{trans('main.subjects')}}
                         </h3>
                         @check_permission('store-subject')
                         <a class="icon text-white" href="{{ route('admin.subject.create') }}">
@@ -83,17 +80,29 @@
                             <thead>
                             <tr>
                                 <th class="checkbox-column text-center"> Id</th>
-                                <th class="text-center">Image</th>
-                                <th class="text-center">Name</th>
-                                <th class="text-center">Pages Count</th>
-                                <th class="text-center">Book</th>
+                                <th class="text-center">
+                                    {{trans('subject.subject_image')}}
+                                </th>
+                                <th class="text-center">
+                                    {{trans('main.name')}}
+                                </th>
+                                <th class="text-center">
+                                    {{trans('subject.pages_count')}} 
+                                </th>
+                                <th class="text-center">
+                                    {{trans('main.book')}}
+                                </th>
                                 
                                 @check_permission('update-subject')
-                                <th class="text-center">Edit</th>
+                                <th class="text-center">
+                                    {{trans('main.edit')}}
+                                </th>
                                 @endcheck_permission
 
                                 @check_permission('delete-subject')
-                                <th class="text-center">Delete</th>
+                                <th class="text-center">
+                                    {{trans('main.delete')}}
+                                </th>
                                 @endcheck_permission
 
                             </tr>

@@ -2,7 +2,9 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header card-header create__form__header">
-                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="editLessonTitle">تعديل الدرس</h5>
+                <h5 class="modal-title font-weight-bold text-capitalize text-light" id="editLessonTitle">
+                    {{trans('lesson.lesson_modification')}}
+                </h5>
             </div>
             <div class="modal-body">
                 <form id="editLessonForm" method="post">
@@ -14,13 +16,14 @@
                             <div class="form-group row mb-4">
                                 <label for="age_type"
                                        class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
-                                    اختر
-                                    المادة
+                                       {{trans('lesson.choose_the_material')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                             </label>
                                 <div class="col-xl-12 col-md-6">
                                     <select class="form-control basic subject_edit" data-select2-id="subject_edit" style="width: 100%;" name="subject_id" id="subject_id">
-                                        <option value="">اختر المادة</option>
+                                        <option value="">
+                                            {{trans('lesson.choose_the_material')}}
+                                        </option>
                                         @foreach ($subjects as $subject)
                                             <option value="{{ $subject->id }}">
                                                 {{ $subject->name }}
@@ -34,7 +37,7 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <x-text name="title" :required="true" label="عنوان الدرس" id="title"/>
+                            <x-text name="title" :required="true" label="{{trans('lesson.the_title_of_lesson')}}" id="title"/>
                         </div>
                     </div>
 
@@ -42,8 +45,8 @@
                         <div class="col-4">
                             <div class="form-group row mb-4">
                                 <label for="name"
-                                    class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">بداية
-                                    الصفحة
+                                    class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
+                                    {{trans('lesson.the_beginning_of_the_page')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6">
@@ -58,8 +61,8 @@
                         <div class="col-4">
                             <div class="form-group row mb-4">
                                 <label for="name"
-                                    class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">نهاية
-                                    الصفحة
+                                    class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
+                                    {{trans('lesson.end_of_page')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
                                 <div class="col-xl-12 col-md-6">
@@ -74,8 +77,8 @@
                         <div class="col-4">
                             <div class="form-group row mb-4">
                                 <label for="name"
-                                    class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">عدد
-                                    الدرس
+                                    class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
+                                    {{trans('lesson.the_number_of_pages_of_the_lesson')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                             </label>
                                 <div class="col-xl-12 col-md-6">
@@ -91,9 +94,13 @@
 
                     <div class="modal-footer">
                         <button type="submit"
-                                class="btn btn-outline-info">{{ __('global.Update') }}</button>
+                                class="btn btn-outline-dark">
+                            {{trans('main.update')}}
+                        </button>
+
                         <button class="btn btn-outline-danger" data-dismiss="modal">
-                            <i class="flaticon-cancel-12"></i>{{ __('global.discard') }}
+                            <i class="flaticon-cancel-12"></i>
+                            {{trans('main.discard')}}
                         </button>
                     </div>
                 </form>
