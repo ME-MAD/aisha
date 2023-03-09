@@ -114,40 +114,40 @@ class LessonsDataTable extends DataTable
             [
                 'name' => 'id',
                 'data' => 'id',
-                'title' => '#',
+                'title' => trans('main.num'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'subject_id',
                 'data' => 'subject.name',
-                'title' => 'subject_id',
+                'title' => trans('main.subject'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'title',
                 'data' => 'title',
-                'title' => 'title',
+                'title' => trans('main.title'),
                 "className" => 'search--col'
             ],
             [
                 'name' => 'from_page',
                 'data' => 'from_page',
-                'title' => 'from_page',
+                'title' => trans('lesson.from_page'),
                 "className" => 'search--col'
             ],
             [
                 'name' => 'to_page',
                 'data' => 'to_page',
-                'title' => 'to_page',
+                'title' => trans('lesson.to_page'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'chapters_count',
                 'data' => 'chapters_count',
-                'title' => 'chapters_count',
+                'title' =>  trans('lesson.chapters_count'),
                 "className" => 'search--col'
             ],
         ];
@@ -157,7 +157,7 @@ class LessonsDataTable extends DataTable
             $columns [] =  [
                 'name' => 'edit',
                 'data' => 'edit',
-                'title' => 'Edit',
+                'title' => trans('main.edit'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
@@ -171,7 +171,7 @@ class LessonsDataTable extends DataTable
             $columns [] =  [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => 'Delete',
+                'title' => trans('main.delete'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,

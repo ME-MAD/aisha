@@ -29,7 +29,9 @@
                         <a href="{{route('admin.home')}}"
                            class="d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                            <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                            <span class="font-weight-bold mt-1">
+                                {{trans('main.home_page')}}
+                            </span>
                         </a>
                     </li>
                     <li class="">
@@ -37,7 +39,9 @@
                            class="d-flex justify-content-center align-items-center">
                             
                            <i class="fa-solid fa-book fa-2x mx-2"></i>
-                           <span class="font-weight-bold ">المناهج المقررة</span>
+                           <span class="font-weight-bold ">
+                            {{trans('subject.prescribed_curriculum')}}
+                           </span>
                         </a>
                     </li>
                     <li class="active">
@@ -45,7 +49,9 @@
                            class="d-flex justify-content-center align-items-center">
 
                             <i class="fa-solid fa-book-open fa-2x mx-2"></i>
-                            <span class="font-weight-bold "> تعديل المنهج </span>
+                            <span class="font-weight-bold "> 
+                               {{trans('subject.edit_material_study')}}
+                            </span>
                         </a>
                     </li>
                 </ul>
@@ -64,7 +70,7 @@
                         <div class="row">
                             <div class="col-xl-12 col-md-12 card-header create__form__header">
                                 <h4 class="text-center font-weight-bold text-capitalize text-light"> 
-                                    تعديل المادة
+                                    {{trans('subject.edit_material_study')}}
                                 </h4>
                             </div>
                         </div>
@@ -77,18 +83,18 @@
 
                             <input type="hidden" name="teacher_id" value="{{ $subject->id }}">
 
-                            <x-text name="name" label="الإسم" :value="$subject->name"/>
+                            <x-text name="name" label="{{trans('subject.subject_name')}}" :value="$subject->name"/>
 
                             <div class="form-group row mb-4">
                                 <label for="book"
                                        class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold text-capitalize">
-                                       الكتاب (PDF)
+                                       {{trans('subject.book_pdf')}}
                                        <i class="fa-solid fa-star-of-life" style="color:rgba(255, 0, 0, 0.778)"></i>
                                     </label>
                                 <div class="col-xl-12 col-md-6">
                                     <div class="custom-file-container" data-upload-id="myFirstImage1">
-                                        <label>Upload <a href="javascript:void(0)"
-                                                         class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                                        <label><a href="javascript:void(0)"
+                                                         class="custom-file-container__image-clear" title="Clear Image"></a></label>
                                         <label class="custom-file-container__custom-file">
                                             <input type="file"
                                                    class="custom-file-container__custom-file__custom-file-input"
@@ -105,12 +111,13 @@
                             </div>
                             <div class="form-group row mb-4">
                                 <label for="book"
-                                       class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold text-capitalize">تعديل
-                                    غلاف الكتاب</label>
+                                       class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold text-capitalize">
+                                       {{trans('subject.book_cover_photo')}}
+                                </label>
                                 <div class="col-xl-12 col-md-6 ">
                                     <div class="custom-file-container" data-upload-id="myFirstImage2">
-                                        <label>Upload <a href="javascript:void(0)"
-                                                         class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+                                        <label><a href="javascript:void(0)"
+                                                         class="custom-file-container__image-clear" title="Clear Image"></a></label>
                                         <label class="custom-file-container__custom-file">
                                             <input type="file"
                                                    class="custom-file-container__custom-file__custom-file-input"
@@ -128,7 +135,9 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-outline-info">Lets Go</button>
+                                    <button type="submit" class="btn btn-outline-dark">
+                                        {{trans('main.update')}}
+                                    </button>
                                 </div>
                             </div>
                         </form>
