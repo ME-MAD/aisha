@@ -8,9 +8,6 @@
               type="text/css"
               href="{{ asset('adminRtl/plugins/table/datatable/datatables.css') }}">
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminRtl/plugins/table/datatable/dt-global_style.css') }}"> --}}
  <link href="{{asset('adminRtl/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
         <link rel="stylesheet"
               type="text/css"
@@ -23,9 +20,6 @@
               href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">
 
 
-        {{-- <link rel="stylesheet"
-              type="text/css"
-              href="{{ asset('adminAssets/plugins/table/datatable/dt-global_style.css') }}"> --}}
       <link href="{{asset('adminAssets/assets/css/elements/breadcrumb.css')}}" rel="stylesheet" type="text/css">
         <link rel="stylesheet"
               type="text/css"
@@ -45,7 +39,9 @@
                         <a href="{{route('admin.home')}}"
                            class="d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                            <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                            <span class="font-weight-bold mt-1">
+                               {{trans('main.home_page')}}
+                            </span>
                         </a>
                     </li>
                     <li class="active">
@@ -53,7 +49,9 @@
                            class="d-flex justify-content-center align-items-center">
 
                             <i class="fa-solid fa-file-invoice-dollar fa-2x mx-2"></i>
-                            <span class="font-weight-bold ">كشف المدفوعات</span>
+                            <span class="font-weight-bold ">
+                               {{trans('payment.payment_statement')}}
+                            </span>
                         </a>
                     </li>
                 </ul>
@@ -72,7 +70,7 @@
                 <div class="card ">
                     <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables">
                         <h3 class="text-capitalize text-white">
-                            المدفوعات
+                            {{trans('main.payment')}}
                         </h3>
                         @check_permission('store-payment')
                         <a class="icon text-white" href="{{ route('admin.payment.create') }}">

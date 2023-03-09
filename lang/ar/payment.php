@@ -4,7 +4,8 @@ return [
 
     'create_payments' => 'تسجيل الدفع',
     'total_payments' => 'إحصائيات بالمدفوعات الكلية',
-    // '' => '',
+    'payment_statement' => 'كشف المدفوعات',
+    'payment_registration' => 'تسجيل المدفوعات',
     // '' => '',
     // '' => '',
     // '' => '',

@@ -17,6 +17,7 @@ return [
     'notes' => 'Notes',
     'note' => 'Note',
     'groups' => 'Groups',
+    'group' => 'Group',
     'subjects' => 'Subjects',
     'lessons' => 'Lessons',
     'payment' => 'Payments',
@@ -65,6 +66,11 @@ return [
     'saturday' => 'Saturday',
     'sunday' => 'Sunday',
     'price' => 'Price',
+    'amount' => 'Amount',
+    'month' => 'Month',
+    'paid' => 'Paid',
+
+
 
     
 ];

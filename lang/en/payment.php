@@ -4,6 +4,8 @@ return [
 
     'create_payments' => 'Create Payments',
     'total_payments' => 'Total Payments',
+    'payment_statement' => 'Payment Statement',
+    'payment_registration' => 'Payment Registration',
     // '' => '',
     // '' => '',
     // '' => '',

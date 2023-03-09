@@ -113,42 +113,42 @@ class PaymentDataTable extends DataTable
             [
                 'name' => 'payments.id',
                 'data' => 'id',
-                'title' => '#',
+                'title' => trans('main.num'),
                 "className" => 'search--col exact'
             ],
 
             [
                 'name' => 'student.name',
                 'data' => 'student.name',
-                'title' => 'الطلاب',
+                'title' => trans('main.name'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'group.name',
                 'data' => 'group.name',
-                'title' => 'المجموعات',
+                'title' => trans('group.group_name'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'amount',
                 'data' => 'amount',
-                'title' => 'القيمة',
+                'title' => trans('main.amount'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'month',
                 'data' => 'month',
-                'title' => 'الشهر',
+                'title' => trans('main.month'),
                 "className" => 'search--col'
             ],
 
             [
                 'name' => 'paid',
                 'data' => 'paid',
-                'title' => 'دفع',
+                'title' => trans('main.paid'),
                 "className" => 'search--col'
             ],
         ];
@@ -158,7 +158,7 @@ class PaymentDataTable extends DataTable
             $columns [] = [
                 'name' => 'delete',
                 'data' => 'delete',
-                'title' => 'حذف',
+                'title' => trans('main.delete'),
                 'printable' => false,
                 'exportable' => false,
                 'orderable' => false,
