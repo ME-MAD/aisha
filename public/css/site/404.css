@@ -3,7 +3,7 @@
 }
 
 .imgBackGround{
-    background-image: url(../images/error404.png);
+    background-image: url(../../images/site/error404.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
