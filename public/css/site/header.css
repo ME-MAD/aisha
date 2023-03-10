@@ -2,7 +2,7 @@
 /* Header */
 .header{
     background-color:#1B1036;;
-    background-image: url(./../images/headerAbout.png);
+    background-image: url(../../images/site/headerAbout.png);
     background-repeat: no-repeat;
     background-size: cover;
     height: 300px;
