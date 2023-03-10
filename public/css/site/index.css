@@ -36,19 +36,19 @@
 }
 
 .elementor-section .elementor-item #online {
-    background-image: url(../images/path6793-3.png);
+    background-image: url(../../images/site/path6793-3.png);
 }
 
 .elementor-section .elementor-item #home {
-    background-image: url(../images/path7839.png);
+    background-image: url(../../images/site/path7839.png);
 }
 
 .elementor-section .elementor-item #offlin {
-    background-image: url(../images/path8223.png);
+    background-image: url(../../images/site/path8223.png);
 }
 
 .elementor-section .elementor-item #special {
-    background-image: url(../images/path8140.png);
+    background-image: url(../../images/site/path8140.png);
 }
 
 
@@ -314,19 +314,19 @@ header .header-paragraph h3 {
 
 
 .course-categories .course-category .background-img:nth-child(1) {
-    background-image: url(../images/path8223.png);
+    background-image: url(../../images/site/path8223.png);
 }
 
 .course-categories .course-category .background-img:nth-child(2) {
-    background-image: url(../images/path7839.png);
+    background-image: url(../../images/site/path7839.png);
 }
 
 .course-categories .course-category .background-img:nth-child(3) {
-    background-image: url(../images/path8223.png);
+    background-image: url(../../images/site/path8223.png);
 }
 
 .course-categories .course-category .background-img:nth-child(4) {
-    background-image: url(../images/path8223.png);
+    background-image: url(../../images/site/path8223.png);
 }
 
 @media only screen and (max-width: 1080px) {

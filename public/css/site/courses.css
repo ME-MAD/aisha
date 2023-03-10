@@ -78,7 +78,7 @@
 
 .join-us-container {
     background-color: var(--color7);
-    background-image: url(./../images/image.elementor-container.png);
+    background-image: url(../../images/site/image.elementor-container.png);
     margin: 4em 0em;
     border-radius: 20px;
     background-size: cover;  
