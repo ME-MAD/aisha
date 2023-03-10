@@ -137,7 +137,7 @@
                   </div>
 
                   <div class="video">
-                        <img src="http://astylers.com/gotech/wp-content/uploads/2020/11/demo-image3.png" alt="">
+                        <img src="{{asset('images/site/img-vido.png')}}">
 
                         <div class="icon-play">
                               <i class="fa-solid fa-play"></i>
