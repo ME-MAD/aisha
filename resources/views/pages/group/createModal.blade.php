@@ -21,11 +21,11 @@
                         <div class="col-4">
                             <div class="form-group row mb-4">
                                 <label for="age_type"
-                                       class="col-xl-12 col-md-6  col-form-label text-muted font-weight-bold text-capitalize">
+                                       class="col-xl-12 col-form-label text-muted font-weight-bold text-capitalize">
                                     {{trans('group.choose_teacher')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
-                                <div class="col-xl-12 col-md-6 ">
+                                <div class="col-xl-12">
                                     <select class="form-control basic teacher_create" 
                                             style="width: 100%;" 
                                             name="teacher_id" 
@@ -48,11 +48,11 @@
                         <div class="col-4">
                             <div class="form-group row mb-4">
                                 <label for="age_type"
-                                       class="col-xl-12 col-md-6  col-form-label text-muted font-weight-bold text-capitalize">
+                                       class="col-xl-12 col-form-label text-muted font-weight-bold text-capitalize">
                                        {{trans('group.choose_type_of_group')}}
                                        <i class="fa-solid fa-star-of-life required-star"></i>
                                     </label>
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
                                     <select class="form-control basic group_type_create" 
                                             style="width: 100%;" 
                                             name="group_type_id"
@@ -76,12 +76,12 @@
                         <div class="col-4">
                             <div class="form-group row mb-4">
                                 <label for="age_type"
-                                       class="col-xl-12 col-md-6  col-form-label text-muted font-weight-bold text-capitalize">
+                                       class="col-xl-12 col-form-label text-muted font-weight-bold text-capitalize">
                                        {{trans('group.age_type')}}
                                        <i class="fa-solid fa-star-of-life required-star"></i>
                                     </label>
         
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
                                     <select class="form-control basic group_age_create" 
                                             style="width: 100%;" 
                                             name="age_type" 
