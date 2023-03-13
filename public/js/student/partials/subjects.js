@@ -1,19 +1,12 @@
 import { renderGroupDays } from "./groups.js"
-// import {handleShowingOfTheBook, handleOpenPageClick} from "./book.js"
 import { Book, handleOpenPageClick } from "./book.js"
 import { renderLessonsHtml } from "./lesson.js"
-import { setBook } from "./shared.js"
-
-// let groupStudentsContainer = $('#groupStudentsContainer')
-// let studentId = $('#studentProfileContainer').data('student-id')
-// let groupStudents = null
-// let subjects = null
 
 
 export function mainStudentShowRun() {
 
     let groupStudentsContainer = $('#groupStudentsContainer')
-    $.ajax({
+    $.ajax({ //admin.student.getGroupStudents', $student
         url: groupStudentsContainer.data('href'),
         success: function (response) {
 
@@ -38,13 +31,13 @@ function renderSubjectsForEachGroup(groupStudent, subjects, words) {
 
     renderGroupDays(groupStudent, words)
 
-    renderSubjects(groupStudent, subjects)
+    renderSubjects(groupStudent, subjects, words)
 
-    handleOnClickSubject(groupStudent, subjects)
+    handleOnClickSubject(groupStudent, subjects, words)
 }
 
 
-function handleOnClickSubject(groupStudent, subjects) {
+function handleOnClickSubject(groupStudent, subjects, words) {
 
     let studentId = $('#studentProfileContainer').data('student-id')
     $(`.subjectContainer${groupStudent.id}`).on('click', function () {
@@ -71,7 +64,7 @@ function handleOnClickSubject(groupStudent, subjects) {
         })
 
 
-        renderLessonsHtml(subject, groupId, studentId, groupStudent)
+        renderLessonsHtml(subject, groupId, studentId, groupStudent, words)
 
 
         handleOpenPageClick(book)
@@ -87,7 +80,7 @@ function handleOnClickSubject(groupStudent, subjects) {
 
 
 
-function renderSubjects(groupStudent, subjects) {
+function renderSubjects(groupStudent, subjects, words) {
     let subjectsElements = ''
 
     subjects.forEach(subject => {
@@ -102,7 +95,7 @@ function renderSubjects(groupStudent, subjects) {
             <div class="card-body d-flex flex-column card-body justify-content-around "  >
                             <img src="${subject.avatar}" alt="" class="avatar-image rounded mx-auto d-block">
                             <div class="btn btn-outline-secondary rounded mx-auto d-block mt-4 mb-0">
-                                Lessson Count <span
+                                ${words.lessons_count} <span
                                     class="badge badge-light">${subject.lessons.length}</span>
                             </div>
             </div>

@@ -24,4 +24,11 @@ return [
     'from_chapter' => 'From Chapter',
     'to_chapter' => 'To Chapter',
     'choose_rate' => 'Choose Rate',
+    'lessons_count' => 'Lessons Count',
+    'go_to_review' => 'Go To Review',
+    'go_to_lesson' => 'Go To Lesson',
+    'show_more' => 'Show More',
+    'last_page_finished' => 'Last Page Finished',
+    'next_lesson_is_from_chapter' => 'Next Lesson Is From Chapter',
+    'next_lesson_is_from_page' => 'Next Lesson Is From Page',
 ];

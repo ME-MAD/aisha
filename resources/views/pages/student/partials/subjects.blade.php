@@ -3,12 +3,12 @@
          data-href="{{route('admin.student.getGroupStudents', $student)}}">
         <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables_show_teacher">
             <h3 class="text-capitalize text-white">
-             {{trans('student.student\'s_materials')}}
+             {{trans('main.subjects')}}
             </h3>
             <a class="icon text-white" id="showBookBtn">
                 <i class="fa-solid fa-book-open fa-2xl"></i>
                 <h6 class="text-capitalize text-white d-inline">
-                    {{trans('student.show_book')}}
+                    {{trans('subject.show_book')}}
                 </h6>
             </a>
         </div>

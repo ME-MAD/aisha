@@ -20,5 +20,5 @@ return [
     'show_users' => 'Show Users',
     'count_permissions' => 'Count Permissions',
     'count_users' => 'Count Users',
-   
+    'choose_role' => 'Choose Role',
 ];

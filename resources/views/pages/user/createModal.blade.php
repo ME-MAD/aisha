@@ -36,7 +36,7 @@
                                 name="role"
                                 id="role" data-select2-id="role_create">
                             <option >
-                                {{trans('user.choose_roles')}}
+                                {{trans('roles.choose_role')}}
                             </option>
 
                             @foreach ($roles as $role)

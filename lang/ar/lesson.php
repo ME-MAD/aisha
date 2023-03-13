@@ -24,4 +24,11 @@ return [
     'from_chapter' => 'من الجزء',
     'to_chapter' => 'إلى الجزء',
     'choose_rate' => 'اختر التقييم',
+    'lessons_count' => 'عدد الدروس',
+    'go_to_review' => 'الذهاب إلى المراجعة',
+    'go_to_lesson' => 'الذهاب إلى الدرس',
+    'show_more' => 'اظهار المزيد',
+    'last_page_finished' => 'اخر صفحة تم دراستها',
+    'next_lesson_is_from_chapter' => 'الدرس الجديد من الجزء',
+    'next_lesson_is_from_page' => 'الدرس الجديد من الصفحة',
 ];

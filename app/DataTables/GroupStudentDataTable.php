@@ -44,7 +44,7 @@ class GroupStudentDataTable extends DataTable
                 'dom'          => 'Blrtip',
                 'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                 'buttons'      => [
-                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', trans('main.print')],
+                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => trans('main.print')],
                 ],
                 "language" => [
                     'lengthMenu' => "<div class='lengthMenuSelect' data-lang='". LaravelLocalization::getCurrentLocale() ."'>" . trans('main.display') .

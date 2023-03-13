@@ -35,11 +35,11 @@
                     @if (!isset($teacher))
                         <div class="form-group row mb-4">
                             <label for="age_type"
-                                   class="col-xl-12 col-md-6  col-form-label text-muted font-weight-bold text-capitalize">
+                                   class="col-xl-12 col-form-label text-muted font-weight-bold text-capitalize">
                                {{trans('teacher.choose_the_teacher')}}
                                 <i class="fa-solid fa-star-of-life" style="color:rgba(246, 14, 14, 0.866)"></i>
                         </label>
-                            <div class="col-xl-12 col-md-6 ">
+                            <div class="col-xl-12 ">
                                 <select id="teacherId" class="form-control basic experience_edit" style="width: 100%;" name="teacher_id"
                                          data-select2-id="experience_edit">
                                     <option value="">

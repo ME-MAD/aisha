@@ -10,7 +10,7 @@ export function getStudentLesson(lesson, groupId, studentId) {
     })[0]
 }
 
-export function renderLessonsHtml(subject, groupId, studentId, groupStudent)
+export function renderLessonsHtml(subject, groupId, studentId, groupStudent, words)
 {
     let subjectsContainer = $(`#subjectsContainer${groupStudent.id}`)
     let lessonsElements = '';
@@ -26,8 +26,8 @@ export function renderLessonsHtml(subject, groupId, studentId, groupStudent)
         let nlrData = studentLesson.getNextLessonReviewData()
 
 
-        let lessonHtml = getLessonHtml(lesson,nlData,groupId,studentId,studentLesson)
-        let lessonReviewHtml = getLessonReviewHtml(lesson,nlData,nlrData,groupId,studentId,studentLessonReview)
+        let lessonHtml = getLessonHtml(lesson,nlData,groupId,studentId,studentLesson, words)
+        let lessonReviewHtml = getLessonReviewHtml(lesson,nlData,nlrData,groupId,studentId,studentLessonReview, words)
 
         lessonsElements += `
             <div class="studentLessonMainContainer borderPrimary">
@@ -91,12 +91,12 @@ export function renderLessonsHtml(subject, groupId, studentId, groupStudent)
     handleFinishNewLessonReview()
 }
 
-function getLessonHtml(lesson , nlData, groupId, studentId, studentLesson)
+function getLessonHtml(lesson , nlData, groupId, studentId, studentLesson, words)
 {
     return `
         <div class="studentLessonContainer">
             <button class="btn btn-success goToReviewButton">
-                Go To Review
+                ${words.go_to_review}
                 <i class="fa-solid fa-arrow-right-arrow-left"></i>
             </button>
 
@@ -104,12 +104,12 @@ function getLessonHtml(lesson , nlData, groupId, studentId, studentLesson)
 
             <div class="mb-4 d-flex justify-content-between align-items-center">
                 <span>
-                    Lesson Is From Page : <span class="badge bg-primary">${lesson.from_page}</span>
-                    To Page : <span class="badge bg-primary">${lesson.to_page}</span>
+                    ${words.from_page} : <span class="badge bg-primary">${lesson.from_page}</span>
+                    ${words.to_page} : <span class="badge bg-primary">${lesson.to_page}</span>
                 </span>
                 <span>
                     <a href="${nlData.showUrl}" class="btn btn-outline-warning text-dark ${nlData.showUrl == "#" ? 'd-none' : ''}" target="_blank">
-                        Show Progress
+                        ${words.show_more}
                         <i class="fa-solid fa-eye"></i>
                     </a>
                 </span>
@@ -163,7 +163,7 @@ function getLessonHtml(lesson , nlData, groupId, studentId, studentLesson)
             <div class="row">
                 <div class="p-3 text-center col" style="font-size:1.5rem;">
                     <div class="mb-4">
-                        Last Page Finished : <span class="badge bg-success studentLessonLastPageFinishedElement">${nlData.lastPage}</span>
+                        ${words.last_page_finished} : <span class="badge bg-success studentLessonLastPageFinishedElement">${nlData.lastPage}</span>
                         <span class="btn btn-outline-info openStudentLastPageFinishedElement" data-last-page-finished="${nlData.lastPage}">
                             <i class="fa-solid fa-book-open"></i>
                         </span>
@@ -172,22 +172,22 @@ function getLessonHtml(lesson , nlData, groupId, studentId, studentLesson)
                     <div class="${nlData.nextLesson ? '' : 'd-none'} newLessonContainerElement">
                         <div class="mb-3">
                             <span>
-                                <span>Next Lesson Is From Chapter</span>
+                                <span>${words.next_lesson_is_from_chapter}</span>
                                 <span class="badge bg-info nextLessonFromChapter">
                                     ${nlData.fromChapter}
                                 </span>
-                                <span>To Chapter</span>
+                                <span>${words.to_chapter}</span>
                                 <span class="badge bg-info nextLessonToChapter">${nlData.toChapter}</span>
                             </span>
                         </div>
                         <div class="mb-3">
                             <span>
-                                <span>Next Lesson Is From Page</span>
+                                <span>${words.next_lesson_is_from_page}</span>
                                 <span class="badge bg-info nextLessonFromPage" data-last-page-finished="${nlData.fromPage}">
                                     <span>${nlData.fromPage || 0}</span>
                                     <i class="fa-solid fa-book-open"></i>
                                 </span>
-                                <span>To Page</span>
+                                <span>${words.to_page}</span>
                                 <span class="badge bg-info nextLessonToPage" data-last-page-finished="${nlData.toPage}">
                                     <span>${nlData.toPage || 0}</span>
                                     <i class="fa-solid fa-book-open"></i>
@@ -198,17 +198,17 @@ function getLessonHtml(lesson , nlData, groupId, studentId, studentLesson)
                     </div>
                     <div class="mb-3">
                         <select class="form-control newLessonRate ${nlData.nextLesson ? '' : 'd-none'}">
-                            <option value="excellent"> excellent </option>
-                            <option value="very good"> very good </option>
-                            <option value="good"> good </option>
-                            <option value="fail"> fail </option>
+                            <option value="excellent"> ${words.excellent} </option>
+                            <option value="very good"> ${words.very_good} </option>
+                            <option value="good"> ${words.good} </option>
+                            <option value="fail"> ${words.fail} </option>
                         </select>
                     </div>
                     <div>
-                        <button class="btn btn-primary newLessonButton ${nlData.nextLesson ? 'd-none' : ''}" data-student-lesson-id="${studentLesson.getStudentLessonId()}" data-group-id="${groupId}" data-lesson-id="${lesson.id}" data-last-page-finished="${nlData.lastPage}" data-last-chapter-finished="${nlData.lastChapter}">New Lesson</button>
+                        <button class="btn btn-primary newLessonButton ${nlData.nextLesson ? 'd-none' : ''}" data-student-lesson-id="${studentLesson.getStudentLessonId()}" data-group-id="${groupId}" data-lesson-id="${lesson.id}" data-last-page-finished="${nlData.lastPage}" data-last-chapter-finished="${nlData.lastChapter}">${words.add_a_lesson}</button>
 
                         <button class="btn btn-info finishNewLessonButton ${nlData.nextLesson ? '' : 'd-none'}" data-syllabi-id=${nlData.id}>
-                            Finish New Lesson
+                            ${words.finished}
                             <i class="fa-solid fa-square-check"></i>
                         </button>
                     </div>
@@ -222,14 +222,14 @@ function getLessonHtml(lesson , nlData, groupId, studentId, studentLesson)
 
 
 
-function getLessonReviewHtml(lesson, nlData, nlrData,groupId, studentId, studentLessonReview)
+function getLessonReviewHtml(lesson, nlData, nlrData,groupId, studentId, studentLessonReview, words)
 {
 
     return `
         <div class="studentLessonContainerReview">
 
             <button class="btn btn-dark goToLessonButton">
-                Go To Lesson
+                ${words.go_to_lesson}
                 <i class="fa-solid fa-arrow-right-arrow-left"></i>
             </button>
 
@@ -237,12 +237,12 @@ function getLessonReviewHtml(lesson, nlData, nlrData,groupId, studentId, student
 
             <div class="mb-4 d-flex justify-content-between align-items-center">
                 <span>
-                    Lesson Is From Page : <span class="badge bg-primary">${lesson.from_page}</span>
-                    To Page : <span class="badge bg-primary">${lesson.to_page}</span>
+                    ${words.from_page} : <span class="badge bg-primary">${lesson.from_page}</span>
+                    ${words.to_page} : <span class="badge bg-primary">${lesson.to_page}</span>
                 </span>
                 <span>
                     <a href="${nlData.showUrl}" class="btn btn-outline-warning text-dark ${nlData.showUrl == "#" ? 'd-none' : ''}" target="_blank">
-                        Show Progress
+                        ${words.show_more}
                         <i class="fa-solid fa-eye"></i>
                     </a>
                 </span>
@@ -296,7 +296,7 @@ function getLessonReviewHtml(lesson, nlData, nlrData,groupId, studentId, student
             <div class="row">
                 <div class="p-3 text-center col" style="font-size:1.5rem;">
                     <div class="mb-4">
-                        Last Page Finished : <span class="badge bg-success studentLessonLastPageFinishedElementReview">${nlrData.lastPage}</span>
+                        ${words.last_page_finished} : <span class="badge bg-success studentLessonLastPageFinishedElementReview">${nlrData.lastPage}</span>
                         <span class="btn btn-outline-info openStudentLastPageFinishedElementReview" data-last-page-finished="${nlrData.lastPage}">
                             <i class="fa-solid fa-book-open"></i>
                         </span>
@@ -305,22 +305,22 @@ function getLessonReviewHtml(lesson, nlData, nlrData,groupId, studentId, student
                     <div class="${nlrData.nextLesson ? '' : 'd-none'} newLessonContainerElementReview">
                         <div class="mb-3">
                             <span>
-                                <span>Next Lesson Is From Chapter</span>
+                                <span>${words.next_lesson_is_from_chapter}</span>
                                 <span class="badge bg-info nextLessonFromChapterReview">
                                     ${nlrData.fromChapter}
                                 </span>
-                                <span>To Chapter</span>
+                                <span>${words.to_chapter}</span>
                                 <span class="badge bg-info nextLessonToChapterReview">${nlrData.toChapter}</span>
                             </span>
                         </div>
                         <div class="mb-3">
                             <span>
-                                <span>Next Lesson Is From Page</span>
+                                <span>${words.next_lesson_is_from_page}</span>
                                 <span class="badge bg-info nextLessonFromPageReview" data-last-page-finished="${nlrData.fromPage}">
                                     <span>${nlrData.fromPage}</span>
                                     <i class="fa-solid fa-book-open"></i>
                                 </span>
-                                <span>To Page</span>
+                                <span>${words.to_page}</span>
                                 <span class="badge bg-info nextLessonToPageReview" data-last-page-finished="${nlrData.toPage}">
                                     <span>${nlrData.toPage}</span>
                                     <i class="fa-solid fa-book-open"></i>
@@ -331,17 +331,17 @@ function getLessonReviewHtml(lesson, nlData, nlrData,groupId, studentId, student
                     </div>
                     <div class="mb-3">
                         <select class="form-control newLessonRateReview ${nlrData.nextLesson ? '' : 'd-none'}">
-                            <option value="excellent"> excellent </option>
-                            <option value="very good"> very good </option>
-                            <option value="good"> good </option>
-                            <option value="fail"> fail </option>
+                            <option value="excellent"> ${words.excellent} </option>
+                            <option value="very good"> ${words.very_good} </option>
+                            <option value="good"> ${words.good} </option>
+                            <option value="fail"> ${words.fail} </option>
                         </select>
                     </div>
                     <div>
-                        <button class="btn btn-primary newLessonButtonReview ${nlrData.nextLesson ? 'd-none' : ''}" data-student-lesson-review-id="${studentLessonReview ? studentLessonReview.id : null}" data-group-id="${groupId}" data-lesson-id="${lesson.id}" data-last-page-finished-review="${nlrData.lastPage}" data-last-chapter-finished-review="${nlrData.lastChapter}">New Lesson</button>
+                        <button class="btn btn-primary newLessonButtonReview ${nlrData.nextLesson ? 'd-none' : ''}" data-student-lesson-review-id="${studentLessonReview ? studentLessonReview.id : null}" data-group-id="${groupId}" data-lesson-id="${lesson.id}" data-last-page-finished-review="${nlrData.lastPage}" data-last-chapter-finished-review="${nlrData.lastChapter}">${words.add_a_lesson}</button>
 
                         <button class="btn btn-info finishNewLessonButtonReview ${nlrData.nextLesson ? '' : 'd-none'}" data-syllabi-review-id=${nlrData.id}>
-                            Finish New Lesson
+                            ${words.finished}
                             <i class="fa-solid fa-square-check"></i>
                         </button>
                     </div>
