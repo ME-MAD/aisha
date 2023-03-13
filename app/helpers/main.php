@@ -106,24 +106,25 @@ if (!function_exists('getPermissionTables')) {
     function getPermissionTables()
     {
         return [
-            'exam' => "Exam",
-            'experience' => "Experience",
-            'group' => "Group",
-            'groupDay' => "Group Day",
-            'groupStudent' => "Group Student",
-            'groupSubject' => "Group Subject",
-            'groupType' => "Group Type",
-            'lesson' => "Lesson",
-            'payment' => "Payment",
-            'role' => "Role",
-            'student' => "Student",
-            'studentLesson' => "Student Lesson",
-            'studentLessonReview' => "Student Lesson Review",
-            'subject' => "Subject",
-            'syllabus' => "Syllabus",
-            'syllabusReview' => "Syllabus Review",
-            'teacher' => "Teacher",
-            'user' => "User",
+            // 'exam' => trans('main.exam'),
+            'experience' => trans('main.experience'),
+            'group' => trans('main.group'),
+            'groupDay' => trans('group.groups_days'),
+            'groupStudent' => trans('group.group_students'),
+            'groupSubject' => trans('group.groups_subject'),
+            'groupType' => trans('group.group_type'),
+            'lesson' => trans('main.lessons'),
+            'payment' => trans('main.payment'),
+            'role' => trans('main.role'),
+            'student' => trans('main.student'),
+            'studentLesson' => trans('student.student_lessons'),
+            'studentLessonReview' => trans('student.student_lessons_review'),
+            'subject' => trans('main.subject'),
+            'syllabus' => trans('main.syllabus'),
+            'syllabusReview' => trans('student.syllabus_review'),
+            'teacher' => trans('main.teacher'),
+            'user' => trans('main.users'),
+            'note' => trans('main.note')
         ];
     }
 }

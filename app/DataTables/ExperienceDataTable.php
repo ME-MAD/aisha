@@ -3,34 +3,20 @@
 namespace App\DataTables;
 
 use App\Models\Experience;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
-use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class ExperienceDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param QueryBuilder $query Results from query() method.
-     * @return \Yajra\DataTables\EloquentDataTable
-     */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-
             ->addColumn('edit', function ($query) {
                 return view('pages.experience.datatable.edit', compact('query'));
             })
-            // ->editColumn('from', function ($query) {
-            //     return  $query->from->format('Y-m-d');
-            // })
-
             ->addColumn('delete', 'pages.experience.datatable.delete')
             ->editColumn('teacher.name', function ($q) {
                 return $q->teacher->name ?? "";
@@ -39,16 +25,8 @@ class ExperienceDataTable extends DataTable
             ->setRowId('id');
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\Experience $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function query(): QueryBuilder
     {
-        // return Teacher::Teachers()->with('role:id,name')->withCount(['groups', 'groupStudents']);
-        
         return Experience::Experiences()->with([
             'teacher' => function ($q) {
                 return $q->select([
@@ -59,11 +37,6 @@ class ExperienceDataTable extends DataTable
         ]);
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html(): HtmlBuilder
     {
         return $this->builder()
@@ -74,7 +47,24 @@ class ExperienceDataTable extends DataTable
                 'dom'          => 'Blrtip',
                 'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                 'buttons'      => [
-                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
+                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', trans('main.print')],
+                ],
+                "language" => [
+                    'lengthMenu' => "<div class='lengthMenuSelect' data-lang='". LaravelLocalization::getCurrentLocale() ."'>" . trans('main.display') .
+                        '<select class="form-control">' .
+                            '<option value="10">10</option>' .
+                            '<option value="20">20</option>' .
+                            '<option value="30">30</option>' .
+                            '<option value="40">40</option>' .
+                            '<option value="50">50</option>' .
+                            '<option value="-1">All</option>' .
+                        '</select> '
+                    . trans('main.records') . "</div>",
+                    "info" =>  trans('main.showing') . " _START_ " . trans('main.to') . " _END_ " . trans('main.of') . " _TOTAL_ " . trans('main.records'),
+                    "paginate" => [
+                        "next" => trans('main.next'),
+                        "previous" => trans('main.previous'),
+                    ]
                 ],
                 'order' => [
                     0, 'desc'
@@ -113,11 +103,6 @@ class ExperienceDataTable extends DataTable
             ]);
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
     protected function getColumns(): array
     {
         $columns =  [
@@ -189,11 +174,6 @@ class ExperienceDataTable extends DataTable
 
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
     protected function filename(): string
     {
         return 'Experience_' . date('YmdHis');

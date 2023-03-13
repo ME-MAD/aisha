@@ -3,7 +3,7 @@
 return [
 
     'create_payments' => 'تسجيل الدفع',
-    'total_payments' => 'إحصائيات بالمدفوعات الكلية',
+    'total_payments' => 'إجمالي المدفوعات',
     'payment_statement' => 'كشف المدفوعات',
     'payment_registration' => 'تسجيل المدفوعات',
     // '' => '',

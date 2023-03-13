@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\DataTables\TeacherDataTable;
 use App\Http\Requests\Teacher\StoreTeacherRequest;
 use App\Http\Requests\Teacher\UpdateTeacherRequest;
-use App\Http\Traits\AuthTrait;
 use App\Models\Role;
 use App\Models\Teacher;
 use App\Services\Experience\ExperienceService;
@@ -105,6 +104,32 @@ class TeacherController extends Controller
             'experiences' => $this->teacherService->getTeacherExperiences($teacher),
 
             'groups' => $this->teacherService->getAllTeacherGroups($teacher),
+            'words' => [
+                'group' => trans('main.group'),
+                'student_count' => trans('student.student_count'),
+                'id' => trans('main.id'),
+                'name' => trans('main.name'),
+                'phone' => trans('main.phone'),
+                'add_lesson' => trans('lesson.add_a_lesson'),
+                'show_lessons' => trans('lesson.show_lessons'),
+                'lesson_starts_from' => trans('lesson.lesson_starts_from'),
+                'lesson_ends_to' => trans('lesson.lesson_ends_to'),
+                'chapters_count' => trans('lesson.chapters_count'),
+                'subject' => trans('main.subject'),
+                'user' => trans('main.user'),
+                'from_chapter' => trans('lesson.from_chapter'),
+                'to_chapter' => trans('lesson.to_chapter'),
+                'from_page' => trans('lesson.from_page'),
+                'to_page' => trans('lesson.to_page'),
+                'choose_lesson' => trans('lesson.choose_lesson'),
+                'choose_subject' => trans('subject.choose_subject'),
+                'choose_rate' => trans('lesson.choose_rate'),
+                'submit' => trans('main.submit'),
+                'excellent' => trans('main.excellent'),
+                'very_good' => trans('main.very_good'),
+                'good' => trans('main.good'),
+                'fail' => trans('main.fail'),
+            ]
         ]);
     }
 

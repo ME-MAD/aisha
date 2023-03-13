@@ -3,19 +3,14 @@
 namespace App\DataTables;
 
 use App\Models\GroupType;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class GroupTypeDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param QueryBuilder $query Results from query() method.
-     * @return \Yajra\DataTables\EloquentDataTable
-     */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
@@ -32,22 +27,11 @@ class GroupTypeDataTable extends DataTable
             ->setRowId('id');
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param \App\Models\GroupType $model
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     public function query(GroupType $model): QueryBuilder
     {
         return $model->newQuery();
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return \Yajra\DataTables\Html\Builder
-     */
     public function html(): HtmlBuilder
     {
         return $this->builder()
@@ -58,7 +42,24 @@ class GroupTypeDataTable extends DataTable
                 'dom'          => 'Blrtip',
                 'lengthMenu'   => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                 'buttons'      => [
-                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
+                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', trans('main.print')],
+                ],
+                "language" => [
+                    'lengthMenu' => "<div class='lengthMenuSelect' data-lang='". LaravelLocalization::getCurrentLocale() ."'>" . trans('main.display') .
+                        '<select class="form-control">' .
+                            '<option value="10">10</option>' .
+                            '<option value="20">20</option>' .
+                            '<option value="30">30</option>' .
+                            '<option value="40">40</option>' .
+                            '<option value="50">50</option>' .
+                            '<option value="-1">All</option>' .
+                        '</select> '
+                    . trans('main.records') . "</div>",
+                    "info" =>  trans('main.showing') . " _START_ " . trans('main.to') . " _END_ " . trans('main.of') . " _TOTAL_ " . trans('main.records'),
+                    "paginate" => [
+                        "next" => trans('main.next'),
+                        "previous" => trans('main.previous'),
+                    ]
                 ],
                 'order' => [
                     0, 'desc'
@@ -97,11 +98,6 @@ class GroupTypeDataTable extends DataTable
             ]);
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
     protected function getColumns(): array
     {
         $columns = [
@@ -165,11 +161,6 @@ class GroupTypeDataTable extends DataTable
         return $columns;
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
     protected function filename(): string
     {
         return 'GroupType_' . date('YmdHis');

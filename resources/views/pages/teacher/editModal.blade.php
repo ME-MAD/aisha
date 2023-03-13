@@ -39,50 +39,55 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="role" class="text-capitalize font-weight-bold text-muted">
-                            {{trans('user.choose_roles')}}
-                            <i class="fa-solid fa-star-of-life required-star"></i>
-                        </label>
-                        <select class="form-control basic role_edit"
-                                name="role"
-                                id="role" data-select2-id="role_edit">
+                    <div class="row">
+                        <div class="col-6">
+                            <x-text name="qualification" 
+                                  :required="true" 
+                                  label="{{trans('main.qualification')}}" 
+                                  id="qualification" />
+                          </div>
 
-                            <option >
-                                {{trans('main.roles')}}
-                            </option>
-
-                            @foreach ($roles as $role)
-
-                                <option class="active" value="{{$role->name}}">
-                                    {{$role->name}}
+                          <div class="col-6 form-group">
+                            <label for="role" class="text-capitalize font-weight-bold text-muted">
+                                {{trans('user.choose_roles')}}
+                                <i class="fa-solid fa-star-of-life required-star"></i>
+                            </label>
+                            <select class="form-control basic role_edit"
+                                    name="role"
+                                    id="role" data-select2-id="role_edit">
+    
+                                <option >
+                                    {{trans('main.roles')}}
                                 </option>
-
-                            @endforeach
-                        </select>
-                        @error('role')
-                        <p class="text-danger">{{ $message }}</p>
-                        @enderror
+    
+                                @foreach ($roles as $role)
+    
+                                    <option class="active" value="{{$role->name}}">
+                                        {{$role->name}}
+                                    </option>
+    
+                                @endforeach
+                            </select>
+                            @error('role')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
 
+                    
+
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-6">
                             <x-date name="birthday" 
                                     :required="true" 
                                     label="{{trans('main.birthday')}}" 
                                     id="birthday" />
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                            <x-text name="phone" 
                                 :required="true" 
                                 label="{{trans('main.phone')}}"  
                                 id="phone" />
-                        </div>
-                        <div class="col-4">
-                          <x-text name="qualification" 
-                                :required="true" 
-                                label="{{trans('main.qualification')}}" 
-                                id="qualification" />
                         </div>
                     </div>
 

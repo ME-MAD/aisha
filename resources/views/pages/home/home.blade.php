@@ -4,7 +4,11 @@
     <!-- BEGIN THEME GLOBAL STYLES -->
    
 
-    <link href="{{asset('adminAssets/plugins/fullcalendar/fullcalendar.css')}}" rel="stylesheet" type="text/css" />
+    @if(LaravelLocalization::getCurrentLocale() == 'ar')
+        <link href="{{asset('adminRtl/plugins/fullcalendar/fullcalendar.css')}}" rel="stylesheet" type="text/css" />
+    @else
+        <link href="{{asset('adminAssets/plugins/fullcalendar/fullcalendar.css')}}" rel="stylesheet" type="text/css" />
+    @endif
 
     <link href="{{asset('adminAssets/plugins/fullcalendar/custom-fullcalendar.advance.css')}}" rel="stylesheet" type="text/css" />
 
@@ -130,6 +134,9 @@
     <script src="{{ asset('adminAssets/plugins/flatpickr/flatpickr.js') }}"></script>
 
     <script src="{{asset('adminAssets/plugins/fullcalendar/fullcalendar.min.js')}}"></script>
+    @if(LaravelLocalization::getCurrentLocale() == 'ar')
+        <script src="{{asset('adminAssets/plugins/fullcalendar/locale/ar.js')}}"></script>
+    @endif
 
     <script src="{{asset('adminAssets/plugins/counter/jquery.countTo.js')}}"></script>
 

@@ -20,7 +20,6 @@ return [
     'enter_student_qualification' => 'أدخل مؤهل الطالب',
     'no_roles_founded' => 'لم يتم تأسيس أي أدوار',
     'update_student' => 'تعديل بيانات الطالب',
-    'show_book' => 'إظهار الكتاب',
     'add_a_new_lesson' => 'أضف درسًا جديدًا',
     'student\'s_materials' => 'مواد الطالب',
     'from_chapter' => 'من الفصل',
@@ -29,4 +28,7 @@ return [
     'to_page' => 'إلى صفحة',
     'add_a_new_review' => 'أضف مراجعة جديدة',
     'student_name' => 'إسم الطالب',
+    'student_lessons' => 'دروس الطالب',
+    'student_lessons_review' => 'مراجعة دروس الطالب',
+    'syllabus_review' => 'مقرر المراجعة',
 ];

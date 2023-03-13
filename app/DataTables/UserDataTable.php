@@ -2,9 +2,9 @@
 
 namespace App\DataTables;
 
-use App\Models\Lesson;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
@@ -26,7 +26,6 @@ class UserDataTable extends DataTable
             ->setRowId('id');
     }
 
-
     public function query(User $model): QueryBuilder
     {
         return $model::select([
@@ -37,11 +36,6 @@ class UserDataTable extends DataTable
         ])->with('role:id,name')->withCount(['rolePermissions']);
     }
     
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return HtmlBuilder
-     */
     public function html(): HtmlBuilder
     {
         return $this->builder()
@@ -52,7 +46,24 @@ class UserDataTable extends DataTable
                 'dom' => 'Blrtip',
                 'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                 'buttons' => [
-                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
+                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => trans('main.print')],
+                ],
+                "language" => [
+                    'lengthMenu' => "<div class='lengthMenuSelect' data-lang='". LaravelLocalization::getCurrentLocale() ."'>" . trans('main.display') .
+                        '<select class="form-control">' .
+                            '<option value="10">10</option>' .
+                            '<option value="20">20</option>' .
+                            '<option value="30">30</option>' .
+                            '<option value="40">40</option>' .
+                            '<option value="50">50</option>' .
+                            '<option value="-1">All</option>' .
+                        '</select> '
+                    . trans('main.records') . "</div>",
+                    "info" =>  trans('main.showing') . " _START_ " . trans('main.to') . " _END_ " . trans('main.of') . " _TOTAL_ " . trans('main.records'),
+                    "paginate" => [
+                        "next" => trans('main.next'),
+                        "previous" => trans('main.previous'),
+                    ]
                 ],
                 'order' => [
                     0, 'desc'
@@ -91,11 +102,6 @@ class UserDataTable extends DataTable
             ]);
     }
 
-    /**
-     * Get columns.
-     *
-     * @return array
-     */
     protected function getColumns(): array
     {
         $columns =  [
@@ -146,7 +152,6 @@ class UserDataTable extends DataTable
             ],
         ];
 
-
         if (userCan('update-user')) {
             $columns [] =
             [
@@ -178,11 +183,6 @@ class UserDataTable extends DataTable
         return $columns;
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
     protected function filename(): string
     {
         return 'Lessons_' . date('YmdHis');

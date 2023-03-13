@@ -3,7 +3,7 @@ import {renderTeacherExperiences} from "./partials/experience.js"
 import {renderTeacherGroups} from "./partials/group.js"
 
     let href = $('#showTeacherAjaxContainer').data('href')
-    $.ajax({
+    $.ajax({ // admin.teacher.getTeacherShowDataAjax', $teacher->id
         url: href,
         success: function (response) {
 
@@ -11,7 +11,7 @@ import {renderTeacherGroups} from "./partials/group.js"
 
             renderTeacherExperiences(response.experiences)
 
-            renderTeacherGroups(response.groups)
+            renderTeacherGroups(response.groups , response.words)
 
             invoiceListClickEvents()
 

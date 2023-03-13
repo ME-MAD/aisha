@@ -4,10 +4,10 @@
             <div class="modal-content">
                   <div class="modal-header card-header create__form__header">
                         <h5 class="modal-title font-weight-bold text-capitalize text-light"
-                              id="addStudentLessonModalTitle">{{ __('teacher.create teacher') }}</h5>
+                              id="addStudentLessonModalTitle">{{ trans('lesson.add_a_lesson') }}</h5>
                         <a class="icon text-white showBookBtn" id="showBookBtn">
                               <i class="fa-solid fa-book-open fa-2xl"></i>
-                              <h6 class="text-capitalize text-white d-inline">إظهار الكتاب</h6>
+                              <h6 class="text-capitalize text-white d-inline">{{ trans('subject.show_book') }}</h6>
                         </a>
                   </div>
                   <div class="modal-body">
@@ -21,15 +21,15 @@
                               <div class="row mb-5">
                                     <div class="col-6">
                                           <p>
-                                                الدرس يبدا من صفحة
+                                                {{ trans('lesson.lesson_starts_from') }}
                                                 <span class="badge bg-primary" id="lesson_from_page">0</span>
-                                                وينتهي عند
+                                                {{ trans('lesson.lesson_ends_to') }}
                                                 <span class="badge bg-primary" id="lesson_to_page">0</span>
                                           </p>
                                     </div>
                                     <div class="col-6">
                                           <p>
-                                                عدد أجزاء الدرس
+                                                {{ trans('lesson.chapters_count') }}
                                                 <span class="badge bg-primary" id="lesson_chapters_count">0</span>
                                           </p>
                                     </div>
@@ -37,12 +37,12 @@
 
                               <div class="form-group">
                                     <label for="subject_id" class="text-capitalize font-weight-bold text-muted">
-                                          {{ trans('user.subject_id') }}
+                                          {{ trans('main.subject') }}
                                           <i class="fa-solid fa-star-of-life required-star"></i>
                                     </label>
                                     <select class="form-control basic subject_create" name="subject_id" id="subject_id"
                                           data-select2-id="subject_create">
-                                          <option value="">{{ trans('user.lessons') }}</option>
+                                          <option value="">{{ trans('subject.choose_subject') }}</option>
 
                                     </select>
                                     @error('lesson')
@@ -52,12 +52,12 @@
 
                               <div class="form-group">
                                     <label for="lesson_id" class="text-capitalize font-weight-bold text-muted">
-                                          {{ trans('user.lesson_id') }}
+                                          {{ trans('main.lesson') }}
                                           <i class="fa-solid fa-star-of-life required-star"></i>
                                     </label>
                                     <select class="form-control basic lesson_create" name="lesson_id" id="lesson_id"
                                           data-select2-id="lesson_create">
-                                          <option value="">{{ trans('user.lessons') }}</option>
+                                          <option value="">{{ trans('lesson.choose_lesson') }}</option>
 
                                     </select>
                                     @error('lesson')
@@ -69,23 +69,23 @@
 
                               <div class="row">
                                     <div class="col-6">
-                                          <x-number name="from_chapter" :required="true" placeholder="أدخل أسم المعلم"
-                                                label="from chapter" :value="old('from_chapter')" />
+                                          <x-number name="from_chapter" :required="true" placeholder="{{trans('lesson.from_chapter')}}"
+                                                label="{{trans('lesson.from_chapter')}}" :value="old('from_chapter')" />
                                     </div>
                                     <div class="col-6">
-                                          <x-number name="to_chapter" :required="true" placeholder="أدخل أسم المعلم"
-                                                label="to chapter" :value="old('to_chapter')" />
+                                          <x-number name="to_chapter" :required="true" placeholder="{{trans('lesson.to_chapter')}}"
+                                                label="{{trans('lesson.to_chapter')}}" :value="old('to_chapter')" />
                                     </div>
                               </div>
 
                               <div class="row">
                                     <div class="col-6">
-                                          <x-number name="from_page" :required="true" placeholder="أدخل أسم المعلم"
-                                                label="from page" :value="old('from_page')" />
+                                          <x-number name="from_page" :required="true" placeholder="{{trans('lesson.from_page')}}"
+                                                label="{{trans('lesson.from_page')}}" :value="old('from_page')" />
                                     </div>
                                     <div class="col-6">
-                                          <x-number name="to_page" :required="true" placeholder="أدخل أسم المعلم"
-                                                label="to page" :value="old('to_page')" />
+                                          <x-number name="to_page" :required="true" placeholder="{{trans('lesson.to_page')}}"
+                                                label="{{trans('lesson.to_page')}}" :value="old('to_page')" />
                                     </div>
                               </div>
 
@@ -93,9 +93,9 @@
 
                               <div class="modal-footer">
                                     <button type="submit"
-                                          class="btn btn-outline-dark">{{ __('teacher.Save') }}</button>
+                                          class="btn btn-outline-dark">{{ __('main.save') }}</button>
                                     <button class="btn btn-outline-danger" data-dismiss="modal"><i
-                                                class="flaticon-cancel-12"></i>{{ __('teacher.Discard') }}</button>
+                                                class="flaticon-cancel-12"></i>{{ __('main.discard') }}</button>
                               </div>
 
                         </form>

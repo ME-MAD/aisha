@@ -31,7 +31,7 @@ export function getStudentsTableHtml(group) {
     return studentsGroupStudentsHtml;
 }
 
-export function handleStudentLessonModal(groups) {
+export function handleStudentLessonModal(groups, words) {
     $('.showStudentLessonButton').click(function () {
 
         let studentId = $(this).data('student-id')
@@ -51,7 +51,7 @@ export function handleStudentLessonModal(groups) {
                     $('#studentLessonTableBody').html('')
 
                     response.syllabus.forEach(syllabi => {
-                        appendSyllabi(syllabi)
+                        appendSyllabi(syllabi, words)
                     });
 
                     $('#studentLessonModal').modal('show')
@@ -75,16 +75,16 @@ export function handleStudentLessonModal(groups) {
 
 
 
-export function handleAddStudentLessonModal(groups) {
+export function handleAddStudentLessonModal(groups, words) {
     $('.addStudentLessonButton').click(function () {
 
         let studentId = $(this).data('student-id')
         let group = getStudentGroupFromGroups(groups, studentId);
 
-        emptyNewLessonModal()
+        emptyNewLessonModal(words)
         renderSubjectsInSelect(group)
-        handleSubjectSelectChange(group)
-        handleLessonSelectChange(group)
+        handleSubjectSelectChange(group, words)
+        handleLessonSelectChange(group , words)
 
         $('.subject_create').select2({
             dropdownParent: $('#addStudentLessonModal'),
@@ -166,7 +166,7 @@ function renderSubjectsInSelect(group) {
     });
 }
 
-function handleLessonSelectChange(group) {
+function handleLessonSelectChange(group, words) {
     $('#addStudentLessonModal #lesson_id').change(function () {
         let subject = getSubjectFromGroup(group, $('#addStudentLessonModal #subject_id').val())
         let lesson = getLessonFromSubject(subject, $(this).val())
@@ -179,7 +179,7 @@ function handleLessonSelectChange(group) {
         }
         else {
             $('#addStudentLessonModal #lesson_id').html(
-                `<option val=''>اختر الدرس</option>`
+                `<option val=''>${words.choose_lesson}</option>`
             )
             $('#addStudentLessonModal #lesson_from_page').html(0)
             $('#addStudentLessonModal #lesson_to_page').html(0)
@@ -189,7 +189,7 @@ function handleLessonSelectChange(group) {
     })
 }
 
-function handleSubjectSelectChange(group) {
+function handleSubjectSelectChange(group, words) {
     $('#addStudentLessonModal #subject_id').change(function () {
         let subject = getSubjectFromGroup(group, $(this).val())
 
@@ -208,14 +208,14 @@ function handleSubjectSelectChange(group) {
         else {
             $('#addStudentLessonModal').data('book', '');
             $('#addStudentLessonModal #lesson_id').html(
-                `<option val=''>اختر الدرس</option>`
+                `<option val=''>${words.choose_lesson}</option>`
             )
         }
 
     })
 }
 
-export function addNewLessonHandler() {
+export function addNewLessonHandler(words) {
     $('#addStudentLessonModalForm').submit(function (e) {
         e.preventDefault();
         let from_chapter = $('#addStudentLessonModalForm #from_chapter').val()
@@ -247,7 +247,7 @@ export function addNewLessonHandler() {
                         'success',
                     )
 
-                    emptyNewLessonModal()
+                    emptyNewLessonModal(words)
                 }
                 else if (response.status == 400) {
                     Swal.fire(
@@ -256,7 +256,7 @@ export function addNewLessonHandler() {
                         'warning',
                     )
 
-                    emptyNewLessonModal()
+                    emptyNewLessonModal(words)
                 }
             },
             error: function (res) {
@@ -327,16 +327,16 @@ function handleFinishNewLesson() {
     })
 }
 
-function emptyNewLessonModal() {
+function emptyNewLessonModal(words) {
     $('#addStudentLessonModal #from_chapter').val('')
     $('#addStudentLessonModal #to_chapter').val('')
     $('#addStudentLessonModal #from_page').val('')
     $('#addStudentLessonModal #to_page').val('')
     $('#addStudentLessonModal #lesson_id').html(
-        `<option val=''>اختر الدرس</option>`
+        `<option val=''>${words.choose_lesson}</option>`
     )
     $('#addStudentLessonModal #subject_id').html(
-        `<option val=''>اختر المادة</option>`
+        `<option val=''>${words.choose_subject}</option>`
     )
 
     $('#addStudentLessonModal #lesson_from_page').html(0)
@@ -344,7 +344,7 @@ function emptyNewLessonModal() {
     $('#addStudentLessonModal #lesson_chapters_count').html(0)
 }
 
-function appendSyllabi(syllabi) {
+function appendSyllabi(syllabi, words) {
     $('#studentLessonTableBody').append(`
         <tr id="syllabi-tr-${syllabi.id}">
             <td>${syllabi.student_lesson.lesson.title}</td>
@@ -354,15 +354,15 @@ function appendSyllabi(syllabi) {
             <td>${syllabi.to_page}</td>
             <td style="width:200px">
                 <select class="form-control" name="rate" id="rate">
-                    <option value="">اختر التقييم</option>
-                    <option value="excellent"> excellent </option>
-                    <option value="very good"> very good </option>
-                    <option value="good"> good </option>
-                    <option value="fail"> fail </option>
+                    <option value="">${words.choose_rate}</option>
+                    <option value="excellent"> ${words.excellent} </option>
+                    <option value="very good"> ${words.very_good} </option>
+                    <option value="good"> ${words.good} </option>
+                    <option value="fail"> ${words.fail} </option>
                 </select>
             </td>
             <td>
-                <button class="btn btn-success finishNewLessonBtn" data-syllabi-id="${syllabi.id}">تأكيد</button>
+                <button class="btn btn-success finishNewLessonBtn" data-syllabi-id="${syllabi.id}">${words.submit}</button>
             </td>
         </tr>
     `)

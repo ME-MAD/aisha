@@ -47,49 +47,51 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="role" class="text-capitalize font-weight-bold text-muted">
-                            {{trans('user.choose_roles')}}
-                            <i class="fa-solid fa-star-of-life required-star"></i>
-                        </label>
-                        <select class="form-control basic role_create"
-                                name="role"
-                                id="role" data-select2-id="role_create">
-                            <option >
-                                {{trans('main.roles')}}
-                            </option>
-
-                            @foreach ($roles as $role)
-
-                                <option  class="active" value="{{$role->name}}">{{$role->name}}</option>
-
-                            @endforeach
-                        </select>
-                        @error('role')
-                        <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                    </div>
-
                     <div class="row">
-                        <div class="col-4">
-                            <x-date name="birthday" 
-                                    label="{{trans('main.birthday')}}" 
-                                    :value=" old('birthday')" />
-                                   
-                        </div>
-                        <div class="col-4">
-                            <x-text name="phone" 
-                                    :required="true" 
-                                    placeholder="{{trans('teacher.enter_the_teacher\'s_phone')}}" 
-                                    label="{{trans('main.phone')}}" 
-                                    :value="old('phone')" />
-                        </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <x-text name="qualification" 
                                     :required="true"  
                                     placeholder="{{trans('teacher.Enter_teacher_qualification')}}" 
                                     label="{{trans('main.qualification')}}" 
                                     :value="old('qualification')" />
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="role" class="text-capitalize font-weight-bold text-muted">
+                                {{trans('user.choose_roles')}}
+                                <i class="fa-solid fa-star-of-life required-star"></i>
+                            </label>
+                            <select class="form-control basic role_create"
+                                    name="role"
+                                    id="role" data-select2-id="role_create">
+                                <option >
+                                    {{trans('main.roles')}}
+                                </option>
+    
+                                @foreach ($roles as $role)
+    
+                                    <option  class="active" value="{{$role->name}}">{{$role->name}}</option>
+    
+                                @endforeach
+                            </select>
+                            @error('role')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <x-date name="birthday" 
+                                    label="{{trans('main.birthday')}}" 
+                                    :value=" old('birthday')" />
+                                   
+                        </div>
+                        <div class="col-6">
+                            <x-text name="phone" 
+                                    :required="true" 
+                                    placeholder="{{trans('teacher.enter_the_teacher\'s_phone')}}" 
+                                    label="{{trans('main.phone')}}" 
+                                    :value="old('phone')" />
                         </div>
                     </div>
 

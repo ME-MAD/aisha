@@ -3,10 +3,11 @@
 namespace App\DataTables;
 
 use App\Models\Group;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class GroupDataTable extends DataTable
 {
@@ -28,9 +29,6 @@ class GroupDataTable extends DataTable
             ->editColumn('countStudent', function ($q) {
                 return ($q->group_students_count);
             })
-
-            // ->rawColumns(['edit', 'delete'])
-
             ->editColumn('show', function ($q) {
                 return "<a class='text-info' href=" . route('admin.group.show', $q->id) . " title='Enter Page show group' ><i class='fa-solid fa-eye'></i></a>";
             })
@@ -62,7 +60,24 @@ class GroupDataTable extends DataTable
                 'dom' => 'Blrtip',
                 'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                 'buttons' => [
-                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
+                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', trans('main.print')],
+                ],
+                "language" => [
+                    'lengthMenu' => "<div class='lengthMenuSelect' data-lang='". LaravelLocalization::getCurrentLocale() ."'>" . trans('main.display') .
+                        '<select class="form-control">' .
+                            '<option value="10">10</option>' .
+                            '<option value="20">20</option>' .
+                            '<option value="30">30</option>' .
+                            '<option value="40">40</option>' .
+                            '<option value="50">50</option>' .
+                            '<option value="-1">All</option>' .
+                        '</select> '
+                    . trans('main.records') . "</div>",
+                    "info" =>  trans('main.showing') . " _START_ " . trans('main.to') . " _END_ " . trans('main.of') . " _TOTAL_ " . trans('main.records'),
+                    "paginate" => [
+                        "next" => trans('main.next'),
+                        "previous" => trans('main.previous'),
+                    ]
                 ],
                 'order' => [
                     0, 'desc'
@@ -192,11 +207,6 @@ class GroupDataTable extends DataTable
         return $columns;
     }
 
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
     protected function filename(): string
     {
         return 'Group_' . date('YmdHis');

@@ -11,8 +11,8 @@ return [
     'book_cover_photo' => 'صورة غلاف الكتاب',
     'download_the_book' => 'تحميل الكتاب',
     'edit_material_study' => 'تعديل المادة',
-    
-
+    'choose_subject' => 'اختر المادة',
+    'show_book' => 'إظهار الكتاب',
 
 
 ];

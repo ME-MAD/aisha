@@ -3,7 +3,7 @@ import {init} from 'echarts';
 export function groupAgesChartRun()
 {
 
-    $.get($('#groupAgesChart').data('href'), function (response) {
+    $.get($('#groupAgesChart').data('href'), function (response) { // admin.group.groupAgesChartData
 
         const data = response.data;
         

@@ -3,10 +3,11 @@
 namespace App\DataTables;
 
 use App\Models\GroupDay;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class GroupDayDataTable extends DataTable
 {
@@ -39,20 +40,6 @@ class GroupDayDataTable extends DataTable
                 ]);
             },
         ]);
-        // return $model->select([
-        //     'group_days.id',
-        //     'group_id',
-        //     'day',
-        //     'from_time',
-        //     'to_time'
-        // ])->with([
-        //     'group' => function ($q) {
-        //         return $q->select([
-        //             'groups.id',
-        //             'groups.name',
-        //         ]);
-        //     },
-        // ]);
     }
 
     public function html(): HtmlBuilder
@@ -65,7 +52,24 @@ class GroupDayDataTable extends DataTable
                 'dom' => 'Blrtip',
                 'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                 'buttons' => [
-                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
+                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', trans('main.print')],
+                ],
+                "language" => [
+                    'lengthMenu' => "<div class='lengthMenuSelect' data-lang='". LaravelLocalization::getCurrentLocale() ."'>" . trans('main.display') .
+                        '<select class="form-control">' .
+                            '<option value="10">10</option>' .
+                            '<option value="20">20</option>' .
+                            '<option value="30">30</option>' .
+                            '<option value="40">40</option>' .
+                            '<option value="50">50</option>' .
+                            '<option value="-1">All</option>' .
+                        '</select> '
+                    . trans('main.records') . "</div>",
+                    "info" =>  trans('main.showing') . " _START_ " . trans('main.to') . " _END_ " . trans('main.of') . " _TOTAL_ " . trans('main.records'),
+                    "paginate" => [
+                        "next" => trans('main.next'),
+                        "previous" => trans('main.previous'),
+                    ]
                 ],
                 'order' => [
                     0, 'desc'
@@ -160,7 +164,6 @@ class GroupDayDataTable extends DataTable
 
         return $columns;
     }
-
 
     protected function filename(): string
     {

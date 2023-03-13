@@ -69,7 +69,7 @@
 
       <section class="about">
             <div class="left">
-                  <img src="{{ asset('images/site/image4.png') }}" alt="">
+                  <img src="{{ asset('images/site/about-img.png') }}" alt="">
                   <div class="legend">
                         <p>
                               <span class="number">

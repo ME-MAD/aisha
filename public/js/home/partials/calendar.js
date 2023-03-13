@@ -84,6 +84,7 @@ export function calendarRun()
         // 2023-01-01T12:37:00
         // 2023-02-02T14:30:00
         var calendar = $('#calendar').fullCalendar({
+            lang: 'ar',
             header: {
                 left: 'prev,next today',
                 center: 'title',

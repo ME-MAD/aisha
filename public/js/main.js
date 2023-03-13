@@ -8,7 +8,9 @@ $(document).ready(function () {
     });
 
     refreshAllTableLinks()
-
+    setTimeout(() => {
+        fixLengthMenuDataTable()
+    }, 100);
     
 })
 
@@ -61,3 +63,17 @@ function areYouSure(formId,message = "")
     })
 }
 
+function fixLengthMenuDataTable()
+{
+    let item = $('.lengthMenuSelect').parent().parent()
+
+    item.css('display', 'flex')
+    if($('.lengthMenuSelect').data('lang') == 'ar')
+    {
+        item.css('justify-content', 'start')
+    }
+    else
+    {
+        item.css('justify-content', 'end')
+    }
+}

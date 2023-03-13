@@ -90,10 +90,20 @@ class PaymentController extends Controller
             ->paid()
             ->getForChart();
 
+        $months = array_keys($data);
+
+        foreach($months as $key => $month_en)
+        {
+            $months[$key] = __("main.$month_en");
+        }
+
         return response()->json([
-            'months' => array_keys($data),
+            'months' => $months,
             'values' => array_values($data),
-            'totalPayments' => array_sum(array_values($data)),
+            'words' => [
+                'totalPayments' => __('payment.total_payments') . " " . array_sum(array_values($data)),
+                'payments' => __('main.payment')
+            ]
         ]);
     }
 }

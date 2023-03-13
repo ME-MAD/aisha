@@ -11,6 +11,8 @@ return [
     'book_cover_photo' => 'Book Cover Photo',
     'download_the_book' => 'Download The Book',
     'edit_material_study' => 'Edit Material Study',
+    'choose_subject' => 'Choose Subject',
+    'show_book' => 'Show Book',
 
 
 ];

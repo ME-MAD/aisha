@@ -3,20 +3,15 @@
 namespace App\DataTables;
 
 use App\Models\Teacher;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
 class TeacherDataTable extends DataTable
 {
-    /**
-     * Build DataTable class.
-     *
-     * @param QueryBuilder $query Results from query() method.
-     * @return EloquentDataTable
-     */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         // dd($words);
@@ -44,22 +39,11 @@ class TeacherDataTable extends DataTable
             ->setRowId('id');
     }
 
-    /**
-     * Get query source of dataTable.
-     *
-     * @param Teacher $model
-     * @return QueryBuilder
-     */
     public function query(): QueryBuilder
     {
         return Teacher::Teachers()->with('role:id,name')->withCount(['groups', 'groupStudents']);
     }
 
-    /**
-     * Optional method if you want to use html builder.
-     *
-     * @return HtmlBuilder
-     */
     public function html(): HtmlBuilder
     {
 
@@ -71,7 +55,24 @@ class TeacherDataTable extends DataTable
                 'dom' => 'Blrtip',
                 'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, 'All records']],
                 'buttons' => [
-                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => 'Print'],
+                    ['extend' => 'print', 'className' => 'btn btn-primary mr-5px', 'text' => trans('main.print')],
+                ],
+                "language" => [
+                    'lengthMenu' => "<div class='lengthMenuSelect' data-lang='". LaravelLocalization::getCurrentLocale() ."'>" . trans('main.display') .
+                        '<select class="form-control">' .
+                            '<option value="10">10</option>' .
+                            '<option value="20">20</option>' .
+                            '<option value="30">30</option>' .
+                            '<option value="40">40</option>' .
+                            '<option value="50">50</option>' .
+                            '<option value="-1">All</option>' .
+                        '</select> '
+                    . trans('main.records') . "</div>",
+                    "info" =>  trans('main.showing') . " _START_ " . trans('main.to') . " _END_ " . trans('main.of') . " _TOTAL_ " . trans('main.records'),
+                    "paginate" => [
+                        "next" => trans('main.next'),
+                        "previous" => trans('main.previous'),
+                    ]
                 ],
                 'order' => [
                     0, 'desc'
@@ -220,7 +221,6 @@ class TeacherDataTable extends DataTable
 
         return $columns;
     }
-
 
     protected function filename(): string
     {

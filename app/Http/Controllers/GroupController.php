@@ -167,7 +167,7 @@ class GroupController extends Controller
                     'value' => $groupsCountsData['groupAdultCount']
                 ],
             ],
-            'allGroupsCount' => $groupsCountsData['allGroupsCount'],
+            'allGroupsCount' => __('group.groups_count') . " " . $groupsCountsData['allGroupsCount'],
             'total_count' => trans('main.adults'),
         ]);
     }

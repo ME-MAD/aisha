@@ -5,7 +5,7 @@ export function totalPaymentsChartRun()
 
     let url = $('#totalPaymentsChart').data('href');
 
-    $.ajax({
+    $.ajax({ //admin.payment.totalPaymentsChartData
         type: 'POST',
         url: url,
         data: {
@@ -14,7 +14,6 @@ export function totalPaymentsChartRun()
         success: function (response) {
             const months = response.months;
             const values = response.values;
-            const totalPayments = response.totalPayments;
 
             var chartDom = document.getElementById('totalPaymentsChartCanvaParent');
             var myChart = init(chartDom);
@@ -22,7 +21,7 @@ export function totalPaymentsChartRun()
         
             option = {
                 title: {
-                    text: 'Total Count ' + response.totalPayments,
+                    text: response.words.totalPayments,
                     // subtext: 'Fake Data',
                     left: 'left'
                 },
@@ -42,7 +41,7 @@ export function totalPaymentsChartRun()
                 },
                 series: [
                     {
-                    name: "payments",
+                    name: response.words.payments,
                     data: values,
                     type: 'bar',
                     showBackground: true,

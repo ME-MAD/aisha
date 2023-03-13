@@ -22,12 +22,14 @@ return [
     'update_student' => 'Update Student',
     'add_a_new_lesson' => 'Add a New Lesson',
     'student\'s_materials' => 'Student\'s Materials',
-    'show_book' => 'Show Book',
     'from_chapter' => 'From Chapter',
     'to_chapter' => 'To Chapter',
     'from_page' => 'From Page',
     'to_page' => 'To Page',
     'add_a_new_review' => 'Add a New Review',
     'student_name' => 'Student Name',
+    'student_lessons' => 'Student Lessons',
+    'student_lessons_review' => 'Student Lessons Review',
+    'syllabus_review' => 'Syllabus Reivew',
 
 ];

@@ -10,21 +10,17 @@
                     <table class="table table-bordered mb-4">
                         <thead>
                             <tr>
-                                <th>Lesson</th>
-                                <th>From Chapter</th>
-                                <th>To Chapter</th>
-                                <th>From Page</th>
-                                <th>To Page</th>
-                                <th>Rate</th>
-                                <th>Finish</th>
+                                <th>{{ trans('main.lesson') }}</th>
+                                <th>{{ trans('lesson.from_chapter') }}</th>
+                                <th>{{ trans('lesson.to_chapter') }}</th>
+                                <th>{{ trans('lesson.from_page') }}</th>
+                                <th>{{ trans('lesson.to_page') }}</th>
+                                <th>{{ trans('main.rate') }}</th>
+                                <th>{{ trans('main.finished') }}</th>
                             </tr>
                         </thead>
                         <tbody id="studentLessonTableBody">
-                            <tr>
-                                <td>Shaun Park</td>
-                                <td>10/08/2021</td>
-                                <td>320</td>
-                            </tr>
+                           
                         </tbody>
                     </table>
                 </div>
