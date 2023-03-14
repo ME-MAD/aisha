@@ -14,6 +14,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentLessonController;
 use App\Http\Controllers\StudentLessonReviewController;
@@ -80,6 +81,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
         Route::put('update/{experience}', [ExperienceController::class, 'update'])->name('update');
         Route::get('delete/{experience}', [ExperienceController::class, 'delete'])->name('delete');
     });
+    
 
 
     Route::group(['prefix' => 'group', 'as' => 'group.'], function () {
@@ -257,5 +259,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
         Route::get('delete/{note}', [NoteController::class, 'delete'])->name('delete');
         Route::get('toggleFavorite/{note}', [NoteController::class, 'toggleFavorite'])->name('toggleFavorite');
         Route::post('updateNoteType/{note}', [NoteController::class, 'updateNoteType'])->name('updateNoteType');
+    });
+
+    Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
+        Route::get('', [SettingController::class, 'index'])->name('index');
+        Route::get('create', [SettingController::class, 'create'])->name('create');
+        Route::post('/store/{setting}', [SettingController::class, 'store'])->name('store');
     });
 });

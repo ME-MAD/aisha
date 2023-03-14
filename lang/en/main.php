@@ -106,8 +106,9 @@ return [
     'Wednesday' => 'Wednesday',
     'Thursday' => 'Thursday',
     'Friday' => 'Friday',
-
     'courses' => 'Courses',
     'about' => 'About',
     'pricing' => 'Pricing',
+    'value' => 'Value',
+    'logo' => 'Logo',
 ];

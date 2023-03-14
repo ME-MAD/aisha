@@ -15,8 +15,12 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
-            $table->text('value');
+            $table->text('logo');
+            $table->string('welcome_text_1');
+            $table->text('welcome_text_2');
+            $table->string('welcome_btn_1');
+            $table->string('welcome_btn_2');
+            $table->text('welcome_img');
             $table->timestamps();
         });
     }

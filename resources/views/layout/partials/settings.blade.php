@@ -52,6 +52,14 @@
                 </a>
             </li>
             @endcheck_permission
+
+            @check_permission("index-setting")
+            <li class="{{ request()->routeIs('admin.setting.index') ? 'active' : '' }}">
+                <a href="{{route('admin.setting.index')}}" class="text-capitalize font-weight-bold">
+                    {{trans('main.settings')}}
+                </a>
+            </li>
+            @endcheck_permission
         </ul>
     </li>
 @endcheck_permission_in_permissions
