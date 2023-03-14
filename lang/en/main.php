@@ -4,7 +4,7 @@ return [
     'admin' => 'Admin',
     'teacher' => 'Teacher',
     'student' => 'Student',
-    'home' => 'HOME',
+    'home' => 'Home',
     'welcome' => 'Welcome',
     'settings' => 'Settings',
     'users' => 'Users',
