@@ -1,5 +1,10 @@
 @extends('master')
 
+@section('title')
+    Roles Table
+@endsection
+
+
 @push('css')
 
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/table/datatable/datatables.css') }}">

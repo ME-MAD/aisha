@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('title')
+    Edid Subject | {{$subject->name}}
+@endsection
+
 
 @push('css')
     @if(LaravelLocalization::getCurrentLocale() == 'ar')

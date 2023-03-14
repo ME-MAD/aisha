@@ -1,5 +1,10 @@
 @extends('master')
 
+@section('title')
+    Teacher | {{$teacher->name}}
+@endsection
+
+
 @push('css')
       @if (LaravelLocalization::getCurrentLocale() == 'ar')
             <link href="{{ asset('adminRtl/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css" />

@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('title')
+    Group Days Table
+@endsection
+
 @push('css')
     @if(LaravelLocalization::getCurrentLocale() == 'ar')
 

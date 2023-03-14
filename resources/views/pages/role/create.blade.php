@@ -1,5 +1,8 @@
 @extends('master')
 
+@section('title')
+    Create Role
+@endsection
 
 @push('css')
 

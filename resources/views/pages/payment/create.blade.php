@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('title')
+    Payments Create
+@endsection
+
 @push('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('adminAssets/plugins/select2/select2.min.css') }}">
     <!--  BEGIN CUSTOM STYLE FILE  -->

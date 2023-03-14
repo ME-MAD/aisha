@@ -124,7 +124,7 @@ if (!function_exists('getPermissionTables')) {
             'syllabusReview' => trans('student.syllabus_review'),
             'teacher' => trans('main.teacher'),
             'user' => trans('main.users'),
-            'note' => trans('main.note')
+            'studentNotes' => trans('student.student_notes'),
         ];
     }
 }

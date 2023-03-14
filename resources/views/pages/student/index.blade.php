@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('title')
+    Students Table
+@endsection
+
 @push('css')
     <link rel="stylesheet"
           type="text/css"

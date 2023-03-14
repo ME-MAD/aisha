@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('title')
+    Dashboard Home
+@endsection
+
 @push('css')
     <!-- BEGIN THEME GLOBAL STYLES -->
    

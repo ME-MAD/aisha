@@ -1,5 +1,8 @@
 @extends('master')
 
+@section('title')
+    Group Subjects Table
+@endsection
 
 @push('css')
 

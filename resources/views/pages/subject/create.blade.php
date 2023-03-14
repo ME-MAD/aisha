@@ -1,6 +1,10 @@
 @php use Mcamara\LaravelLocalization\Facades\LaravelLocalization; @endphp
 @extends('master')
 
+@section('title')
+    Subjects Table
+@endsection
+
 
 @push('css')
     @if(LaravelLocalization::getCurrentLocale() == 'ar')

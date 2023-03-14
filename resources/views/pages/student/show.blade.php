@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('title')
+    Student | {{$student->name}}
+@endsection
+
 @push('css')
     <!--  BEGIN CUSTOM STYLE FILE  -->
     <link href="{{ asset('adminAssets/assets/css/users/user-profile.css') }}" rel="stylesheet" type="text/css"/>

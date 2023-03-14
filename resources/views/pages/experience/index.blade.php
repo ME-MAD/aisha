@@ -1,5 +1,8 @@
 @extends('master')
 
+@section('title')
+    Experiences Table
+@endsection
 
 @push('css')
     @if(LaravelLocalization::getCurrentLocale() == 'ar')

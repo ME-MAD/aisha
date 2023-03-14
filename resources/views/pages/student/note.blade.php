@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('title')
+    Students Note
+@endsection
+
 @push('css')
 
     @if (LaravelLocalization::getCurrentLocale() == 'ar')
@@ -69,10 +73,12 @@
                 <div class="tab-title">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-12 text-center">
+                            @check_permission('store-studentNotes')
                             <a id="btn-add-notes" data-toggle="modal"
                             data-target="#createNoteModal" class="btn btn-primary">
                                 {{trans('main.add')}}
                             </a>
+                            @endcheck_permission
                         </div>
                         <div class="col-md-12 col-sm-12 col-12 mt-5">
                             <ul class="nav nav-pills d-block" id="pills-tab3" role="tablist">
@@ -155,12 +161,21 @@
                                     </div>
                                 </div>
                                 <div class="note-action">
+
+                                    @check_permission('update-studentNotes')
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star fav-note noteFavoriteButton" data-href="{{route('admin.note.toggleFavorite',$note->id)}}"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                    @endcheck_permission
+
+                                    @check_permission('delete-studentNotes')
                                     <a href="{{route('admin.note.delete',$note->id)}}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 delete-note"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                     </a>
+                                    @endcheck_permission
+
                                 </div>
+
                                 <div class="note-footer">
+                                    @check_permission('update-studentNotes')
                                     <div class="tags-selector btn-group">
                                         <a class="nav-link dropdown-toggle d-icon label-group" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">
                                             <div class="tags">
@@ -186,6 +201,7 @@
                                             </a> 
                                         </div>
                                     </div>
+                                    @endcheck_permission
                                 </div>
                             </div>
                         </div>

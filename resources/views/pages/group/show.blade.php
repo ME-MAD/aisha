@@ -1,5 +1,10 @@
 @extends('master')
 
+@section('title')
+    Group | {{$group->name}}
+@endsection
+
+
 @push('css')
 
     <link href="{{asset('adminAssets/assets/css/tables/table-basic.css')}}" rel="stylesheet" type="text/css" />

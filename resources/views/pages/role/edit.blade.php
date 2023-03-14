@@ -1,5 +1,8 @@
 @extends('master')
 
+@section('title')
+    Edit Role {{$role->name}}
+@endsection
 
 @push('css')
     @if (LaravelLocalization::getCurrentLocale() == 'ar')

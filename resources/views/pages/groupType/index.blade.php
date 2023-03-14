@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('title')
+    Group Types Table
+@endsection
+
 @push('css')
 
     @if(LaravelLocalization::getCurrentLocale() == 'ar')
