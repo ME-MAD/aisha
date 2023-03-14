@@ -90,19 +90,12 @@ class PaymentController extends Controller
             ->paid()
             ->getForChart();
 
-        $months = array_keys($data);
-
-        foreach($months as $key => $month_en)
-        {
-            $months[$key] = __("main.$month_en");
-        }
-
         return response()->json([
-            'months' => $months,
+            'months' => getMonthsAccordingToLocalization(array_keys($data)),
             'values' => array_values($data),
             'words' => [
-                'totalPayments' => __('payment.total_payments') . " " . array_sum(array_values($data)),
-                'payments' => __('main.payment')
+                'totalPayments' => trans('payment.total_payments') . " " . array_sum(array_values($data)),
+                'payments' => trans('main.payment')
             ]
         ]);
     }

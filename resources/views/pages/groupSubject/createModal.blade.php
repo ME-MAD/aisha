@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header card-header create__form__header">
                 <h5 class="modal-titlefont-weight-bold text-capitalize text-light" id="creatGroupSubjectModal">
-                  {{trans('group.add_study_material_to_the_group')}}
+                  {{trans('subject.add_subject_to_group')}}
                 </h5>
             </div>
             <div class="modal-body">
@@ -18,17 +18,17 @@
                         @endif
                             <div class="form-group row mb-4">
                                 <label for="age_type"
-                                       class="col-xl-12 col-md-6  col-form-label text-dark text-capitalize font-weight-bold">
-                                  {{trans('group.choose_the_material_for_the_group')}}
+                                       class="col-xl-12 col-form-label text-dark text-capitalize font-weight-bold">
+                                  {{trans('subject.choose_subject')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
                                     <select class="form-control basic group_subject_create" 
                                             style="width: 100%;" 
                                             name="subject_id" 
                                             id="subject_id" data-select2-id="group_subject_create">
                                         <option value="">
-                                            {{trans('group.choose_the_material_for_the_group')}}
+                                            {{trans('subject.choose_subject')}}
                                         </option>
                                         @foreach ($subjects as $subject)
                                             <option value="{{ $subject->id }}"
@@ -48,11 +48,11 @@
                             @if (!isset($group))
                             <div class="form-group row mb-4">
                                 <label for="age_type"
-                                       class="col-xl-12 col-md-6  col-form-label text-dark text-capitalize font-weight-bold">
+                                       class="col-xl-12 col-form-label text-dark text-capitalize font-weight-bold">
                                        {{trans('group.choose_group')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
                                     <select class="form-control basic group_create" 
                                     style="width: 100%;" 
                                     name="group_id" 

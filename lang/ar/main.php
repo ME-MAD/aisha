@@ -98,4 +98,12 @@ return [
     'very_good' => 'جيد جدا',
     'good' => 'جيد',
     'fail' => 'راسب',
+    'id' => 'رقم الهوية',
+    'Saturday' => 'السبت',
+    'Sunday' => 'الأحد',
+    'Monday' => 'الإثنين',
+    'Tuesday' => 'الثلاثاء',
+    'Wednesday' => 'الأربعاء',
+    'Thursday' => 'الخميس',
+    'Friday' => 'الحمعة',
 ];

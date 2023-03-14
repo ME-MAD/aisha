@@ -2,21 +2,22 @@ import {runPackage} from "./partials/package.js"
 import {appendMainGroup} from "./partials/group.js"
 import {appendGroupStudentsHtml, handleClickOnPaidCheckbox, handleChangeMonth} from "./partials/students.js"
 
-$.ajax({
+$.ajax({ //admin.group.getAllGroupsForPayment
     url: $('.groupsContainer').data('href'),
     success: function (response) {
 
         let currentMonth = response.currentMonth; 
+        let words = response.words
 
         response.groups.forEach(group => {
 
             
 
-            appendMainGroup(group)
+            appendMainGroup(group, words)
 
 
 
-            appendGroupStudentsHtml(group, currentMonth)
+            appendGroupStudentsHtml(group, currentMonth, words)
 
 
 

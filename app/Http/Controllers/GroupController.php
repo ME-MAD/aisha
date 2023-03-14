@@ -112,15 +112,18 @@ class GroupController extends Controller
     public function getPaymentPerMonth(Group $group)
     {
 
-        $this->paymentChartService->sumOfAmountAndMonth()
+        $data = $this->paymentChartService->sumOfAmountAndMonth()
             ->fromGroup($group->id)
             ->year(date('Y'))
             ->paid()
             ->getForChart();
 
         return response()->json([
-            'months' => array_keys($this->paymentChartService->getForChart()),
-            'values' => array_values($this->paymentChartService->getForChart()),
+            'months' => getMonthsAccordingToLocalization(array_keys($data)),
+            'values' => array_values($data),
+            'words' => [
+                'payments' => trans('main.payment')
+            ]
         ]);
     }
 
@@ -148,7 +151,26 @@ class GroupController extends Controller
         return response()->json([
             'status' => 200,
             'groups' => $groups,
-            'currentMonth' => getCurrectMonthName()
+            'currentMonth' => getCurrectMonthName(),
+            'words' => [
+                'group' => trans('main.group'),
+                'id' => trans('main.id'),
+                'name' => trans('main.name'),
+                'paid' => trans('main.paid'),
+                'choose_month' => trans('group.choose_month'),
+                'January' => trans('main.January'),
+                'February' => trans('main.February'),
+                'March' => trans('main.March'),
+                'April' => trans('main.April'),
+                'May' => trans('main.May'),
+                'June' => trans('main.June'),
+                'July' => trans('main.July'),
+                'August' => trans('main.August'),
+                'September' => trans('main.September'),
+                'October' => trans('main.October'),
+                'November' => trans('main.November'),
+                'December' => trans('main.December')
+            ]
         ]);
     }
 

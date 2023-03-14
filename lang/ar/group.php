@@ -34,4 +34,5 @@ return [
     'enter_the_number_of_group_days' => 'أدخل عدد أيام المجموعة',
     'enter_the_group_price'=> 'أدخل سعر المجموعة',
     'edite_group_types' => 'تعديل بيانات نوع المجموعة',
+    'choose_month' => 'اختر الشهر',
 ];

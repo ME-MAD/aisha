@@ -18,11 +18,11 @@
                             <div class="col-12">
                         @endif
                             <div class="form-group row mb-4">
-                                <label for="day" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
+                                <label for="day" class="col-xl-12 col-form-label text-dark font-weight-bold">
                                     {{trans('group.groups_days')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
-                                <div class="col-xl-12 col-md-6  ">
+                                <div class="col-xl-12">
                                     <select class="form-control selectpicker" style="width: 100%;" name="day"
                                             id="day">
                                         <option value="Monday">
@@ -67,11 +67,11 @@
                         <div class="col-6">
                             @if (!isset($group))
                             <div class="form-group row mb-4">
-                                <label for="age_type" class="col-xl-12 col-md-6  col-form-label text-dark font-weight-bold">
+                                <label for="age_type" class="col-xl-12 col-form-label text-dark font-weight-bold">
                                    {{trans('group.choose_group')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
                                     <select class="form-control basic group_days_create" 
                                             name="group_id"
                                             id="group_id" data-select2-id="group_days_create"

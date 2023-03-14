@@ -3,7 +3,7 @@
             <div
                   class="card-header d-flex justify-content-between align-items-center card__header__for_tables_show_teacher">
                   <h3 class="text-capitalize text-white">
-                        {{ __('group.Payment') }}
+                        {{ trans('main.payment') }}
                         <span id="paymentsCount" class="badge badge-pill badge-light">{{ $groupPaymentsCount }}</span>
                   </h3>
             </div>
@@ -19,56 +19,56 @@
                                                             data-group-id="{{ $group->id }}"
                                                             data-href-payment-count="{{ route('admin.payment.getPaymentCountOfGroupByMonth') }}">
                                                             <option value="">
-                                                                  {{ __('group.choose the month') }}
+                                                                  {{ trans('group.choose_month') }}
                                                             </option>
                                                             <option value="January"
                                                                   {{ $currentMonth == 'January' ? 'selected' : '' }}>
 
-                                                                  {{ __('group.January') }}
+                                                                  {{ trans('main.January') }}
                                                             </option>
                                                             <option value="February"
                                                                   {{ $currentMonth == 'February' ? 'selected' : '' }}>
-                                                                  {{ __('group.February') }}
+                                                                  {{ trans('main.February') }}
                                                             </option>
                                                             <option value="March"
                                                                   {{ $currentMonth == 'March' ? 'selected' : '' }}>
-                                                                  {{ __('group.March') }}
+                                                                  {{ trans('main.March') }}
                                                             </option>
                                                             <option value="April"
                                                                   {{ $currentMonth == 'April' ? 'selected' : '' }}>
-                                                                  {{ __('group.April') }}
+                                                                  {{ trans('main.April') }}
                                                             </option>
                                                             <option value="May"
                                                                   {{ $currentMonth == 'May' ? 'selected' : '' }}>
-                                                                  {{ __('group.May') }}
+                                                                  {{ trans('main.May') }}
                                                             </option>
                                                             <option value="June"
                                                                   {{ $currentMonth == 'June' ? 'selected' : '' }}>
-                                                                  {{ __('group.June') }}
+                                                                  {{ trans('main.June') }}
                                                             </option>
                                                             <option value="July"
                                                                   {{ $currentMonth == 'July' ? 'selected' : '' }}>
-                                                                  {{ __('group.July') }}
+                                                                  {{ trans('main.July') }}
                                                             </option>
                                                             <option value="August"
                                                                   {{ $currentMonth == 'August' ? 'selected' : '' }}>
-                                                                  {{ __('group.August') }}
+                                                                  {{ trans('main.August') }}
                                                             </option>
                                                             <option value="September"
                                                                   {{ $currentMonth == 'September' ? 'selected' : '' }}>
-                                                                  {{ __('group.September') }}
+                                                                  {{ trans('main.September') }}
                                                             </option>
                                                             <option value="October"
                                                                   {{ $currentMonth == 'October' ? 'selected' : '' }}>
-                                                                  {{ __('group.October') }}
+                                                                  {{ trans('main.October') }}
                                                             </option>
                                                             <option value="November"
                                                                   {{ $currentMonth == 'November' ? 'selected' : '' }}>
-                                                                  {{ __('group.November') }}
+                                                                  {{ trans('main.November') }}
                                                             </option>
                                                             <option value="December"
                                                                   {{ $currentMonth == 'December' ? 'selected' : '' }}>
-                                                                  {{ __('group.December') }}
+                                                                  {{ trans('main.December') }}
                                                             </option>
                                                       </select>
                                                 </div>
@@ -78,11 +78,14 @@
                                                             <thead>
                                                                   <tr>
                                                                         <th class="text-secondary">
-                                                                              {{ __('group.S.No') }}</th>
+                                                                              {{ trans('main.id') }}      
+                                                                        </th>
                                                                         <th class="text-secondary">
-                                                                              {{ __('group.Name') }}</th>
+                                                                              {{ trans('main.name') }}
+                                                                        </th>
                                                                         <th class="text-secondary">
-                                                                              {{ __('group.Paid') }}</th>
+                                                                              {{ trans('main.paid') }}
+                                                                        </th>
                                                                   </tr>
                                                             </thead>
                                                             <tbody>

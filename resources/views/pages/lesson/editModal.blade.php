@@ -15,14 +15,14 @@
                         <div class="col-6">
                             <div class="form-group row mb-4">
                                 <label for="age_type"
-                                       class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
-                                       {{trans('lesson.choose_the_material')}}
+                                       class="col-xl-12 col-form-label text-dark font-weight-bold text-capitalize">
+                                       {{trans('subject.choose_subject')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                             </label>
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
                                     <select class="form-control basic subject_edit" data-select2-id="subject_edit" style="width: 100%;" name="subject_id" id="subject_id">
                                         <option value="">
-                                            {{trans('lesson.choose_the_material')}}
+                                            {{trans('subject.choose_subject')}}
                                         </option>
                                         @foreach ($subjects as $subject)
                                             <option value="{{ $subject->id }}">
@@ -42,14 +42,14 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="form-group row mb-4">
                                 <label for="name"
-                                    class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
-                                    {{trans('lesson.the_beginning_of_the_page')}}
+                                    class="col-xl-12 col-form-label text-dark font-weight-bold text-capitalize">
+                                    {{trans('lesson.start_page')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
                                     <input type="number" class="form-control" placeholder="" name="from_page" id="from_page"
                                         min="0" max="">
                                     @error('from_page')
@@ -58,14 +58,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="form-group row mb-4">
                                 <label for="name"
-                                    class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
-                                    {{trans('lesson.end_of_page')}}
+                                    class="col-xl-12 col-form-label text-dark font-weight-bold text-capitalize">
+                                    {{trans('lesson.end_page')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
                                     <input type="number" class="form-control" placeholder="" name="to_page" id="to_page"
                                         min="0" max="">
                                     @error('to_page')
@@ -74,14 +74,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
                             <div class="form-group row mb-4">
                                 <label for="name"
-                                    class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
-                                    {{trans('lesson.the_number_of_pages_of_the_lesson')}}
+                                    class="col-xl-12 col-form-label text-dark font-weight-bold text-capitalize">
+                                    {{trans('lesson.chapters_count')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                             </label>
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
                                     <input type="number" class="form-control" placeholder="" name="chapters_count"
                                         id="chapters_count" min="0" max="">
                                     @error('chapters_count')

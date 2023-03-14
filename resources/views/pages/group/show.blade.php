@@ -59,14 +59,16 @@
                         <a href="{{route('admin.home')}}"
                            class="d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-house mx-2 fa-2x"></i>
-                            <span class="font-weight-bold mt-1">{{__('global.home')}}</span>
+                            <span class="font-weight-bold mt-1">{{trans('main.home')}}</span>
                         </a>
                     </li>
                     <li class="">
                         <a href="{{route('admin.group.index')}}"
                            class="d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-users-rays fa-2x mx-2"></i>
-                            <span class="font-weight-bold ">المجموعات</span>
+                            <span class="font-weight-bold ">
+                                {{ trans('main.groups') }}
+                            </span>
                         </a>
                     </li>
                     <li class="active">

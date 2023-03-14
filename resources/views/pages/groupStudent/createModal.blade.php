@@ -18,11 +18,11 @@
                         @endif
                             <div class="form-group row mb-4">
                                 <label for="age_type"
-                                       class="col-xl-12 col-md-6  col-form-label text-dark text-capitalize font-weight-bold">
+                                       class="col-xl-12 col-form-label text-dark text-capitalize font-weight-bold">
                                     {{trans('student.choose_student')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
                                     <select class="form-control basic student_create" 
                                             style="width: 100%;" 
                                             name="student_id"  data-href="{{ route('admin.group_students.getStudentGroups') }}"
@@ -47,11 +47,11 @@
                             @if (!isset($group))
                             <div class="form-group row mb-4">
                                 <label for="age_type"
-                                       class="col-xl-12 col-md-6  col-form-label text-dark text-capitalize font-weight-bold">
+                                       class="col-xl-12 col-form-label text-dark text-capitalize font-weight-bold">
                                        {{trans('group.choose_group')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
                                     <select class="form-control basic" style="width: 100%;" name="group_id" id="group_id"
                                             data-href="{{ route('admin.group_students.getGroupStudents') }}">
                                         <option value=""> 

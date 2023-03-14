@@ -3,7 +3,7 @@
             <div
                   class="card-header d-flex justify-content-between align-items-center card__header__for_tables_show_teacher">
                   <h3 class="text-capitalize text-white">
-                        طلاب المجموعة
+                        {{ trans('group.group_students') }}
                         <span class="badge badge-pill badge-light">{{ $countStudents }}</span>
                   </h3>
                   <a class="icon text-white mt-2" data-toggle='modal' data-target='#creatGroupStudentModal'
@@ -18,10 +18,10 @@
                               <table class="table table-bordered table-hover table-striped mb-4">
                                     <thead>
                                           <tr>
-                                                <th class="text-secondary">{{ __('group.name') }}</th>
-                                                <th class="text-secondary">{{ __('group.Birthday') }}</th>
-                                                <th class="text-secondary">{{ __('group.Phone') }}</th>
-                                                <th class="text-secondary">{{ __('global.Delete') }}</th>
+                                                <th class="text-secondary">{{ __('main.name') }}</th>
+                                                <th class="text-secondary">{{ __('main.birthday') }}</th>
+                                                <th class="text-secondary">{{ __('main.phone') }}</th>
+                                                <th class="text-secondary">{{ __('main.delete') }}</th>
                                           </tr>
                                     </thead>
                                     <tbody>

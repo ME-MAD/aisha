@@ -2,7 +2,7 @@
     <div class="card ">
         <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables_show_teacher">
             <h3 class="text-capitalize text-white">
-                {{ __('group.Group Days') }}
+                {{ __('group.groups_days') }}
                 @if ($groupDaysCount < $groupTypeNumDays)
                     <span class="badge badge-pill badge-light">
                        {{ $groupDaysCount }}
@@ -26,8 +26,8 @@
                 <table id="zero-config" class="table table-hover dataTable">
                     <thead>
                         <tr role="row">
-                            <th class="text-center text-secondary">{{ __('group.Group Days') }}</th>
-                            <th class="text-center text-secondary">{{ __('global.Delete') }}</th>
+                            <th class="text-center text-secondary"> {{ trans('group.groups_days') }} </th>
+                            <th class="text-center text-secondary">{{ trans('main.delete') }}</th>
                         </tr>
                     </thead>
                     <tbody>

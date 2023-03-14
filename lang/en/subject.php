@@ -13,6 +13,5 @@ return [
     'edit_material_study' => 'Edit Material Study',
     'choose_subject' => 'Choose Subject',
     'show_book' => 'Show Book',
-
-
+    'add_subject_to_group' => 'Add Subject To Group',
 ];

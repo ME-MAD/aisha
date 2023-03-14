@@ -15,14 +15,14 @@
                         <div class="col-6">
                             <div class="form-group row mb-4">
                                 <label for="age_type"
-                                       class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
-                                      {{trans('lesson.choose_the_material')}}
+                                       class="col-xl-12 col-form-label text-dark font-weight-bold text-capitalize">
+                                      {{trans('subject.choose_subject')}}
                                        <i class="fa-solid fa-star-of-life required-star"></i>
                                     </label>
-                                <div class="col-xl-12 col-md6">
+                                <div class="col-xl-12">
                                     <select class="form-control basic subject_create" style="width: 100%;" name="subject_id" id="subject_id" data-select2-id="subject_create">
                                         <option value="">
-                                            {{trans('lesson.choose_the_material')}}
+                                            {{trans('subject.choose_subject')}}
                                         </option>
                                         @foreach ($subjects as $subject)
                                             <option value="{{ $subject->id }}">
@@ -39,21 +39,21 @@
                         </div>
                         <div class="col-6">
                             <x-text name="title" :required="true"
-                             placeholder="{{trans('lesson.enter_the_title_of_the_lesson')}}" 
+                             placeholder="{{trans('lesson.lesson_title')}}" 
                              label="{{trans('lesson.the_title_of_lesson')}}" :value="old('title')"/>
                         </div>
                     </div>
                   
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="form-group row mb-4">
                                 <label for="name"
-                                       class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
-                                     {{trans('lesson.the_beginning_of_the_page')}}
+                                       class="col-xl-12 col-form-label text-dark font-weight-bold text-capitalize">
+                                     {{trans('lesson.start_page')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                                 </label>
-                                <div class="col-xl-12 col-md-6">
-                                    <input type="number"  class="form-control" placeholder="{{trans('lesson.enter_the_beginning_of_the_lesson_page')}}" name="from_page"
+                                <div class="col-xl-12">
+                                    <input type="number"  class="form-control" placeholder="{{trans('lesson.start_page')}}" name="from_page"
                                            :value="old('from_page')" min="0" max="">
                                     @error('from_page')
                                     <p class="text-danger">{{ $message }}</p>
@@ -61,17 +61,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="form-group row mb-4">
                                 <label for="name"
-                                       class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
-                                       {{trans('lesson.end_of_page')}}
+                                       class="col-xl-12 col-form-label text-dark font-weight-bold text-capitalize">
+                                       {{trans('lesson.end_page')}}
                                        <i class="fa-solid fa-star-of-life required-star"></i>
                                </label>
 
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
                                     <input type="number" class="form-control" 
-                                          placeholder="{{trans('lesson.enter_the_end_of_the_lesson_page')}}" name="to_page" min="0"
+                                          placeholder="{{trans('lesson.end_page')}}" name="to_page" min="0"
                                            max="" :value="old('to_page')">
                                     @error('to_page')
                                     <p class="text-danger">{{ $message }}</p>
@@ -79,18 +79,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
                             <div class="form-group row mb-4">
                                 <label for="name"
-                                       class="col-xl-12 col-md-6 col-form-label text-dark font-weight-bold text-capitalize">
-                                    {{trans('lesson.the_number_of_pages_of_the_lesson')}}
+                                       class="col-xl-12 col-form-label text-dark font-weight-bold text-capitalize">
+                                    {{trans('lesson.chapters_count')}}
                                     <i class="fa-solid fa-star-of-life required-star"></i>
                             </label>
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12">
         
                                     <input type="number"
                                            class="form-control"
-                                           placeholder="{{trans('lesson.enter_the_grand_total_for_this_lesson')}}"
+                                           placeholder="{{trans('lesson.chapters_count')}}"
                                            name="chapters_count"
                                            min="0" max="" :value="old('chapters_count')">
         

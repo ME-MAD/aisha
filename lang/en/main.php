@@ -98,4 +98,12 @@ return [
     'very_good' => 'Very Good',
     'good' => 'Good',
     'fail' => 'Fail',
+    'id' => 'Id',
+    'Saturday' => 'Saturday',
+    'Sunday' => 'Sunday',
+    'Monday' => 'Monday',
+    'Tuesday' => 'Tuesday',
+    'Wednesday' => 'Wednesday',
+    'Thursday' => 'Thursday',
+    'Friday' => 'Friday',
 ];

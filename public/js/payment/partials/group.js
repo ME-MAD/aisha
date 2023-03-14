@@ -1,4 +1,4 @@
-export function appendMainGroup(group)
+export function appendMainGroup(group, words)
 {
     $('.groupsContainer').append(`
         <li class="nav-item">
@@ -6,7 +6,7 @@ export function appendMainGroup(group)
                 <div class="f-m-body">
                     <div class="f-head">
                         <p class="" style="font-size:1.2rem">
-                            Group <span style="font-weight:bold">${group.name}</span>
+                            ${words.group} <span style="font-weight:bold">${group.name}</span>
                         </p>
                         <h5 class="${group.allStudentsPaid ? 'text-success' : 'text-danger'}">
                             ${group.allStudentsPaid ? 'All paid' : 'Not All Paid'}

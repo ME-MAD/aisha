@@ -2,6 +2,7 @@ import * as echarts from 'echarts';
 
 export function groupPaymentChartRun()
 {
+    //'admin.group.getPaymentPerMonth', $group->id
     $.get($('#paymentsThisMonthContainerGroup').data('href'), function (response) {
 
         const months = response.months;
@@ -33,7 +34,7 @@ export function groupPaymentChartRun()
                 },
                 series: [
                     {
-                    name: "payments",
+                    name: response.words.payments,
                     data: values,
                     type: 'bar',
                     showBackground: true,

@@ -1,7 +1,7 @@
-export function appendGroupStudentsHtml(group, currentMonth)
+export function appendGroupStudentsHtml(group, currentMonth, words)
 {
     $('#ct').append(
-        getGroupStudentsHtml(group, currentMonth)
+        getGroupStudentsHtml(group, currentMonth, words)
     )
 }
 
@@ -229,7 +229,7 @@ function getAllStudentsTableRowsHtml(group)
     return studentsTableRowsHtml;
 }
 
-function getGroupStudentsHtml(group, currentMonth)
+function getGroupStudentsHtml(group, currentMonth, words)
 {
     let studentsTableRowsHtml = getAllStudentsTableRowsHtml(group)
 
@@ -247,43 +247,43 @@ function getGroupStudentsHtml(group, currentMonth)
 
                 <select class="form-control basic month" name="month${group.id}" data-group-id="${group.id}">
                     <option value="">
-                        choose the month
+                        ${words.choose_month}
                     </option>
                     <option value="January"
-                        ${currentMonth == "January" ? 'selected' : ''}>January
+                        ${currentMonth == "January" ? 'selected' : ''}>${words.January} 
                     </option>
                     <option value="February"
-                        ${currentMonth == "February" ? 'selected' : ''}>February
+                        ${currentMonth == "February" ? 'selected' : ''}>${words.February} 
                     </option>
                     <option value="March"
-                        ${currentMonth == "March" ? 'selected' : ''}>March
+                        ${currentMonth == "March" ? 'selected' : ''}>${words.March} 
                     </option>
                     <option value="April"
-                        ${currentMonth == "April" ? 'selected' : ''}>April
+                        ${currentMonth == "April" ? 'selected' : ''}>${words.April} 
                     </option>
                     <option value="May"
-                        ${currentMonth == "May" ? 'selected' : ''}>May
+                        ${currentMonth == "May" ? 'selected' : ''}>${words.May} 
                     </option>
                     <option value="June"
-                        ${currentMonth == "June" ? 'selected' : ''}>June
+                        ${currentMonth == "June" ? 'selected' : ''}>${words.June} 
                     </option>
                     <option value="July"
-                        ${currentMonth == "July" ? 'selected' : ''}>July
+                        ${currentMonth == "July" ? 'selected' : ''}>${words.July} 
                     </option>
                     <option value="August"
-                        ${currentMonth == "August" ? 'selected' : ''}>August
+                        ${currentMonth == "August" ? 'selected' : ''}>${words.August} 
                     </option>
                     <option value="September"
-                        ${currentMonth == "September" ? 'selected' : ''}>September
+                        ${currentMonth == "September" ? 'selected' : ''}>${words.September} 
                     </option>
                     <option value="October"
-                        ${currentMonth == "October" ? 'selected' : ''}>October
+                        ${currentMonth == "October" ? 'selected' : ''}>${words.October} 
                     </option>
                     <option value="November"
-                        ${currentMonth == "November" ? 'selected' : ''}>November
+                        ${currentMonth == "November" ? 'selected' : ''}>${words.November} 
                     </option>
                     <option value="December"
-                        ${currentMonth == "December" ? 'selected' : ''}>December
+                        ${currentMonth == "December" ? 'selected' : ''}>${words.December} 
                     </option>
                 </select>
 
@@ -294,9 +294,9 @@ function getGroupStudentsHtml(group, currentMonth)
                         <table class="table">
                             <thead class="">
                                 <tr>
-                                    <th scope="col">S.No</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">paid</th>
+                                    <th scope="col">${words.id}</th>
+                                    <th scope="col">${words.name}</th>
+                                    <th scope="col">${words.paid}</th>
                                 </tr>
                             </thead>
                             <tbody>

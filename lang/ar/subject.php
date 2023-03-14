@@ -13,6 +13,6 @@ return [
     'edit_material_study' => 'تعديل المادة',
     'choose_subject' => 'اختر المادة',
     'show_book' => 'إظهار الكتاب',
-
+    'add_subject_to_group' => 'إضافة مادة دراسية للمجموعة',
 
 ];

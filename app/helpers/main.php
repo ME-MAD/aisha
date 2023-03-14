@@ -247,3 +247,15 @@ if (!function_exists('getSeededRoles')) {
         ];
     }
 }
+
+
+if (!function_exists('getMonthsAccordingToLocalization')) {
+    function getMonthsAccordingToLocalization($months)
+    {
+        foreach($months as $key => $month_en)
+        {
+            $months[$key] = trans("main.$month_en");
+        }
+        return $months;
+    }
+}

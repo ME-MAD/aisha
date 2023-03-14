@@ -55,7 +55,7 @@
 
                             <i class="fa-solid fa-users-viewfinder fa-2x mx-2"></i>
                             <span class="font-weight-bold "> 
-                                {{trans('group.group_study_materials')}}
+                                {{trans('group.groups_subject')}}
                             </span>
                         </a>
                     </li>
@@ -78,7 +78,7 @@
                 <div class="card ">
                     <div class="card-header d-flex justify-content-between align-items-center card__header__for_tables">
                         <h3 class="text-capitalize text-white">
-                            {{trans('group.group_study_materials')}}
+                            {{trans('group.groups_subject')}}
                         </h3>
                         @check_permission('store-groupSubject')
                         <a class="icon text-white" data-toggle="modal"

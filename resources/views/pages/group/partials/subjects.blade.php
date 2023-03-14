@@ -3,7 +3,7 @@
             <div
                   class="card-header d-flex justify-content-between align-items-center card__header__for_tables_show_teacher">
                   <h3 class="text-capitalize text-white">
-                        المواد الدراسية للمجموعة
+                        {{ trans('group.groups_subject') }}
                         <span class="badge badge-pill badge-light">{{ $countSubjects }}</span>
                   </h3>
                   <a class="icon text-white mt-2" data-toggle='modal' data-target='#creatGroupSubjectModal'
@@ -18,9 +18,11 @@
                               <table class="table table-bordered table-hover table-striped mb-4">
                                     <thead>
                                           <tr>
-                                                <th class="text-secondary">{{ __('main.num') }}</th>
+                                                <th class="text-secondary">{{ __('main.id') }}</th>
                                                 <th class="text-secondary">{{ __('group.group_name') }}</th>
-                                                <th class="text-secondary">عدد الصفحات</th>
+                                                <th class="text-secondary">
+                                                      {{ trans('subject.pages_count') }}
+                                                </th>
                                           </tr>
                                     </thead>
                                     <tbody>
