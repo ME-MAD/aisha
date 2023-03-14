@@ -16,4 +16,14 @@ class SiteController extends Controller
     {
         return view('site.about.index');
     }
+
+    public function courses()
+    {
+        return view('site.courses.index');
+    }
+
+    public function pricing()
+    {
+        return view('site.pricing.index');
+    }
 }

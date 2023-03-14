@@ -1,6 +1,7 @@
 .about {
     display: flex;
     margin-top: 6em;
+    gap: 2em;
 }
 
 .about .left {
@@ -13,10 +14,6 @@
 
 .about .left img {
     border-radius: 30px;
-}
-
-.about .right {
-    margin-left: 1.5em;
 }
 
 .about .right h2 {

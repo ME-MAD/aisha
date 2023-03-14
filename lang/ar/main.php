@@ -106,4 +106,8 @@ return [
     'Wednesday' => 'الأربعاء',
     'Thursday' => 'الخميس',
     'Friday' => 'الحمعة',
+
+    'courses' => 'الكورسات',
+    'about' => 'من نحن',
+    'pricing' => 'الأسعار',
 ];

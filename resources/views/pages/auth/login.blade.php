@@ -77,7 +77,7 @@
                         <div class="form-container">
                               <div class="form-content">
 
-                                    <h1 class="">{{ trans('auth.login_to') }}:<a href="index.html"><span
+                                    <h1 class="">{{ trans('auth.login_to') }}:<a href="#"><span
                                                       class="brand-name">{{ trans('auth.educational_platform') }}</span></a></h1>
                                     <form class="text-left" method="POST" action="{{ route('login') }}">
                                           <div class="form">

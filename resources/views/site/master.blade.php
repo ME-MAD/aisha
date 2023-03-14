@@ -10,7 +10,12 @@
 
       <link rel="stylesheet" href="{{ asset('fonts/heebo/heebo.css') }}">
 
-      <link rel="stylesheet" href="{{ asset('css/site/main.css') }}">
+      @if(LaravelLocalization::getCurrentLocale() == 'ar')
+            <link rel="stylesheet" href="{{ asset('css/siteRtl/main.css') }}">
+      @else
+            <link rel="stylesheet" href="{{ asset('css/site/main.css') }}">
+      @endif
+
       <link rel="stylesheet" href="{{ asset('css/site/nav.css') }}">
       <link rel="stylesheet" href="{{ asset('css/site/about.css') }}">
       <link rel="stylesheet" href="{{ asset('css/site/courses.css') }}">
@@ -28,25 +33,30 @@
 
                   <ul>
                         <li>
-                              <a href="{{ route('home.index') }}">Home</a>
+                              <a href="{{ route('home.index') }}">{{ trans('main.home') }}</a>
                         </li>
                         <li>
-                              <a href="./courses.html">Courses</a>
+                              <a href="{{route('courses.index')}}">{{ trans('main.courses') }}</a>
                         </li>
                         <li>
-                              <a href="{{ route('about.index') }}">About</a>
+                              <a href="{{ route('about.index') }}">{{ trans('main.about') }}</a>
                         </li>
                         <li>
-                              <a href="./Course Details.html">Course Detials</a>
+                              <a href="{{route('pricing.index')}}">{{ trans('main.pricing') }}</a>
                         </li>
-                        <li>
-                              <a href="./pricing.html">Pricing</a>
-                        </li>
-                        <li>
-                              <a href="./404.html">Pages</a>
-                        </li>
-                        <li>
-                              <a href="#">Contact</a>
+                        <li class="dropdown lang" data-dropdown>
+
+                              <img class="link" data-dropdown-button src="{{asset('adminAssets/assets/img/' . getFlag(LaravelLocalization::getCurrentLocale()))}}" alt="">
+
+                              <div class="dropdown-menu">
+                                    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <a class="dropdown-item" data-img-value="ca" data-value="en"
+                                          href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"><img
+                                                src="{{ asset('adminAssets/assets/img/'. getFlag($localeCode)) }}" class="flag-width"
+                                                alt="flag alternate" hreflang="{{ $localeCode }}">
+                                          {{ $properties['native'] }}</a>
+                                    @endforeach
+                              </div>
                         </li>
 
                         <div class="close-btn">
