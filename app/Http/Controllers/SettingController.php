@@ -4,34 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use App\Services\ImageService;
+use App\Services\Permission\PermissionService;
+use App\Services\Setting\SettingService;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SettingController extends Controller
 {
     private $imageService;
+    private $settingService;
+    private $permissionService;
 
-    public function __construct(ImageService $imageService)
+    public function __construct(ImageService $imageService, SettingService $settingService, PermissionService $permissionService)
     {
         $this->imageService = $imageService;
+        $this->settingService = $settingService;
+        $this->permissionService = $permissionService;
+
+        $this->permissionService->handlePermissions($this, [
+            'index' => 'index-setting',
+            'store' => 'store-setting',
+        ]);
     }
 
     public function index()
     {
-        $setting = Setting::first();
+        $setting = $this->settingService->getSettingRedis();
         return view('pages.setting.index', [
             'setting' => $setting
         ]);
     }
 
-    public function create()
-    {
-        return view('pages.setting.create');
-    }
-
     public function store(Request $request,Setting $setting)
     {
-        dd($request);
-
         $logo = $setting->getRawOriginal('logo');
         $welcome_img = $setting->getRawOriginal('welcome_img');
 
@@ -55,12 +60,28 @@ class SettingController extends Controller
 
         $setting->update([
             'logo' => $logo,
-            'welcome_text_1' => $request->welcome_text_1,
-            'welcome_text_2' => $request->welcome_text_2,
-            'welcome_btn_1' => $request->welcome_btn_1,
-            'welcome_btn_2' => $request->welcome_btn_2,
+            'welcome_text_1' => [
+                'en' => $request->welcome_text_1_en,
+                'ar' => $request->welcome_text_1_ar,
+            ],
+            'welcome_text_2' => [
+                'en' => $request->welcome_text_2_en,
+                'ar' => $request->welcome_text_2_ar,
+            ],
+            'welcome_btn_1' => [
+                'en' => $request->welcome_btn_1_en,
+                'ar' => $request->welcome_btn_1_ar,
+            ],
+            'welcome_btn_2' => [
+                'en' => $request->welcome_btn_2_en,
+                'ar' => $request->welcome_btn_2_ar,
+            ],
             'welcome_img' => $welcome_img,
         ]);
 
+        $this->settingService->setSettingRedis();
+
+        Alert::toast('تمت العملية بنجاح', 'success');
+        return redirect()->back();
     }
 }

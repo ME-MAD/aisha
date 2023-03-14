@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Translatable\HasTranslations;
 
 class Setting extends Model
 {
     use HasFactory;
+    use HasTranslations;
+    public $translatable = ['welcome_text_1', 'welcome_text_2', 'welcome_btn_1','welcome_btn_2'];
 
     protected $guarded = [];
 
@@ -32,7 +35,7 @@ class Setting extends Model
     {
         return Attribute::make(
             get: function($welcomeImg){
-                if($welcomeImg && file_exists($this->getWelcomeImgPath()))
+                if($welcomeImg && file_exists($this->getWelcomeImagePath()))
                 {
                     return asset(Setting::WELCOME_IMAGE_PATH . $welcomeImg);
                 }
@@ -49,7 +52,7 @@ class Setting extends Model
         return '';
     }
 
-    function getWelcomeImgPath(){
+    function getWelcomeImagePath(){
         if($this->getRawOriginal('welcome_img'))
         {
             return public_path(Setting::WELCOME_IMAGE_PATH . $this->getRawOriginal('welcome_img'));

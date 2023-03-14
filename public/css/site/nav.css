@@ -7,6 +7,12 @@
     align-items: center;
 }
 
+.main-top nav .logo {
+    width: 125px;
+    height: 35px;
+    object-fit: cover;
+}
+
 .main-top nav ul {
     display: flex;
     transition: 1s;

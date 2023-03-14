@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Setting;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -9,6 +10,10 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
+        Setting::create([
+
+        ]);
+        
         $this->call([
             GroupTypeSeeder::class,
             QuraanSeeder::class,

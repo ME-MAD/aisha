@@ -17,4 +17,6 @@ return [
     'welcome_btn_2_arabic' => 'نص رابط الترحيب 2 عربي',
 
     'welcome_img' => 'صورة الترحيب',
+
+    'create_elementor' => 'انشاء ميزة',
 ];

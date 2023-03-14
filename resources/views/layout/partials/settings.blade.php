@@ -29,6 +29,8 @@
                 request()->routeIs('admin.home') ||
                 request()->routeIs('admin.user.index') ||
                 request()->routeIs('admin.role.index') ||
+                request()->routeIs('admin.setting.index') ||
+                request()->routeIs('admin.elementor.index') ||
                 request()->routeIs('admin.role.edit') ? 'show' : ''
             }}" id="dashboard" data-parent="#topAccordion">
 
@@ -57,6 +59,14 @@
             <li class="{{ request()->routeIs('admin.setting.index') ? 'active' : '' }}">
                 <a href="{{route('admin.setting.index')}}" class="text-capitalize font-weight-bold">
                     {{trans('main.settings')}}
+                </a>
+            </li>
+            @endcheck_permission
+
+            @check_permission("index-elementor")
+            <li class="{{ request()->routeIs('admin.elementor.index') ? 'active' : '' }}">
+                <a href="{{route('admin.elementor.index')}}" class="text-capitalize font-weight-bold">
+                    {{trans('main.elementor')}}
                 </a>
             </li>
             @endcheck_permission

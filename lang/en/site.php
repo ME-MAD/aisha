@@ -17,4 +17,6 @@ return [
     'welcome_btn_2_arabic' => 'Welcome Button 2 Arabic',
 
     'welcome_img' => 'Welcome Image',
+
+    'create_elementor' => 'Create Elementor',
 ];

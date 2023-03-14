@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-
-use Illuminate\Support\Facades\Schema;
+use App\Models\Setting;
+use App\Services\Setting\SettingService;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,8 +24,16 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(SettingService $settingService)
     {
         // Schema::defaultStringLength(191);
+
+        View::composer([
+            'layout.header',
+            'site.master',
+            'site.home.index'
+        ],function($view)use($settingService){
+            return $view->with('setting', $settingService->getSettingRedis());
+        });
     }
 }

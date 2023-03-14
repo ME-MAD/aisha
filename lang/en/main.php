@@ -111,4 +111,11 @@ return [
     'pricing' => 'Pricing',
     'value' => 'Value',
     'logo' => 'Logo',
+    'elementor' => 'Elementor',
+    'description' => 'Description',
+    'image' => 'Image',
+    'name_en' => 'Name English',
+    'name_ar' => 'Name Arabic',
+    'desc_ar' => 'Description Arabic',
+    'desc_en' => 'Description English',
 ];

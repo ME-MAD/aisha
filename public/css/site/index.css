@@ -76,6 +76,7 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 8em 0em;
+    align-items: center;
 }
 
 header .header-paragraph,
@@ -112,10 +113,12 @@ header .header-paragraph h2 {
 }
 
 header .header-paragraph h3 {
-    font-size: 3.8rem;
+    font-size: 3rem;
     font-weight: 900;
     color: var(--font-color);
-    line-height: 1.2;
+    line-height: 1.3;
+    text-transform: capitalize;
+    margin: 1em 0em;
 }
 
 

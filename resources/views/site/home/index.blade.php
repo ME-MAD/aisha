@@ -9,15 +9,15 @@
 @section('header')
       <header>
             <div class="header-paragraph text-center">
-                  <h2>Welcome gotech</h2>
-                  <h3>Upgrade your skills start here with us</h3>
+                  <h2>{{$setting->welcome_text_1->{LaravelLocalization::getCurrentLocale()} }}</h2>
+                  <h3>{{$setting->welcome_text_2->{LaravelLocalization::getCurrentLocale()} }}</h3>
                   <div class="btns-con">
-                        <button class="btn-blue">Join US</button>
-                        <button class="btn-blue">Contact US</button>
+                        <button class="btn-blue">{{$setting->welcome_btn_1->{LaravelLocalization::getCurrentLocale()} }}</button>
+                        <button class="btn-blue">{{$setting->welcome_btn_2->{LaravelLocalization::getCurrentLocale()} }}</button>
                   </div>
             </div>
             <div class="header-image-con text-center">
-                  <img src="{{ asset('images/site/header-image.png') }}" alt="">
+                  <img src="{{ $setting->welcome_img }}" alt="">
             </div>
       </header>
 
@@ -27,41 +27,21 @@
 
 
       <section class="elementor-section text-center">
-            <div class="elementor-item">
-                  <div class="img_back_ground" id="online">
-                        <img src="{{ asset('images/site/Online Courses.png') }}" alt="">
+
+            @for ($i = 0; $i <= 3; $i++)
+                  <div class="elementor-item">
+                        <div class="img_back_ground" id="online">
+                              <img src="{{ $elementors[$i]->img ?? '' }}" alt="">
+                        </div>
+
+                        <h2>
+                              {{ $elementors[$i]->name->{LaravelLocalization::getCurrentLocale()} ?? '' }}
+                        </h2>
+                        <p>
+                              {{ $elementors[$i]->desc->{LaravelLocalization::getCurrentLocale()} ?? '' }}
+                        </p>
                   </div>
-
-                  <h2>Online Courses</h2>
-                  <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-
-            <div class="elementor-item">
-                  <div class="img_back_ground " id="home">
-                        <img src="{{ asset('images/site/Home Tutoring.png') }}" alt="">
-                  </div>
-
-                  <h2>Home Tutoring</h2>
-                  <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-
-            <div class="elementor-item">
-                  <div class="img_back_ground" id="offlin">
-                        <img src="{{ asset('images/site/Offline Courses.png') }}" alt="">
-                  </div>
-
-                  <h2>Offlin Courses</h2>
-                  <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-
-            <div class="elementor-item">
-                  <div class="img_back_ground" id="special">
-                        <img src="{{ asset('images/site/Special Offers.png') }}" alt="">
-                  </div>
-
-                  <h2>Special Offers</h2>
-                  <p>Lorem ipsum dolor sit amet.</p>
-            </div>
+            @endfor
       </section>
 
 
@@ -109,32 +89,20 @@
 
 
             <div class="page-process elementor-section text-center">
-                  <div class="elementor-item">
-                        <div class="img_back_ground" id="online">
-                              <img src="{{ asset('images/site/Online Courses.png') }}" alt="">
+                  @for ($i = 4; $i <= 6; $i++)
+                        <div class="elementor-item">
+                              <div class="img_back_ground" id="online">
+                                    <img src="{{ $elementors[$i]->img ?? '' }}" alt="">
+                              </div>
+
+                              <h2>
+                                    {{ $elementors[$i]->name->{LaravelLocalization::getCurrentLocale()} ?? '' }}
+                              </h2>
+                              <p>
+                                    {{ $elementors[$i]->desc->{LaravelLocalization::getCurrentLocale()} ?? '' }}
+                              </p>
                         </div>
-
-                        <h2>Online Courses</h2>
-                        <p>Lorem ipsum dolor sit amet.</p>
-                  </div>
-
-                  <div class="elementor-item">
-                        <div class="img_back_ground " id="home">
-                              <img src="{{ asset('images/site/Home Tutoring.png') }}" alt="">
-                        </div>
-
-                        <h2>Home Tutoring</h2>
-                        <p>Lorem ipsum dolor sit amet.</p>
-                  </div>
-
-                  <div class="elementor-item">
-                        <div class="img_back_ground" id="offlin">
-                              <img src="{{ asset('images/site/Offline Courses.png') }}" alt="">
-                        </div>
-
-                        <h2>Offlin Courses</h2>
-                        <p>Lorem ipsum dolor sit amet.</p>
-                  </div>
+                  @endfor
 
                   <div class="video">
                         <img src="{{asset('images/site/img-vido.png')}}">

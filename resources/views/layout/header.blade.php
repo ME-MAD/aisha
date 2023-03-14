@@ -13,7 +13,7 @@
 
         <div class="nav-logo align-self-center">
             <a class="navbar-brand" href="{{ route('admin.home') }}"><img alt="logo"
-                    src="{{ asset('images/home.jpg') }}"> 
+                    src="{{ $setting->logo }}"> 
                     <span  class="navbar-brand-name">
                    {{trans('main.home')}}
                    </span>

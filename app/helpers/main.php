@@ -126,6 +126,7 @@ if (!function_exists('getPermissionTables')) {
             'user' => trans('main.users'),
             'studentNotes' => trans('student.student_notes'),
             'setting' => trans('main.settings'),
+            'elementor' => trans('main.elementor'),
         ];
     }
 }

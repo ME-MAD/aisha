@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ElementorController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\GroupController;
@@ -265,5 +266,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_auth
         Route::get('', [SettingController::class, 'index'])->name('index');
         Route::get('create', [SettingController::class, 'create'])->name('create');
         Route::post('/store/{setting}', [SettingController::class, 'store'])->name('store');
+    });
+
+    Route::group(['prefix' => 'elementor', 'as' => 'elementor.'], function () {
+        Route::get('', [ElementorController::class, 'index'])->name('index');
+        Route::get('create', [ElementorController::class, 'create'])->name('create');
+        Route::post('/store', [ElementorController::class, 'store'])->name('store');
+        Route::get('edit/{elementor}', [ElementorController::class, 'edit'])->name('edit');
+        Route::put('update/{elementor}', [ElementorController::class, 'update'])->name('update');
+        Route::get('delete/{elementor}', [ElementorController::class, 'delete'])->name('delete');
     });
 });

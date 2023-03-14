@@ -28,7 +28,7 @@
       <div class="main-top">
             <nav>
                   <div>
-                        <img src="{{ asset('images/site/logo.png') }}" alt="">
+                        <img class="logo" src="{{ $setting->logo }}" alt="">
                   </div>
 
                   <ul>

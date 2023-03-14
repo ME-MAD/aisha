@@ -63,7 +63,7 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{route('admin.setting.store')}}" enctype="multipart/form-data">
+                            <form method="POST" action="{{route('admin.setting.store', $setting->id)}}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="table-responsive">
@@ -84,37 +84,37 @@
                                             <tr>
                                                 <td>{{ trans('site.welcome_text_1') }}</td>
                                                 <td>
-                                                    <input class="form-control" type="text" name="welcome_text_1_en" placeholder="{{ trans('site.welcome_text_1_english') }}" value="{{$setting->welcome_text_1 ?? old('welcome_text_1_en')}}">
+                                                    <input class="form-control" type="text" name="welcome_text_1_en" placeholder="{{ trans('site.welcome_text_1_english') }}" value="{{$setting->welcome_text_1->en ?? old('welcome_text_1_en')}}">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="text" name="welcome_text_1_ar" placeholder="{{ trans('site.welcome_text_1_arabic') }}" value="{{$setting->welcome_text_1 ?? old('welcome_text_1_ar')}}">
+                                                    <input class="form-control" type="text" name="welcome_text_1_ar" placeholder="{{ trans('site.welcome_text_1_arabic') }}" value="{{$setting->welcome_text_1->ar ?? old('welcome_text_1_ar')}}">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>{{ trans('site.welecom_text_2') }}</td>
                                                 <td>
-                                                    <input class="form-control" type="text" name="welcome_text_2_en" placeholder="{{ trans('site.welecom_text_2_english') }}" value="{{$setting->welcome_text_2 ?? old('welcome_text_2_en')}}">
+                                                    <input class="form-control" type="text" name="welcome_text_2_en" placeholder="{{ trans('site.welecom_text_2_english') }}" value="{{$setting->welcome_text_2->en ?? old('welcome_text_2_en')}}">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="text" name="welcome_text_2_ar" placeholder="{{ trans('site.welecom_text_2_arabic') }}" value="{{$setting->welcome_text_2 ?? old('welcome_text_2_ar')}}">
+                                                    <input class="form-control" type="text" name="welcome_text_2_ar" placeholder="{{ trans('site.welecom_text_2_arabic') }}" value="{{$setting->welcome_text_2->ar ?? old('welcome_text_2_ar')}}">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>{{ trans('site.welcome_btn_1') }}</td>
                                                 <td>
-                                                    <input class="form-control" type="text" name="welcome_btn_1_en" placeholder="{{ trans('site.welcome_btn_1_english') }}" value="{{$setting->welcome_btn_1 ?? old('welcome_btn_1_en')}}">
+                                                    <input class="form-control" type="text" name="welcome_btn_1_en" placeholder="{{ trans('site.welcome_btn_1_english') }}" value="{{$setting->welcome_btn_1->en ?? old('welcome_btn_1_en')}}">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="text" name="welcome_btn_1_ar" placeholder="{{ trans('site.welcome_btn_1_arabic') }}" value="{{$setting->welcome_btn_1 ?? old('welcome_btn_1_ar')}}">
+                                                    <input class="form-control" type="text" name="welcome_btn_1_ar" placeholder="{{ trans('site.welcome_btn_1_arabic') }}" value="{{$setting->welcome_btn_1->ar ?? old('welcome_btn_1_ar')}}">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>{{ trans('site.welcome_btn_2') }}</td>
                                                 <td>
-                                                    <input class="form-control" type="text" name="welcome_btn_2_en" placeholder="{{ trans('site.welcome_btn_2_english') }}" value="{{$setting->welcome_btn_2 ?? old('welcome_btn_2_en')}}">
+                                                    <input class="form-control" type="text" name="welcome_btn_2_en" placeholder="{{ trans('site.welcome_btn_2_english') }}" value="{{$setting->welcome_btn_2->en ?? old('welcome_btn_2_en')}}">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" type="text" name="welcome_btn_2_ar" placeholder="{{ trans('site.welcome_btn_2_arabic') }}" value="{{$setting->welcome_btn_2 ?? old('welcome_btn_2_ar')}}">
+                                                    <input class="form-control" type="text" name="welcome_btn_2_ar" placeholder="{{ trans('site.welcome_btn_2_arabic') }}" value="{{$setting->welcome_btn_2->ar ?? old('welcome_btn_2_ar')}}">
                                                 </td>
                                             </tr>
                                             <tr>

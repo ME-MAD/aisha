@@ -2,8 +2,6 @@
 
 namespace App\Services\Permission;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 
 class PermissionService
